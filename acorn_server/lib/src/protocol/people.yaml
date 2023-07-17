@@ -1,0 +1,4 @@
+class: People
+table: people
+fields: 
+  person: String

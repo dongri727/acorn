@@ -1,0 +1,4 @@
+class: Organisations
+table: organisations
+fields: 
+  organisation: String

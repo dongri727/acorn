@@ -1,0 +1,9 @@
+class: Lieux
+table: lieux
+fields: 
+  principal_id: int
+  latitude: double
+  longitude: double
+  three_d_x: double
+  three_d_y: double
+  three_d_z: double

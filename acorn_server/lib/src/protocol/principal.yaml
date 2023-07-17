@@ -1,0 +1,6 @@
+class: Principal
+table: principal
+fields:
+  annee: int
+  affair: String
+  pays: String

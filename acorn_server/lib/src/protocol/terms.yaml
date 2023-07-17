@@ -1,0 +1,4 @@
+class: Terms
+table: terms
+fields: 
+  term: String

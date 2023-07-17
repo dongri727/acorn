@@ -1,0 +1,40 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "acorn_client",
+            "cwd": "acorn_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "acorn_flutter",
+            "cwd": "acorn_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "acorn_flutter (profile mode)",
+            "cwd": "acorn_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "acorn_flutter (release mode)",
+            "cwd": "acorn_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "acorn_server",
+            "cwd": "acorn_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

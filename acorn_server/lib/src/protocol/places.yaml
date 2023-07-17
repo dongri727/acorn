@@ -1,0 +1,4 @@
+class: Places
+table: places
+fields: 
+  place: String
