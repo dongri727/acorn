@@ -4,7 +4,6 @@ import "../bloc_provider.dart";
 import "../utils/formats.dart";
 import "menu_data.dart";
 import "menu_section.dart";
-import "timeline.dart";
 import "widget.dart";
 
 /// The Base Page of the Timeline App.
@@ -21,6 +20,8 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   /// [MenuData] selects era witch will be displayed at the Timeline
   /// This data is loaded from the asset bundle during [initState()]
   final MenuData _menu = MenuData();
+  final TextEditingController controller = TextEditingController();
+
 
 
   /// Helper function which sets the [MenuItemData] for the [TimelineWidget].
@@ -46,9 +47,15 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
-    final controller = TextEditingController();
+    //final controller = TextEditingController();
     final timeline = BlocProvider.getTimeline(context);
 
     List<Widget> tail = [];
@@ -96,15 +103,22 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                       padding: const EdgeInsets.fromLTRB(5,20,20,20),
                       child: ElevatedButton(
                         onPressed: () {
-                           timeline.fetchPrincipal(pays: controller.text.isNotEmpty
+                          print("Submitted country: ${controller.text}");
+                           timeline.fetchPrincipal(country: controller.text.isNotEmpty
                               ? controller.text
                               : null);
                           showDialog(
+                              barrierDismissible: false,
                               context: context,
                               builder: (BuildContext context){
-                                return const AlertDialog(
-                                  title: Text('Successfully Selected'),
-                                  content: Text('Choose an Era and Move On'),
+                                return AlertDialog(
+                                  title: const Text('Successfully Selected'),
+                                  content: const Text('Choose an Era and Move On'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text('OK')),
+                                  ],
                                 );
                               });
                         },
@@ -113,6 +127,14 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                   )
                 ],
               ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: (){
+                      controller.clear();
+                      timeline.fetchPrincipal(country: null);
+                    },
+                    child: const Text('clear')),
+              )
             ] + tail),
       ),
     );

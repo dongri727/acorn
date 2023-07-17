@@ -200,8 +200,16 @@ class Timeline {
   List<Principal> _principal = [];
 
   Future<List<TimelineEntry>> fetchPrincipal(
-      {String? pays}) async {
-      _principal = await client.principal.getPrincipal(keyword: pays);
+      {String? country}) async {
+    print("Fetching principal with country: $country");
+
+    try {
+      _principal = await client.principal.getPrincipal(keyword: country);
+    }
+    catch (e) {
+      print('Error while getting principal: $e');
+    }
+
 
     List<TimelineEntry> allEntries = [];
     _tickColors = [];
