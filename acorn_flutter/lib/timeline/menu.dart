@@ -96,10 +96,9 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                       padding: const EdgeInsets.fromLTRB(5,20,20,20),
                       child: ElevatedButton(
                         onPressed: () {
-/*                           timeline.loadFromServerpod( country: controller.text.isNotEmpty
+                           timeline.fetchPrincipal(pays: controller.text.isNotEmpty
                               ? controller.text
                               : null);
- */
                           showDialog(
                               context: context,
                               builder: (BuildContext context){

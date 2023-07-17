@@ -200,8 +200,8 @@ class Timeline {
   List<Principal> _principal = [];
 
   Future<List<TimelineEntry>> fetchPrincipal(
-      {String? country}) async {
-      _principal = await client.principal.getPrincipal();
+      {String? pays}) async {
+      _principal = await client.principal.getPrincipal(keyword: pays);
 
     List<TimelineEntry> allEntries = [];
     _tickColors = [];

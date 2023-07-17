@@ -15,7 +15,7 @@ class PrincipalEndpoint extends Endpoint {
       {String? keyword}) async {
     return await Principal.find(
       session,
-      //where: (t) =>keyword != null ? t.affair.like('%$keyword%') : Constant(true),
+      where: (t) =>keyword != null ? t.affair.like('%$keyword%') : Constant(true),
       orderBy: Principal.t.annee,
     );
   }
