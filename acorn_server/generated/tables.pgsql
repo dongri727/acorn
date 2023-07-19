@@ -43,6 +43,20 @@ ALTER TABLE ONLY "lieux"
 
 
 --
+-- Class Months as table months
+--
+
+CREATE TABLE "months" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "month" text NOT NULL
+);
+
+ALTER TABLE ONLY "months"
+  ADD CONSTRAINT months_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Organisations as table organisations
 --
 

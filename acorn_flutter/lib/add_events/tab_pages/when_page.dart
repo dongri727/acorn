@@ -27,18 +27,18 @@ class _WhenPageState extends State<WhenPage> {
 
   List<String> mois = <String>[
     'No-Month',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
   ];
 
   List<String> jours = <String>[
@@ -99,12 +99,17 @@ class _WhenPageState extends State<WhenPage> {
                       children: [
                         //month
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                          padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
                           child: OutlinedButton(
                             onPressed: () {
                               setState(toggleMonthButton);
                             },
-                            child: const Text('Select "Month" ?'),
+                            child: const Text(
+                                'Select "Month" ?',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                         //dropdownButtonの無効化で対応
@@ -171,7 +176,10 @@ class _WhenPageState extends State<WhenPage> {
                                 onPressed: () {
                                   setState(toggleDateButton);
                                 },
-                                child: const Text('Select "Date" ?'),
+                                child: const Text('Select "Date" ?',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),),
                               ),
                             ),
                             //date

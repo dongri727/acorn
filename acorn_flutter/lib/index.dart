@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 //import 'add_events/tab_top.dart';
-//import 'read_select/read_all.dart';
+//import 'read_select/search_page.dart';
 import 'add_events/tab_top.dart';
-import 'read_all.dart';
+import 'search/search_page.dart';
 import 'timeline/menu.dart';
 import 'utils/theme.dart';
 
@@ -75,12 +75,12 @@ class IndexPage extends StatelessWidget {
                             Navigator.push<String>(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ReadAllPage(title: "Show All"),
+                                builder: (context) => const ReadAllPage(title: "Search and Read"),
                               ),
                             );
                           },
                           child: Text(
-                            "Read & Update",
+                            "Search & Read",
                             style: AcornTheme.textTheme.bodyLarge,
                           ),
                         ),

@@ -1,0 +1,5 @@
+class: Months
+table: months
+fields: 
+  principal_id: int
+  month: String

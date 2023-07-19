@@ -17,7 +17,7 @@ class ConfirmModel extends ChangeNotifier {
   String affair = "";
   String pays = "";
 
-  String mois = "";
+  String month = "";
   String jour = "";
   String localDate = "";
 
@@ -56,29 +56,39 @@ class ConfirmModel extends ChangeNotifier {
   late int billionCategoriesLastVal;
   late int billionTermsLastVal;
 
+  Future addPrincipal(Principal principal) async {
+    try {
+      principalLastVal = await client.principal.addPrincipal(principal);
+      debugPrint('Add principal : $principalLastVal');
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  Future addMonths(Months months) async {
+    try {
+      months.principal_id = principalLastVal;
+      var result = await client.months.addMonths(months);
+      debugPrint('Add months : $result');
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+
   //insert into DB
   Future<void> save(Confirm confirm) async {
-    Future addPrincipal(Principal principal) async {
-      try {
-        var result = await client.principal.addPrincipal(principal);
-        debugPrint('Add principal : $result');
-      } on Exception catch (e) {
-        debugPrint('$e');
-      }
-    }
+
     var principal = Principal(annee: confirm.year, affair: confirm.name, pays: confirm.country);
     await addPrincipal(principal);
-    //print(principalLastVal);
+    print(principalLastVal);
 
-/*    Future addPrincipalMois() async {
-      var principalMois =
-      PrincipalMois(principal_id: principalLastVal, mois: mois);
-      principalMoisLastVal =
-      await client.principalMois.addPrincipalMois(principalMois);
-      <String, String?>{
-        "mois": confirm.isSelectedMonth,
-      };
-    }*/
+    var months = Months(principal_id: principalLastVal, month: month);
+    await addMonths(months);
+    <String, String?>{"month": confirm.isSelectedMonth};
+    print('save month');
+
+
 
 /*    Future addPrincipalJours() async {
       var principalJours =
