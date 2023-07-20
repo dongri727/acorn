@@ -58,8 +58,8 @@ class ConfirmModel extends ChangeNotifier {
 
   Future addPrincipal(Principal principal) async {
     try {
-      principalLastVal = await client.principal.addPrincipal(principal);
-      debugPrint('Add principal : $principalLastVal');
+      var result = await client.principal.addPrincipal(principal);
+      print('Add principal : $result');
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -67,9 +67,17 @@ class ConfirmModel extends ChangeNotifier {
 
   Future addMonths(Months months) async {
     try {
-      months.principal_id = principalLastVal;
       var result = await client.months.addMonths(months);
       debugPrint('Add months : $result');
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  Future addDays(Days days) async {
+    try {
+      var result = await client.days.addDays(days);
+      debugPrint('Add days : $result');
     } on Exception catch (e) {
       debugPrint('$e');
     }
@@ -78,15 +86,40 @@ class ConfirmModel extends ChangeNotifier {
 
   //insert into DB
   Future<void> save(Confirm confirm) async {
-
+    try {
     var principal = Principal(annee: confirm.year, affair: confirm.name, pays: confirm.country);
-    await addPrincipal(principal);
-    print(principalLastVal);
+    var principalId = await client.principal.addPrincipal(principal);
+    if (principalId == null) {
+      debugPrint('Error: Failed to add principal');
+      return;
+    }
+    debugPrint('Add principal : $principalId');
 
-    var months = Months(principal_id: principalLastVal, month: month);
-    await addMonths(months);
-    <String, String?>{"month": confirm.isSelectedMonth};
-    print('save month');
+
+    if (confirm.isSelectedMonth != null) {
+      var months = Months(
+          principal_id: principalId, month: confirm.isSelectedMonth!);
+      var monthsResult = await addMonths(months);
+      if (monthsResult == null) {
+        debugPrint('Error: Failed to add months');
+        return;
+      }
+      debugPrint('save month');
+    }
+
+    if (confirm.isSelectedDate != null) {
+      var days = Days(
+          principal_id: principalId, day: confirm.isSelectedDate!);
+      var daysResult = await addDays(days);
+      if (daysResult == null) {
+        debugPrint('Error: Failed to add days');
+        return;
+      }
+      debugPrint('save date');
+    }
+    } catch (e) {
+    debugPrint('Error: $e');
+  }
 
 
 

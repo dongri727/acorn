@@ -1,4 +1,5 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class _WherePageState extends State<WherePage> {
   var newLongitude = 0.0;
   var newPaysatt = '';
   var newPlaceatt = '';
+  var newCountryatt = '';
   double x = 0.0;
   double y = 0.0;
   double z = 0.0;
@@ -32,6 +34,10 @@ class _WherePageState extends State<WherePage> {
   List<Places> listPlaces = [];
   List<Map<String, String>> displayListPlaces = [];
   final List<String> _filtersPlaces = <String>[];
+
+  List<Countryatts> listCountryatts = [];
+  List<Map<String, String>> displayListCountryatts = [];
+  final List<String> _filtersCountryatts = <String>[];
 
   List<Placeatts> listPlaceatts = [];
   List<Map<String, String>> displayListPlaceatts = [];
@@ -56,6 +62,28 @@ class _WherePageState extends State<WherePage> {
     print(placeLastVal);
     debugPrint("add a place");
     listPlaces = await client.places.getPlaces();
+    setState(() {});
+  }
+
+  Future<void> fetchCountryATT() async {
+    try {
+      listCountryatts = await client.countryatts.getCountryATTs();
+      setState(() {
+        displayListCountryatts = listCountryatts.cast<Map<String, String>>();
+      });
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  late int countryattLastVal;
+
+  addCountryATTandFetch() async {
+    var catts = Countryatts(countryatt: newCountryatt);
+    countryattLastVal = await client.countryatts.addCountryATTs(catts);
+    print(countryattLastVal);
+    debugPrint("add an CountryATT");
+    listCountryatts = await client.countryatts.getCountryATTs();
     setState(() {});
   }
 
@@ -102,34 +130,11 @@ class _WherePageState extends State<WherePage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: OutlinedButton(
+                        child: ButtonFormat(
                           onPressed: fetchPlaces,
-                          child: const Text('Show and Select Current Place'),
+                          label: 'Show and Select Current Place',
                         ),
                       ),
- /*                     Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: listPlaces.map((places) {
-                            return ChoiceChip(
-                              label: Text(places.place),
-                              selected: _filtersPlaces.contains(places.place),
-                              onSelected: (bool value) {
-                                setState(() {
-                                  if (value) {
-                                    _filtersPlaces.clear();
-                                    _filtersPlaces.add(places.place);
-                                  } else {
-                                    _filtersPlaces.removeWhere(
-                                        (filters) => filters == places.place);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),*/
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                         child: Wrap(
@@ -152,82 +157,94 @@ class _WherePageState extends State<WherePage> {
                           tffColor2: const Color(0x99e6e6fa),
                         ),
                       ),
-                      OutlinedButton(
+                      ButtonFormat(
                         onPressed: addPlacesAndFetch,
-                        child: const Text('Add a New Place'),
-                      )
+                        label: 'Add a new Place',
+                      ),
+
                     ],
                   )),
               Expanded(
                   flex: 1,
                   child: Column(
                     children: [
+
+                      ///CountryATT
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: OutlinedButton(
-                          onPressed: fetchPlaceATT,
-                          child: const Text(
-                              'Show and Select Country, Place at that time'),
+                        child: ButtonFormat(
+                          onPressed: fetchCountryATT,
+                          label: 'Show and Select Country at that time',
                         ),
                       ),
-/*                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: listPlaceatts.map((patts) {
-                            return ChoiceChip(
-                              label: Text(patts.placeatt),
-                              selected: _filtersPlaceatts.contains(patts.placeatt),
-                              onSelected: (bool value) {
-                                setState(() {
-                                  if (value) {
-                                    _filtersPlaceatts.clear();
-                                    _filtersPlaceatts.add(patts.placeatt);
-                                  } else {
-                                    _filtersPlaceatts.removeWhere(
-                                        (filters) => filters == patts.placeatt);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),*/
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Wrap(
                           spacing: 5.0,
-                          children: listPlaceatts.map((placeatts){
+                          children: listCountryatts.map((countryatts){
                             return ChipsFormat(
-                                chipsFilter: _filtersPlaceatts,
-                                chipsData: placeatts.placeatt);
+                                chipsFilter: _filtersCountryatts,
+                                chipsData: countryatts.countryatt);
                           }).toList(),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: TffFormat(
-                          hintText: 'a New Country,Place at that time You Want',
+                          hintText: 'a New Country at that time You Want',
                           onChanged: (text) {
-                            newPlaceatt = text;
+                            newCountryatt = text;
                           },
                           tffColor1: Colors.black54,
                           tffColor2: const Color(0x99e6e6fa),
                         ),
                       ),
-                      OutlinedButton(
-                        onPressed: addPlaceATTandFetch,
-                        child:
-                            const Text('Add a New Country, Place at that time'),
-                      )
+                      ButtonFormat(
+                        onPressed: addCountryATTandFetch,
+                        label: 'Add a New Country at that time',
+                      ),
                     ],
                   )),
               Expanded(
                 flex: 1,
                 child: Column(
                   children: [
+                    ///PlaceATT
                     Padding(
-                        padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(20.0),
+                      child: ButtonFormat(
+                        onPressed: fetchPlaceATT,
+                        label: 'Show and Select Place at that time',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Wrap(
+                        spacing: 5.0,
+                        children: listPlaceatts.map((placeatts){
+                          return ChipsFormat(
+                              chipsFilter: _filtersPlaceatts,
+                              chipsData: placeatts.placeatt);
+                        }).toList(),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: TffFormat(
+                        hintText: 'a New Place at that time You Want',
+                        onChanged: (text) {
+                          newPlaceatt = text;
+                        },
+                        tffColor1: Colors.black54,
+                        tffColor2: const Color(0x99e6e6fa),
+                      ),
+                    ),
+                    ButtonFormat(
+                      onPressed: addPlaceATTandFetch,
+                      label:'Add a New Place at that time',
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 200, 20, 20),
                         child: TffFormat(
                           hintText: "Latitude",
                           onChanged: (value) {

@@ -1,0 +1,5 @@
+class: Days
+table: days
+fields: 
+  principal_id: int
+  day: String

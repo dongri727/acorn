@@ -1,10 +1,12 @@
+import "package:acorn_flutter/timeline/timeline.dart";
 import "package:flutter/material.dart";
 
-import "../bloc_provider.dart";
+import 'bloc_provider.dart';
 import "../utils/formats.dart";
 import "menu_data.dart";
 import "menu_section.dart";
 import "widget.dart";
+import 'timeline.dart';
 
 /// The Base Page of the Timeline App.
 
@@ -74,69 +76,73 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
         .toList(growable: false)
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("TIMELINE"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(top: devicePadding.top),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,20,5,20),
-                      child: FormatGrey(
-                        controller: controller,
-                        hintText: "Search Term",
-                        onChanged: (text) {
-                        },
+    return /*BlocProvider(
+      platform: Theme.of(context).platform,
+      t: Timeline(Theme.of(context).platform),
+      child:*/ Scaffold(
+        appBar: AppBar(
+          title: const Text("TIMELINE"),
+        ),
+        body: Padding(
+          padding: EdgeInsets.only(top: devicePadding.top),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20,20,5,20),
+                        child: FormatGrey(
+                          controller: controller,
+                          hintText: "Search Term",
+                          onChanged: (text) {
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(5,20,20,20),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          print("Submitted country: ${controller.text}");
-                           timeline.fetchPrincipal(country: controller.text.isNotEmpty
-                              ? controller.text
-                              : null);
-                          showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
-                                  title: const Text('Successfully Selected'),
-                                  content: const Text('Choose an Era and Move On'),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: const Text('OK')),
-                                  ],
-                                );
-                              });
-                        },
-                        child: const Text("Submit"),
-                      ),),
-                  )
-                ],
-              ),
-              Center(
-                child: ElevatedButton(
-                    onPressed: (){
-                      controller.clear();
-                      timeline.fetchPrincipal(country: null);
-                    },
-                    child: const Text('clear')),
-              )
-            ] + tail),
-      ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(5,20,20,20),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            print("Submitted country: ${controller.text}");
+                             timeline.fetchPrincipal(country: controller.text.isNotEmpty
+                                ? controller.text
+                                : null);
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                    title: const Text('Successfully Selected'),
+                                    content: const Text('Choose an Era and Move On'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: const Text('OK')),
+                                    ],
+                                  );
+                                });
+                          },
+                          child: const Text("Submit"),
+                        ),),
+                    )
+                  ],
+                ),
+                Center(
+                  child: ElevatedButton(
+                      onPressed: (){
+                        controller.clear();
+                        timeline.fetchPrincipal(country: null);
+                      },
+                      child: const Text('clear')),
+                )
+              ] + tail),
+        ),
+      //),
     );
 
   }

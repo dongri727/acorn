@@ -25,6 +25,20 @@ ALTER TABLE ONLY "countryatts"
 
 
 --
+-- Class Days as table days
+--
+
+CREATE TABLE "days" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "day" text NOT NULL
+);
+
+ALTER TABLE ONLY "days"
+  ADD CONSTRAINT days_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Lieux as table lieux
 --
 

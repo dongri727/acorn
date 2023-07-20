@@ -2,7 +2,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'bloc_provider.dart';
+import 'timeline/bloc_provider.dart';
 import 'cover.dart';
 import 'timeline/timeline.dart';
 

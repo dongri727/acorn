@@ -7,7 +7,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import 'entry.dart';
 import 'timeline_utils.dart';
-import 'package:acorn_flutter/utils/list_principal.dart';
 
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
