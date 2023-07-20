@@ -1,36 +1,75 @@
 import 'package:flutter/material.dart';
 
-class ChipsFormat extends StatefulWidget {
+class ChoiceFormat extends StatefulWidget {
 
-  final List<String> chipsFilter;
-  final String chipsData;
+  final List<String> choiceFilter;
+  final String choiceData;
 
-  const ChipsFormat({super.key,
-    required this.chipsFilter,
-    required this.chipsData,
+  const ChoiceFormat({super.key,
+    required this.choiceFilter,
+    required this.choiceData,
   });
 
   @override
-  ChipsFormatState createState() => ChipsFormatState();
+  ChoiceFormatState createState() => ChoiceFormatState();
 }
 
-class ChipsFormatState extends State<ChipsFormat> {
+class ChoiceFormatState extends State<ChoiceFormat> {
 
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
-        label: Text(widget.chipsData),
-        selected: widget.chipsFilter.contains(widget.chipsData),
+        label: Text(widget.choiceData),
+        selected: widget.choiceFilter.contains(widget.choiceData),
         onSelected: (bool value) {
           setState(() {
             if (value) {
-              widget.chipsFilter.clear();
-              widget.chipsFilter.add(widget.chipsData);
+              widget.choiceFilter.clear();
+              widget.choiceFilter.add(widget.choiceData);
             } else {
-              widget.chipsFilter.removeWhere((filter) => filter == widget.chipsData);
+              widget.choiceFilter.removeWhere((filter) => filter == widget.choiceData);
             }
           });
         },
+    );
+  }
+}
+
+
+class FilterFormat extends StatefulWidget {
+
+  final List<String> filterFilter;
+  final String filterData;
+
+  const FilterFormat({super.key,
+    required this.filterFilter,
+    required this.filterData,
+  });
+
+  @override
+  FilterFormatState createState() => FilterFormatState();
+}
+
+class FilterFormatState extends State<FilterFormat> {
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: Text(widget.filterData),
+      selected: widget.filterFilter.contains(widget.filterData),
+      onSelected: (bool value) {
+        setState(() {
+          if (value) {
+            if (!widget.filterFilter.contains(
+                widget.filterData)) {
+              widget.filterFilter
+                  .add(widget.filterData);
+            }
+          } else {
+            widget.filterFilter.removeWhere((filterFilter) => filterFilter == widget.filterData);
+          }
+        });
+      },
     );
   }
 }

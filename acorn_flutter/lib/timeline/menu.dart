@@ -1,4 +1,3 @@
-import "package:acorn_flutter/timeline/timeline.dart";
 import "package:flutter/material.dart";
 
 import 'bloc_provider.dart';
@@ -6,7 +5,6 @@ import "../utils/formats.dart";
 import "menu_data.dart";
 import "menu_section.dart";
 import "widget.dart";
-import 'timeline.dart';
 
 /// The Base Page of the Timeline App.
 
@@ -57,7 +55,6 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   @override
   Widget build(BuildContext context) {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
-    //final controller = TextEditingController();
     final timeline = BlocProvider.getTimeline(context);
 
     List<Widget> tail = [];
@@ -76,10 +73,7 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
         .toList(growable: false)
     );
 
-    return /*BlocProvider(
-      platform: Theme.of(context).platform,
-      t: Timeline(Theme.of(context).platform),
-      child:*/ Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text("TIMELINE"),
         ),
@@ -126,24 +120,15 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                                     ],
                                   );
                                 });
+                            controller.clear();
                           },
                           child: const Text("Submit"),
                         ),),
                     )
                   ],
                 ),
-                Center(
-                  child: ElevatedButton(
-                      onPressed: (){
-                        controller.clear();
-                        timeline.fetchPrincipal(country: null);
-                      },
-                      child: const Text('clear')),
-                )
               ] + tail),
         ),
-      //),
     );
-
   }
 }

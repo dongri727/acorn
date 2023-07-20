@@ -112,6 +112,12 @@ class _WherePageState extends State<WherePage> {
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+
+    final placeKey = GlobalKey<FormFieldState>();
+    final cattKey = GlobalKey<FormFieldState>();
+    final pattKey = GlobalKey<FormFieldState>();
+
+
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -140,15 +146,16 @@ class _WherePageState extends State<WherePage> {
                         child: Wrap(
                           spacing: 5.0,
                           children: listPlaces.map((places){
-                            return ChipsFormat(
-                                chipsFilter: _filtersPlaces,
-                                chipsData: places.place);
+                            return ChoiceFormat(
+                                choiceFilter: _filtersPlaces,
+                                choiceData: places.place);
                           }).toList(),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: TffFormat(
+                          key: placeKey,
                           hintText: 'a New Place You Want',
                           onChanged: (text) {
                             newPlace = text;
@@ -158,10 +165,12 @@ class _WherePageState extends State<WherePage> {
                         ),
                       ),
                       ButtonFormat(
-                        onPressed: addPlacesAndFetch,
+                        onPressed: () {
+                          addPlacesAndFetch();
+                          placeKey.currentState!.reset();
+                          },
                         label: 'Add a new Place',
                       ),
-
                     ],
                   )),
               Expanded(
@@ -182,15 +191,16 @@ class _WherePageState extends State<WherePage> {
                         child: Wrap(
                           spacing: 5.0,
                           children: listCountryatts.map((countryatts){
-                            return ChipsFormat(
-                                chipsFilter: _filtersCountryatts,
-                                chipsData: countryatts.countryatt);
+                            return ChoiceFormat(
+                                choiceFilter: _filtersCountryatts,
+                                choiceData: countryatts.countryatt);
                           }).toList(),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: TffFormat(
+                          key: cattKey,
                           hintText: 'a New Country at that time You Want',
                           onChanged: (text) {
                             newCountryatt = text;
@@ -200,7 +210,10 @@ class _WherePageState extends State<WherePage> {
                         ),
                       ),
                       ButtonFormat(
-                        onPressed: addCountryATTandFetch,
+                        onPressed: () {
+                          addCountryATTandFetch();
+                          cattKey.currentState!.reset();
+                          },
                         label: 'Add a New Country at that time',
                       ),
                     ],
@@ -222,15 +235,16 @@ class _WherePageState extends State<WherePage> {
                       child: Wrap(
                         spacing: 5.0,
                         children: listPlaceatts.map((placeatts){
-                          return ChipsFormat(
-                              chipsFilter: _filtersPlaceatts,
-                              chipsData: placeatts.placeatt);
+                          return ChoiceFormat(
+                              choiceFilter: _filtersPlaceatts,
+                              choiceData: placeatts.placeatt);
                         }).toList(),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: TffFormat(
+                        key: pattKey,
                         hintText: 'a New Place at that time You Want',
                         onChanged: (text) {
                           newPlaceatt = text;
@@ -240,7 +254,10 @@ class _WherePageState extends State<WherePage> {
                       ),
                     ),
                     ButtonFormat(
-                      onPressed: addPlaceATTandFetch,
+                      onPressed: () {
+                        addPlaceATTandFetch();
+                        pattKey.currentState!.reset();
+                        },
                       label:'Add a New Place at that time',
                     ),
                     Padding(

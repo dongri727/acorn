@@ -1,4 +1,5 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -47,7 +48,7 @@ class _WhoPageState extends State<WhoPage> {
     organisationLastVal =
     await client.organisations.addOrganisations(organisations);
     print(organisationLastVal);
-    debugPrint("add a place");
+    debugPrint("add an organisation");
     listOrgs = await client.organisations.getOrganisations();
     setState(() {});
   }
@@ -70,7 +71,7 @@ class _WhoPageState extends State<WhoPage> {
     var people = People(person: newPerson);
     personLastVal = await client.people.addPeople(people);
     print(personLastVal);
-    debugPrint("add a place");
+    debugPrint("add a person");
     listPeople = await client.people.getPeople();
     setState(() {});
   }
@@ -96,10 +97,9 @@ class _WhoPageState extends State<WhoPage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: OutlinedButton(
+                                child: ButtonFormat(
                                   onPressed: fetchOrgsInvolved,
-                                  child: const Text(
-                                      'Show and Select Organizations Involved'),
+                                  label: 'Show and Select Organizations Involved',
                                 ),
                               ),
                               Padding(
