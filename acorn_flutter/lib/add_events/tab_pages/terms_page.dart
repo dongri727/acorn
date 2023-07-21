@@ -1,4 +1,6 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/utils/button_format.dart';
+import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -80,6 +82,9 @@ class TermsPageState extends State<TermsPage> {
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+    final categoryKey = GlobalKey<FormFieldState>();
+    final termKey = GlobalKey<FormFieldState>();
+
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -99,9 +104,9 @@ class TermsPageState extends State<TermsPage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: OutlinedButton(
+                          child: ButtonFormat(
                             onPressed: fetchCategories,
-                            child: const Text('Show and Select Categories'),
+                            label: 'Show and Select Categories',
                           ),
                         ),
                         Text(
@@ -116,7 +121,10 @@ class TermsPageState extends State<TermsPage> {
                           child: Wrap(
                             spacing: 5.0,
                             children: listCategories.map((categories) {
-                              return FilterChip(
+                              return FilterFormat(
+                                  filterFilter: filtersCategories,
+                                  filterData: categories.category);
+/*                              return FilterChip(
                                 label: Text(categories.category),
                                 selected: filtersCategories.contains(categories.category),
                                 onSelected: (bool value) {
@@ -130,13 +138,14 @@ class TermsPageState extends State<TermsPage> {
                                     }
                                   });
                                 },
-                              );
+                              );*/
                             }).toList(),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
                           child: TffFormat(
+                            key: categoryKey,
                             hintText: 'a New Category You Want',
                             onChanged: (text) {
                               newCategory = text;
@@ -145,9 +154,12 @@ class TermsPageState extends State<TermsPage> {
                             tffColor2: const Color(0x99e6e6fa),
                           ),
                         ),
-                        OutlinedButton(
-                          onPressed: addCategoriesAndFetch,
-                          child: const Text('Add a New Category'),
+                        ButtonFormat(
+                          onPressed: () {
+                            addCategoriesAndFetch();
+                            categoryKey.currentState!.reset();
+                            },
+                          label: 'Add a New Category',
                         )
                       ],
                     ),
@@ -159,9 +171,9 @@ class TermsPageState extends State<TermsPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: OutlinedButton(
+                            child: ButtonFormat(
                               onPressed: fetchTerms,
-                              child: const Text('Show and Select Search Terms'),
+                              label: 'Show and Select Search Terms',
                             ),
                           ),
                           Text(
@@ -177,7 +189,10 @@ class TermsPageState extends State<TermsPage> {
                             child: Wrap(
                               spacing: 5.0,
                               children: listTerms.map((terms) {
-                                return FilterChip(
+                                return FilterFormat(
+                                    filterFilter: filtersTerms,
+                                    filterData: terms.term);
+/*                                return FilterChip(
                                   label: Text(terms.term),
                                   selected: filtersTerms.contains(terms.term),
                                   onSelected: (bool value) {
@@ -191,13 +206,14 @@ class TermsPageState extends State<TermsPage> {
                                       }
                                     });
                                   },
-                                );
+                                );*/
                               }).toList(),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(200, 30 ,200, 30),
                             child: TffFormat(
+                              key: termKey,
                               hintText: 'a New Search Term You Want',
                               onChanged: (text) {
                                 newTerm = text;
@@ -206,9 +222,12 @@ class TermsPageState extends State<TermsPage> {
                               tffColor2: const Color(0x99e6e6fa),
                             ),
                           ),
-                          OutlinedButton(
-                            onPressed: addTermsAndFetch,
-                            child: const Text('Add a New Term'),
+                          ButtonFormat(
+                            onPressed: () {
+                              addTermsAndFetch();
+                              termKey.currentState!.reset();
+                              },
+                            label: 'Add a New Term',
                           )
                         ],
                       )

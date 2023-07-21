@@ -1,5 +1,6 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
+import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -79,6 +80,10 @@ class _WhoPageState extends State<WhoPage> {
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+
+    final orgKey = GlobalKey<FormFieldState>();
+    final personKey = GlobalKey<FormFieldState>();
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -107,7 +112,10 @@ class _WhoPageState extends State<WhoPage> {
                                 child: Wrap(
                                   spacing: 5.0,
                                   children: listOrgs.map((organisations) {
-                                    return FilterChip(
+                                    return FilterFormat(
+                                        filterFilter: filtersOrgs,
+                                        filterData: organisations.organisation);
+/*                                    return FilterChip(
                                       label: Text(organisations.organisation),
                                       selected: filtersOrgs
                                           .contains(organisations.organisation),
@@ -126,7 +134,7 @@ class _WhoPageState extends State<WhoPage> {
                                           }
                                         });
                                       },
-                                    );
+                                    );*/
                                   }).toList(),
                                 ),
                               ),
@@ -140,6 +148,7 @@ class _WhoPageState extends State<WhoPage> {
                               Padding(
                                 padding: const EdgeInsets.all(30.0),
                                 child: TffFormat(
+                                  key: orgKey,
                                   hintText: 'a New Organization You Want',
                                   onChanged: (text) {
                                     newOrg = text;
@@ -148,9 +157,12 @@ class _WhoPageState extends State<WhoPage> {
                                   tffColor2: const Color(0x99e6e6fa),
                                 ),
                               ),
-                              OutlinedButton(
-                                onPressed: addOrgsAndFetch,
-                                child: const Text('Add a New Organization'),
+                              ButtonFormat(
+                                onPressed: () {
+                                  addOrgsAndFetch();
+                                  orgKey.currentState!.reset();
+                                },
+                                label: 'Add a New Organization',
                               )
                             ],
                           )),
@@ -160,10 +172,9 @@ class _WhoPageState extends State<WhoPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(20.0),
-                              child: OutlinedButton(
+                              child: ButtonFormat(
                                 onPressed: fetchPeopleInvolved,
-                                child:
-                                const Text('Show and Select People Involved'),
+                                label: 'Show and Select People Involved',
                               ),
                             ),
                             Padding(
@@ -171,7 +182,10 @@ class _WhoPageState extends State<WhoPage> {
                               child: Wrap(
                                 spacing: 5.0,
                                 children: listPeople.map((people) {
-                                  return FilterChip(
+                                  return FilterFormat(
+                                      filterFilter: filtersPeople,
+                                      filterData: people.person);
+/*                                  return FilterChip(
                                     label: Text(people.person),
                                     selected: filtersPeople.contains(people.person),
                                     onSelected: (bool value) {
@@ -188,7 +202,7 @@ class _WhoPageState extends State<WhoPage> {
                                         }
                                       });
                                     },
-                                  );
+                                  );*/
                                 }).toList(),
                               ),
                             ),
@@ -202,6 +216,7 @@ class _WhoPageState extends State<WhoPage> {
                             Padding(
                               padding: const EdgeInsets.all(30.0),
                               child: TffFormat(
+                                key: personKey,
                                 hintText: 'a New Person You Want',
                                 onChanged: (text) {
                                   newPerson = text;
@@ -210,9 +225,12 @@ class _WhoPageState extends State<WhoPage> {
                                 tffColor2: const Color(0x99e6e6fa),
                               ),
                             ),
-                            OutlinedButton(
-                              onPressed: addPeoplendFetch,
-                              child: const Text('Add a New Person'),
+                            ButtonFormat(
+                              onPressed: () {
+                                addPeoplendFetch();
+                                personKey.currentState!.reset();
+                                },
+                              label: 'Add a New Person',
                             )
                           ],
                         ),
