@@ -1,0 +1,4 @@
+class: Pays
+table: pays
+fields: 
+  pays: String

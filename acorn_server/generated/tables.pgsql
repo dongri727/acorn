@@ -84,6 +84,19 @@ ALTER TABLE ONLY "organisations"
 
 
 --
+-- Class Pays as table pays
+--
+
+CREATE TABLE "pays" (
+  "id" serial,
+  "pays" text NOT NULL
+);
+
+ALTER TABLE ONLY "pays"
+  ADD CONSTRAINT pays_pkey PRIMARY KEY (id);
+
+
+--
 -- Class People as table people
 --
 

@@ -37,7 +37,7 @@ class TabPage extends StatelessWidget {
             ),
             child: const SafeArea(
               child: DefaultTabController(
-                length: 6,
+                length: 7,
                 child: Column(
                   children: [
                     TabBar(
@@ -47,7 +47,7 @@ class TabPage extends StatelessWidget {
                         Tab(text: 'REQUIRED'),
                         Tab(text: 'ADDITIONAL "WHEN"'),
                         Tab(text: 'ADDITIONAL "WHERE"'),
-                        //Tab(text: 'PARTICIPANTS A'),
+                        Tab(text: 'PARTICIPANTS A'),
                         Tab(text: 'PARTICIPANTS B'),
                         Tab(text: 'SEARCH TERMS'),
                         Tab(text: 'CONFIRM'),
@@ -61,7 +61,7 @@ class TabPage extends StatelessWidget {
                           WhatPage(), // 必須
                           WhenPage(), // 月日・地域暦
                           WherePage(), // 地名･座標
-                          //PaysPage(),//関係国・都市
+                          PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者
                           TermsPage(), // 検索語
                           PreviewPage(), // プレビュー

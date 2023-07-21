@@ -82,7 +82,7 @@ class _WherePageState extends State<WherePage> {
     var catts = Countryatts(countryatt: newCountryatt);
     countryattLastVal = await client.countryatts.addCountryATTs(catts);
     print(countryattLastVal);
-    debugPrint("add an CountryATT");
+    debugPrint("add a CountryATT");
     listCountryatts = await client.countryatts.getCountryATTs();
     setState(() {});
   }

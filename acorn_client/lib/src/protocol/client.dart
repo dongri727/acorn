@@ -14,13 +14,14 @@ import 'package:acorn_client/src/protocol/days.dart' as _i5;
 import 'package:acorn_client/src/protocol/lieux.dart' as _i6;
 import 'package:acorn_client/src/protocol/months.dart' as _i7;
 import 'package:acorn_client/src/protocol/organisations.dart' as _i8;
-import 'package:acorn_client/src/protocol/people.dart' as _i9;
-import 'package:acorn_client/src/protocol/placeatts.dart' as _i10;
-import 'package:acorn_client/src/protocol/places.dart' as _i11;
-import 'package:acorn_client/src/protocol/principal.dart' as _i12;
-import 'package:acorn_client/src/protocol/terms.dart' as _i13;
-import 'dart:io' as _i14;
-import 'protocol.dart' as _i15;
+import 'package:acorn_client/src/protocol/pays.dart' as _i9;
+import 'package:acorn_client/src/protocol/people.dart' as _i10;
+import 'package:acorn_client/src/protocol/placeatts.dart' as _i11;
+import 'package:acorn_client/src/protocol/places.dart' as _i12;
+import 'package:acorn_client/src/protocol/principal.dart' as _i13;
+import 'package:acorn_client/src/protocol/terms.dart' as _i14;
+import 'dart:io' as _i15;
+import 'protocol.dart' as _i16;
 
 class _EndpointCategories extends _i1.EndpointRef {
   _EndpointCategories(_i1.EndpointCaller caller) : super(caller);
@@ -159,20 +160,40 @@ class _EndpointOrganisations extends _i1.EndpointRef {
       );
 }
 
+class _EndpointPays extends _i1.EndpointRef {
+  _EndpointPays(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'pays';
+
+  _i2.Future<List<_i9.Pays>> getPays({String? keyword}) =>
+      caller.callServerEndpoint<List<_i9.Pays>>(
+        'pays',
+        'getPays',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addPays(_i9.Pays pays) => caller.callServerEndpoint<int>(
+        'pays',
+        'addPays',
+        {'pays': pays},
+      );
+}
+
 class _EndpointPeople extends _i1.EndpointRef {
   _EndpointPeople(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'people';
 
-  _i2.Future<List<_i9.People>> getPeople({String? keyword}) =>
-      caller.callServerEndpoint<List<_i9.People>>(
+  _i2.Future<List<_i10.People>> getPeople({String? keyword}) =>
+      caller.callServerEndpoint<List<_i10.People>>(
         'people',
         'getPeople',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPeople(_i9.People people) =>
+  _i2.Future<int> addPeople(_i10.People people) =>
       caller.callServerEndpoint<int>(
         'people',
         'addPeople',
@@ -186,14 +207,14 @@ class _EndpointPlaceatts extends _i1.EndpointRef {
   @override
   String get name => 'placeatts';
 
-  _i2.Future<List<_i10.Placeatts>> getPlaceATTs({String? keyword}) =>
-      caller.callServerEndpoint<List<_i10.Placeatts>>(
+  _i2.Future<List<_i11.Placeatts>> getPlaceATTs({String? keyword}) =>
+      caller.callServerEndpoint<List<_i11.Placeatts>>(
         'placeatts',
         'getPlaceATTs',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPlaceATTs(_i10.Placeatts placeatts) =>
+  _i2.Future<int> addPlaceATTs(_i11.Placeatts placeatts) =>
       caller.callServerEndpoint<int>(
         'placeatts',
         'addPlaceATTs',
@@ -207,14 +228,14 @@ class _EndpointPlaces extends _i1.EndpointRef {
   @override
   String get name => 'places';
 
-  _i2.Future<List<_i11.Places>> getPlaces({String? keyword}) =>
-      caller.callServerEndpoint<List<_i11.Places>>(
+  _i2.Future<List<_i12.Places>> getPlaces({String? keyword}) =>
+      caller.callServerEndpoint<List<_i12.Places>>(
         'places',
         'getPlaces',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPlaces(_i11.Places places) =>
+  _i2.Future<int> addPlaces(_i12.Places places) =>
       caller.callServerEndpoint<int>(
         'places',
         'addPlaces',
@@ -228,15 +249,15 @@ class _EndpointPrincipal extends _i1.EndpointRef {
   @override
   String get name => 'principal';
 
-  _i2.Future<int> addPrincipal(_i12.Principal principal) =>
+  _i2.Future<int> addPrincipal(_i13.Principal principal) =>
       caller.callServerEndpoint<int>(
         'principal',
         'addPrincipal',
         {'principal': principal},
       );
 
-  _i2.Future<List<_i12.Principal>> getPrincipal({String? keyword}) =>
-      caller.callServerEndpoint<List<_i12.Principal>>(
+  _i2.Future<List<_i13.Principal>> getPrincipal({String? keyword}) =>
+      caller.callServerEndpoint<List<_i13.Principal>>(
         'principal',
         'getPrincipal',
         {'keyword': keyword},
@@ -249,14 +270,14 @@ class _EndpointTerms extends _i1.EndpointRef {
   @override
   String get name => 'terms';
 
-  _i2.Future<List<_i13.Terms>> getTerms({String? keyword}) =>
-      caller.callServerEndpoint<List<_i13.Terms>>(
+  _i2.Future<List<_i14.Terms>> getTerms({String? keyword}) =>
+      caller.callServerEndpoint<List<_i14.Terms>>(
         'terms',
         'getTerms',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addTerms(_i13.Terms terms) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addTerms(_i14.Terms terms) => caller.callServerEndpoint<int>(
         'terms',
         'addTerms',
         {'terms': terms},
@@ -266,11 +287,11 @@ class _EndpointTerms extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i14.SecurityContext? context,
+    _i15.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i15.Protocol(),
+          _i16.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -281,6 +302,7 @@ class Client extends _i1.ServerpodClient {
     lieux = _EndpointLieux(this);
     months = _EndpointMonths(this);
     organisations = _EndpointOrganisations(this);
+    pays = _EndpointPays(this);
     people = _EndpointPeople(this);
     placeatts = _EndpointPlaceatts(this);
     places = _EndpointPlaces(this);
@@ -302,6 +324,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointOrganisations organisations;
 
+  late final _EndpointPays pays;
+
   late final _EndpointPeople people;
 
   late final _EndpointPlaceatts placeatts;
@@ -321,6 +345,7 @@ class Client extends _i1.ServerpodClient {
         'lieux': lieux,
         'months': months,
         'organisations': organisations,
+        'pays': pays,
         'people': people,
         'placeatts': placeatts,
         'places': places,

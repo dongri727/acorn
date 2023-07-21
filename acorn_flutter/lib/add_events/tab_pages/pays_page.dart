@@ -1,10 +1,11 @@
-/*
+import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:acorn_client/acorn_client.dart';
 
 import '../../confirm/confirm.dart';
+import '../../utils/button_format.dart';
 import '../../utils/formats.dart';
 
 
@@ -25,10 +26,10 @@ class _PaysPageState extends State<PaysPage> {
   final List<String> filtersPays = <String>[];
   final List<String> filtersPaysId = <String>[];
 
-  List<Countryatts> listAtThatTimes = [];
-  List<Map<String, String>> displayListATTs = [];
-  final List<String> filtersATTs = <String>[];
-  final List<String> filtersATTId = <String>[];
+  List<Countryatts> listCATTs = [];
+  List<Map<String, String>> displayListCATTs = [];
+  final List<String> filtersCATTs = <String>[];
+  final List<String> filtersCATTId = <String>[];
 
   Future<void> fetchPaysInvolved() async {
     try {
@@ -41,11 +42,11 @@ class _PaysPageState extends State<PaysPage> {
     }
   }
 
-  Future<void> fetchAttInvolved() async {
+  Future<void> fetchCountriesAttInvolved() async {
     try {
-      listAtThatTimes = await client.atThatTime.getAtThatTime();
+      listCATTs = await client.countryatts.getCountryATTs();
       setState(() {
-        displayListATTs = listAtThatTimes.cast<Map<String, String>>();
+        displayListCATTs = listCATTs.cast<Map<String, String>>();
       });
     } on Exception catch (e) {
       debugPrint('$e');
@@ -53,16 +54,16 @@ class _PaysPageState extends State<PaysPage> {
 
   }
 
-  var newATT = '';
+  var newCATT = '';
 
-  late int attLastVal;
+  late int countryattLastVal;
 
-  addATTandFetch() async {
-    var atts = AtThatTime(att: newATT);
-    attLastVal = await client.atThatTime.addAtThatTime(atts);
-    print(attLastVal);
-    debugPrint("add an ATT");
-    listAtThatTimes = await client.atThatTime.getAtThatTime();
+  addCountryATTandFetch() async {
+    var catts = Countryatts(countryatt: newCATT);
+    countryattLastVal = await client.countryatts.addCountryATTs(catts);
+    print(countryattLastVal);
+    debugPrint("add a CountryATT");
+    listCATTs = await client.countryatts.getCountryATTs();
     setState(() {});
   }
 
@@ -106,7 +107,10 @@ class _PaysPageState extends State<PaysPage> {
                                 child: Wrap(
                                   spacing: 5.0,
                                   children: listPays.map((pays) {
-                                    return FilterChip(
+                                    return FilterFormat(
+                                        filterFilter: filtersPays,
+                                        filterData: pays.pays);
+/*                                    return FilterChip(
                                       label: Text(pays.pays),
                                       selected: filtersPays.contains(pays.pays),
                                       onSelected: (bool value) {
@@ -125,7 +129,7 @@ class _PaysPageState extends State<PaysPage> {
                                           }
                                         });
                                       },
-                                    );
+                                    );*/
                                   }).toList(),
                                 ),
                               ),
@@ -139,18 +143,21 @@ class _PaysPageState extends State<PaysPage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: OutlinedButton(
-                                  onPressed: fetchAttInvolved,
-                                  child: const Text('Show and Select Countries Involved at that time'),
+                                child: ButtonFormat(
+                                  onPressed: fetchCountriesAttInvolved,
+                                  label: 'Show and Select Countries Involved at that time',
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Wrap(
                                   spacing: 5.0,
-                                  children: listAtThatTimes.map((atts) {
-                                    return FilterChip(
-                                      label: Text(atts.att),
+                                  children: listCATTs.map((countryatts) {
+                                    return FilterFormat(
+                                        filterFilter: filtersCATTs,
+                                        filterData: countryatts.countryatt);
+/*                                    return FilterChip(
+                                      label: Text(catts.catt),
                                       selected: filtersATTs.contains(atts.att),
                                       onSelected: (bool value) {
                                         setState(() {
@@ -169,12 +176,12 @@ class _PaysPageState extends State<PaysPage> {
                                           }
                                         });
                                       },
-                                    );
+                                    );*/
                                   }).toList(),
                                 ),
                               ),
                               Text(
-                                'Selected: ${filtersATTs.join(', ')}',
+                                'Selected: ${filtersCATTs.join(', ')}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.yellow,
@@ -185,14 +192,14 @@ class _PaysPageState extends State<PaysPage> {
                                 child: TffFormat(
                                   hintText: 'a New Country Involved at that time You Want',
                                   onChanged: (text) {
-                                    newATT = text;
+                                    newCATT = text;
                                   },
                                   tffColor1: Colors.black54,
                                   tffColor2: const Color(0x99e6e6fa),
                                 ),
                               ),
                               OutlinedButton (
-                                onPressed: addATTandFetch,
+                                onPressed: addCountryATTandFetch,
                                 child: const Text('Add a New Country Involved at that time'),
                               )
                             ],
@@ -226,13 +233,13 @@ class _PaysPageState extends State<PaysPage> {
           print ("$filtersPaysId");
 
 
-          confirm.selectedATT = filtersATTs;
-          confirm.selectedATTId = filtersATTId;
-          print ("$filtersATTId");
+          confirm.selectedATT = filtersCATTs;
+          confirm.selectedATTId = filtersCATTId;
+          print ("$filtersCATTId");
 
         },
         label: const Text('Temporarily Save'),
       ),
     );
   }
-}*/
+}
