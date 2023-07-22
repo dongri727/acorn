@@ -23,12 +23,12 @@ class _WhoPageState extends State<WhoPage> {
   List<Organisations> listOrgs = [];
   List<Map<String, String>> displayListOrgs = [];
   final List<String> filtersOrgs = <String>[];
-  final List<String> filtersOrgsId = <String>[];
+  final List<int> filtersOrgsId = <int>[];
 
   List<People> listPeople = [];
   List<Map<String, String>> displayListPeople = [];
   final List<String> filtersPeople = <String>[];
-  final List<String> filtersPeopleId = <String>[];
+  final List<int> filtersPeopleId = <int>[];
 
   Future<void> fetchOrgsInvolved() async {
     try {
@@ -113,8 +113,11 @@ class _WhoPageState extends State<WhoPage> {
                                   spacing: 5.0,
                                   children: listOrgs.map((organisations) {
                                     return FilterFormat(
-                                        filterFilter: filtersOrgs,
-                                        filterData: organisations.organisation);
+                                        filteredKeys: filtersOrgs,
+                                        filteredValues: filtersOrgsId,
+                                        filterKey: organisations.organisation,
+                                      filterValue: organisations.id,
+                                    );
 /*                                    return FilterChip(
                                       label: Text(organisations.organisation),
                                       selected: filtersOrgs
@@ -183,8 +186,11 @@ class _WhoPageState extends State<WhoPage> {
                                 spacing: 5.0,
                                 children: listPeople.map((people) {
                                   return FilterFormat(
-                                      filterFilter: filtersPeople,
-                                      filterData: people.person);
+                                      filteredKeys: filtersPeople,
+                                      filteredValues: filtersPeopleId,
+                                      filterKey: people.person,
+                                    filterValue: people.id,
+                                  );
 /*                                  return FilterChip(
                                     label: Text(people.person),
                                     selected: filtersPeople.contains(people.person),
@@ -258,12 +264,11 @@ class _WhoPageState extends State<WhoPage> {
               });
 
           confirm.selectedOrg = filtersOrgs;
-          confirm.selectedOrgId = filtersOrgs;
-          ;
+          confirm.selectedOrgId = filtersOrgsId;
           print("$filtersOrgs");
 
           confirm.selectedWho = filtersPeople;
-          confirm.selectedWhoId = filtersPeople;
+          confirm.selectedWhoId = filtersPeopleId;
           print("$filtersPeople");
         },
         label: const Text('Temporarily Save'),

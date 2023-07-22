@@ -41,8 +41,9 @@ class TabPage extends StatelessWidget {
                 child: Column(
                   children: [
                     TabBar(
-                      labelColor: Colors.white,
+                      labelColor: Colors.yellow,
                       indicatorColor: Colors.yellow,
+                      unselectedLabelColor: Colors.white,
                       tabs: [
                         Tab(text: 'REQUIRED'),
                         Tab(text: 'ADDITIONAL "WHEN"'),

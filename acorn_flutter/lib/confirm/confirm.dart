@@ -27,25 +27,25 @@ class Confirm {
 
   //pays involved
   List<String> selectedPays = [];
-  List<String> selectedPaysId = [];
+  List<int> selectedPaysId = [];
 
   //pays involved at that time
   List<String> selectedATT = [];
-  List<String> selectedATTId = [];
+  List<int> selectedATTId = [];
 
   //Org involved
   List<String> selectedOrg = [];
-  List<String> selectedOrgId = [];
+  List<int> selectedOrgId = [];
 
   //who
   List<String> selectedWho = [];
-  List<String> selectedWhoId = [];
+  List<int> selectedWhoId = [];
 
   //terms
   List<String> selectedTerm = [];
-  List<String> selectedTermId = [];
+  List<int> selectedTermId = [];
 
   //categories
   List<String> selectedCategory = [];
-  List<String> selectedCategoryId = [];
+  List<int> selectedCategoryId = [];
 }

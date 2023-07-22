@@ -38,12 +38,16 @@ class ChoiceFormatState extends State<ChoiceFormat> {
 
 class FilterFormat extends StatefulWidget {
 
-  final List<String> filterFilter;
-  final String filterData;
+  final List<String> filteredKeys;
+  final List<dynamic> filteredValues;
+  final String filterKey;
+  final dynamic filterValue;
 
   const FilterFormat({super.key,
-    required this.filterFilter,
-    required this.filterData,
+    required this.filteredKeys,
+    required this.filteredValues,
+    required this.filterKey,
+    required this.filterValue,
   });
 
   @override
@@ -55,18 +59,21 @@ class FilterFormatState extends State<FilterFormat> {
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-      label: Text(widget.filterData),
-      selected: widget.filterFilter.contains(widget.filterData),
+      label: Text(widget.filterKey),
+      selected: widget.filteredKeys.contains(widget.filterKey),
       onSelected: (bool value) {
         setState(() {
           if (value) {
-            if (!widget.filterFilter.contains(
-                widget.filterData)) {
-              widget.filterFilter
-                  .add(widget.filterData);
+            if (!widget.filteredKeys.contains(widget.filterKey)) {
+              widget.filteredKeys
+                  .add(widget.filterKey);
+            }
+            if (!widget.filteredValues.contains(widget.filterValue)) {
+              widget.filteredValues.add(widget.filterValue);
             }
           } else {
-            widget.filterFilter.removeWhere((filterFilter) => filterFilter == widget.filterData);
+            widget.filteredKeys.removeWhere((key) => key == widget.filterKey);
+            widget.filteredValues.removeWhere((value) => value == widget.filterValue);
           }
         });
       },

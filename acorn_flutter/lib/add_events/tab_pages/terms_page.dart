@@ -26,12 +26,12 @@ class TermsPageState extends State<TermsPage> {
   List<Terms> listTerms = [];
   List<Map<String, String>> displayTerms = [];
   final List<String> filtersTerms = <String>[];
-  final List<String> filtersTermsId = <String>[];
+  final List<int> filtersTermsId = <int>[];
 
   List<Categories> listCategories = [];
   List<Map<String, String>> displayCategories = [];
   final List<String> filtersCategories = <String>[];
-  final List<String> filtersCategoriesId = <String>[];
+  final List<int> filtersCategoriesId = <int>[];
 
   Future<void> fetchTerms() async {
     try {
@@ -122,8 +122,11 @@ class TermsPageState extends State<TermsPage> {
                             spacing: 5.0,
                             children: listCategories.map((categories) {
                               return FilterFormat(
-                                  filterFilter: filtersCategories,
-                                  filterData: categories.category);
+                                  filteredKeys: filtersCategories,
+                                  filteredValues: filtersCategoriesId,
+                                  filterKey: categories.category,
+                                filterValue: categories.id,
+                              );
 /*                              return FilterChip(
                                 label: Text(categories.category),
                                 selected: filtersCategories.contains(categories.category),
@@ -190,8 +193,11 @@ class TermsPageState extends State<TermsPage> {
                               spacing: 5.0,
                               children: listTerms.map((terms) {
                                 return FilterFormat(
-                                    filterFilter: filtersTerms,
-                                    filterData: terms.term);
+                                    filteredKeys: filtersTerms,
+                                    filteredValues: filtersTermsId,
+                                    filterKey: terms.term,
+                                  filterValue: terms.id,
+                                );
 /*                                return FilterChip(
                                   label: Text(terms.term),
                                   selected: filtersTerms.contains(terms.term),

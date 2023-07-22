@@ -24,12 +24,12 @@ class _PaysPageState extends State<PaysPage> {
   List<Pays> listPays = [];
   List<Map<String, String>> displayListPays = [];
   final List<String> filtersPays = <String>[];
-  final List<String> filtersPaysId = <String>[];
+  final List<int> filtersPaysId = <int>[];
 
   List<Countryatts> listCATTs = [];
   List<Map<String, String>> displayListCATTs = [];
   final List<String> filtersCATTs = <String>[];
-  final List<String> filtersCATTId = <String>[];
+  final List<int> filtersCATTId = <int>[];
 
   Future<void> fetchPaysInvolved() async {
     try {
@@ -70,6 +70,8 @@ class _PaysPageState extends State<PaysPage> {
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+    final cinvKey = GlobalKey<FormFieldState>();
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -90,9 +92,9 @@ class _PaysPageState extends State<PaysPage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: OutlinedButton(
+                                child: ButtonFormat(
                                   onPressed: fetchPaysInvolved,
-                                  child: const Text('Show and Select Countries Involved'),
+                                  label: 'Show and Select Current Countries Involved',
                                 ),
                               ),
                               Text(
@@ -108,8 +110,11 @@ class _PaysPageState extends State<PaysPage> {
                                   spacing: 5.0,
                                   children: listPays.map((pays) {
                                     return FilterFormat(
-                                        filterFilter: filtersPays,
-                                        filterData: pays.pays);
+                                        filteredKeys: filtersPays,
+                                        filteredValues: filtersPaysId,
+                                        filterKey: pays.pays,
+                                        filterValue: pays.id,
+                                    );
 /*                                    return FilterChip(
                                       label: Text(pays.pays),
                                       selected: filtersPays.contains(pays.pays),
@@ -148,14 +153,24 @@ class _PaysPageState extends State<PaysPage> {
                                   label: 'Show and Select Countries Involved at that time',
                                 ),
                               ),
+                              Text(
+                                'Selected: ${filtersCATTs.join(', ')}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.yellow,
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Wrap(
                                   spacing: 5.0,
                                   children: listCATTs.map((countryatts) {
                                     return FilterFormat(
-                                        filterFilter: filtersCATTs,
-                                        filterData: countryatts.countryatt);
+                                        filteredKeys: filtersCATTs,
+                                        filteredValues: filtersCATTId,
+                                        filterKey: countryatts.countryatt,
+                                      filterValue: countryatts.id,
+                                    );
 /*                                    return FilterChip(
                                       label: Text(catts.catt),
                                       selected: filtersATTs.contains(atts.att),
@@ -180,16 +195,11 @@ class _PaysPageState extends State<PaysPage> {
                                   }).toList(),
                                 ),
                               ),
-                              Text(
-                                'Selected: ${filtersCATTs.join(', ')}',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.yellow,
-                                ),
-                              ),
+
                               Padding(
                                 padding: const EdgeInsets.all(30.0),
                                 child: TffFormat(
+                                  key: cinvKey,
                                   hintText: 'a New Country Involved at that time You Want',
                                   onChanged: (text) {
                                     newCATT = text;
@@ -198,9 +208,12 @@ class _PaysPageState extends State<PaysPage> {
                                   tffColor2: const Color(0x99e6e6fa),
                                 ),
                               ),
-                              OutlinedButton (
-                                onPressed: addCountryATTandFetch,
-                                child: const Text('Add a New Country Involved at that time'),
+                              ButtonFormat (
+                                onPressed: () {
+                                  addCountryATTandFetch();
+                                  cinvKey.currentState!.reset();
+                                  },
+                                label: 'Add a New Country Involved at that time',
                               )
                             ],
                           )
