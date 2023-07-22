@@ -25,14 +25,13 @@ class TimelineRenderWidget extends LeafRenderObjectWidget {
   final TouchEntryCallback touchEntry;
 
   const TimelineRenderWidget(
-      {Key? key,
+      {super.key,
         required this.focusItem,
         required this.touchBubble,
         required this.touchEntry,
         required this.topOverlap,
         required this.timeline,
-      })
-      : super(key: key);
+      });
 
   @override
   RenderObject createRenderObject(BuildContext context) {
