@@ -289,7 +289,7 @@ class TimelineRenderObject extends RenderBox {
             legPaint);*/
       }
 
-      const double maxLabelWidth = 1200.0;
+      const double maxLabelWidth = 1500.0;
       const double bubblePadding = 20.0;
 
       /// Let the Timeline calculate the height for the current item's bubble.

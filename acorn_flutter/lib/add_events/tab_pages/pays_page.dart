@@ -97,13 +97,13 @@ class _PaysPageState extends State<PaysPage> {
                                   label: 'Show and Select Current Countries Involved',
                                 ),
                               ),
-                              Text(
+/*                              Text(
                                 'Selected: ${filtersPays.join(', ')}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.yellow,
                                 ),
-                              ),
+                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Wrap(
@@ -153,13 +153,13 @@ class _PaysPageState extends State<PaysPage> {
                                   label: 'Show and Select Countries Involved at that time',
                                 ),
                               ),
-                              Text(
+/*                              Text(
                                 'Selected: ${filtersCATTs.join(', ')}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.yellow,
                                 ),
-                              ),
+                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Wrap(

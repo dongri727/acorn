@@ -57,6 +57,20 @@ ALTER TABLE ONLY "lieux"
 
 
 --
+-- Class LocalDates as table localdates
+--
+
+CREATE TABLE "localdates" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "localdate" text NOT NULL
+);
+
+ALTER TABLE ONLY "localdates"
+  ADD CONSTRAINT localdates_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Months as table months
 --
 

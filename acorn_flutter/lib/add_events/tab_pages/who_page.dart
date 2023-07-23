@@ -141,13 +141,13 @@ class _WhoPageState extends State<WhoPage> {
                                   }).toList(),
                                 ),
                               ),
-                              Text(
+/*                              Text(
                                 'Selected: ${filtersOrgs.join(', ')}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.yellow,
                                 ),
-                              ),
+                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(30.0),
                                 child: TffFormat(
@@ -212,13 +212,13 @@ class _WhoPageState extends State<WhoPage> {
                                 }).toList(),
                               ),
                             ),
-                            Text(
+/*                            Text(
                               'Selected: ${filtersPeople.join(', ')}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.yellow,
                               ),
-                            ),
+                            ),*/
                             Padding(
                               padding: const EdgeInsets.all(30.0),
                               child: TffFormat(

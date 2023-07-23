@@ -109,13 +109,13 @@ class TermsPageState extends State<TermsPage> {
                             label: 'Show and Select Categories',
                           ),
                         ),
-                        Text(
+/*                        Text(
                           'Selected: ${filtersCategories.join(', ')}',
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.yellow,
                           ),
-                        ),
+                        ),*/
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Wrap(
@@ -179,14 +179,14 @@ class TermsPageState extends State<TermsPage> {
                               label: 'Show and Select Search Terms',
                             ),
                           ),
-                          Text(
+/*                          Text(
                             'Selected: ${filtersTerms.join(', ')}',
                             style: const TextStyle(
                               fontSize: 20,
 
                               color: Colors.yellow,
                             ),
-                          ),
+                          ),*/
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(

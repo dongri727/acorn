@@ -123,16 +123,6 @@ class ConfirmModel extends ChangeNotifier {
 
 
 
-/*    Future addPrincipalJours() async {
-      var principalJours =
-      PrincipalJours(principal_id: principalLastVal, jour: jour);
-      principalJourLastVal =
-      await client.principalJours.addPrincipalJours(principalJours);
-      <String, String?>{
-        jour: confirm.isSelectedDate,
-      };
-    }*/
-
 /*    Future addPrincipalLocalDates() async {
       var principalLocalDates = PrincipalLocalDates(
           principal_id: principalLastVal, localDate: localDate);

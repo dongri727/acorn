@@ -42,12 +42,14 @@ class FilterFormat extends StatefulWidget {
   final List<dynamic> filteredValues;
   final String filterKey;
   final dynamic filterValue;
+  //final Function onSelected;
 
   const FilterFormat({super.key,
     required this.filteredKeys,
     required this.filteredValues,
     required this.filterKey,
     required this.filterValue,
+    //required this.onSelected,
   });
 
   @override
@@ -75,8 +77,57 @@ class FilterFormatState extends State<FilterFormat> {
             widget.filteredKeys.removeWhere((key) => key == widget.filterKey);
             widget.filteredValues.removeWhere((value) => value == widget.filterValue);
           }
+          // Notify the parent widget that the selection has changed.
+          //widget.onSelected();
         });
       },
     );
   }
 }
+
+/*
+class FilterList extends StatefulWidget {
+  final List<String> filteredKeys;
+  final List<dynamic> filteredValues;
+  final List<String> listWords;
+
+  FilterList({required this.filteredKeys, required this.filteredValues, required this.listWords});
+
+  @override
+  _FilterListState createState() => _FilterListState();
+}
+
+class _FilterListState extends State<FilterList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Selected: ${widget.filteredKeys.join(', ')}',
+          style: const TextStyle(
+            fontSize: 20,
+            color: Colors.yellow,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Wrap(
+            spacing: 5.0,
+            children: widget.listWords.map((words) {
+              return FilterFormat(
+                filteredKeys: widget.filteredKeys,
+                filteredValues: widget.filteredValues,
+                filterKey: widget.word,
+                filterValue: words.id,
+                onSelected: () {
+                  // Trigger a rebuild of this widget when a selection has changed.
+                  setState(() {});
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+}*/

@@ -240,7 +240,7 @@ class Timeline {
         /// The label is a brief description for the current entry.
         //if (map.containsKey("affair")) {
         //timelineEntry.name = principal.affair;
-        timelineEntry.name = "${principal.affair} (${principal.pays})";
+        timelineEntry.name = "${principal.annee}　${principal.affair}  (${principal.pays})";
         //}
 
         /// Add this entry to the list.
