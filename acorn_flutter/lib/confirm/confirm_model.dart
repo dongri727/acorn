@@ -56,32 +56,52 @@ class ConfirmModel extends ChangeNotifier {
   late int billionCategoriesLastVal;
   late int billionTermsLastVal;
 
-  Future addPrincipal(Principal principal) async {
+/*  Future addPrincipal(Principal principal) async {
     try {
       var result = await client.principal.addPrincipal(principal);
       print('Add principal : $result');
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  Future addMonths(Months months) async {
+/*  Future addMonths(Months months) async {
     try {
       var result = await client.months.addMonths(months);
-      debugPrint('Add months : $result');
+      print('Add months : $result');
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  Future addDays(Days days) async {
+/*  Future addDays(Days days) async {
     try {
       var result = await client.days.addDays(days);
       debugPrint('Add days : $result');
     } on Exception catch (e) {
       debugPrint('$e');
     }
+  }*/
+
+/*  Future addLocalDates() async {
+    try {
+      var result = await client.localDates.addLocalDates(localdates);
+      debugPrint('Add local dates : $result');
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }*/
+
+/*
+  Future addLieux(Lieux lieux) async {
+    try {
+      var result = await client.lieux.addLieux(lieux);
+      debugPrint('add lieux : $result');
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
   }
+*/
 
 
   //insert into DB
@@ -96,44 +116,40 @@ class ConfirmModel extends ChangeNotifier {
     debugPrint('Add principal : $principalId');
 
 
-    if (confirm.isSelectedMonth != null) {
+    if (confirm.isSelectedMonth != 'No-Month') {
       var months = Months(
           principal_id: principalId, month: confirm.isSelectedMonth!);
-      var monthsResult = await addMonths(months);
-      if (monthsResult == null) {
-        debugPrint('Error: Failed to add months');
+      var monthsId = await client.months.addMonths(months);
+      if (monthsId == null) {
+        print('Error: Failed to add months');
         return;
       }
-      debugPrint('save month');
+      debugPrint('Add month : $monthsId');
     }
 
-    if (confirm.isSelectedDate != null) {
+    if (confirm.isSelectedDate != 'No-Date') {
       var days = Days(
           principal_id: principalId, day: confirm.isSelectedDate!);
-      var daysResult = await addDays(days);
-      if (daysResult == null) {
-        debugPrint('Error: Failed to add days');
+      var daysId = await client.days.addDays(days);
+      if (daysId == null) {
+        print('Error: Failed to add days');
         return;
       }
-      debugPrint('save date');
+      debugPrint('Add day : $daysId');
     }
-    } catch (e) {
-    debugPrint('Error: $e');
-  }
 
+    if (confirm.dateLocal != "") {
+      var localdates = LocalDates(
+          principal_id: principalId, localdate: confirm.dateLocal!);
+      var localdateId = await client.localDates.addLocalDates(localdates);
+      if (localdateId == null) {
+        debugPrint('Error: Failed to add Local dates');
+        return;
+      }
+      debugPrint('Add localdate : $localdateId');
+    }
 
-
-/*    Future addPrincipalLocalDates() async {
-      var principalLocalDates = PrincipalLocalDates(
-          principal_id: principalLastVal, localDate: localDate);
-      principalLocalDateLastVal = await client.principalLocalDates
-          .addPrincipalLocalDates(principalLocalDates);
-      <String, String?>{
-        "localDate": confirm.dateLocal,
-      };
-    }*/
-
-/*    Future addPrincipalPlaces() async {
+      /*    Future addPrincipalPlaces() async {
       var principalPlaces =
       PrincipalPlaces(principal_id: principalLastVal, place: place);
       principalPlaceLastVal =
@@ -143,7 +159,7 @@ class ConfirmModel extends ChangeNotifier {
       };
     }*/
 
-/*    Future addPrincipalAtts() async {
+      /*    Future addPrincipalAtts() async {
       var principalAtts =
       PrincipalAtts(principal_id: principalLastVal, att: att);
       principalAttLastVal =
@@ -153,25 +169,38 @@ class ConfirmModel extends ChangeNotifier {
       };
     }*/
 
-/*    Future addPrincipalLieux() async {
-      var principalLieux = PrincipalLieux(
-        principal_id: principalLastVal,
-        latitude: latitude,
-        longitude: longitude,
-        three_d_x: dx,
-        three_d_y: dy,
-        three_d_z: dz,
-      );
-      principalLieuxLastVal =
-      await client.principalLieux.addPrincipalLieux(principalLieux);
-      <double, double?>{
-        latitude: confirm.latitude,
-        longitude: confirm.longitude,
-        dx: confirm.x,
-        dy: confirm.y,
-        dz: confirm.z,
-      };
-    }*/
+      if (confirm.latitude != null && confirm.longitude != null) {
+        var lieux = Lieux(
+          principal_id: principalId,
+          latitude: confirm.latitude!,
+          longitude: confirm.longitude!,
+          three_d_x: confirm.x!,
+          three_d_y: confirm.y!,
+          three_d_z: confirm.z!,
+        );
+        var lieuxId = await client.lieux.addLieux(lieux);
+        if (lieuxId == null) {
+          debugPrint('Error: Faild to add lieux');
+          return;
+        }
+        debugPrint('Add lieux : $lieuxId');
+      }
+
+
+
+    } catch (e) {
+    debugPrint('Error: $e');
+  }
+
+
+
+
+
+
+
+
+
+
 
 /*    ///todo Listを入力するにはどうすればいいのか？
     Future addPrincipalPaysInvolved() async {

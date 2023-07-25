@@ -16,11 +16,13 @@ class Confirm {
   String name = "";
 
   //where
+  String? att = "";
+
   String country = "";
   String? place = "";
   double? latitude = 0.0;
   double? longitude = 0.0;
-  String? att = "";
+
   double? x = 0.0;
   double? y = 0.0;
   double? z = 0.0;

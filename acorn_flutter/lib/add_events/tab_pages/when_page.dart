@@ -201,7 +201,7 @@ class _WhenPageState extends State<WhenPage> {
                                       ? null
                                       : (String? value) {
                                     setState(() {
-                                      isSelectedJour;
+                                      isSelectedJour = value;
                                     });
                                   },
                                   items:
@@ -228,9 +228,6 @@ class _WhenPageState extends State<WhenPage> {
                                 hintText:
                                 'If it lasts for a while,'),
                             const HintText(hintText: 'please enter "Start Date"'),
-
-
-
                           ],
                         ),
                       )),

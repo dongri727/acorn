@@ -7,7 +7,7 @@ class LieuxEndpoint extends Endpoint {
   Future<List<Lieux>> getLieux(Session session, {String? keyword}) async {
     return await Lieux.find(
       session,
-      //where: (t) => keyword !=null ? t.title.like('%$keyword%') : Constant(true),
+      //where: (t) => keyword !=null ? t.latitude.like('%$keyword%') : Constant(true),
       //orderBy: Lieux.t.latitude,
     );
   }

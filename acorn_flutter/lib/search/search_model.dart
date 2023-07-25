@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
-class ReadAllModel extends ChangeNotifier {
+class SelectModel extends ChangeNotifier {
   var client = Client('http://localhost:8080/')
     ..connectivityMonitor = FlutterConnectivityMonitor();
 

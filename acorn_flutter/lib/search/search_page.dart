@@ -10,12 +10,12 @@ class ReadAllPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ReadAllModel(),
+      create: (_) => SelectModel(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Consumer<ReadAllModel>(
+        body: Consumer<SelectModel>(
           builder: (context, model, child) {
             return Container(
               decoration: const BoxDecoration(
@@ -53,7 +53,7 @@ class ReadAllPage extends StatelessWidget {
                                   model.fetchPrincipal(country: model.controller.text.isNotEmpty
                                       ? model.controller.text
                                       : null);
-                                  showDialog(
+/*                                  showDialog(
                                       barrierDismissible: false,
                                       context: context,
                                       builder: (BuildContext context){
@@ -66,7 +66,7 @@ class ReadAllPage extends StatelessWidget {
                                                 child: const Text('OK')),
                                           ],
                                         );
-                                      });
+                                      });*/
                                   model.controller.clear();
                                 },
                                 child: const Text("Submit"),
@@ -102,8 +102,8 @@ class ReadAllPage extends StatelessWidget {
             );
           },
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => Provider.of<ReadAllModel>(context, listen: false).fetchPrincipal(),
+/*        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => model.fetchPrincipal(),
           tooltip: 'ShowAll',
           backgroundColor: Colors.blueGrey,
           label: const Text(
@@ -112,7 +112,7 @@ class ReadAllPage extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-        ),
+        ),*/
       ),
     );
   }
