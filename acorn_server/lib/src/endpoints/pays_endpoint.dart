@@ -14,7 +14,8 @@ class PaysEndpoint extends Endpoint {
   //Add pays in DB
   Future<int> addPays(Session session, Pays pays) async {
     await Pays.insert(session, pays);
-    var paysLastVal = await session.db.query('SELECT LASTVAL()');
-    return paysLastVal[0][0] as int;
+    //var paysLastVal = await session.db.query('SELECT LASTVAL()');
+    //return paysLastVal[0][0] as int;
+    return pays.id!;
   }
 }

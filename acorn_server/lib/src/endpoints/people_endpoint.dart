@@ -14,7 +14,8 @@ class PeopleEndpoint extends Endpoint {
   //Add people in DB
   Future<int> addPeople(Session session, People people) async {
     await People.insert(session, people);
-    var personLastVal = await session.db.query('SELECT LASTVAL()');
-    return personLastVal[0][0] as int;
+    //var personLastVal = await session.db.query('SELECT LASTVAL()');
+    //return personLastVal[0][0] as int;
+    return people.id!;
   }
 }

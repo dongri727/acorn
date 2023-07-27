@@ -14,7 +14,8 @@ class TermsEndpoint extends Endpoint {
   //Add a term in DB
   Future<int> addTerms(Session session, Terms terms) async {
     await Terms.insert(session, terms);
-    var termLastVal = await session.db.query('SELECT LASTVAL()');
-    return termLastVal[0][0] as int;
+    //var termLastVal = await session.db.query('SELECT LASTVAL()');
+    //return termLastVal[0][0] as int;
+    return terms.id!;
   }
 }

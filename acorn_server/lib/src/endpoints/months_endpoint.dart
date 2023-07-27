@@ -1,7 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
-
 class MonthsEndpoint extends Endpoint {
   //Fetch categories from DB
   Future<List<Months>> getMonths(Session session, {String? keyword}) async {
@@ -15,7 +14,8 @@ class MonthsEndpoint extends Endpoint {
   //Add a category in DB
   Future<int> addMonths(Session session, Months months) async {
     await Months.insert(session, months);
-    var monthsLastVal = await session.db.query('SELECT LASTVAL()');
-    return monthsLastVal[0][0] as int;
+    //var monthsLastVal = await session.db.query('SELECT LASTVAL()');
+    //return monthsLastVal[0][0] as int;
+    return months.id!;
   }
 }
