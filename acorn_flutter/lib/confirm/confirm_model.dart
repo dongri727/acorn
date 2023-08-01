@@ -149,7 +149,12 @@ class ConfirmModel extends ChangeNotifier {
       debugPrint('Add localdate : $localdateId');
     }
 
-      /*    Future addPrincipalPlaces() async {
+/*    if (confirm.place != "") {
+      var principlPlace = PrincipalPlace(
+        principal_id: principalId, p
+      )
+    }*/
+/* Future addPrincipalPlaces() async {
       var principalPlaces =
       PrincipalPlaces(principal_id: principalLastVal, place: place);
       principalPlaceLastVal =
@@ -157,8 +162,7 @@ class ConfirmModel extends ChangeNotifier {
       <String, String?>{
         "place": confirm.place,
       };
-    }*/
-
+ */
       /*    Future addPrincipalAtts() async {
       var principalAtts =
       PrincipalAtts(principal_id: principalLastVal, att: att);
@@ -186,32 +190,24 @@ class ConfirmModel extends ChangeNotifier {
         debugPrint('Add lieux : $lieuxId');
       }
 
+      if (confirm.selectedPaysId.isNotEmpty) {
+        for (var countryId in confirm.selectedPaysId) {
+          var countryInvolved = CountryInvolved(
+              principal_id: principalId, pays_id: countryId);
+          var countryInvolvedId = await client.countryInvolved.addCountryInvolved(countryInvolved);
+          if (countryInvolvedId == null) {
+            debugPrint('Error: Failed to add country involved');
+          } else {
+            debugPrint('Added country involved : $countryInvolvedId');
+          }
+        }
+      }
+
 
 
     } catch (e) {
     debugPrint('Error: $e');
   }
-
-
-
-
-
-
-
-
-
-
-
-/*    ///todo Listを入力するにはどうすればいいのか？
-    Future addPrincipalPaysInvolved() async {
-      var principalPaysInvolved = PrincipalPaysInvolved(
-          principal_id: principalLastVal, paysInvolved: countriesInvolved);
-      principalPaysInvolvedLastVal = await client.principalPaysInvolved
-          .addPrincipalPaysInvolved(principalPaysInvolved);
-      <List<String>, List<String>?>{
-        countriesInvolved: confirm.selectedPays,
-      };
-    }*/
 
 /*    Future addPrincipalAttsInvolved() async {
       var principalAttsInvolved = PrincipalAttsInvolved(

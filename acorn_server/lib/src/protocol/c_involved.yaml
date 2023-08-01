@@ -1,0 +1,5 @@
+class: CountryInvolved
+table: country_involved
+fields: 
+  principal_id: int
+  pays_id: int

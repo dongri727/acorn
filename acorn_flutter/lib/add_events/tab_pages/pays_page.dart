@@ -115,26 +115,6 @@ class _PaysPageState extends State<PaysPage> {
                                         filterKey: pays.pays,
                                         filterValue: pays.id,
                                     );
-/*                                    return FilterChip(
-                                      label: Text(pays.pays),
-                                      selected: filtersPays.contains(pays.pays),
-                                      onSelected: (bool value) {
-                                        setState(() {
-                                          if (value) {
-                                            if (!filtersPays.contains(pays.pays)) {
-                                              filtersPays.add(pays.pays);
-                                            }
-                                            if (!filtersPaysId.contains(pays.id)) {
-                                              filtersPaysId.add(pays.id as String);
-                                            }
-
-                                          } else {
-                                            filtersPays.removeWhere((filtersPays) => filtersPays == pays.pays);
-                                            filtersPaysId.removeWhere((filtersPaysId) => filtersPaysId == pays.id);
-                                          }
-                                        });
-                                      },
-                                    );*/
                                   }).toList(),
                                 ),
                               ),
@@ -171,27 +151,6 @@ class _PaysPageState extends State<PaysPage> {
                                         filterKey: countryatts.countryatt,
                                       filterValue: countryatts.id,
                                     );
-/*                                    return FilterChip(
-                                      label: Text(catts.catt),
-                                      selected: filtersATTs.contains(atts.att),
-                                      onSelected: (bool value) {
-                                        setState(() {
-                                          if (value) {
-                                            if (!filtersATTs.contains(atts.att)) {
-                                              filtersATTs.add(atts.att);
-                                            }
-                                            if(!filtersATTId.contains(atts.id)){
-                                              filtersATTId.add(atts.id as String);
-                                            }
-                                          } else {
-                                            // ignore: unrelated_type_equality_checks
-                                            filtersATTs.removeWhere((filtersAtts) => filtersATTs == atts.att);
-                                            // ignore: unrelated_type_equality_checks
-                                            filtersATTId.removeWhere((filtersAttId) => filtersATTId == atts.id);
-                                          }
-                                        });
-                                      },
-                                    );*/
                                   }).toList(),
                                 ),
                               ),

@@ -1,0 +1,5 @@
+class: PrincipalPlace
+table: principal_place
+fields: 
+  principal_id: int
+  place_id: int

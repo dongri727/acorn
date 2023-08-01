@@ -22,27 +22,47 @@ class WherePage extends StatefulWidget {
 
 class _WherePageState extends State<WherePage> {
   var newPlace = '';
+  //var newPlaceId = 0;
+
   var newLatitude = 0.0;
   var newLongitude = 0.0;
+
   var newPaysatt = '';
+  //var newPaysattId = 0;
+
   var newPlaceatt = '';
+  //var newPlaceattId = 0;
+
   var newCountryatt = '';
+  //var newCountryattId = 0;
+
   double x = 0.0;
   double y = 0.0;
   double z = 0.0;
 
+  ///DBから取得したList
   List<Places> listPlaces = [];
-  List<Map<String, String>> displayListPlaces = [];
-  final List<String> _filtersPlaces = <String>[];
 
+  ///Chipに並べるList
+  List<Map<String, String>> displayListPlaces = [];
+
+  ///選択された項目
+  final List<String> _filtersPlaces = <String>[];
+  final List<int> _filtersPlacesId = <int>[];
+
+  ///当時の国名
   List<Countryatts> listCountryatts = [];
   List<Map<String, String>> displayListCountryatts = [];
   final List<String> _filtersCountryatts = <String>[];
+  final List<int> _fltersCountryattsId = <int>[];
 
+  ///当時の地名
   List<Placeatts> listPlaceatts = [];
   List<Map<String, String>> displayListPlaceatts = [];
   final List<String> _filtersPlaceatts = <String>[];
+  final List<int> _filtersPlaceattsId = <int>[];
 
+  ///DBからPlaceを取得
   Future<void> fetchPlaces() async {
     try {
       listPlaces = await client.places.getPlaces();
@@ -54,13 +74,12 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int placeLastVal;
+  late int placeId;
 
+  ///DBに新規placeを挿入・再取得･再描画
   addPlacesAndFetch() async {
     var places = Places(place: newPlace);
-    placeLastVal = await client.places.addPlaces(places);
-    print(placeLastVal);
-    debugPrint("add a place");
+    placeId = await client.places.addPlaces(places);
     listPlaces = await client.places.getPlaces();
     setState(() {});
   }
@@ -76,12 +95,12 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int countryattLastVal;
+  late int countryattId;
 
   addCountryATTandFetch() async {
     var catts = Countryatts(countryatt: newCountryatt);
-    countryattLastVal = await client.countryatts.addCountryATTs(catts);
-    print(countryattLastVal);
+    countryattId = await client.countryatts.addCountryATTs(catts);
+    print(countryattId);
     debugPrint("add a CountryATT");
     listCountryatts = await client.countryatts.getCountryATTs();
     setState(() {});
@@ -98,13 +117,11 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int attLastVal;
+  late int placeattId;
 
   addPlaceATTandFetch() async {
     var patts = Placeatts(placeatt: newPlaceatt);
-    attLastVal = await client.placeatts.addPlaceATTs(patts);
-    print(attLastVal);
-    debugPrint("add an PlaceATT");
+    placeattId = await client.placeatts.addPlaceATTs(patts);
     listPlaceatts = await client.placeatts.getPlaceATTs();
     setState(() {});
   }
@@ -146,9 +163,25 @@ class _WherePageState extends State<WherePage> {
                         child: Wrap(
                           spacing: 5.0,
                           children: listPlaces.map((places){
+                            bool isSelectedP = _filtersPlaces.contains(places.place);
                             return ChoiceFormat(
-                                choiceFilter: _filtersPlaces,
-                                choiceData: places.place);
+                                choiceKey: places.place,
+                              choiceValue: places.id,
+                              isSelected: isSelectedP,
+                              onSelectionChanged: (key, value) {
+                                  setState(() {
+                                    if (isSelectedP) {
+                                      _filtersPlaces.remove(key);
+                                      _filtersPlacesId.remove(value);
+                                    } else {
+                                      _filtersPlaces.clear();
+                                      _filtersPlacesId.clear();
+                                      _filtersPlaces.add(key);
+                                      _filtersPlacesId.add(value);
+                                    }
+                                  });
+                              },
+                            );
                           }).toList(),
                         ),
                       ),
@@ -191,9 +224,25 @@ class _WherePageState extends State<WherePage> {
                         child: Wrap(
                           spacing: 5.0,
                           children: listCountryatts.map((countryatts){
+                            bool isSelectedCatt= _filtersCountryatts.contains(countryatts.countryatt);
                             return ChoiceFormat(
-                                choiceFilter: _filtersCountryatts,
-                                choiceData: countryatts.countryatt);
+                                choiceKey: countryatts.countryatt,
+                              choiceValue: countryatts.id,
+                              isSelected: isSelectedCatt,
+                              onSelectionChanged: (key, value) {
+                                  setState(() {
+                                    if (isSelectedCatt) {
+                                      _filtersCountryatts.remove(key);
+                                      _fltersCountryattsId.remove(value);
+                                    } else {
+                                      _filtersCountryatts.clear();
+                                      _fltersCountryattsId.clear();
+                                      _filtersCountryatts.add(key);
+                                      _fltersCountryattsId.add(value);
+                                    }
+                                  });
+                            }
+                            );
                           }).toList(),
                         ),
                       ),
@@ -235,9 +284,25 @@ class _WherePageState extends State<WherePage> {
                       child: Wrap(
                         spacing: 5.0,
                         children: listPlaceatts.map((placeatts){
+                          bool isSelectedPatt = _filtersPlaceatts.contains(placeatts.placeatt);
                           return ChoiceFormat(
-                              choiceFilter: _filtersPlaceatts,
-                              choiceData: placeatts.placeatt);
+                              choiceKey: placeatts.placeatt,
+                            choiceValue: placeatts.id,
+                            isSelected: isSelectedPatt,
+                            onSelectionChanged: (key, value) {
+                                setState(() {
+                                  if (isSelectedPatt) {
+                                    _filtersPlaceatts.remove(key);
+                                    _fltersCountryattsId.remove(value);
+                                  } else {
+                                    _filtersPlaceatts.clear();
+                                    _filtersPlaceattsId.clear();
+                                    _filtersPlaceatts.add(key);
+                                    _filtersPlaceattsId.add(value);
+                                  }
+                                });
+                            },
+                          );
                         }).toList(),
                       ),
                     ),
@@ -315,8 +380,38 @@ class _WherePageState extends State<WherePage> {
                 );
               });
 
+          ///追加されたplace
           confirm.place = newPlace;
-          confirm.att = newPlaceatt;
+          confirm.placeId = placeId;
+          print("add a new place $placeId");
+
+          ///選択されたplace
+          confirm.selectedPlace = _filtersPlaces;
+          confirm.selectedPlaceId = _filtersPlacesId;
+          print("kept Selected Place $_filtersPlacesId");
+
+          ///追加されたCatt
+          confirm.countryatt = newCountryatt;
+          confirm.countryattId = countryattId;
+          print("add a new Catt $countryattId");
+
+          ///選択されたCatt
+          confirm.selectedCatt = _filtersCountryatts;
+          confirm.selectedCattId = _fltersCountryattsId;
+          print("kept selected Catt $_fltersCountryattsId");
+
+          ///追加されたPatt
+          confirm.placeatt = newPlaceatt;
+          confirm.placeattId = placeattId;
+          print("add a new Patt $placeattId");
+
+          ///選択されたPatt
+          confirm.selectedPatt = _filtersPlaceatts;
+          confirm.selectedPattId = _filtersPlaceattsId;
+          print("kept selected Patt $_filtersPlaceattsId");
+
+
+
           confirm.latitude = newLatitude;
           confirm.longitude = newLongitude;
           confirm.x = x;

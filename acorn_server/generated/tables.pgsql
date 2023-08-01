@@ -12,6 +12,20 @@ ALTER TABLE ONLY "categories"
 
 
 --
+-- Class CountryInvolved as table country_involved
+--
+
+CREATE TABLE "country_involved" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "pays_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "country_involved"
+  ADD CONSTRAINT country_involved_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Countryatts as table countryatts
 --
 
@@ -162,6 +176,20 @@ CREATE TABLE "principal" (
 
 ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_pkey PRIMARY KEY (id);
+
+
+--
+-- Class PrincipalPlace as table principal_place
+--
+
+CREATE TABLE "principal_place" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "place_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_place"
+  ADD CONSTRAINT principal_place_pkey PRIMARY KEY (id);
 
 
 --

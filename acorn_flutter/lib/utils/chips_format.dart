@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 
 class ChoiceFormat extends StatefulWidget {
 
-  final List<String> choiceFilter;
-  final String choiceData;
+  final Function(String, dynamic) onSelectionChanged;
+
+  final String choiceKey;
+  final dynamic choiceValue;
+
+  final bool isSelected;
 
   const ChoiceFormat({super.key,
-    required this.choiceFilter,
-    required this.choiceData,
+
+    required this.onSelectionChanged,
+
+    required this.choiceKey,
+    required this.choiceValue,
+
+    required this.isSelected,
   });
 
   @override
@@ -19,17 +28,11 @@ class ChoiceFormatState extends State<ChoiceFormat> {
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
-        label: Text(widget.choiceData),
-        selected: widget.choiceFilter.contains(widget.choiceData),
-        onSelected: (bool value) {
-          setState(() {
-            if (value) {
-              widget.choiceFilter.clear();
-              widget.choiceFilter.add(widget.choiceData);
-            } else {
-              widget.choiceFilter.removeWhere((filter) => filter == widget.choiceData);
-            }
-          });
+        label: Text(widget.choiceKey),
+        selected: widget.isSelected,
+        onSelected: (_) {
+          widget.onSelectionChanged(widget.choiceKey, widget.choiceValue);
+
         },
     );
   }
@@ -42,14 +45,12 @@ class FilterFormat extends StatefulWidget {
   final List<dynamic> filteredValues;
   final String filterKey;
   final dynamic filterValue;
-  //final Function onSelected;
 
   const FilterFormat({super.key,
     required this.filteredKeys,
     required this.filteredValues,
     required this.filterKey,
     required this.filterValue,
-    //required this.onSelected,
   });
 
   @override
@@ -84,50 +85,3 @@ class FilterFormatState extends State<FilterFormat> {
     );
   }
 }
-
-/*
-class FilterList extends StatefulWidget {
-  final List<String> filteredKeys;
-  final List<dynamic> filteredValues;
-  final List<String> listWords;
-
-  FilterList({required this.filteredKeys, required this.filteredValues, required this.listWords});
-
-  @override
-  _FilterListState createState() => _FilterListState();
-}
-
-class _FilterListState extends State<FilterList> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Selected: ${widget.filteredKeys.join(', ')}',
-          style: const TextStyle(
-            fontSize: 20,
-            color: Colors.yellow,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Wrap(
-            spacing: 5.0,
-            children: widget.listWords.map((words) {
-              return FilterFormat(
-                filteredKeys: widget.filteredKeys,
-                filteredValues: widget.filteredValues,
-                filterKey: widget.word,
-                filterValue: words.id,
-                onSelected: () {
-                  // Trigger a rebuild of this widget when a selection has changed.
-                  setState(() {});
-                },
-              );
-            }).toList(),
-          ),
-        ),
-      ],
-    );
-  }
-}*/

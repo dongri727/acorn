@@ -122,19 +122,13 @@ class ConfirmPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.att,
+                                    confirmText: _confirm.countryatt,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: '${_confirm.latitude}',
-                                    confirmColor: const Color(0xFF8fbc8f)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ConfirmText(
-                                    confirmText: '${_confirm.longitude}',
+                                    confirmText: _confirm.placeatt,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
 
@@ -145,6 +139,18 @@ class ConfirmPage extends StatelessWidget {
                           flex: 1,
                           child: Column(
                             children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: ConfirmText(
+                                    confirmText: '${_confirm.latitude}',
+                                    confirmColor: const Color(0xFF8fbc8f)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ConfirmText(
+                                    confirmText: '${_confirm.longitude}',
+                                    confirmColor: const Color(0xFF8fbc8f)),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Countries Involved',
@@ -202,6 +208,7 @@ class ConfirmPage extends StatelessWidget {
                                       }
                                   )
                               ),
+
                             ],
                           ),
                         ),
