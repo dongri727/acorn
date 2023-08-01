@@ -24,6 +24,14 @@ class Confirm {
   List<String> selectedPlace = [];
   List<int> selectedPlaceId = [];
 
+  //追加されたsea
+  String? sea = "";
+  int? seaId = 0;
+
+  //選択されたsea
+  List<String> selectedSea = [];
+  List<int> selectedSeaId = [];
+
   //追加されたCatt
   String? countryatt = "";
   int? countryattId = 0;

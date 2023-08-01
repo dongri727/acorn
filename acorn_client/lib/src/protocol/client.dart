@@ -22,9 +22,10 @@ import 'package:acorn_client/src/protocol/people.dart' as _i13;
 import 'package:acorn_client/src/protocol/placeatts.dart' as _i14;
 import 'package:acorn_client/src/protocol/places.dart' as _i15;
 import 'package:acorn_client/src/protocol/principal.dart' as _i16;
-import 'package:acorn_client/src/protocol/terms.dart' as _i17;
-import 'dart:io' as _i18;
-import 'protocol.dart' as _i19;
+import 'package:acorn_client/src/protocol/seas.dart' as _i17;
+import 'package:acorn_client/src/protocol/terms.dart' as _i18;
+import 'dart:io' as _i19;
+import 'protocol.dart' as _i20;
 
 class _EndpointCountryInvolved extends _i1.EndpointRef {
   _EndpointCountryInvolved(_i1.EndpointCaller caller) : super(caller);
@@ -330,20 +331,40 @@ class _EndpointPrincipal extends _i1.EndpointRef {
       );
 }
 
+class _EndpointSeas extends _i1.EndpointRef {
+  _EndpointSeas(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'seas';
+
+  _i2.Future<List<_i17.Seas>> getSeas({String? keyword}) =>
+      caller.callServerEndpoint<List<_i17.Seas>>(
+        'seas',
+        'getSeas',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addSeas(_i17.Seas seas) => caller.callServerEndpoint<int>(
+        'seas',
+        'addSeas',
+        {'seas': seas},
+      );
+}
+
 class _EndpointTerms extends _i1.EndpointRef {
   _EndpointTerms(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'terms';
 
-  _i2.Future<List<_i17.Terms>> getTerms({String? keyword}) =>
-      caller.callServerEndpoint<List<_i17.Terms>>(
+  _i2.Future<List<_i18.Terms>> getTerms({String? keyword}) =>
+      caller.callServerEndpoint<List<_i18.Terms>>(
         'terms',
         'getTerms',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addTerms(_i17.Terms terms) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addTerms(_i18.Terms terms) => caller.callServerEndpoint<int>(
         'terms',
         'addTerms',
         {'terms': terms},
@@ -353,11 +374,11 @@ class _EndpointTerms extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i18.SecurityContext? context,
+    _i19.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i19.Protocol(),
+          _i20.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -376,6 +397,7 @@ class Client extends _i1.ServerpodClient {
     placeatts = _EndpointPlaceatts(this);
     places = _EndpointPlaces(this);
     principal = _EndpointPrincipal(this);
+    seas = _EndpointSeas(this);
     terms = _EndpointTerms(this);
   }
 
@@ -409,6 +431,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointPrincipal principal;
 
+  late final _EndpointSeas seas;
+
   late final _EndpointTerms terms;
 
   @override
@@ -428,6 +452,7 @@ class Client extends _i1.ServerpodClient {
         'placeatts': placeatts,
         'places': places,
         'principal': principal,
+        'seas': seas,
         'terms': terms,
       };
   @override

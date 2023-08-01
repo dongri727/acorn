@@ -193,6 +193,19 @@ ALTER TABLE ONLY "principal_place"
 
 
 --
+-- Class Seas as table seas
+--
+
+CREATE TABLE "seas" (
+  "id" serial,
+  "sea" text NOT NULL
+);
+
+ALTER TABLE ONLY "seas"
+  ADD CONSTRAINT seas_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Terms as table terms
 --
 

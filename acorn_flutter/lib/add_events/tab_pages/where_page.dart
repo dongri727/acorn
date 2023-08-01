@@ -22,24 +22,18 @@ class WherePage extends StatefulWidget {
 
 class _WherePageState extends State<WherePage> {
   var newPlace = '';
-  //var newPlaceId = 0;
+  var newSea = '';
+  var newPaysatt = '';
+  var newCountryatt = '';
+  var newPlaceatt = '';
 
   var newLatitude = 0.0;
   var newLongitude = 0.0;
-
-  var newPaysatt = '';
-  //var newPaysattId = 0;
-
-  var newPlaceatt = '';
-  //var newPlaceattId = 0;
-
-  var newCountryatt = '';
-  //var newCountryattId = 0;
-
   double x = 0.0;
   double y = 0.0;
   double z = 0.0;
 
+  ///Place
   ///DBから取得したList
   List<Places> listPlaces = [];
 
@@ -49,6 +43,12 @@ class _WherePageState extends State<WherePage> {
   ///選択された項目
   final List<String> _filtersPlaces = <String>[];
   final List<int> _filtersPlacesId = <int>[];
+
+  ///Seas
+  List<Seas> listSeas = [];
+  List<Map<String, String>> displayListSeas = [];
+  final List<String> _filtersSeas = <String>[];
+  final List<int> _filtersSeasId = <int>[];
 
   ///当時の国名
   List<Countryatts> listCountryatts = [];
@@ -74,7 +74,7 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int placeId;
+  int? placeId;
 
   ///DBに新規placeを挿入・再取得･再描画
   addPlacesAndFetch() async {
@@ -84,6 +84,30 @@ class _WherePageState extends State<WherePage> {
     setState(() {});
   }
 
+  ///DBからSeasを取得
+  Future<void> fetchSeas() async {
+    try {
+      listSeas = await client.seas.getSeas();
+      setState(() {
+        displayListSeas = listSeas.cast<Map<String, String>>();
+      });
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  int? seasId;
+
+  ///DBに新規seaを挿入・再取得･再描画
+  addSeasAndFetch() async {
+    var seas = Seas(sea: newSea);
+    seasId = await client.seas.addSeas(seas);
+    listSeas = await client.seas.getSeas();
+    setState(() {});
+  }
+
+  ///CATT
+  ///DBからcountryattを取得
   Future<void> fetchCountryATT() async {
     try {
       listCountryatts = await client.countryatts.getCountryATTs();
@@ -95,7 +119,7 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int countryattId;
+  int? countryattId;
 
   addCountryATTandFetch() async {
     var catts = Countryatts(countryatt: newCountryatt);
@@ -117,7 +141,7 @@ class _WherePageState extends State<WherePage> {
     }
   }
 
-  late int placeattId;
+  int? placeattId;
 
   addPlaceATTandFetch() async {
     var patts = Placeatts(placeatt: newPlaceatt);
@@ -131,6 +155,7 @@ class _WherePageState extends State<WherePage> {
     final confirm = Provider.of<Confirm>(context);
 
     final placeKey = GlobalKey<FormFieldState>();
+    final seaKey = GlobalKey<FormFieldState>();
     final cattKey = GlobalKey<FormFieldState>();
     final pattKey = GlobalKey<FormFieldState>();
 
@@ -151,6 +176,7 @@ class _WherePageState extends State<WherePage> {
                   flex: 1,
                   child: Column(
                     children: [
+                      ///Place
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: ButtonFormat(
@@ -203,6 +229,61 @@ class _WherePageState extends State<WherePage> {
                           placeKey.currentState!.reset();
                           },
                         label: 'Add a new Place',
+                      ),
+
+                      ///Ocean
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: ButtonFormat(
+                          onPressed: fetchSeas,
+                          label: 'Show and Select Seas',
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          spacing: 5.0,
+                          children: listSeas.map((seas){
+                            bool isSelectedS = _filtersSeas.contains(seas.sea);
+                            return ChoiceFormat(
+                              choiceKey: seas.sea,
+                              choiceValue: seas.id,
+                              isSelected: isSelectedS,
+                              onSelectionChanged: (key, value) {
+                                setState(() {
+                                  if (isSelectedS) {
+                                    _filtersSeas.remove(key);
+                                    _filtersSeasId.remove(value);
+                                  } else {
+                                    _filtersSeas.clear();
+                                    _filtersSeasId.clear();
+                                    _filtersSeas.add(key);
+                                    _filtersSeasId.add(value);
+                                  }
+                                });
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: TffFormat(
+                          key: seaKey,
+                          hintText: 'a New Sea You Want',
+                          onChanged: (text) {
+                            newSea = text;
+                          },
+                          tffColor1: Colors.black54,
+                          tffColor2: const Color(0x99e6e6fa),
+                        ),
+                      ),
+                      ButtonFormat(
+                        onPressed: () {
+                          addSeasAndFetch();
+                          seaKey.currentState!.reset();
+                        },
+                        label: 'Add a new Sea',
                       ),
                     ],
                   )),
@@ -381,14 +462,28 @@ class _WherePageState extends State<WherePage> {
               });
 
           ///追加されたplace
-          confirm.place = newPlace;
-          confirm.placeId = placeId;
-          print("add a new place $placeId");
+          if (newPlace != "") {
+            confirm.place = newPlace;
+            confirm.placeId = placeId;
+            print("add a new place $placeId");
+          }
 
           ///選択されたplace
           confirm.selectedPlace = _filtersPlaces;
           confirm.selectedPlaceId = _filtersPlacesId;
           print("kept Selected Place $_filtersPlacesId");
+
+          ///追加されたsea
+          if (newSea != "") {
+            confirm.sea = newSea;
+            confirm.seaId = seasId;
+            print("add a new Sea $seasId");
+          }
+
+          ///選択されたsea
+          confirm.selectedSea = _filtersSeas;
+          confirm.selectedSeaId = _filtersSeasId;
+          print("kept Selected Sea $_filtersSeasId");
 
           ///追加されたCatt
           confirm.countryatt = newCountryatt;
