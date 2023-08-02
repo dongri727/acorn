@@ -1,20 +1,20 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
-class PCattEndpoint extends Endpoint {
+class PrincipalCattEndpoint extends Endpoint {
   //Fetch principal-Catt from DB
-  Future<List<PCatt>> getPCatt(Session session,
+  Future<List<PrincipalCatt>> getPCatt(Session session,
       {String? keyword}) async {
-    return await PCatt.find(
+    return await PrincipalCatt.find(
       session,
       //where: (t) => keyword !=null ? t.pCatt.like('%$keyword%') : Constant(true),
-      orderBy: PCatt.t.catt_id,
+      orderBy: PrincipalCatt.t.catt_id,
     );
   }
 
   //Add PCatt in DB
-  Future<int> addPCatt(Session session, PCatt pCatt) async {
-    await PCatt.insert(session, pCatt);
+  Future<int> addPCatt(Session session, PrincipalCatt pCatt) async {
+    await PrincipalCatt.insert(session, pCatt);
     return pCatt.id!;
   }
 }
