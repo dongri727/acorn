@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 
@@ -56,152 +57,108 @@ class ConfirmModel extends ChangeNotifier {
   late int billionCategoriesLastVal;
   late int billionTermsLastVal;
 
-/*  Future addPrincipal(Principal principal) async {
-    try {
-      var result = await client.principal.addPrincipal(principal);
-      print('Add principal : $result');
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  Future addMonths(Months months) async {
-    try {
-      var result = await client.months.addMonths(months);
-      print('Add months : $result');
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  Future addDays(Days days) async {
-    try {
-      var result = await client.days.addDays(days);
-      debugPrint('Add days : $result');
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  Future addLocalDates() async {
-    try {
-      var result = await client.localDates.addLocalDates(localdates);
-      debugPrint('Add local dates : $result');
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*
-  Future addLieux(Lieux lieux) async {
-    try {
-      var result = await client.lieux.addLieux(lieux);
-      debugPrint('add lieux : $result');
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-*/
-
-
   //insert into DB
   Future<void> save(Confirm confirm) async {
-    try {
-    var principal = Principal(annee: confirm.year, affair: confirm.name, pays: confirm.country);
-    var principalId = await client.principal.addPrincipal(principal);
-/*    if (principalId == null) {
-      debugPrint('Error: Failed to add principal');
-      return;
-    }*/
-    debugPrint('Add principal : $principalId');
+    if (confirm.year != 0 && confirm.name != "" && confirm.country != "") {
+      try {
+        var principal = Principal(
+            annee: confirm.year, affair: confirm.name, pays: confirm.country);
+        var principalId = await client.principal.addPrincipal(principal);
+
+        debugPrint('Add principal : $principalId');
 
 
-    if (confirm.isSelectedMonth != 'No-Month') {
-      var months = Months(
-          principal_id: principalId, month: confirm.isSelectedMonth!);
-      var monthsId = await client.months.addMonths(months);
+        if (confirm.isSelectedMonth != 'No-Month') {
+          var months = Months(
+              principal_id: principalId, month: confirm.isSelectedMonth!);
+          var monthsId = await client.months.addMonths(months);
 /*      if (monthsId == null) {
         print('Error: Failed to add months');
         return;
       }*/
-      debugPrint('Add month : $monthsId');
-    }
+          debugPrint('Add month : $monthsId');
+        }
 
-    if (confirm.isSelectedDate != 'No-Date') {
-      var days = Days(
-          principal_id: principalId, day: confirm.isSelectedDate!);
-      var daysId = await client.days.addDays(days);
+        if (confirm.isSelectedDate != 'No-Date') {
+          var days = Days(
+              principal_id: principalId, day: confirm.isSelectedDate!);
+          var daysId = await client.days.addDays(days);
 /*      if (daysId == null) {
         print('Error: Failed to add days');
         return;
       }*/
-      debugPrint('Add day : $daysId');
-    }
+          debugPrint('Add day : $daysId');
+        }
 
-    if (confirm.dateLocal != "No-Local-Date") {
-      var localdates = LocalDates(
-          principal_id: principalId, localdate: confirm.dateLocal!);
-      var localdateId = await client.localDates.addLocalDates(localdates);
+        if (confirm.dateLocal != "No-Local-Date") {
+          var localdates = LocalDates(
+              principal_id: principalId, localdate: confirm.dateLocal!);
+          var localdateId = await client.localDates.addLocalDates(localdates);
 /*      if (localdateId == null) {
         debugPrint('Error: Failed to add Local dates');
         return;
       }*/
-      debugPrint('Add localdate : $localdateId');
-    }
-
-    if (confirm.selectedPlaceId.isNotEmpty) {
-      for (var placeId in confirm.selectedPlaceId) {
-        var principalPlace = PrincipalPlace(
-            principal_id: principalId, place_id: placeId);
-        var principalPlaceId = await client.principalPlace.addPrincipalPlace(principalPlace);
-        debugPrint('Added principal-place : $principalPlaceId');
-      }
-    }
-
-    if (confirm.selectedSeaId.isNotEmpty) {
-      for (var seaId in confirm.selectedSeaId) {
-        var principalSeas = PrincipalSeas(
-          principal_id: principalId, seas_id: seaId);
-        var principalSeasId = await client.principalSeas.addPrincipalSeas(principalSeas);
-        debugPrint('added principal-sea : $principalSeasId');
-      }
-    }
-
-      if (confirm.latitude != null && confirm.longitude != null) {
-        var lieux = Lieux(
-          principal_id: principalId,
-          latitude: confirm.latitude!,
-          longitude: confirm.longitude!,
-          three_d_x: confirm.x!,
-          three_d_y: confirm.y!,
-          three_d_z: confirm.z!,
-        );
-        var lieuxId = await client.lieux.addLieux(lieux);
-        if (lieuxId == null) {
-          debugPrint('Error: Faild to add lieux');
-          return;
+          debugPrint('Add localdate : $localdateId');
         }
-        debugPrint('Add lieux : $lieuxId');
-      }
 
-      if (confirm.selectedPaysId.isNotEmpty) {
-        for (var countryId in confirm.selectedPaysId) {
-          var countryInvolved = CountryInvolved(
-              principal_id: principalId, pays_id: countryId);
-          var countryInvolvedId = await client.countryInvolved.addCountryInvolved(countryInvolved);
-          if (countryInvolvedId == null) {
-            debugPrint('Error: Failed to add country involved');
-          } else {
-            debugPrint('Added country involved : $countryInvolvedId');
+        if (confirm.selectedPlaceId.isNotEmpty) {
+          for (var placeId in confirm.selectedPlaceId) {
+            var principalPlace = PrincipalPlace(
+                principal_id: principalId, place_id: placeId);
+            var principalPlaceId = await client.principalPlace
+                .addPrincipalPlace(principalPlace);
+            debugPrint('Added principal-place : $principalPlaceId');
           }
         }
+
+        if (confirm.selectedSeaId.isNotEmpty) {
+          for (var seaId in confirm.selectedSeaId) {
+            var principalSeas = PrincipalSeas(
+                principal_id: principalId, seas_id: seaId);
+            var principalSeasId = await client.principalSeas.addPrincipalSeas(
+                principalSeas);
+            debugPrint('added principal-sea : $principalSeasId');
+          }
+        }
+
+        if (confirm.latitude != 0.0 && confirm.longitude != 0.0) {
+          var lieux = Lieux(
+            principal_id: principalId,
+            latitude: confirm.latitude!,
+            longitude: confirm.longitude!,
+            three_d_x: confirm.x!,
+            three_d_y: confirm.y!,
+            three_d_z: confirm.z!,
+          );
+          var lieuxId = await client.lieux.addLieux(lieux);
+          if (lieuxId == null) {
+            debugPrint('Error: Faild to add lieux');
+            return;
+          }
+          debugPrint('Add lieux : $lieuxId');
+        }
+
+        if (confirm.selectedPaysId.isNotEmpty) {
+          for (var countryId in confirm.selectedPaysId) {
+            var countryInvolved = CountryInvolved(
+                principal_id: principalId, pays_id: countryId);
+            var countryInvolvedId = await client.countryInvolved
+                .addCountryInvolved(countryInvolved);
+            if (countryInvolvedId == null) {
+              debugPrint('Error: Failed to add country involved');
+            } else {
+              debugPrint('Added country involved : $countryInvolvedId');
+            }
+          }
+        }
+      } catch (e) {
+        debugPrint('Error: $e');
       }
+    } else {
+      print("必須項目なし");
+      ///todo アラートを出す
 
-
-
-    } catch (e) {
-    debugPrint('Error: $e');
-  }
+    }
 
 /*    Future addPrincipalAttsInvolved() async {
       var principalAttsInvolved = PrincipalAttsInvolved(
