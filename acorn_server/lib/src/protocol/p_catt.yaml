@@ -1,0 +1,5 @@
+class: PrincipalCatt
+table: principal_catt
+fields: 
+  principal_id: int
+  catt_id: int

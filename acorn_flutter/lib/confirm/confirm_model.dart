@@ -109,10 +109,10 @@ class ConfirmModel extends ChangeNotifier {
     try {
     var principal = Principal(annee: confirm.year, affair: confirm.name, pays: confirm.country);
     var principalId = await client.principal.addPrincipal(principal);
-    if (principalId == null) {
+/*    if (principalId == null) {
       debugPrint('Error: Failed to add principal');
       return;
-    }
+    }*/
     debugPrint('Add principal : $principalId');
 
 
@@ -120,10 +120,10 @@ class ConfirmModel extends ChangeNotifier {
       var months = Months(
           principal_id: principalId, month: confirm.isSelectedMonth!);
       var monthsId = await client.months.addMonths(months);
-      if (monthsId == null) {
+/*      if (monthsId == null) {
         print('Error: Failed to add months');
         return;
-      }
+      }*/
       debugPrint('Add month : $monthsId');
     }
 
@@ -131,47 +131,41 @@ class ConfirmModel extends ChangeNotifier {
       var days = Days(
           principal_id: principalId, day: confirm.isSelectedDate!);
       var daysId = await client.days.addDays(days);
-      if (daysId == null) {
+/*      if (daysId == null) {
         print('Error: Failed to add days');
         return;
-      }
+      }*/
       debugPrint('Add day : $daysId');
     }
 
-    if (confirm.dateLocal != "") {
+    if (confirm.dateLocal != "No-Local-Date") {
       var localdates = LocalDates(
           principal_id: principalId, localdate: confirm.dateLocal!);
       var localdateId = await client.localDates.addLocalDates(localdates);
-      if (localdateId == null) {
+/*      if (localdateId == null) {
         debugPrint('Error: Failed to add Local dates');
         return;
-      }
+      }*/
       debugPrint('Add localdate : $localdateId');
     }
 
-/*    if (confirm.place != "") {
-      var principlPlace = PrincipalPlace(
-        principal_id: principalId, p
-      )
-    }*/
-/* Future addPrincipalPlaces() async {
-      var principalPlaces =
-      PrincipalPlaces(principal_id: principalLastVal, place: place);
-      principalPlaceLastVal =
-      await client.principalPlaces.addPrincipalPlaces(principalPlaces);
-      <String, String?>{
-        "place": confirm.place,
-      };
- */
-      /*    Future addPrincipalAtts() async {
-      var principalAtts =
-      PrincipalAtts(principal_id: principalLastVal, att: att);
-      principalAttLastVal =
-      await client.principalAtts.addPrincipalAtts(principalAtts);
-      <String, String?>{
-        "att": confirm.att,
-      };
-    }*/
+    if (confirm.selectedPlaceId.isNotEmpty) {
+      for (var placeId in confirm.selectedPlaceId) {
+        var principalPlace = PrincipalPlace(
+            principal_id: principalId, place_id: placeId);
+        var principalPlaceId = await client.principalPlace.addPrincipalPlace(principalPlace);
+        debugPrint('Added principal-place : $principalPlaceId');
+      }
+    }
+
+    if (confirm.selectedSeaId.isNotEmpty) {
+      for (var seaId in confirm.selectedSeaId) {
+        var principalSeas = PrincipalSeas(
+          principal_id: principalId, seas_id: seaId);
+        var principalSeasId = await client.principalSeas.addPrincipalSeas(principalSeas);
+        debugPrint('added principal-sea : $principalSeasId');
+      }
+    }
 
       if (confirm.latitude != null && confirm.longitude != null) {
         var lieux = Lieux(

@@ -1,0 +1,5 @@
+class: PrincipalSeas
+table: principal_seas
+fields: 
+  principal_id: int
+  seas_id: int

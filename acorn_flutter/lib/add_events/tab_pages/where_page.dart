@@ -233,7 +233,7 @@ class _WherePageState extends State<WherePage> {
 
                       ///Ocean
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.fromLTRB(20, 170, 20, 20),
                         child: ButtonFormat(
                           onPressed: fetchSeas,
                           label: 'Show and Select Seas',
@@ -469,9 +469,11 @@ class _WherePageState extends State<WherePage> {
           }
 
           ///選択されたplace
-          confirm.selectedPlace = _filtersPlaces;
-          confirm.selectedPlaceId = _filtersPlacesId;
-          print("kept Selected Place $_filtersPlacesId");
+          if (_filtersPlaces.isNotEmpty) {
+            confirm.selectedPlace = _filtersPlaces;
+            confirm.selectedPlaceId = _filtersPlacesId;
+            print("kept Selected Place $_filtersPlacesId");
+          }
 
           ///追加されたsea
           if (newSea != "") {
@@ -481,31 +483,39 @@ class _WherePageState extends State<WherePage> {
           }
 
           ///選択されたsea
-          confirm.selectedSea = _filtersSeas;
-          confirm.selectedSeaId = _filtersSeasId;
-          print("kept Selected Sea $_filtersSeasId");
+          if (_filtersSeas.isNotEmpty) {
+            confirm.selectedSea = _filtersSeas;
+            confirm.selectedSeaId = _filtersSeasId;
+            print("kept Selected Sea $_filtersSeasId");
+          }
 
           ///追加されたCatt
-          confirm.countryatt = newCountryatt;
-          confirm.countryattId = countryattId;
-          print("add a new Catt $countryattId");
+          if (newCountryatt != "") {
+            confirm.countryatt = newCountryatt;
+            confirm.countryattId = countryattId;
+            print("add a new Catt $countryattId");
+          }
 
           ///選択されたCatt
-          confirm.selectedCatt = _filtersCountryatts;
-          confirm.selectedCattId = _fltersCountryattsId;
-          print("kept selected Catt $_fltersCountryattsId");
+          if (_filtersCountryatts.isNotEmpty) {
+            confirm.selectedCatt = _filtersCountryatts;
+            confirm.selectedCattId = _fltersCountryattsId;
+            print("kept selected Catt $_fltersCountryattsId");
+          }
 
           ///追加されたPatt
-          confirm.placeatt = newPlaceatt;
-          confirm.placeattId = placeattId;
-          print("add a new Patt $placeattId");
+          if (newPlaceatt != "") {
+            confirm.placeatt = newPlaceatt;
+            confirm.placeattId = placeattId;
+            print("add a new Patt $placeattId");
+          }
 
           ///選択されたPatt
-          confirm.selectedPatt = _filtersPlaceatts;
-          confirm.selectedPattId = _filtersPlaceattsId;
-          print("kept selected Patt $_filtersPlaceattsId");
-
-
+          if (_filtersPlaceatts.isNotEmpty) {
+            confirm.selectedPatt = _filtersPlaceatts;
+            confirm.selectedPattId = _filtersPlaceattsId;
+            print("kept selected Patt $_filtersPlaceattsId");
+          }
 
           confirm.latitude = newLatitude;
           confirm.longitude = newLongitude;

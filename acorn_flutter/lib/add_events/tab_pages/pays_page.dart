@@ -21,11 +21,15 @@ class PaysPage extends StatefulWidget {
 
 class _PaysPageState extends State<PaysPage> {
 
+  var newCATT = '';
+
+  ///関係国の現在名
   List<Pays> listPays = [];
   List<Map<String, String>> displayListPays = [];
   final List<String> filtersPays = <String>[];
   final List<int> filtersPaysId = <int>[];
 
+  ///関係国の当時の名称
   List<Countryatts> listCATTs = [];
   List<Map<String, String>> displayListCATTs = [];
   final List<String> filtersCATTs = <String>[];
@@ -54,15 +58,11 @@ class _PaysPageState extends State<PaysPage> {
 
   }
 
-  var newCATT = '';
-
-  late int countryattLastVal;
+  int? countryattId;
 
   addCountryATTandFetch() async {
     var catts = Countryatts(countryatt: newCATT);
-    countryattLastVal = await client.countryatts.addCountryATTs(catts);
-    print(countryattLastVal);
-    debugPrint("add a CountryATT");
+    countryattId = await client.countryatts.addCountryATTs(catts);
     listCATTs = await client.countryatts.getCountryATTs();
     setState(() {});
   }

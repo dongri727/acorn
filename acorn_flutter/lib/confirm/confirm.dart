@@ -9,7 +9,7 @@ class Confirm {
   String? isSelectedMonth = "No-Month";
   String? isSelectedDate = "No-Date";
 
-  String? dateLocal = "";
+  String? dateLocal = "No-Local-Date";
 
   //principal
   String name = "";
@@ -17,7 +17,7 @@ class Confirm {
 
   //where
   //追加されたplace
-  String? place = "";
+  String? place = "No-Place";
   int? placeId = 0;
 
   //選択されたplace
@@ -25,7 +25,7 @@ class Confirm {
   List<int> selectedPlaceId = [];
 
   //追加されたsea
-  String? sea = "";
+  String? sea = "sea";
   int? seaId = 0;
 
   //選択されたsea
@@ -33,7 +33,7 @@ class Confirm {
   List<int> selectedSeaId = [];
 
   //追加されたCatt
-  String? countryatt = "";
+  String? countryatt = "country name at that time";
   int? countryattId = 0;
 
   //選択されたCatt
@@ -41,7 +41,7 @@ class Confirm {
   List<int> selectedCattId = [];
 
   //追加されたPatt
-  String? placeatt = "";
+  String? placeatt = "place name at that time";
   int? placeattId = 0;
 
   //選択されたPatt

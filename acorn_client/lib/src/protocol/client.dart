@@ -17,15 +17,16 @@ import 'package:acorn_client/src/protocol/localdates.dart' as _i8;
 import 'package:acorn_client/src/protocol/months.dart' as _i9;
 import 'package:acorn_client/src/protocol/organisations.dart' as _i10;
 import 'package:acorn_client/src/protocol/p_place.dart' as _i11;
-import 'package:acorn_client/src/protocol/pays.dart' as _i12;
-import 'package:acorn_client/src/protocol/people.dart' as _i13;
-import 'package:acorn_client/src/protocol/placeatts.dart' as _i14;
-import 'package:acorn_client/src/protocol/places.dart' as _i15;
-import 'package:acorn_client/src/protocol/principal.dart' as _i16;
-import 'package:acorn_client/src/protocol/seas.dart' as _i17;
-import 'package:acorn_client/src/protocol/terms.dart' as _i18;
-import 'dart:io' as _i19;
-import 'protocol.dart' as _i20;
+import 'package:acorn_client/src/protocol/p_seas.dart' as _i12;
+import 'package:acorn_client/src/protocol/pays.dart' as _i13;
+import 'package:acorn_client/src/protocol/people.dart' as _i14;
+import 'package:acorn_client/src/protocol/placeatts.dart' as _i15;
+import 'package:acorn_client/src/protocol/places.dart' as _i16;
+import 'package:acorn_client/src/protocol/principal.dart' as _i17;
+import 'package:acorn_client/src/protocol/seas.dart' as _i18;
+import 'package:acorn_client/src/protocol/terms.dart' as _i19;
+import 'dart:io' as _i20;
+import 'protocol.dart' as _i21;
 
 class _EndpointCountryInvolved extends _i1.EndpointRef {
   _EndpointCountryInvolved(_i1.EndpointCaller caller) : super(caller);
@@ -227,20 +228,41 @@ class _EndpointPrincipalPlace extends _i1.EndpointRef {
       );
 }
 
+class _EndpointPrincipalSeas extends _i1.EndpointRef {
+  _EndpointPrincipalSeas(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'principalSeas';
+
+  _i2.Future<List<_i12.PrincipalSeas>> getPrincipalSeas({String? keyword}) =>
+      caller.callServerEndpoint<List<_i12.PrincipalSeas>>(
+        'principalSeas',
+        'getPrincipalSeas',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addPrincipalSeas(_i12.PrincipalSeas principalSeas) =>
+      caller.callServerEndpoint<int>(
+        'principalSeas',
+        'addPrincipalSeas',
+        {'principalSeas': principalSeas},
+      );
+}
+
 class _EndpointPays extends _i1.EndpointRef {
   _EndpointPays(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'pays';
 
-  _i2.Future<List<_i12.Pays>> getPays({String? keyword}) =>
-      caller.callServerEndpoint<List<_i12.Pays>>(
+  _i2.Future<List<_i13.Pays>> getPays({String? keyword}) =>
+      caller.callServerEndpoint<List<_i13.Pays>>(
         'pays',
         'getPays',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPays(_i12.Pays pays) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addPays(_i13.Pays pays) => caller.callServerEndpoint<int>(
         'pays',
         'addPays',
         {'pays': pays},
@@ -253,14 +275,14 @@ class _EndpointPeople extends _i1.EndpointRef {
   @override
   String get name => 'people';
 
-  _i2.Future<List<_i13.People>> getPeople({String? keyword}) =>
-      caller.callServerEndpoint<List<_i13.People>>(
+  _i2.Future<List<_i14.People>> getPeople({String? keyword}) =>
+      caller.callServerEndpoint<List<_i14.People>>(
         'people',
         'getPeople',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPeople(_i13.People people) =>
+  _i2.Future<int> addPeople(_i14.People people) =>
       caller.callServerEndpoint<int>(
         'people',
         'addPeople',
@@ -274,14 +296,14 @@ class _EndpointPlaceatts extends _i1.EndpointRef {
   @override
   String get name => 'placeatts';
 
-  _i2.Future<List<_i14.Placeatts>> getPlaceATTs({String? keyword}) =>
-      caller.callServerEndpoint<List<_i14.Placeatts>>(
+  _i2.Future<List<_i15.Placeatts>> getPlaceATTs({String? keyword}) =>
+      caller.callServerEndpoint<List<_i15.Placeatts>>(
         'placeatts',
         'getPlaceATTs',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPlaceATTs(_i14.Placeatts placeatts) =>
+  _i2.Future<int> addPlaceATTs(_i15.Placeatts placeatts) =>
       caller.callServerEndpoint<int>(
         'placeatts',
         'addPlaceATTs',
@@ -295,14 +317,14 @@ class _EndpointPlaces extends _i1.EndpointRef {
   @override
   String get name => 'places';
 
-  _i2.Future<List<_i15.Places>> getPlaces({String? keyword}) =>
-      caller.callServerEndpoint<List<_i15.Places>>(
+  _i2.Future<List<_i16.Places>> getPlaces({String? keyword}) =>
+      caller.callServerEndpoint<List<_i16.Places>>(
         'places',
         'getPlaces',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPlaces(_i15.Places places) =>
+  _i2.Future<int> addPlaces(_i16.Places places) =>
       caller.callServerEndpoint<int>(
         'places',
         'addPlaces',
@@ -316,15 +338,15 @@ class _EndpointPrincipal extends _i1.EndpointRef {
   @override
   String get name => 'principal';
 
-  _i2.Future<int> addPrincipal(_i16.Principal principal) =>
+  _i2.Future<int> addPrincipal(_i17.Principal principal) =>
       caller.callServerEndpoint<int>(
         'principal',
         'addPrincipal',
         {'principal': principal},
       );
 
-  _i2.Future<List<_i16.Principal>> getPrincipal({String? keyword}) =>
-      caller.callServerEndpoint<List<_i16.Principal>>(
+  _i2.Future<List<_i17.Principal>> getPrincipal({String? keyword}) =>
+      caller.callServerEndpoint<List<_i17.Principal>>(
         'principal',
         'getPrincipal',
         {'keyword': keyword},
@@ -337,14 +359,14 @@ class _EndpointSeas extends _i1.EndpointRef {
   @override
   String get name => 'seas';
 
-  _i2.Future<List<_i17.Seas>> getSeas({String? keyword}) =>
-      caller.callServerEndpoint<List<_i17.Seas>>(
+  _i2.Future<List<_i18.Seas>> getSeas({String? keyword}) =>
+      caller.callServerEndpoint<List<_i18.Seas>>(
         'seas',
         'getSeas',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addSeas(_i17.Seas seas) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addSeas(_i18.Seas seas) => caller.callServerEndpoint<int>(
         'seas',
         'addSeas',
         {'seas': seas},
@@ -357,14 +379,14 @@ class _EndpointTerms extends _i1.EndpointRef {
   @override
   String get name => 'terms';
 
-  _i2.Future<List<_i18.Terms>> getTerms({String? keyword}) =>
-      caller.callServerEndpoint<List<_i18.Terms>>(
+  _i2.Future<List<_i19.Terms>> getTerms({String? keyword}) =>
+      caller.callServerEndpoint<List<_i19.Terms>>(
         'terms',
         'getTerms',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addTerms(_i18.Terms terms) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addTerms(_i19.Terms terms) => caller.callServerEndpoint<int>(
         'terms',
         'addTerms',
         {'terms': terms},
@@ -374,11 +396,11 @@ class _EndpointTerms extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i19.SecurityContext? context,
+    _i20.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i20.Protocol(),
+          _i21.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -392,6 +414,7 @@ class Client extends _i1.ServerpodClient {
     months = _EndpointMonths(this);
     organisations = _EndpointOrganisations(this);
     principalPlace = _EndpointPrincipalPlace(this);
+    principalSeas = _EndpointPrincipalSeas(this);
     pays = _EndpointPays(this);
     people = _EndpointPeople(this);
     placeatts = _EndpointPlaceatts(this);
@@ -421,6 +444,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointPrincipalPlace principalPlace;
 
+  late final _EndpointPrincipalSeas principalSeas;
+
   late final _EndpointPays pays;
 
   late final _EndpointPeople people;
@@ -447,6 +472,7 @@ class Client extends _i1.ServerpodClient {
         'months': months,
         'organisations': organisations,
         'principalPlace': principalPlace,
+        'principalSeas': principalSeas,
         'pays': pays,
         'people': people,
         'placeatts': placeatts,

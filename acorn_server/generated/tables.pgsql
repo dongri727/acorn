@@ -179,6 +179,20 @@ ALTER TABLE ONLY "principal"
 
 
 --
+-- Class PrincipalCatt as table principal_catt
+--
+
+CREATE TABLE "principal_catt" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "catt_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_catt"
+  ADD CONSTRAINT principal_catt_pkey PRIMARY KEY (id);
+
+
+--
 -- Class PrincipalPlace as table principal_place
 --
 
@@ -190,6 +204,20 @@ CREATE TABLE "principal_place" (
 
 ALTER TABLE ONLY "principal_place"
   ADD CONSTRAINT principal_place_pkey PRIMARY KEY (id);
+
+
+--
+-- Class PrincipalSeas as table principal_seas
+--
+
+CREATE TABLE "principal_seas" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "seas_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_seas"
+  ADD CONSTRAINT principal_seas_pkey PRIMARY KEY (id);
 
 
 --
