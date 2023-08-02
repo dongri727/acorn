@@ -49,12 +49,12 @@ class Confirm {
   List<int> selectedPattId = [];
 
 
-  double? latitude = 0.0;
-  double? longitude = 0.0;
+  double? latitude;
+  double? longitude;
 
-  double? x = 0.0;
-  double? y = 0.0;
-  double? z = 0.0;
+  double? x;
+  double? y;
+  double? z;
 
   //pays involved
   List<String> selectedPays = [];

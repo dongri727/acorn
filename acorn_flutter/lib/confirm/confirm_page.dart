@@ -27,6 +27,7 @@ class ConfirmPage extends StatelessWidget {
                       showDialog<void>(
                           context: context,
                           builder: (_) {
+                            /// todo 失敗アラートと統合
                             return AlertDialog(
                               title: const Text('Data has been archived.'),
                               content: const Text(

@@ -25,8 +25,8 @@ class ConfirmModel extends ChangeNotifier {
   String place = "";
   String att = "";
 
-  final latitude = 0.0;
-  final longitude = 0.0;
+  double? latitude;
+  double? longitude;
   final dx = 0.0;
   final dy = 0.0;
   final dz = 0.0;
@@ -72,10 +72,7 @@ class ConfirmModel extends ChangeNotifier {
           var months = Months(
               principal_id: principalId, month: confirm.isSelectedMonth!);
           var monthsId = await client.months.addMonths(months);
-/*      if (monthsId == null) {
-        print('Error: Failed to add months');
-        return;
-      }*/
+
           debugPrint('Add month : $monthsId');
         }
 
@@ -83,10 +80,7 @@ class ConfirmModel extends ChangeNotifier {
           var days = Days(
               principal_id: principalId, day: confirm.isSelectedDate!);
           var daysId = await client.days.addDays(days);
-/*      if (daysId == null) {
-        print('Error: Failed to add days');
-        return;
-      }*/
+
           debugPrint('Add day : $daysId');
         }
 
@@ -94,10 +88,7 @@ class ConfirmModel extends ChangeNotifier {
           var localdates = LocalDates(
               principal_id: principalId, localdate: confirm.dateLocal!);
           var localdateId = await client.localDates.addLocalDates(localdates);
-/*      if (localdateId == null) {
-        debugPrint('Error: Failed to add Local dates');
-        return;
-      }*/
+
           debugPrint('Add localdate : $localdateId');
         }
 
@@ -121,7 +112,7 @@ class ConfirmModel extends ChangeNotifier {
           }
         }
 
-        if (confirm.latitude != 0.0 && confirm.longitude != 0.0) {
+        if (confirm.latitude != null && confirm.longitude != null) {
           var lieux = Lieux(
             principal_id: principalId,
             latitude: confirm.latitude!,

@@ -1,0 +1,219 @@
+/* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
+/*   To generate run: "serverpod generate"    */
+
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: public_member_api_docs
+// ignore_for_file: implementation_imports
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:serverpod/serverpod.dart' as _i1;
+
+class PrincipalOrgs extends _i1.TableRow {
+  PrincipalOrgs({
+    int? id,
+    required this.principal_id,
+    required this.org_id,
+  }) : super(id);
+
+  factory PrincipalOrgs.fromJson(
+    Map<String, dynamic> jsonSerialization,
+    _i1.SerializationManager serializationManager,
+  ) {
+    return PrincipalOrgs(
+      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
+      principal_id: serializationManager
+          .deserialize<int>(jsonSerialization['principal_id']),
+      org_id:
+          serializationManager.deserialize<int>(jsonSerialization['org_id']),
+    );
+  }
+
+  static final t = PrincipalOrgsTable();
+
+  int principal_id;
+
+  int org_id;
+
+  @override
+  String get tableName => 'principal_orgs';
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'principal_id': principal_id,
+      'org_id': org_id,
+    };
+  }
+
+  @override
+  Map<String, dynamic> toJsonForDatabase() {
+    return {
+      'id': id,
+      'principal_id': principal_id,
+      'org_id': org_id,
+    };
+  }
+
+  @override
+  Map<String, dynamic> allToJson() {
+    return {
+      'id': id,
+      'principal_id': principal_id,
+      'org_id': org_id,
+    };
+  }
+
+  @override
+  void setColumn(
+    String columnName,
+    value,
+  ) {
+    switch (columnName) {
+      case 'id':
+        id = value;
+        return;
+      case 'principal_id':
+        principal_id = value;
+        return;
+      case 'org_id':
+        org_id = value;
+        return;
+      default:
+        throw UnimplementedError();
+    }
+  }
+
+  static Future<List<PrincipalOrgs>> find(
+    _i1.Session session, {
+    PrincipalOrgsExpressionBuilder? where,
+    int? limit,
+    int? offset,
+    _i1.Column? orderBy,
+    List<_i1.Order>? orderByList,
+    bool orderDescending = false,
+    bool useCache = true,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.find<PrincipalOrgs>(
+      where: where != null ? where(PrincipalOrgs.t) : null,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy,
+      orderByList: orderByList,
+      orderDescending: orderDescending,
+      useCache: useCache,
+      transaction: transaction,
+    );
+  }
+
+  static Future<PrincipalOrgs?> findSingleRow(
+    _i1.Session session, {
+    PrincipalOrgsExpressionBuilder? where,
+    int? offset,
+    _i1.Column? orderBy,
+    bool orderDescending = false,
+    bool useCache = true,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.findSingleRow<PrincipalOrgs>(
+      where: where != null ? where(PrincipalOrgs.t) : null,
+      offset: offset,
+      orderBy: orderBy,
+      orderDescending: orderDescending,
+      useCache: useCache,
+      transaction: transaction,
+    );
+  }
+
+  static Future<PrincipalOrgs?> findById(
+    _i1.Session session,
+    int id,
+  ) async {
+    return session.db.findById<PrincipalOrgs>(id);
+  }
+
+  static Future<int> delete(
+    _i1.Session session, {
+    required PrincipalOrgsExpressionBuilder where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.delete<PrincipalOrgs>(
+      where: where(PrincipalOrgs.t),
+      transaction: transaction,
+    );
+  }
+
+  static Future<bool> deleteRow(
+    _i1.Session session,
+    PrincipalOrgs row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.deleteRow(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  static Future<bool> update(
+    _i1.Session session,
+    PrincipalOrgs row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.update(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  static Future<void> insert(
+    _i1.Session session,
+    PrincipalOrgs row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.insert(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  static Future<int> count(
+    _i1.Session session, {
+    PrincipalOrgsExpressionBuilder? where,
+    int? limit,
+    bool useCache = true,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.count<PrincipalOrgs>(
+      where: where != null ? where(PrincipalOrgs.t) : null,
+      limit: limit,
+      useCache: useCache,
+      transaction: transaction,
+    );
+  }
+}
+
+typedef PrincipalOrgsExpressionBuilder = _i1.Expression Function(
+    PrincipalOrgsTable);
+
+class PrincipalOrgsTable extends _i1.Table {
+  PrincipalOrgsTable() : super(tableName: 'principal_orgs');
+
+  /// The database id, set if the object has been inserted into the
+  /// database or if it has been fetched from the database. Otherwise,
+  /// the id will be null.
+  final id = _i1.ColumnInt('id');
+
+  final principal_id = _i1.ColumnInt('principal_id');
+
+  final org_id = _i1.ColumnInt('org_id');
+
+  @override
+  List<_i1.Column> get columns => [
+        id,
+        principal_id,
+        org_id,
+      ];
+}
+
+@Deprecated('Use PrincipalOrgsTable.t instead.')
+PrincipalOrgsTable tPrincipalOrgs = PrincipalOrgsTable();

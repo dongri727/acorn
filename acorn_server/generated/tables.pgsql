@@ -193,6 +193,34 @@ ALTER TABLE ONLY "principal_catt"
 
 
 --
+-- Class PrincipalOrgs as table principal_orgs
+--
+
+CREATE TABLE "principal_orgs" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "org_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_orgs"
+  ADD CONSTRAINT principal_orgs_pkey PRIMARY KEY (id);
+
+
+--
+-- Class PrincipalPeople as table principal_people
+--
+
+CREATE TABLE "principal_people" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "person_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_people"
+  ADD CONSTRAINT principal_people_pkey PRIMARY KEY (id);
+
+
+--
 -- Class PrincipalPlace as table principal_place
 --
 

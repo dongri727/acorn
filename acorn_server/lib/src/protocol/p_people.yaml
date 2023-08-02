@@ -1,0 +1,5 @@
+class: PrincipalPeople
+table: principal_people
+fields: 
+  principal_id: int
+  person_id: int
