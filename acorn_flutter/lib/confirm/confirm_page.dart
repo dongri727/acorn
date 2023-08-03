@@ -24,26 +24,45 @@ class ConfirmPage extends StatelessWidget {
               return Scaffold(
                 floatingActionButton: FloatingActionButton.extended(
                     onPressed: () async {
-                      showDialog<void>(
-                          context: context,
-                          builder: (_) {
-                            /// todo 失敗アラートと統合
-                            return AlertDialog(
-                              title: const Text('Data has been archived.'),
-                              content: const Text(
-                                  'thank you for the information'),
-                              actions: <Widget>[
-                                GestureDetector(
-                                  child: const Text('OK'),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          });
+                      bool success = await model.save(_confirm);
 
-                      await model.save(_confirm);
+                      if (success) {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: const Text('Succeded'),
+                                content: const Text('Thank you for adding Informations'),
+                                actions: <Widget>[
+                                  GestureDetector(
+                                    child: const Text('OK'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                        );
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: const Text('Error'),
+                                content: const Text('Required fields are missing'),
+                                actions: <Widget>[
+                                  GestureDetector(
+                                    child: const Text('OK'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                        );
+                      }
                     },
                     label: const Text('all right ?')),
                 body: SafeArea(

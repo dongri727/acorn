@@ -1,4 +1,18 @@
 --
+-- Class AttsInvolved as table atts_involved
+--
+
+CREATE TABLE "atts_involved" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "att_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "atts_involved"
+  ADD CONSTRAINT atts_involved_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Categories as table categories
 --
 
@@ -179,6 +193,20 @@ ALTER TABLE ONLY "principal"
 
 
 --
+-- Class PrincipalCategories as table principal_categories
+--
+
+CREATE TABLE "principal_categories" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "category_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_categories"
+  ADD CONSTRAINT principal_categories_pkey PRIMARY KEY (id);
+
+
+--
 -- Class PrincipalCatt as table principal_catt
 --
 
@@ -204,6 +232,20 @@ CREATE TABLE "principal_orgs" (
 
 ALTER TABLE ONLY "principal_orgs"
   ADD CONSTRAINT principal_orgs_pkey PRIMARY KEY (id);
+
+
+--
+-- Class PrincipalPatt as table principal_patt
+--
+
+CREATE TABLE "principal_patt" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "patt_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_patt"
+  ADD CONSTRAINT principal_patt_pkey PRIMARY KEY (id);
 
 
 --
@@ -246,6 +288,20 @@ CREATE TABLE "principal_seas" (
 
 ALTER TABLE ONLY "principal_seas"
   ADD CONSTRAINT principal_seas_pkey PRIMARY KEY (id);
+
+
+--
+-- Class PrincipalTerms as table principal_terms
+--
+
+CREATE TABLE "principal_terms" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "term_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_terms"
+  ADD CONSTRAINT principal_terms_pkey PRIMARY KEY (id);
 
 
 --

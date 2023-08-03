@@ -1,0 +1,5 @@
+class: AttsInvolved
+table: atts_involved
+fields: 
+  principal_id: int
+  att_id: int

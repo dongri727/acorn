@@ -72,11 +72,11 @@ class Confirm {
   List<String> selectedWho = [];
   List<int> selectedWhoId = [];
 
-  //terms
-  List<String> selectedTerm = [];
-  List<int> selectedTermId = [];
-
   //categories
   List<String> selectedCategory = [];
   List<int> selectedCategoryId = [];
+
+  //terms
+  List<String> selectedTerm = [];
+  List<int> selectedTermId = [];
 }

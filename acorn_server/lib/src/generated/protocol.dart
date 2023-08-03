@@ -9,47 +9,56 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'c_involved.dart' as _i3;
-import 'categories.dart' as _i4;
-import 'countryatts.dart' as _i5;
-import 'days.dart' as _i6;
-import 'example.dart' as _i7;
-import 'lieux.dart' as _i8;
-import 'localdates.dart' as _i9;
-import 'months.dart' as _i10;
-import 'organisations.dart' as _i11;
-import 'p_catt.dart' as _i12;
-import 'p_orgs.dart' as _i13;
-import 'p_people.dart' as _i14;
-import 'p_place.dart' as _i15;
-import 'p_seas.dart' as _i16;
-import 'pays.dart' as _i17;
-import 'people.dart' as _i18;
-import 'placeatts.dart' as _i19;
-import 'places.dart' as _i20;
-import 'principal.dart' as _i21;
-import 'seas.dart' as _i22;
-import 'terms.dart' as _i23;
-import 'package:acorn_server/src/generated/c_involved.dart' as _i24;
-import 'package:acorn_server/src/generated/categories.dart' as _i25;
-import 'package:acorn_server/src/generated/countryatts.dart' as _i26;
-import 'package:acorn_server/src/generated/days.dart' as _i27;
-import 'package:acorn_server/src/generated/lieux.dart' as _i28;
-import 'package:acorn_server/src/generated/localdates.dart' as _i29;
-import 'package:acorn_server/src/generated/months.dart' as _i30;
-import 'package:acorn_server/src/generated/organisations.dart' as _i31;
-import 'package:acorn_server/src/generated/p_catt.dart' as _i32;
-import 'package:acorn_server/src/generated/p_orgs.dart' as _i33;
-import 'package:acorn_server/src/generated/p_people.dart' as _i34;
-import 'package:acorn_server/src/generated/p_place.dart' as _i35;
-import 'package:acorn_server/src/generated/p_seas.dart' as _i36;
-import 'package:acorn_server/src/generated/pays.dart' as _i37;
-import 'package:acorn_server/src/generated/people.dart' as _i38;
-import 'package:acorn_server/src/generated/placeatts.dart' as _i39;
-import 'package:acorn_server/src/generated/places.dart' as _i40;
-import 'package:acorn_server/src/generated/principal.dart' as _i41;
-import 'package:acorn_server/src/generated/seas.dart' as _i42;
-import 'package:acorn_server/src/generated/terms.dart' as _i43;
+import 'att_involved.dart' as _i3;
+import 'c_involved.dart' as _i4;
+import 'categories.dart' as _i5;
+import 'countryatts.dart' as _i6;
+import 'days.dart' as _i7;
+import 'example.dart' as _i8;
+import 'lieux.dart' as _i9;
+import 'localdates.dart' as _i10;
+import 'months.dart' as _i11;
+import 'organisations.dart' as _i12;
+import 'p_categories.dart' as _i13;
+import 'p_catt.dart' as _i14;
+import 'p_orgs.dart' as _i15;
+import 'p_patt.dart' as _i16;
+import 'p_people.dart' as _i17;
+import 'p_place.dart' as _i18;
+import 'p_seas.dart' as _i19;
+import 'p_terms.dart' as _i20;
+import 'pays.dart' as _i21;
+import 'people.dart' as _i22;
+import 'placeatts.dart' as _i23;
+import 'places.dart' as _i24;
+import 'principal.dart' as _i25;
+import 'seas.dart' as _i26;
+import 'terms.dart' as _i27;
+import 'package:acorn_server/src/generated/att_involved.dart' as _i28;
+import 'package:acorn_server/src/generated/c_involved.dart' as _i29;
+import 'package:acorn_server/src/generated/categories.dart' as _i30;
+import 'package:acorn_server/src/generated/countryatts.dart' as _i31;
+import 'package:acorn_server/src/generated/days.dart' as _i32;
+import 'package:acorn_server/src/generated/lieux.dart' as _i33;
+import 'package:acorn_server/src/generated/localdates.dart' as _i34;
+import 'package:acorn_server/src/generated/months.dart' as _i35;
+import 'package:acorn_server/src/generated/organisations.dart' as _i36;
+import 'package:acorn_server/src/generated/p_categories.dart' as _i37;
+import 'package:acorn_server/src/generated/p_catt.dart' as _i38;
+import 'package:acorn_server/src/generated/p_orgs.dart' as _i39;
+import 'package:acorn_server/src/generated/p_patt.dart' as _i40;
+import 'package:acorn_server/src/generated/p_people.dart' as _i41;
+import 'package:acorn_server/src/generated/p_place.dart' as _i42;
+import 'package:acorn_server/src/generated/p_seas.dart' as _i43;
+import 'package:acorn_server/src/generated/p_terms.dart' as _i44;
+import 'package:acorn_server/src/generated/pays.dart' as _i45;
+import 'package:acorn_server/src/generated/people.dart' as _i46;
+import 'package:acorn_server/src/generated/placeatts.dart' as _i47;
+import 'package:acorn_server/src/generated/places.dart' as _i48;
+import 'package:acorn_server/src/generated/principal.dart' as _i49;
+import 'package:acorn_server/src/generated/seas.dart' as _i50;
+import 'package:acorn_server/src/generated/terms.dart' as _i51;
+export 'att_involved.dart';
 export 'c_involved.dart';
 export 'categories.dart';
 export 'countryatts.dart';
@@ -59,11 +68,14 @@ export 'lieux.dart';
 export 'localdates.dart';
 export 'months.dart';
 export 'organisations.dart';
+export 'p_categories.dart';
 export 'p_catt.dart';
 export 'p_orgs.dart';
+export 'p_patt.dart';
 export 'p_people.dart';
 export 'p_place.dart';
 export 'p_seas.dart';
+export 'p_terms.dart';
 export 'pays.dart';
 export 'people.dart';
 export 'placeatts.dart';
@@ -82,6 +94,48 @@ class Protocol extends _i1.SerializationManagerServer {
   static final Protocol _instance = Protocol._();
 
   static final targetDatabaseDefinition = _i2.DatabaseDefinition(tables: [
+    _i2.TableDefinition(
+      name: 'atts_involved',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'atts_involved_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principal_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'att_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'atts_involved_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
     _i2.TableDefinition(
       name: 'country_involved',
       schema: 'public',
@@ -425,6 +479,48 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
+      name: 'principal_categories',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_categories_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principal_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'category_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_categories_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
       name: 'principal_catt',
       schema: 'public',
       columns: [
@@ -494,6 +590,48 @@ class Protocol extends _i1.SerializationManagerServer {
       indexes: [
         _i2.IndexDefinition(
           indexName: 'principal_orgs_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_patt',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_patt_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principal_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'patt_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_patt_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -620,6 +758,48 @@ class Protocol extends _i1.SerializationManagerServer {
       indexes: [
         _i2.IndexDefinition(
           indexName: 'principal_seas_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_terms',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_terms_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principal_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'term_id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_terms_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -910,225 +1090,273 @@ class Protocol extends _i1.SerializationManagerServer {
     if (customConstructors.containsKey(t)) {
       return customConstructors[t]!(data, this) as T;
     }
-    if (t == _i3.CountryInvolved) {
-      return _i3.CountryInvolved.fromJson(data, this) as T;
+    if (t == _i3.AttsInvolved) {
+      return _i3.AttsInvolved.fromJson(data, this) as T;
     }
-    if (t == _i4.Categories) {
-      return _i4.Categories.fromJson(data, this) as T;
+    if (t == _i4.CountryInvolved) {
+      return _i4.CountryInvolved.fromJson(data, this) as T;
     }
-    if (t == _i5.Countryatts) {
-      return _i5.Countryatts.fromJson(data, this) as T;
+    if (t == _i5.Categories) {
+      return _i5.Categories.fromJson(data, this) as T;
     }
-    if (t == _i6.Days) {
-      return _i6.Days.fromJson(data, this) as T;
+    if (t == _i6.Countryatts) {
+      return _i6.Countryatts.fromJson(data, this) as T;
     }
-    if (t == _i7.Example) {
-      return _i7.Example.fromJson(data, this) as T;
+    if (t == _i7.Days) {
+      return _i7.Days.fromJson(data, this) as T;
     }
-    if (t == _i8.Lieux) {
-      return _i8.Lieux.fromJson(data, this) as T;
+    if (t == _i8.Example) {
+      return _i8.Example.fromJson(data, this) as T;
     }
-    if (t == _i9.LocalDates) {
-      return _i9.LocalDates.fromJson(data, this) as T;
+    if (t == _i9.Lieux) {
+      return _i9.Lieux.fromJson(data, this) as T;
     }
-    if (t == _i10.Months) {
-      return _i10.Months.fromJson(data, this) as T;
+    if (t == _i10.LocalDates) {
+      return _i10.LocalDates.fromJson(data, this) as T;
     }
-    if (t == _i11.Organisations) {
-      return _i11.Organisations.fromJson(data, this) as T;
+    if (t == _i11.Months) {
+      return _i11.Months.fromJson(data, this) as T;
     }
-    if (t == _i12.PrincipalCatt) {
-      return _i12.PrincipalCatt.fromJson(data, this) as T;
+    if (t == _i12.Organisations) {
+      return _i12.Organisations.fromJson(data, this) as T;
     }
-    if (t == _i13.PrincipalOrgs) {
-      return _i13.PrincipalOrgs.fromJson(data, this) as T;
+    if (t == _i13.PrincipalCategories) {
+      return _i13.PrincipalCategories.fromJson(data, this) as T;
     }
-    if (t == _i14.PrincipalPeople) {
-      return _i14.PrincipalPeople.fromJson(data, this) as T;
+    if (t == _i14.PrincipalCatt) {
+      return _i14.PrincipalCatt.fromJson(data, this) as T;
     }
-    if (t == _i15.PrincipalPlace) {
-      return _i15.PrincipalPlace.fromJson(data, this) as T;
+    if (t == _i15.PrincipalOrgs) {
+      return _i15.PrincipalOrgs.fromJson(data, this) as T;
     }
-    if (t == _i16.PrincipalSeas) {
-      return _i16.PrincipalSeas.fromJson(data, this) as T;
+    if (t == _i16.PrincipalPatt) {
+      return _i16.PrincipalPatt.fromJson(data, this) as T;
     }
-    if (t == _i17.Pays) {
-      return _i17.Pays.fromJson(data, this) as T;
+    if (t == _i17.PrincipalPeople) {
+      return _i17.PrincipalPeople.fromJson(data, this) as T;
     }
-    if (t == _i18.People) {
-      return _i18.People.fromJson(data, this) as T;
+    if (t == _i18.PrincipalPlace) {
+      return _i18.PrincipalPlace.fromJson(data, this) as T;
     }
-    if (t == _i19.Placeatts) {
-      return _i19.Placeatts.fromJson(data, this) as T;
+    if (t == _i19.PrincipalSeas) {
+      return _i19.PrincipalSeas.fromJson(data, this) as T;
     }
-    if (t == _i20.Places) {
-      return _i20.Places.fromJson(data, this) as T;
+    if (t == _i20.PrincipalTerms) {
+      return _i20.PrincipalTerms.fromJson(data, this) as T;
     }
-    if (t == _i21.Principal) {
-      return _i21.Principal.fromJson(data, this) as T;
+    if (t == _i21.Pays) {
+      return _i21.Pays.fromJson(data, this) as T;
     }
-    if (t == _i22.Seas) {
-      return _i22.Seas.fromJson(data, this) as T;
+    if (t == _i22.People) {
+      return _i22.People.fromJson(data, this) as T;
     }
-    if (t == _i23.Terms) {
-      return _i23.Terms.fromJson(data, this) as T;
+    if (t == _i23.Placeatts) {
+      return _i23.Placeatts.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i3.CountryInvolved?>()) {
-      return (data != null ? _i3.CountryInvolved.fromJson(data, this) : null)
+    if (t == _i24.Places) {
+      return _i24.Places.fromJson(data, this) as T;
+    }
+    if (t == _i25.Principal) {
+      return _i25.Principal.fromJson(data, this) as T;
+    }
+    if (t == _i26.Seas) {
+      return _i26.Seas.fromJson(data, this) as T;
+    }
+    if (t == _i27.Terms) {
+      return _i27.Terms.fromJson(data, this) as T;
+    }
+    if (t == _i1.getType<_i3.AttsInvolved?>()) {
+      return (data != null ? _i3.AttsInvolved.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i4.CountryInvolved?>()) {
+      return (data != null ? _i4.CountryInvolved.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i4.Categories?>()) {
-      return (data != null ? _i4.Categories.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i5.Categories?>()) {
+      return (data != null ? _i5.Categories.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i5.Countryatts?>()) {
-      return (data != null ? _i5.Countryatts.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i6.Countryatts?>()) {
+      return (data != null ? _i6.Countryatts.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i6.Days?>()) {
-      return (data != null ? _i6.Days.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i7.Days?>()) {
+      return (data != null ? _i7.Days.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i7.Example?>()) {
-      return (data != null ? _i7.Example.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i8.Example?>()) {
+      return (data != null ? _i8.Example.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i8.Lieux?>()) {
-      return (data != null ? _i8.Lieux.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i9.Lieux?>()) {
+      return (data != null ? _i9.Lieux.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i9.LocalDates?>()) {
-      return (data != null ? _i9.LocalDates.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i10.LocalDates?>()) {
+      return (data != null ? _i10.LocalDates.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i10.Months?>()) {
-      return (data != null ? _i10.Months.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i11.Months?>()) {
+      return (data != null ? _i11.Months.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i11.Organisations?>()) {
-      return (data != null ? _i11.Organisations.fromJson(data, this) : null)
+    if (t == _i1.getType<_i12.Organisations?>()) {
+      return (data != null ? _i12.Organisations.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i12.PrincipalCatt?>()) {
-      return (data != null ? _i12.PrincipalCatt.fromJson(data, this) : null)
+    if (t == _i1.getType<_i13.PrincipalCategories?>()) {
+      return (data != null
+          ? _i13.PrincipalCategories.fromJson(data, this)
+          : null) as T;
+    }
+    if (t == _i1.getType<_i14.PrincipalCatt?>()) {
+      return (data != null ? _i14.PrincipalCatt.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i13.PrincipalOrgs?>()) {
-      return (data != null ? _i13.PrincipalOrgs.fromJson(data, this) : null)
+    if (t == _i1.getType<_i15.PrincipalOrgs?>()) {
+      return (data != null ? _i15.PrincipalOrgs.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i14.PrincipalPeople?>()) {
-      return (data != null ? _i14.PrincipalPeople.fromJson(data, this) : null)
+    if (t == _i1.getType<_i16.PrincipalPatt?>()) {
+      return (data != null ? _i16.PrincipalPatt.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i15.PrincipalPlace?>()) {
-      return (data != null ? _i15.PrincipalPlace.fromJson(data, this) : null)
+    if (t == _i1.getType<_i17.PrincipalPeople?>()) {
+      return (data != null ? _i17.PrincipalPeople.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i16.PrincipalSeas?>()) {
-      return (data != null ? _i16.PrincipalSeas.fromJson(data, this) : null)
+    if (t == _i1.getType<_i18.PrincipalPlace?>()) {
+      return (data != null ? _i18.PrincipalPlace.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i17.Pays?>()) {
-      return (data != null ? _i17.Pays.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i19.PrincipalSeas?>()) {
+      return (data != null ? _i19.PrincipalSeas.fromJson(data, this) : null)
+          as T;
     }
-    if (t == _i1.getType<_i18.People?>()) {
-      return (data != null ? _i18.People.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i20.PrincipalTerms?>()) {
+      return (data != null ? _i20.PrincipalTerms.fromJson(data, this) : null)
+          as T;
     }
-    if (t == _i1.getType<_i19.Placeatts?>()) {
-      return (data != null ? _i19.Placeatts.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i21.Pays?>()) {
+      return (data != null ? _i21.Pays.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i20.Places?>()) {
-      return (data != null ? _i20.Places.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i22.People?>()) {
+      return (data != null ? _i22.People.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i21.Principal?>()) {
-      return (data != null ? _i21.Principal.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i23.Placeatts?>()) {
+      return (data != null ? _i23.Placeatts.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i22.Seas?>()) {
-      return (data != null ? _i22.Seas.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i24.Places?>()) {
+      return (data != null ? _i24.Places.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i23.Terms?>()) {
-      return (data != null ? _i23.Terms.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i25.Principal?>()) {
+      return (data != null ? _i25.Principal.fromJson(data, this) : null) as T;
     }
-    if (t == List<_i24.CountryInvolved>) {
+    if (t == _i1.getType<_i26.Seas?>()) {
+      return (data != null ? _i26.Seas.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i27.Terms?>()) {
+      return (data != null ? _i27.Terms.fromJson(data, this) : null) as T;
+    }
+    if (t == List<_i28.AttsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i24.CountryInvolved>(e))
+          .map((e) => deserialize<_i28.AttsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i25.Categories>) {
-      return (data as List).map((e) => deserialize<_i25.Categories>(e)).toList()
-          as dynamic;
-    }
-    if (t == List<_i26.Countryatts>) {
+    if (t == List<_i29.CountryInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i26.Countryatts>(e))
+          .map((e) => deserialize<_i29.CountryInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i27.Days>) {
-      return (data as List).map((e) => deserialize<_i27.Days>(e)).toList()
+    if (t == List<_i30.Categories>) {
+      return (data as List).map((e) => deserialize<_i30.Categories>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i28.Lieux>) {
-      return (data as List).map((e) => deserialize<_i28.Lieux>(e)).toList()
-          as dynamic;
-    }
-    if (t == List<_i29.LocalDates>) {
-      return (data as List).map((e) => deserialize<_i29.LocalDates>(e)).toList()
-          as dynamic;
-    }
-    if (t == List<_i30.Months>) {
-      return (data as List).map((e) => deserialize<_i30.Months>(e)).toList()
-          as dynamic;
-    }
-    if (t == List<_i31.Organisations>) {
+    if (t == List<_i31.Countryatts>) {
       return (data as List)
-          .map((e) => deserialize<_i31.Organisations>(e))
+          .map((e) => deserialize<_i31.Countryatts>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i32.PrincipalCatt>) {
+    if (t == List<_i32.Days>) {
+      return (data as List).map((e) => deserialize<_i32.Days>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i33.Lieux>) {
+      return (data as List).map((e) => deserialize<_i33.Lieux>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i34.LocalDates>) {
+      return (data as List).map((e) => deserialize<_i34.LocalDates>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i35.Months>) {
+      return (data as List).map((e) => deserialize<_i35.Months>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i36.Organisations>) {
       return (data as List)
-          .map((e) => deserialize<_i32.PrincipalCatt>(e))
+          .map((e) => deserialize<_i36.Organisations>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i33.PrincipalOrgs>) {
+    if (t == List<_i37.PrincipalCategories>) {
       return (data as List)
-          .map((e) => deserialize<_i33.PrincipalOrgs>(e))
+          .map((e) => deserialize<_i37.PrincipalCategories>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i34.PrincipalPeople>) {
+    if (t == List<_i38.PrincipalCatt>) {
       return (data as List)
-          .map((e) => deserialize<_i34.PrincipalPeople>(e))
+          .map((e) => deserialize<_i38.PrincipalCatt>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i35.PrincipalPlace>) {
+    if (t == List<_i39.PrincipalOrgs>) {
       return (data as List)
-          .map((e) => deserialize<_i35.PrincipalPlace>(e))
+          .map((e) => deserialize<_i39.PrincipalOrgs>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i36.PrincipalSeas>) {
+    if (t == List<_i40.PrincipalPatt>) {
       return (data as List)
-          .map((e) => deserialize<_i36.PrincipalSeas>(e))
+          .map((e) => deserialize<_i40.PrincipalPatt>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i37.Pays>) {
-      return (data as List).map((e) => deserialize<_i37.Pays>(e)).toList()
+    if (t == List<_i41.PrincipalPeople>) {
+      return (data as List)
+          .map((e) => deserialize<_i41.PrincipalPeople>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i42.PrincipalPlace>) {
+      return (data as List)
+          .map((e) => deserialize<_i42.PrincipalPlace>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i43.PrincipalSeas>) {
+      return (data as List)
+          .map((e) => deserialize<_i43.PrincipalSeas>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i44.PrincipalTerms>) {
+      return (data as List)
+          .map((e) => deserialize<_i44.PrincipalTerms>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i45.Pays>) {
+      return (data as List).map((e) => deserialize<_i45.Pays>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i38.People>) {
-      return (data as List).map((e) => deserialize<_i38.People>(e)).toList()
+    if (t == List<_i46.People>) {
+      return (data as List).map((e) => deserialize<_i46.People>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i39.Placeatts>) {
-      return (data as List).map((e) => deserialize<_i39.Placeatts>(e)).toList()
+    if (t == List<_i47.Placeatts>) {
+      return (data as List).map((e) => deserialize<_i47.Placeatts>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i40.Places>) {
-      return (data as List).map((e) => deserialize<_i40.Places>(e)).toList()
+    if (t == List<_i48.Places>) {
+      return (data as List).map((e) => deserialize<_i48.Places>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i41.Principal>) {
-      return (data as List).map((e) => deserialize<_i41.Principal>(e)).toList()
+    if (t == List<_i49.Principal>) {
+      return (data as List).map((e) => deserialize<_i49.Principal>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i42.Seas>) {
-      return (data as List).map((e) => deserialize<_i42.Seas>(e)).toList()
+    if (t == List<_i50.Seas>) {
+      return (data as List).map((e) => deserialize<_i50.Seas>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i43.Terms>) {
-      return (data as List).map((e) => deserialize<_i43.Terms>(e)).toList()
+    if (t == List<_i51.Terms>) {
+      return (data as List).map((e) => deserialize<_i51.Terms>(e)).toList()
           as dynamic;
     }
     try {
@@ -1139,67 +1367,79 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   String? getClassNameForObject(Object data) {
-    if (data is _i3.CountryInvolved) {
+    if (data is _i3.AttsInvolved) {
+      return 'AttsInvolved';
+    }
+    if (data is _i4.CountryInvolved) {
       return 'CountryInvolved';
     }
-    if (data is _i4.Categories) {
+    if (data is _i5.Categories) {
       return 'Categories';
     }
-    if (data is _i5.Countryatts) {
+    if (data is _i6.Countryatts) {
       return 'Countryatts';
     }
-    if (data is _i6.Days) {
+    if (data is _i7.Days) {
       return 'Days';
     }
-    if (data is _i7.Example) {
+    if (data is _i8.Example) {
       return 'Example';
     }
-    if (data is _i8.Lieux) {
+    if (data is _i9.Lieux) {
       return 'Lieux';
     }
-    if (data is _i9.LocalDates) {
+    if (data is _i10.LocalDates) {
       return 'LocalDates';
     }
-    if (data is _i10.Months) {
+    if (data is _i11.Months) {
       return 'Months';
     }
-    if (data is _i11.Organisations) {
+    if (data is _i12.Organisations) {
       return 'Organisations';
     }
-    if (data is _i12.PrincipalCatt) {
+    if (data is _i13.PrincipalCategories) {
+      return 'PrincipalCategories';
+    }
+    if (data is _i14.PrincipalCatt) {
       return 'PrincipalCatt';
     }
-    if (data is _i13.PrincipalOrgs) {
+    if (data is _i15.PrincipalOrgs) {
       return 'PrincipalOrgs';
     }
-    if (data is _i14.PrincipalPeople) {
+    if (data is _i16.PrincipalPatt) {
+      return 'PrincipalPatt';
+    }
+    if (data is _i17.PrincipalPeople) {
       return 'PrincipalPeople';
     }
-    if (data is _i15.PrincipalPlace) {
+    if (data is _i18.PrincipalPlace) {
       return 'PrincipalPlace';
     }
-    if (data is _i16.PrincipalSeas) {
+    if (data is _i19.PrincipalSeas) {
       return 'PrincipalSeas';
     }
-    if (data is _i17.Pays) {
+    if (data is _i20.PrincipalTerms) {
+      return 'PrincipalTerms';
+    }
+    if (data is _i21.Pays) {
       return 'Pays';
     }
-    if (data is _i18.People) {
+    if (data is _i22.People) {
       return 'People';
     }
-    if (data is _i19.Placeatts) {
+    if (data is _i23.Placeatts) {
       return 'Placeatts';
     }
-    if (data is _i20.Places) {
+    if (data is _i24.Places) {
       return 'Places';
     }
-    if (data is _i21.Principal) {
+    if (data is _i25.Principal) {
       return 'Principal';
     }
-    if (data is _i22.Seas) {
+    if (data is _i26.Seas) {
       return 'Seas';
     }
-    if (data is _i23.Terms) {
+    if (data is _i27.Terms) {
       return 'Terms';
     }
     return super.getClassNameForObject(data);
@@ -1207,68 +1447,80 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
+    if (data['className'] == 'AttsInvolved') {
+      return deserialize<_i3.AttsInvolved>(data['data']);
+    }
     if (data['className'] == 'CountryInvolved') {
-      return deserialize<_i3.CountryInvolved>(data['data']);
+      return deserialize<_i4.CountryInvolved>(data['data']);
     }
     if (data['className'] == 'Categories') {
-      return deserialize<_i4.Categories>(data['data']);
+      return deserialize<_i5.Categories>(data['data']);
     }
     if (data['className'] == 'Countryatts') {
-      return deserialize<_i5.Countryatts>(data['data']);
+      return deserialize<_i6.Countryatts>(data['data']);
     }
     if (data['className'] == 'Days') {
-      return deserialize<_i6.Days>(data['data']);
+      return deserialize<_i7.Days>(data['data']);
     }
     if (data['className'] == 'Example') {
-      return deserialize<_i7.Example>(data['data']);
+      return deserialize<_i8.Example>(data['data']);
     }
     if (data['className'] == 'Lieux') {
-      return deserialize<_i8.Lieux>(data['data']);
+      return deserialize<_i9.Lieux>(data['data']);
     }
     if (data['className'] == 'LocalDates') {
-      return deserialize<_i9.LocalDates>(data['data']);
+      return deserialize<_i10.LocalDates>(data['data']);
     }
     if (data['className'] == 'Months') {
-      return deserialize<_i10.Months>(data['data']);
+      return deserialize<_i11.Months>(data['data']);
     }
     if (data['className'] == 'Organisations') {
-      return deserialize<_i11.Organisations>(data['data']);
+      return deserialize<_i12.Organisations>(data['data']);
+    }
+    if (data['className'] == 'PrincipalCategories') {
+      return deserialize<_i13.PrincipalCategories>(data['data']);
     }
     if (data['className'] == 'PrincipalCatt') {
-      return deserialize<_i12.PrincipalCatt>(data['data']);
+      return deserialize<_i14.PrincipalCatt>(data['data']);
     }
     if (data['className'] == 'PrincipalOrgs') {
-      return deserialize<_i13.PrincipalOrgs>(data['data']);
+      return deserialize<_i15.PrincipalOrgs>(data['data']);
+    }
+    if (data['className'] == 'PrincipalPatt') {
+      return deserialize<_i16.PrincipalPatt>(data['data']);
     }
     if (data['className'] == 'PrincipalPeople') {
-      return deserialize<_i14.PrincipalPeople>(data['data']);
+      return deserialize<_i17.PrincipalPeople>(data['data']);
     }
     if (data['className'] == 'PrincipalPlace') {
-      return deserialize<_i15.PrincipalPlace>(data['data']);
+      return deserialize<_i18.PrincipalPlace>(data['data']);
     }
     if (data['className'] == 'PrincipalSeas') {
-      return deserialize<_i16.PrincipalSeas>(data['data']);
+      return deserialize<_i19.PrincipalSeas>(data['data']);
+    }
+    if (data['className'] == 'PrincipalTerms') {
+      return deserialize<_i20.PrincipalTerms>(data['data']);
     }
     if (data['className'] == 'Pays') {
-      return deserialize<_i17.Pays>(data['data']);
+      return deserialize<_i21.Pays>(data['data']);
     }
     if (data['className'] == 'People') {
-      return deserialize<_i18.People>(data['data']);
+      return deserialize<_i22.People>(data['data']);
     }
     if (data['className'] == 'Placeatts') {
-      return deserialize<_i19.Placeatts>(data['data']);
+      return deserialize<_i23.Placeatts>(data['data']);
     }
     if (data['className'] == 'Places') {
-      return deserialize<_i20.Places>(data['data']);
+      return deserialize<_i24.Places>(data['data']);
     }
     if (data['className'] == 'Principal') {
-      return deserialize<_i21.Principal>(data['data']);
+      return deserialize<_i25.Principal>(data['data']);
     }
     if (data['className'] == 'Seas') {
-      return deserialize<_i22.Seas>(data['data']);
+      return deserialize<_i26.Seas>(data['data']);
     }
     if (data['className'] == 'Terms') {
-      return deserialize<_i23.Terms>(data['data']);
+      return deserialize<_i27.Terms>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -1282,46 +1534,54 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i3.CountryInvolved:
-        return _i3.CountryInvolved.t;
-      case _i4.Categories:
-        return _i4.Categories.t;
-      case _i5.Countryatts:
-        return _i5.Countryatts.t;
-      case _i6.Days:
-        return _i6.Days.t;
-      case _i8.Lieux:
-        return _i8.Lieux.t;
-      case _i9.LocalDates:
-        return _i9.LocalDates.t;
-      case _i10.Months:
-        return _i10.Months.t;
-      case _i11.Organisations:
-        return _i11.Organisations.t;
-      case _i12.PrincipalCatt:
-        return _i12.PrincipalCatt.t;
-      case _i13.PrincipalOrgs:
-        return _i13.PrincipalOrgs.t;
-      case _i14.PrincipalPeople:
-        return _i14.PrincipalPeople.t;
-      case _i15.PrincipalPlace:
-        return _i15.PrincipalPlace.t;
-      case _i16.PrincipalSeas:
-        return _i16.PrincipalSeas.t;
-      case _i17.Pays:
-        return _i17.Pays.t;
-      case _i18.People:
-        return _i18.People.t;
-      case _i19.Placeatts:
-        return _i19.Placeatts.t;
-      case _i20.Places:
-        return _i20.Places.t;
-      case _i21.Principal:
-        return _i21.Principal.t;
-      case _i22.Seas:
-        return _i22.Seas.t;
-      case _i23.Terms:
-        return _i23.Terms.t;
+      case _i3.AttsInvolved:
+        return _i3.AttsInvolved.t;
+      case _i4.CountryInvolved:
+        return _i4.CountryInvolved.t;
+      case _i5.Categories:
+        return _i5.Categories.t;
+      case _i6.Countryatts:
+        return _i6.Countryatts.t;
+      case _i7.Days:
+        return _i7.Days.t;
+      case _i9.Lieux:
+        return _i9.Lieux.t;
+      case _i10.LocalDates:
+        return _i10.LocalDates.t;
+      case _i11.Months:
+        return _i11.Months.t;
+      case _i12.Organisations:
+        return _i12.Organisations.t;
+      case _i13.PrincipalCategories:
+        return _i13.PrincipalCategories.t;
+      case _i14.PrincipalCatt:
+        return _i14.PrincipalCatt.t;
+      case _i15.PrincipalOrgs:
+        return _i15.PrincipalOrgs.t;
+      case _i16.PrincipalPatt:
+        return _i16.PrincipalPatt.t;
+      case _i17.PrincipalPeople:
+        return _i17.PrincipalPeople.t;
+      case _i18.PrincipalPlace:
+        return _i18.PrincipalPlace.t;
+      case _i19.PrincipalSeas:
+        return _i19.PrincipalSeas.t;
+      case _i20.PrincipalTerms:
+        return _i20.PrincipalTerms.t;
+      case _i21.Pays:
+        return _i21.Pays.t;
+      case _i22.People:
+        return _i22.People.t;
+      case _i23.Placeatts:
+        return _i23.Placeatts.t;
+      case _i24.Places:
+        return _i24.Places.t;
+      case _i25.Principal:
+        return _i25.Principal.t;
+      case _i26.Seas:
+        return _i26.Seas.t;
+      case _i27.Terms:
+        return _i27.Terms.t;
     }
     return null;
   }

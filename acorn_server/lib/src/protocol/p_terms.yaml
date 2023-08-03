@@ -1,0 +1,5 @@
+class: PrincipalTerms
+table: principal_terms
+fields: 
+  principal_id: int
+  term_id: int

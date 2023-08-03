@@ -15,8 +15,6 @@ class CountryInvolvedEndpoint extends Endpoint {
   //Add country involved in DB
   Future<int> addCountryInvolved(Session session, CountryInvolved countryInvolved) async {
     await CountryInvolved.insert(session, countryInvolved);
-    //var countryattsLastVal = await session.db.query('SELECT LASTVAL()');
-    //return countryattsLastVal[0][0] as int;
     return countryInvolved.id!;
   }
 }
