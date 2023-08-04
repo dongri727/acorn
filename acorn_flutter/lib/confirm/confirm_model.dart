@@ -39,7 +39,7 @@ class ConfirmModel extends ChangeNotifier {
   List<String> terms = [];
 
   //insert into DB
-  Future<dynamic> save(Confirm confirm) async {
+  Future<int> save(Confirm confirm) async {
     if (confirm.year != 0 && confirm.name != "" && confirm.country != "") {
       try {
         var principal = Principal(
@@ -178,19 +178,19 @@ class ConfirmModel extends ChangeNotifier {
           for (var termId in confirm.selectedTermId) {
             var principalTerms = PrincipalTerms(principal_id: principalId, term_id: termId);
             var principalTermsId = await client.principalTerms.addPrincipalTerms(principalTerms);
-            debugPrint('Added principal Termss : $principalTermsId');
+            debugPrint('Added principal Terms : $principalTermsId');
           }
         }
 
-        return true;
+        return 0;
 
       } catch (e) {
         debugPrint('Error: $e');
-        return false;
+        return 1;
       }
     } else {
       print("必須項目なし");
-      return false;
+      return 2;
     }
   }
 }

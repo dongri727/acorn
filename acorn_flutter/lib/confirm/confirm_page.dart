@@ -24,15 +24,16 @@ class ConfirmPage extends StatelessWidget {
               return Scaffold(
                 floatingActionButton: FloatingActionButton.extended(
                     onPressed: () async {
-                      bool success = await model.save(_confirm);
+                      int result = await model.save(_confirm) ;
 
-                      if (success) {
+                      switch (result) {
+                        case 0:
                         showDialog(
                             context: context,
                             builder: (_) {
                               return AlertDialog(
-                                title: const Text('Succeded'),
-                                content: const Text('Thank you for adding Informations'),
+                                title: const Text('Succeeded'),
+                                content: const Text('Thank you for adding Information'),
                                 actions: <Widget>[
                                   GestureDetector(
                                     child: const Text('OK'),
@@ -44,8 +45,28 @@ class ConfirmPage extends StatelessWidget {
                               );
                             },
                         );
-                      } else {
+                        break;
+                        case 1:
                         showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: const Text('Error'),
+                                content: const Text('Oups! Something wrong...'),
+                                actions: <Widget>[
+                                  GestureDetector(
+                                    child: const Text('OK'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                        );
+                        break;
+                        case 2:
+                          showDialog(
                             context: context,
                             builder: (_) {
                               return AlertDialog(
@@ -61,10 +82,11 @@ class ConfirmPage extends StatelessWidget {
                                 ],
                               );
                             },
-                        );
+                          );
+                          break;
                       }
                     },
-                    label: const Text('all right ?')),
+                    label: const Text('register them ?')),
                 body: SafeArea(
                   child: Container(
                     decoration: const BoxDecoration(
