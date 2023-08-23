@@ -7,7 +7,7 @@ class PaysEndpoint extends Endpoint {
     return await Pays.find(
       session,
       //where: (t) => keyword !=null ? t.pays.like('%$keyword%') : Constant(true),
-      orderBy: Pays.t.pays,
+      orderBy: Pays.t.id,
     );
   }
 

@@ -47,16 +47,15 @@ import 'package:acorn_client/src/protocol/p_catt.dart' as _i37;
 import 'package:acorn_client/src/protocol/p_orgs.dart' as _i38;
 import 'package:acorn_client/src/protocol/p_patt.dart' as _i39;
 import 'package:acorn_client/src/protocol/p_people.dart' as _i40;
-import 'package:acorn_client/src/protocol/p_place.dart' as _i41;
-import 'package:acorn_client/src/protocol/p_seas.dart' as _i42;
-import 'package:acorn_client/src/protocol/p_terms.dart' as _i43;
-import 'package:acorn_client/src/protocol/pays.dart' as _i44;
-import 'package:acorn_client/src/protocol/people.dart' as _i45;
-import 'package:acorn_client/src/protocol/placeatts.dart' as _i46;
-import 'package:acorn_client/src/protocol/places.dart' as _i47;
-import 'package:acorn_client/src/protocol/principal.dart' as _i48;
-import 'package:acorn_client/src/protocol/seas.dart' as _i49;
-import 'package:acorn_client/src/protocol/terms.dart' as _i50;
+import 'package:acorn_client/src/protocol/p_seas.dart' as _i41;
+import 'package:acorn_client/src/protocol/p_terms.dart' as _i42;
+import 'package:acorn_client/src/protocol/pays.dart' as _i43;
+import 'package:acorn_client/src/protocol/people.dart' as _i44;
+import 'package:acorn_client/src/protocol/placeatts.dart' as _i45;
+import 'package:acorn_client/src/protocol/places.dart' as _i46;
+import 'package:acorn_client/src/protocol/principal.dart' as _i47;
+import 'package:acorn_client/src/protocol/seas.dart' as _i48;
+import 'package:acorn_client/src/protocol/terms.dart' as _i49;
 export 'att_involved.dart';
 export 'c_involved.dart';
 export 'categories.dart';
@@ -328,47 +327,56 @@ class Protocol extends _i1.SerializationManager {
           .map((e) => deserialize<_i40.PrincipalPeople>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i41.PrincipalPlace>) {
+    if (t == List<Map<String, dynamic>>) {
       return (data as List)
-          .map((e) => deserialize<_i41.PrincipalPlace>(e))
+          .map((e) => deserialize<Map<String, dynamic>>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i42.PrincipalSeas>) {
+    if (t == Map<String, dynamic>) {
+      return (data as Map).map((k, v) =>
+          MapEntry(deserialize<String>(k), deserialize<dynamic>(v))) as dynamic;
+    }
+    if (t == List<_i41.PrincipalSeas>) {
       return (data as List)
-          .map((e) => deserialize<_i42.PrincipalSeas>(e))
+          .map((e) => deserialize<_i41.PrincipalSeas>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i43.PrincipalTerms>) {
+    if (t == List<_i42.PrincipalTerms>) {
       return (data as List)
-          .map((e) => deserialize<_i43.PrincipalTerms>(e))
+          .map((e) => deserialize<_i42.PrincipalTerms>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i44.Pays>) {
-      return (data as List).map((e) => deserialize<_i44.Pays>(e)).toList()
+    if (t == List<_i43.Pays>) {
+      return (data as List).map((e) => deserialize<_i43.Pays>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i45.People>) {
-      return (data as List).map((e) => deserialize<_i45.People>(e)).toList()
+    if (t == List<_i44.People>) {
+      return (data as List).map((e) => deserialize<_i44.People>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i46.Placeatts>) {
-      return (data as List).map((e) => deserialize<_i46.Placeatts>(e)).toList()
+    if (t == List<_i45.Placeatts>) {
+      return (data as List).map((e) => deserialize<_i45.Placeatts>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i47.Places>) {
-      return (data as List).map((e) => deserialize<_i47.Places>(e)).toList()
+    if (t == List<_i46.Places>) {
+      return (data as List).map((e) => deserialize<_i46.Places>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i48.Principal>) {
-      return (data as List).map((e) => deserialize<_i48.Principal>(e)).toList()
+    if (t == List<_i47.Principal>) {
+      return (data as List).map((e) => deserialize<_i47.Principal>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i49.Seas>) {
-      return (data as List).map((e) => deserialize<_i49.Seas>(e)).toList()
+    if (t == _i1.getType<List<String>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i48.Seas>) {
+      return (data as List).map((e) => deserialize<_i48.Seas>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i50.Terms>) {
-      return (data as List).map((e) => deserialize<_i50.Terms>(e)).toList()
+    if (t == List<_i49.Terms>) {
+      return (data as List).map((e) => deserialize<_i49.Terms>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);

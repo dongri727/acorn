@@ -49,16 +49,13 @@ class SearchPage extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(5,20,20,20),
                         child: ElevatedButton(
                           onPressed: () {
-                            print("Submitted country: ${model.controller.text}");
+/*                            print("Submitted country: ${model.controller.text}");
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ResultPage(query: model.controller.text)
                                 )
-                            );
-
-
-                            //model.controller.clear();
+                            );//model.controller.clear();*/
                           },
                           child: const Text("Submit"),
                         )),

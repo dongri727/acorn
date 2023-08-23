@@ -203,7 +203,7 @@ class Timeline {
     print("Fetching principal with country: $country");
 
     try {
-      _principal = await client.principal.getPrincipal(keyword: country);
+      _principal = await client.principal.getPrincipal();
     }
     catch (e) {
       print('Error while getting principal: $e');

@@ -40,8 +40,8 @@ class _WhatPageState extends State<WhatPage> {
     'MilkyWay',
     'SolarSystem',
     'TheEarth',
-    'Ocean'
-    'Antarctica'
+    'Ocean',
+    'Antarctica',
     'Afghanistan',
     'Albania',
     'Algeria',

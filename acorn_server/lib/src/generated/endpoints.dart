@@ -1171,7 +1171,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
-              type: _i1.getType<String?>(),
+              type: _i1.getType<List<String>?>(),
               nullable: true,
             )
           },

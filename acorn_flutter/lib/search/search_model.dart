@@ -6,13 +6,17 @@ class SelectModel extends ChangeNotifier {
   var client = Client('http://localhost:8080/')
     ..connectivityMonitor = FlutterConnectivityMonitor();
 
-  List<Principal> _principal = [];
-  List<Principal> get principal => _principal;
   final controller = TextEditingController();
 
-  fetchPrincipal({String? country}) async {
+  ///国だけで絞る
+  ///country name
+  List<Principal> _principal = [];
+  List<Principal> get principal => _principal;
+
+
+  fetchPrincipal({List<String>? countries}) async {
     try {
-      _principal = await client.principal.getPrincipal(keyword: country);
+      _principal = await client.principal.getPrincipal(keyword: countries);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');

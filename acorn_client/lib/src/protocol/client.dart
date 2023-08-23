@@ -350,8 +350,8 @@ class _EndpointPrincipalPlace extends _i1.EndpointRef {
   @override
   String get name => 'principalPlace';
 
-  _i2.Future<List<_i17.PrincipalPlace>> getPrincipalPlace({String? keyword}) =>
-      caller.callServerEndpoint<List<_i17.PrincipalPlace>>(
+  _i2.Future<List<Map<String, dynamic>>> getPrincipalPlace({String? keyword}) =>
+      caller.callServerEndpoint<List<Map<String, dynamic>>>(
         'principalPlace',
         'getPrincipalPlace',
         {'keyword': keyword},
@@ -503,7 +503,7 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'principal': principal},
       );
 
-  _i2.Future<List<_i24.Principal>> getPrincipal({String? keyword}) =>
+  _i2.Future<List<_i24.Principal>> getPrincipal({List<String>? keyword}) =>
       caller.callServerEndpoint<List<_i24.Principal>>(
         'principal',
         'getPrincipal',
