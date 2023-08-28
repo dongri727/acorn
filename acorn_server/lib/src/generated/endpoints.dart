@@ -1169,8 +1169,8 @@ class Endpoints extends _i1.EndpointDispatch {
         'getPrincipal': _i1.MethodConnector(
           name: 'getPrincipal',
           params: {
-            'keyword': _i1.ParameterDescription(
-              name: 'keyword',
+            'keywords': _i1.ParameterDescription(
+              name: 'keywords',
               type: _i1.getType<List<String>?>(),
               nullable: true,
             )
@@ -1181,7 +1181,7 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['principal'] as _i24.PrincipalEndpoint).getPrincipal(
             session,
-            keyword: params['keyword'],
+            keywords: params['keywords'],
           ),
         ),
       },

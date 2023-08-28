@@ -9,38 +9,27 @@ class PrincipalEndpoint extends Endpoint {
     return principal.id!;
   }
 
-/*   Future<List<Principal>> getPrincipal(Session session,
-      {String? keyword}) async {
-    print("Getting principal with keyword: $keyword");
+  Future<List<Principal>> getPrincipal(Session session,
+      {List<String>? keywords}) async {
+    print("Getting principal with keywords: $keywords");
+
+    var whereClause;
+    if (keywords != null && keywords.isNotEmpty) {
+      for (var keyword in keywords) {
+        if (whereClause == null) {
+          whereClause = Principal.t.pays.like('%$keyword%');
+        } else {
+          whereClause = whereClause | Principal.t.pays.like('%$keyword%');
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
     return await Principal.find(
       session,
-      where: (t) =>
-          keyword != null ? t.pays.like('%$keyword%') : Constant(true),
+      where: (_) => whereClause,
       orderBy: Principal.t.annee,
     );
-  } */
-
-  Future<List<Principal>> getPrincipal(Session session,
-    {List<String>? keyword}) async {
-  print("Getting principal with keywords: $keyword");
-
-  var whereClause;
-  if (keyword != null && keyword.isNotEmpty) {
-    for (var keyword in keyword) {
-      if (whereClause == null) {
-        whereClause = Principal.t.pays.like('%$keyword%');
-      } else {
-        whereClause = whereClause | Principal.t.pays.like('%$keyword%');
-      }
-    }
-  } else {
-    whereClause = Constant(true);
   }
-
-  return await Principal.find(
-    session,
-    where: whereClause,
-    orderBy: Principal.t.annee,
-  );
-}
 }

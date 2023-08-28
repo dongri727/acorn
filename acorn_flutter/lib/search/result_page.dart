@@ -11,14 +11,12 @@ class ResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      //create: (_) => SelectModel()..fetchPrincipal(country: query),
-      create: (_) => SelectModel()..fetchPrincipal(countries: listPays),
+      create: (_) => SearchByPaysModel()..fetchPrincipal(countries: listPays),
       child: Scaffold(
         appBar: AppBar(
           title: Text('Search Results for: $listPays'),
-          //title: Text('Search Results for: $query'),
         ),
-        body: Consumer<SelectModel>(
+        body: Consumer<SearchByPaysModel>(
           builder: (context, model, child) {
             return ListView.builder(
               itemCount: model.principal.length,

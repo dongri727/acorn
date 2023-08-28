@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
-class SelectModel extends ChangeNotifier {
+class SearchByPaysModel extends ChangeNotifier {
   var client = Client('http://localhost:8080/')
     ..connectivityMonitor = FlutterConnectivityMonitor();
-
-  final controller = TextEditingController();
 
   ///国だけで絞る
   ///country name
@@ -16,10 +14,12 @@ class SelectModel extends ChangeNotifier {
 
   fetchPrincipal({List<String>? countries}) async {
     try {
-      _principal = await client.principal.getPrincipal(keyword: countries);
+      _principal = await client.principal.getPrincipal(keywords: countries);
+      print("Getting principal with keywords: $countries");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
 }
+

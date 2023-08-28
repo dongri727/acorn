@@ -503,11 +503,11 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'principal': principal},
       );
 
-  _i2.Future<List<_i24.Principal>> getPrincipal({List<String>? keyword}) =>
+  _i2.Future<List<_i24.Principal>> getPrincipal({List<String>? keywords}) =>
       caller.callServerEndpoint<List<_i24.Principal>>(
         'principal',
         'getPrincipal',
-        {'keyword': keyword},
+        {'keywords': keywords},
       );
 }
 
