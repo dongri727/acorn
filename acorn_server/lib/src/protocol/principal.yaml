@@ -4,3 +4,4 @@ fields:
   annee: int
   affair: String
   pays: String
+  placeId: int?, parent=places

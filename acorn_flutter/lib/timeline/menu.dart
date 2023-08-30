@@ -1,12 +1,10 @@
+import "package:acorn_client/acorn_client.dart";
 import "package:flutter/material.dart";
-
 import 'bloc_provider.dart';
 import "../utils/formats.dart";
 import "menu_data.dart";
 import "menu_section.dart";
 import "widget.dart";
-
-/// The Base Page of the Timeline App.
 
 class MainMenuWidget extends StatefulWidget {
   const MainMenuWidget({Key? key}) : super(key: key);
@@ -21,8 +19,7 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   /// This data is loaded from the asset bundle during [initState()]
   final MenuData _menu = MenuData();
   final TextEditingController controller = TextEditingController();
-
-
+  final List<String> _countries = [];
 
   /// Helper function which sets the [MenuItemData] for the [TimelineWidget].
   /// This will trigger a transition from the current menu to the Timeline,
@@ -62,12 +59,12 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
     tail
         .addAll(_menu.sections
         .map<Widget>((MenuSectionData section) => Container(
-        margin: const EdgeInsets.only(top: 20.0),
-        child: MenuSection(
-          section.label,
-          section.backgroundColor,
-          section.textColor,
-          section.items,
+          margin: const EdgeInsets.only(top: 20.0),
+          child: MenuSection(
+            section.label,
+            section.backgroundColor,
+            section.textColor,
+            section.items,
           navigateToTimeline,
         )))
         .toList(growable: false)
@@ -102,30 +99,50 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                         padding: const EdgeInsets.fromLTRB(5,20,20,20),
                         child: ElevatedButton(
                           onPressed: () {
-                            print("Submitted country: ${controller.text}");
-                             timeline.fetchPrincipal(country: controller.text.isNotEmpty
-                                ? controller.text
-                                : null);
-                            showDialog(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (BuildContext context){
-                                  return AlertDialog(
-                                    title: const Text('Successfully Selected'),
-                                    content: const Text('Choose an Era and Move On'),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () => Navigator.pop(context),
-                                          child: const Text('OK')),
-                                    ],
-                                  );
-                                });
+                            if (controller.text.isNotEmpty){
+                              setState(() {
+                                _countries.add(controller.text);
+                              });
+                              timeline.fetchPrincipal(countries: _countries);
+                              print("Submitted countries: $_countries");
+                            }
                             controller.clear();
                           },
-                          child: const Text("Submit"),
-                        ),),
+                          child: const Text("Add"),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _countries.clear();
+                              });
+                            },
+                            child: const Text('Clear'),
+                          ),
+                        )
                     )
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Text(
+                        _countries.join(', '),  // リストの内容をカンマで区切って表示
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  ),
                 ),
               ] + tail),
         ),

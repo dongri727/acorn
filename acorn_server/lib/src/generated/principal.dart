@@ -14,6 +14,7 @@ class Principal extends _i1.TableRow {
     required this.annee,
     required this.affair,
     required this.pays,
+    this.placeId,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -26,6 +27,8 @@ class Principal extends _i1.TableRow {
       affair:
           serializationManager.deserialize<String>(jsonSerialization['affair']),
       pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
+      placeId:
+          serializationManager.deserialize<int?>(jsonSerialization['placeId']),
     );
   }
 
@@ -37,6 +40,8 @@ class Principal extends _i1.TableRow {
 
   String pays;
 
+  int? placeId;
+
   @override
   String get tableName => 'principal';
   @override
@@ -46,6 +51,7 @@ class Principal extends _i1.TableRow {
       'annee': annee,
       'affair': affair,
       'pays': pays,
+      'placeId': placeId,
     };
   }
 
@@ -56,6 +62,7 @@ class Principal extends _i1.TableRow {
       'annee': annee,
       'affair': affair,
       'pays': pays,
+      'placeId': placeId,
     };
   }
 
@@ -66,6 +73,7 @@ class Principal extends _i1.TableRow {
       'annee': annee,
       'affair': affair,
       'pays': pays,
+      'placeId': placeId,
     };
   }
 
@@ -86,6 +94,9 @@ class Principal extends _i1.TableRow {
         return;
       case 'pays':
         pays = value;
+        return;
+      case 'placeId':
+        placeId = value;
         return;
       default:
         throw UnimplementedError();
@@ -217,12 +228,15 @@ class PrincipalTable extends _i1.Table {
 
   final pays = _i1.ColumnString('pays');
 
+  final placeId = _i1.ColumnInt('placeId');
+
   @override
   List<_i1.Column> get columns => [
         id,
         annee,
         affair,
         pays,
+        placeId,
       ];
 }
 

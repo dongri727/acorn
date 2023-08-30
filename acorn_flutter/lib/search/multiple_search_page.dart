@@ -1,8 +1,13 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
+import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../utils/chips_format.dart';
+import '../utils/formats.dart';
 import 'result_page.dart';
 
 var client = Client('http://localhost:8080/')
@@ -17,11 +22,38 @@ class MultiSearchPage extends StatefulWidget {
 
 class _MultiSearchPageState extends State<MultiSearchPage> {
 
+  final List<String> options = [
+    'Current Country where it happened',
+    'Current Place-name where it happened',
+    'People involved',
+    'Category'
+  ];
+  String? isSelectedOption = 'Current Country where it happened';
+  List<dynamic> currentDisplayList = [];
+
   ///検索対象国の現在名
   List<Pays> listPays = [];
   List<Map<String, String>> displayListPays = [];
   final List<String> filtersPays = <String>[];
   final List<int> filtersPaysId = <int>[];
+
+  ///検索対象都市の現在名
+  List<Places> listVilles = [];
+  List<Map<String, String>> displayListVilles = [];
+  final List<String> filtersVilles = <String>[];
+  final List<int> filtersVillesId = <int>[];
+
+  ///検索対象のカテゴリー名
+  List<Categories> listCategories = [];
+  List<Map<String, String>> displayListCategories = [];
+  final List<String> filtersCategories = <String>[];
+  final List<int> filtersCategoriesId = <int>[];
+
+  ///検索対象の人名
+  List<People> listPeople = [];
+  List<Map<String, String>> displayListPeople = [];
+  final List<String> filtersPeople = <String>[];
+  final List<int> filtersPeopleId = <int>[];
 
   @override
   Widget build(BuildContext context) {
@@ -37,44 +69,159 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                 )
             ),
             child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(20.0),
-                      child: ButtonFormat(
-                        onPressed: fetchPaysLookingFor,
-                        label: 'Show and Select Current Countries',
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Wrap(
-                        spacing: 5.0, // Gap between FilterChips
-                        children: listPays.map((pays) {
-                          return FilterFormat(
-                            filteredKeys: filtersPays,
-                            filteredValues: filtersPaysId,
-                            filterKey: pays.pays,
-                            filterValue: pays.id,
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResultPage(listPays: filtersPays),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: HintText(
+                              hintText: "What narrows your search ?",
+                            ),
                           ),
-                        );
-                        print ("$filtersPays");
-                      },
-                      child: const Text("Search"),
+                          Padding(
+                              padding: EdgeInsets.all(20.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: const Color(0x99e6e6fa),
+                              ),
+                              child: DropdownButton<String>(
+                                value: isSelectedOption,
+                                alignment: Alignment.center,
+                                dropdownColor: const Color(0x99e6e6fa),
+                                borderRadius: BorderRadius.circular(15.0),
+                                  onChanged: (String? value){
+                                    setState(() {
+                                      isSelectedOption = value!;
+                                      switch (isSelectedOption) {
+                                        case 'Current Country where it happened':
+                                          currentDisplayList = listPays;
+                                          break;
+                                        case 'Current Ville where it happened':
+                                          currentDisplayList = listVilles;
+                                          break;
+                                        case 'People involved':
+                                          currentDisplayList = listPeople;
+                                          break;
+                                        case 'Category':
+                                          currentDisplayList = listCategories;
+                                          break;
+                                      }
+                                    });
+                                  },
+                                  items: options.map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                      child: Text(
+                                        style: AcornTheme.textTheme.headlineMedium,
+                                        value),
+                                  );
+                                }).toList()
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                            child: ElevatedButton(
+                              onPressed: () {
+/*                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultPage(listPays: filtersPays),
+                                  ),
+                                );
+                                print ("$filtersPays");*/
+                              },
+                              child: const Text("Search"),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  filtersPays.clear();
+                                  filtersPaysId.clear();
+                                  currentDisplayList.clear();
+                                });
+                              },
+                              child: const Text("clear"),
+                            ),
+                          ),
+                        ],
+
+                      )),
+                  Expanded(
+                    flex: 5,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                            child: OutlinedButton(
+                              onPressed: () {
+                                switch (isSelectedOption){
+                                  case 'Current Country where it happened':
+                                    fetchPaysLookingFor();
+                                    break;
+                                  case 'Current Place-name where it happened':
+                                    fetchVillesLookingFor();
+                                    break;
+                                  case 'People involved':
+                                    fetchPeopleLookingFor();
+                                    break;
+                                  case 'Category':
+                                    fetchCategoriesLookingFor();
+                                    break;
+                                }
+                              },
+                              child: const Text('Show and Select your options'),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Wrap(
+                              spacing: 5.0, // Gap between FilterChips
+                              children: currentDisplayList.map<Widget>((item) {
+                                if (item is Pays) {
+                                  return FilterFormat(
+                                    filteredKeys: filtersPays,
+                                    filteredValues: filtersPaysId,
+                                    filterKey: item.pays,
+                                    filterValue: item.id,
+                                  );
+                                } else if(item is Places) {
+                                  return FilterFormat(
+                                      filteredKeys: filtersVilles,
+                                      filteredValues: filtersVillesId,
+                                      filterKey: item.place,
+                                      filterValue: item.id);
+                                } else if (item is People) {
+                                  return FilterFormat(
+                                      filteredKeys: filtersPeople,
+                                      filteredValues: filtersPeopleId,
+                                      filterKey: item.person,
+                                      filterValue: item.id);
+                                } else if (item is Categories) {
+                                  return FilterFormat(
+                                      filteredKeys: filtersCategories,
+                                      filteredValues: filtersCategoriesId,
+                                      filterKey: item.category,
+                                      filterValue: item.id);
+                                }
+                                return const SizedBox.shrink();
+
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
       ),
@@ -90,8 +237,44 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
     try {
       listPays = await client.pays.getPays();
       setState(() {
-        displayListPays = listPays.cast<Map<String, String>>();
+        currentDisplayList = listPays;
       });
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  Future<void> fetchVillesLookingFor() async {
+    try {
+      listVilles = await client.places.getPlaces();
+      setState(() {
+        currentDisplayList = listVilles;
+      });
+      print(listVilles);
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  Future<void> fetchCategoriesLookingFor() async {
+    try {
+      listCategories = await client.categories.getCategories();
+      setState(() {
+        currentDisplayList = listCategories;
+      });
+      print(listCategories);
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  Future<void> fetchPeopleLookingFor() async {
+    try {
+      listPeople = await client.people.getPeople();
+      setState(() {
+        currentDisplayList = listPeople;
+      });
+      print(listPeople);
     } on Exception catch (e) {
       debugPrint('$e');
     }

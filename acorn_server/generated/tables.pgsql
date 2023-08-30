@@ -185,12 +185,18 @@ CREATE TABLE "principal" (
   "id" serial,
   "annee" integer NOT NULL,
   "affair" text NOT NULL,
-  "pays" text NOT NULL
+  "pays" text NOT NULL,
+  "placeId" integer
 );
 
 ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_pkey PRIMARY KEY (id);
 
+ALTER TABLE ONLY "principal"
+  ADD CONSTRAINT principal_fk_0
+    FOREIGN KEY("placeId")
+      REFERENCES places(id)
+        ON DELETE CASCADE;
 
 --
 -- Class PrincipalCategories as table principal_categories

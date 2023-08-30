@@ -199,11 +199,11 @@ class Timeline {
   List<Principal> _principal = [];
 
   Future<List<TimelineEntry>> fetchPrincipal(
-      {String? country}) async {
-    print("Fetching principal with country: $country");
+      {List<String>? countries}) async {
+    print("Fetching principal with countries: $countries");
 
     try {
-      _principal = await client.principal.getPrincipal();
+      _principal = await client.principal.getPrincipal(keywords: countries);
     }
     catch (e) {
       print('Error while getting principal: $e');

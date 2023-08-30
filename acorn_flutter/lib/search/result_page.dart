@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
-  //final String query;
   final List<String> listPays;
-  //const ResultPage({super.key, required this.query});
   const ResultPage({super.key, required this.listPays});
 
   @override
