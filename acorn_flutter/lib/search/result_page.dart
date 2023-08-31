@@ -3,18 +3,41 @@ import 'package:provider/provider.dart';
 import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
-  final List<String> listPays;
-  const ResultPage({super.key, required this.listPays});
+  final List<String>? listPays;
+  final List<int>? listPlaceIds;
+  final List<int>? listCategoriesId;
+  final List<int>? listPeopleId;
+
+  const ResultPage({
+    super.key,
+    this.listPays,
+    this.listPlaceIds,
+    this.listCategoriesId,
+    this.listPeopleId
+  });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SearchByPaysModel()..fetchPrincipal(countries: listPays),
+      create: (_) {
+        final model = SearchByOptionsModel();
+
+        if (listPays != null) {
+          model.fetchPrincipal(countries: listPays);
+        } else if (listPlaceIds != null) {
+          model.fetchPrincipalByPlaces(listPlaceIds: listPlaceIds);
+        } else if (listCategoriesId != null) {
+          //model.fetchByCategories(categoryId: listCategoriesId);
+        }  else if (listPeopleId != null) {
+          //model.fetchByPeople(peopleId: listPeopleId);
+        }
+        return model;
+      },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Search Results for: $listPays'),
+          title: const Text('Search Results'),
         ),
-        body: Consumer<SearchByPaysModel>(
+        body: Consumer<SearchByOptionsModel>(
           builder: (context, model, child) {
             return ListView.builder(
               itemCount: model.principal.length,

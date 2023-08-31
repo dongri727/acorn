@@ -509,6 +509,14 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'getPrincipal',
         {'keywords': keywords},
       );
+
+  _i2.Future<List<_i24.Principal>> getPrincipalByPlaces(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByPlaces',
+        {'keynumbers': keynumbers},
+      );
 }
 
 class _EndpointSeas extends _i1.EndpointRef {

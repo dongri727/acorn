@@ -32,4 +32,29 @@ class PrincipalEndpoint extends Endpoint {
       orderBy: Principal.t.annee,
     );
   }
+
+  Future<List<Principal>> getPrincipalByPlaces(Session session, {List<int>? keynumbers}) async {
+    print("Getting principal with placeIds: $keynumbers");
+
+    var whereClause;
+
+    if (keynumbers != null && keynumbers.isNotEmpty) {
+      for (var keynumber in keynumbers) {
+        if (whereClause == null) {
+          whereClause = Principal.t.placeId.equals(keynumber);
+        } else {
+          whereClause = whereClause | Principal.t.placeId.equals(keynumber);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Principal.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Principal.t.annee,
+    );
+}
+
 }
