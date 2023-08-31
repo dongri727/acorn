@@ -15,6 +15,8 @@ class Principal extends _i1.TableRow {
     required this.affair,
     required this.pays,
     this.placeId,
+    this.cattId,
+    this.pattId,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -29,6 +31,10 @@ class Principal extends _i1.TableRow {
       pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
       placeId:
           serializationManager.deserialize<int?>(jsonSerialization['placeId']),
+      cattId:
+          serializationManager.deserialize<int?>(jsonSerialization['cattId']),
+      pattId:
+          serializationManager.deserialize<int?>(jsonSerialization['pattId']),
     );
   }
 
@@ -42,6 +48,10 @@ class Principal extends _i1.TableRow {
 
   int? placeId;
 
+  int? cattId;
+
+  int? pattId;
+
   @override
   String get tableName => 'principal';
   @override
@@ -52,6 +62,8 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
+      'cattId': cattId,
+      'pattId': pattId,
     };
   }
 
@@ -63,6 +75,8 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
+      'cattId': cattId,
+      'pattId': pattId,
     };
   }
 
@@ -74,6 +88,8 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
+      'cattId': cattId,
+      'pattId': pattId,
     };
   }
 
@@ -97,6 +113,12 @@ class Principal extends _i1.TableRow {
         return;
       case 'placeId':
         placeId = value;
+        return;
+      case 'cattId':
+        cattId = value;
+        return;
+      case 'pattId':
+        pattId = value;
         return;
       default:
         throw UnimplementedError();
@@ -230,6 +252,10 @@ class PrincipalTable extends _i1.Table {
 
   final placeId = _i1.ColumnInt('placeId');
 
+  final cattId = _i1.ColumnInt('cattId');
+
+  final pattId = _i1.ColumnInt('pattId');
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -237,6 +263,8 @@ class PrincipalTable extends _i1.Table {
         affair,
         pays,
         placeId,
+        cattId,
+        pattId,
       ];
 }
 

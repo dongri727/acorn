@@ -517,6 +517,22 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'getPrincipalByPlaces',
         {'keynumbers': keynumbers},
       );
+
+  _i2.Future<List<_i24.Principal>> getPrincipalByCatt(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByCatt',
+        {'keynumbers': keynumbers},
+      );
+
+  _i2.Future<List<_i24.Principal>> getPrincipalByPatt(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByPatt',
+        {'keynumbers': keynumbers},
+      );
 }
 
 class _EndpointSeas extends _i1.EndpointRef {

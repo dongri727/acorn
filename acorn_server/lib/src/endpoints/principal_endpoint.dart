@@ -57,4 +57,51 @@ class PrincipalEndpoint extends Endpoint {
     );
 }
 
+  Future<List<Principal>> getPrincipalByCatt(Session session, {List<int>? keynumbers}) async {
+    print("Getting principal with cattIds: $keynumbers");
+
+    var whereClause;
+
+    if (keynumbers != null && keynumbers.isNotEmpty) {
+      for (var keynumber in keynumbers) {
+        if (whereClause == null) {
+          whereClause = Principal.t.cattId.equals(keynumber);
+        } else {
+          whereClause = whereClause | Principal.t.cattId.equals(keynumber);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Principal.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Principal.t.annee,
+    );
+}
+
+  Future<List<Principal>> getPrincipalByPatt(Session session, {List<int>? keynumbers}) async {
+    print("Getting principal with pattIds: $keynumbers");
+
+    var whereClause;
+
+    if (keynumbers != null && keynumbers.isNotEmpty) {
+      for (var keynumber in keynumbers) {
+        if (whereClause == null) {
+          whereClause = Principal.t.pattId.equals(keynumber);
+        } else {
+          whereClause = whereClause | Principal.t.pattId.equals(keynumber);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Principal.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Principal.t.annee,
+    );
+}
 }

@@ -5,3 +5,5 @@ fields:
   affair: String
   pays: String
   placeId: int?, parent=places
+  cattId: int?, parent=countryatts
+  pattId: int?, parent=placeatts

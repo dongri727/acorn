@@ -186,7 +186,9 @@ CREATE TABLE "principal" (
   "annee" integer NOT NULL,
   "affair" text NOT NULL,
   "pays" text NOT NULL,
-  "placeId" integer
+  "placeId" integer,
+  "cattId" integer,
+  "pattId" integer
 );
 
 ALTER TABLE ONLY "principal"
@@ -196,6 +198,16 @@ ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_fk_0
     FOREIGN KEY("placeId")
       REFERENCES places(id)
+        ON DELETE CASCADE;
+ALTER TABLE ONLY "principal"
+  ADD CONSTRAINT principal_fk_1
+    FOREIGN KEY("cattId")
+      REFERENCES countryatts(id)
+        ON DELETE CASCADE;
+ALTER TABLE ONLY "principal"
+  ADD CONSTRAINT principal_fk_2
+    FOREIGN KEY("pattId")
+      REFERENCES placeatts(id)
         ON DELETE CASCADE;
 
 --

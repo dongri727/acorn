@@ -6,12 +6,10 @@ class SearchByOptionsModel extends ChangeNotifier {
   var client = Client('http://localhost:8080/')
     ..connectivityMonitor = FlutterConnectivityMonitor();
 
-  ///country name
-  List<Principal> _principal = [];
-  List<Principal> get principal => _principal;
 
-  ///place name
-  List<Principal> _principalByPlaces = [];
+  List<Principal> _principal = [];
+
+  List<Principal> get principal => _principal;
   List<Principal> get principalByPlaces => _principal;
 
 

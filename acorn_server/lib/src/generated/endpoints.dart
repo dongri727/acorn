@@ -1203,6 +1203,44 @@ class Endpoints extends _i1.EndpointDispatch {
             keynumbers: params['keynumbers'],
           ),
         ),
+        'getPrincipalByCatt': _i1.MethodConnector(
+          name: 'getPrincipalByCatt',
+          params: {
+            'keynumbers': _i1.ParameterDescription(
+              name: 'keynumbers',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i24.PrincipalEndpoint)
+                  .getPrincipalByCatt(
+            session,
+            keynumbers: params['keynumbers'],
+          ),
+        ),
+        'getPrincipalByPatt': _i1.MethodConnector(
+          name: 'getPrincipalByPatt',
+          params: {
+            'keynumbers': _i1.ParameterDescription(
+              name: 'keynumbers',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i24.PrincipalEndpoint)
+                  .getPrincipalByPatt(
+            session,
+            keynumbers: params['keynumbers'],
+          ),
+        ),
       },
     );
     connectors['seas'] = _i1.EndpointConnector(
