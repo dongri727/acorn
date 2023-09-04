@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
@@ -6,7 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../../confirm/confirm.dart';
-import '../../utils/formats.dart';
+import '../../utils/blank_text_format.dart';
+import '../../utils/tff_format.dart';
 
 import 'dart:math' as math;
 
@@ -33,6 +36,13 @@ class _WherePageState extends State<WherePage> {
   double y = 0.0;
   double z = 0.0;
 
+  ///選択された項目（唯一）
+  String _chosenPlace = '';
+  int? _chosenPlaceId;
+  String _chosenSea = '';
+  String _chosenCatt = '';
+  String _chosenPatt = '';
+
   ///Place
   ///DBから取得したList
   List<Places> listPlaces = [];
@@ -40,7 +50,7 @@ class _WherePageState extends State<WherePage> {
   ///Chipに並べるList
   List<Map<String, String>> displayListPlaces = [];
 
-  ///選択された項目
+  ///表示されるplace
   final List<String> _filtersPlaces = <String>[];
   final List<int> _filtersPlacesId = <int>[];
 
@@ -61,6 +71,19 @@ class _WherePageState extends State<WherePage> {
   List<Map<String, String>> displayListPlaceatts = [];
   final List<String> _filtersPlaceatts = <String>[];
   final List<int> _filtersPlaceattsId = <int>[];
+
+  List<dynamic> currentDisplayList = [];
+
+  String? isSelectedOption = 'Place';
+  String? selectedChoiceKey;
+
+
+  /// Choiceが選択されたときのコールバック関数
+  void onChoiceSelectionChanged(String key, dynamic value) {
+    setState(() {
+      selectedChoiceKey = key;
+    });
+  }
 
   ///DBからPlaceを取得
   Future<void> fetchPlaces() async {
@@ -107,7 +130,7 @@ class _WherePageState extends State<WherePage> {
   }
 
   ///CATT
-  ///DBからcountryattを取得
+  ///DBからCATTを取得
   Future<void> fetchCountryATT() async {
     try {
       listCountryatts = await client.countryatts.getCountryATTs();
@@ -121,6 +144,8 @@ class _WherePageState extends State<WherePage> {
 
   int? countryattId;
 
+
+  ///DBに新規CATTを挿入・再取得･再描画
   addCountryATTandFetch() async {
     var catts = Countryatts(countryatt: newCountryatt);
     countryattId = await client.countryatts.addCountryATTs(catts);
@@ -130,6 +155,7 @@ class _WherePageState extends State<WherePage> {
     setState(() {});
   }
 
+  ///DBからPATTを取得
   Future<void> fetchPlaceATT() async {
     try {
       listPlaceatts = await client.placeatts.getPlaceATTs();
@@ -143,6 +169,7 @@ class _WherePageState extends State<WherePage> {
 
   int? placeattId;
 
+  ///DBに新規PATTを挿入・再取得･再描画
   addPlaceATTandFetch() async {
     var patts = Placeatts(placeatt: newPlaceatt);
     placeattId = await client.placeatts.addPlaceATTs(patts);
@@ -161,278 +188,161 @@ class _WherePageState extends State<WherePage> {
 
 
     return Scaffold(
-      body: SafeArea(
-          child: Container(
+      body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
+        image: DecorationImage(
           image: AssetImage('assets/images/both.png'),
           fit: BoxFit.cover,
         )),
         child: Center(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      ///Place
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ButtonFormat(
-                          onPressed: fetchPlaces,
-                          label: 'Show and Select Current Place',
-                        ),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: listPlaces.map((places){
-                            bool isSelectedP = _filtersPlaces.contains(places.place);
-                            return ChoiceFormat(
-                                choiceKey: places.place,
-                              choiceValue: places.id,
-                              isSelected: isSelectedP,
-                              onSelectionChanged: (key, value) {
-                                  setState(() {
-                                    if (isSelectedP) {
-                                      _filtersPlaces.remove(key);
-                                      _filtersPlacesId.remove(value);
-                                    } else {
-                                      _filtersPlaces.clear();
-                                      _filtersPlacesId.clear();
-                                      _filtersPlaces.add(key);
-                                      _filtersPlacesId.add(value);
-                                    }
-                                  });
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: TffFormat(
-                          key: placeKey,
-                          hintText: 'a New Place You Want',
-                          onChanged: (text) {
-                            newPlace = text;
-                          },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
-                        ),
-                      ),
-                      ButtonFormat(
-                        onPressed: () {
-                          addPlacesAndFetch();
-                          placeKey.currentState!.reset();
-                          },
-                        label: 'Add a new Place',
-                      ),
-
-                      ///Ocean
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 170, 20, 20),
-                        child: ButtonFormat(
-                          onPressed: fetchSeas,
-                          label: 'Show and Select Seas',
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: listSeas.map((seas){
-                            bool isSelectedS = _filtersSeas.contains(seas.sea);
-                            return ChoiceFormat(
-                              choiceKey: seas.sea,
-                              choiceValue: seas.id,
-                              isSelected: isSelectedS,
-                              onSelectionChanged: (key, value) {
-                                setState(() {
-                                  if (isSelectedS) {
-                                    _filtersSeas.remove(key);
-                                    _filtersSeasId.remove(value);
-                                  } else {
-                                    _filtersSeas.clear();
-                                    _filtersSeasId.clear();
-                                    _filtersSeas.add(key);
-                                    _filtersSeasId.add(value);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: TffFormat(
-                          key: seaKey,
-                          hintText: 'a New Sea You Want',
-                          onChanged: (text) {
-                            newSea = text;
-                          },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
-                        ),
-                      ),
-                      ButtonFormat(
-                        onPressed: () {
-                          addSeasAndFetch();
-                          seaKey.currentState!.reset();
-                        },
-                        label: 'Add a new Sea',
-                      ),
-                    ],
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-
-                      ///CountryATT
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ButtonFormat(
-                          onPressed: fetchCountryATT,
-                          label: 'Show and Select Country at that time',
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: listCountryatts.map((countryatts){
-                            bool isSelectedCatt= _filtersCountryatts.contains(countryatts.countryatt);
-                            return ChoiceFormat(
-                                choiceKey: countryatts.countryatt,
-                              choiceValue: countryatts.id,
-                              isSelected: isSelectedCatt,
-                              onSelectionChanged: (key, value) {
-                                  setState(() {
-                                    if (isSelectedCatt) {
-                                      _filtersCountryatts.remove(key);
-                                      _fltersCountryattsId.remove(value);
-                                    } else {
-                                      _filtersCountryatts.clear();
-                                      _fltersCountryattsId.clear();
-                                      _filtersCountryatts.add(key);
-                                      _fltersCountryattsId.add(value);
-                                    }
-                                  });
-                            }
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: TffFormat(
-                          key: cattKey,
-                          hintText: 'a New Country at that time You Want',
-                          onChanged: (text) {
-                            newCountryatt = text;
-                          },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
-                        ),
-                      ),
-                      ButtonFormat(
-                        onPressed: () {
-                          addCountryATTandFetch();
-                          cattKey.currentState!.reset();
-                          },
-                        label: 'Add a New Country at that time',
-                      ),
-                    ],
-                  )),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    ///PlaceATT
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: ButtonFormat(
-                        onPressed: fetchPlaceATT,
-                        label: 'Show and Select Place at that time',
-                      ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                      child: RadioButtonFormat(
+                          options: const ['Current Place-name', 'Sea-name', 'Country-name at that time', 'Place-name at that time'],
+                          initialOption: 'Places',
+                          onChanged: (String? value) {
+                            setState(() {
+                              isSelectedOption = value!;
+                            });
+                            print("selected: $value");
+                          }),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Wrap(
-                        spacing: 5.0,
-                        children: listPlaceatts.map((placeatts){
-                          bool isSelectedPatt = _filtersPlaceatts.contains(placeatts.placeatt);
-                          return ChoiceFormat(
-                              choiceKey: placeatts.placeatt,
-                            choiceValue: placeatts.id,
-                            isSelected: isSelectedPatt,
-                            onSelectionChanged: (key, value) {
-                                setState(() {
-                                  if (isSelectedPatt) {
-                                    _filtersPlaceatts.remove(key);
-                                    _fltersCountryattsId.remove(value);
-                                  } else {
-                                    _filtersPlaceatts.clear();
-                                    _filtersPlaceattsId.clear();
-                                    _filtersPlaceatts.add(key);
-                                    _filtersPlaceattsId.add(value);
-                                  }
-                                });
+                  ),
+                  Expanded(
+                    flex: 1,
+                      child: Column(
+                        children: [
+                          BlankTextFormat(text: _chosenPlace),
+                          BlankTextFormat(text: _chosenSea),
+                          BlankTextFormat(text: _chosenCatt),
+                          BlankTextFormat(text: _chosenPatt),
+                        ],
+                      )
+                  ),
+
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 50, 100, 10),
+                          child: TffFormat(
+                            hintText: "Latitude",
+                            onChanged: (value) {
+                              newLatitude = double.tryParse(value)!;
                             },
-                          );
-                        }).toList(),
-                      ),
+                            tffColor1: Colors.black54,
+                            tffColor2: const Color(0x99e6e6fa),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 10, 100, 50),
+                          child: TffFormat(
+                            hintText: "Longitude",
+                            onChanged: (value) {
+                              newLongitude = double.tryParse(value)!;
+                            },
+                            tffColor1: Colors.black54,
+                            tffColor2: const Color(0x99e6e6fa),
+                          ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: TffFormat(
-                        key: pattKey,
-                        hintText: 'a New Place at that time You Want',
-                        onChanged: (text) {
-                          newPlaceatt = text;
-                        },
-                        tffColor1: Colors.black54,
-                        tffColor2: const Color(0x99e6e6fa),
-                      ),
-                    ),
-                    ButtonFormat(
-                      onPressed: () {
-                        addPlaceATTandFetch();
-                        pattKey.currentState!.reset();
-                        },
-                      label:'Add a New Place at that time',
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 200, 20, 20),
-                        child: TffFormat(
-                          hintText: "Latitude",
-                          onChanged: (value) {
-                            newLatitude = double.tryParse(value)!;
-                          },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: TffFormat(
-                          hintText: "Longitude",
-                          onChanged: (value) {
-                            newLongitude = double.tryParse(value)!;
-                          },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
-                        )),
-                  ],
-                ),
+
+                  )]),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () async {
+                      switch (isSelectedOption) {
+                        case 'Current Place-name':
+                          await fetchPlaces();
+                          currentDisplayList = listPlaces;
+                          print(listPlaces);
+                          break;
+                        case 'Sea-name':
+                          await fetchSeas();
+                          currentDisplayList = listSeas;
+                          break;
+                        case 'Country-name at that time':
+                          await fetchCountryATT();
+                          currentDisplayList = listCountryatts;
+                          print(listCountryatts);
+                          break;
+                        case 'Place-name at that time':
+                          await fetchPlaceATT();
+                          currentDisplayList = listPlaceatts;
+                          break;
+                      }
+                    },
+                    child: const Text('Show and Select Options'),
+              ),
+              ),
+
+              Wrap(
+                spacing: 5.0,
+                children: currentDisplayList.map<Widget>((item) {
+                  if (item is Places) {
+                    return ChoiceFormat(
+                    choiceList: _filtersPlaces,
+                    choiceKey: item.place,
+                    choiceValue: item.id!,
+                    onChoiceSelected: (choice) {
+                      setState(() {
+                        _chosenPlace = choice;
+                        print(_chosenPlace);
+                      });
+                    });
+                } else if (item is Seas) {
+                    return ChoiceFormat(
+                        choiceList: _filtersSeas,
+                        choiceKey: item.sea,
+                        choiceValue: item.id!,
+                      //isSelected: true,
+                      onChoiceSelected: (choice) {
+                          setState(() {
+                            _chosenSea = choice;
+                          });
+                      },
+                    );
+                  } else if (item is Countryatts) {
+                    return ChoiceFormat(
+                        choiceList: _filtersCountryatts,
+                        choiceKey: item.countryatt,
+                        choiceValue: item.id!,
+                      //isSelected: true,
+                      onChoiceSelected: (choice) {
+                        setState(() {
+                          _chosenCatt = choice;
+                        });
+                      },
+                    );
+                  } else if (item is Placeatts) {
+                    return ChoiceFormat(
+                        choiceList: _filtersPlaceatts,
+                        choiceKey: item.placeatt,
+                        choiceValue: item.id!,
+                      //isSelected: true,
+                      onChoiceSelected: (choice) {
+                          setState(() {
+                            _chosenPatt = choice;
+                          });
+                      },
+                    );
+                  }
+                  return const SizedBox.shrink();
+                }).toList(),
               ),
             ],
           ),
-        ),
-      )),
+
+        )
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           setState(() {
@@ -469,11 +379,18 @@ class _WherePageState extends State<WherePage> {
           }
 
           ///選択されたplace
+          if (_chosenPlace != '') {
+            confirm.selectedPlace = _chosenPlace;
+            confirm.selectedPlaceId = _chosenPlaceId;
+            print("kept Selected Place $_chosenPlaceId");
+          }
+
+/*          ///選択されたplace
           if (_filtersPlaces.isNotEmpty) {
             confirm.selectedPlace = _filtersPlaces;
             confirm.selectedPlaceId = _filtersPlacesId;
             print("kept Selected Place $_filtersPlacesId");
-          }
+          }*/
 
           ///追加されたsea
           if (newSea != "") {

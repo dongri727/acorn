@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 class ChoiceFormat extends StatefulWidget {
 
-  final Function(String, dynamic) onSelectionChanged;
-
+  final List<String> choiceList;
   final String choiceKey;
-  final dynamic choiceValue;
+  final int choiceValue;
+  //final bool isSelected;
+  final Function(String) onChoiceSelected;
 
-  final bool isSelected;
+
 
   const ChoiceFormat({super.key,
 
-    required this.onSelectionChanged,
-
+    required this.choiceList,
     required this.choiceKey,
     required this.choiceValue,
-
-    required this.isSelected,
+    //required this.isSelected,
+    required this.onChoiceSelected,
   });
 
   @override
@@ -29,9 +29,18 @@ class ChoiceFormatState extends State<ChoiceFormat> {
   Widget build(BuildContext context) {
     return ChoiceChip(
         label: Text(widget.choiceKey),
-        selected: widget.isSelected,
-        onSelected: (_) {
-          widget.onSelectionChanged(widget.choiceKey, widget.choiceValue);
+        selected: widget.choiceList.contains(widget.choiceKey),
+        selectedColor: Colors.yellow,
+        onSelected: (bool value) {
+          setState(() {
+            if (value) {
+              widget.choiceList.clear();
+              widget.choiceList.add(widget.choiceKey);
+            } else {
+              widget.choiceList.removeWhere((filter) => filter == widget.choiceKey);
+            }
+          });
+          widget.onChoiceSelected(widget.choiceKey);
 
         },
     );

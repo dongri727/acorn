@@ -43,7 +43,11 @@ class ConfirmModel extends ChangeNotifier {
     if (confirm.year != 0 && confirm.name != "" && confirm.country != "") {
       try {
         var principal = Principal(
-            annee: confirm.year, affair: confirm.name, pays: confirm.country);
+            annee: confirm.year,
+            affair: confirm.name,
+            pays: confirm.country,
+            placeId: confirm.selectedPlaceId,
+        );
         var principalId = await client.principal.addPrincipal(principal);
 
         debugPrint('Add principal : $principalId');
@@ -73,8 +77,17 @@ class ConfirmModel extends ChangeNotifier {
           debugPrint('Add localdate : $localdateId');
         }
 
-        ///additional where
+/*        ///additional where
         if (confirm.selectedPlaceId.isNotEmpty) {
+          for (var placeId in confirm.selectedPlaceId) {
+            var principal = Principal(placeId: placeId);
+            var principalId = await client.principalPlace
+                .addPrincipalPlace(principalPlace);
+            debugPrint('Added principal-place : $principalPlaceId');
+          }
+        }*/
+
+/*        if (confirm.selectedPlaceId.isNotEmpty) {
           for (var placeId in confirm.selectedPlaceId) {
             var principalPlace = PrincipalPlace(
                 principal_id: principalId, place_id: placeId);
@@ -82,7 +95,7 @@ class ConfirmModel extends ChangeNotifier {
                 .addPrincipalPlace(principalPlace);
             debugPrint('Added principal-place : $principalPlaceId');
           }
-        }
+        }*/
 
         if (confirm.selectedSeaId.isNotEmpty) {
           for (var seaId in confirm.selectedSeaId) {

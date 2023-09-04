@@ -22,3 +22,52 @@ class ButtonFormat extends StatelessWidget {
     );
   }
 }
+
+class RadioButtonFormat extends StatefulWidget {
+  final List<String> options;
+  final String? initialOption;
+  final ValueChanged<String?> onChanged;
+
+  const RadioButtonFormat({
+    Key? key,
+    required this.options,
+    this.initialOption,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  State<RadioButtonFormat> createState() => _RadioButtonFormatState();
+}
+
+class _RadioButtonFormatState extends State<RadioButtonFormat> {
+  String? _selectedOption;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedOption = widget.initialOption;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: widget.options.map((option) {
+        return ListTile(
+          textColor: Colors.white,
+          title: Text(option),
+          leading: Radio<String>(
+            activeColor: Colors.yellow,
+            value: option,
+            groupValue: _selectedOption,
+            onChanged: (String? value) {
+              setState(() {
+                _selectedOption = value;
+              });
+              widget.onChanged(value);
+            },
+          ),
+        );
+      }).toList(),
+    );
+  }
+}

@@ -1,7 +1,7 @@
 import "package:acorn_client/acorn_client.dart";
 import "package:flutter/material.dart";
 import 'bloc_provider.dart';
-import "../utils/formats.dart";
+import "../utils/tff_format.dart";
 import "menu_data.dart";
 import "menu_section.dart";
 import "widget.dart";

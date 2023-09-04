@@ -7,7 +7,7 @@ import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../utils/chips_format.dart';
-import '../utils/formats.dart';
+import '../utils/tff_format.dart';
 import 'result_page.dart';
 import 'search_by_pays.dart';
 

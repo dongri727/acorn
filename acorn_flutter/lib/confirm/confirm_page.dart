@@ -2,7 +2,7 @@ import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/formats.dart';
+import '../../../utils/tff_format.dart';
 import '../../../utils/card_format.dart';
 import 'confirm.dart';
 import 'confirm_model.dart';

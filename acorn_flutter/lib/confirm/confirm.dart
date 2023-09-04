@@ -21,8 +21,10 @@ class Confirm {
   int? placeId = 0;
 
   //選択されたplace
-  List<String> selectedPlace = [];
-  List<int> selectedPlaceId = [];
+  String? selectedPlace;
+  int? selectedPlaceId;
+/*  List<String> selectedPlace = [];
+  List<int> selectedPlaceId = [];*/
 
   //追加されたsea
   String? sea = "sea";
