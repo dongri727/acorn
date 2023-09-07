@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+typedef OnChoiceSelected = void Function(String choiceKey, int choiceId);
+
 class ChoiceFormat extends StatefulWidget {
 
   final List<String> choiceList;
   final String choiceKey;
-  final int choiceValue;
-  //final bool isSelected;
-  final Function(String) onChoiceSelected;
+  final int choiceId;
+  final OnChoiceSelected onChoiceSelected;
 
 
 
@@ -14,8 +15,7 @@ class ChoiceFormat extends StatefulWidget {
 
     required this.choiceList,
     required this.choiceKey,
-    required this.choiceValue,
-    //required this.isSelected,
+    required this.choiceId,
     required this.onChoiceSelected,
   });
 
@@ -40,7 +40,7 @@ class ChoiceFormatState extends State<ChoiceFormat> {
               widget.choiceList.removeWhere((filter) => filter == widget.choiceKey);
             }
           });
-          widget.onChoiceSelected(widget.choiceKey);
+          widget.onChoiceSelected(widget.choiceKey, widget.choiceId);
 
         },
     );

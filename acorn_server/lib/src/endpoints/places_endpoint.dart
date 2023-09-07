@@ -14,8 +14,6 @@ class PlacesEndpoint extends Endpoint {
   //Add place in DB
   Future<int> addPlaces(Session session, Places places) async {
     await Places.insert(session, places);
-    //var placeLastVal = await session.db.query('SELECT LASTVAL()');
-    //return placeLastVal[0][0] as int;
     return places.id!;
   }
 }

@@ -35,12 +35,12 @@ class TabPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: const SafeArea(
+            child: SafeArea(
               child: DefaultTabController(
                 length: 7,
                 child: Column(
                   children: [
-                    TabBar(
+                    const TabBar(
                       labelColor: Colors.yellow,
                       indicatorColor: Colors.yellow,
                       unselectedLabelColor: Colors.white,
@@ -57,15 +57,15 @@ class TabPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          WhatPage(), // 必須
-                          WhenPage(), // 月日・地域暦
+                          const WhatPage(), // 必須
+                          const WhenPage(), // 月日・地域暦
                           WherePage(), // 地名･座標
-                          PaysPage(),//関係国・都市
-                          WhoPage(), // 関係団体･関係者
-                          TermsPage(), // 検索語
-                          PreviewPage(), // プレビュー
+                          const PaysPage(),//関係国・都市
+                          const WhoPage(), // 関係団体･関係者
+                          const TermsPage(), // 検索語
+                          const PreviewPage(), // プレビュー
                         ],
                       ),
                     )

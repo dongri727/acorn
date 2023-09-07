@@ -1,11 +1,8 @@
 import 'dart:core';
-
 import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
-
-
 import 'confirm.dart';
 
 var client = Client('http://localhost:8080/')
@@ -97,7 +94,7 @@ class ConfirmModel extends ChangeNotifier {
           }
         }*/
 
-        if (confirm.selectedSeaId.isNotEmpty) {
+/*        if (confirm.selectedSeaId.isNotEmpty) {
           for (var seaId in confirm.selectedSeaId) {
             var principalSeas = PrincipalSeas(
                 principal_id: principalId, seas_id: seaId);
@@ -105,25 +102,25 @@ class ConfirmModel extends ChangeNotifier {
                 principalSeas);
             debugPrint('added principal-sea : $principalSeasId');
           }
-        }
+        }*/
 
-        if (confirm.selectedCattId.isNotEmpty) {
+/*        if (confirm.selectedCattId.isNotEmpty) {
           for (var cattId in confirm.selectedCattId) {
             var pCatt = PrincipalCatt(
                 principal_id: principalId, catt_id: cattId);
             var principalCattsId = await client.principalCatt.addPCatt(pCatt);
             debugPrint('added principal-catt : $principalCattsId');
           }
-        }
+        }*/
 
-        if (confirm.selectedPattId.isNotEmpty) {
+/*        if (confirm.selectedPattId.isNotEmpty) {
           for (var pattId in confirm.selectedPattId) {
             var pPatt = PrincipalPatt(
               principal_id: principalId, patt_id: pattId);
             var principalPattId = await client.principalPatt.addPPatt(pPatt);
             debugPrint('add principal-patt : $principalPattId');
           }
-        }
+        }*/
 
         if (confirm.latitude != null && confirm.longitude != null) {
           var lieux = Lieux(
