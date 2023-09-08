@@ -9,8 +9,6 @@ class ChoiceFormat extends StatefulWidget {
   final int choiceId;
   final OnChoiceSelected onChoiceSelected;
 
-
-
   const ChoiceFormat({super.key,
 
     required this.choiceList,
@@ -46,7 +44,6 @@ class ChoiceFormatState extends State<ChoiceFormat> {
     );
   }
 }
-
 
 class FilterFormat extends StatefulWidget {
 
@@ -87,8 +84,57 @@ class FilterFormatState extends State<FilterFormat> {
             widget.filteredKeys.removeWhere((key) => key == widget.filterKey);
             widget.filteredValues.removeWhere((value) => value == widget.filterValue);
           }
+        });
+      },
+    );
+  }
+}
+
+typedef OnSelected = void Function(String filterKey, int filterId);
+
+class FilterFormatImediat extends StatefulWidget {
+
+  final List<String> filteredImKeys;
+  final List<dynamic> filteredImValues;
+  final String filterImKey;
+  final dynamic filterImValue;
+  final OnSelected onSelected;
+
+  const FilterFormatImediat({super.key,
+    required this.filteredImKeys,
+    required this.filteredImValues,
+    required this.filterImKey,
+    required this.filterImValue,
+    required this.onSelected,
+  });
+
+  @override
+  FilterFormatImediatState createState() => FilterFormatImediatState();
+}
+
+class FilterFormatImediatState extends State<FilterFormatImediat> {
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: Text(widget.filterImKey),
+      selected: widget.filteredImKeys.contains(widget.filterImKey),
+      onSelected: (bool value) {
+        setState(() {
+          if (value) {
+            if (!widget.filteredImKeys.contains(widget.filterImKey)) {
+              widget.filteredImKeys
+                  .add(widget.filterImKey);
+            }
+            if (!widget.filteredImValues.contains(widget.filterImValue)) {
+              widget.filteredImValues.add(widget.filterImValue);
+            }
+          } else {
+            widget.filteredImKeys.removeWhere((key) => key == widget.filterImKey);
+            widget.filteredImValues.removeWhere((value) => value == widget.filterImValue);
+          }
           // Notify the parent widget that the selection has changed.
-          //widget.onSelected();
+          widget.onSelected(widget.filterImKey, widget.filterImValue);
         });
       },
     );

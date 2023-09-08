@@ -5,7 +5,6 @@ import 'package:acorn_flutter/add_events/tab_pages/where_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
@@ -37,41 +36,39 @@ class WherePage extends StatelessWidget{
   ///DBから取得したList
   List<Places> listPlaces = [];
 
-  ///Chipに並べるList
-  List<Map<String, String>> displayListPlaces = [];
+ /* ///Chipに並べるList
+  List<Map<String, String>> displayListPlaces = [];*/
 
   ///表示されるplace
   final List<String> _filtersPlaces = <String>[];
-  final List<int> _filtersPlacesId = <int>[];
+  //final List<int> _filtersPlacesId = <int>[];
 
   ///Seas
   List<Seas> listSeas = [];
-  List<Map<String, String>> displayListSeas = [];
+  //List<Map<String, String>> displayListSeas = [];
   final List<String> _filtersSeas = <String>[];
-  final List<int> _filtersSeasId = <int>[];
+  //final List<int> _filtersSeasId = <int>[];
 
   ///当時の国名
   List<Countryatts> listCountryatts = [];
-  List<Map<String, String>> displayListCountryatts = [];
+  //List<Map<String, String>> displayListCountryatts = [];
   final List<String> _filtersCountryatts = <String>[];
-  final List<int> _fltersCountryattsId = <int>[];
+  //final List<int> _fltersCountryattsId = <int>[];
 
   ///当時の地名
   List<Placeatts> listPlaceatts = [];
-  List<Map<String, String>> displayListPlaceatts = [];
+  //List<Map<String, String>> displayListPlaceatts = [];
   final List<String> _filtersPlaceatts = <String>[];
-  final List<int> _filtersPlaceattsId = <int>[];
+  //final List<int> _filtersPlaceattsId = <int>[];
 
   List<dynamic> currentDisplayList = [];
-
   String? isSelectedOption = '';
-
-
 
 
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+    final TextEditingController controller = TextEditingController();
 
     return ChangeNotifierProvider<WhereModel>(
       create: (_) => WhereModel(),
@@ -184,8 +181,8 @@ class WherePage extends StatelessWidget{
                       ),
                       Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: TffFormat(
-                          key: model.clearWhereKey,
+                        child: FormatGrey(
+                          controller: controller,
                           hintText: 'a New Name You Want',
                           onChanged: (text) {
                             switch (isSelectedOption) {
@@ -203,8 +200,6 @@ class WherePage extends StatelessWidget{
                                 break;
                             }
                           },
-                          tffColor1: Colors.black54,
-                          tffColor2: const Color(0x99e6e6fa),
                         ),
                       ),
                       ButtonFormat(
@@ -227,58 +222,61 @@ class WherePage extends StatelessWidget{
                               currentDisplayList = model.listPlaceatts;
                               break;
                           }
-                          model.resetWhereForm();
+                          controller.clear();
                         },
                         label: 'Add a New Name',
                       ),
-                      SingleChildScrollView(
-                        child: Wrap(
-                          spacing: 5.0,
-                          children: currentDisplayList.map<Widget>((item) {
-                            if (item is Places) {
-                              return ChoiceFormat(
-                                  choiceList: _filtersPlaces,
-                                  choiceKey: item.place,
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: SingleChildScrollView(
+                          child: Wrap(
+                            spacing: 5.0,
+                            children: currentDisplayList.map<Widget>((item) {
+                              if (item is Places) {
+                                return ChoiceFormat(
+                                    choiceList: _filtersPlaces,
+                                    choiceKey: item.place,
+                                    choiceId: item.id!,
+                                    onChoiceSelected: (choiceKey, choiceId) {
+                                        model.chosenPlace = choiceKey;
+                                        model.chosenPlaceId = choiceId;
+
+                                    });
+                              } else if (item is Seas) {
+                                return ChoiceFormat(
+                                  choiceList: _filtersSeas,
+                                  choiceKey: item.sea,
                                   choiceId: item.id!,
                                   onChoiceSelected: (choiceKey, choiceId) {
-                                      model.chosenPlace = choiceKey;
-                                      model.chosenPlaceId = choiceId;
-
-                                  });
-                            } else if (item is Seas) {
-                              return ChoiceFormat(
-                                choiceList: _filtersSeas,
-                                choiceKey: item.sea,
-                                choiceId: item.id!,
-                                onChoiceSelected: (choiceKey, choiceId) {
-                                    model.chosenSea = choiceKey;
-                                    model.chosenSeaId = choiceId;
-                                },
-                              );
-                            } else if (item is Countryatts) {
-                              return ChoiceFormat(
-                                choiceList: _filtersCountryatts,
-                                choiceKey: item.countryatt,
-                                choiceId: item.id!,
-                                onChoiceSelected: (choiceKey, choiceId) {
-                                    model.chosenCatt = choiceKey;
-                                    model.chosenCattId = choiceId;
-                                },
-                              );
-                            } else if (item is Placeatts) {
-                              return ChoiceFormat(
-                                choiceList: _filtersPlaceatts,
-                                choiceKey: item.placeatt,
-                                choiceId: item.id!,
-                                onChoiceSelected: (choiceKey, choiceId) {
-                                    model.chosenPatt = choiceKey;
-                                    model.chosenPattId = choiceId;
-                                    print(choiceId);
-                                },
-                              );
-                            }
-                            return const SizedBox.shrink();
-                          }).toList(),
+                                      model.chosenSea = choiceKey;
+                                      model.chosenSeaId = choiceId;
+                                  },
+                                );
+                              } else if (item is Countryatts) {
+                                return ChoiceFormat(
+                                  choiceList: _filtersCountryatts,
+                                  choiceKey: item.countryatt,
+                                  choiceId: item.id!,
+                                  onChoiceSelected: (choiceKey, choiceId) {
+                                      model.chosenCatt = choiceKey;
+                                      model.chosenCattId = choiceId;
+                                  },
+                                );
+                              } else if (item is Placeatts) {
+                                return ChoiceFormat(
+                                  choiceList: _filtersPlaceatts,
+                                  choiceKey: item.placeatt,
+                                  choiceId: item.id!,
+                                  onChoiceSelected: (choiceKey, choiceId) {
+                                      model.chosenPatt = choiceKey;
+                                      model.chosenPattId = choiceId;
+                                      print(choiceId);
+                                  },
+                                );
+                              }
+                              return const SizedBox.shrink();
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ],
@@ -311,12 +309,12 @@ class WherePage extends StatelessWidget{
                       );
                     });
 
-                ///追加されたplace
+/*                ///追加されたplace
                 if (newPlace != "") {
                   confirm.place = newPlace;
                   confirm.placeId = model.placeId;
                   print("add a new place $model.placeId");
-                }
+                }*/
 
                 ///選択されたplace
                 if (model.chosenPlace != '') {
@@ -326,12 +324,12 @@ class WherePage extends StatelessWidget{
                   print("kept Selected Place ${model.chosenPlaceId}");
                 }
 
-                ///追加されたsea
+/*                ///追加されたsea
                 if (newSea != "") {
                   confirm.sea = newSea;
                   confirm.seaId = model.seasId;
                   print("add a new Sea $model.seasId");
-                }
+                }*/
 
                 ///選択されたsea
                 if (model.chosenSea != '') {
@@ -340,12 +338,12 @@ class WherePage extends StatelessWidget{
                   print("kept Selected Sea $model.chosenSeaId");
                 }
 
-                ///追加されたCatt
+/*                ///追加されたCatt
                 if (newCountryatt != "") {
                   confirm.countryatt = newCountryatt;
                   confirm.countryattId = model.countryattId;
                   print("add a new Catt $model.countryattId");
-                }
+                }*/
 
                 ///選択されたCatt
                 if (model.chosenCatt != '') {
@@ -354,12 +352,12 @@ class WherePage extends StatelessWidget{
                   print("kept selected Catt $model.chosenCattId");
                 }
 
-                ///追加されたPatt
+/*                ///追加されたPatt
                 if (newPlaceatt != "") {
                   confirm.placeatt = newPlaceatt;
                   confirm.placeattId = model.placeattId;
                   print("add a new Patt $model.placeattId");
-                }
+                }*/
 
                 ///選択されたPatt
                 if (model.chosenPatt != '') {

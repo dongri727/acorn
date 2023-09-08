@@ -158,19 +158,19 @@ class ConfirmPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.place,
+                                    confirmText: _confirm.selectedPlace,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.countryatt,
+                                    confirmText: _confirm.selectedCatt,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.placeatt,
+                                    confirmText: _confirm.selectedPatt,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
 

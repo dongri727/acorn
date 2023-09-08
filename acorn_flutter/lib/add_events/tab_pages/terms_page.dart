@@ -129,7 +129,8 @@ class TermsPageState extends State<TermsPage> {
                               );
 /*                              return FilterChip(
                                 label: Text(categories.category),
-                                selected: filtersCategories.contains(categories.category),
+                                selected: filtersCategories.contains(categories.ca
+                                tegory),
                                 onSelected: (bool value) {
                                   setState(() {
                                     if (value) {

@@ -13,11 +13,11 @@ class WhereModel extends ChangeNotifier {
   var newCountryatt = '';
   var newPlaceatt = '';
 
-  var newLatitude = 0.0;
+/*  var newLatitude = 0.0;
   var newLongitude = 0.0;
   double x = 0.0;
   double y = 0.0;
-  double z = 0.0;
+  double z = 0.0;*/
 
   ///Place
   ///DBから取得したList
@@ -32,13 +32,13 @@ class WhereModel extends ChangeNotifier {
 
   ///Seas
   List<Seas> listSeas = [];
-  List<Map<String, String>> displayListSeas = [];
+  //List<Map<String, String>> displayListSeas = [];
 /*  final List<String> _filtersSeas = <String>[];
   final List<int> _filtersSeasId = <int>[];*/
 
   ///当時の国名
   List<Countryatts> listCountryatts = [];
-  List<Map<String, String>> displayListCountryatts = [];
+  //List<Map<String, String>> displayListCountryatts = [];
 /*  final List<String> _filtersCountryatts = <String>[];
   final List<int> _fltersCountryattsId = <int>[];*/
 
@@ -48,8 +48,8 @@ class WhereModel extends ChangeNotifier {
 /*  final List<String> _filtersPlaceatts = <String>[];
   final List<int> _filtersPlaceattsId = <int>[];*/
 
-  List<dynamic> currentDisplayList = [];
-  String? isSelectedOption = 'Place';
+  //List<dynamic> currentDisplayList = [];
+  //String? isSelectedOption = 'Place';
 
   ///DBからPlaceを取得
   fetchPlaces() async {
@@ -63,12 +63,12 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  int? placeId;
+  //int? placeId;
 
   ///DBに新規placeを挿入・再取得･再描画
   addPlacesAndFetch(String newPlace) async {
     var places = Places(place: newPlace);
-    placeId = await client.places.addPlaces(places);
+    /*placeId = */await client.places.addPlaces(places);
     await fetchPlaces();
     notifyListeners();
   }
@@ -85,12 +85,12 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  int? seasId;
+  //int? seasId;
 
   ///DBに新規seaを挿入・再取得･再描画
   addSeasAndFetch(String newSea) async {
     var seas = Seas(sea: newSea);
-    seasId = await client.seas.addSeas(seas);
+    /*seasId = */await client.seas.addSeas(seas);
     fetchSeas();
     notifyListeners();
   }
@@ -101,21 +101,20 @@ class WhereModel extends ChangeNotifier {
     try {
       listCountryatts = await client.countryatts.getCountryATTs();
       print('getCatt');
-      listCountryatts.cast<Map<String, String>>();
+      //listCountryatts.cast<Map<String, String>>();
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
 
-  int? countryattId;
+  //int? countryattId;
 
 
   ///DBに新規CATTを挿入・再取得･再描画
   addCountryATTandFetch() async {
     var catts = Countryatts(countryatt: newCountryatt);
-    countryattId = await client.countryatts.addCountryATTs(catts);
-    print(countryattId);
+    /*countryattId = */await client.countryatts.addCountryATTs(catts);
     fetchCountryATT();
     notifyListeners();
   }
@@ -124,19 +123,19 @@ class WhereModel extends ChangeNotifier {
   Future<void> fetchPlaceATT() async {
     try {
       listPlaceatts = await client.placeatts.getPlaceATTs();
-      displayListPlaceatts = listPlaceatts.cast<Map<String, String>>();
+      //displayListPlaceatts = listPlaceatts.cast<Map<String, String>>();
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
 
-  int? placeattId;
+  //int? placeattId;
 
   ///DBに新規PATTを挿入・再取得･再描画
   addPlaceATTandFetch() async {
     var patts = Placeatts(placeatt: newPlaceatt);
-    placeattId = await client.placeatts.addPlaceATTs(patts);
+    /*placeattId = */await client.placeatts.addPlaceATTs(patts);
     fetchPlaceATT();
     notifyListeners();
   }
@@ -214,12 +213,12 @@ class WhereModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final clearWhereKey = GlobalKey<FormState>();
+/*  final clearWhereKey = GlobalKey<FormState>();
   void resetWhereForm() {
     clearWhereKey.currentState?.reset();
     print('text clear');
     notifyListeners();
-  }
+  }*/
 
 
 
