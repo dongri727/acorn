@@ -1,4 +1,5 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/utils/blank_text_format.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
@@ -7,21 +8,22 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../../confirm/confirm.dart';
 import '../../utils/tff_format.dart';
-
+import 'who_model.dart';
 
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
-class WhoPage extends StatefulWidget {
-  const WhoPage({Key? key}) : super(key: key);
+class WhoPage extends StatelessWidget {
+  WhoPage({super.key});
 
-  @override
-  State<WhoPage> createState() => _WhoPageState();
-}
+  var newOrg = '';
+  var newPerson = '';
 
-class _WhoPageState extends State<WhoPage> {
+  List<String> options = ['Organisations', 'People'];
+  String isSelectedOption = '';
+  List<dynamic> currentDisplayList = [];
+
   List<Organisations> listOrgs = [];
-  List<Map<String, String>> displayListOrgs = [];
   final List<String> filtersOrgs = <String>[];
   final List<int> filtersOrgsId = <int>[];
 
@@ -30,249 +32,169 @@ class _WhoPageState extends State<WhoPage> {
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
 
-  Future<void> fetchOrgsInvolved() async {
-    try {
-      listOrgs = await client.organisations.getOrganisations();
-      setState(() {
-        displayListOrgs = listOrgs.cast<Map<String, String>>();
-      });
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  var newOrg = '';
-  late int organisationLastVal;
-
-  Future<void> addOrgsAndFetch() async {
-    var organisations = Organisations(organisation: newOrg);
-    organisationLastVal =
-    await client.organisations.addOrganisations(organisations);
-    print(organisationLastVal);
-    debugPrint("add an organisation");
-    listOrgs = await client.organisations.getOrganisations();
-    setState(() {});
-  }
-
-  Future<void> fetchPeopleInvolved() async {
-    try {
-      listPeople = await client.people.getPeople();
-      setState(() {
-        displayListPeople = listPeople.cast<Map<String, String>>();
-      });
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  var newPerson = '';
-  late int personLastVal;
-
-  Future<void> addPeoplendFetch() async {
-    var people = People(person: newPerson);
-    personLastVal = await client.people.addPeople(people);
-    print(personLastVal);
-    debugPrint("add a person");
-    listPeople = await client.people.getPeople();
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
+    final TextEditingController controller = TextEditingController();
 
-    final orgKey = GlobalKey<FormFieldState>();
-    final personKey = GlobalKey<FormFieldState>();
-
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return ChangeNotifierProvider<WhoModel>(
+      create: (_) => WhoModel(),
+      child: Consumer<WhoModel>(builder: (_, model, child) {
+        return Scaffold(
+          body: SafeArea(
+              child: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/both.png'),
-                  fit: BoxFit.cover,
-                )),
+              image: AssetImage('assets/images/both.png'),
+              fit: BoxFit.cover,
+            )),
             child: Center(
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Row(
                     children: [
                       Expanded(
                           flex: 1,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: ButtonFormat(
-                                  onPressed: fetchOrgsInvolved,
-                                  label: 'Show and Select Organizations Involved',
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Wrap(
-                                  spacing: 5.0,
-                                  children: listOrgs.map((organisations) {
-                                    return FilterFormat(
-                                        filteredKeys: filtersOrgs,
-                                        filteredValues: filtersOrgsId,
-                                        filterKey: organisations.organisation,
-                                      filterValue: organisations.id,
-                                    );
-/*                                    return FilterChip(
-                                      label: Text(organisations.organisation),
-                                      selected: filtersOrgs
-                                          .contains(organisations.organisation),
-                                      onSelected: (bool value) {
-                                        setState(() {
-                                          if (value) {
-                                            if (!filtersOrgs.contains(
-                                                organisations.organisation)) {
-                                              filtersOrgs
-                                                  .add(organisations.organisation);
-                                            }
-                                          } else {
-                                            filtersOrgs.removeWhere((filtersOrgs) =>
-                                            filtersOrgs ==
-                                                organisations.organisation);
-                                          }
-                                        });
-                                      },
-                                    );*/
-                                  }).toList(),
-                                ),
-                              ),
-/*                              Text(
-                                'Selected: ${filtersOrgs.join(', ')}',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.yellow,
-                                ),
-                              ),*/
-                              Padding(
-                                padding: const EdgeInsets.all(30.0),
-                                child: TffFormat(
-                                  key: orgKey,
-                                  hintText: 'a New Organization You Want',
-                                  onChanged: (text) {
-                                    newOrg = text;
-                                  },
-                                  tffColor1: Colors.black54,
-                                  tffColor2: const Color(0x99e6e6fa),
-                                ),
-                              ),
-                              ButtonFormat(
-                                onPressed: () {
-                                  addOrgsAndFetch();
-                                  orgKey.currentState!.reset();
-                                },
-                                label: 'Add a New Organization',
-                              )
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                            child: RadioButtonFormat(
+                                options: options,
+                                onChanged: (String? value) {
+                                  model.selectedOption = value!;
+                                  isSelectedOption = value;
+                                  print("selected: $value");
+                                }),
                           )),
                       Expanded(
                         flex: 1,
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: ButtonFormat(
-                                onPressed: fetchPeopleInvolved,
-                                label: 'Show and Select People Involved',
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Wrap(
-                                spacing: 5.0,
-                                children: listPeople.map((people) {
-                                  return FilterFormat(
-                                      filteredKeys: filtersPeople,
-                                      filteredValues: filtersPeopleId,
-                                      filterKey: people.person,
-                                    filterValue: people.id,
-                                  );
-/*                                  return FilterChip(
-                                    label: Text(people.person),
-                                    selected: filtersPeople.contains(people.person),
-                                    onSelected: (bool value) {
-                                      setState(() {
-                                        if (value) {
-                                          if (!filtersPeople
-                                              .contains(people.person)) {
-                                            filtersPeople.add(people.person);
-                                          }
-                                        } else {
-                                          filtersPeople.removeWhere(
-                                                  (filtersPeople) =>
-                                              filtersPeople == people.person);
-                                        }
-                                      });
-                                    },
-                                  );*/
-                                }).toList(),
-                              ),
-                            ),
-/*                            Text(
-                              'Selected: ${filtersPeople.join(', ')}',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.yellow,
-                              ),
-                            ),*/
-                            Padding(
-                              padding: const EdgeInsets.all(30.0),
-                              child: TffFormat(
-                                key: personKey,
-                                hintText: 'a New Person You Want',
-                                onChanged: (text) {
-                                  newPerson = text;
-                                },
-                                tffColor1: Colors.black54,
-                                tffColor2: const Color(0x99e6e6fa),
-                              ),
-                            ),
-                            ButtonFormat(
-                              onPressed: () {
-                                addPeoplendFetch();
-                                personKey.currentState!.reset();
-                                },
-                              label: 'Add a New Person',
-                            )
+                            BlankTextFormat(text: model.filtersOrgs.join(', ')),
+                            BlankTextFormat(text: model.filtersPeople.join(', ')),
                           ],
                         ),
                       ),
-                    ]))),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          showDialog<void>(
-              context: context,
-              builder: (_) {
-                return AlertDialog(
-                  title: const Text('Data has been temporarily stored.'),
-                  content: const Text(
-                      'They are not uploaded yet. please continue to fill in the other fields.'),
-                  actions: <Widget>[
-                    GestureDetector(
-                      child: const Text('OK'),
-                      onTap: () {
-                        Navigator.pop(context);
+                      Expanded(flex: 1, child: Container()),
+                    ],
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      child: const Text('Show and Select Options'),
+                      onPressed: () async {
+                        switch (isSelectedOption) {
+                          case 'Organisations':
+                            await model.fetchOrgsInvolved();
+                            currentDisplayList = model.listOrgs;
+                            print(currentDisplayList);
+                            break;
+                          case 'People':
+                            await model.fetchPeopleInvolved();
+                            currentDisplayList = model.listPeople;
+                            print(currentDisplayList);
+                            break;
+                        }
                       },
-                    )
-                  ],
-                );
-              });
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(28.0),
+                    child: FormatGrey(
+                      controller: controller,
+                      hintText: 'a New Name You Want',
+                      onChanged: (text) {
+                        switch (isSelectedOption) {
+                          case 'Organisations':
+                            newOrg = text;
+                            break;
+                          case 'People':
+                            newPerson = text;
+                            break;
+                        }
+                      },
+                    ),
+                  ),
+                  ButtonFormat(
+                    label: 'Add a New Name',
+                    onPressed: () async {
+                      switch (isSelectedOption) {
+                        case 'Organisations':
+                          await model.addOrgsAndFetch(newOrg);
+                          currentDisplayList = model.listOrgs;
+                          break;
+                        case 'People':
+                          await model.addPeopleAndFetch(newPerson);
+                          currentDisplayList = model.listPeople;
+                          break;
+                      }
+                      controller.clear();
+                    },
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Wrap(
+                        spacing: 5.0,
+                        children: currentDisplayList.map<Widget>((item) {
+                          if (item is Organisations) {
+                            return FilterFormatImediat(
+                                filteredImKeys: model.filtersOrgs,
+                                filteredImValues: model.filtersOrgsId,
+                                filterImKey: item.organisation,
+                                filterImValue: item.id,
+                                onSelected: (filterKey, filterId) {
+                                  model.selectedOrgs = filterKey;
+                                  model.selectedOrgsId = filterId;
+                                });
+                          } else if (item is People) {
+                            return FilterFormatImediat(
+                              filteredImKeys: model.filtersPeople,
+                              filteredImValues: model.filtersPeopleId,
+                              filterImKey: item.person,
+                              filterImValue: item.id,
+                              onSelected: (filterKey, filterId) {
+                                model.selectedPeople = filterKey;
+                                model.selectedPeopleId = filterId;
+                              },
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        }).toList(),
+                      )),
+                ]),
+              ),
+            ),
+          )),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              showDialog<void>(
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: const Text('Data has been temporarily stored.'),
+                      content: const Text(
+                          'They are not uploaded yet. please continue to fill in the other fields.'),
+                      actions: <Widget>[
+                        GestureDetector(
+                          child: const Text('OK'),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    );
+                  });
 
-          confirm.selectedOrg = filtersOrgs;
-          confirm.selectedOrgId = filtersOrgsId;
-          print("$filtersOrgs");
+              confirm.selectedOrg = model.filtersOrgs;
+              confirm.selectedOrgId = model.filtersOrgsId;
+              print("${model.filtersOrgs}");
 
-          confirm.selectedWho = filtersPeople;
-          confirm.selectedWhoId = filtersPeopleId;
-          print("$filtersPeople");
-        },
-        label: const Text('Temporarily Save'),
-      ),
+              confirm.selectedWho = model.filtersPeople;
+              confirm.selectedWhoId = model.filtersPeopleId;
+              print("${model.filtersPeople}");
+            },
+            label: const Text('Temporarily Save'),
+          ),
+        );
+      }),
     );
   }
 }

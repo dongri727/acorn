@@ -63,6 +63,12 @@ class WherePage extends StatelessWidget{
 
   List<dynamic> currentDisplayList = [];
   String? isSelectedOption = '';
+  List<String> options = [
+    'Current Place-name',
+    'Sea-name',
+    'Country-name at that time',
+    'Place-name at that time'
+  ];
 
 
   @override
@@ -82,153 +88,148 @@ class WherePage extends StatelessWidget{
                       fit: BoxFit.cover,
                     )),
                 child: Center(
-                  child: Column(
-                    children: [
-                      Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(100, 20, 20,
-                                    20),
-                                child: RadioButtonFormat(
-                                    options: const [
-                                      'Current Place-name',
-                                      'Sea-name',
-                                      'Country-name at that time',
-                                      'Place-name at that time'
-                                    ],
-                                    initialOption: model.selectedOption,
-                                    onChanged: (String? value) {
-                                      model.selectedOption = value!;
-                                      isSelectedOption = value;
-                                      print("selected: $value");
-                                    }),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(100, 20, 20,
+                                      20),
+                                  child: RadioButtonFormat(
+                                      options: options,
+                                      //initialOption: model.selectedOption,
+                                      onChanged: (String? value) {
+                                        model.selectedOption = value!;
+                                        isSelectedOption = value;
+                                        print("selected: $value");
+                                      }),
+                                ),
                               ),
-                            ),
-                            Expanded(
+                              Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    children: [
+                                      BlankTextFormat(text: model.chosenPlace),
+                                      BlankTextFormat(text: model.chosenSea),
+                                      BlankTextFormat(text: model.chosenCatt),
+                                      BlankTextFormat(text: model.chosenPatt),
+                                    ],
+                                  )
+                              ),
+
+                              Expanded(
                                 flex: 1,
                                 child: Column(
                                   children: [
-                                    BlankTextFormat(text: model.chosenPlace),
-                                    BlankTextFormat(text: model.chosenSea),
-                                    BlankTextFormat(text: model.chosenCatt),
-                                    BlankTextFormat(text: model.chosenPatt),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          50, 50, 100, 10),
+                                      child: TffFormat(
+                                        hintText: "Latitude",
+                                        onChanged: (value) {
+                                          newLatitude = double.tryParse(value)!;
+                                        },
+                                        tffColor1: Colors.black54,
+                                        tffColor2: const Color(0x99e6e6fa),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          50, 10, 100, 50),
+                                      child: TffFormat(
+                                        hintText: "Longitude",
+                                        onChanged: (value) {
+                                          newLongitude = double.tryParse(value)!;
+                                        },
+                                        tffColor1: Colors.black54,
+                                        tffColor2: const Color(0x99e6e6fa),
+                                      ),
+                                    ),
                                   ],
-                                )
-                            ),
+                                ),
 
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        50, 50, 100, 10),
-                                    child: TffFormat(
-                                      hintText: "Latitude",
-                                      onChanged: (value) {
-                                        newLatitude = double.tryParse(value)!;
-                                      },
-                                      tffColor1: Colors.black54,
-                                      tffColor2: const Color(0x99e6e6fa),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        50, 10, 100, 50),
-                                    child: TffFormat(
-                                      hintText: "Longitude",
-                                      onChanged: (value) {
-                                        newLongitude = double.tryParse(value)!;
-                                      },
-                                      tffColor1: Colors.black54,
-                                      tffColor2: const Color(0x99e6e6fa),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            )
-                          ]),
-                      Center(
-                        child: ElevatedButton(
+                              )
+                            ]),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              switch (isSelectedOption) {
+                                case 'Current Place-name':
+                                  await model.fetchPlaces();
+                                  currentDisplayList = model.listPlaces;
+                                  print(currentDisplayList);
+                                  break;
+                                case 'Sea-name':
+                                  await model.fetchSeas();
+                                  currentDisplayList = model.listSeas;
+                                  print(currentDisplayList);
+                                  break;
+                                case 'Country-name at that time':
+                                  await model.fetchCountryATT();
+                                  currentDisplayList = model.listCountryatts;
+                                  print(currentDisplayList);
+                                  break;
+                                case 'Place-name at that time':
+                                  await model.fetchPlaceATT();
+                                  currentDisplayList = model.listPlaceatts;
+                                  break;
+                              }
+                            },
+                            child: const Text('Show and Select Options'),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: FormatGrey(
+                            controller: controller,
+                            hintText: 'a New Name You Want',
+                            onChanged: (text) {
+                              switch (isSelectedOption) {
+                                case 'Current Place-name':
+                                  newPlace = text;
+                                  break;
+                                case 'Sea-name':
+                                  newSea = text;
+                                  break;
+                                case 'Country-name at that time':
+                                  newCountryatt = text;
+                                  break;
+                                case 'Place-name at that time':
+                                  newPlaceatt = text;
+                                  break;
+                              }
+                            },
+                          ),
+                        ),
+                        ButtonFormat(
                           onPressed: () async {
                             switch (isSelectedOption) {
                               case 'Current Place-name':
-                                await model.fetchPlaces();
+                                await model.addPlacesAndFetch(newPlace);
                                 currentDisplayList = model.listPlaces;
-                                print(currentDisplayList);
                                 break;
                               case 'Sea-name':
-                                await model.fetchSeas();
+                                await model.addSeasAndFetch(newSea);
                                 currentDisplayList = model.listSeas;
-                                print(currentDisplayList);
                                 break;
                               case 'Country-name at that time':
-                                await model.fetchCountryATT();
+                                await model.addCountryATTandFetch();
                                 currentDisplayList = model.listCountryatts;
-                                print(currentDisplayList);
                                 break;
                               case 'Place-name at that time':
-                                await model.fetchPlaceATT();
+                                await model.addPlaceATTandFetch();
                                 currentDisplayList = model.listPlaceatts;
                                 break;
                             }
+                            controller.clear();
                           },
-                          child: const Text('Show and Select Options'),
+                          label: 'Add a New Name',
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: FormatGrey(
-                          controller: controller,
-                          hintText: 'a New Name You Want',
-                          onChanged: (text) {
-                            switch (isSelectedOption) {
-                              case 'Current Place-name':
-                                newPlace = text;
-                                break;
-                              case 'Sea-name':
-                                newSea = text;
-                                break;
-                              case 'Country-name at that time':
-                                newCountryatt = text;
-                                break;
-                              case 'Place-name at that time':
-                                newPlaceatt = text;
-                                break;
-                            }
-                          },
-                        ),
-                      ),
-                      ButtonFormat(
-                        onPressed: () async {
-                          switch (isSelectedOption) {
-                            case 'Current Place-name':
-                              await model.addPlacesAndFetch(newPlace);
-                              currentDisplayList = model.listPlaces;
-                              break;
-                            case 'Sea-name':
-                              await model.addSeasAndFetch(newSea);
-                              currentDisplayList = model.listSeas;
-                              break;
-                            case 'Country-name at that time':
-                              await model.addCountryATTandFetch();
-                              currentDisplayList = model.listCountryatts;
-                              break;
-                            case 'Place-name at that time':
-                              await model.addPlaceATTandFetch();
-                              currentDisplayList = model.listPlaceatts;
-                              break;
-                          }
-                          controller.clear();
-                        },
-                        label: 'Add a New Name',
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: SingleChildScrollView(
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
                           child: Wrap(
                             spacing: 5.0,
                             children: currentDisplayList.map<Widget>((item) {
@@ -278,8 +279,8 @@ class WherePage extends StatelessWidget{
                             }).toList(),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
             ),

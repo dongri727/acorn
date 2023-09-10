@@ -1,4 +1,5 @@
 import "package:acorn_client/acorn_client.dart";
+import "package:acorn_flutter/utils/blank_text_format.dart";
 import "package:flutter/material.dart";
 import 'bloc_provider.dart';
 import "../utils/tff_format.dart";
@@ -128,22 +129,7 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Text(
-                        _countries.join(', '),  // リストの内容をカンマで区切って表示
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                    ),
-                  ),
-                ),
+                BlankTextBlackFormat(text: _countries.join(',')),
               ] + tail),
         ),
     );

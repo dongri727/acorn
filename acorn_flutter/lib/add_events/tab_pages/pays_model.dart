@@ -12,13 +12,13 @@ class PaysModel extends ChangeNotifier {
 
   ///関係国の現在名
   List<Pays> listPays = [];
-  List<Map<String, String>> displayListPays = [];
+  //List<Map<String, String>> displayListPays = [];
   final List<String> filtersPays = <String>[];
   final List<int> filtersPaysId = <int>[];
 
   ///関係国の当時の名称
   List<Countryatts> listCATTs = [];
-  List<Map<String, String>> displayListCATTs = [];
+  //List<Map<String, String>> displayListCATTs = [];
   final List<String> filtersCATTs = <String>[];
   final List<int> filtersCATTId = <int>[];
 
@@ -84,6 +84,15 @@ class PaysModel extends ChangeNotifier {
 
   set selectedCattInvId(int value) {
     _selectedCattInvId = value;
+    notifyListeners();
+  }
+
+  ///RadioButton
+  String _selectedOption = '';
+  String get selectedOption => _selectedOption;
+
+  set selectedOption(String value) {
+    _selectedOption = value;
     notifyListeners();
   }
 
