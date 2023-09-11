@@ -22,7 +22,6 @@ class PaysPage extends StatelessWidget {
   List<String> options = ['Current Country Name', 'Country Name At That Time'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
-  var isDisable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class PaysPage extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                       child: Container()),
-                                ],),
+                                ]),
                               Center(
                                 child: ElevatedButton(
                                   child: const Text('Show and Select Options'),

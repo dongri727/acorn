@@ -8,24 +8,20 @@ var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
 class PaysModel extends ChangeNotifier {
-  var newCATT = '';
 
   ///関係国の現在名
   List<Pays> listPays = [];
-  //List<Map<String, String>> displayListPays = [];
   final List<String> filtersPays = <String>[];
   final List<int> filtersPaysId = <int>[];
 
   ///関係国の当時の名称
   List<Countryatts> listCATTs = [];
-  //List<Map<String, String>> displayListCATTs = [];
   final List<String> filtersCATTs = <String>[];
   final List<int> filtersCATTId = <int>[];
 
   fetchPaysInvolved() async {
     try {
       listPays = await client.pays.getPays();
-      //displayListPays = listPays.cast<Map<String, String>>();
       print(listPays);
       notifyListeners();
     } catch (e) {
@@ -36,19 +32,16 @@ class PaysModel extends ChangeNotifier {
   fetchCountriesAtt() async {
     try {
       listCATTs = await client.countryatts.getCountryATTs();
-      //displayListCATTs = listCATTs.cast<Map<String, String>>();
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
   }
 
-  int? countryattId;
-
   addCountryATTandFetch(String newCATT) async {
     try {
     var catts = Countryatts(countryatt: newCATT);
-    countryattId = await client.countryatts.addCountryATTs(catts);
+    await client.countryatts.addCountryATTs(catts);
     await fetchCountriesAtt();
     print(catts);
     notifyListeners();

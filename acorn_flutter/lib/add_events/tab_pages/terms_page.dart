@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/add_events/tab_pages/terms_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
@@ -7,272 +10,192 @@ import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../../confirm/confirm.dart';
+import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
-
 
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
-class TermsPage extends StatefulWidget {
-  const TermsPage({Key? key}) : super(key: key);
+class TermsPage extends StatelessWidget {
+  TermsPage({super.key});
 
-
-  @override
-  State<TermsPage> createState() => TermsPageState();
-}
-
-class TermsPageState extends State<TermsPage> {
-
-  List<Terms> listTerms = [];
-  List<Map<String, String>> displayTerms = [];
-  final List<String> filtersTerms = <String>[];
-  final List<int> filtersTermsId = <int>[];
-
+  var newCategory = '';
   List<Categories> listCategories = [];
-  List<Map<String, String>> displayCategories = [];
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
 
-  Future<void> fetchTerms() async {
-    try {
-      listTerms = await client.terms.getTerms();
-      setState(() {
-        displayTerms = listTerms.cast<Map<String, String>>();
-      });
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
   var newTerm = '';
-  late int termLastVal;
+  List<Terms> listTerms = [];
+  final List<String> filtersTerms = <String>[];
+  final List<int> filtersTermsId = <int>[];
 
-  Future<void> addTermsAndFetch() async {
-    var terms = Terms(term: newTerm);
-    termLastVal = await client.terms.addTerms(terms);
-    print(termLastVal);
-    debugPrint("add term");
-    listTerms = await client.terms.getTerms();
-    setState(() {});
-  }
-
-  Future<void> fetchCategories() async {
-    try {
-      listCategories = await client.categories.getCategories();
-      setState(() {
-        displayCategories = listCategories.cast<Map<String, String>>();
-      });
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  var newCategory = '';
-  late int categoryLastVal;
-
-  Future<void> addCategoriesAndFetch() async {
-    var categories = Categories(category: newCategory);
-    categoryLastVal = await client.categories.addCategories(categories);
-    print(categoryLastVal);
-    debugPrint("add category");
-    listCategories = await client.categories.getCategories();
-    setState(() {});
-  }
+  List<String> options = ['Categories', 'Terms'];
+  String isSelectedOption = '';
+  List<dynamic> currentDisplayList = [];
 
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
-    final categoryKey = GlobalKey<FormFieldState>();
-    final termKey = GlobalKey<FormFieldState>();
+    final TextEditingController controller = TextEditingController();
 
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/both.png'),
-                  fit: BoxFit.cover,
-                )
-            ),
-            child: Center(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: ButtonFormat(
-                            onPressed: fetchCategories,
-                            label: 'Show and Select Categories',
-                          ),
+    return ChangeNotifierProvider<TermsModel>(
+      create: (_) => TermsModel(),
+      child: Consumer<TermsModel>(builder: (_, model, child) {
+        return Scaffold(
+            body: SafeArea(
+                child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/images/both.png'),
+                fit: BoxFit.cover,
+              )),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                                child: RadioButtonFormat(
+                                    options: options,
+                                    onChanged: (String? value) {
+                                      model.selectedOption = value!;
+                                      isSelectedOption = value;
+                                      print("selected: $value");
+                                    }),
+                              )),
+                          Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  BlankTextFormat(text: model.filtersCategories.join(', ')),
+                                  BlankTextFormat(text: model.filtersTerms.join(', ')),
+                                ],
+                              )),
+                          Expanded(
+                              flex: 1,
+                              child: Container()),
+                        ]),
+                      Center(
+                        child: ElevatedButton(
+                          child: const Text('Show and Select Options'),
+                          onPressed: () async {
+                            switch (isSelectedOption) {
+                              case 'Categories':
+                                await model.fetchCategories();
+                                currentDisplayList = model.listCategories;
+                                print(currentDisplayList);
+                                break;
+                              case 'Terms':
+                                await model.fetchTerms();
+                                currentDisplayList = model.listTerms;
+                                print(currentDisplayList);
+                                break;
+                            }
+                          },
                         ),
-/*                        Text(
-                          'Selected: ${filtersCategories.join(', ')}',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.yellow,
-                          ),
-                        ),*/
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(28.0),
+                        child: FormatGrey(
+                          controller: controller,
+                          hintText: 'A New Word You Want',
+                          onChanged: (text) {
+                            switch (isSelectedOption) {
+                              case 'Categories':
+                                newCategory = text;
+                                break;
+                              case 'Terms':
+                                newTerm = text;
+                                break;
+                            }
+                          },
+                        ),
+                      ),
+                      ButtonFormat(
+                        label: 'Add a New Word',
+                        onPressed: () async {
+                          switch (isSelectedOption) {
+                            case 'Categories':
+                              await model.addCategoriesAndFetch(newCategory);
+                              currentDisplayList = model.listCategories;
+                              break;
+                            case 'Terms':
+                              await model.addTermsAndFetch(newTerm);
+                              currentDisplayList = model.listTerms;
+                              break;
+                          }
+                          controller.clear();
+                        },
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(20.0),
                           child: Wrap(
                             spacing: 5.0,
-                            children: listCategories.map((categories) {
-                              return FilterFormat(
-                                  filteredKeys: filtersCategories,
-                                  filteredValues: filtersCategoriesId,
-                                  filterKey: categories.category,
-                                filterValue: categories.id,
-                              );
-/*                              return FilterChip(
-                                label: Text(categories.category),
-                                selected: filtersCategories.contains(categories.ca
-                                tegory),
-                                onSelected: (bool value) {
-                                  setState(() {
-                                    if (value) {
-                                      if (!filtersCategories.contains(categories.category)) {
-                                        filtersCategories.add(categories.category);
-                                      }
-                                    } else {
-                                      filtersCategories.removeWhere((filtersCategories) => filtersCategories == filtersCategories);
-                                    }
-                                  });
-                                },
-                              );*/
-                            }).toList(),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: TffFormat(
-                            key: categoryKey,
-                            hintText: 'a New Category You Want',
-                            onChanged: (text) {
-                              newCategory = text;
-                            },
-                            tffColor1: Colors.black54,
-                            tffColor2: const Color(0x99e6e6fa),
-                          ),
-                        ),
-                        ButtonFormat(
-                          onPressed: () {
-                            addCategoriesAndFetch();
-                            categoryKey.currentState!.reset();
-                            },
-                          label: 'Add a New Category',
-                        )
-                      ],
-                    ),
-                  ),
-
-                  Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: ButtonFormat(
-                              onPressed: fetchTerms,
-                              label: 'Show and Select Search Terms',
-                            ),
-                          ),
-/*                          Text(
-                            'Selected: ${filtersTerms.join(', ')}',
-                            style: const TextStyle(
-                              fontSize: 20,
-
-                              color: Colors.yellow,
-                            ),
-                          ),*/
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Wrap(
-                              spacing: 5.0,
-                              children: listTerms.map((terms) {
-                                return FilterFormat(
-                                    filteredKeys: filtersTerms,
-                                    filteredValues: filtersTermsId,
-                                    filterKey: terms.term,
-                                  filterValue: terms.id,
-                                );
-/*                                return FilterChip(
-                                  label: Text(terms.term),
-                                  selected: filtersTerms.contains(terms.term),
-                                  onSelected: (bool value) {
-                                    setState(() {
-                                      if (value) {
-                                        if (!filtersTerms.contains(terms.term)) {
-                                          filtersTerms.add(terms.term);
-                                        }
-                                      } else {
-                                        filtersTerms.removeWhere((filterTerms) => filtersTerms == terms.term);
-                                      }
+                            children: currentDisplayList.map<Widget>((item) {
+                              if (item is Categories) {
+                                return FilterFormatImediat(
+                                    filteredImKeys: model.filtersCategories,
+                                    filteredImValues: model.filtersCategoriesId,
+                                    filterImKey: item.category,
+                                    filterImValue: item.id,
+                                    onSelected: (filterKey, filterId) {
+                                      model.selectedCategory = filterKey;
+                                      model.selectedCategoryId = filterId;
                                     });
+                              } else if (item is Terms) {
+                                return FilterFormatImediat(
+                                  filteredImKeys: model.filtersTerms,
+                                  filteredImValues: model.filtersTermsId,
+                                  filterImKey: item.term,
+                                  filterImValue: item.id,
+                                  onSelected: (filterKey, filterId) {
+                                    model.selectedTerm = filterKey;
+                                    model.selectedTermId = filterId;
                                   },
-                                );*/
-                              }).toList(),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(200, 30 ,200, 30),
-                            child: TffFormat(
-                              key: termKey,
-                              hintText: 'a New Search Term You Want',
-                              onChanged: (text) {
-                                newTerm = text;
-                              },
-                              tffColor1: Colors.black54,
-                              tffColor2: const Color(0x99e6e6fa),
-                            ),
-                          ),
-                          ButtonFormat(
-                            onPressed: () {
-                              addTermsAndFetch();
-                              termKey.currentState!.reset();
-                              },
-                            label: 'Add a New Term',
+                                );
+                              }
+                              return const SizedBox.shrink();
+                            }).toList(),
+                          )),
+                    ]),
+                ),
+              ),
+            )),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                showDialog<void>(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: const Text('Data has been temporarily stored.'),
+                        content: const Text(
+                            'They are not uploaded yet. See the whole data in the next Page'),
+                        actions: <Widget>[
+                          GestureDetector(
+                            child: const Text('OK'),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           )
                         ],
-                      )
-                  ),
-                ],
-              ),
-            ),
-          )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          showDialog<void>(
-              context: context,
-              builder: (_){
-                return AlertDialog(
-                  title: const Text('Data has been temporarily stored.'),
-                  content: const Text('They are not uploaded yet. See the whole data in the next Page'),
-                  actions: <Widget>[
-                    GestureDetector(
-                      child: const Text('OK'),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    )
-                  ],
-                );
-              });
+                      );
+                    });
 
-          confirm.selectedTerm = filtersTerms;
-          confirm.selectedTermId = filtersTermsId;
-          print("$filtersTerms");
+                confirm.selectedCategory = model.filtersCategories;
+                confirm.selectedCategoryId = model.filtersCategoriesId;
+                print("${model.filtersCategories}");
 
-          confirm.selectedCategory = filtersCategories;
-          confirm.selectedCategoryId = filtersCategoriesId;
-          print("$filtersCategories");
-
-        },
-        label: const Text('Temporarily Save'),
-      ),
+                confirm.selectedTerm = model.filtersTerms;
+                confirm.selectedTermId = model.filtersTermsId;
+                print("${model.filtersTerms}");
+              },
+              label: const Text('Temporarily Save'),
+            ));
+      }),
     );
   }
 }

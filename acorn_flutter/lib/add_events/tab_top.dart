@@ -64,7 +64,7 @@ class TabPage extends StatelessWidget {
                           WherePage(), // 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者
-                          const TermsPage(), // 検索語
+                          TermsPage(), // 検索語
                           const PreviewPage(), // プレビュー
                         ],
                       ),
