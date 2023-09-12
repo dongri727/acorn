@@ -7,16 +7,26 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 class Principal extends _i1.TableRow {
   Principal({
     int? id,
     required this.annee,
+    required this.jour,
     required this.affair,
     required this.pays,
     this.placeId,
     this.cattId,
     this.pattId,
+    this.personId,
+    this.categoryId,
+    this.paysInv,
+    this.cattInv,
+    this.orgs,
+    this.people,
+    this.category,
+    this.term,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -26,6 +36,7 @@ class Principal extends _i1.TableRow {
     return Principal(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       annee: serializationManager.deserialize<int>(jsonSerialization['annee']),
+      jour: serializationManager.deserialize<int>(jsonSerialization['jour']),
       affair:
           serializationManager.deserialize<String>(jsonSerialization['affair']),
       pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
@@ -35,12 +46,30 @@ class Principal extends _i1.TableRow {
           serializationManager.deserialize<int?>(jsonSerialization['cattId']),
       pattId:
           serializationManager.deserialize<int?>(jsonSerialization['pattId']),
+      personId:
+          serializationManager.deserialize<int?>(jsonSerialization['personId']),
+      categoryId: serializationManager
+          .deserialize<int?>(jsonSerialization['categoryId']),
+      paysInv: serializationManager
+          .deserialize<List<_i2.Pays>?>(jsonSerialization['paysInv']),
+      cattInv: serializationManager
+          .deserialize<List<_i2.Countryatts>?>(jsonSerialization['cattInv']),
+      orgs: serializationManager
+          .deserialize<List<_i2.Organisations>?>(jsonSerialization['orgs']),
+      people: serializationManager
+          .deserialize<List<_i2.People>?>(jsonSerialization['people']),
+      category: serializationManager
+          .deserialize<List<_i2.Categories>?>(jsonSerialization['category']),
+      term: serializationManager
+          .deserialize<List<_i2.Terms>?>(jsonSerialization['term']),
     );
   }
 
   static final t = PrincipalTable();
 
   int annee;
+
+  int jour;
 
   String affair;
 
@@ -52,6 +81,22 @@ class Principal extends _i1.TableRow {
 
   int? pattId;
 
+  int? personId;
+
+  int? categoryId;
+
+  List<_i2.Pays>? paysInv;
+
+  List<_i2.Countryatts>? cattInv;
+
+  List<_i2.Organisations>? orgs;
+
+  List<_i2.People>? people;
+
+  List<_i2.Categories>? category;
+
+  List<_i2.Terms>? term;
+
   @override
   String get tableName => 'principal';
   @override
@@ -59,11 +104,20 @@ class Principal extends _i1.TableRow {
     return {
       'id': id,
       'annee': annee,
+      'jour': jour,
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
       'cattId': cattId,
       'pattId': pattId,
+      'personId': personId,
+      'categoryId': categoryId,
+      'paysInv': paysInv,
+      'cattInv': cattInv,
+      'orgs': orgs,
+      'people': people,
+      'category': category,
+      'term': term,
     };
   }
 
@@ -72,11 +126,14 @@ class Principal extends _i1.TableRow {
     return {
       'id': id,
       'annee': annee,
+      'jour': jour,
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
       'cattId': cattId,
       'pattId': pattId,
+      'personId': personId,
+      'categoryId': categoryId,
     };
   }
 
@@ -85,11 +142,20 @@ class Principal extends _i1.TableRow {
     return {
       'id': id,
       'annee': annee,
+      'jour': jour,
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
       'cattId': cattId,
       'pattId': pattId,
+      'personId': personId,
+      'categoryId': categoryId,
+      'paysInv': paysInv,
+      'cattInv': cattInv,
+      'orgs': orgs,
+      'people': people,
+      'category': category,
+      'term': term,
     };
   }
 
@@ -105,6 +171,9 @@ class Principal extends _i1.TableRow {
       case 'annee':
         annee = value;
         return;
+      case 'jour':
+        jour = value;
+        return;
       case 'affair':
         affair = value;
         return;
@@ -119,6 +188,12 @@ class Principal extends _i1.TableRow {
         return;
       case 'pattId':
         pattId = value;
+        return;
+      case 'personId':
+        personId = value;
+        return;
+      case 'categoryId':
+        categoryId = value;
         return;
       default:
         throw UnimplementedError();
@@ -246,6 +321,8 @@ class PrincipalTable extends _i1.Table {
 
   final annee = _i1.ColumnInt('annee');
 
+  final jour = _i1.ColumnInt('jour');
+
   final affair = _i1.ColumnString('affair');
 
   final pays = _i1.ColumnString('pays');
@@ -256,15 +333,22 @@ class PrincipalTable extends _i1.Table {
 
   final pattId = _i1.ColumnInt('pattId');
 
+  final personId = _i1.ColumnInt('personId');
+
+  final categoryId = _i1.ColumnInt('categoryId');
+
   @override
   List<_i1.Column> get columns => [
         id,
         annee,
+        jour,
         affair,
         pays,
         placeId,
         cattId,
         pattId,
+        personId,
+        categoryId,
       ];
 }
 

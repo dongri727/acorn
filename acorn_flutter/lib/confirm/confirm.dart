@@ -4,7 +4,7 @@ class Confirm {
   //when
   String? isSelectedCalendar = "HistoricalYears";
   int year = 0;
-  String? date = "";
+  int date = 0;
 
   String? isSelectedMonth = "No-Month";
   String? isSelectedDate = "No-Date";
@@ -15,36 +15,17 @@ class Confirm {
   String name = "";
   String country = "";
 
-  //where
-/*  //追加されたplace
-  String? place = "No-Place";
-  int? placeId = 0;*/
-
   //選択されたplace（単）
   String? selectedPlace;
   int? selectedPlaceId;
-/*  List<String> selectedPlace = [];
-  List<int> selectedPlaceId = [];*/
-
-/*  //追加されたsea
-  String? sea = '';
-  int? seaId = 0;*/
 
   //選択されたsea（単）
   String? selectedSea;
   int? selectedSeaId;
 
-/*  //追加されたCatt
-  String? countryatt = "country name at that time";
-  int? countryattId = 0;*/
-
   //選択されたCatt（単）
   String? selectedCatt = '';
   int? selectedCattId = 0;
-
-/*  //追加されたPatt
-  String? placeatt = "place name at that time";
-  int? placeattId = 0;*/
 
   //選択されたPatt（単）
   String? selectedPatt = '';

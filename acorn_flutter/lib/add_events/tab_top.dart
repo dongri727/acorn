@@ -6,7 +6,6 @@ import 'tab_pages/pays_page.dart';
 import 'tab_pages/preview_page.dart';
 import 'tab_pages/required_fields.dart';
 import 'tab_pages/terms_page.dart';
-import 'tab_pages/when_page.dart';
 import 'tab_pages/where_page.dart';
 import 'tab_pages/who_page.dart';
 
@@ -37,7 +36,7 @@ class TabPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: DefaultTabController(
-                length: 7,
+                length: 6,
                 child: Column(
                   children: [
                     const TabBar(
@@ -46,13 +45,11 @@ class TabPage extends StatelessWidget {
                       unselectedLabelColor: Colors.white,
                       tabs: [
                         Tab(text: 'REQUIRED'),
-                        Tab(text: 'ADDITIONAL "WHEN"'),
                         Tab(text: 'ADDITIONAL "WHERE"'),
                         Tab(text: 'PARTICIPANTS A'),
                         Tab(text: 'PARTICIPANTS B'),
                         Tab(text: 'SEARCH TERMS'),
                         Tab(text: 'CONFIRM'),
-
                       ],
                     ),
                     Expanded(
@@ -60,7 +57,6 @@ class TabPage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           const WhatPage(), // 必須
-                          const WhenPage(), // 月日・地域暦
                           WherePage(), // 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者

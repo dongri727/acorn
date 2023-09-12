@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:acorn_flutter/add_events/tab_pages/pays_model.dart';
 import 'package:acorn_flutter/utils/blank_text_format.dart';
@@ -89,8 +88,9 @@ class PaysPage extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                  padding: EdgeInsets.all(28.0),
-                                child: FormatGrey(
+                                  padding: const EdgeInsets.all(28.0),
+                                child: FormatGreyEnable(
+                                  enabled: isSelectedOption != 'Current Country Name',
                                   controller: controller,
                                   hintText: 'A New Country Name At That Time You Want',
                                   onChanged: (text) {

@@ -1241,6 +1241,44 @@ class Endpoints extends _i1.EndpointDispatch {
             keynumbers: params['keynumbers'],
           ),
         ),
+        'getPrincipalByCategory': _i1.MethodConnector(
+          name: 'getPrincipalByCategory',
+          params: {
+            'keynumbers': _i1.ParameterDescription(
+              name: 'keynumbers',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i24.PrincipalEndpoint)
+                  .getPrincipalByCategory(
+            session,
+            keynumbers: params['keynumbers'],
+          ),
+        ),
+        'getPrincipalByPeople': _i1.MethodConnector(
+          name: 'getPrincipalByPeople',
+          params: {
+            'keynumbers': _i1.ParameterDescription(
+              name: 'keynumbers',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i24.PrincipalEndpoint)
+                  .getPrincipalByPeople(
+            session,
+            keynumbers: params['keynumbers'],
+          ),
+        ),
       },
     );
     connectors['seas'] = _i1.EndpointConnector(

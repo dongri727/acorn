@@ -22,6 +22,7 @@ class WhatPage extends StatefulWidget {
 class _WhatPageState extends State<WhatPage> {
   var newYearD = 0.0;  //入力は小数
   var newYearI = 0;  // 登録は整数
+  var newDate = 0;
   var newName= '';
   String? isSelectedCalendar = 'HistoricalYears';
 
@@ -262,6 +263,14 @@ class _WhatPageState extends State<WhatPage> {
                     child: Column(
                       children: [
                         const Padding(
+                            padding: EdgeInsets.all(20.0),
+                          child: Text('WHEN',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),),
+                        ),
+                        const Padding(
                           padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                           child: HintText(
                               hintText: 'Required a format from the following'),
@@ -307,82 +316,33 @@ class _WhatPageState extends State<WhatPage> {
                               tffColor2: const Color(0x99e6e6fa),
                             )),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(50, 50, 50, 10),
-                          child: Text(
-                            style: AcornTheme.textTheme.bodyLarge,
-                            'Format',
-                          ),
-                        ),
-                        const HintText(
-                            hintText:
-                            'Ex: -13.8 (as Billion years) as Big Bang'),
-                        const HintText(
-                            hintText:
-                            'Ex: -3200 (as Million years) as Cyanobacteria'),
-                        const HintText(
-                            hintText:
-                            'Ex: -3180 (as Thousand years) \n as Lucy (Australopithecus)'),
-                        const HintText(
-                            hintText:
-                            'Ex: -9500 (by dating methods) as Gobekli Tepe'),
-                        const HintText(
-                            hintText:
-                            'Ex: -766 (as Historical years) \n as The Ancient Olympic Game'),
-                        const HintText(
-                            hintText:
-                            'Ex: 1969 (as Historical years) as Apollo-11 was launched '),
-
+                            padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+                            child: TffFormat(
+                              hintText: "date (required)",
+                              onChanged: (value) {
+                                try {
+                                  newDate = int.parse(value);
+                                } catch (e) {
+                                  newDate = 0000;
+                                }
+                              },
+                              tffColor1: Colors.black54,
+                              tffColor2: const Color(0x99e6e6fa),
+                            )),
                       ],
-
                     )),
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(100, 100, 100, 20),
-                          child: TffFormat(
-                            hintText: "Event　(within 50 letters)",
-                            onChanged: (text) {
-                              newName = text;
-                            },
-                            tffColor1: const Color(0xFF2f4f4f),
-                            tffColor2: const Color(0x99e6e6fa),
-                          )
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(50, 50, 50, 10),
-                        child: Text(
-                          style: AcornTheme.textTheme.bodyLarge,
-                          'Format',
-                        ),
-                      ),
-                      const HintText(
-                          hintText:
-                          '人類史以前のできごとについては、出来事とその出来事の発見を分けて登録してください。'),
-                      const HintText(
-                          hintText:
-                          '例えば'),
-                      const HintText(
-                          hintText:
-                          'ベルギーにイグアノドンがいた、ことはは○○万年前として登録し'),
-                      const HintText(
-                          hintText:
-                          'その発掘は○○年、発掘関係者等の記述も発掘側に登録してください。'),
-                      const HintText(
-                          hintText:
-                          'Ex: -766 (as Historical years) \n as The Ancient Olympic Game'),
-                      const HintText(
-                          hintText:
-                          'Ex: 1969 (as Historical years) as Apollo-11 was launched '),
-
-                    ],
-                  ),
-                ),
                 Expanded(
                     flex: 1,
                     child: Column(
                       children: [
+                        const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Text('WHERE',
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),),
+                        ),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                           child: HintText(
@@ -420,7 +380,34 @@ class _WhatPageState extends State<WhatPage> {
                         ),
 
                       ],
-                    ))
+                    )),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Text('WHAT',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(100, 80, 100, 20),
+                          child: TffFormat(
+                            hintText: "Event　(within 50 letters)",
+                            onChanged: (text) {
+                              newName = text;
+                            },
+                            tffColor1: const Color(0xFF2f4f4f),
+                            tffColor2: const Color(0x99e6e6fa),
+                          )
+                      ),
+                    ],
+                  ),
+                ),
+
               ],
             ),
           )),
@@ -464,9 +451,14 @@ class _WhatPageState extends State<WhatPage> {
           }
 
           confirm.year = newYearI;
-          confirm.name = newName;
+          print(newYearI);
+          confirm.date = newDate;
+          print(newDate);
           confirm.isSelectedCalendar = isSelectedCalendar;
           confirm.country = isSelectedPay;
+          print(isSelectedPay);
+          confirm.name = newName;
+          print(newName);
           print("save name");
         },
         label: const Text('Temporarily save'),

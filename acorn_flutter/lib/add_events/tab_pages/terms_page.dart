@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/add_events/tab_pages/terms_model.dart';

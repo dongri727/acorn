@@ -14,10 +14,8 @@ class ConfirmModel extends ChangeNotifier {
   int annee = 0;
   String affair = "";
   String pays = "";
-
-  String month = "";
   String jour = "";
-  String localDate = "";
+  //String localDate = "";
 
   String place = "";
   String att = "";
@@ -41,9 +39,13 @@ class ConfirmModel extends ChangeNotifier {
       try {
         var principal = Principal(
             annee: confirm.year,
+            jour: confirm.date,
             affair: confirm.name,
             pays: confirm.country,
             placeId: confirm.selectedPlaceId,
+            cattId: confirm.selectedCattId,
+            pattId: confirm.selectedPattId,
+
         );
         var principalId = await client.principal.addPrincipal(principal);
 

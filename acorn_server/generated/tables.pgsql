@@ -184,11 +184,14 @@ ALTER TABLE ONLY "places"
 CREATE TABLE "principal" (
   "id" serial,
   "annee" integer NOT NULL,
+  "jour" integer NOT NULL,
   "affair" text NOT NULL,
   "pays" text NOT NULL,
   "placeId" integer,
   "cattId" integer,
-  "pattId" integer
+  "pattId" integer,
+  "personId" integer,
+  "categoryId" integer
 );
 
 ALTER TABLE ONLY "principal"
@@ -208,6 +211,16 @@ ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_fk_2
     FOREIGN KEY("pattId")
       REFERENCES placeatts(id)
+        ON DELETE CASCADE;
+ALTER TABLE ONLY "principal"
+  ADD CONSTRAINT principal_fk_3
+    FOREIGN KEY("personId")
+      REFERENCES people(id)
+        ON DELETE CASCADE;
+ALTER TABLE ONLY "principal"
+  ADD CONSTRAINT principal_fk_4
+    FOREIGN KEY("categoryId")
+      REFERENCES categories(id)
         ON DELETE CASCADE;
 
 --

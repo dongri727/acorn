@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:ui';
 
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
@@ -9,7 +7,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../utils/chips_format.dart';
 import '../utils/tff_format.dart';
 import 'result_page.dart';
-import 'search_by_pays.dart';
 
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
@@ -85,7 +82,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                     ),
                                   ),
                                   Padding(
-                                      padding: EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.all(20.0),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15.0),
@@ -153,7 +150,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       ResultPage(
-                                                          listCategoriesId: filtersPeopleId),
+                                                          listPeopleId: filtersPeopleId),
                                                 )
                                             );
                                             break;

@@ -29,7 +29,7 @@ class PrincipalEndpoint extends Endpoint {
     return await Principal.find(
       session,
       where: (_) => whereClause,
-      orderBy: Principal.t.annee,
+      orderBy: Principal.t.annee, 
     );
   }
 
@@ -104,4 +104,54 @@ class PrincipalEndpoint extends Endpoint {
       orderBy: Principal.t.annee,
     );
 }
+
+  Future<List<Principal>> getPrincipalByCategory(Session session, {List<int>? keynumbers}) async {
+    print("Getting principal with categoryId: $keynumbers");
+
+    var whereClause;
+
+    if (keynumbers != null && keynumbers.isNotEmpty) {
+      for (var keynumber in keynumbers) {
+        if (whereClause == null) {
+          whereClause = Principal.t.categoryId.equals(keynumber);
+        } else {
+          whereClause = whereClause | Principal.t.categoryId.equals(keynumber);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Principal.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Principal.t.annee,
+    );
+}
+
+  Future<List<Principal>> getPrincipalByPeople(Session session, {List<int>? keynumbers}) async {
+    print("Getting principal with personId: $keynumbers");
+
+    var whereClause;
+
+    if (keynumbers != null && keynumbers.isNotEmpty) {
+      for (var keynumber in keynumbers) {
+        if (whereClause == null) {
+          whereClause = Principal.t.personId.equals(keynumber);
+        } else {
+          whereClause = whereClause | Principal.t.personId.equals(keynumber);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Principal.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Principal.t.annee,
+    );
+}
+
+
 }

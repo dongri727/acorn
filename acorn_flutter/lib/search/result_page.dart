@@ -27,9 +27,9 @@ class ResultPage extends StatelessWidget {
         } else if (listPlaceIds != null) {
           model.fetchPrincipalByPlaces(listPlaceIds: listPlaceIds);
         } else if (listCategoriesId != null) {
-          //model.fetchByCategories(categoryId: listCategoriesId);
-        }  else if (listPeopleId != null) {
-          //model.fetchByPeople(peopleId: listPeopleId);
+          model.fetchPrincipalByCategories(listCategoryIds: listCategoriesId);
+        } else if (listPeopleId != null) {
+          model.fetchPrincipalByPeople(listPeopleIds: listPeopleId);
         }
         return model;
       },
