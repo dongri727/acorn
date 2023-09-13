@@ -11,6 +11,10 @@ class SearchByOptionsModel extends ChangeNotifier {
 
   List<Principal> get principal => _principal;
   List<Principal> get principalByPlaces => _principal;
+  List<Principal> get principalByCatts => _principal;
+  List<Principal> get principalByPatts => _principal;
+  List<Principal> get principalByOrgs => _principal;
+  List<Principal> get principalByPeople => _principal;
 
 
   fetchPrincipal({List<String>? countries}) async {
@@ -33,6 +37,47 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }
 
+  fetchPrincipalByCatts({List<int>? listCattIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByCatt(keynumbers: listCattIds);
+      print("Getting principal with keynumbers: $listCattIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByPatts({List<int>? listPattIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPatt(keynumbers: listPattIds);
+      print("Getting principal with keynumbers: $listPattIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByOrgs({List<int>? listOrgIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByOrgs(keynumbers: listOrgIds);
+      print("Getting principal with keynumbers: $listOrgIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByPeople({List<int>? listPersonIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPeople(keynumbers: listPersonIds);
+      print("Getting principal with keynumbers: $listPersonIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+
   fetchPrincipalByCategories({List<int>? listCategoryIds}) async {
     try {
       _principal = await client.principal.getPrincipalByCategory(keynumbers: listCategoryIds);
@@ -43,10 +88,10 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }
 
-  fetchPrincipalByPeople({List<int>? listPeopleIds}) async {
+  fetchPrincipalByTerms({List<int>? listTermIds}) async {
     try {
-      _principal = await client.principal.getPrincipalByPeople(keynumbers: listPeopleIds);
-      print("Getting principal with keynumbers: $listPeopleIds");
+      _principal = await client.principal.getPrincipalByTerms(keynumbers: listTermIds);
+      print("Getting principal with keynumbers: $listTermIds");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');

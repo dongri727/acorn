@@ -17,10 +17,13 @@ class Principal extends _i1.SerializableEntity {
     required this.affair,
     required this.pays,
     this.placeId,
+    this.seaId,
     this.cattId,
     this.pattId,
+    this.orgId,
     this.personId,
     this.categoryId,
+    this.termId,
     this.paysInv,
     this.cattInv,
     this.orgs,
@@ -42,14 +45,18 @@ class Principal extends _i1.SerializableEntity {
       pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
       placeId:
           serializationManager.deserialize<int?>(jsonSerialization['placeId']),
+      seaId: serializationManager.deserialize<int?>(jsonSerialization['seaId']),
       cattId:
           serializationManager.deserialize<int?>(jsonSerialization['cattId']),
       pattId:
           serializationManager.deserialize<int?>(jsonSerialization['pattId']),
+      orgId: serializationManager.deserialize<int?>(jsonSerialization['orgId']),
       personId:
           serializationManager.deserialize<int?>(jsonSerialization['personId']),
       categoryId: serializationManager
           .deserialize<int?>(jsonSerialization['categoryId']),
+      termId:
+          serializationManager.deserialize<int?>(jsonSerialization['termId']),
       paysInv: serializationManager
           .deserialize<List<_i2.Pays>?>(jsonSerialization['paysInv']),
       cattInv: serializationManager
@@ -80,13 +87,19 @@ class Principal extends _i1.SerializableEntity {
 
   int? placeId;
 
+  int? seaId;
+
   int? cattId;
 
   int? pattId;
 
+  int? orgId;
+
   int? personId;
 
   int? categoryId;
+
+  int? termId;
 
   List<_i2.Pays>? paysInv;
 
@@ -109,10 +122,13 @@ class Principal extends _i1.SerializableEntity {
       'affair': affair,
       'pays': pays,
       'placeId': placeId,
+      'seaId': seaId,
       'cattId': cattId,
       'pattId': pattId,
+      'orgId': orgId,
       'personId': personId,
       'categoryId': categoryId,
+      'termId': termId,
       'paysInv': paysInv,
       'cattInv': cattInv,
       'orgs': orgs,

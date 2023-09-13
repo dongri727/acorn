@@ -5,15 +5,26 @@ import 'search_model.dart';
 class ResultPage extends StatelessWidget {
   final List<String>? listPays;
   final List<int>? listPlaceIds;
-  final List<int>? listCategoriesId;
-  final List<int>? listPeopleId;
+  final List<int>? listSeaIds;
+  final List<int>? listCattIds;
+  final List<int>? listPattIds;
+  final List<int>? listOrgIds;
+  final List<int>? listPersonIds;
+  final List<int>? listCategoryIds;
+  final List<int>? listTermIds;
 
   const ResultPage({
     super.key,
     this.listPays,
     this.listPlaceIds,
-    this.listCategoriesId,
-    this.listPeopleId
+    this.listSeaIds,
+    this.listCattIds,
+    this.listPattIds,
+    this.listOrgIds,
+    this.listPersonIds,
+    this.listCategoryIds,
+    this.listTermIds,
+
   });
 
   @override
@@ -26,10 +37,18 @@ class ResultPage extends StatelessWidget {
           model.fetchPrincipal(countries: listPays);
         } else if (listPlaceIds != null) {
           model.fetchPrincipalByPlaces(listPlaceIds: listPlaceIds);
-        } else if (listCategoriesId != null) {
-          model.fetchPrincipalByCategories(listCategoryIds: listCategoriesId);
-        } else if (listPeopleId != null) {
-          model.fetchPrincipalByPeople(listPeopleIds: listPeopleId);
+        } else if (listCattIds != null) {
+          model.fetchPrincipalByCatts(listCattIds: listCattIds);
+        } else if (listPattIds != null) {
+          model.fetchPrincipalByPatts(listPattIds: listPattIds);
+        } else if (listOrgIds != null) {
+          model.fetchPrincipalByOrgs(listOrgIds: listOrgIds);
+        } else if (listPersonIds != null) {
+          model.fetchPrincipalByPeople(listPersonIds: listPersonIds);
+        } else if (listCategoryIds != null) {
+          model.fetchPrincipalByCategories(listCategoryIds: listCategoryIds);
+        } else if (listTermIds != null) {
+          model.fetchPrincipalByTerms(listTermIds: listTermIds);
         }
         return model;
       },

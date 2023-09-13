@@ -518,6 +518,14 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'keynumbers': keynumbers},
       );
 
+  _i2.Future<List<_i24.Principal>> getPrincipalBySeas(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalBySeas',
+        {'keynumbers': keynumbers},
+      );
+
   _i2.Future<List<_i24.Principal>> getPrincipalByCatt(
           {List<int>? keynumbers}) =>
       caller.callServerEndpoint<List<_i24.Principal>>(
@@ -534,11 +542,11 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'keynumbers': keynumbers},
       );
 
-  _i2.Future<List<_i24.Principal>> getPrincipalByCategory(
+  _i2.Future<List<_i24.Principal>> getPrincipalByOrgs(
           {List<int>? keynumbers}) =>
       caller.callServerEndpoint<List<_i24.Principal>>(
         'principal',
-        'getPrincipalByCategory',
+        'getPrincipalByOrgs',
         {'keynumbers': keynumbers},
       );
 
@@ -547,6 +555,22 @@ class _EndpointPrincipal extends _i1.EndpointRef {
       caller.callServerEndpoint<List<_i24.Principal>>(
         'principal',
         'getPrincipalByPeople',
+        {'keynumbers': keynumbers},
+      );
+
+  _i2.Future<List<_i24.Principal>> getPrincipalByCategory(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByCategory',
+        {'keynumbers': keynumbers},
+      );
+
+  _i2.Future<List<_i24.Principal>> getPrincipalByTerms(
+          {List<int>? keynumbers}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByTerms',
         {'keynumbers': keynumbers},
       );
 }
