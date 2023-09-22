@@ -2,14 +2,14 @@ class Confirm {
   Confirm();
 
   //when
-  String? isSelectedCalendar = "HistoricalYears";
-  int year = 0;
-  int date = 0;
+  String isSelectedCalendar = "HistoricalYears";
+  int calendarNo = 0;
+  double year = 0.0;
+  int month = 0;
+  int day = 0;
+  int point = 0;
 
-  String? isSelectedMonth = "No-Month";
-  String? isSelectedDate = "No-Date";
-
-  String? dateLocal = "No-Local-Date";
+  //String? dateLocal = "No-Local-Date";
 
   //principal
   String name = "";
@@ -17,7 +17,7 @@ class Confirm {
 
   //選択されたplace（単）
   String? selectedPlace;
-  int? selectedPlaceId;
+  int selectedPlaceId = 0;
 
   //選択されたsea（単）
   String? selectedSea;

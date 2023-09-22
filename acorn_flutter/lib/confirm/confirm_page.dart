@@ -110,7 +110,7 @@ class ConfirmPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: '${_confirm.isSelectedCalendar}',
+                                    confirmText: _confirm.isSelectedCalendar,
                                     confirmColor: const Color(0xFFF0E68C)),
                               ),
                               Padding(
@@ -140,21 +140,21 @@ class ConfirmPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.isSelectedMonth,
+                                    confirmText: _confirm.month.toString(),
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.isSelectedDate,
+                                    confirmText: _confirm.day.toString(),
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
-                              Padding(
+/*                              Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
                                     confirmText: _confirm.dateLocal,
                                     confirmColor: const Color(0xFF8fbc8f)),
-                              ),
+                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(

@@ -129,6 +129,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                           onChanged: (String? value){
                                             setState(() {
                                               isSelectedOption = value!;
+                                              print(isSelectedOption);
                                             });
                                           },
                                           items: options.map<DropdownMenuItem<String>>((String value) {
@@ -150,6 +151,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                         switch (isSelectedOption) {
                                           case 'Current Country where it happened':
                                             args['listPays'] = filtersPays;
+                                            print(args);
                                             break;
                                           case 'Current Place-name where it happened':
                                             args['listPlaceIds'] = filtersVillesId;
@@ -265,7 +267,6 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                             fetchTermsLookingFor();
                                             currentDisplayList = listTerms;
                                             break;
-
                                         }
                                       },
                                       child: const Text('Show and Select your options'),

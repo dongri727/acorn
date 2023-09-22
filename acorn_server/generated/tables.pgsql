@@ -53,20 +53,6 @@ ALTER TABLE ONLY "countryatts"
 
 
 --
--- Class Days as table days
---
-
-CREATE TABLE "days" (
-  "id" serial,
-  "principal_id" integer NOT NULL,
-  "day" text NOT NULL
-);
-
-ALTER TABLE ONLY "days"
-  ADD CONSTRAINT days_pkey PRIMARY KEY (id);
-
-
---
 -- Class Lieux as table lieux
 --
 
@@ -96,20 +82,6 @@ CREATE TABLE "localdates" (
 
 ALTER TABLE ONLY "localdates"
   ADD CONSTRAINT localdates_pkey PRIMARY KEY (id);
-
-
---
--- Class Months as table months
---
-
-CREATE TABLE "months" (
-  "id" serial,
-  "principal_id" integer NOT NULL,
-  "month" text NOT NULL
-);
-
-ALTER TABLE ONLY "months"
-  ADD CONSTRAINT months_pkey PRIMARY KEY (id);
 
 
 --
@@ -183,45 +155,19 @@ ALTER TABLE ONLY "places"
 
 CREATE TABLE "principal" (
   "id" serial,
-  "annee" integer NOT NULL,
-  "jour" integer NOT NULL,
+  "period" integer NOT NULL,
+  "annee" double precision NOT NULL,
+  "month" integer NOT NULL,
+  "day" integer NOT NULL,
+  "point" integer NOT NULL,
   "affair" text NOT NULL,
   "pays" text NOT NULL,
-  "placeId" integer,
-  "cattId" integer,
-  "pattId" integer,
-  "personId" integer,
-  "categoryId" integer
+  "placeId" integer NOT NULL
 );
 
 ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_pkey PRIMARY KEY (id);
 
-ALTER TABLE ONLY "principal"
-  ADD CONSTRAINT principal_fk_0
-    FOREIGN KEY("placeId")
-      REFERENCES places(id)
-        ON DELETE CASCADE;
-ALTER TABLE ONLY "principal"
-  ADD CONSTRAINT principal_fk_1
-    FOREIGN KEY("cattId")
-      REFERENCES countryatts(id)
-        ON DELETE CASCADE;
-ALTER TABLE ONLY "principal"
-  ADD CONSTRAINT principal_fk_2
-    FOREIGN KEY("pattId")
-      REFERENCES placeatts(id)
-        ON DELETE CASCADE;
-ALTER TABLE ONLY "principal"
-  ADD CONSTRAINT principal_fk_3
-    FOREIGN KEY("personId")
-      REFERENCES people(id)
-        ON DELETE CASCADE;
-ALTER TABLE ONLY "principal"
-  ADD CONSTRAINT principal_fk_4
-    FOREIGN KEY("categoryId")
-      REFERENCES categories(id)
-        ON DELETE CASCADE;
 
 --
 -- Class PrincipalCategories as table principal_categories

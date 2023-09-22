@@ -1,18 +1,11 @@
 class: Principal
 table: principal
 fields:
-  annee: int
-  jour: int
+  period: int
+  annee: double
+  month: int
+  day: int
+  point: int
   affair: String
   pays: String
-  placeId: int?, parent=places
-  cattId: int?, parent=countryatts
-  pattId: int?, parent=placeatts
-  personId: int?, parent=people
-  categoryId: int?, parent=categories
-  paysInv: List<Pays>?, api
-  cattInv: List<Countryatts>?,api
-  orgs: List<Organisations>?, api
-  people: List<People>?, api
-  category: List<Categories>?, api
-  term: List<Terms>?, api
+  placeId: int

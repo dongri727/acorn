@@ -35,8 +35,11 @@ class ResultPage extends StatelessWidget {
 
         if (listPays != null) {
           model.fetchPrincipal(countries: listPays);
+          print('fetch Principal');
         } else if (listPlaceIds != null) {
           model.fetchPrincipalByPlaces(listPlaceIds: listPlaceIds);
+/*        } else if (listSeaIds != null) {
+          model.fetchPrincipalBySeas(listSeaIds: listSeaIds);
         } else if (listCattIds != null) {
           model.fetchPrincipalByCatts(listCattIds: listCattIds);
         } else if (listPattIds != null) {
@@ -48,7 +51,7 @@ class ResultPage extends StatelessWidget {
         } else if (listCategoryIds != null) {
           model.fetchPrincipalByCategories(listCategoryIds: listCategoryIds);
         } else if (listTermIds != null) {
-          model.fetchPrincipalByTerms(listTermIds: listTermIds);
+          model.fetchPrincipalByTerms(listTermIds: listTermIds);*/
         }
         return model;
       },

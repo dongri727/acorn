@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +18,14 @@ class WhatPage extends StatefulWidget {
 }
 
 class _WhatPageState extends State<WhatPage> {
-  var newYearD = 0.0;  //入力は小数
-  var newYearI = 0;  // 登録は整数
-  var newDate = 0;
+  var newYearD = 0.0;
+  var newYearI = 0;
+  var newMonth = 0;
+  var newDay = 0;
+  var newPoint = 0;
   var newName= '';
-  String? isSelectedCalendar = 'HistoricalYears';
+  String isSelectedCalendar = 'HistoricalYears';
+  var calendarNo = 0;
 
   List<String> periods = <String>[
     'BillionYears',
@@ -41,7 +42,7 @@ class _WhatPageState extends State<WhatPage> {
     'MilkyWay',
     'SolarSystem',
     'TheEarth',
-    'Ocean',
+    'Sea',
     'Antarctica',
     'Afghanistan',
     'Albania',
@@ -289,7 +290,7 @@ class _WhatPageState extends State<WhatPage> {
                               borderRadius: BorderRadius.circular(15.0),
                               onChanged: (String? value) {
                                 setState(() {
-                                  isSelectedCalendar = value;
+                                  isSelectedCalendar = value!;
                                 });
                               },
                               items: periods
@@ -318,12 +319,26 @@ class _WhatPageState extends State<WhatPage> {
                         Padding(
                             padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
                             child: TffFormat(
-                              hintText: "date (required)",
+                              hintText: "Month 1-12 or 0",
                               onChanged: (value) {
                                 try {
-                                  newDate = int.parse(value);
+                                  newMonth = int.parse(value);
                                 } catch (e) {
-                                  newDate = 0000;
+                                  newMonth = 0;
+                                }
+                              },
+                              tffColor1: Colors.black54,
+                              tffColor2: const Color(0x99e6e6fa),
+                            )),
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+                            child: TffFormat(
+                              hintText: "Date 1-31 or 0",
+                              onChanged: (value) {
+                                try {
+                                  newDay = int.parse(value);
+                                } catch (e) {
+                                  newDay = 0;
                                 }
                               },
                               tffColor1: Colors.black54,
@@ -434,27 +449,38 @@ class _WhatPageState extends State<WhatPage> {
           // convert the years depending on the selected calendar period
           switch (isSelectedCalendar) {
             case 'BillionYears':
-              newYearI = (newYearD * 1000000000).round();  // billion years
+              newYearI = (newYearD * 1000000000).round();
+              calendarNo = 1;// billion years
               break;
             case 'MillionYears':
-              newYearI = (newYearD * 1000000).round();  // million years
+              newYearI = (newYearD * 1000000).round();
+              calendarNo = 2;// million years
               break;
             case 'ThousandYears':
               newYearI = (newYearD * 1000).round();
+              calendarNo = 3;
               break;
             case 'YearsByDatingMethods':
               newYearI = (2000 - newYearD).round();
+              calendarNo = 4;
               break;
             case 'HistoricalYears':
               newYearI = (newYearD).round();
+              calendarNo = 5;
               break;
           }
+          ///make data of point
+          newPoint = (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay).toDouble()).round();
 
-          confirm.year = newYearI;
-          print(newYearI);
-          confirm.date = newDate;
-          print(newDate);
+
           confirm.isSelectedCalendar = isSelectedCalendar;
+          confirm.calendarNo = calendarNo;
+          confirm.year = newYearD;
+          confirm.month = newMonth;
+          confirm.day = newDay;
+          confirm.point = newPoint;
+          print(newPoint);
+
           confirm.country = isSelectedPay;
           print(isSelectedPay);
           confirm.name = newName;

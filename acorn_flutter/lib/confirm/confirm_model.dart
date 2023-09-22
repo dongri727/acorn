@@ -11,10 +11,13 @@ var client = Client('http://localhost:8080/')
 class ConfirmModel extends ChangeNotifier {
   ConfirmModel();
 
-  int annee = 0;
+  int period = 0;
+  double annee = 0.0;
   String affair = "";
   String pays = "";
-  String jour = "";
+  int month = 0;
+  int day = 0;
+  int point = 0;
   //String localDate = "";
 
   String place = "";
@@ -27,7 +30,7 @@ class ConfirmModel extends ChangeNotifier {
   final dz = 0.0;
 
   List<String> countriesInvolved = [];
-  List<String> attsInvolved = [];
+  List<String> cattsInvolved = [];
   List<String> orgs = [];
   List<String> people = [];
   List<String> categories = [];
@@ -38,43 +41,30 @@ class ConfirmModel extends ChangeNotifier {
     if (confirm.year != 0 && confirm.name != "" && confirm.country != "") {
       try {
         var principal = Principal(
+          period: confirm.calendarNo,
             annee: confirm.year,
-            jour: confirm.date,
+            month: confirm.month,
+            day: confirm.day,
+            point: confirm.point,
             affair: confirm.name,
             pays: confirm.country,
             placeId: confirm.selectedPlaceId,
+/*            seaId: confirm.selectedSeaId,
             cattId: confirm.selectedCattId,
-            pattId: confirm.selectedPattId,
-
+            pattId: confirm.selectedPattId,*/
         );
         var principalId = await client.principal.addPrincipal(principal);
 
         debugPrint('Add principal : $principalId');
 
-        ///additional when
-        if (confirm.isSelectedMonth != 'No-Month') {
-          var months = Months(
-              principal_id: principalId, month: confirm.isSelectedMonth!);
-          var monthsId = await client.months.addMonths(months);
 
-          debugPrint('Add month : $monthsId');
-        }
-
-        if (confirm.isSelectedDate != 'No-Date') {
-          var days = Days(
-              principal_id: principalId, day: confirm.isSelectedDate!);
-          var daysId = await client.days.addDays(days);
-
-          debugPrint('Add day : $daysId');
-        }
-
-        if (confirm.dateLocal != "No-Local-Date") {
+/*        if (confirm.dateLocal != "No-Local-Date") {
           var localdates = LocalDates(
               principal_id: principalId, localdate: confirm.dateLocal!);
           var localdateId = await client.localDates.addLocalDates(localdates);
 
           debugPrint('Add localdate : $localdateId');
-        }
+        }*/
 
 /*        ///additional where
         if (confirm.selectedPlaceId.isNotEmpty) {
