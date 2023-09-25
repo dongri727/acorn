@@ -73,7 +73,7 @@ class ResultPage extends StatelessWidget {
                       child: ListTile(
                         leading: Text(model.principal[index].annee.toString()),
                         title: Text(model.principal[index].affair),
-                        subtitle: Text(model.principal[index].pays),
+                        subtitle: Text(model.principal[index].location),
                       ),
                     ),
                   ),

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../confirm/confirm.dart';
 import 'tab_pages/pays_page.dart';
 import 'tab_pages/preview_page.dart';
+import 'tab_pages/principal_page.dart';
 import 'tab_pages/required_fields.dart';
 import 'tab_pages/terms_page.dart';
 import 'tab_pages/where_page.dart';
@@ -56,7 +57,7 @@ class TabPage extends StatelessWidget {
                       child: TabBarView(
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          const WhatPage(), // 必須
+                          PrincipalPage(), // 必須
                           WherePage(), // 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者

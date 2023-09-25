@@ -17,7 +17,7 @@ class Principal extends _i1.TableRow {
     required this.day,
     required this.point,
     required this.affair,
-    required this.pays,
+    required this.location,
     required this.placeId,
   }) : super(id);
 
@@ -36,7 +36,8 @@ class Principal extends _i1.TableRow {
       point: serializationManager.deserialize<int>(jsonSerialization['point']),
       affair:
           serializationManager.deserialize<String>(jsonSerialization['affair']),
-      pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
+      location: serializationManager
+          .deserialize<String>(jsonSerialization['location']),
       placeId:
           serializationManager.deserialize<int>(jsonSerialization['placeId']),
     );
@@ -56,7 +57,7 @@ class Principal extends _i1.TableRow {
 
   String affair;
 
-  String pays;
+  String location;
 
   int placeId;
 
@@ -72,7 +73,7 @@ class Principal extends _i1.TableRow {
       'day': day,
       'point': point,
       'affair': affair,
-      'pays': pays,
+      'location': location,
       'placeId': placeId,
     };
   }
@@ -87,7 +88,7 @@ class Principal extends _i1.TableRow {
       'day': day,
       'point': point,
       'affair': affair,
-      'pays': pays,
+      'location': location,
       'placeId': placeId,
     };
   }
@@ -102,7 +103,7 @@ class Principal extends _i1.TableRow {
       'day': day,
       'point': point,
       'affair': affair,
-      'pays': pays,
+      'location': location,
       'placeId': placeId,
     };
   }
@@ -134,8 +135,8 @@ class Principal extends _i1.TableRow {
       case 'affair':
         affair = value;
         return;
-      case 'pays':
-        pays = value;
+      case 'location':
+        location = value;
         return;
       case 'placeId':
         placeId = value;
@@ -276,7 +277,7 @@ class PrincipalTable extends _i1.Table {
 
   final affair = _i1.ColumnString('affair');
 
-  final pays = _i1.ColumnString('pays');
+  final location = _i1.ColumnString('location');
 
   final placeId = _i1.ColumnInt('placeId');
 
@@ -289,7 +290,7 @@ class PrincipalTable extends _i1.Table {
         day,
         point,
         affair,
-        pays,
+        location,
         placeId,
       ];
 }

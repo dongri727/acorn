@@ -161,7 +161,7 @@ CREATE TABLE "principal" (
   "day" integer NOT NULL,
   "point" integer NOT NULL,
   "affair" text NOT NULL,
-  "pays" text NOT NULL,
+  "location" text NOT NULL,
   "placeId" integer NOT NULL
 );
 
@@ -305,5 +305,18 @@ CREATE TABLE "terms" (
 
 ALTER TABLE ONLY "terms"
   ADD CONSTRAINT terms_pkey PRIMARY KEY (id);
+
+
+--
+-- Class Universe as table universe
+--
+
+CREATE TABLE "universe" (
+  "id" serial,
+  "universe" text NOT NULL
+);
+
+ALTER TABLE ONLY "universe"
+  ADD CONSTRAINT universe_pkey PRIMARY KEY (id);
 
 

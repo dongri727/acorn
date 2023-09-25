@@ -17,9 +17,9 @@ class PrincipalEndpoint extends Endpoint {
     if (keywords != null && keywords.isNotEmpty) {
       for (var keyword in keywords) {
         if (whereClause == null) {
-          whereClause = Principal.t.pays.like('%$keyword%');
+          whereClause = Principal.t.location.like('%$keyword%');
         } else {
-          whereClause = whereClause | Principal.t.pays.like('%$keyword%');
+          whereClause = whereClause | Principal.t.location.like('%$keyword%');
         }
       }
     } else {

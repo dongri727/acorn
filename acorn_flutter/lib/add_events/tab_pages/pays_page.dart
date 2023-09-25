@@ -168,8 +168,8 @@ class PaysPage extends StatelessWidget {
                     );
                   });
 
-              confirm.selectedPays = model.filtersPays;
-              confirm.selectedPaysId = model.filtersPaysId;
+              confirm.selectedCountries = model.filtersPays;
+              confirm.selectedCountriesId = model.filtersPaysId;
               print("${model.filtersPays}");
 
               confirm.selectedATT = model.filtersCATTs;

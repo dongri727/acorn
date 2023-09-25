@@ -14,7 +14,11 @@ class ConfirmModel extends ChangeNotifier {
   int period = 0;
   double annee = 0.0;
   String affair = "";
-  String pays = "";
+  String? universe = "";
+  String? pays = "";
+  String? sea = "";
+  String location = "";
+  String locationNum = "";
   int month = 0;
   int day = 0;
   int point = 0;
@@ -38,16 +42,16 @@ class ConfirmModel extends ChangeNotifier {
 
   //insert into DB
   Future<int> save(Confirm confirm) async {
-    if (confirm.year != 0 && confirm.name != "" && confirm.country != "") {
+    if (confirm.year != 0 && confirm.name != "" && confirm.selectedLocation != "") {
       try {
         var principal = Principal(
           period: confirm.calendarNo,
-            annee: confirm.year,
+            annee: confirm.annee,
             month: confirm.month,
             day: confirm.day,
             point: confirm.point,
             affair: confirm.name,
-            pays: confirm.country,
+            location: confirm.selectedLocationNum,
             placeId: confirm.selectedPlaceId,
 /*            seaId: confirm.selectedSeaId,
             cattId: confirm.selectedCattId,
@@ -128,8 +132,8 @@ class ConfirmModel extends ChangeNotifier {
         }
 
         ///participants A
-        if (confirm.selectedPaysId.isNotEmpty) {
-          for (var countryId in confirm.selectedPaysId) {
+        if (confirm.selectedCountriesId.isNotEmpty) {
+          for (var countryId in confirm.selectedCountriesId) {
             var countryInvolved = CountryInvolved(
                 principal_id: principalId, pays_id: countryId);
             var countryInvolvedId = await client.countryInvolved

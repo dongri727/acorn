@@ -241,7 +241,7 @@ class Timeline {
         //if (map.containsKey("affair")) {
         //timelineEntry.name = principal.affair;
         //timelineEntry.name = "${principal.annee}　${principal.affair}  (${principal.pays})";
-        timelineEntry.name = "${principal.annee.toString()}　${principal.affair}  (${principal.pays})";
+        timelineEntry.name = "${principal.annee.toString()}　${principal.affair}  (${principal.location})";
         //}
 
         /// Add this entry to the list.

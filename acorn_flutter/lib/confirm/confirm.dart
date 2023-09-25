@@ -4,7 +4,8 @@ class Confirm {
   //when
   String isSelectedCalendar = "HistoricalYears";
   int calendarNo = 0;
-  double year = 0.0;
+  double annee = 0.0;
+  int year = 0;
   int month = 0;
   int day = 0;
   int point = 0;
@@ -13,7 +14,26 @@ class Confirm {
 
   //principal
   String name = "";
-  String country = "";
+
+/*
+  //選択された宇宙(単)
+  String? selectedUniverse = "";
+  int selectedUniverseId = 0;
+*/
+
+/*  //選択された国(単)
+  String selectedPays = "";
+  int selectedPaysId = 0;*/
+
+/*  //選択されたOcean（単）
+  String? selectedOcean;
+  //int? selectedOceanId;*/
+
+
+
+  //統合された位置(単)
+  String selectedLocation = "";
+  String selectedLocationNum = "";
 
   //選択されたplace（単）
   String? selectedPlace;
@@ -40,8 +60,8 @@ class Confirm {
   double? z;
 
   //pays involved
-  List<String> selectedPays = [];
-  List<int> selectedPaysId = [];
+  List<String> selectedCountries = [];
+  List<int> selectedCountriesId = [];
 
   //pays involved at that time
   List<String> selectedATT = [];

@@ -103,8 +103,12 @@ class ConfirmPage extends StatelessWidget {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                                child: HintText(hintText:
-                                '4 items required'
+                                child: Text(
+                                'WHEN',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -122,24 +126,6 @@ class ConfirmPage extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.name,
-                                    confirmColor: const Color(0xFFF0E68C)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ConfirmText(
-                                    confirmText: _confirm.country,
-                                    confirmColor: const Color(0xFFF0E68C)),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                                child: HintText(hintText:
-                                'others option'
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ConfirmText(
                                     confirmText: _confirm.month.toString(),
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
@@ -149,12 +135,24 @@ class ConfirmPage extends StatelessWidget {
                                     confirmText: _confirm.day.toString(),
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
-/*                              Padding(
+
+
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                child: Text(
+                                'WHERE',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
-                                    confirmText: _confirm.dateLocal,
-                                    confirmColor: const Color(0xFF8fbc8f)),
-                              ),*/
+                                    confirmText: _confirm.selectedLocation,
+                                    confirmColor: const Color(0xFFF0E68C)),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
@@ -173,16 +171,8 @@ class ConfirmPage extends StatelessWidget {
                                     confirmText: _confirm.selectedPatt,
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
-
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
                                     confirmText: '${_confirm.latitude}',
                                     confirmColor: const Color(0xFF8fbc8f)),
@@ -193,6 +183,30 @@ class ConfirmPage extends StatelessWidget {
                                     confirmText: '${_confirm.longitude}',
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                child: Text(
+                                  'WHAT',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ConfirmText(
+                                    confirmText: _confirm.name,
+                                    confirmColor: const Color(0xFFF0E68C)),
+                              ),
+
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Countries Involved',
@@ -204,13 +218,12 @@ class ConfirmPage extends StatelessWidget {
                                   child: ListView.builder(
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
-                                      itemCount: _confirm.selectedPays.length,
+                                      itemCount: _confirm.selectedCountries.length,
                                       itemBuilder: (context, index) {
                                         return TermCard(
-                                          _confirm.selectedPays[index],
+                                          _confirm.selectedCountries[index],
                                         );
-                                      }
-                                  )
+                                      })
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),

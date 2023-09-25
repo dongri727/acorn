@@ -17,7 +17,7 @@ class Principal extends _i1.SerializableEntity {
     required this.day,
     required this.point,
     required this.affair,
-    required this.pays,
+    required this.location,
     required this.placeId,
   });
 
@@ -36,7 +36,8 @@ class Principal extends _i1.SerializableEntity {
       point: serializationManager.deserialize<int>(jsonSerialization['point']),
       affair:
           serializationManager.deserialize<String>(jsonSerialization['affair']),
-      pays: serializationManager.deserialize<String>(jsonSerialization['pays']),
+      location: serializationManager
+          .deserialize<String>(jsonSerialization['location']),
       placeId:
           serializationManager.deserialize<int>(jsonSerialization['placeId']),
     );
@@ -59,7 +60,7 @@ class Principal extends _i1.SerializableEntity {
 
   String affair;
 
-  String pays;
+  String location;
 
   int placeId;
 
@@ -73,7 +74,7 @@ class Principal extends _i1.SerializableEntity {
       'day': day,
       'point': point,
       'affair': affair,
-      'pays': pays,
+      'location': location,
       'placeId': placeId,
     };
   }

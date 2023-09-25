@@ -7,5 +7,5 @@ fields:
   day: int
   point: int
   affair: String
-  pays: String
+  location: String
   placeId: int
