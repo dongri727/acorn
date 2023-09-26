@@ -29,10 +29,11 @@ import 'package:acorn_client/src/protocol/placeatts.dart' as _i20;
 import 'package:acorn_client/src/protocol/places.dart' as _i21;
 import 'package:acorn_client/src/protocol/principal.dart' as _i22;
 import 'package:acorn_client/src/protocol/seas.dart' as _i23;
-import 'package:acorn_client/src/protocol/terms.dart' as _i24;
-import 'package:acorn_client/src/protocol/universe.dart' as _i25;
-import 'dart:io' as _i26;
-import 'protocol.dart' as _i27;
+import 'package:acorn_client/src/protocol/stars.dart' as _i24;
+import 'package:acorn_client/src/protocol/terms.dart' as _i25;
+import 'package:acorn_client/src/protocol/universe.dart' as _i26;
+import 'dart:io' as _i27;
+import 'protocol.dart' as _i28;
 
 class _EndpointAttInvolved extends _i1.EndpointRef {
   _EndpointAttInvolved(_i1.EndpointCaller caller) : super(caller);
@@ -497,20 +498,40 @@ class _EndpointSeas extends _i1.EndpointRef {
       );
 }
 
+class _EndpointStars extends _i1.EndpointRef {
+  _EndpointStars(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'stars';
+
+  _i2.Future<List<_i24.Stars>> getStars({String? keyword}) =>
+      caller.callServerEndpoint<List<_i24.Stars>>(
+        'stars',
+        'getStars',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addStars(_i24.Stars stars) => caller.callServerEndpoint<int>(
+        'stars',
+        'addStars',
+        {'stars': stars},
+      );
+}
+
 class _EndpointTerms extends _i1.EndpointRef {
   _EndpointTerms(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'terms';
 
-  _i2.Future<List<_i24.Terms>> getTerms({String? keyword}) =>
-      caller.callServerEndpoint<List<_i24.Terms>>(
+  _i2.Future<List<_i25.Terms>> getTerms({String? keyword}) =>
+      caller.callServerEndpoint<List<_i25.Terms>>(
         'terms',
         'getTerms',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addTerms(_i24.Terms terms) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addTerms(_i25.Terms terms) => caller.callServerEndpoint<int>(
         'terms',
         'addTerms',
         {'terms': terms},
@@ -523,14 +544,14 @@ class _EndpointUniverse extends _i1.EndpointRef {
   @override
   String get name => 'universe';
 
-  _i2.Future<List<_i25.Universe>> getUniverse({String? keyword}) =>
-      caller.callServerEndpoint<List<_i25.Universe>>(
+  _i2.Future<List<_i26.Universe>> getUniverse({String? keyword}) =>
+      caller.callServerEndpoint<List<_i26.Universe>>(
         'universe',
         'getUniverse',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addUniverse(_i25.Universe universe) =>
+  _i2.Future<int> addUniverse(_i26.Universe universe) =>
       caller.callServerEndpoint<int>(
         'universe',
         'addUniverse',
@@ -541,11 +562,11 @@ class _EndpointUniverse extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i26.SecurityContext? context,
+    _i27.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i27.Protocol(),
+          _i28.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -571,6 +592,7 @@ class Client extends _i1.ServerpodClient {
     places = _EndpointPlaces(this);
     principal = _EndpointPrincipal(this);
     seas = _EndpointSeas(this);
+    stars = _EndpointStars(this);
     terms = _EndpointTerms(this);
     universe = _EndpointUniverse(this);
   }
@@ -619,6 +641,8 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointSeas seas;
 
+  late final _EndpointStars stars;
+
   late final _EndpointTerms terms;
 
   late final _EndpointUniverse universe;
@@ -647,6 +671,7 @@ class Client extends _i1.ServerpodClient {
         'places': places,
         'principal': principal,
         'seas': seas,
+        'stars': stars,
         'terms': terms,
         'universe': universe,
       };

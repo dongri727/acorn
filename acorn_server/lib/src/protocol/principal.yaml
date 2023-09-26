@@ -9,3 +9,4 @@ fields:
   affair: String
   location: String
   placeId: int
+  precise: String

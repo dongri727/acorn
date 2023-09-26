@@ -162,7 +162,8 @@ CREATE TABLE "principal" (
   "point" integer NOT NULL,
   "affair" text NOT NULL,
   "location" text NOT NULL,
-  "placeId" integer NOT NULL
+  "placeId" integer NOT NULL,
+  "precise" text NOT NULL
 );
 
 ALTER TABLE ONLY "principal"
@@ -292,6 +293,19 @@ CREATE TABLE "seas" (
 
 ALTER TABLE ONLY "seas"
   ADD CONSTRAINT seas_pkey PRIMARY KEY (id);
+
+
+--
+-- Class Stars as table stars
+--
+
+CREATE TABLE "stars" (
+  "id" serial,
+  "star" text NOT NULL
+);
+
+ALTER TABLE ONLY "stars"
+  ADD CONSTRAINT stars_pkey PRIMARY KEY (id);
 
 
 --

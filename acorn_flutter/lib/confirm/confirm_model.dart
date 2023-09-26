@@ -51,8 +51,10 @@ class ConfirmModel extends ChangeNotifier {
             day: confirm.day,
             point: confirm.point,
             affair: confirm.name,
-            location: confirm.selectedLocationNum,
+            location: confirm.selectedLocation,
             placeId: confirm.selectedPlaceId,
+            precise: confirm.selectedPrecise,
+
 /*            seaId: confirm.selectedSeaId,
             cattId: confirm.selectedCattId,
             pattId: confirm.selectedPattId,*/

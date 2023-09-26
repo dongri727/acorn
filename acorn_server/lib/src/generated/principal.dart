@@ -19,6 +19,7 @@ class Principal extends _i1.TableRow {
     required this.affair,
     required this.location,
     required this.placeId,
+    required this.precise,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -40,6 +41,8 @@ class Principal extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['location']),
       placeId:
           serializationManager.deserialize<int>(jsonSerialization['placeId']),
+      precise: serializationManager
+          .deserialize<String>(jsonSerialization['precise']),
     );
   }
 
@@ -61,6 +64,8 @@ class Principal extends _i1.TableRow {
 
   int placeId;
 
+  String precise;
+
   @override
   String get tableName => 'principal';
   @override
@@ -75,6 +80,7 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'placeId': placeId,
+      'precise': precise,
     };
   }
 
@@ -90,6 +96,7 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'placeId': placeId,
+      'precise': precise,
     };
   }
 
@@ -105,6 +112,7 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'placeId': placeId,
+      'precise': precise,
     };
   }
 
@@ -140,6 +148,9 @@ class Principal extends _i1.TableRow {
         return;
       case 'placeId':
         placeId = value;
+        return;
+      case 'precise':
+        precise = value;
         return;
       default:
         throw UnimplementedError();
@@ -281,6 +292,8 @@ class PrincipalTable extends _i1.Table {
 
   final placeId = _i1.ColumnInt('placeId');
 
+  final precise = _i1.ColumnString('precise');
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -292,6 +305,7 @@ class PrincipalTable extends _i1.Table {
         affair,
         location,
         placeId,
+        precise,
       ];
 }
 

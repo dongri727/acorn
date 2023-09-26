@@ -19,6 +19,7 @@ class Principal extends _i1.SerializableEntity {
     required this.affair,
     required this.location,
     required this.placeId,
+    required this.precise,
   });
 
   factory Principal.fromJson(
@@ -40,6 +41,8 @@ class Principal extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['location']),
       placeId:
           serializationManager.deserialize<int>(jsonSerialization['placeId']),
+      precise: serializationManager
+          .deserialize<String>(jsonSerialization['precise']),
     );
   }
 
@@ -64,6 +67,8 @@ class Principal extends _i1.SerializableEntity {
 
   int placeId;
 
+  String precise;
+
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -76,6 +81,7 @@ class Principal extends _i1.SerializableEntity {
       'affair': affair,
       'location': location,
       'placeId': placeId,
+      'precise': precise,
     };
   }
 }

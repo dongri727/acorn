@@ -7,6 +7,8 @@ var client = Client('http://localhost:8080/')
 
 class WhereModel extends ChangeNotifier {
 
+  String locationPrecise = '';
+
   var newPlace = '';
   var newSea = '';
   var newPaysatt = '';
@@ -19,11 +21,12 @@ class WhereModel extends ChangeNotifier {
   double y = 0.0;
   double z = 0.0;*/
 
+  ///Stars
+  List<Stars> listStars = [];
+
   ///Place
   ///DBから取得したList
   List<Places> listPlaces = [];
-
-  ///Chipに並べるList
   //List<Map<String, String>> displayListPlaces = [];
 
 /*  ///表示されるplace
@@ -38,7 +41,7 @@ class WhereModel extends ChangeNotifier {
 
   ///当時の国名
   List<Countryatts> listCountryatts = [];
-  //List<Map<String, String>> displayListCountryatts = [];
+  List<Map<String, String>> displayListCountryatts = [];
 /*  final List<String> _filtersCountryatts = <String>[];
   final List<int> _fltersCountryattsId = <int>[];*/
 
@@ -50,6 +53,26 @@ class WhereModel extends ChangeNotifier {
 
   //List<dynamic> currentDisplayList = [];
   //String? isSelectedOption = 'Place';
+
+  ///DBからStarsを取得
+  fetchStars() async {
+    try {
+      listStars = await client.stars.getStars();
+      print('getStars');
+      //listPlaces.cast<Map<String, String>>();
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  ///DBに新規starを挿入・再取得･再描画
+  addStarsAndFetch(String newStar) async {
+    var stars = Stars(star: newStar);
+    /*placeId = */await client.stars.addStars(stars);
+    await fetchStars();
+    notifyListeners();
+  }
 
   ///DBからPlaceを取得
   fetchPlaces() async {
@@ -63,8 +86,6 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  //int? placeId;
-
   ///DBに新規placeを挿入・再取得･再描画
   addPlacesAndFetch(String newPlace) async {
     var places = Places(place: newPlace);
@@ -77,15 +98,13 @@ class WhereModel extends ChangeNotifier {
   fetchSeas() async {
     try {
       listSeas = await client.seas.getSeas();
-      print('get Seas');
-      //listSeas.cast<Map<String, String>>();
+      print('getSeas');
+      //listPlaces.cast<Map<String, String>>();
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
-
-  //int? seasId;
 
   ///DBに新規seaを挿入・再取得･再描画
   addSeasAndFetch(String newSea) async {
@@ -149,7 +168,32 @@ class WhereModel extends ChangeNotifier {
     notifyListeners();
   }
 
+/*  ///RadioButtonB
+  String _selectedOptionB = '';
+  String get selectedOptionB => _selectedOptionB;
+
+  set selectedOptionB(String value) {
+    _selectedOptionB = value;
+    notifyListeners();
+  }*/
+
   ///仮表示
+  String _chosenStar = '';
+  int _chosenStarId = 0;
+  String get chosenStar => _chosenStar;
+  int get chosenStarId => _chosenStarId;
+
+  set chosenStar(String choice){
+    _chosenStar = choice;
+    print(chosenStar);
+    notifyListeners();
+  }
+  set chosenStarId(int value){
+    _chosenStarId = value;
+    print(chosenStarId);
+    notifyListeners();
+  }
+
   String _chosenPlace = '';
   int _chosenPlaceId = 0;
   String get chosenPlace => _chosenPlace;
@@ -179,6 +223,28 @@ class WhereModel extends ChangeNotifier {
 
   set chosenSeaId(int value) {
     _chosenSeaId = value;
+    notifyListeners();
+  }
+
+  String _chosenLocationPrecise = '';
+  int _chosenLocationPreciseId = 0;
+  String get chosenLocationPrecise => _chosenLocationPrecise;
+  int get chosenLocationPreciseId => _chosenLocationPreciseId;
+
+  List<dynamic> currentDisplayList = [];
+
+  set chosenLocationPrecise(String locationPrecise) {
+    _chosenLocationPrecise = "";
+    notifyListeners();
+  }
+
+  set chosenLocationPreciseId(int value) {
+    _chosenLocationPreciseId = value;
+    notifyListeners();
+  }
+
+  void updateLocationPrecise(String newLocationPrecise) {
+    locationPrecise = newLocationPrecise;
     notifyListeners();
   }
 
