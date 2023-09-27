@@ -10,32 +10,14 @@ class Confirm {
   int day = 0;
   int point = 0;
 
-  //String? dateLocal = "No-Local-Date";
-
   //principal
   String name = "";
-
-/*
-  //選択された宇宙(単)
-  String? selectedUniverse = "";
-  int selectedUniverseId = 0;
-*/
-
-/*  //選択された国(単)
-  String selectedPays = "";
-  int selectedPaysId = 0;*/
-
-/*  //選択されたOcean（単）
-  String? selectedOcean;
-  //int? selectedOceanId;*/
-
-
 
   //統合された位置(単)
   String selectedLocation = 'location';
   String selectedPrecise = 'precise';
 
-  String? selectedStar;
+  //String? selectedStar;
 
   //選択されたplace（単）
   String? selectedPlace;

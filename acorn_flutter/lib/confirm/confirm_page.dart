@@ -188,62 +188,70 @@ class ConfirmPage extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Column(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                                child: Text(
-                                  'WHAT',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                  child: Text(
+                                    'WHAT',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ConfirmText(
-                                    confirmText: _confirm.name,
-                                    confirmColor: const Color(0xFFF0E68C)),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ConfirmText(
+                                      confirmText: _confirm.name,
+                                      confirmColor: const Color(0xFFF0E68C)),
+                                ),
 
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('Countries Involved',
-                                    style: AcornTheme.textTheme.headlineSmall),
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      30, 8, 30, 8),
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      itemCount: _confirm.selectedCountries.length,
-                                      itemBuilder: (context, index) {
-                                        return TermCard(
-                                          _confirm.selectedCountries[index],
-                                        );
-                                      })
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('Countries Involved at that time',
-                                    style: AcornTheme.textTheme.headlineSmall),
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      30, 8, 30, 8),
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      itemCount: _confirm.selectedATT.length,
-                                      itemBuilder: (context, index) {
-                                        return TermCard(
-                                          _confirm.selectedATT[index],
-                                        );
-                                      }
-                                  )
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Countries Involved',
+                                      style: AcornTheme.textTheme.headlineSmall),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: _confirm.selectedCountries.length,
+                                        itemBuilder: (context, index) {
+                                          return TermCard(
+                                            _confirm.selectedCountries[index],
+                                          );
+                                        })
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Countries Involved at that time',
+                                      style: AcornTheme.textTheme.headlineSmall),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        30, 8, 30, 8),
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: _confirm.selectedATT.length,
+                                        itemBuilder: (context, index) {
+                                          return TermCard(
+                                            _confirm.selectedATT[index],
+                                          );
+                                        }
+                                    )
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SingleChildScrollView(
+                            child: Column(children: [
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Organizations Involved',
@@ -263,73 +271,67 @@ class ConfirmPage extends StatelessWidget {
                                       }
                                   )
                               ),
-
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                              child: Text('People Involved',
-                                  style: AcornTheme.textTheme.headlineSmall),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: Text('People Involved',
+                                    style: AcornTheme.textTheme.headlineSmall),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      30, 8, 30, 8),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _confirm.selectedWho.length,
+                                      itemBuilder: (context, index) {
+                                        return TermCard(
+                                          _confirm.selectedWho[index],
+                                        );
+                                      }
+                                  )
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: Text('Category',
+                                    style: AcornTheme.textTheme.headlineSmall),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      30, 8, 30, 8),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _confirm.selectedCategory.length,
+                                      //gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      //  crossAxisCount: 2),
+                                      itemBuilder: (context, index) {
+                                        return TermCard(
+                                            _confirm.selectedCategory[index]
+                                        );
+                                      }
+                                  )
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: Text('Search Terms',
+                                    style: AcornTheme.textTheme.headlineSmall),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      30, 8, 30, 8),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _confirm.selectedTerm.length,
+                                      itemBuilder: (context, index) {
+                                        return TermCard(
+                                          _confirm.selectedTerm[index],
+                                        );
+                                      }
+                                  )
+                              ),
+                            ]
                             ),
-                            Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    30, 8, 30, 8),
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: _confirm.selectedWho.length,
-                                    itemBuilder: (context, index) {
-                                      return TermCard(
-                                        _confirm.selectedWho[index],
-                                      );
-                                    }
-                                )
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                              child: Text('Category',
-                                  style: AcornTheme.textTheme.headlineSmall),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    30, 8, 30, 8),
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: _confirm.selectedCategory.length,
-                                    //gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    //  crossAxisCount: 2),
-                                    itemBuilder: (context, index) {
-                                      return TermCard(
-                                          _confirm.selectedCategory[index]
-                                      );
-                                    }
-                                )
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                              child: Text('Search Terms',
-                                  style: AcornTheme.textTheme.headlineSmall),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    30, 8, 30, 8),
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: _confirm.selectedTerm.length,
-                                    itemBuilder: (context, index) {
-                                      return TermCard(
-                                        _confirm.selectedTerm[index],
-                                      );
-                                    }
-                                )
-                            ),
-                          ]
                           ),
                         ),
                       ],

@@ -20,8 +20,6 @@ var client = Client('http://localhost:8080/')
 class WherePage extends StatelessWidget{
   WherePage({super.key});
 
-  //var locationPrecise = '';
-
   var newStar = '';
   var newPlace = '';
   var newSea = '';
@@ -38,18 +36,12 @@ class WherePage extends StatelessWidget{
 
   ///Stars
   List<Stars> listStars = [];
-  final List<String> _filtersStars = <String>[];
 
   ///Place
   List<Places> listPlaces = [];
-  final List<String> _filtersPlaces = <String>[];
-  //final List<int> _filtersPlacesId = <int>[];
 
   ///Seas
   List<Seas> listSeas = [];
-  //List<Map<String, String>> displayListSeas = [];
-  final List<String> _filtersSeas = <String>[];
-  //final List<int> _filtersSeasId = <int>[];
 
   ///当時の国名
   List<Countryatts> listCountryatts = [];
@@ -76,8 +68,6 @@ class WherePage extends StatelessWidget{
   ];
 
   final List<String> _filtersLocationPrecise = <String>[];
-  //final List<int> _filtersLocationPreciseId = <int>[];
-
 
   @override
   Widget build(BuildContext context) {
@@ -257,35 +247,29 @@ class WherePage extends StatelessWidget{
                             spacing: 5.0,
                             children: currentDisplayList.map<Widget>((item) {
                               if (item is Stars) {
-                                return ChoiceFormat(
-                                    choiceList: _filtersLocationPrecise,
-                                    choiceKey: item.star,
-                                    choiceId: item.id!,
-                                    onChoiceSelected: (choiceKey, choiceId) {
+                                return ChoiceSIFormat(
+                                    choiceSIList: _filtersLocationPrecise,
+                                    choiceSIKey: item.star,
+                                    onChoiceSISelected: (choiceKey) {
                                       model.chosenLocationPrecise = choiceKey;
-                                      model.chosenLocationPreciseId = choiceId;
                                       model.updateLocationPrecise(choiceKey);
                                       print(choiceKey);
                                     });
                               } else if (item is Places) {
-                                return ChoiceFormat(
-                                    choiceList: _filtersLocationPrecise,
-                                    choiceKey: item.place,
-                                    choiceId: item.id!,
-                                    onChoiceSelected: (choiceKey, choiceId) {
+                                return ChoiceSIFormat(
+                                    choiceSIList: _filtersLocationPrecise,
+                                    choiceSIKey: item.place,
+                                    onChoiceSISelected: (choiceKey) {
                                         model.chosenLocationPrecise = choiceKey;
-                                        model.chosenLocationPreciseId = choiceId;
                                         model.updateLocationPrecise(choiceKey);
                                         print(choiceKey);
                                     });
                               } else if (item is Seas) {
-                                return ChoiceFormat(
-                                  choiceList: _filtersLocationPrecise,
-                                  choiceKey: item.sea,
-                                  choiceId: item.id!,
-                                  onChoiceSelected: (choiceKey, choiceId) {
+                                return ChoiceSIFormat(
+                                  choiceSIList: _filtersLocationPrecise,
+                                  choiceSIKey: item.sea,
+                                  onChoiceSISelected: (choiceKey) {
                                       model.chosenLocationPrecise = choiceKey;
-                                      model.chosenLocationPreciseId = choiceId;
                                       model.updateLocationPrecise(choiceKey);
                                       print(choiceKey);
                                   });
@@ -350,41 +334,17 @@ class WherePage extends StatelessWidget{
                   confirm.selectedPrecise = model.locationPrecise;
                   print("kept Selected Precise ${model.chosenLocationPrecise}");
 
-
-                ///選択されたplace
-                if (model.chosenStar != '') {
-                  confirm.selectedStar = model.chosenStar;
-                  print("kept Selected Place ${model.chosenPlace}");
-                  confirm.selectedPlaceId = model.chosenPlaceId;
-                  print("kept Selected Place ${model.chosenPlaceId}");
-                }
-
-                ///選択されたplace
-                if (model.chosenPlace != '') {
-                  confirm.selectedPlace = model.chosenPlace;
-                  print("kept Selected Place ${model.chosenPlace}");
-                  confirm.selectedPlaceId = model.chosenPlaceId;
-                  print("kept Selected Place ${model.chosenPlaceId}");
-                }
-
-                ///選択されたsea
-                if (model.chosenSea != '') {
-                  confirm.selectedSea = model.chosenSea;
-                  confirm.selectedSeaId = model.chosenSeaId;
-                  print("kept Selected Sea $model.chosenSeaId");
-                }
-
                 ///選択されたCatt
                 if (model.chosenCatt != '') {
                   confirm.selectedCatt = model.chosenCatt;
                   confirm.selectedCattId = model.chosenCattId;
-                  print("kept selected Catt $model.chosenCattId");
+                  print("kept selected Catt ${model.chosenCattId}");
                 }
 
                 ///選択されたPatt
                 if (model.chosenPatt != '') {
                   confirm.selectedPatt = model.chosenPatt;
-                  print('$model.chosenPatt');
+                  print('kept selected Patt ${model.chosenPatt}');
                   confirm.selectedPattId = model.chosenPattId;
                 }
 
