@@ -32,7 +32,8 @@ class Confirm {
 
 
   //統合された位置(単)
-  String selectedLocation = "";
+  String selectedLocation = 'location';
+  String selectedPrecise = 'precise';
 
   String? selectedStar;
 
@@ -43,8 +44,6 @@ class Confirm {
   //選択されたsea（単）
   String? selectedSea;
   int? selectedSeaId;
-
-  String selectedPrecise = "0";
 
   //選択されたCatt（単）
   String? selectedCatt = '';

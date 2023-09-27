@@ -20,7 +20,7 @@ var client = Client('http://localhost:8080/')
 class WherePage extends StatelessWidget{
   WherePage({super.key});
 
-  var locationPrecise = '';
+  //var locationPrecise = '';
 
   var newStar = '';
   var newPlace = '';
@@ -76,7 +76,7 @@ class WherePage extends StatelessWidget{
   ];
 
   final List<String> _filtersLocationPrecise = <String>[];
-  final List<int> _filtersLocationPreciseId = <int>[];
+  //final List<int> _filtersLocationPreciseId = <int>[];
 
 
   @override
@@ -322,11 +322,11 @@ class WherePage extends StatelessWidget{
             ),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
-                  double sn = (math.pi * newLatitude) / 180;
-                  double ew = (math.pi * newLongitude) / 180;
-                  x = math.cos(sn) * math.cos(ew);
-                  y = math.sin(sn);
-                  z = math.cos(sn) * math.sin(ew);
+                double sn = (math.pi * newLatitude) / 180;
+                double ew = (math.pi * newLongitude) / 180;
+                x = math.cos(sn) * math.cos(ew);
+                y = math.sin(sn);
+                z = math.cos(sn) * math.sin(ew);
 
                 showDialog<void>(
                     context: context,
@@ -346,13 +346,18 @@ class WherePage extends StatelessWidget{
                       );
                     });
 
-                  ///選択されたplace
-                  if (model.chosenStar != '') {
-                    confirm.selectedStar = model.chosenStar;
-                    print("kept Selected Place ${model.chosenPlace}");
-                    confirm.selectedPlaceId = model.chosenPlaceId;
-                    print("kept Selected Place ${model.chosenPlaceId}");
-                  }
+                ///選択されたLocationPrecise
+                  confirm.selectedPrecise = model.locationPrecise;
+                  print("kept Selected Precise ${model.chosenLocationPrecise}");
+
+
+                ///選択されたplace
+                if (model.chosenStar != '') {
+                  confirm.selectedStar = model.chosenStar;
+                  print("kept Selected Place ${model.chosenPlace}");
+                  confirm.selectedPlaceId = model.chosenPlaceId;
+                  print("kept Selected Place ${model.chosenPlaceId}");
+                }
 
                 ///選択されたplace
                 if (model.chosenPlace != '') {
@@ -391,6 +396,7 @@ class WherePage extends StatelessWidget{
                 print(newLatitude);
                 print('save where');
               },
+
               label: const Text('Temporarily Save'),
             )
             );
