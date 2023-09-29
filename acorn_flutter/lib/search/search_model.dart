@@ -28,10 +28,10 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }
 
-  fetchPrincipalByPlaces({List<int>? listPlaceIds}) async {
+  fetchPrincipalByPrecise({List<String>? listPrecise}) async {
     try {
-      _principal = await client.principal.getPrincipalByPlaces(keynumbers: listPlaceIds);
-      print("Getting principal with keynumbers: $listPlaceIds");
+      _principal = await client.principal.getPrincipalByPrecise(keywords: listPrecise);
+      print("Getting principal with keywords: $listPrecise");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');

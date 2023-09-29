@@ -20,8 +20,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
 
   final List<String> options = [
     'Current Country where it happened',
-    'Current Place-name where it happened',
-    'Current Sea-name where it happened',
+    'Current place-name where it happened',
     'Country-name at that time',
     'Place-name at that time',
     'Organisations',
@@ -29,7 +28,7 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
     'Categories',
     'Other Terms'
   ];
-  String? isSelectedOption = 'Current Country where it happened';
+  String? isSelectedOption = 'Current Location where it happened';
   List<dynamic> currentDisplayList = [];
 
   ///検索対象国の現在名
@@ -150,11 +149,11 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                         Map<String, dynamic> args = {};
                                         switch (isSelectedOption) {
                                           case 'Current Country where it happened':
-                                            args['listPays'] = filtersPays;
+                                            args['pays'] = filtersPays;
                                             print(args);
                                             break;
                                           case 'Current Place-name where it happened':
-                                            args['listPlaceIds'] = filtersVillesId;
+                                            args['listPlace'] = filtersVilles;
                                             break;
                                           case 'Current Sea-name where it happened':
                                             args['listSeaIds'] = filtersSeasId;
@@ -182,8 +181,8 @@ class _MultiSearchPageState extends State<MultiSearchPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => ResultPage(
-                                                  listPays: args['listPays'],
-                                                  listPlaceIds: args['listPlaceIds'],
+                                                  listLocation: args['listLocation'],
+                                                  listPrecise: args['listPrecise'],
                                                   listSeaIds: args['listSeaIds'],
                                                   listCattIds: args['listCattIds'] ,
                                                   listPattIds: args['listPattIds'],

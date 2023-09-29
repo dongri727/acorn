@@ -1100,12 +1100,12 @@ class Endpoints extends _i1.EndpointDispatch {
             keywords: params['keywords'],
           ),
         ),
-        'getPrincipalByPlaces': _i1.MethodConnector(
-          name: 'getPrincipalByPlaces',
+        'getPrincipalByPrecise': _i1.MethodConnector(
+          name: 'getPrincipalByPrecise',
           params: {
-            'keynumbers': _i1.ParameterDescription(
-              name: 'keynumbers',
-              type: _i1.getType<List<int>?>(),
+            'keywords': _i1.ParameterDescription(
+              name: 'keywords',
+              type: _i1.getType<List<String>?>(),
               nullable: true,
             )
           },
@@ -1114,9 +1114,9 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principal'] as _i22.PrincipalEndpoint)
-                  .getPrincipalByPlaces(
+                  .getPrincipalByPrecise(
             session,
-            keynumbers: params['keynumbers'],
+            keywords: params['keywords'],
           ),
         ),
       },

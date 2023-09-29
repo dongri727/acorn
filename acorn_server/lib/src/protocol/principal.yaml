@@ -8,5 +8,9 @@ fields:
   point: int
   affair: String
   location: String
-  placeId: int
   precise: String
+  latitude: double
+  longitude: double
+  three_d_x: double
+  three_d_y: double
+  three_d_z: double

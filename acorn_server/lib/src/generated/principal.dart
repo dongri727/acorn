@@ -18,8 +18,12 @@ class Principal extends _i1.TableRow {
     required this.point,
     required this.affair,
     required this.location,
-    required this.placeId,
     required this.precise,
+    required this.latitude,
+    required this.longitude,
+    required this.three_d_x,
+    required this.three_d_y,
+    required this.three_d_z,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -39,10 +43,18 @@ class Principal extends _i1.TableRow {
           serializationManager.deserialize<String>(jsonSerialization['affair']),
       location: serializationManager
           .deserialize<String>(jsonSerialization['location']),
-      placeId:
-          serializationManager.deserialize<int>(jsonSerialization['placeId']),
       precise: serializationManager
           .deserialize<String>(jsonSerialization['precise']),
+      latitude: serializationManager
+          .deserialize<double>(jsonSerialization['latitude']),
+      longitude: serializationManager
+          .deserialize<double>(jsonSerialization['longitude']),
+      three_d_x: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_x']),
+      three_d_y: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_y']),
+      three_d_z: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_z']),
     );
   }
 
@@ -62,9 +74,17 @@ class Principal extends _i1.TableRow {
 
   String location;
 
-  int placeId;
-
   String precise;
+
+  double latitude;
+
+  double longitude;
+
+  double three_d_x;
+
+  double three_d_y;
+
+  double three_d_z;
 
   @override
   String get tableName => 'principal';
@@ -79,8 +99,12 @@ class Principal extends _i1.TableRow {
       'point': point,
       'affair': affair,
       'location': location,
-      'placeId': placeId,
       'precise': precise,
+      'latitude': latitude,
+      'longitude': longitude,
+      'three_d_x': three_d_x,
+      'three_d_y': three_d_y,
+      'three_d_z': three_d_z,
     };
   }
 
@@ -95,8 +119,12 @@ class Principal extends _i1.TableRow {
       'point': point,
       'affair': affair,
       'location': location,
-      'placeId': placeId,
       'precise': precise,
+      'latitude': latitude,
+      'longitude': longitude,
+      'three_d_x': three_d_x,
+      'three_d_y': three_d_y,
+      'three_d_z': three_d_z,
     };
   }
 
@@ -111,8 +139,12 @@ class Principal extends _i1.TableRow {
       'point': point,
       'affair': affair,
       'location': location,
-      'placeId': placeId,
       'precise': precise,
+      'latitude': latitude,
+      'longitude': longitude,
+      'three_d_x': three_d_x,
+      'three_d_y': three_d_y,
+      'three_d_z': three_d_z,
     };
   }
 
@@ -146,11 +178,23 @@ class Principal extends _i1.TableRow {
       case 'location':
         location = value;
         return;
-      case 'placeId':
-        placeId = value;
-        return;
       case 'precise':
         precise = value;
+        return;
+      case 'latitude':
+        latitude = value;
+        return;
+      case 'longitude':
+        longitude = value;
+        return;
+      case 'three_d_x':
+        three_d_x = value;
+        return;
+      case 'three_d_y':
+        three_d_y = value;
+        return;
+      case 'three_d_z':
+        three_d_z = value;
         return;
       default:
         throw UnimplementedError();
@@ -290,9 +334,17 @@ class PrincipalTable extends _i1.Table {
 
   final location = _i1.ColumnString('location');
 
-  final placeId = _i1.ColumnInt('placeId');
-
   final precise = _i1.ColumnString('precise');
+
+  final latitude = _i1.ColumnDouble('latitude');
+
+  final longitude = _i1.ColumnDouble('longitude');
+
+  final three_d_x = _i1.ColumnDouble('three_d_x');
+
+  final three_d_y = _i1.ColumnDouble('three_d_y');
+
+  final three_d_z = _i1.ColumnDouble('three_d_z');
 
   @override
   List<_i1.Column> get columns => [
@@ -304,8 +356,12 @@ class PrincipalTable extends _i1.Table {
         point,
         affair,
         location,
-        placeId,
         precise,
+        latitude,
+        longitude,
+        three_d_x,
+        three_d_y,
+        three_d_z,
       ];
 }
 

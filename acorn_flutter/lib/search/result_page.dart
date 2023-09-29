@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
-  final List<String>? listPays;
-  final List<int>? listPlaceIds;
+  final List<String>? listLocation;
+  final List<String>? listPrecise;
   final List<int>? listSeaIds;
   final List<int>? listCattIds;
   final List<int>? listPattIds;
@@ -15,8 +15,8 @@ class ResultPage extends StatelessWidget {
 
   const ResultPage({
     super.key,
-    this.listPays,
-    this.listPlaceIds,
+    this.listLocation,
+    this.listPrecise,
     this.listSeaIds,
     this.listCattIds,
     this.listPattIds,
@@ -33,11 +33,11 @@ class ResultPage extends StatelessWidget {
       create: (_) {
         final model = SearchByOptionsModel();
 
-        if (listPays != null) {
-          model.fetchPrincipal(countries: listPays);
+        if (listLocation != null) {
+          model.fetchPrincipal(countries: listLocation);
           print('fetch Principal');
-        } else if (listPlaceIds != null) {
-          model.fetchPrincipalByPlaces(listPlaceIds: listPlaceIds);
+        } else if (listPrecise != null) {
+          model.fetchPrincipalByPrecise(listPrecise: listPrecise);
 /*        } else if (listSeaIds != null) {
           model.fetchPrincipalBySeas(listSeaIds: listSeaIds);
         } else if (listCattIds != null) {

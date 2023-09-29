@@ -469,12 +469,12 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'keywords': keywords},
       );
 
-  _i2.Future<List<_i22.Principal>> getPrincipalByPlaces(
-          {List<int>? keynumbers}) =>
+  _i2.Future<List<_i22.Principal>> getPrincipalByPrecise(
+          {List<String>? keywords}) =>
       caller.callServerEndpoint<List<_i22.Principal>>(
         'principal',
-        'getPrincipalByPlaces',
-        {'keynumbers': keynumbers},
+        'getPrincipalByPrecise',
+        {'keywords': keywords},
       );
 }
 

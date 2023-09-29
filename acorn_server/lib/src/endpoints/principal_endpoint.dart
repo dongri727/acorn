@@ -33,17 +33,17 @@ class PrincipalEndpoint extends Endpoint {
     );
   }
 
-  Future<List<Principal>> getPrincipalByPlaces(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with placeIds: $keynumbers");
+  Future<List<Principal>> getPrincipalByPrecise(Session session, {List<String>? keywords}) async {
+    print("Getting principal with placeIds: $keywords");
 
     var whereClause;
 
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
+    if (keywords != null && keywords.isNotEmpty) {
+      for (var keyword in keywords) {
         if (whereClause == null) {
-          whereClause = Principal.t.placeId.equals(keynumber);
+          whereClause = Principal.t.precise.like('%$keyword%');
         } else {
-          whereClause = whereClause | Principal.t.placeId.equals(keynumber);
+          whereClause = whereClause | Principal.t.precise.like('%$keyword%');
         }
       }
     } else {

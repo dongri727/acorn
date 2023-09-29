@@ -11,7 +11,7 @@ var client = Client('http://localhost:8080/')
 class ConfirmModel extends ChangeNotifier {
   ConfirmModel();
 
-  int period = 0;
+/*  int period = 0;
   double annee = 0.0;
   String affair = "";
   String? universe = "";
@@ -25,20 +25,20 @@ class ConfirmModel extends ChangeNotifier {
   //String localDate = "";
 
   String place = "";
-  String att = "";
+  String att = "";*/
 
-  double? latitude;
+/*  double? latitude;
   double? longitude;
   final dx = 0.0;
   final dy = 0.0;
-  final dz = 0.0;
+  final dz = 0.0;*/
 
-  List<String> countriesInvolved = [];
+/*  List<String> countriesInvolved = [];
   List<String> cattsInvolved = [];
   List<String> orgs = [];
   List<String> people = [];
   List<String> categories = [];
-  List<String> terms = [];
+  List<String> terms = [];*/
 
   //insert into DB
   Future<int> save(Confirm confirm) async {
@@ -52,85 +52,31 @@ class ConfirmModel extends ChangeNotifier {
             point: confirm.point,
             affair: confirm.name,
             location: confirm.selectedLocation,
-            placeId: confirm.selectedPlaceId,
             precise: confirm.selectedPrecise,
-
-/*            seaId: confirm.selectedSeaId,
-            cattId: confirm.selectedCattId,
-            pattId: confirm.selectedPattId,*/
+            latitude: confirm.latitude,
+            longitude: confirm.longitude,
+            three_d_x: confirm.x,
+            three_d_y: confirm.y,
+            three_d_z: confirm.z,
         );
         var principalId = await client.principal.addPrincipal(principal);
 
         debugPrint('Add principal : $principalId');
 
-
-/*        if (confirm.dateLocal != "No-Local-Date") {
-          var localdates = LocalDates(
-              principal_id: principalId, localdate: confirm.dateLocal!);
-          var localdateId = await client.localDates.addLocalDates(localdates);
-
-          debugPrint('Add localdate : $localdateId');
-        }*/
-
-/*        ///additional where
-        if (confirm.selectedPlaceId.isNotEmpty) {
-          for (var placeId in confirm.selectedPlaceId) {
-            var principal = Principal(placeId: placeId);
-            var principalId = await client.principalPlace
-                .addPrincipalPlace(principalPlace);
-            debugPrint('Added principal-place : $principalPlaceId');
-          }
-        }*/
-
-/*        if (confirm.selectedPlaceId.isNotEmpty) {
-          for (var placeId in confirm.selectedPlaceId) {
-            var principalPlace = PrincipalPlace(
-                principal_id: principalId, place_id: placeId);
-            var principalPlaceId = await client.principalPlace
-                .addPrincipalPlace(principalPlace);
-            debugPrint('Added principal-place : $principalPlaceId');
-          }
-        }*/
-
-/*        if (confirm.selectedSeaId.isNotEmpty) {
-          for (var seaId in confirm.selectedSeaId) {
-            var principalSeas = PrincipalSeas(
-                principal_id: principalId, seas_id: seaId);
-            var principalSeasId = await client.principalSeas.addPrincipalSeas(
-                principalSeas);
-            debugPrint('added principal-sea : $principalSeasId');
-          }
-        }*/
-
-/*        if (confirm.selectedCattId.isNotEmpty) {
-          for (var cattId in confirm.selectedCattId) {
+        //CATT 単
+        if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalCatt(
-                principal_id: principalId, catt_id: cattId);
+                principal_id: principalId, catt_id: confirm.selectedCattId);
             var principalCattsId = await client.principalCatt.addPCatt(pCatt);
             debugPrint('added principal-catt : $principalCattsId');
-          }
-        }*/
+        }
 
-/*        if (confirm.selectedPattId.isNotEmpty) {
-          for (var pattId in confirm.selectedPattId) {
+        //PATT 単
+        if (confirm.selectedPattId != 0) {
             var pPatt = PrincipalPatt(
-              principal_id: principalId, patt_id: pattId);
+              principal_id: principalId, patt_id: confirm.selectedPattId);
             var principalPattId = await client.principalPatt.addPPatt(pPatt);
             debugPrint('add principal-patt : $principalPattId');
-          }
-        }*/
-
-        if (confirm.latitude != null && confirm.longitude != null) {
-          var lieux = Lieux(
-            principal_id: principalId,
-            latitude: confirm.latitude!,
-            longitude: confirm.longitude!,
-            three_d_x: confirm.x!,
-            three_d_y: confirm.y!,
-            three_d_z: confirm.z!,
-          );
-          var lieuxId = await client.lieux.addLieux(lieux);
-          debugPrint('Add lieux : $lieuxId');
         }
 
         ///participants A
@@ -197,7 +143,7 @@ class ConfirmModel extends ChangeNotifier {
         return 1;
       }
     } else {
-      print("必須項目なし");
+      print("必須項目不足");
       return 2;
     }
   }

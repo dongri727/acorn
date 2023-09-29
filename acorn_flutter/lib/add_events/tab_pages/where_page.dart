@@ -67,6 +67,16 @@ class WherePage extends StatelessWidget{
     'Place-name at that time'
   ];
 
+  List<String> ns = [
+    'N',
+    'S',
+  ];
+
+  List<String> ew = [
+    'E',
+    'W',
+  ];
+
   final List<String> _filtersLocationPrecise = <String>[];
 
   @override
@@ -123,24 +133,56 @@ class WherePage extends StatelessWidget{
                                 child: Column(
                                   children: [
                                     Padding(
+                                      padding: const EdgeInsets.fromLTRB(50, 8, 200, 8),
+                                      child: RadioButtonRowFormat(
+                                          options: ns,
+                                          onChanged: (String? value) {
+                                            model.selectedOption = value!;
+                                            isSelectedOption = value;
+                                            print("selected: $value");
+                                          }),
+                                    ),
+                                    Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          50, 50, 100, 10),
+                                          50, 8, 100, 8),
                                       child: TffFormat(
                                         hintText: "Latitude",
                                         onChanged: (value) {
-                                          newLatitude = double.tryParse(value)!;
+                                          switch (isSelectedOption) {
+                                            case 'N': newLatitude = double.tryParse(value)!;
+                                            break;
+                                            case 'S': newLatitude = -double.tryParse(value)!;
+                                            break;
+                                          }
+                                          print(newLatitude);
                                         },
                                         tffColor1: Colors.black54,
                                         tffColor2: const Color(0x99e6e6fa),
                                       ),
                                     ),
                                     Padding(
+                                      padding: const EdgeInsets.fromLTRB(50, 8, 200, 8),
+                                      child: RadioButtonRowFormat(
+                                          options: ew,
+                                          onChanged: (String? value) {
+                                            model.selectedOption = value!;
+                                            isSelectedOption = value;
+                                            print("selected: $value");
+                                          }),
+                                    ),
+                                    Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          50, 10, 100, 50),
+                                          50, 8, 100, 40),
                                       child: TffFormat(
                                         hintText: "Longitude",
                                         onChanged: (value) {
-                                          newLongitude = double.tryParse(value)!;
+                                          switch (isSelectedOption) {
+                                            case 'E': newLongitude = double.tryParse(value)!;
+                                            break;
+                                            case 'W': newLongitude = -double.tryParse(value)!;
+                                            break;
+                                          }
+                                          print(newLongitude);
                                         },
                                         tffColor1: Colors.black54,
                                         tffColor2: const Color(0x99e6e6fa),
@@ -353,7 +395,6 @@ class WherePage extends StatelessWidget{
                 confirm.x = x;
                 confirm.y = y;
                 confirm.z = z;
-                print(newLatitude);
                 print('save where');
               },
 

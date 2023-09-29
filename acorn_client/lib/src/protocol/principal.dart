@@ -18,8 +18,12 @@ class Principal extends _i1.SerializableEntity {
     required this.point,
     required this.affair,
     required this.location,
-    required this.placeId,
     required this.precise,
+    required this.latitude,
+    required this.longitude,
+    required this.three_d_x,
+    required this.three_d_y,
+    required this.three_d_z,
   });
 
   factory Principal.fromJson(
@@ -39,10 +43,18 @@ class Principal extends _i1.SerializableEntity {
           serializationManager.deserialize<String>(jsonSerialization['affair']),
       location: serializationManager
           .deserialize<String>(jsonSerialization['location']),
-      placeId:
-          serializationManager.deserialize<int>(jsonSerialization['placeId']),
       precise: serializationManager
           .deserialize<String>(jsonSerialization['precise']),
+      latitude: serializationManager
+          .deserialize<double>(jsonSerialization['latitude']),
+      longitude: serializationManager
+          .deserialize<double>(jsonSerialization['longitude']),
+      three_d_x: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_x']),
+      three_d_y: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_y']),
+      three_d_z: serializationManager
+          .deserialize<double>(jsonSerialization['three_d_z']),
     );
   }
 
@@ -65,9 +77,17 @@ class Principal extends _i1.SerializableEntity {
 
   String location;
 
-  int placeId;
-
   String precise;
+
+  double latitude;
+
+  double longitude;
+
+  double three_d_x;
+
+  double three_d_y;
+
+  double three_d_z;
 
   @override
   Map<String, dynamic> toJson() {
@@ -80,8 +100,12 @@ class Principal extends _i1.SerializableEntity {
       'point': point,
       'affair': affair,
       'location': location,
-      'placeId': placeId,
       'precise': precise,
+      'latitude': latitude,
+      'longitude': longitude,
+      'three_d_x': three_d_x,
+      'three_d_y': three_d_y,
+      'three_d_z': three_d_z,
     };
   }
 }

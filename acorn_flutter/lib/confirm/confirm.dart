@@ -16,6 +16,8 @@ class Confirm {
   //統合された位置(単)
   String selectedLocation = 'location';
   String selectedPrecise = 'precise';
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   //String? selectedStar;
 
@@ -28,20 +30,16 @@ class Confirm {
   int? selectedSeaId;
 
   //選択されたCatt（単）
-  String? selectedCatt = '';
-  int? selectedCattId = 0;
+  String selectedCatt = '';
+  int selectedCattId = 0;
 
   //選択されたPatt（単）
-  String? selectedPatt = '';
-  int? selectedPattId = 0;
+  String selectedPatt = '';
+  int selectedPattId = 0;
 
-
-  double? latitude;
-  double? longitude;
-
-  double? x;
-  double? y;
-  double? z;
+  double x = 0.0;
+  double y = 0.0;
+  double z = 0.0;
 
   //pays involved
   List<String> selectedCountries = [];
