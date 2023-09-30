@@ -76,12 +76,10 @@ class PaysPage extends StatelessWidget {
                                       case 'Current Country Name':
                                         await model.fetchPaysInvolved();
                                         currentDisplayList = model.listPays;
-                                        print(currentDisplayList);
                                         break;
                                       case 'Country Name At That Time':
                                         await model.fetchCountriesAtt();
                                         currentDisplayList = model.listCATTs;
-                                        print(currentDisplayList);
                                         break;
                                     }
                                   },

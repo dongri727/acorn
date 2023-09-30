@@ -97,7 +97,7 @@ class HintText extends StatelessWidget {
       child: Text(
         hintText,
         textAlign: TextAlign.left,
-        style: AcornTheme.textTheme.headlineSmall,
+        style: AcornTheme.textTheme.headlineMedium,
         ),
       );
   }

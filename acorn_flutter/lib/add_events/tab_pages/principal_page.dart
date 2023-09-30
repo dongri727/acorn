@@ -456,17 +456,14 @@ class PrincipalPage extends StatelessWidget{
                                     case 'Universe':
                                       currentDisplayList = universe;
                                       model.updateDisplayList(universe);
-                                      print(currentDisplayList);
                                       break;
                                     case 'Current Country-name':
                                       currentDisplayList = pays;
                                       model.updateDisplayList(pays);
-                                      print(currentDisplayList);
                                       break;
                                     case 'Ocean-name':
                                       currentDisplayList = oceans;
                                       model.updateDisplayList(oceans);
-                                      print(currentDisplayList);
                                       break;
                                   }
                                 },

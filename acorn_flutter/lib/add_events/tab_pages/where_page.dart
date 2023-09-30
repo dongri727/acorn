@@ -201,24 +201,20 @@ class WherePage extends StatelessWidget{
                                   await model.fetchStars();
                                   currentDisplayList = model.listStars;
                                   model.updateLocationPrecise(model.chosenStar);
-                                  print(currentDisplayList);
                                   break;
                                 case 'Current Place-name':
                                   await model.fetchPlaces();
                                   currentDisplayList = model.listPlaces;
                                   model.updateLocationPrecise(model.chosenPlace);
-                                  print(currentDisplayList);
                                   break;
                                 case 'Sea-name':
                                   await model.fetchSeas();
                                   currentDisplayList = model.listSeas;
                                   model.updateLocationPrecise(model.chosenSea);
-                                  print(currentDisplayList);
                                   break;
                                 case 'Country-name at that time':
                                   await model.fetchCountryATT();
                                   currentDisplayList = model.listCountryatts;
-                                  print(currentDisplayList);
                                   break;
                                 case 'Place-name at that time':
                                   await model.fetchPlaceATT();

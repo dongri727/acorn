@@ -85,6 +85,19 @@ ALTER TABLE ONLY "localdates"
 
 
 --
+-- Class Oceans as table oceans
+--
+
+CREATE TABLE "oceans" (
+  "id" serial,
+  "ocean" text NOT NULL
+);
+
+ALTER TABLE ONLY "oceans"
+  ADD CONSTRAINT oceans_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Organisations as table organisations
 --
 
@@ -172,6 +185,9 @@ CREATE TABLE "principal" (
 
 ALTER TABLE ONLY "principal"
   ADD CONSTRAINT principal_pkey PRIMARY KEY (id);
+
+CREATE INDEX location_idx ON "principal" USING btree ("location");
+CREATE INDEX precise_idx ON "principal" USING btree ("precise");
 
 
 --

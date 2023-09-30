@@ -5,7 +5,6 @@ import '../confirm/confirm.dart';
 import 'tab_pages/pays_page.dart';
 import 'tab_pages/preview_page.dart';
 import 'tab_pages/principal_page.dart';
-import 'tab_pages/required_fields.dart';
 import 'tab_pages/terms_page.dart';
 import 'tab_pages/where_page.dart';
 import 'tab_pages/who_page.dart';
@@ -45,7 +44,7 @@ class TabPage extends StatelessWidget {
                       indicatorColor: Colors.yellow,
                       unselectedLabelColor: Colors.white,
                       tabs: [
-                        Tab(text: 'REQUIRED'),
+                        Tab(text: 'PRINCIPAL'),
                         Tab(text: 'ADDITIONAL "WHERE"'),
                         Tab(text: 'PARTICIPANTS A'),
                         Tab(text: 'PARTICIPANTS B'),

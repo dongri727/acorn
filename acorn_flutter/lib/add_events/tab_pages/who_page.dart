@@ -85,12 +85,10 @@ class WhoPage extends StatelessWidget {
                           case 'Organisations':
                             await model.fetchOrgsInvolved();
                             currentDisplayList = model.listOrgs;
-                            print(currentDisplayList);
                             break;
                           case 'People':
                             await model.fetchPeopleInvolved();
                             currentDisplayList = model.listPeople;
-                            print(currentDisplayList);
                             break;
                         }
                       },

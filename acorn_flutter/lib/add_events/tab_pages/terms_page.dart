@@ -86,12 +86,10 @@ class TermsPage extends StatelessWidget {
                               case 'Categories':
                                 await model.fetchCategories();
                                 currentDisplayList = model.listCategories;
-                                print(currentDisplayList);
                                 break;
                               case 'Terms':
                                 await model.fetchTerms();
                                 currentDisplayList = model.listTerms;
-                                print(currentDisplayList);
                                 break;
                             }
                           },
