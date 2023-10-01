@@ -78,6 +78,16 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }
 
+  fetchPrincipalByOrgsId({List<int>? listOrgIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByOrgsId(orgIds: listOrgIds);
+      print("Getting principal with OrgIds: $listOrgIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
 
 /*  fetchPrincipalByCategories({List<int>? listCategoryIds}) async {
     try {

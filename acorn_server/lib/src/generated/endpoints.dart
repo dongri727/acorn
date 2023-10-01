@@ -682,8 +682,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principalOrgs',
       endpoint: endpoints['principalOrgs']!,
       methodConnectors: {
-        'getPrincipalOrganisations': _i1.MethodConnector(
-          name: 'getPrincipalOrganisations',
+        'getPOrgs': _i1.MethodConnector(
+          name: 'getPOrgs',
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
@@ -696,16 +696,16 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalOrgs'] as _i13.PrincipalOrgsEndpoint)
-                  .getPrincipalOrganisations(
+                  .getPOrgs(
             session,
             keyword: params['keyword'],
           ),
         ),
-        'addPrincipalOrgs': _i1.MethodConnector(
-          name: 'addPrincipalOrgs',
+        'addPOrgs': _i1.MethodConnector(
+          name: 'addPOrgs',
           params: {
-            'principalOrgs': _i1.ParameterDescription(
-              name: 'principalOrgs',
+            'pOrgs': _i1.ParameterDescription(
+              name: 'pOrgs',
               type: _i1.getType<_i38.PrincipalOrgs>(),
               nullable: false,
             )
@@ -715,9 +715,9 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalOrgs'] as _i13.PrincipalOrgsEndpoint)
-                  .addPrincipalOrgs(
+                  .addPOrgs(
             session,
-            params['principalOrgs'],
+            params['pOrgs'],
           ),
         ),
       },
@@ -1205,6 +1205,25 @@ class Endpoints extends _i1.EndpointDispatch {
                   .getPrincipalByPersonId(
             session,
             personIds: params['personIds'],
+          ),
+        ),
+        'getPrincipalByOrgsId': _i1.MethodConnector(
+          name: 'getPrincipalByOrgsId',
+          params: {
+            'orgIds': _i1.ParameterDescription(
+              name: 'orgIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByOrgsId(
+            session,
+            orgIds: params['orgIds'],
           ),
         ),
       },

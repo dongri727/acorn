@@ -141,6 +141,7 @@ class MultiSearchPage extends StatelessWidget {
                                       break;
                                     case 'Organisations':
                                       args['listOrgIds'] = model.filtersOrgsId;
+                                      print(args);
                                       break;
                                     case 'People':
                                       args['listPersonIds'] = model.filtersPeopleId;

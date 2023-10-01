@@ -42,9 +42,10 @@ class ResultPage extends StatelessWidget {
           model.fetchPrincipalByCattId(listCattIds: listCattIds);
           print(listCattIds);
 /*        } else if (listPattIds != null) {
-          model.fetchPrincipalByPatts(listPattIds: listPattIds);
+          model.fetchPrincipalByPatts(listPattIds: listPattIds);*/
         } else if (listOrgIds != null) {
-          model.fetchPrincipalByOrgs(listOrgIds: listOrgIds);*/
+          model.fetchPrincipalByOrgsId(listOrgIds: listOrgIds);
+          print(listOrgIds);
         } else if (listPersonIds != null) {
           model.fetchPrincipalByPersonId(listPersonIds: listPersonIds);
           print(listPersonIds);

@@ -102,9 +102,9 @@ class ConfirmModel extends ChangeNotifier {
         ///participants B
         if (confirm.selectedOrgId.isNotEmpty) {
           for (var orgId in confirm.selectedOrgId) {
-            var principalOrgs = PrincipalOrgs(
+            var pOrgs = PrincipalOrgs(
                 principal_id: principalId, org_id: orgId);
-            var principalOrgsId = await client.principalOrgs.addPrincipalOrgs(principalOrgs);
+            var principalOrgsId = await client.principalOrgs.addPOrgs(pOrgs);
             debugPrint('Added Orgs involved : $principalOrgsId');
           }
         }

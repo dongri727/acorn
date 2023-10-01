@@ -266,19 +266,18 @@ class _EndpointPrincipalOrgs extends _i1.EndpointRef {
   @override
   String get name => 'principalOrgs';
 
-  _i2.Future<List<_i13.PrincipalOrgs>> getPrincipalOrganisations(
-          {String? keyword}) =>
+  _i2.Future<List<_i13.PrincipalOrgs>> getPOrgs({String? keyword}) =>
       caller.callServerEndpoint<List<_i13.PrincipalOrgs>>(
         'principalOrgs',
-        'getPrincipalOrganisations',
+        'getPOrgs',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPrincipalOrgs(_i13.PrincipalOrgs principalOrgs) =>
+  _i2.Future<int> addPOrgs(_i13.PrincipalOrgs pOrgs) =>
       caller.callServerEndpoint<int>(
         'principalOrgs',
-        'addPrincipalOrgs',
-        {'principalOrgs': principalOrgs},
+        'addPOrgs',
+        {'pOrgs': pOrgs},
       );
 }
 
@@ -511,6 +510,13 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByPersonId',
         {'personIds': personIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByOrgsId({List<int>? orgIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByOrgsId',
+        {'orgIds': orgIds},
       );
 }
 
