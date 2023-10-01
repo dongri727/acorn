@@ -57,172 +57,80 @@ class PrincipalEndpoint extends Endpoint {
     );
 }
 
-/*   Future<List<Principal>> getPrincipalBySeas(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with seaIds: $keynumbers");
+Future<List<Principal>> getPrincipalByCattId(Session session, {List<int>? cattIds}) async {
+  print("Getting principal with cattIds: $cattIds");
 
-    var whereClause;
+  if (cattIds == null || cattIds.isEmpty) {
+    return Future.value([]); // Return empty list if no cattIds are provided
+  }
 
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.seaId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.seaId.equals(keynumber);
-        }
-      }
+  // Step 1: Get principalIds from TableA using cattIds
+  var whereClausePrincipalCatt;
+  for (var cattId in cattIds) {
+    if (whereClausePrincipalCatt == null) {
+      whereClausePrincipalCatt = PrincipalCatt.t.catt_id.equals(cattId);
     } else {
-      whereClause = Constant(true);
+      whereClausePrincipalCatt = whereClausePrincipalCatt | PrincipalCatt.t.catt_id.equals(cattId);
     }
+  }
 
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
+  var PrincipalCattResults = await PrincipalCatt.find(session, where: (_) => whereClausePrincipalCatt);
+  var principalIds = PrincipalCattResults.map((row) => row.principal_id).toList();
 
-/*   Future<List<Principal>> getPrincipalByCatt(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with cattIds: $keynumbers");
-
-    var whereClause;
-
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.cattId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.cattId.equals(keynumber);
-        }
-      }
+  // Step 2: Get Principals using principalIds
+  var whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId); // Assuming the id field in Principal table is named 'id'
     } else {
-      whereClause = Constant(true);
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
     }
+  }
 
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
-
-/*   Future<List<Principal>> getPrincipalByPatt(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with pattIds: $keynumbers");
-
-    var whereClause;
-
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.pattId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.pattId.equals(keynumber);
-        }
-      }
-    } else {
-      whereClause = Constant(true);
-    }
-
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
-
-/*   Future<List<Principal>> getPrincipalByOrgs(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with orgsId: $keynumbers");
-
-    var whereClause;
-
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.orgId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.orgId.equals(keynumber);
-        }
-      }
-    } else {
-      whereClause = Constant(true);
-    }
-
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
-
-/*   Future<List<Principal>> getPrincipalByPeople(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with personId: $keynumbers");
-
-    var whereClause;
-
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.personId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.personId.equals(keynumber);
-        }
-      }
-    } else {
-      whereClause = Constant(true);
-    }
-
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
+  return await Principal.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: Principal.t.point,
+  );
 }
- */
-/*   Future<List<Principal>> getPrincipalByCategory(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with categoryId: $keynumbers");
 
-    var whereClause;
+Future<List<Principal>> getPrincipalByPersonId(Session session, {List<int>? personIds}) async {
+  print("Getting principal with personIds: $personIds");
 
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.categoryId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.categoryId.equals(keynumber);
-        }
-      }
+  if (personIds == null || personIds.isEmpty) {
+    return Future.value([]); // Return empty list if no personIds are provided
+  }
+
+  // Step 1: Get principalIds from PrincipalPeople using personIds
+  var whereClausePrincipalPeople;
+  for (var personId in personIds) {
+    if (whereClausePrincipalPeople == null) {
+      whereClausePrincipalPeople = PrincipalPeople.t.person_id.equals(personId);
     } else {
-      whereClause = Constant(true);
+      whereClausePrincipalPeople = whereClausePrincipalPeople | PrincipalPeople.t.person_id.equals(personId);
     }
+  }
 
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
+  var PrincipalPeopleResults = await PrincipalPeople.find(session, where: (_) => whereClausePrincipalPeople);
+  var principalIds = PrincipalPeopleResults.map((row) => row.principal_id).toList();
 
-/*   Future<List<Principal>> getPrincipalByTerms(Session session, {List<int>? keynumbers}) async {
-    print("Getting principal with termId: $keynumbers");
-
-    var whereClause;
-
-    if (keynumbers != null && keynumbers.isNotEmpty) {
-      for (var keynumber in keynumbers) {
-        if (whereClause == null) {
-          whereClause = Principal.t.termId.equals(keynumber);
-        } else {
-          whereClause = whereClause | Principal.t.termId.equals(keynumber);
-        }
-      }
+  // Step 2: Get Principals using principalIds
+  var whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId); // Assuming the id field in Principal table is named 'id'
     } else {
-      whereClause = Constant(true);
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
     }
+  }
 
-    return await Principal.find(
-      session,
-      where: (_) => whereClause,
-      orderBy: Principal.t.point,
-    );
-} */
+  return await Principal.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: Principal.t.point,
+  );
+}
+
+
 
 }

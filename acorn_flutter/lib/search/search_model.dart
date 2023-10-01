@@ -10,18 +10,18 @@ class SearchByOptionsModel extends ChangeNotifier {
   List<Principal> _principal = [];
 
   List<Principal> get principal => _principal;
-  List<Principal> get principalByPlaces => _principal;
-/*  List<Principal> get principalByCatts => _principal;
+  List<Principal> get principalByPrecise => _principal;
+  List<Principal> get principalByCatts => _principal;
   List<Principal> get principalByPatts => _principal;
   List<Principal> get principalByOrgs => _principal;
-  List<Principal> get principalByPeople => _principal;*/
+  List<Principal> get principalByPeople => _principal;
 
 
-  Future<void>fetchPrincipal({List<String>? countries}) async {
+  Future<void>fetchPrincipal({List<String>? location}) async {
     try {
-      print(countries);
-      _principal = await client.principal.getPrincipal(keywords: countries);
-      print("Getting principal with keywords: $countries");
+      print(location);
+      _principal = await client.principal.getPrincipal(keywords: location);
+      print("Getting principal with keywords: $location");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -38,27 +38,15 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }
 
-/*  fetchPrincipalBySeas({List<int>? listSeaIds}) async {
+  fetchPrincipalByCattId({List<int>? listCattIds}) async {
     try {
-      _principal = await client.principal.getPrincipalBySeas(keynumbers: listSeaIds);
-      print("Getting principal with keynumbers: $listSeaIds");
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*
-  fetchPrincipalByCatts({List<int>? listCattIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByCatt(keynumbers: listCattIds);
-      print("Getting principal with keynumbers: $listCattIds");
+      _principal = await client.principal.getPrincipalByCattId(cattIds: listCattIds);
+      print("Getting principal with CattIds: $listCattIds");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
-*/
 
 /*  fetchPrincipalByPatts({List<int>? listPattIds}) async {
     try {
@@ -80,15 +68,15 @@ class SearchByOptionsModel extends ChangeNotifier {
     }
   }*/
 
-/*  fetchPrincipalByPeople({List<int>? listPersonIds}) async {
+  fetchPrincipalByPersonId({List<int>? listPersonIds}) async {
     try {
-      _principal = await client.principal.getPrincipalByPeople(keynumbers: listPersonIds);
-      print("Getting principal with keynumbers: $listPersonIds");
+      _principal = await client.principal.getPrincipalByPersonId(personIds: listPersonIds);
+      print("Getting principal with PersonIds: $listPersonIds");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
 
 /*  fetchPrincipalByCategories({List<int>? listCategoryIds}) async {

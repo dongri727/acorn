@@ -239,12 +239,14 @@ class MultipleSearchModel extends ChangeNotifier {
     filtersPays.clear();
     listVilles.clear();
     filtersVilles.clear();
+    listOceans.clear();
+    filtersOceans.clear();
     listSeas.clear();
     filtersSeas.clear();
-    listPaysInvolvedATT.clear();
+    listPaysInvolved.clear();
     filtersPaysInvolved.clear();
     listPaysInvolvedATT.clear();
-    filtersPaysInvolved.clear();
+    filtersPaysInvolvedATT.clear();
     listCategories.clear();
     filtersCategories.clear();
     listPeople.clear();
@@ -253,6 +255,10 @@ class MultipleSearchModel extends ChangeNotifier {
     filtersOrgs.clear();
     listTerms.clear();
     filtersTerms.clear();
+    listCatts.clear();
+    filtersCatts.clear();
+    listPatts.clear();
+    filtersPatts.clear();
 
     notifyListeners(); // 状態が変更されたことを通知
   }

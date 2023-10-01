@@ -34,21 +34,21 @@ class ResultPage extends StatelessWidget {
         final model = SearchByOptionsModel();
 
         if (listLocation != null) {
-          model.fetchPrincipal(countries: listLocation);
+          model.fetchPrincipal(location: listLocation);
           print('fetch Principal');
         } else if (listPrecise != null) {
           model.fetchPrincipalByPrecise(listPrecise: listPrecise);
-/*        } else if (listSeaIds != null) {
-          model.fetchPrincipalBySeas(listSeaIds: listSeaIds);
         } else if (listCattIds != null) {
-          model.fetchPrincipalByCatts(listCattIds: listCattIds);
-        } else if (listPattIds != null) {
+          model.fetchPrincipalByCattId(listCattIds: listCattIds);
+          print(listCattIds);
+/*        } else if (listPattIds != null) {
           model.fetchPrincipalByPatts(listPattIds: listPattIds);
         } else if (listOrgIds != null) {
-          model.fetchPrincipalByOrgs(listOrgIds: listOrgIds);
+          model.fetchPrincipalByOrgs(listOrgIds: listOrgIds);*/
         } else if (listPersonIds != null) {
-          model.fetchPrincipalByPeople(listPersonIds: listPersonIds);
-        } else if (listCategoryIds != null) {
+          model.fetchPrincipalByPersonId(listPersonIds: listPersonIds);
+          print(listPersonIds);
+/*        } else if (listCategoryIds != null) {
           model.fetchPrincipalByCategories(listCategoryIds: listCategoryIds);
         } else if (listTermIds != null) {
           model.fetchPrincipalByTerms(listTermIds: listTermIds);*/

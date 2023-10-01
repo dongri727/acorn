@@ -309,18 +309,17 @@ class _EndpointPrincipalPeople extends _i1.EndpointRef {
   @override
   String get name => 'principalPeople';
 
-  _i2.Future<List<_i15.PrincipalPeople>> getPrincipalPeople(
-          {String? keyword}) =>
+  _i2.Future<List<_i15.PrincipalPeople>> getPPeople({String? keyword}) =>
       caller.callServerEndpoint<List<_i15.PrincipalPeople>>(
         'principalPeople',
-        'getPrincipalPeople',
+        'getPPeople',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPrincipalPeople(_i15.PrincipalPeople principalPeople) =>
+  _i2.Future<int> addPPeople(_i15.PrincipalPeople principalPeople) =>
       caller.callServerEndpoint<int>(
         'principalPeople',
-        'addPrincipalPeople',
+        'addPPeople',
         {'principalPeople': principalPeople},
       );
 }
@@ -497,6 +496,21 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByPrecise',
         {'keywords': keywords},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByCattId({List<int>? cattIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByCattId',
+        {'cattIds': cattIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByPersonId(
+          {List<int>? personIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByPersonId',
+        {'personIds': personIds},
       );
 }
 

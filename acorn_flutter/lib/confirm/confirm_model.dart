@@ -113,7 +113,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var whoId in confirm.selectedWhoId) {
             var principalPeople = PrincipalPeople(
                 principal_id: principalId, person_id: whoId);
-            var principalPeopleId = await client.principalPeople.addPrincipalPeople(principalPeople);
+            var principalPeopleId = await client.principalPeople.addPPeople(principalPeople);
             debugPrint('Added people involved : $principalPeopleId');
           }
         }

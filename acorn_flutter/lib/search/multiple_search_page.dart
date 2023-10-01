@@ -128,6 +128,7 @@ class MultiSearchPage extends StatelessWidget {
                                       break;
                                     case 'Country-name at that time':
                                       args['listCattIds'] = model.filtersCattsId;
+                                      print(args);
                                       break;
                                     case 'Place-name at that time':
                                       args['listPattIds'] = model.filtersPattsId;
@@ -143,6 +144,7 @@ class MultiSearchPage extends StatelessWidget {
                                       break;
                                     case 'People':
                                       args['listPersonIds'] = model.filtersPeopleId;
+                                      print(args);
                                       break;
                                     case 'Categories':
                                       args['listCategoriesIds'] =
@@ -166,7 +168,7 @@ class MultiSearchPage extends StatelessWidget {
                                                 listPersonIds: args['listPersonIds'],
                                                 listCategoryIds: args['listCategoriesIds'],
                                                 listTermIds: args['listTermIds'],
-                                              )
+                                              ),
                                       ));
                                 },
                                 child: const Text("Search"),
@@ -358,6 +360,7 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedCatt = filterKey;
                                           model.selectedCattId = filterId;
+                                          print(filterId);
                                         },
                                     );
                                   } else if (item is Placeatts) {
