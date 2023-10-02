@@ -592,8 +592,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principalCategories',
       endpoint: endpoints['principalCategories']!,
       methodConnectors: {
-        'getPrincipalCategories': _i1.MethodConnector(
-          name: 'getPrincipalCategories',
+        'getPCategories': _i1.MethodConnector(
+          name: 'getPCategories',
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
@@ -607,16 +607,16 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['principalCategories']
                       as _i11.PrincipalCategoriesEndpoint)
-                  .getPrincipalCategories(
+                  .getPCategories(
             session,
             keyword: params['keyword'],
           ),
         ),
-        'addPrincipalCategories': _i1.MethodConnector(
-          name: 'addPrincipalCategories',
+        'addPCategories': _i1.MethodConnector(
+          name: 'addPCategories',
           params: {
-            'principalCategories': _i1.ParameterDescription(
-              name: 'principalCategories',
+            'pCategories': _i1.ParameterDescription(
+              name: 'pCategories',
               type: _i1.getType<_i36.PrincipalCategories>(),
               nullable: false,
             )
@@ -627,9 +627,9 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['principalCategories']
                       as _i11.PrincipalCategoriesEndpoint)
-                  .addPrincipalCategories(
+                  .addPCategories(
             session,
-            params['principalCategories'],
+            params['pCategories'],
           ),
         ),
       },
@@ -1224,6 +1224,25 @@ class Endpoints extends _i1.EndpointDispatch {
                   .getPrincipalByOrgsId(
             session,
             orgIds: params['orgIds'],
+          ),
+        ),
+        'getPrincipalByCategoryId': _i1.MethodConnector(
+          name: 'getPrincipalByCategoryId',
+          params: {
+            'categoryIds': _i1.ParameterDescription(
+              name: 'categoryIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByCategoryId(
+            session,
+            categoryIds: params['categoryIds'],
           ),
         ),
       },

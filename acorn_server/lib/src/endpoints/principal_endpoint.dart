@@ -168,5 +168,42 @@ Future<List<Principal>> getPrincipalByOrgsId(Session session, {List<int>? orgIds
   );
 }
 
+Future<List<Principal>> getPrincipalByCategoryId(Session session, {List<int>? categoryIds}) async {
+  print("Getting principal with categoryIds: $categoryIds");
+
+  if (categoryIds == null || categoryIds.isEmpty) {
+    return Future.value([]); // Return empty list if no categoryIds are provided
+  }
+
+  // Step 1: Get principalIds from PrincipalOrganisation using orgIds
+  var whereClausePrincipalCategories;
+  for (var categoryId in categoryIds) {
+    if (whereClausePrincipalCategories == null) {
+      whereClausePrincipalCategories = PrincipalCategories.t.category_id.equals(categoryId);
+    } else {
+      whereClausePrincipalCategories = whereClausePrincipalCategories | PrincipalCategories.t.category_id.equals(categoryId);
+    }
+  }
+
+  var PrincipalCategoriesResults = await PrincipalCategories.find(session, where: (_) => whereClausePrincipalCategories);
+  var principalIds = PrincipalCategoriesResults.map((row) => row.principal_id).toList();
+
+  // Step 2: Get Principals using principalIds
+  var whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId); // Assuming the id field in Principal table is named 'id'
+    } else {
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
+    }
+  }
+
+  return await Principal.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: Principal.t.point,
+  );
+}
+
 
 }

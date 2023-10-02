@@ -222,20 +222,19 @@ class _EndpointPrincipalCategories extends _i1.EndpointRef {
   @override
   String get name => 'principalCategories';
 
-  _i2.Future<List<_i11.PrincipalCategories>> getPrincipalCategories(
+  _i2.Future<List<_i11.PrincipalCategories>> getPCategories(
           {String? keyword}) =>
       caller.callServerEndpoint<List<_i11.PrincipalCategories>>(
         'principalCategories',
-        'getPrincipalCategories',
+        'getPCategories',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPrincipalCategories(
-          _i11.PrincipalCategories principalCategories) =>
+  _i2.Future<int> addPCategories(_i11.PrincipalCategories pCategories) =>
       caller.callServerEndpoint<int>(
         'principalCategories',
-        'addPrincipalCategories',
-        {'principalCategories': principalCategories},
+        'addPCategories',
+        {'pCategories': pCategories},
       );
 }
 
@@ -517,6 +516,14 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByOrgsId',
         {'orgIds': orgIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByCategoryId(
+          {List<int>? categoryIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByCategoryId',
+        {'categoryIds': categoryIds},
       );
 }
 

@@ -3,7 +3,7 @@ import 'package:acorn_server/src/generated/protocol.dart';
 
 class PrincipalCategoriesEndpoint extends Endpoint {
   //Fetch principal-categories from DB
-  Future<List<PrincipalCategories>> getPrincipalCategories(Session session,
+  Future<List<PrincipalCategories>> getPCategories(Session session,
       {String? keyword}) async {
     return await PrincipalCategories.find(
       session,
@@ -13,8 +13,8 @@ class PrincipalCategoriesEndpoint extends Endpoint {
   }
 
   //Add POrgs in DB
-  Future<int> addPrincipalCategories(Session session, PrincipalCategories principalCategories) async {
-    await PrincipalCategories.insert(session, principalCategories);
-    return principalCategories.id!;
+  Future<int> addPCategories(Session session, PrincipalCategories pCategories) async {
+    await PrincipalCategories.insert(session, pCategories);
+    return pCategories.id!;
   }
 }

@@ -123,7 +123,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var categoryId in confirm.selectedCategoryId) {
             var principalCategories = PrincipalCategories(
                 principal_id: principalId, category_id: categoryId);
-            var principalCategoriesId = await client.principalCategories.addPrincipalCategories(principalCategories);
+            var principalCategoriesId = await client.principalCategories.addPCategories(principalCategories);
             debugPrint('Added principal Categories : $principalCategoriesId');
           }
         }
