@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -16,14 +19,15 @@ class MultiSearchPage extends StatelessWidget {
   MultiSearchPage({super.key});
 
   final List<String> options = [
+    'Period',
     'Universe',
     'Stars',
     'Current Country where it happened',
     'Current Place-name where it happened',
-    'Country-name at that time',
-    'Place-name at that time',
     'Oceans',
     'Seas',
+    'Country-name at that time',
+    'Place-name at that time',
     'Countries involved',
     'Names of Countries involved at that time',
     'Organisations',
@@ -32,11 +36,246 @@ class MultiSearchPage extends StatelessWidget {
     'Other Terms'
   ];
 
+
+  ///Period
+  final List<String> period =[
+    'Billion Years',
+    'Million Years',
+    'Thousand Years',
+    'Years by Dating Methods',
+    'Historical Years',
+  ];
+  final List<String> filtersPeriod = <String>[];
+
+  ///Universe
+  final List<String> universe =[
+    'Universe',
+    'Milky Way',
+    'Other Galaxy',
+    'Solar System',
+  ];
+  final List<String> filtersUniverse = <String>[];
+
+  ///Pays
+  List<String> pays = [
+    'Antarctica',
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo, DR',
+    'Congo, Republic of the',
+    'Cook Islands',
+    'Costa Rica',
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'East Timor',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Ivory Coast',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Kosovo',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'Niue',
+    'North Korea',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'South Korea',
+    'South Sudan',
+    'Spain',
+    'Sri Lanka',
+    'St. Kitts and Nevis',
+    'St. Lucia',
+    'St. Vincent and the Grenadines',
+    'Sudan',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Taiwan',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'UAE',
+    'Uganda',
+    'Ukraine',
+    'United Kingdom',
+    'United States',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Vatican City',
+    'Venezuela',
+    'Viet Nam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe',
+  ];
+  final List<String> filtersPays = <String>[];
+
+  ///Oceans
+  List<String> oceans = <String>[
+    'Arctic Ocean',
+    'North Atlantic Ocean',
+    'South Atlantic Ocean',
+    'Indian Ocean',
+    'North Pacific Ocean',
+    'South Pacific Ocean',
+    'Southern Ocean',
+  ];
+  final List<String> filtersOceans = <String>[];
+
+
+
   String? isSelectedOption = 'Universe';
   List<dynamic> currentDisplayList = [];
-
-  final List<String> _filtersSearchingWords = <String>[];
-  final List<int> _filtersSearchingWordsId = <int>[];
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +343,12 @@ class MultiSearchPage extends StatelessWidget {
                                 onPressed: () {
                                   Map<String, dynamic> args = {};
                                   switch (isSelectedOption) {
+                                    case 'Period':
+                                      args['listPeriod'] = filtersPeriod;
+                                      print(args);
+                                      break;
                                     case 'Universe':
-                                      args['listLocation'] = model.filtersUniverse;
+                                      args['listLocation'] = filtersUniverse;
                                       print(args);
                                       break;
                                     case 'Stars':
@@ -113,14 +356,14 @@ class MultiSearchPage extends StatelessWidget {
                                       print(args);
                                       break;
                                     case 'Current Country where it happened':
-                                      args['listLocation'] = model.filtersPays;
+                                      args['listLocation'] = filtersPays;
                                       print(args);
                                       break;
                                     case 'Current Place-name where it happened':
                                       args['listPrecise'] = model.filtersVilles;
                                       break;
                                     case 'Oceans':
-                                      args['listLocation'] = model.filtersOceans;
+                                      args['listLocation'] = filtersOceans;
                                       print(args);
                                       break;
                                     case 'Seas':
@@ -135,6 +378,7 @@ class MultiSearchPage extends StatelessWidget {
                                       break;
                                     case 'Countries involved':
                                       args['listPaysInvolvedIds'] = model.filtersPaysInvolvedId;
+                                      print(args);
                                       break;
                                     case 'Names of Countries involved at that time':
                                       args['listPaysInvolvedATTIds'] = model.filtersPaysInvolvedATTId;
@@ -160,11 +404,12 @@ class MultiSearchPage extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               ResultPage(
+                                                listPeriod: args['listPeriod'],
                                                 listLocation: args['listLocation'],
                                                 listPrecise: args['listPrecise'],
-                                                listSeaIds: args['listSeaIds'],
                                                 listCattIds: args['listCattIds'],
                                                 listPattIds: args['listPattIds'],
+                                                listPaysInvolvedIds: args['listPaysInvolvedIds'],
                                                 listOrgIds: args['listOrgIds'],
                                                 listPersonIds: args['listPersonIds'],
                                                 listCategoryIds: args['listCategoriesIds'],
@@ -180,12 +425,16 @@ class MultiSearchPage extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                     model.clearSearch();
+                                    currentDisplayList.clear();
+                                    filtersPeriod.clear();
+                                    filtersUniverse.clear();
+                                    filtersPays.clear();
+                                    filtersOceans.clear();
                                 },
                                 child: const Text("clear"),
                               ),
                             ),
                           ],
-
                         )),
                     Expanded(
                       flex: 5,
@@ -195,11 +444,12 @@ class MultiSearchPage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: BlankTextFormat(text: [
-                                ...model.filtersUniverse,
+                                ...filtersPeriod,
+                                ...filtersUniverse,
                                 ...model.filtersStars,
-                                ...model.filtersPays,
+                                ...filtersPays,
                                 ...model.filtersVilles,
-                                ...model.filtersOceans,
+                                ...filtersOceans,
                                 ...model.filtersSeas,
                                 ...model.filtersCatts,
                                 ...model.filtersPatts,
@@ -214,25 +464,31 @@ class MultiSearchPage extends StatelessWidget {
                               child: OutlinedButton(
                                 onPressed: () async {
                                   switch (isSelectedOption) {
+                                    case 'Period':
+                                      currentDisplayList = period;
+                                      model.updateDisplayList(period);
+                                      break;
                                     case 'Universe':
-                                      await model.fetchUniverseLookedFor();
-                                      currentDisplayList = model.listUniverse;
+                                      currentDisplayList = universe;
+                                      model.updateDisplayList(universe);
                                       break;
                                     case 'Stars':
                                       await model.fetchStarsLookedFor();
                                       currentDisplayList = model.listStars;
                                       break;
                                     case 'Current Country where it happened':
-                                      await model.fetchPaysLookedFor();
-                                      currentDisplayList = model.listPays;
+                                      //await model.fetchPaysLookedFor();
+                                      currentDisplayList = pays;
+                                      model.updateDisplayList(pays);
                                       break;
                                     case 'Current Place-name where it happened':
                                       await model.fetchVillesLookedFor();
                                       currentDisplayList = model.listVilles;
                                       break;
                                     case 'Oceans':
-                                      await model.fetchOceansLookedFor();
-                                      currentDisplayList = model.listOceans;
+                                      //await model.fetchOceansLookedFor();
+                                      currentDisplayList = oceans;
+                                      model.updateDisplayList(oceans);
                                       break;
                                     case 'Seas':
                                       await model.fetchSeasLookedFor();
@@ -286,74 +542,58 @@ class MultiSearchPage extends StatelessWidget {
                                 spacing: 5.0, // Gap between FilterChips
                                 children: currentDisplayList.map<Widget>((
                                     item) {
-                                  if (item is Pays) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPays,
-                                        filteredImValues: model.filtersPaysId,
-                                        filterImKey: item.pays,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPays = filterKey;
-                                          model.selectedPaysId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Places) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersVilles,
-                                        filteredImValues: model.filtersVillesId,
-                                        filterImKey: item.place,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPlace = filterKey;
-                                          model.selectedPlaceId = filterId;
-                                      },
-                                    );
-                                  } else if (item is Universe) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersUniverse,
-                                        filteredImValues: model.filtersUniverseId,
-                                        filterImKey: item.universe,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedUniverse = filterKey;
-                                          model.selectedUniverseId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Stars) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersStars,
-                                        filteredImValues: model.filtersSeasId,
-                                        filterImKey: item.star,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedStar = filterKey;
-                                          model.selectedStarId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Oceans) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersOceans,
-                                        filteredImValues: model.filtersOceansId,
-                                        filterImKey: item.ocean,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedOcean = filterKey;
-                                          model.selectedOceanId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Seas) {
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersSeas,
-                                        filteredImValues: model.filtersSeasId,
-                                        filterImKey: item.sea,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedSea = filterKey;
-                                          model.selectedSeaId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Countryatts) {
-                                    return FilterFormatImediat(
+                                  switch (isSelectedOption) {
+                                    case 'Period':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: filtersPeriod,
+                                          filterImSiKey: item,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedPeriod = filterImSiKey;
+                                          });
+                                    case 'Universe':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: filtersUniverse,
+                                          filterImSiKey: item,
+                                          onSelectedSI: (filterImSiKey){
+                                            model.selectedUniverse = filterImSiKey;
+                                          });
+                                    case 'Stars':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: model.filtersStars,
+                                          filterImSiKey: item.star,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedStar = filterImSiKey;
+                                          });
+                                    case 'Current Country where it happened':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: filtersPays,
+                                          filterImSiKey: item,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedPays = filterImSiKey;
+                                          });
+                                    case 'Current Place-name where it happened':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: model.filtersVilles,
+                                          filterImSiKey: item.place,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedPlace = filterImSiKey;
+                                          });
+                                    case 'Oceans':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: filtersOceans,
+                                          filterImSiKey: item,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedOcean = filterImSiKey;
+                                          });
+                                    case 'Seas':
+                                      return FilterFormatImediatSI(
+                                          filteredImSiKeys: model.filtersSeas,
+                                          filterImSiKey: item.sea,
+                                          onSelectedSI: (filterImSiKey) {
+                                            model.selectedSea = filterImSiKey;
+                                          });
+                                    case 'Country-name at that time':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersCatts,
                                         filteredImValues: model.filtersCattsId,
                                         filterImKey: item.countryatt,
@@ -362,10 +602,9 @@ class MultiSearchPage extends StatelessWidget {
                                           model.selectedCatt = filterKey;
                                           model.selectedCattId = filterId;
                                           print(filterId);
-                                        },
-                                    );
-                                  } else if (item is Placeatts) {
-                                    return FilterFormatImediat(
+                                        });
+                                    case 'Place-name at that time':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersPatts,
                                         filteredImValues: model.filtersPattsId,
                                         filterImKey: item.placeatt,
@@ -373,10 +612,29 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedPatt = filterKey;
                                           model.selectedPattId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Organisations) {
-                                    return FilterFormatImediat(
+                                        });
+                                    case 'Countries involved':
+                                      return FilterFormatImediat(
+                                          filteredImKeys: model.filtersPaysInvolved,
+                                          filteredImValues: model.filtersPaysInvolvedId,
+                                          filterImKey: item.paysInvolved,
+                                          filterImValue: item.id,
+                                          onSelected: (filterKey, filterId) {
+                                            model.selectedCountryInvolved = filterKey;
+                                            model.selectedCountryInvolvedId = filterId;
+                                          });
+                                    case 'Names of Countries involved at that time':
+                                      return FilterFormatImediat(
+                                          filteredImKeys: model.filtersPaysInvolvedATT,
+                                          filteredImValues: model.filtersPaysInvolvedATTId,
+                                          filterImKey: item.attsInvolved,
+                                          filterImValue: item.id,
+                                          onSelected: (filterKey, filterId) {
+                                            model.selectedCountryInvolvedATT = filterKey;
+                                            model.selectedCountryInvolvedATTId = filterId;
+                                          });
+                                    case 'Organisations':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersOrgs,
                                         filteredImValues: model.filtersOrgsId,
                                         filterImKey: item.organisation,
@@ -384,10 +642,9 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedOrg = filterKey;
                                           model.selectedOrgId = filterId;
-                                        },
-                                    );
-                                  } else if (item is People) {
-                                    return FilterFormatImediat(
+                                        });
+                                    case 'People':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersPeople,
                                         filteredImValues: model.filtersPeopleId,
                                         filterImKey: item.person,
@@ -395,10 +652,9 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedPeople = filterKey;
                                           model.selectedPeopleId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Categories) {
-                                    return FilterFormatImediat(
+                                        });
+                                    case 'Categories':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersCategories,
                                         filteredImValues: model.filtersCategoriesId,
                                         filterImKey: item.category,
@@ -406,10 +662,9 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedCategory = filterKey;
                                           model.selectedCategoryId = filterId;
-                                        },
-                                    );
-                                  } else if (item is Terms) {
-                                    return FilterFormatImediat(
+                                        });
+                                    case 'Other Terms':
+                                      return FilterFormatImediat(
                                         filteredImKeys: model.filtersTerms,
                                         filteredImValues: model.filtersTermsId,
                                         filterImKey: item.term,
@@ -417,8 +672,7 @@ class MultiSearchPage extends StatelessWidget {
                                         onSelected: (filterKey, filterId) {
                                           model.selectedTerm = filterKey;
                                           model.selectedTermId = filterId;
-                                        },
-                                    );
+                                        });
                                   }
                                   return const SizedBox.shrink();
                                 }).toList(),

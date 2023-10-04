@@ -33,7 +33,7 @@ class Principal extends _i1.TableRow {
     return Principal(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       period:
-          serializationManager.deserialize<int>(jsonSerialization['period']),
+          serializationManager.deserialize<String>(jsonSerialization['period']),
       annee:
           serializationManager.deserialize<double>(jsonSerialization['annee']),
       month: serializationManager.deserialize<int>(jsonSerialization['month']),
@@ -60,7 +60,7 @@ class Principal extends _i1.TableRow {
 
   static final t = PrincipalTable();
 
-  int period;
+  String period;
 
   double annee;
 
@@ -320,7 +320,7 @@ class PrincipalTable extends _i1.Table {
   /// the id will be null.
   final id = _i1.ColumnInt('id');
 
-  final period = _i1.ColumnInt('period');
+  final period = _i1.ColumnString('period');
 
   final annee = _i1.ColumnDouble('annee');
 

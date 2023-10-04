@@ -33,7 +33,7 @@ class Principal extends _i1.SerializableEntity {
     return Principal(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       period:
-          serializationManager.deserialize<int>(jsonSerialization['period']),
+          serializationManager.deserialize<String>(jsonSerialization['period']),
       annee:
           serializationManager.deserialize<double>(jsonSerialization['annee']),
       month: serializationManager.deserialize<int>(jsonSerialization['month']),
@@ -63,7 +63,7 @@ class Principal extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int period;
+  String period;
 
   double annee;
 

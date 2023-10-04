@@ -11,41 +11,12 @@ var client = Client('http://localhost:8080/')
 class ConfirmModel extends ChangeNotifier {
   ConfirmModel();
 
-/*  int period = 0;
-  double annee = 0.0;
-  String affair = "";
-  String? universe = "";
-  String? pays = "";
-  String? sea = "";
-  String location = "";
-  String locationNum = "";
-  int month = 0;
-  int day = 0;
-  int point = 0;
-  //String localDate = "";
-
-  String place = "";
-  String att = "";*/
-
-/*  double? latitude;
-  double? longitude;
-  final dx = 0.0;
-  final dy = 0.0;
-  final dz = 0.0;*/
-
-/*  List<String> countriesInvolved = [];
-  List<String> cattsInvolved = [];
-  List<String> orgs = [];
-  List<String> people = [];
-  List<String> categories = [];
-  List<String> terms = [];*/
-
   //insert into DB
   Future<int> save(Confirm confirm) async {
     if (confirm.year != 0 && confirm.name != "" && confirm.selectedLocation != "") {
       try {
         var principal = Principal(
-          period: confirm.calendarNo,
+            period: confirm.isSelectedCalendar,
             annee: confirm.annee,
             month: confirm.month,
             day: confirm.day,
@@ -85,7 +56,7 @@ class ConfirmModel extends ChangeNotifier {
             var countryInvolved = CountryInvolved(
                 principal_id: principalId, pays_id: countryId);
             var countryInvolvedId = await client.countryInvolved
-                .addCountryInvolved(countryInvolved);
+                .addCInvolved(countryInvolved);
             debugPrint('Added country involved : $countryInvolvedId');
           }
         }

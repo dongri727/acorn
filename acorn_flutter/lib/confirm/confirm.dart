@@ -2,8 +2,8 @@ class Confirm {
   Confirm();
 
   //when
-  String isSelectedCalendar = "HistoricalYears";
-  int calendarNo = 0;
+  String isSelectedCalendar = "Historical Years";
+  //int calendarNo = 0;
   double annee = 0.0;
   int year = 0;
   int month = 0;

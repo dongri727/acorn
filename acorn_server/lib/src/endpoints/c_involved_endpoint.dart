@@ -3,7 +3,7 @@ import 'package:acorn_server/src/generated/protocol.dart';
 
 class CountryInvolvedEndpoint extends Endpoint {
   //Fetch countries-involved from DB
-  Future<List<CountryInvolved>> getCountryInvolved(Session session,
+  Future<List<CountryInvolved>> getCInvolved(Session session,
       {String? keyword}) async {
     return await CountryInvolved.find(
       session,
@@ -13,8 +13,8 @@ class CountryInvolvedEndpoint extends Endpoint {
   }
 
   //Add country involved in DB
-  Future<int> addCountryInvolved(Session session, CountryInvolved countryInvolved) async {
-    await CountryInvolved.insert(session, countryInvolved);
-    return countryInvolved.id!;
+  Future<int> addCInvolved(Session session, CountryInvolved cInvolved) async {
+    await CountryInvolved.insert(session, cInvolved);
+    return cInvolved.id!;
   }
 }

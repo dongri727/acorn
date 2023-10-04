@@ -268,8 +268,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'countryInvolved',
       endpoint: endpoints['countryInvolved']!,
       methodConnectors: {
-        'getCountryInvolved': _i1.MethodConnector(
-          name: 'getCountryInvolved',
+        'getCInvolved': _i1.MethodConnector(
+          name: 'getCInvolved',
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
@@ -282,16 +282,16 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['countryInvolved'] as _i3.CountryInvolvedEndpoint)
-                  .getCountryInvolved(
+                  .getCInvolved(
             session,
             keyword: params['keyword'],
           ),
         ),
-        'addCountryInvolved': _i1.MethodConnector(
-          name: 'addCountryInvolved',
+        'addCInvolved': _i1.MethodConnector(
+          name: 'addCInvolved',
           params: {
-            'countryInvolved': _i1.ParameterDescription(
-              name: 'countryInvolved',
+            'cInvolved': _i1.ParameterDescription(
+              name: 'cInvolved',
               type: _i1.getType<_i29.CountryInvolved>(),
               nullable: false,
             )
@@ -301,9 +301,9 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['countryInvolved'] as _i3.CountryInvolvedEndpoint)
-                  .addCountryInvolved(
+                  .addCInvolved(
             session,
-            params['countryInvolved'],
+            params['cInvolved'],
           ),
         ),
       },
@@ -902,8 +902,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principalTerms',
       endpoint: endpoints['principalTerms']!,
       methodConnectors: {
-        'getPrincipalTerms': _i1.MethodConnector(
-          name: 'getPrincipalTerms',
+        'getPTerms': _i1.MethodConnector(
+          name: 'getPTerms',
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
@@ -916,7 +916,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalTerms'] as _i18.PrincipalTermsEndpoint)
-                  .getPrincipalTerms(
+                  .getPTerms(
             session,
             keyword: params['keyword'],
           ),
@@ -924,8 +924,8 @@ class Endpoints extends _i1.EndpointDispatch {
         'addPrincipalTerms': _i1.MethodConnector(
           name: 'addPrincipalTerms',
           params: {
-            'principalTerms': _i1.ParameterDescription(
-              name: 'principalTerms',
+            'pTerms': _i1.ParameterDescription(
+              name: 'pTerms',
               type: _i1.getType<_i43.PrincipalTerms>(),
               nullable: false,
             )
@@ -937,7 +937,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['principalTerms'] as _i18.PrincipalTermsEndpoint)
                   .addPrincipalTerms(
             session,
-            params['principalTerms'],
+            params['pTerms'],
           ),
         ),
       },
@@ -1150,6 +1150,25 @@ class Endpoints extends _i1.EndpointDispatch {
             keywords: params['keywords'],
           ),
         ),
+        'getPrincipalByPeriod': _i1.MethodConnector(
+          name: 'getPrincipalByPeriod',
+          params: {
+            'keywords': _i1.ParameterDescription(
+              name: 'keywords',
+              type: _i1.getType<List<String>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByPeriod(
+            session,
+            keywords: params['keywords'],
+          ),
+        ),
         'getPrincipalByPrecise': _i1.MethodConnector(
           name: 'getPrincipalByPrecise',
           params: {
@@ -1188,6 +1207,25 @@ class Endpoints extends _i1.EndpointDispatch {
             cattIds: params['cattIds'],
           ),
         ),
+        'getPrincipalByPattId': _i1.MethodConnector(
+          name: 'getPrincipalByPattId',
+          params: {
+            'pattIds': _i1.ParameterDescription(
+              name: 'pattIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByPattId(
+            session,
+            pattIds: params['pattIds'],
+          ),
+        ),
         'getPrincipalByPersonId': _i1.MethodConnector(
           name: 'getPrincipalByPersonId',
           params: {
@@ -1205,6 +1243,25 @@ class Endpoints extends _i1.EndpointDispatch {
                   .getPrincipalByPersonId(
             session,
             personIds: params['personIds'],
+          ),
+        ),
+        'getPrincipalByCInvolvedId': _i1.MethodConnector(
+          name: 'getPrincipalByCInvolvedId',
+          params: {
+            'cInvolvedIds': _i1.ParameterDescription(
+              name: 'cInvolvedIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByCInvolvedId(
+            session,
+            cInvolvedIds: params['cInvolvedIds'],
           ),
         ),
         'getPrincipalByOrgsId': _i1.MethodConnector(
@@ -1243,6 +1300,25 @@ class Endpoints extends _i1.EndpointDispatch {
                   .getPrincipalByCategoryId(
             session,
             categoryIds: params['categoryIds'],
+          ),
+        ),
+        'getPrincipalByTermId': _i1.MethodConnector(
+          name: 'getPrincipalByTermId',
+          params: {
+            'termIds': _i1.ParameterDescription(
+              name: 'termIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByTermId(
+            session,
+            termIds: params['termIds'],
           ),
         ),
       },

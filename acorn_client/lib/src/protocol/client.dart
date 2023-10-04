@@ -63,18 +63,18 @@ class _EndpointCountryInvolved extends _i1.EndpointRef {
   @override
   String get name => 'countryInvolved';
 
-  _i2.Future<List<_i4.CountryInvolved>> getCountryInvolved({String? keyword}) =>
+  _i2.Future<List<_i4.CountryInvolved>> getCInvolved({String? keyword}) =>
       caller.callServerEndpoint<List<_i4.CountryInvolved>>(
         'countryInvolved',
-        'getCountryInvolved',
+        'getCInvolved',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addCountryInvolved(_i4.CountryInvolved countryInvolved) =>
+  _i2.Future<int> addCInvolved(_i4.CountryInvolved cInvolved) =>
       caller.callServerEndpoint<int>(
         'countryInvolved',
-        'addCountryInvolved',
-        {'countryInvolved': countryInvolved},
+        'addCInvolved',
+        {'cInvolved': cInvolved},
       );
 }
 
@@ -370,18 +370,18 @@ class _EndpointPrincipalTerms extends _i1.EndpointRef {
   @override
   String get name => 'principalTerms';
 
-  _i2.Future<List<_i18.PrincipalTerms>> getPrincipalTerms({String? keyword}) =>
+  _i2.Future<List<_i18.PrincipalTerms>> getPTerms({String? keyword}) =>
       caller.callServerEndpoint<List<_i18.PrincipalTerms>>(
         'principalTerms',
-        'getPrincipalTerms',
+        'getPTerms',
         {'keyword': keyword},
       );
 
-  _i2.Future<int> addPrincipalTerms(_i18.PrincipalTerms principalTerms) =>
+  _i2.Future<int> addPrincipalTerms(_i18.PrincipalTerms pTerms) =>
       caller.callServerEndpoint<int>(
         'principalTerms',
         'addPrincipalTerms',
-        {'principalTerms': principalTerms},
+        {'pTerms': pTerms},
       );
 }
 
@@ -488,6 +488,14 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'keywords': keywords},
       );
 
+  _i2.Future<List<_i23.Principal>> getPrincipalByPeriod(
+          {List<String>? keywords}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByPeriod',
+        {'keywords': keywords},
+      );
+
   _i2.Future<List<_i23.Principal>> getPrincipalByPrecise(
           {List<String>? keywords}) =>
       caller.callServerEndpoint<List<_i23.Principal>>(
@@ -503,12 +511,27 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'cattIds': cattIds},
       );
 
+  _i2.Future<List<_i23.Principal>> getPrincipalByPattId({List<int>? pattIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByPattId',
+        {'pattIds': pattIds},
+      );
+
   _i2.Future<List<_i23.Principal>> getPrincipalByPersonId(
           {List<int>? personIds}) =>
       caller.callServerEndpoint<List<_i23.Principal>>(
         'principal',
         'getPrincipalByPersonId',
         {'personIds': personIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByCInvolvedId(
+          {List<int>? cInvolvedIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByCInvolvedId',
+        {'cInvolvedIds': cInvolvedIds},
       );
 
   _i2.Future<List<_i23.Principal>> getPrincipalByOrgsId({List<int>? orgIds}) =>
@@ -524,6 +547,13 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByCategoryId',
         {'categoryIds': categoryIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByTermId({List<int>? termIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByTermId',
+        {'termIds': termIds},
       );
 }
 

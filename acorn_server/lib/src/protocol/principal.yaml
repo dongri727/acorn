@@ -1,7 +1,7 @@
 class: Principal
 table: principal
 fields:
-  period: int
+  period: String
   annee: double
   month: int
   day: int

@@ -168,7 +168,7 @@ ALTER TABLE ONLY "places"
 
 CREATE TABLE "principal" (
   "id" serial,
-  "period" integer NOT NULL,
+  "period" text NOT NULL,
   "annee" double precision NOT NULL,
   "month" integer NOT NULL,
   "day" integer NOT NULL,

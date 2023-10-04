@@ -17,28 +17,22 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final List<dynamic> _currentDisplayList = [];
-  List<dynamic> get currentDisplayList => _currentDisplayList;
+  List<String> currentDisplayList = [];
+
+
+  ///時代別検索
+/*  List<String> listPeriod = [];
+  final List<String> filtersPeriod = <String>[];
+  List<String> get period => listPeriod;*/
 
   ///宇宙の検索
-  List<Universe> listUniverse = [];
+/*  List<String> listUniverse = [];
   final List<String> filtersUniverse = <String>[];
-  final List<int> filtersUniverseId = <int>[];
-
-  fetchUniverseLookedFor() async {
-    try {
-      listUniverse = await client.universe.getUniverse();
-      print(listUniverse);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
+  List<String> get universe => listUniverse;*/
 
   ///宇宙の検索
   List<Stars> listStars = [];
   final List<String> filtersStars = <String>[];
-  final List<int> filtersStarsId = <int>[];
 
   fetchStarsLookedFor() async {
     try {
@@ -51,11 +45,11 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///検索対象国の現在名
-  List<Pays> listPays = [];
+/*  List<Pays> listPays = [];
   final List<String> filtersPays = <String>[];
-  final List<int> filtersPaysId = <int>[];
+  final List<int> filtersPaysId = <int>[];*/
 
-  fetchPaysLookedFor() async {
+/*  fetchPaysLookedFor() async {
     try {
       listPays = await client.pays.getPays();
       print(listPays);
@@ -63,7 +57,7 @@ class MultipleSearchModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
   ///検索対象都市の現在名
   List<Places> listVilles = [];
@@ -81,11 +75,11 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///検索対象海域
-  List<Oceans> listOceans = [];
+/*  List<Oceans> listOceans = [];
   final List<String> filtersOceans = <String>[];
-  final List<int> filtersOceansId = <int>[];
+  final List<int> filtersOceansId = <int>[];*/
 
-  fetchOceansLookedFor() async {
+/*  fetchOceansLookedFor() async {
     try {
       listOceans = await client.oceans.getOceans();
       print(listOceans);
@@ -93,7 +87,7 @@ class MultipleSearchModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
   ///検索対象海域の現在名
   List<Seas> listSeas = [];
@@ -231,16 +225,14 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   void clearSearch() {
-    listUniverse.clear();
-    filtersUniverse.clear();
     listStars.clear();
     filtersStars.clear();
-    listPays.clear();
-    filtersPays.clear();
+/*    listPays.clear();
+    filtersPays.clear();*/
     listVilles.clear();
     filtersVilles.clear();
-    listOceans.clear();
-    filtersOceans.clear();
+/*    listOceans.clear();
+    filtersOceans.clear();*/
     listSeas.clear();
     filtersSeas.clear();
     listPaysInvolved.clear();
@@ -383,6 +375,36 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _selectedCountryInvolved = '';
+  int _selectedCountryInvolvedId = 0;
+  String get selectedCountryInvolved => _selectedCountryInvolved;
+  int get selectedCountryInvolvedId => _selectedCountryInvolvedId;
+
+  set selectedCountryInvolved(String cInvolved) {
+    _selectedCountryInvolved = cInvolved;
+    notifyListeners();
+  }
+
+  set selectedCountryInvolvedId(int value) {
+    _selectedCountryInvolvedId = value;
+    notifyListeners();
+  }
+
+  String _selectedCountryInvolvedATT = '';
+  int _selectedCountryInvolvedATTId = 0;
+  String get selectedCountryInvolvedATT => _selectedCountryInvolvedATT;
+  int get selectedCountryInvolvedATTId => _selectedCountryInvolvedATTId;
+
+  set selectedCountryInvolvedATT(String attsInvolved) {
+    _selectedCountryInvolvedATT = attsInvolved;
+    notifyListeners();
+  }
+
+  set selectedCountryInvolvedATTId(int value) {
+    _selectedCountryInvolvedATTId = value;
+    notifyListeners();
+  }
+
   String _selectedOrg = '';
   int _selectedOrgId = 0;
   String get selectedOrg => _selectedOrg;
@@ -442,5 +464,27 @@ class MultipleSearchModel extends ChangeNotifier {
     _selectedTermId = value;
     notifyListeners();
   }
+
+  String _selectedPeriod = '';
+  int _selectedPeriodId = 0;
+  String get selectedPeriod => _selectedPeriod;
+  int get selectedPeriodId => _selectedPeriodId;
+
+  set selectedPeriod(String period) {
+    _selectedPeriod = period;
+    notifyListeners();
+  }
+
+  set selectedPeriodId(int value) {
+    _selectedPeriodId = value;
+    notifyListeners();
+  }
+
+  void updateDisplayList(List<String> newList) {
+    currentDisplayList = newList;
+    notifyListeners();
+  }
+
+
 
 }

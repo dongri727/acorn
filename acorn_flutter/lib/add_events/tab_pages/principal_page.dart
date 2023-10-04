@@ -28,15 +28,15 @@ class PrincipalPage extends StatelessWidget{
   var newDay = 0;
   var newPoint = 0;
   var newName= '';
-  String isSelectedCalendar = 'HistoricalYears';
+  String isSelectedCalendar = 'Historical Years';
   var calendarNo = 0;
 
   List<String> periods = <String>[
-    'BillionYears',
-    'MillionYears',
-    'ThousandYears',
-    'YearsByDatingMethods',
-    'HistoricalYears',
+    'Billion Years',
+    'Million Years',
+    'Thousand Years',
+    'Years by Dating Methods',
+    'Historical Years',
   ];
 
   final List<String> _filtersLocation = <String>[];
@@ -47,8 +47,6 @@ class PrincipalPage extends StatelessWidget{
     'Milky Way',
     'Other Galaxies',
     'Solar System',
-    'Earth',
-    'Moon',
   ];
 
   ///Pays
@@ -257,13 +255,17 @@ class PrincipalPage extends StatelessWidget{
   ///Oceans
   List<String> oceans = <String>[
     'Arctic Ocean',
+    'North Atlantic Ocean',
+    'South Atlantic Ocean',
     'Indian Ocean',
-    'Pacific Ocean',
+    'North Pacific Ocean',
+    'South Pacific Ocean',
     'Southern Ocean',
   ];
 
   List<String> currentDisplayList = [];
   String? isSelectedOption = '';
+
   List<String> options = [
     'Universe',
     'Current Country-name',
@@ -514,32 +516,32 @@ class PrincipalPage extends StatelessWidget{
 
                     // convert the years depending on the selected calendar period
                     switch (isSelectedCalendar) {
-                      case 'BillionYears':
+                      case 'Billion Years':
                         newYearI = (newYearD * 1000000000).round();
-                        calendarNo = 1;// billion years
+                        //calendarNo = 1;// billion years
                         break;
-                      case 'MillionYears':
+                      case 'Million Years':
                         newYearI = (newYearD * 1000000).round();
-                        calendarNo = 2;// million years
+                        //calendarNo = 2;// million years
                         break;
-                      case 'ThousandYears':
+                      case 'Thousand Years':
                         newYearI = (newYearD * 1000).round();
-                        calendarNo = 3;
+                        //calendarNo = 3;
                         break;
-                      case 'YearsByDatingMethods':
+                      case 'Years by Dating Methods':
                         newYearI = (2000 - newYearD).round();
-                        calendarNo = 4;
+                        //calendarNo = 4;
                         break;
-                      case 'HistoricalYears':
+                      case 'Historical Years':
                         newYearI = (newYearD).round();
-                        calendarNo = 5;
+                        //calendarNo = 5;
                         break;
                     }
                     ///make data of point
                     newPoint = (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay).toDouble()).round();
 
                     confirm.isSelectedCalendar = isSelectedCalendar;
-                    confirm.calendarNo = calendarNo;
+                    //confirm.calendarNo = calendarNo;
                     confirm.year = newYearI;
                     confirm.annee = newYearD;
                     confirm.month = newMonth;

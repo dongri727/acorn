@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
+  final List<String>? listPeriod;
   final List<String>? listLocation;
   final List<String>? listPrecise;
   final List<int>? listSeaIds;
   final List<int>? listCattIds;
   final List<int>? listPattIds;
+  final List<int>? listPaysInvolvedIds;
   final List<int>? listOrgIds;
   final List<int>? listPersonIds;
   final List<int>? listCategoryIds;
@@ -15,11 +17,13 @@ class ResultPage extends StatelessWidget {
 
   const ResultPage({
     super.key,
+    this.listPeriod,
     this.listLocation,
     this.listPrecise,
     this.listSeaIds,
     this.listCattIds,
     this.listPattIds,
+    this.listPaysInvolvedIds,
     this.listOrgIds,
     this.listPersonIds,
     this.listCategoryIds,
@@ -32,8 +36,9 @@ class ResultPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) {
         final model = SearchByOptionsModel();
-
-        if (listLocation != null) {
+        if (listPeriod != null) {
+          model.fetchPrincipalByPeriod(period: listPeriod);
+        } else if (listLocation != null) {
           model.fetchPrincipal(location: listLocation);
           print('fetch Principal');
         } else if (listPrecise != null) {
@@ -41,8 +46,8 @@ class ResultPage extends StatelessWidget {
         } else if (listCattIds != null) {
           model.fetchPrincipalByCattId(listCattIds: listCattIds);
           print(listCattIds);
-/*        } else if (listPattIds != null) {
-          model.fetchPrincipalByPatts(listPattIds: listPattIds);*/
+        } else if (listPattIds != null) {
+          model.fetchPrincipalByPattId(listPattIds: listPattIds);
         } else if (listOrgIds != null) {
           model.fetchPrincipalByOrgsId(listOrgIds: listOrgIds);
           print(listOrgIds);
@@ -51,8 +56,8 @@ class ResultPage extends StatelessWidget {
           print(listPersonIds);
         } else if (listCategoryIds != null) {
           model.fetchPrincipalByCategoryId(listCategoryIds: listCategoryIds);
-/*        } else if (listTermIds != null) {
-          model.fetchPrincipalByTerms(listTermIds: listTermIds);*/
+        } else if (listTermIds != null) {
+          model.fetchPrincipalByTermId(listTermIds: listTermIds);
         }
         return model;
       },
@@ -62,24 +67,32 @@ class ResultPage extends StatelessWidget {
         ),
         body: Consumer<SearchByOptionsModel>(
           builder: (context, model, child) {
-            return ListView.builder(
-              itemCount: model.principal.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Card(
-                    color: const Color(0xFFe6e6fa),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        leading: Text(model.principal[index].annee.toString()),
-                        title: Text(model.principal[index].affair),
-                        subtitle: Text(model.principal[index].location),
+            return Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/both.png'),
+                    fit: BoxFit.cover,
+                  )
+              ),
+              child: ListView.builder(
+                itemCount: model.principal.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Card(
+                      color: const Color(0xFFe6e6fa),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: Text(model.principal[index].annee.toString()),
+                          title: Text(model.principal[index].affair),
+                          subtitle: Text(model.principal[index].location),
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             );
           },
         ),
