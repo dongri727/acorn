@@ -1,0 +1,4 @@
+class: Universe
+table: universe
+fields: 
+  universe: String

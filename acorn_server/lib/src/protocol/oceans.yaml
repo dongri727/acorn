@@ -1,0 +1,4 @@
+class: Oceans
+table: oceans
+fields: 
+  ocean: String
