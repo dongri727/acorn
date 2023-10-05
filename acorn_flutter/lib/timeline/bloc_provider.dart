@@ -17,7 +17,7 @@ class BlocProvider extends InheritedWidget {
         TargetPlatform platform = TargetPlatform.iOS})
       : timeline = t,
         super(key: key, child: child) {
-    timeline
+/*    timeline
         .fetchPrincipal()
         .then((List<TimelineEntry> entries) {
       timeline.setViewport(
@@ -27,7 +27,7 @@ class BlocProvider extends InheritedWidget {
 
       /// Advance the Timeline to its starting position.
       timeline.advance(0.0, false);
-    });
+    });*/
   }
 
   @override

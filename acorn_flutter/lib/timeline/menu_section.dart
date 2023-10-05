@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'menu_data.dart';
 
-typedef NavigateTo = Function(MenuItemData item);
+typedef NavigateTo = Function(MenuItemData item, BuildContext context);
 
 /// This widget displays the single menu section of the [MainMenuWidget].
 /// There are main sections, as loaded from the menu.json file in the　assets folder.
@@ -50,7 +50,7 @@ class MenuSection extends StatelessWidget {
                     fontSize: 16.0,
                   ),
                 ),
-                onTap: () => navigateTo(item),
+                onTap: () => navigateTo(item, context),
               ),
             );
           }).toList(),

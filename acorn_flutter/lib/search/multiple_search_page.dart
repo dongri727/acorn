@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -272,9 +269,7 @@ class MultiSearchPage extends StatelessWidget {
   ];
   final List<String> filtersOceans = <String>[];
 
-
-
-  String? isSelectedOption = 'Universe';
+  String? isSelectedOption = 'Period';
   List<dynamic> currentDisplayList = [];
 
   @override

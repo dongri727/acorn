@@ -1,8 +1,10 @@
 import "package:acorn_client/acorn_client.dart";
+import "package:acorn_flutter/timeline/timeline.dart";
 import "package:acorn_flutter/utils/blank_text_format.dart";
 import "package:flutter/material.dart";
 import 'bloc_provider.dart';
 import "../utils/tff_format.dart";
+import "entry.dart";
 import "menu_data.dart";
 import "menu_section.dart";
 import "widget.dart";
@@ -15,7 +17,6 @@ class MainMenuWidget extends StatefulWidget {
 }
 
 class MainMenuWidgetState extends State<MainMenuWidget> {
-
   /// [MenuData] selects era witch will be displayed at the Timeline
   /// This data is loaded from the asset bundle during [initState()]
   final MenuData _menu = MenuData();
@@ -25,9 +26,8 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   /// Helper function which sets the [MenuItemData] for the [TimelineWidget].
   /// This will trigger a transition from the current menu to the Timeline,
   /// thus the push on the [Navigator], this widget will know where to scroll to.
-  navigateToTimeline(MenuItemData item) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(
+  navigateToTimeline(MenuItemData item, BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
       builder: (BuildContext context) =>
           TimelineWidget(item, BlocProvider.getTimeline(context)),
     ));
@@ -55,9 +55,9 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
     final timeline = BlocProvider.getTimeline(context);
 
-    List<Widget> tail = [];
+    // List<Widget> tail = [];
 
-    tail
+/*    tail
         .addAll(_menu.sections
         .map<Widget>((MenuSectionData section) => Container(
           margin: const EdgeInsets.only(top: 20.0),
@@ -69,69 +69,94 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
           navigateToTimeline,
         )))
         .toList(growable: false)
-    );
+    );*/
+    bool _hasSetViewport = false;
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("TIMELINE"),
-        ),
-        body: Padding(
-          padding: EdgeInsets.only(top: devicePadding.top),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20,20,5,20),
-                        child: FormatGrey(
-                          controller: controller,
-                          hintText: "Search Term",
-                          onChanged: (text) {
-                          },
-                        ),
+      appBar: AppBar(
+        title: const Text("TIMELINE"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(top: devicePadding.top),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 5, 20),
+                      child: FormatGrey(
+                        controller: controller,
+                        hintText: "Search Term",
+                        onChanged: (text) {},
                       ),
                     ),
-                    Expanded(
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (controller.text.isNotEmpty) {
+                            setState(() {
+                              _countries.add(controller.text);
+                            });
+                            timeline
+                                .fetchPrincipal(countries: _countries);
+/*                                .then((List<TimelineEntry> entries) {
+                                    timeline.setViewport(
+                                        start: entries.first.start * 2.0,
+                                        end: entries.first.start,
+                                        animate: true);
+
+                                    /// Advance the Timeline to its starting position.
+                                    timeline.advance(0.0, false);
+
+                          });*/
+                            print("Submitted countries: $_countries");
+                          }
+                          controller.clear();
+                        },
+                        child: const Text("Add"),
+                      ),
+                    ),
+                  ),
+                  Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(5,20,20,20),
+                        padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
                         child: ElevatedButton(
                           onPressed: () {
-                            if (controller.text.isNotEmpty){
-                              setState(() {
-                                _countries.add(controller.text);
-                              });
-                              timeline.fetchPrincipal(countries: _countries);
-                              print("Submitted countries: $_countries");
-                            }
-                            controller.clear();
+                            setState(() {
+                              _countries.clear();
+                            });
                           },
-                          child: const Text("Add"),
+                          child: const Text('Clear'),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                _countries.clear();
-                              });
-                            },
-                            child: const Text('Clear'),
-                          ),
-                        )
-                    )
-                  ],
-                ),
-                BlankTextBlackFormat(text: _countries.join(',')),
-              ] + tail),
-        ),
+                      ))
+                ],
+              ),
+              BlankTextBlackFormat(text: _countries.join(',')),
+              ..._menu.sections
+                  .map<Widget>(
+                      (MenuSectionData section) => Builder(builder: (context) {
+                            return Container(
+                                margin: const EdgeInsets.only(top: 20.0),
+                                child: MenuSection(
+                                  section.label,
+                                  section.backgroundColor,
+                                  section.textColor,
+                                  section.items,
+                                  (item, context) =>
+                                      navigateToTimeline(item, context),
+                                ));
+                          }))
+                  .toList(growable: false)
+            ]),
+      ),
     );
   }
 }
