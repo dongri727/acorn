@@ -70,6 +70,15 @@ class ConfirmModel extends ChangeNotifier {
           }
         }
 
+        if (confirm.selectedStarId.isNotEmpty) {
+          for (var starId in confirm.selectedStarId) {
+            var starsInvolved = StarsInvolved(
+                principal_id: principalId, star_id: starId);
+            var starInvolvedId = await client.starsInvolved.addStarsInvolved(starsInvolved);
+            debugPrint('Added Star involved : $starInvolvedId');
+          }
+        }
+
         ///participants B
         if (confirm.selectedOrgId.isNotEmpty) {
           for (var orgId in confirm.selectedOrgId) {

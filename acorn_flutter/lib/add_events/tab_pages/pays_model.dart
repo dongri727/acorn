@@ -19,6 +19,11 @@ class PaysModel extends ChangeNotifier {
   final List<String> filtersCATTs = <String>[];
   final List<int> filtersCATTId = <int>[];
 
+  ///観測された星
+  List<Stars> listStars = [];
+  final List<String> filtersStars = <String>[];
+  final List<int> filtersStarId = <int>[];
+
   fetchPaysInvolved() async {
     try {
       listPays = await client.pays.getPays();
@@ -38,6 +43,15 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
+  fetchStars() async {
+    try {
+      listStars = await client.stars.getStars();
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
   addCountryATTandFetch(String newCATT) async {
     try {
     var catts = Countryatts(countryatt: newCATT);
@@ -45,6 +59,18 @@ class PaysModel extends ChangeNotifier {
     await fetchCountriesAtt();
     print(catts);
     notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  addStarAndFetch(String newStar) async {
+    try {
+      var stars = Stars(star: newStar);
+      await client.stars.addStars(stars);
+      await fetchStars();
+      print(stars);
+      notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
@@ -77,6 +103,21 @@ class PaysModel extends ChangeNotifier {
 
   set selectedCattInvId(int value) {
     _selectedCattInvId = value;
+    notifyListeners();
+  }
+
+  String _selectedStarInv = '';
+  int _selectedStarInvId = 0;
+  String get selectedStarInv => _selectedStarInv;
+  int get selectedStarInvId => _selectedStarInvId;
+
+  set selectedStarInv(String star) {
+    _selectedStarInv = star;
+    notifyListeners();
+  }
+
+  set selectedStarInvId(int value) {
+    _selectedStarInvId = value;
     notifyListeners();
   }
 

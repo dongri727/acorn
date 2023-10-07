@@ -329,6 +329,20 @@ ALTER TABLE ONLY "stars"
 
 
 --
+-- Class StarsInvolved as table stars_involved
+--
+
+CREATE TABLE "stars_involved" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "star_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "stars_involved"
+  ADD CONSTRAINT stars_involved_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Terms as table terms
 --
 

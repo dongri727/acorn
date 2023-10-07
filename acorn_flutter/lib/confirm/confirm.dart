@@ -49,6 +49,10 @@ class Confirm {
   List<String> selectedATT = [];
   List<int> selectedATTId = [];
 
+  //stars involved at that time
+  List<String> selectedStar = [];
+  List<int> selectedStarId = [];
+
   //Org involved
   List<String> selectedOrg = [];
   List<int> selectedOrgId = [];

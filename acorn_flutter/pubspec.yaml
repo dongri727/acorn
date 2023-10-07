@@ -28,6 +28,8 @@ dependencies:
   acorn_client:
     path: ../acorn_client
 
+  serverpod_auth_shared_flutter: ^1.1.1
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

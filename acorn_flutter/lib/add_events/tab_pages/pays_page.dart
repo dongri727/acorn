@@ -18,7 +18,8 @@ class PaysPage extends StatelessWidget {
   PaysPage({super.key});
 
   var newCATT = '';
-  List<String> options = ['Current Country Name', 'Country Name At That Time'];
+  var newStar = '';
+  List<String> options = ['Current Country Name', 'Country Name At That Time', 'Stars'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -62,6 +63,7 @@ class PaysPage extends StatelessWidget {
                                         children: [
                                           BlankTextFormat(text: model.filtersPays.join(', ')),
                                           BlankTextFormat(text: model.filtersCATTs.join(', ')),
+                                          BlankTextFormat(text: model.filtersStars.join(', ')),
                                         ],
                                       )),
                                   Expanded(
@@ -81,6 +83,10 @@ class PaysPage extends StatelessWidget {
                                         await model.fetchCountriesAtt();
                                         currentDisplayList = model.listCATTs;
                                         break;
+                                      case 'Stars':
+                                        await model.fetchStars();
+                                        currentDisplayList = model.listStars;
+                                        break;
                                     }
                                   },
                                 ),
@@ -90,10 +96,12 @@ class PaysPage extends StatelessWidget {
                                 child: FormatGreyEnable(
                                   enabled: isSelectedOption != 'Current Country Name',
                                   controller: controller,
-                                  hintText: 'A New Country Name At That Time You Want',
+                                  hintText: 'A New Name You Want',
                                   onChanged: (text) {
                                     if (isSelectedOption == 'Country Name At That Time') {
                                       newCATT = text;
+                                    } else if (isSelectedOption == 'Stars') {
+                                      newStar = text;
                                     } else {
                                       return;
                                     }
@@ -101,11 +109,14 @@ class PaysPage extends StatelessWidget {
                                 ),
                               ),
                               ButtonFormat(
-                                  label: 'Add A New Country Name At That Time',
+                                  label: 'Add A New Name',
                                   onPressed: () async {
                                     if (isSelectedOption == 'Country Name At That Time') {
                                       await model.addCountryATTandFetch(newCATT);
                                       currentDisplayList = model.listCATTs;
+                                    } else if (isSelectedOption == 'Stars') {
+                                      await model.addStarAndFetch(newStar);
+                                      currentDisplayList = model.listStars;
                                     } else {
                                       return;
                                     }
@@ -136,6 +147,16 @@ class PaysPage extends StatelessWidget {
                                             onSelected: (filterKey, filterId) {
                                               model.selectedPaysInv = filterKey;
                                               model.selectedPaysInvId = filterId;
+                                            });
+                                      }  else if (item is Stars) {
+                                        return FilterFormatImediat(
+                                            filteredImKeys: model.filtersStars,
+                                            filteredImValues: model.filtersStarId,
+                                            filterImKey: item.star,
+                                            filterImValue: item.id,
+                                            onSelected: (filterKey, filterId) {
+                                              model.selectedStarInv = filterKey;
+                                              model.selectedStarInvId = filterId;
                                             });
                                       }
                                       return SizedBox.shrink();
@@ -173,6 +194,10 @@ class PaysPage extends StatelessWidget {
               confirm.selectedATT = model.filtersCATTs;
               confirm.selectedATTId = model.filtersCATTId;
               print("${model.filtersCATTs}");
+
+              confirm.selectedStar = model.filtersStars;
+              confirm.selectedStarId = model.filtersStarId;
+              print("${model.filtersStars}");
             },
             label: const Text('Temporarily Save'),
           ));

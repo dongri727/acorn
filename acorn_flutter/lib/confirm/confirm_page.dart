@@ -244,6 +244,25 @@ class ConfirmPage extends StatelessWidget {
                                         }
                                     )
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Stars Observed',
+                                      style: AcornTheme.textTheme.headlineSmall),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        30, 8, 30, 8),
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: _confirm.selectedStar.length,
+                                        itemBuilder: (context, index) {
+                                          return TermCard(
+                                            _confirm.selectedStar[index],
+                                          );
+                                        }
+                                    )
+                                ),
                               ],
                             ),
                           ),
