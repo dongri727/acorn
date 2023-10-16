@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'multiple_search_page.dart';
 import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
@@ -10,6 +11,8 @@ class ResultPage extends StatelessWidget {
   final List<int>? listCattIds;
   final List<int>? listPattIds;
   final List<int>? listPaysInvolvedIds;
+  final List<int>? listPaysInvolvedATTIds;
+  final List<int>? listStarsInvolvedIds;
   final List<int>? listOrgIds;
   final List<int>? listPersonIds;
   final List<int>? listCategoryIds;
@@ -24,6 +27,8 @@ class ResultPage extends StatelessWidget {
     this.listCattIds,
     this.listPattIds,
     this.listPaysInvolvedIds,
+    this.listPaysInvolvedATTIds,
+    this.listStarsInvolvedIds,
     this.listOrgIds,
     this.listPersonIds,
     this.listCategoryIds,
@@ -48,6 +53,12 @@ class ResultPage extends StatelessWidget {
           print(listCattIds);
         } else if (listPattIds != null) {
           model.fetchPrincipalByPattId(listPattIds: listPattIds);
+        } else if (listPaysInvolvedIds != null) {
+          model.fetchPrincipalByCInvolvedId(listCInvolvedIds: listPaysInvolvedIds);
+        } else if (listPaysInvolvedATTIds != null) {
+          model.fetchPrincipalByAttInvolvedId(listAttsInvolvedIds: listPaysInvolvedATTIds);
+        } else if (listStarsInvolvedIds != null) {
+          model.fetchPrincipalByStarsInvolvedId(listStarInvolvedIds: listStarsInvolvedIds);
         } else if (listOrgIds != null) {
           model.fetchPrincipalByOrgsId(listOrgIds: listOrgIds);
           print(listOrgIds);
@@ -63,6 +74,17 @@ class ResultPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon:const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push<String>(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MultiSearchPage(),
+                ),
+              );
+            },
+          ),
           title: const Text('Search Results'),
         ),
         body: Consumer<SearchByOptionsModel>(
@@ -78,15 +100,21 @@ class ResultPage extends StatelessWidget {
                 itemCount: model.principal.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                     child: Card(
                       color: const Color(0xFFe6e6fa),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          leading: Text(model.principal[index].annee.toString()),
-                          title: Text(model.principal[index].affair),
-                          subtitle: Text(model.principal[index].location),
+                          leading: Text(model.principal[index].annee.toString(),
+                          style: const TextStyle(fontSize: 16),
+                          ),
+                          title: Text(model.principal[index].affair,
+                            style: const TextStyle(fontSize: 24),
+                          ),
+                          trailing: Text('${model.principal[index].location}, ${model.principal[index].precise}',
+                            style: const TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
                     ),

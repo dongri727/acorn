@@ -1,3 +1,4 @@
+import 'package:acorn_flutter/timeline/menu.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
@@ -261,7 +262,8 @@ class TimelineWidgetState extends State<TimelineWidget> {
                               icon: const Icon(Icons.arrow_back),
                               onPressed: () {
                                 widget.timeline.isActive = false;
-                                Navigator.of(context).pop();
+                                //Navigator.of(context).pop();
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenuWidget()));
                                 //return true;
                               },
                             ),

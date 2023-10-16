@@ -222,7 +222,7 @@ class Timeline {
         /// Some entries will have a `start` element, but not an `end` specified.
         TimelineEntry timelineEntry = TimelineEntry();
           timelineEntry.type = TimelineEntryType.incident;
-          dynamic year = principal.annee;
+          dynamic year = principal.point;
           timelineEntry.start = year is int ? year.toDouble() : year;
 
         TickColors tickColors = TickColors()
@@ -241,7 +241,7 @@ class Timeline {
         //if (map.containsKey("affair")) {
         //timelineEntry.name = principal.affair;
         //timelineEntry.name = "${principal.annee}　${principal.affair}  (${principal.pays})";
-        timelineEntry.name = "${principal.annee.toString()}　${principal.affair}  (${principal.location})";
+        timelineEntry.name = "${principal.annee}　${principal.affair}  ${principal.location} ${principal.precise}";
         //}
 
         /// Add this entry to the list.

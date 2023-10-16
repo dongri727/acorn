@@ -536,6 +536,22 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         {'cInvolvedIds': cInvolvedIds},
       );
 
+  _i2.Future<List<_i23.Principal>> getPrincipalByAttInvolvedId(
+          {List<int>? attInvolvedIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByAttInvolvedId',
+        {'attInvolvedIds': attInvolvedIds},
+      );
+
+  _i2.Future<List<_i23.Principal>> getPrincipalByStarsInvolvedId(
+          {List<int>? starInvolvedIds}) =>
+      caller.callServerEndpoint<List<_i23.Principal>>(
+        'principal',
+        'getPrincipalByStarsInvolvedId',
+        {'starInvolvedIds': starInvolvedIds},
+      );
+
   _i2.Future<List<_i23.Principal>> getPrincipalByOrgsId({List<int>? orgIds}) =>
       caller.callServerEndpoint<List<_i23.Principal>>(
         'principal',

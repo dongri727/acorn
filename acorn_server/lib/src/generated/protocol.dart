@@ -937,9 +937,9 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'annee',
-          columnType: _i2.ColumnType.doublePrecision,
+          columnType: _i2.ColumnType.text,
           isNullable: false,
-          dartType: 'double',
+          dartType: 'String',
         ),
         _i2.ColumnDefinition(
           name: 'month',
@@ -1544,6 +1544,16 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {

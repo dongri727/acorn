@@ -24,11 +24,12 @@ class PrincipalPage extends StatelessWidget{
 
   var newYearD = 0.0;
   var newYearI = 0;
+  var newAnnee = '';
   var newMonth = 0;
   var newDay = 0;
   var newPoint = 0;
   var newName= '';
-  String isSelectedCalendar = 'Historical Years';
+  String isSelectedCalendar = 'Common-Era';
   var calendarNo = 0;
 
   List<String> periods = <String>[
@@ -36,7 +37,8 @@ class PrincipalPage extends StatelessWidget{
     'Million Years',
     'Thousand Years',
     'Years by Dating Methods',
-    'Historical Years',
+    'Before-CommonEra',
+    'Common-Era',
   ];
 
   final List<String> _filtersLocation = <String>[];
@@ -518,32 +520,54 @@ class PrincipalPage extends StatelessWidget{
                     switch (isSelectedCalendar) {
                       case 'Billion Years':
                         newYearI = (newYearD * 1000000000).round();
-                        //calendarNo = 1;// billion years
+                        newYearI = -newYearI.abs();
                         break;
                       case 'Million Years':
                         newYearI = (newYearD * 1000000).round();
-                        //calendarNo = 2;// million years
+                        newYearI = -newYearI.abs();
                         break;
                       case 'Thousand Years':
                         newYearI = (newYearD * 1000).round();
-                        //calendarNo = 3;
+                        newYearI = -newYearI.abs();
                         break;
                       case 'Years by Dating Methods':
                         newYearI = (2000 - newYearD).round();
-                        //calendarNo = 4;
                         break;
-                      case 'Historical Years':
+                      case 'Before-CommonEra':
                         newYearI = (newYearD).round();
-                        //calendarNo = 5;
+                        newYearI = -newYearI.abs();
+                        break;
+                      case 'Common-Era':
+                        newYearI = (newYearD).round();
                         break;
                     }
                     ///make data of point
                     newPoint = (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay).toDouble()).round();
 
+                    switch (isSelectedCalendar) {
+                      case 'Billion Years':
+                        newAnnee = '${newYearD}B years ago';
+                        break;
+                      case 'Million Years':
+                        newAnnee = '${newYearD}M years ago';
+                        break;
+                      case 'Thousand Years':
+                        newAnnee = '${newYearD}K years ago';
+                        break;
+                      case 'Years by Dating Methods':
+                        newAnnee = 'about $newYearD years ago';
+                        break;
+                      case 'Before-CommonEra':
+                        newAnnee = 'BCE ${(newYearD).round()}';
+                        break;
+                      case 'Common-Era':
+                        newAnnee = 'CE ${(newYearD).round()}';
+                        break;
+                    }
+
                     confirm.isSelectedCalendar = isSelectedCalendar;
-                    //confirm.calendarNo = calendarNo;
                     confirm.year = newYearI;
-                    confirm.annee = newYearD;
+                    confirm.annee = newAnnee;
                     confirm.month = newMonth;
                     confirm.day = newDay;
                     confirm.point = newPoint;

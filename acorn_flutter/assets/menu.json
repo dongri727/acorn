@@ -6,33 +6,38 @@
       "items":
       [
         {
-          "start": -17000000000,
-          "end": -1000000000,
+          "start": -5100000000000,
+          "end": -366000000000,
           "label": "Billion Years Ago"
         },
         {
-          "start": -1000000000,
-          "end": -1000000,
+          "start": -366000000000,
+          "end": -366000000,
           "label": "Million Years Ago"
         },
         {
-          "start": -1000000,
-          "end": -5000,
+          "start": -366000000,
+          "end": -366000,
           "label": "Thousand Years Ago"
         },
         {
-          "start": -5000,
-          "end": 1900,
-          "label": "Historical Years"
+          "start": -366000,
+          "end": 0,
+          "label": "BCE"
         },
         {
-          "start": 1900,
-          "end": 2000,
+          "start": 0,
+          "end": 7000000,
+          "label": "CE"
+        },
+        {
+          "start": 6000000,
+          "end": 750000,
           "label": "20th Century"
         },
         {
-          "start": 2000,
-          "end": 2100,
+          "start": 700000,
+          "end": 800000,
           "label": "21th Century"
         }
       ]

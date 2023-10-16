@@ -1273,6 +1273,44 @@ class Endpoints extends _i1.EndpointDispatch {
             cInvolvedIds: params['cInvolvedIds'],
           ),
         ),
+        'getPrincipalByAttInvolvedId': _i1.MethodConnector(
+          name: 'getPrincipalByAttInvolvedId',
+          params: {
+            'attInvolvedIds': _i1.ParameterDescription(
+              name: 'attInvolvedIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByAttInvolvedId(
+            session,
+            attInvolvedIds: params['attInvolvedIds'],
+          ),
+        ),
+        'getPrincipalByStarsInvolvedId': _i1.MethodConnector(
+          name: 'getPrincipalByStarsInvolvedId',
+          params: {
+            'starInvolvedIds': _i1.ParameterDescription(
+              name: 'starInvolvedIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByStarsInvolvedId(
+            session,
+            starInvolvedIds: params['starInvolvedIds'],
+          ),
+        ),
         'getPrincipalByOrgsId': _i1.MethodConnector(
           name: 'getPrincipalByOrgsId',
           params: {

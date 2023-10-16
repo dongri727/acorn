@@ -2,9 +2,8 @@ class Confirm {
   Confirm();
 
   //when
-  String isSelectedCalendar = "Historical Years";
-  //int calendarNo = 0;
-  double annee = 0.0;
+  String isSelectedCalendar = "Common-Era";
+  String annee = '';
   int year = 0;
   int month = 0;
   int day = 0;
@@ -15,11 +14,9 @@ class Confirm {
 
   //統合された位置(単)
   String selectedLocation = 'location';
-  String selectedPrecise = 'precise';
+  String selectedPrecise = '(whole)';
   double latitude = 0.0;
   double longitude = 0.0;
-
-  //String? selectedStar;
 
   //選択されたplace（単）
   String? selectedPlace;
@@ -49,7 +46,7 @@ class Confirm {
   List<String> selectedATT = [];
   List<int> selectedATTId = [];
 
-  //stars involved at that time
+  //stars observed
   List<String> selectedStar = [];
   List<int> selectedStarId = [];
 

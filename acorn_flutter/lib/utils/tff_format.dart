@@ -81,6 +81,42 @@ class ConfirmText extends StatelessWidget {
   }
 }
 
+class ConfirmTextBig extends StatelessWidget {
+  final String? confirmText;
+  final Color confirmColor;
+
+  const ConfirmTextBig({
+    required this.confirmText,
+    required this.confirmColor,
+
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 350,
+      height: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: confirmColor),
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+          child: Text(
+            confirmText??"",
+            style: TextStyle(
+              fontSize: 20,
+              color: confirmColor,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class HintText extends StatelessWidget {
   final String hintText;
 

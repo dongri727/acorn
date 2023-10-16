@@ -1,4 +1,5 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class MultiSearchPage extends StatelessWidget {
     'Place-name at that time',
     'Countries involved',
     'Names of Countries involved at that time',
+    'Stars Observed',
     'Organisations',
     'People',
     'Categories',
@@ -40,7 +42,8 @@ class MultiSearchPage extends StatelessWidget {
     'Million Years',
     'Thousand Years',
     'Years by Dating Methods',
-    'Historical Years',
+    'Before-CommonEra',
+    'Common-Era',
   ];
   final List<String> filtersPeriod = <String>[];
 
@@ -279,6 +282,15 @@ class MultiSearchPage extends StatelessWidget {
       child: Consumer<MultipleSearchModel>(builder: (_, model, child) {
         return Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: (){
+                  Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(builder: (context) => const IndexPage(),
+                  ));
+                },
+              ),
               title: const Text('Multiple Search Page'),
             ),
             body: Container(
@@ -372,11 +384,14 @@ class MultiSearchPage extends StatelessWidget {
                                       args['listPattIds'] = model.filtersPattsId;
                                       break;
                                     case 'Countries involved':
-                                      args['listPaysInvolvedIds'] = model.filtersPaysInvolvedId;
+                                      args['listPaysInvolvedIds'] = model.filtersPaysInvId;
                                       print(args);
                                       break;
                                     case 'Names of Countries involved at that time':
-                                      args['listPaysInvolvedATTIds'] = model.filtersPaysInvolvedATTId;
+                                      args['listPaysInvolvedATTIds'] = model.filtersPaysInvATTId;
+                                      break;
+                                    case 'Stars Observed':
+                                      args['listStarsInvolvedIds'] = model.filtersStarsInvolvedId;
                                       break;
                                     case 'Organisations':
                                       args['listOrgIds'] = model.filtersOrgsId;
@@ -405,6 +420,8 @@ class MultiSearchPage extends StatelessWidget {
                                                 listCattIds: args['listCattIds'],
                                                 listPattIds: args['listPattIds'],
                                                 listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                                                listPaysInvolvedATTIds: args['listPaysInvolvedATTIds'],
+                                                listStarsInvolvedIds: args['listStarsInvolvedIds'],
                                                 listOrgIds: args['listOrgIds'],
                                                 listPersonIds: args['listPersonIds'],
                                                 listCategoryIds: args['listCategoriesIds'],
@@ -448,6 +465,9 @@ class MultiSearchPage extends StatelessWidget {
                                 ...model.filtersSeas,
                                 ...model.filtersCatts,
                                 ...model.filtersPatts,
+                                ...model.filtersPaysInv,
+                                ...model.filtersPaysInvATT,
+                                ...model.filtersStarsInvolved,
                                 ...model.filtersOrgs,
                                 ...model.filtersPeople,
                                 ...model.filtersCategories,
@@ -499,11 +519,15 @@ class MultiSearchPage extends StatelessWidget {
                                       break;
                                     case 'Countries involved':
                                       await model.fetchPaysInvolvedLookedFor();
-                                      currentDisplayList = model.listPaysInvolved;
+                                      currentDisplayList = model.listPaysInv;
                                       break;
                                     case 'Names of Countries involved at that time':
                                       await model.fetchPaysInvolvedATTLookedFor();
-                                      currentDisplayList = model.listPaysInvolvedATT;
+                                      currentDisplayList = model.listPaysInvATT;
+                                      break;
+                                    case 'Stars Observed':
+                                      await model.fetchStarsInvolvedLookedFor();
+                                      currentDisplayList = model.listStarsInvolved;
                                       break;
                                     case 'Organisations':
                                       await model.fetchOrgsLookedFor();
@@ -610,23 +634,33 @@ class MultiSearchPage extends StatelessWidget {
                                         });
                                     case 'Countries involved':
                                       return FilterFormatImediat(
-                                          filteredImKeys: model.filtersPaysInvolved,
-                                          filteredImValues: model.filtersPaysInvolvedId,
-                                          filterImKey: item.paysInvolved,
+                                          filteredImKeys: model.filtersPaysInv,
+                                          filteredImValues: model.filtersPaysInvId,
+                                          filterImKey: item.pays,
                                           filterImValue: item.id,
                                           onSelected: (filterKey, filterId) {
-                                            model.selectedCountryInvolved = filterKey;
-                                            model.selectedCountryInvolvedId = filterId;
+                                            model.selectedPays = filterKey;
+                                            model.selectedPaysId = filterId;
                                           });
                                     case 'Names of Countries involved at that time':
                                       return FilterFormatImediat(
-                                          filteredImKeys: model.filtersPaysInvolvedATT,
-                                          filteredImValues: model.filtersPaysInvolvedATTId,
-                                          filterImKey: item.attsInvolved,
+                                          filteredImKeys: model.filtersPaysInvATT,
+                                          filteredImValues: model.filtersPaysInvATTId,
+                                          filterImKey: item.countryatt,
                                           filterImValue: item.id,
                                           onSelected: (filterKey, filterId) {
                                             model.selectedCountryInvolvedATT = filterKey;
                                             model.selectedCountryInvolvedATTId = filterId;
+                                          });
+                                    case 'Stars Observed':
+                                      return FilterFormatImediat(
+                                          filteredImKeys: model.filtersStarsInvolved,
+                                          filteredImValues: model.filtersStarsInvolvedId,
+                                          filterImKey: item.star,
+                                          filterImValue: item.id,
+                                          onSelected: (filterKey, filterId) {
+                                            model.selectedStarsInvolved = filterKey;
+                                            model.selectedStarsInvolvedId = filterId;
                                           });
                                     case 'Organisations':
                                       return FilterFormatImediat(

@@ -2,7 +2,7 @@ class: Principal
 table: principal
 fields:
   period: String
-  annee: double
+  annee: String
   month: int
   day: int
   point: int

@@ -21,16 +21,10 @@ class MultipleSearchModel extends ChangeNotifier {
 
 
   ///時代別検索
-/*  List<String> listPeriod = [];
-  final List<String> filtersPeriod = <String>[];
-  List<String> get period => listPeriod;*/
 
   ///宇宙の検索
-/*  List<String> listUniverse = [];
-  final List<String> filtersUniverse = <String>[];
-  List<String> get universe => listUniverse;*/
 
-  ///宇宙の検索
+  ///星の検索
   List<Stars> listStars = [];
   final List<String> filtersStars = <String>[];
 
@@ -45,19 +39,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///検索対象国の現在名
-/*  List<Pays> listPays = [];
-  final List<String> filtersPays = <String>[];
-  final List<int> filtersPaysId = <int>[];*/
-
-/*  fetchPaysLookedFor() async {
-    try {
-      listPays = await client.pays.getPays();
-      print(listPays);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }*/
 
   ///検索対象都市の現在名
   List<Places> listVilles = [];
@@ -74,22 +55,9 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
-  ///検索対象海域
-/*  List<Oceans> listOceans = [];
-  final List<String> filtersOceans = <String>[];
-  final List<int> filtersOceansId = <int>[];*/
+  ///検索対象海洋名
 
-/*  fetchOceansLookedFor() async {
-    try {
-      listOceans = await client.oceans.getOceans();
-      print(listOceans);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-  ///検索対象海域の現在名
+  ///検索対象海域名
   List<Seas> listSeas = [];
   final List<String> filtersSeas = <String>[];
   final List<int> filtersSeasId = <int>[];
@@ -135,14 +103,14 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///関係国の現在名
-  List<Pays> listPaysInvolved = [];
-  final List<String> filtersPaysInvolved = <String>[];
-  final List<int> filtersPaysInvolvedId = <int>[];
+  List<Pays> listPaysInv = [];
+  final List<String> filtersPaysInv = <String>[];
+  final List<int> filtersPaysInvId = <int>[];
 
   fetchPaysInvolvedLookedFor() async {
     try {
-      listPaysInvolved = await client.pays.getPays();
-      print(listPaysInvolved);
+      listPaysInv = await client.pays.getPays();
+      print(listPaysInv);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -150,14 +118,29 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///当時の関係国名
-  List<Countryatts> listPaysInvolvedATT = [];
-  final List<String> filtersPaysInvolvedATT = <String>[];
-  final List<int> filtersPaysInvolvedATTId = <int>[];
+  List<Countryatts> listPaysInvATT = [];
+  final List<String> filtersPaysInvATT = <String>[];
+  final List<int> filtersPaysInvATTId = <int>[];
 
   fetchPaysInvolvedATTLookedFor() async {
     try {
-      listPaysInvolvedATT = await client.countryatts.getCountryATTs();
-      print(listPaysInvolvedATT);
+      listPaysInvATT = await client.countryatts.getCountryATTs();
+      print(listPaysInvATT);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  ///観測された星
+  List<Stars> listStarsInvolved = [];
+  final List<String> filtersStarsInvolved = <String>[];
+  final List<int> filtersStarsInvolvedId = <int>[];
+
+  fetchStarsInvolvedLookedFor() async {
+    try {
+      listStarsInvolved = await client.stars.getStars();
+      print(listStarsInvolved);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -227,18 +210,16 @@ class MultipleSearchModel extends ChangeNotifier {
   void clearSearch() {
     listStars.clear();
     filtersStars.clear();
-/*    listPays.clear();
-    filtersPays.clear();*/
     listVilles.clear();
     filtersVilles.clear();
-/*    listOceans.clear();
-    filtersOceans.clear();*/
     listSeas.clear();
     filtersSeas.clear();
-    listPaysInvolved.clear();
-    filtersPaysInvolved.clear();
-    listPaysInvolvedATT.clear();
-    filtersPaysInvolvedATT.clear();
+    listPaysInv.clear();
+    filtersPaysInv.clear();
+    listPaysInvATT.clear();
+    filtersPaysInvATT.clear();
+    listStarsInvolved.clear();
+    filtersStarsInvolved.clear();
     listCategories.clear();
     filtersCategories.clear();
     listPeople.clear();
@@ -402,6 +383,21 @@ class MultipleSearchModel extends ChangeNotifier {
 
   set selectedCountryInvolvedATTId(int value) {
     _selectedCountryInvolvedATTId = value;
+    notifyListeners();
+  }
+
+  String _selectedStarsInvolved = '';
+  int _selectedStarsInvolvedId = 0;
+  String get selectedStarsInvolved => _selectedStarsInvolved;
+  int get selectedStarsInvolvedATTId => _selectedStarsInvolvedId;
+
+  set selectedStarsInvolved(String starsInvolved) {
+    _selectedStarsInvolved = starsInvolved;
+    notifyListeners();
+  }
+
+  set selectedStarsInvolvedId(int value) {
+    _selectedStarsInvolvedId = value;
     notifyListeners();
   }
 
