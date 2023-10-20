@@ -7,6 +7,11 @@
       [
         {
           "start": -5100000000000,
+          "end": 800000,
+          "label": "ALL"
+        },
+        {
+          "start": -5100000000000,
           "end": -366000000000,
           "label": "Billion Years Ago"
         },

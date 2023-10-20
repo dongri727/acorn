@@ -1,11 +1,19 @@
+import 'dart:ui';
+
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
+import 'package:acorn_flutter/timeline/menu.dart';
 import 'package:acorn_flutter/utils/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import '../four_d_page.dart';
+import '../three_d_page.dart';
+import '../timeline/scalable_page.dart';
 import '../utils/blank_text_format.dart';
+import '../utils/button_format.dart';
 import '../utils/chips_format.dart';
 import '../utils/tff_format.dart';
 import 'result_page.dart';
@@ -15,6 +23,13 @@ var client = Client('http://localhost:8080/')
 
 class MultiSearchPage extends StatelessWidget {
   MultiSearchPage({super.key});
+
+  final List<String> formats = [
+    'CLASSIC',
+    'SCALABLE',
+    '3D',
+    '4D',
+  ];
 
   final List<String> options = [
     'Period',
@@ -272,6 +287,8 @@ class MultiSearchPage extends StatelessWidget {
   ];
   final List<String> filtersOceans = <String>[];
 
+  String? isSelectedFormat = 'CLASSIC';
+
   String? isSelectedOption = 'Period';
   List<dynamic> currentDisplayList = [];
 
@@ -293,6 +310,7 @@ class MultiSearchPage extends StatelessWidget {
               ),
               title: const Text('Multiple Search Page'),
             ),
+
             body: Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -303,6 +321,27 @@ class MultiSearchPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
+                    Expanded(
+                      flex: 1,
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: HintText(
+                                hintText: "Which display format do you prefer?",
+                              ),
+                            ),
+                            Flexible(
+                              child: RadioButtonRowFormat(
+                                  options: formats,
+                                  onChanged: (String? value) {
+                                    isSelectedOption = value;
+                                    print("selected: $value");
+                                  }),
+                            ),
+
+                          ],
+                        )),
                     Expanded(
                         flex: 1,
                         child: Row(
@@ -344,7 +383,7 @@ class MultiSearchPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Padding(
+/*                            Padding(
                               padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                               child: ElevatedButton(
                                 onPressed: () {
@@ -431,7 +470,7 @@ class MultiSearchPage extends StatelessWidget {
                                 },
                                 child: const Text("Search"),
                               ),
-                            ),
+                            ),*/
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                               child: ElevatedButton(
@@ -449,7 +488,7 @@ class MultiSearchPage extends StatelessWidget {
                           ],
                         )),
                     Expanded(
-                      flex: 5,
+                      flex: 6,
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -714,7 +753,166 @@ class MultiSearchPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ));
+            ),
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Map<String, dynamic> args = {};
+                switch (isSelectedOption) {
+                  case 'Period':
+                    args['listPeriod'] = filtersPeriod;
+                    print(args);
+                    break;
+                  case 'Universe':
+                    args['listLocation'] = filtersUniverse;
+                    print(args);
+                    break;
+                  case 'Stars':
+                    args['listPrecise'] = model.filtersStars;
+                    print(args);
+                    break;
+                  case 'Current Country where it happened':
+                    args['listLocation'] = filtersPays;
+                    print(args);
+                    break;
+                  case 'Current Place-name where it happened':
+                    args['listPrecise'] = model.filtersVilles;
+                    break;
+                  case 'Oceans':
+                    args['listLocation'] = filtersOceans;
+                    print(args);
+                    break;
+                  case 'Seas':
+                    args['listPrecise'] = model.filtersSeas;
+                    break;
+                  case 'Country-name at that time':
+                    args['listCattIds'] = model.filtersCattsId;
+                    print(args);
+                    break;
+                  case 'Place-name at that time':
+                    args['listPattIds'] = model.filtersPattsId;
+                    break;
+                  case 'Countries involved':
+                    args['listPaysInvolvedIds'] = model.filtersPaysInvId;
+                    print(args);
+                    break;
+                  case 'Names of Countries involved at that time':
+                    args['listPaysInvolvedATTIds'] = model.filtersPaysInvATTId;
+                    break;
+                  case 'Stars Observed':
+                    args['listStarsInvolvedIds'] = model.filtersStarsInvolvedId;
+                    break;
+                  case 'Organisations':
+                    args['listOrgIds'] = model.filtersOrgsId;
+                    print(args);
+                    break;
+                  case 'People':
+                    args['listPersonIds'] = model.filtersPeopleId;
+                    print(args);
+                    break;
+                  case 'Categories':
+                    args['listCategoriesIds'] =
+                        model.filtersCategoriesId;
+                    break;
+                  case 'Other Terms':
+                    args['listTermIds'] = model.filtersTermsId;
+                    break;
+                }
+                switch (isSelectedFormat) {
+                  case 'CLASSIC' :
+                Navigator.push(
+                    context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ResultPage(
+                          listPeriod: args['listPeriod'],
+                          listLocation: args['listLocation'],
+                          listPrecise: args['listPrecise'],
+                          listCattIds: args['listCattIds'],
+                          listPattIds: args['listPattIds'],
+                          listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                          listPaysInvolvedATTIds: args['listPaysInvolvedATTIds'],
+                          listStarsInvolvedIds: args['listStarsInvolvedIds'],
+                          listOrgIds: args['listOrgIds'],
+                          listPersonIds: args['listPersonIds'],
+                          listCategoryIds: args['listCategoriesIds'],
+                          listTermIds: args['listTermIds'],
+                        ),
+                  ));
+                    break;
+
+                    case 'SCALABLE' :
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ScalablePage(
+                                  listPeriod: args['listPeriod'],
+                                  listLocation: args['listLocation'],
+                                  listPrecise: args['listPrecise'],
+                                  listCattIds: args['listCattIds'],
+                                  listPattIds: args['listPattIds'],
+                                  listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                                  listPaysInvolvedATTIds: args['listPaysInvolvedATTIds'],
+                                  listStarsInvolvedIds: args['listStarsInvolvedIds'],
+                                  listOrgIds: args['listOrgIds'],
+                                  listPersonIds: args['listPersonIds'],
+                                  listCategoryIds: args['listCategoriesIds'],
+                                  listTermIds: args['listTermIds'],
+                                ),
+                          ));
+                      break;
+
+                  case '3D' :
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const ThreeDViewPage(
+/*                                listPeriod: args['listPeriod'],
+                                listLocation: args['listLocation'],
+                                listPrecise: args['listPrecise'],
+                                listCattIds: args['listCattIds'],
+                                listPattIds: args['listPattIds'],
+                                listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                                listPaysInvolvedATTIds: args['listPaysInvolvedATTIds'],
+                                listStarsInvolvedIds: args['listStarsInvolvedIds'],
+                                listOrgIds: args['listOrgIds'],
+                                listPersonIds: args['listPersonIds'],
+                                listCategoryIds: args['listCategoriesIds'],
+                                listTermIds: args['listTermIds'],*/
+                              ),
+                        ));
+                    break;
+
+                  case '4D' :
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const FourDViewPage(
+/*                                listPeriod: args['listPeriod'],
+                                listLocation: args['listLocation'],
+                                listPrecise: args['listPrecise'],
+                                listCattIds: args['listCattIds'],
+                                listPattIds: args['listPattIds'],
+                                listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                                listPaysInvolvedATTIds: args['listPaysInvolvedATTIds'],
+                                listStarsInvolvedIds: args['listStarsInvolvedIds'],
+                                listOrgIds: args['listOrgIds'],
+                                listPersonIds: args['listPersonIds'],
+                                listCategoryIds: args['listCategoriesIds'],
+                                listTermIds: args['listTermIds'],*/
+                              ),
+                        ));
+                    break;
+                }
+              },
+              label: const Text('SEARCH'),
+            ),
+          ),
+        );
       }),
     );
   }

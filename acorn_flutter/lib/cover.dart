@@ -1,7 +1,6 @@
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:acorn_flutter/users/account_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'users/sign_in_page.dart';
 import 'utils/theme.dart';
 

@@ -20,6 +20,7 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   /// [MenuData] selects era witch will be displayed at the Timeline
   /// This data is loaded from the asset bundle during [initState()]
   final MenuData _menu = MenuData();
+
   final TextEditingController controller = TextEditingController();
   final List<String> _countries = [];
 

@@ -85,7 +85,7 @@ class ResultPage extends StatelessWidget {
               );
             },
           ),
-          title: const Text('Search Results'),
+          title: const Text('CLASSIC VIEW'),
         ),
         body: Consumer<SearchByOptionsModel>(
           builder: (context, model, child) {
@@ -106,7 +106,7 @@ class ResultPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          leading: Text(model.principal[index].annee.toString(),
+                          leading: Text('${model.principal[index].annee}-${model.principal[index].month}-${model.principal[index].day}' ,
                           style: const TextStyle(fontSize: 16),
                           ),
                           title: Text(model.principal[index].affair,

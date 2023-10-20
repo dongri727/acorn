@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:serverpod_auth_email_flutter/serverpod_auth_email_flutter.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:serverpod_auth_google_flutter/serverpod_auth_google_flutter.dart';
@@ -7,21 +6,14 @@ import 'package:serverpod_auth_google_flutter/serverpod_auth_google_flutter.dart
 import '../index.dart';
 import 'account_page.dart';
 
-
-
+const _googleClientId = '849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com';
+const _googleServerClientId = '849604984098-hgp1ddeqslbrsn70vrd8grvp3cbvji0s.apps.googleusercontent.com';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-
-    DotEnv().load(fileName: '.env');
-    String? googleClientId = dotenv.get('CLIENT_ID');
-    String? googleServerClientId = dotenv.get('SERVER_CLIENT_ID');
-
 
     return Scaffold(
       appBar: AppBar(title: const Text('Sign In')),
@@ -60,9 +52,9 @@ class SignInPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: SignInWithGoogleButton(
                       caller: client.modules.auth,
-                      clientId: googleClientId,
+                      clientId: _googleClientId,
                       //clientId: null,
-                      serverClientId: googleServerClientId,
+                      serverClientId: _googleServerClientId,
                       redirectUri: Uri.parse('http://localhost:8082/googlesignin'),
                       onSignedIn: () {
                         Navigator.push<String>(
