@@ -199,16 +199,15 @@ class Timeline {
   List<Principal> _principal = [];
 
   Future<List<TimelineEntry>> fetchPrincipal(
-      {List<String>? countries}) async {
-    print("Fetching principal with countries: $countries");
+      {List<String>? location}) async {
+    print("Fetching principal with location: $location");
 
     try {
-      _principal = await client.principal.getPrincipal(keywords: countries);
+      _principal = await client.principal.getPrincipal(keywords: location);
     }
     catch (e) {
       print('Error while getting principal: $e');
     }
-
 
     List<TimelineEntry> allEntries = [];
     _tickColors = [];
@@ -228,20 +227,18 @@ class Timeline {
         TickColors tickColors = TickColors()
           ..long = Colors.black
           ..short = Colors.black
-          ..text = Colors.black
-          ..start = timelineEntry.start
+          ..text = Colors.grey
+          //..start = timelineEntry.start
           ..screenY = 0.0;
 
         _tickColors.add(tickColors);
 
-        timelineEntry.end = timelineEntry.start;
+        timelineEntry.end = timelineEntry.start; //消したら怒られた
 
 
         /// The label is a brief description for the current entry.
-        //if (map.containsKey("affair")) {
-        //timelineEntry.name = principal.affair;
-        //timelineEntry.name = "${principal.annee}　${principal.affair}  (${principal.pays})";
-        timelineEntry.name = "${principal.annee}　${principal.affair}  ${principal.location} ${principal.precise}";
+        /// labelの表示
+        timelineEntry.name = "${principal.annee}-${principal.month}-${principal.day} ${principal.affair}  ${principal.location} ${principal.precise}";
         //}
 
         /// Add this entry to the list.
@@ -249,10 +246,10 @@ class Timeline {
       }
     }
 
-    /// sort the full list so they are in order of oldest to newest
+/*    /// sort the full list so they are in order of oldest to newest
     allEntries.sort((TimelineEntry a, TimelineEntry b) {
       return a.start.compareTo(b.start);
-    });
+    });*/
 
     _timeMin = double.maxFinite;
     _timeMax = -double.maxFinite;
@@ -261,6 +258,7 @@ class Timeline {
     _entries = [];
 
     /// Build up hierarchy (Position are grouped into "Spanning Position" and Events are placed into the Position they belong to).
+    /// 消したら表示されない。
     TimelineEntry? previous;
     for (TimelineEntry entry in allEntries) {
       if (entry.start < _timeMin) {
@@ -269,11 +267,11 @@ class Timeline {
       if (entry.end > _timeMax) {
         _timeMax = entry.end;
       }
-      if (previous != null) {
+/*      if (previous != null) {
         previous.next = entry;
       }
       entry.previous = previous;
-      previous = entry;
+      previous = entry;*/
 
       TimelineEntry? parent;
       double minTimeline = double.maxFinite;

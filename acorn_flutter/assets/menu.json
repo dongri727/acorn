@@ -32,11 +32,11 @@
         },
         {
           "start": 0,
-          "end": 7000000,
+          "end": 700000,
           "label": "CE"
         },
         {
-          "start": 6000000,
+          "start": 600000,
           "end": 750000,
           "label": "20th Century"
         },

@@ -1,4 +1,6 @@
 import "package:acorn_client/acorn_client.dart";
+import "package:acorn_flutter/index.dart";
+import "package:acorn_flutter/search/multiple_search_page.dart";
 import "package:acorn_flutter/timeline/timeline.dart";
 import "package:acorn_flutter/utils/blank_text_format.dart";
 import "package:flutter/material.dart";
@@ -10,7 +12,13 @@ import "menu_section.dart";
 import "widget.dart";
 
 class MainMenuWidget extends StatefulWidget {
-  const MainMenuWidget({Key? key}) : super(key: key);
+
+  final List<String>? listLocation;
+
+  const MainMenuWidget({
+    super.key,
+    this.listLocation
+  });
 
   @override
   MainMenuWidgetState createState() => MainMenuWidgetState();
@@ -21,7 +29,7 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
   /// This data is loaded from the asset bundle during [initState()]
   final MenuData _menu = MenuData();
 
-  final TextEditingController controller = TextEditingController();
+  //final TextEditingController controller = TextEditingController();
   final List<String> _countries = [];
 
   /// Helper function which sets the [MenuItemData] for the [TimelineWidget].
@@ -45,11 +53,11 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
     });
   }
 
-  @override
+/*  @override
   void dispose() {
     controller.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -71,92 +79,104 @@ class MainMenuWidgetState extends State<MainMenuWidget> {
         )))
         .toList(growable: false)
     );*/
-    bool _hasSetViewport = false;
+    //bool _hasSetViewport = false;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TIMELINE"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push<String>(
+                context,
+                MaterialPageRoute(builder: (context) => MultiSearchPage()),
+            );
+          },
+        ),
+
+        title: const Text("SCALABLE"),
+
       ),
-      body: Padding(
-        padding: EdgeInsets.only(top: devicePadding.top),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 5, 20),
-                      child: FormatGrey(
-                        controller: controller,
-                        hintText: "Search Term",
-                        onChanged: (text) {},
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/both.png'),
+              fit: BoxFit.cover,
+            )
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: devicePadding.top),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 5, 20),
+                        child: ConfirmText(
+                          confirmText: widget.listLocation?.join(', ') ?? '',
+                          confirmColor: Colors.yellow,
+                        )
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (controller.text.isNotEmpty) {
-                            setState(() {
-                              _countries.add(controller.text);
-                            });
-                            timeline
-                                .fetchPrincipal(countries: _countries);
-/*                                .then((List<TimelineEntry> entries) {
-                                    timeline.setViewport(
-                                        start: entries.first.start * 2.0,
-                                        end: entries.first.start,
-                                        animate: true);
-
-                                    /// Advance the Timeline to its starting position.
-                                    timeline.advance(0.0, false);
-
-                          });*/
-                            print("Submitted countries: $_countries");
-                          }
-                          controller.clear();
-                        },
-                        child: const Text("Add"),
-                      ),
-                    ),
-                  ),
-                  Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
                         child: ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              _countries.clear();
-                            });
-                          },
-                          child: const Text('Clear'),
+                              timeline
+                                  .fetchPrincipal(location: widget.listLocation);
+/*                                .then((List<TimelineEntry> entries) {
+                                      timeline.setViewport(
+                                          start: entries.first.start * 2.0,
+                                          end: entries.first.start,
+                                          animate: true);
+
+                                      /// Advance the Timeline to its starting position.
+                                      timeline.advance(0.0, false);
+
+                            });*/
+                              print("Submitted countries: $_countries");
+                            },
+                          child: const Text("SUBMIT"),
                         ),
-                      ))
-                ],
-              ),
-              BlankTextBlackFormat(text: _countries.join(',')),
-              ..._menu.sections
-                  .map<Widget>(
-                      (MenuSectionData section) => Builder(builder: (context) {
-                            return Container(
-                                margin: const EdgeInsets.only(top: 20.0),
-                                child: MenuSection(
-                                  section.label,
-                                  section.backgroundColor,
-                                  section.textColor,
-                                  section.items,
-                                  (item, context) =>
-                                      navigateToTimeline(item, context),
-                                ));
-                          }))
-                  .toList(growable: false)
-            ]),
+                      ),
+                    ),
+/*                  Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 20, 20, 20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _countries.clear();
+                              });
+                            },
+                            child: const Text('Clear'),
+                          ),
+                        ))*/
+                  ],
+                ),
+                //BlankTextBlackFormat(text: _countries.join(',')),
+                ..._menu.sections
+                    .map<Widget>(
+                        (MenuSectionData section) => Builder(builder: (context) {
+                              return Container(
+                                  margin: const EdgeInsets.only(top: 20.0),
+                                  child: MenuSection(
+                                    section.label,
+                                    section.backgroundColor,
+                                    section.textColor,
+                                    section.items,
+                                    (item, context) =>
+                                        navigateToTimeline(item, context),
+                                  ));
+                            }))
+                    .toList(growable: false)
+              ]),
+        ),
       ),
     );
   }

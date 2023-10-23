@@ -51,24 +51,6 @@ class IndexPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
-/*                       Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.push<String>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ThreeDViewPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "3D Space",
-                            style: SpaceTimeTheme.textTheme.bodyLarge,
-                          ),
-                        ),
-                      ), */
                        Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OutlinedButton(
@@ -81,24 +63,7 @@ class IndexPage extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            "Search & Read",
-                            style: AcornTheme.textTheme.bodyLarge,
-                          ),
-                        ),
-                      ),
-                       Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: OutlinedButton(
-                          onPressed: () {
-                             Navigator.push<String>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MainMenuWidget(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Timeline",
+                            "Search & View",
                             style: AcornTheme.textTheme.bodyLarge,
                           ),
                         ),

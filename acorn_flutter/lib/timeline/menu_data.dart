@@ -40,7 +40,7 @@ class MenuItemData {
     if (entry.type == TimelineEntryType.era) {
       start = entry.start;
       end = entry.end;
-    } else {
+    } /*else {
       /// No need to pad here as we are centering on a single item.
       double rangeBefore = double.maxFinite;
       for (TimelineEntry? prev = entry.previous;
@@ -64,7 +64,7 @@ class MenuItemData {
       double range = min(rangeBefore, rangeAfter) / 2.0;
       start = entry.start;
       end = entry.end + range;
-    }
+    }*/
   }
 }
 

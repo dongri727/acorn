@@ -1,3 +1,4 @@
+import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/timeline/menu.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ typedef SelectItemCallback = Function(TimelineEntry item);
 /// focus on when it's created.
 class TimelineWidget extends StatefulWidget {
   final MenuItemData focusItem;
+  //final List<Principal> _principal;
   final Timeline timeline;
   const TimelineWidget(this.focusItem, this.timeline, {Key? key}) : super(key: key);
 
@@ -268,7 +270,7 @@ class TimelineWidgetState extends State<TimelineWidget> {
                               },
                             ),
                             const Text(
-                              "TIMELINE",
+                              "SCALABLE VIEW",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 20.0,

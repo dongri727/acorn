@@ -1,9 +1,14 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/search/multiple_search_page.dart';
+import 'package:acorn_flutter/timeline/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../index.dart';
+import '../utils/blank_text_format.dart';
 import '../utils/custom_page_route.dart';
+import 'bloc_provider.dart';
+import 'menu_data.dart';
 
 
 ///検索ワードを受け取る
@@ -178,29 +183,96 @@ class ScalablePage extends StatelessWidget {
   }
 
 
+  ///検索結果と表示領域をtimelineに送る
+  navigateToTimeline(MenuItemData item, BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) =>
+          TimelineWidget(item, BlocProvider.getTimeline(context)),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints.expand( ),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/both.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: OutlinedButton(
+    if (listPeriod != null) {
+      fetchPrincipalByPeriod(period: listPeriod);
+    } else if (listLocation != null) {
+      fetchPrincipal(location: listLocation);
+      print('fetch Principal');
+    } else if (listPrecise != null) {
+      fetchPrincipalByPrecise(listPrecise: listPrecise);
+    } else if (listCattIds != null) {
+      fetchPrincipalByCattId(listCattIds: listCattIds);
+      print(listCattIds);
+    } else if (listPattIds != null) {
+      fetchPrincipalByPattId(listPattIds: listPattIds);
+    } else if (listPaysInvolvedIds != null) {
+      fetchPrincipalByCInvolvedId(listCInvolvedIds: listPaysInvolvedIds);
+    } else if (listPaysInvolvedATTIds != null) {
+      fetchPrincipalByAttInvolvedId(listAttsInvolvedIds: listPaysInvolvedATTIds);
+    } else if (listStarsInvolvedIds != null) {
+      fetchPrincipalByStarsInvolvedId(listStarInvolvedIds: listStarsInvolvedIds);
+    } else if (listOrgIds != null) {
+      fetchPrincipalByOrgsId(listOrgIds: listOrgIds);
+      print(listOrgIds);
+    } else if (listPersonIds != null) {
+      fetchPrincipalByPersonId(listPersonIds: listPersonIds);
+      print(listPersonIds);
+    } else if (listCategoryIds != null) {
+      fetchPrincipalByCategoryId(listCategoryIds: listCategoryIds);
+    } else if (listTermIds != null) {
+      fetchPrincipalByTermId(listTermIds: listTermIds);
+    }
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push<String>(
-              context,
-              CustomPageRoute(
-                const IndexPage(),
-              ),
-            );
-          },
-          child: const Text(
-            "return",
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MultiSearchPage()));
+          }),
+        title: const Text('half-way to SCALABLE VIEW'),
+      ),
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints.expand( ),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/both.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+/*              //todo 受けとったキーワードを表示 -> IDを見てもしょうがないので止め
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: BlankTextFormat(text: [
+                  ...?listPeriod,
+                  ...?listLocation,
+                  ...?listPrecise,
+                ].join(', ')),
+              ),*/
+              //todo 表示領域を指定
 
+
+              //todo 実行Button
+              
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push<String>(
+                    context,
+                    CustomPageRoute(
+                      const IndexPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "return",
+
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -208,6 +280,3 @@ class ScalablePage extends StatelessWidget {
   }}
 
 
-
-///ワードで検索する
-///検索結果と表示領域をtimelineに送る

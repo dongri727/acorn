@@ -9,19 +9,19 @@ enum TimelineEntryType { era, incident }
 class TimelineEntry {
   late TimelineEntryType type;
 
-  late String _name;
-  Color accent = Colors.blueGrey;
+  late String _name;//文字表示
+  Color accent = Colors.blueGrey; //labelの色
 
   /// Each entry constitues an element of a tree:
   /// Eras are grouped into spanning positions and events are placed into the positions they belong to.
   TimelineEntry? parent;
   List<TimelineEntry> children = [];
 
-  /// All the Timeline entries are also linked together to easily access the next/previous element.
+/*  /// All the Timeline entries are also linked together to easily access the next/previous element.
   /// After a couple of seconds of inactivity on the Timeline, a previous/next entry button will appear
   /// to allow the user to navigate faster between adjacent element.
   TimelineEntry? next;
-  TimelineEntry? previous;
+  TimelineEntry? previous;*/
 
   /// All these parameters are used by the [Timeline] object to properly position the current entry.
   late double start;
