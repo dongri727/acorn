@@ -1,4 +1,5 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/search/multiple_search_page.dart';
 import 'package:acorn_flutter/timeline/menu.dart';
 import 'package:flutter/material.dart';
 
@@ -265,7 +266,7 @@ class TimelineWidgetState extends State<TimelineWidget> {
                               onPressed: () {
                                 widget.timeline.isActive = false;
                                 //Navigator.of(context).pop();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenuWidget()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MultiSearchPage()));
                                 //return true;
                               },
                             ),

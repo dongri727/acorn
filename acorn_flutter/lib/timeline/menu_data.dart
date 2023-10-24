@@ -11,8 +11,8 @@ import 'entry.dart';
 /// Data container for the Section loaded in [MenuData.loadFromBundle()].
 class MenuSectionData {
   late String label;
-  Color textColor = Colors.white;
-  Color backgroundColor = Colors.green;
+  Color textColor = Colors.blue;
+  Color backgroundColor = Colors.white;
   List<MenuItemData> items = [];
 }
 

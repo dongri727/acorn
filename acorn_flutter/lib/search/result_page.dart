@@ -7,7 +7,6 @@ class ResultPage extends StatelessWidget {
   final List<String>? listPeriod;
   final List<String>? listLocation;
   final List<String>? listPrecise;
-  final List<int>? listSeaIds;
   final List<int>? listCattIds;
   final List<int>? listPattIds;
   final List<int>? listPaysInvolvedIds;
@@ -23,7 +22,6 @@ class ResultPage extends StatelessWidget {
     this.listPeriod,
     this.listLocation,
     this.listPrecise,
-    this.listSeaIds,
     this.listCattIds,
     this.listPattIds,
     this.listPaysInvolvedIds,

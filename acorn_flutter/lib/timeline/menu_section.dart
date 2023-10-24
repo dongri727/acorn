@@ -25,9 +25,9 @@ class MenuSection extends StatelessWidget {
         child: ListTile(
           title: Text(
             title,
-            style: TextStyle(
-              fontSize: 16.0,
-              color: accentColor,
+            style: const TextStyle(
+              fontSize: 24.0,
+              color: Colors.white,
             ),
           ),
         ),
@@ -47,7 +47,7 @@ class MenuSection extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: accentColor,
-                    fontSize: 16.0,
+                    fontSize: 18.0,
                   ),
                 ),
                 onTap: () => navigateTo(item, context),

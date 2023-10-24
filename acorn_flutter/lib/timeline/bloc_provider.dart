@@ -1,6 +1,4 @@
 import "package:flutter/widgets.dart";
-
-import 'entry.dart';
 import 'timeline.dart';
 
 

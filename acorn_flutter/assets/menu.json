@@ -1,8 +1,8 @@
 [
     {
-      "label": "Initial Display Era\n    You can move, zoom freely\n         after the transition",
-      "background": "#9acd32",
-      "color": "#2f4f4f",
+      "label": "2. Select Initial Display Era,  You can move, zoom freely after the transition",
+      "background": "#2f4f4f",
+      "color": "#9acd32",
       "items":
       [
         {
@@ -36,12 +36,12 @@
           "label": "CE"
         },
         {
-          "start": 600000,
+          "start": 650000,
           "end": 750000,
           "label": "20th Century"
         },
         {
-          "start": 700000,
+          "start": 750000,
           "end": 800000,
           "label": "21th Century"
         }

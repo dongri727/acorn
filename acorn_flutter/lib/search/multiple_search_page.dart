@@ -8,9 +8,8 @@ import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
-import '../four_d_page.dart';
-import '../three_d_page.dart';
-import '../timeline/scalable_page.dart';
+import '../unity_view/four_d_page.dart';
+import '../unity_view/three_d_page.dart';
 import '../utils/blank_text_format.dart';
 import '../utils/button_format.dart';
 import '../utils/chips_format.dart';
@@ -763,8 +762,20 @@ class MultiSearchPage extends StatelessWidget {
                           builder: (context) =>
                               //ScalablePage(
                               MainMenuWidget(
-                                  listLocation: args['listLocation']
-                              ),
+                            listPeriod: args['listPeriod'],
+                            listLocation: args['listLocation'],
+                            listPrecise: args['listPrecise'],
+                            listCattIds: args['listCattIds'],
+                            listPattIds: args['listPattIds'],
+                            listPaysInvolvedIds: args['listPaysInvolvedIds'],
+                            listPaysInvolvedATTIds:
+                                args['listPaysInvolvedATTIds'],
+                            listStarsInvolvedIds: args['listStarsInvolvedIds'],
+                            listOrgIds: args['listOrgIds'],
+                            listPersonIds: args['listPersonIds'],
+                            listCategoryIds: args['listCategoriesIds'],
+                            listTermIds: args['listTermIds'],
+                          ),
                         ));
                     break;
 
