@@ -1,32 +1,19 @@
 import "package:flutter/widgets.dart";
 import 'timeline.dart';
 
-
-
 /// This [InheritedWidget] wraps the whole app, and provides access
 /// to the [Timeline] object.
 class BlocProvider extends InheritedWidget {
   final Timeline timeline;
 
-  BlocProvider(
+  const BlocProvider(
       {Key? key,
         required Timeline t,
         required Widget child,
-        TargetPlatform platform = TargetPlatform.iOS})
+        //TargetPlatform platform = TargetPlatform.iOS,
+      })
       : timeline = t,
-        super(key: key, child: child) {
-/*    timeline
-        .fetchPrincipal()
-        .then((List<TimelineEntry> entries) {
-      timeline.setViewport(
-          start: entries.first.start * 2.0,
-          end: entries.first.start,
-          animate: true);
-
-      /// Advance the Timeline to its starting position.
-      timeline.advance(0.0, false);
-    });*/
-  }
+        super(key: key, child: child);
 
   @override
   updateShouldNotify(InheritedWidget oldWidget) => true;
@@ -38,7 +25,7 @@ class BlocProvider extends InheritedWidget {
     context.dependOnInheritedWidgetOfExactType<BlocProvider>();
 
     if (bp != null) {
-    Timeline bloc = bp!.timeline;
+    Timeline bloc = bp.timeline;
     return bloc;
     } else {
       throw Exception('Unable to get BlocProvider from context');

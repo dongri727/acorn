@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-
-//import 'add_events/tab_top.dart';
-//import 'read_select/single_search_page.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
-//import 'search/single_search_page.dart';
-import 'timeline/menu.dart';
 import 'utils/theme.dart';
 
 class IndexPage extends StatelessWidget {

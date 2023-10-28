@@ -1,14 +1,14 @@
 import 'dart:ui';
-
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
-import 'package:acorn_flutter/timeline/menu.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import '../timeline/scalable.dart';
 import '../unity_view/four_d_page.dart';
+import '../unity_view/mr_page.dart';
 import '../unity_view/three_d_page.dart';
 import '../utils/blank_text_format.dart';
 import '../utils/button_format.dart';
@@ -27,6 +27,7 @@ class MultiSearchPage extends StatelessWidget {
     'SCALABLE',
     '3D',
     '4D',
+    'MR',
   ];
 
   final List<String> options = [
@@ -391,6 +392,64 @@ class MultiSearchPage extends StatelessWidget {
                               child: const Text("clear"),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                switch (isSelectedOption) {
+                                  case 'Period':
+                                    model.fetchPrincipalByPeriod(period: filtersPeriod);
+                                    break;
+                                  case 'Universe':
+                                    model.fetchPrincipal(location: filtersUniverse);
+                                    break;
+                                  case 'Stars':
+                                    model.fetchPrincipalByPrecise(precise: model.filtersStars);
+                                    break;
+                                  case 'Current Country where it happened':
+                                    model.fetchPrincipal(location: filtersPays);
+                                    break;
+                                  case 'Current Place-name where it happened':
+                                    model.fetchPrincipalByPrecise(precise: model.filtersVilles);
+                                    break;
+                                  case 'Oceans':
+                                    model.fetchPrincipal(location: filtersOceans);
+                                    break;
+                                  case 'Seas':
+                                    model.fetchPrincipalByPrecise(precise: model.filtersSeas);
+                                    break;
+                                  case 'Country-name at that time':
+                                    model.fetchPrincipalByCattId(cattIds: model.filtersCattsId);
+                                    break;
+                                  case 'Place-name at that time':
+                                    model.fetchPrincipalByPattId(pattIds: model.filtersPattsId);
+                                    break;
+                                  case 'Countries involved':
+                                    model.fetchPrincipalByCInvolvedId(cInvolvedIds: model.filtersPaysInvId);
+                                    break;
+                                  case 'Names of Countries involved at that time':
+                                    model.fetchPrincipalByAttInvolvedId(attsInvolvedIds: model.filtersPaysInvATTId);
+                                    break;
+                                  case 'Stars Observed':
+                                    model.fetchPrincipalByStarsInvolvedId(starInvolvedIds: model.filtersStarsInvolvedId);
+                                    break;
+                                  case 'Organisations':
+                                    model.fetchPrincipalByOrgsId(orgIds: model.filtersOrgsId);
+                                    break;
+                                  case 'People':
+                                    model.fetchPrincipalByPersonId(personIds: model.filtersPeopleId);
+                                    break;
+                                  case 'Categories':
+                                    model.fetchPrincipalByCategoryId(categoryIds: model.filtersCategoriesId);
+                                    break;
+                                  case 'Other Terms':
+                                    model.fetchPrincipalByTermId(termIds: model.filtersTermsId);
+                                    break;
+                                }
+                              },
+                              child: const Text("submit"),
+                            ),
+                          ),
                         ],
                       )),
                   Expanded(
@@ -673,110 +732,20 @@ class MultiSearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                Map<String, dynamic> args = {};
-                switch (isSelectedOption) {
-                  case 'Period':
-                    args['listPeriod'] = filtersPeriod;
-                    print(args);
-                    break;
-                  case 'Universe':
-                    args['listLocation'] = filtersUniverse;
-                    print(args);
-                    break;
-                  case 'Stars':
-                    args['listPrecise'] = model.filtersStars;
-                    print(args);
-                    break;
-                  case 'Current Country where it happened':
-                    args['listLocation'] = filtersPays;
-                    print(args);
-                    break;
-                  case 'Current Place-name where it happened':
-                    args['listPrecise'] = model.filtersVilles;
-                    break;
-                  case 'Oceans':
-                    args['listLocation'] = filtersOceans;
-                    print(args);
-                    break;
-                  case 'Seas':
-                    args['listPrecise'] = model.filtersSeas;
-                    break;
-                  case 'Country-name at that time':
-                    args['listCattIds'] = model.filtersCattsId;
-                    print(args);
-                    break;
-                  case 'Place-name at that time':
-                    args['listPattIds'] = model.filtersPattsId;
-                    break;
-                  case 'Countries involved':
-                    args['listPaysInvolvedIds'] = model.filtersPaysInvId;
-                    print(args);
-                    break;
-                  case 'Names of Countries involved at that time':
-                    args['listPaysInvolvedATTIds'] = model.filtersPaysInvATTId;
-                    break;
-                  case 'Stars Observed':
-                    args['listStarsInvolvedIds'] = model.filtersStarsInvolvedId;
-                    break;
-                  case 'Organisations':
-                    args['listOrgIds'] = model.filtersOrgsId;
-                    print(args);
-                    break;
-                  case 'People':
-                    args['listPersonIds'] = model.filtersPeopleId;
-                    print(args);
-                    break;
-                  case 'Categories':
-                    args['listCategoriesIds'] = model.filtersCategoriesId;
-                    break;
-                  case 'Other Terms':
-                    args['listTermIds'] = model.filtersTermsId;
-                    break;
-                }
                 switch (isSelectedFormat) {
                   case 'CLASSIC':
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ResultPage(
-                            listPeriod: args['listPeriod'],
-                            listLocation: args['listLocation'],
-                            listPrecise: args['listPrecise'],
-                            listCattIds: args['listCattIds'],
-                            listPattIds: args['listPattIds'],
-                            listPaysInvolvedIds: args['listPaysInvolvedIds'],
-                            listPaysInvolvedATTIds:
-                                args['listPaysInvolvedATTIds'],
-                            listStarsInvolvedIds: args['listStarsInvolvedIds'],
-                            listOrgIds: args['listOrgIds'],
-                            listPersonIds: args['listPersonIds'],
-                            listCategoryIds: args['listCategoriesIds'],
-                            listTermIds: args['listTermIds'],
-                          ),
-                        ));
+                          builder: (context) => ResultPage(principal: model.principal)));
+                    print('send: ${model.principal}');
                     break;
                   case 'SCALABLE':
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              //ScalablePage(
-                              MainMenuWidget(
-                            listPeriod: args['listPeriod'],
-                            listLocation: args['listLocation'],
-                            listPrecise: args['listPrecise'],
-                            listCattIds: args['listCattIds'],
-                            listPattIds: args['listPattIds'],
-                            listPaysInvolvedIds: args['listPaysInvolvedIds'],
-                            listPaysInvolvedATTIds:
-                                args['listPaysInvolvedATTIds'],
-                            listStarsInvolvedIds: args['listStarsInvolvedIds'],
-                            listOrgIds: args['listOrgIds'],
-                            listPersonIds: args['listPersonIds'],
-                            listCategoryIds: args['listCategoriesIds'],
-                            listTermIds: args['listTermIds'],
-                          ),
-                        ));
+                          builder: (context) => Scalable(principal: model.principal)));
+                    print('send: ${model.principal}');
                     break;
 
                   case '3D':
@@ -794,9 +763,17 @@ class MultiSearchPage extends StatelessWidget {
                           builder: (context) => const FourDViewPage(),
                         ));
                     break;
+
+                  case 'MR':
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MRViewPage(),
+                        ));
+                    break;
                 }
               },
-              label: const Text('SEARCH'),
+              label: const Text('SHOW'),
             ),
           ),
         );

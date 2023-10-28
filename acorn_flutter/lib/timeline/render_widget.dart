@@ -1,8 +1,5 @@
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-
 import 'menu_data.dart';
 import 'timeline.dart';
 import 'entry.dart';
@@ -65,13 +62,8 @@ class TimelineRenderWidget extends LeafRenderObjectWidget {
 /// The core method of this object is [paint()]: this is where all the elements
 /// are actually drawn to screen.
 class TimelineRenderObject extends RenderBox {
-  static const List<Color> lineColors = [
-/*    Color.fromARGB(200, 125, 195, 184),
-    Color.fromARGB(200, 190, 224, 146),
-    Color.fromARGB(200, 238, 155, 75),
-    Color.fromARGB(200, 202, 79, 63),
-    Color.fromARGB(200, 128, 28, 15)*/
-  ];
+  //Listは空だけど消すとまずい
+  static const List<Color> lineColors = [];
 
   double _topOverlap = 0.0;
   final Ticks _ticks = Ticks();
@@ -182,41 +174,6 @@ class TimelineRenderObject extends RenderBox {
       return;
     }
 
-    /// Fetch the background colors from the [Timeline] and compute the fill.
-/*    List<TimelineBackgroundColor> backgroundColors = timeline.backgroundColors;
-    ui.Paint backgroundPaint;
-    if (backgroundColors != null && backgroundColors.isNotEmpty) {
-      double rangeStart = backgroundColors.first.start;
-      double range = backgroundColors.last.start - backgroundColors.first.start;
-      List<ui.Color> colors = <ui.Color>[];
-      List<double> stops = <double>[];
-      for (TimelineBackgroundColor bg in backgroundColors) {
-        colors.add(bg.color);
-        stops.add((bg.start - rangeStart) / range);
-      }
-      double s =
-      timeline.computeScale(timeline.renderStart, timeline.renderEnd);
-      double y1 = (backgroundColors.first.start - timeline.renderStart) * s;
-      double y2 = (backgroundColors.last.start - timeline.renderStart) * s;
-
-      /// Fill Background.
-      backgroundPaint = ui.Paint()
-        ..shader = ui.Gradient.linear(
-            ui.Offset(0.0, y1), ui.Offset(0.0, y2), colors, stops)
-        ..style = ui.PaintingStyle.fill;
-
-      if (y1 > offset.dy) {
-        canvas.drawRect(
-            Rect.fromLTWH(
-                offset.dx, offset.dy, size.width, y1 - offset.dy + 1.0),
-            ui.Paint()..color = backgroundColors.first.color);
-      }
-
-      /// Draw the background on the canvas.
-      canvas.drawRect(
-          Rect.fromLTWH(offset.dx, y1, size.width, y2 - y1), backgroundPaint);
-    }*/
-
     _tapTargets.clear();
     double renderStart = _timeline!.renderStart;
     double renderEnd = _timeline!.renderEnd;
@@ -278,15 +235,6 @@ class TimelineRenderObject extends RenderBox {
         Paint legPaint = Paint()
           ..color = (item.accent ?? lineColors[depth % lineColors.length])
               .withOpacity(legOpacity);
-
-        /// Draw the line connecting the start&point of this item on the Timeline.
-/*        canvas.drawRect(
-            Offset(x, item.y) & Size(Timeline.lineWidth, item.length),
-            legPaint);
-        canvas.drawCircle(
-            Offset(x + Timeline.lineWidth / 2.0, item.y + item.length),
-            Timeline.edgeRadius,
-            legPaint);*/
       }
 
       const double maxLabelWidth = 1500.0;

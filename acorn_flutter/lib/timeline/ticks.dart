@@ -71,20 +71,6 @@ class Ticks {
     tickOffset -= scaledTickDistance;
     startingTickMarkValue -= tickDistance;
 
-    /// Ticks can change color because the Timeline background will also change color
-    /// depending on the current era. The [TickColors] object, in `distance_utils.dart`,
-    /// wraps this information.
-/*    List<TickColors> tickColors = timeline.tickColors;
-    if (tickColors != null && tickColors.isNotEmpty) {
-      /// Build up the color stops for the linear gradient.
-      double rangeStart = tickColors.first.start;
-      double range = tickColors.last.start - tickColors.first.start;
-      List<ui.Color> colors = <ui.Color>[];
-      List<double> stops = <double>[];
-      for (TickColors bg in tickColors) {
-        colors.add(bg.background);
-        stops.add((bg.start - rangeStart) / range);
-      }*/
     double s =
     timeline.computeScale(timeline.renderStart, timeline.renderEnd);
 
@@ -125,7 +111,7 @@ class Ticks {
     //}
 
     ///文字の描画？
-    Set<String> usedValues = Set<String>();
+    Set<String> usedValues = <String>{};
 
     /// Draw all the ticks.
     for (int i = 0; i < numTicks; i++) {

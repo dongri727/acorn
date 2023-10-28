@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../utils/custom_page_route.dart';
 
 
-class ThreeDViewPage extends StatelessWidget {
-  const ThreeDViewPage({Key? key}) : super(key: key);
+class MRViewPage extends StatelessWidget {
+  const MRViewPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

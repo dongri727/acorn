@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart" show rootBundle;
-
 import 'entry.dart';
-
-
 
 /// Data container for the Section loaded in [MenuData.loadFromBundle()].
 class MenuSectionData {
@@ -40,31 +36,7 @@ class MenuItemData {
     if (entry.type == TimelineEntryType.era) {
       start = entry.start;
       end = entry.end;
-    } /*else {
-      /// No need to pad here as we are centering on a single item.
-      double rangeBefore = double.maxFinite;
-      for (TimelineEntry? prev = entry.previous;
-      prev != null;
-      prev = prev.previous) {
-        double diff = entry.start - prev.start;
-        if (diff > 0.0) {
-          rangeBefore = diff;
-          break;
-        }
-      }
-
-      double rangeAfter = double.maxFinite;
-      for (TimelineEntry? next = entry.next; next != null; next = next.next) {
-        double diff = next.start - entry.start;
-        if (diff > 0.0) {
-          rangeAfter = diff;
-          break;
-        }
-      }
-      double range = min(rangeBefore, rangeAfter) / 2.0;
-      start = entry.start;
-      end = entry.end + range;
-    }*/
+    }
   }
 }
 

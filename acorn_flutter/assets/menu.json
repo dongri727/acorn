@@ -36,12 +36,12 @@
           "label": "CE"
         },
         {
-          "start": 650000,
+          "start": 690000,
           "end": 750000,
           "label": "20th Century"
         },
         {
-          "start": 750000,
+          "start": 730000,
           "end": 800000,
           "label": "21th Century"
         }

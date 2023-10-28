@@ -1,75 +1,17 @@
+import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'multiple_search_page.dart';
-import 'search_model.dart';
 
 class ResultPage extends StatelessWidget {
-  final List<String>? listPeriod;
-  final List<String>? listLocation;
-  final List<String>? listPrecise;
-  final List<int>? listCattIds;
-  final List<int>? listPattIds;
-  final List<int>? listPaysInvolvedIds;
-  final List<int>? listPaysInvolvedATTIds;
-  final List<int>? listStarsInvolvedIds;
-  final List<int>? listOrgIds;
-  final List<int>? listPersonIds;
-  final List<int>? listCategoryIds;
-  final List<int>? listTermIds;
-
-  const ResultPage({
-    super.key,
-    this.listPeriod,
-    this.listLocation,
-    this.listPrecise,
-    this.listCattIds,
-    this.listPattIds,
-    this.listPaysInvolvedIds,
-    this.listPaysInvolvedATTIds,
-    this.listStarsInvolvedIds,
-    this.listOrgIds,
-    this.listPersonIds,
-    this.listCategoryIds,
-    this.listTermIds,
-
-  });
+  final List<Principal>? principal;
+  const ResultPage({ super.key , this.principal});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) {
-        final model = SearchByOptionsModel();
-        if (listPeriod != null) {
-          model.fetchPrincipalByPeriod(period: listPeriod);
-        } else if (listLocation != null) {
-          model.fetchPrincipal(location: listLocation);
-          print('fetch Principal');
-        } else if (listPrecise != null) {
-          model.fetchPrincipalByPrecise(listPrecise: listPrecise);
-        } else if (listCattIds != null) {
-          model.fetchPrincipalByCattId(listCattIds: listCattIds);
-          print(listCattIds);
-        } else if (listPattIds != null) {
-          model.fetchPrincipalByPattId(listPattIds: listPattIds);
-        } else if (listPaysInvolvedIds != null) {
-          model.fetchPrincipalByCInvolvedId(listCInvolvedIds: listPaysInvolvedIds);
-        } else if (listPaysInvolvedATTIds != null) {
-          model.fetchPrincipalByAttInvolvedId(listAttsInvolvedIds: listPaysInvolvedATTIds);
-        } else if (listStarsInvolvedIds != null) {
-          model.fetchPrincipalByStarsInvolvedId(listStarInvolvedIds: listStarsInvolvedIds);
-        } else if (listOrgIds != null) {
-          model.fetchPrincipalByOrgsId(listOrgIds: listOrgIds);
-          print(listOrgIds);
-        } else if (listPersonIds != null) {
-          model.fetchPrincipalByPersonId(listPersonIds: listPersonIds);
-          print(listPersonIds);
-        } else if (listCategoryIds != null) {
-          model.fetchPrincipalByCategoryId(listCategoryIds: listCategoryIds);
-        } else if (listTermIds != null) {
-          model.fetchPrincipalByTermId(listTermIds: listTermIds);
-        }
-        return model;
-      },
+        create: (_) => MultipleSearchModel(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -85,7 +27,7 @@ class ResultPage extends StatelessWidget {
           ),
           title: const Text('CLASSIC VIEW'),
         ),
-        body: Consumer<SearchByOptionsModel>(
+        body: Consumer<MultipleSearchModel>(
           builder: (context, model, child) {
             return Container(
               decoration: const BoxDecoration(
@@ -95,7 +37,7 @@ class ResultPage extends StatelessWidget {
                   )
               ),
               child: ListView.builder(
-                itemCount: model.principal.length,
+                itemCount: principal?.length ?? 0,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
@@ -104,13 +46,13 @@ class ResultPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          leading: Text('${model.principal[index].annee}-${model.principal[index].month}-${model.principal[index].day}' ,
+                          leading: Text('${principal?[index].annee}-${principal?[index].month}-${principal?[index].day}' ,
                           style: const TextStyle(fontSize: 16),
                           ),
-                          title: Text(model.principal[index].affair,
+                          title: Text(principal![index].affair,
                             style: const TextStyle(fontSize: 24),
                           ),
-                          trailing: Text('${model.principal[index].location}, ${model.principal[index].precise}',
+                          trailing: Text('${principal?[index].location}, ${principal?[index].precise}',
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),

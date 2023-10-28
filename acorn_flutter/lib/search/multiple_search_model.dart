@@ -19,7 +19,6 @@ class MultipleSearchModel extends ChangeNotifier {
 
   List<String> currentDisplayList = [];
 
-
   ///時代別検索
 
   ///宇宙の検索
@@ -481,6 +480,131 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Principal> _principal = [];
+  List<Principal> get principal => _principal;
 
+  Future<void>fetchPrincipalByPeriod({List<String>? period}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPeriod(keywords: period);
+      print('got: $_principal');
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
 
+  Future<void>fetchPrincipal({List<String>? location}) async {
+    try {
+      _principal = await client.principal.getPrincipal(keywords: location);
+      print("Getting principal with keywords: $location");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByPrecise({List<String>? precise}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPrecise(keywords: precise);
+      print("Getting principal with keywords: $precise");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByCattId({List<int>? cattIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByCattId(cattIds: cattIds);
+      print("Getting principal with CattIds: $cattIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByPattId({List<int>? pattIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPattId(pattIds: pattIds);
+      print("Getting principal with PattIds: $pattIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByCInvolvedId({List<int>? cInvolvedIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByCInvolvedId(cInvolvedIds: cInvolvedIds);
+      print("Getting principal with CInvolvedIds: $cInvolvedIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
+      print("Getting principal with AttsInvolvedIds: $attsInvolvedIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByStarsInvolvedId({List<int>? starInvolvedIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starInvolvedIds);
+      print("Getting principal with StarInvolvedIds: $starInvolvedIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByOrgsId({List<int>? orgIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
+      print("Getting principal with OrgIds: $orgIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByPersonId({List<int>? personIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPersonId(personIds: personIds);
+      print("Getting principal with PersonIds: $personIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByCategoryId({List<int>? categoryIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByCategoryId(categoryIds: categoryIds);
+      print("Getting principal with CategoryIds: $categoryIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByTermId({List<int>? termIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByTermId(termIds: termIds);
+      print("Getting principal with TermIds: $termIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  set principal (dynamic value) {
+    _principal = [];
+    notifyListeners();
+  }
 }

@@ -11,7 +11,6 @@ import 'timeline_utils.dart';
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
-
 typedef PaintCallback = Function();
 
 class Timeline {
@@ -198,52 +197,12 @@ class Timeline {
   ///
   List<Principal> _principal = [];
 
-  Future<List<TimelineEntry>> fetchPrincipal({
-    List<String>? period,
-    List<String>? location,
-    List<String>? precise,
-    List<int>? cattIds,
-    List<int>? pattIds,
-    List<int>? paysInvIds,
-    List<int>? paysInvAttIds,
-    List<int>? starsInvolvedIds,
-    List<int>? orgIds,
-    List<int>? personIds,
-    List<int>? categoryIds,
-    List<int>? termIds,
-  }) async {
+  List<Principal> get listPrincipal => _principal;
 
-    print("Fetching principal");
+  Future<List<TimelineEntry>> gatherEntries(principal) async {
+    print("Gather Entries with: $principal");
 
-    try {
-      if (period != null) {
-        _principal = await client.principal.getPrincipalByPeriod(keywords: period);
-      } else if (location != null) {
-        _principal = await client.principal.getPrincipal(keywords: location);
-      } else if (precise != null) {
-        _principal = await client.principal.getPrincipalByPrecise(keywords: precise);
-      } else if (cattIds != null) {
-        _principal = await client.principal.getPrincipalByCattId(cattIds: cattIds);
-      } else if (pattIds != null) {
-        _principal = await client.principal.getPrincipalByPattId(pattIds: pattIds);
-      } else if (paysInvIds != null) {
-        _principal = await client.principal.getPrincipalByCInvolvedId(cInvolvedIds: paysInvIds);
-      } else if (paysInvAttIds != null) {
-        _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: paysInvAttIds);
-      } else if (starsInvolvedIds != null) {
-        _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starsInvolvedIds);
-      } else if (orgIds != null) {
-        _principal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
-      } else if (personIds != null) {
-        _principal = await client.principal.getPrincipalByPersonId(personIds: personIds);
-      } else if (categoryIds != null) {
-        _principal = await client.principal.getPrincipalByCategoryId(categoryIds: categoryIds);
-      } else if (termIds != null) {
-        _principal = await client.principal.getPrincipalByTermId(termIds: termIds);
-      }
-    }
-    catch (e) {print('Error while getting principal: $e');}
-
+    _principal = principal;
 
     List<TimelineEntry> allEntries = [];
     _tickColors = [];

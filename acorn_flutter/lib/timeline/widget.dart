@@ -1,6 +1,6 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_page.dart';
-import 'package:acorn_flutter/timeline/menu.dart';
+import 'package:acorn_flutter/timeline/scalable.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
@@ -20,7 +20,7 @@ class TimelineWidget extends StatefulWidget {
   final MenuItemData focusItem;
   //final List<Principal> _principal;
   final Timeline timeline;
-  const TimelineWidget(this.focusItem, this.timeline, {Key? key}) : super(key: key);
+  const TimelineWidget(this.focusItem, /*this._principal,*/ this.timeline, {Key? key}) : super(key: key);
 
   @override
   TimelineWidgetState createState() => TimelineWidgetState();
@@ -244,6 +244,7 @@ class TimelineWidgetState extends State<TimelineWidget> {
                 touchBubble: onTouchBubble,
                 touchEntry: onTouchEntry
             ),
+
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
