@@ -1,10 +1,11 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_page.dart';
+import 'package:acorn_flutter/timeline/pont_data.dart';
 import 'package:acorn_flutter/timeline/scalable.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
-import 'menu_data.dart';
+import 'pont_data.dart';
 import 'timeline.dart';
 import 'render_widget.dart';
 import 'timeline_utils.dart';
@@ -41,18 +42,8 @@ class TimelineWidgetState extends State<TimelineWidget> {
   TapTarget? _touchedBubble;
   TimelineEntry? _touchedEntry;
 
-/*  /// Which position the Timeline is currently focused on.
-  /// Defaults to [DefaultPositionName].
-  String _positionName;*/
-
   /// Syntactic-sugar-getter.
   Timeline get timeline => widget.timeline;
-
-/*
-  Color _headerTextColor;
-  Color _headerBackgroundColor;
-*/
-
 
   /// The following three functions define are the callbacks used by the
   /// [GestureDetector] widget when rendering this widget.
@@ -153,55 +144,12 @@ class TimelineWidgetState extends State<TimelineWidget> {
     super.initState();
     //if (timeline != null) {
     widget.timeline.isActive = true;
-/*      _positionName = timeline.currentPosition != null
-          ? timeline.currentPosition.label
-          : defaultPositionName;
-      timeline.onHeaderColorsChanged = (Color background, Color text) {
-        setState(() {
-          _headerTextColor = text;
-          _headerBackgroundColor = background;
-        });
-      };
-
-      /// Update the label for the [Timeline] object.
-      timeline.onPositionChanged = (TimelineEntry entry) {
-        setState(() {
-          _positionName = entry != null ? entry.label : defaultPositionName;
-        });
-      };
-
-      _headerTextColor = timeline.headerTextColor;
-      _headerBackgroundColor = timeline.headerBackgroundColor;
-    }*/
   }
 
   /// Update the current view and change the Timeline header, color and background color,
   @override
   void didUpdateWidget(covariant TimelineWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-/*    if (timeline != oldWidget.timeline && timeline != null) {
-      setState(() {
-        _headerTextColor = timeline.headerTextColor;
-        _headerBackgroundColor = timeline.headerBackgroundColor;
-      });
-
-      timeline.onHeaderColorsChanged = (Color background, Color text) {
-        setState(() {
-          _headerTextColor = text;
-          _headerBackgroundColor = background;
-        });
-      };
-      timeline.onPositionChanged = (TimelineEntry entry) {
-        setState(() {
-          _positionName = entry != null ? entry.label : defaultPositionName;
-        });
-      };
-      setState(() {
-        _positionName =
-            timeline.currentPosition ?? defaultPositionName;
-      });
-    }*/
   }
 
   /// This is a [StatefulWidget] life-cycle method. It's being overridden here
@@ -209,10 +157,6 @@ class TimelineWidgetState extends State<TimelineWidget> {
   @override
   deactivate() {
     super.deactivate();
-/*    if (timeline != null) {
-      timeline.onHeaderColorsChanged = null;
-      timeline.onPositionChanged = null;
-    }*/
   }
 
   /// This widget is wrapped in a [Scaffold] to have the classic Material Design visual layout structure.
@@ -224,11 +168,8 @@ class TimelineWidgetState extends State<TimelineWidget> {
   @override
   Widget build(BuildContext context) {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
-/*    if (timeline != null) {
-      timeline.devicePadding = devicePadding;
-    }*/
+
     return Scaffold(
-      //backgroundColor: Colors.white,
       body: GestureDetector(
           onLongPress: _longPress,
           onTapDown: _tapDown,

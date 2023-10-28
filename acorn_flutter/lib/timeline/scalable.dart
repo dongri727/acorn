@@ -3,7 +3,8 @@ import "package:acorn_flutter/search/multiple_search_page.dart";
 import "package:flutter/material.dart";
 import "../utils/tff_format.dart";
 import 'bloc_provider.dart';
-import "menu_data.dart";
+//import "menu_data.dart";
+import 'pont_data.dart';
 import "menu_section.dart";
 import "widget.dart";
 
@@ -16,6 +17,7 @@ class Scalable extends StatefulWidget {
 }
 
 class ScalableState extends State<Scalable> {
+
 
   /// [MenuData] selects era witch will be displayed at the Timeline
   /// This data is loaded from the asset bundle during [initState()]
@@ -32,7 +34,7 @@ class ScalableState extends State<Scalable> {
     ));
   }
 
-  @override
+/*  @override
   initState() {
     super.initState();
 
@@ -41,12 +43,34 @@ class ScalableState extends State<Scalable> {
     _menu.loadFromBundle("assets/menu.json").then((bool success) {
       if (success) setState(() {}); // Load the menu.
     });
+  }*/
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Initialize the menu with hardcoded data.
+    _menu.initializeWithDefaultData();
+
+    /// Notify the framework that the internal state of this object has changed.
+    setState(() {});
   }
+
 
   @override
   Widget build(BuildContext context) {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
     final timeline = BlocProvider.getTimeline(context);
+
+    String displayText;
+    if (widget.principal!.isNotEmpty) {
+      displayText = widget.principal![0].affair;
+      if (widget.principal!.length > 1) {
+        displayText += ' +etc';
+      }
+    } else {
+      displayText = '';
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -82,7 +106,7 @@ class ScalableState extends State<Scalable> {
                           child: Padding(
                               padding: const EdgeInsets.fromLTRB(20, 20, 5, 20),
                               child: ConfirmText(
-                                confirmText: widget.principal!.map((p) => p.affair).join(', ') ?? '',
+                                confirmText: displayText,
                                 confirmColor: Colors.yellow,
                               )
                           ),
