@@ -1,3 +1,4 @@
+//import 'package:acorn_flutter/utils/theme.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -147,7 +148,14 @@ class TermCard extends StatelessWidget {
       color: const Color(0x99e6e6fa),
       child: ListTile(
         title: Text(term??"",
-            style: AcornTheme.textTheme.bodyLarge),
+            style: AcornTheme.textTheme.bodyLarge,
+/*          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+          ),*/
+
+
+        ),
       ),
     );
   }

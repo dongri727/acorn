@@ -41,6 +41,10 @@ class CoverPageState extends State<CoverPage> {
             child: Text(
               "WELCOME",
               style: AcornTheme.textTheme.bodyLarge,
+/*              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),*/
             ),
             onPressed: () {
               Navigator.push<String>(

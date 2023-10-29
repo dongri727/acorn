@@ -333,6 +333,10 @@ class PrincipalPage extends StatelessWidget{
                                             value: value,
                                             child: Text(
                                                 style: AcornTheme.textTheme.bodyMedium,
+/*                                              style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 18)*/
+
                                                 value),
                                           );
                                         }).toList(),

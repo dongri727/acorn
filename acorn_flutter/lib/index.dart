@@ -43,8 +43,12 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             "Register Events",
                             style: AcornTheme.textTheme.bodyLarge,
-                          ),
+/*                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                          ),*/
                         ),
+                      ),
                       ),
                        Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -60,6 +64,9 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             "Search & View",
                             style: AcornTheme.textTheme.bodyLarge,
+/*                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,),*/
                           ),
                         ),
                       ),

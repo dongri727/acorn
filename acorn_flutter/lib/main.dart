@@ -2,10 +2,10 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'search/multiple_search_model.dart';
 import 'timeline/bloc_provider.dart';
 import 'cover.dart';
 import 'timeline/timeline.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
 
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'ACORN',
           theme: ThemeData(
+            textTheme: GoogleFonts.kalamTextTheme(
+              Theme.of(context).textTheme
+            ),
             useMaterial3: true,
           ),
           home: const CoverPage(title: 'Acorn Login'),

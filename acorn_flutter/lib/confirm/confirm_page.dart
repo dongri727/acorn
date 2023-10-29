@@ -211,7 +211,12 @@ class ConfirmPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                   child: Text('Countries Involved',
-                                      style: AcornTheme.textTheme.headlineSmall),
+                                      style: AcornTheme.textTheme.headlineSmall,
+/*                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                  ),*/
+                                ),
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
@@ -228,7 +233,11 @@ class ConfirmPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                   child: Text('Countries Involved at that time',
-                                      style: AcornTheme.textTheme.headlineSmall),
+                                      style: AcornTheme.textTheme.headlineSmall,
+/*                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,*/
+                                  ),
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.fromLTRB(
@@ -244,10 +253,15 @@ class ConfirmPage extends StatelessWidget {
                                         }
                                     )
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                 Padding(
+                                  padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                   child: Text('Stars Observed',
-                                      style: AcornTheme.textTheme.headlineSmall),
+                                      style: AcornTheme.textTheme.headlineSmall
+/*                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                    ),*/
+                                  ),
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.fromLTRB(
@@ -272,9 +286,14 @@ class ConfirmPage extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Organizations Involved',
-                                    style: AcornTheme.textTheme.headlineSmall),
+                                    style: AcornTheme.textTheme.headlineSmall,
+/*                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),*/
+                                ),
                               ),
                               Padding(
                                   padding: const EdgeInsets.fromLTRB(
@@ -291,9 +310,14 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('People Involved',
-                                    style: AcornTheme.textTheme.headlineSmall),
+                                    style: AcornTheme.textTheme.headlineSmall,
+/*                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),*/
+                                ),
                               ),
                               Padding(
                                   padding: const EdgeInsets.fromLTRB(
@@ -310,9 +334,14 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Category',
-                                    style: AcornTheme.textTheme.headlineSmall),
+                                    style: AcornTheme.textTheme.headlineSmall,
+/*                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),*/
+                                ),
                               ),
                               Padding(
                                   padding: const EdgeInsets.fromLTRB(
@@ -331,9 +360,14 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Search Terms',
-                                    style: AcornTheme.textTheme.headlineSmall),
+                                    style: AcornTheme.textTheme.headlineSmall,
+/*                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),*/
+                                ),
                               ),
                               Padding(
                                   padding: const EdgeInsets.fromLTRB(

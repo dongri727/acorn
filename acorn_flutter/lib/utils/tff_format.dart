@@ -134,6 +134,10 @@ class HintText extends StatelessWidget {
         hintText,
         textAlign: TextAlign.left,
         style: AcornTheme.textTheme.headlineMedium,
+/*        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+        ),*/
         ),
       );
   }

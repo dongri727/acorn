@@ -371,8 +371,11 @@ class MultiSearchPage extends StatelessWidget {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(
-                                          style: AcornTheme
-                                              .textTheme.headlineMedium,
+                                          style: AcornTheme.textTheme.headlineMedium,
+/*                                      style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      ),*/
                                           value),
                                     );
                                   }).toList()),
