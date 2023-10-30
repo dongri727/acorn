@@ -12,7 +12,7 @@ class PrincipalPeopleEndpoint extends Endpoint {
     );
   }
 
-  //Add POrgs in DB
+  //Add Principal people in DB
   Future<int> addPPeople(Session session, PrincipalPeople principalPeople) async {
     await PrincipalPeople.insert(session, principalPeople);
     return principalPeople.id!;

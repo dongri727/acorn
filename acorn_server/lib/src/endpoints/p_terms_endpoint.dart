@@ -12,7 +12,7 @@ class PrincipalTermsEndpoint extends Endpoint {
     );
   }
 
-  //Add POrgs in DB
+  //Add principal terms in DB
   Future<int> addPrincipalTerms(Session session, PrincipalTerms pTerms) async {
     await PrincipalTerms.insert(session, pTerms);
     return pTerms.id!;

@@ -303,6 +303,20 @@ ALTER TABLE ONLY "principal_terms"
 
 
 --
+-- Class PrincipalUser as table principal_user
+--
+
+CREATE TABLE "principal_user" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "user_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "principal_user"
+  ADD CONSTRAINT principal_user_pkey PRIMARY KEY (id);
+
+
+--
 -- Class Seas as table seas
 --
 

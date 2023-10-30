@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -115,6 +116,12 @@ class ConfirmModel extends ChangeNotifier {
             debugPrint('Added principal Terms : $principalTermsId');
           }
         }
+
+        var userId = sessionManager.signedInUser?.id ?? 0;
+        print('written by user: $userId');
+        var principalUser = PrincipalUser(principal_id: principalId, user_id: userId);
+        var principalUserId = await client.principalUser.addPrincipalUser(principalUser);
+        debugPrint('Added principal User : $principalUserId');
 
         return 0;
 

@@ -12,7 +12,7 @@ class PrincipalSeasEndpoint extends Endpoint {
     );
   }
 
-  //Add country involved in DB
+  //Add principal seas in DB
   Future<int> addPrincipalSeas(Session session, PrincipalSeas principalSeas) async {
     await PrincipalSeas.insert(session, principalSeas);
     return principalSeas.id!;
