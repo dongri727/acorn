@@ -385,7 +385,7 @@ Future<List<Principal>> getPrincipalByTermId(Session session, {List<int>? termId
     return Future.value([]); // Return empty list if no termIds are provided
   }
 
-  // Step 1: Get principalIds from PrincipalOrganisation using orgIds
+  // Step 1: Get principalIds from PrincipalTerms using termIds
   var whereClausePrincipalTerms;
   for (var termId in termIds) {
     if (whereClausePrincipalTerms == null) {
@@ -414,5 +414,79 @@ Future<List<Principal>> getPrincipalByTermId(Session session, {List<int>? termId
     orderBy: Principal.t.point,
   );
 }
+
+///単一user version
+Future<List<Principal>> getPrincipalByUserId(Session session, {int? userId}) async {
+  print("Getting principal with userId: $userId");
+
+  if (userId == null) {
+    return Future.value([]); // Return empty list if no userId is provided
+  }
+
+  // Step 1: Get principalIds from PrincipalUser using userId
+  var whereClausePrincipalUser = PrincipalUser.t.user_id.equals(userId);
+  
+  var PrincipalUserResults = await PrincipalUser.find(session, where: (_) => whereClausePrincipalUser);
+  var principalIds = PrincipalUserResults.map((row) => row.principal_id).toList();
+
+  if (principalIds.isEmpty) {
+    return Future.value([]);
+  }
+
+  // Step 2: Get Principals using principalIds
+  var whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId); // Assuming the id field in Principal table is named 'id'
+    } else {
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
+    }
+  }
+
+  return await Principal.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: Principal.t.point,
+  );
+}
+
+
+/* ///複数人version
+Future<List<Principal>> getPrincipalByUserIds(Session session, {List<int>? userIds}) async {
+  print("Getting principal with userIds: $userIds");
+
+  if (userIds == null || userIds.isEmpty) {
+    return Future.value([]); // Return empty list if no pUserIds are provided
+  }
+
+  // Step 1: Get principalIds from PrincipalUser using userId
+  var whereClausePrincipalUser;
+  for (var userId in userIds) {
+    if (whereClausePrincipalUser == null) {
+      whereClausePrincipalUser = PrincipalUser.t.user_id.equals(userId);
+    } else {
+      whereClausePrincipalUser = whereClausePrincipalUser | PrincipalUser.t.user_id.equals(userId);
+    }
+  }
+
+  var PrincipalUserResults = await PrincipalUser.find(session, where: (_) => whereClausePrincipalUser);
+  var principalIds = PrincipalUserResults.map((row) => row.principal_id).toList();
+
+  // Step 2: Get Principals using principalIds
+  var whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId); // Assuming the id field in Principal table is named 'id'
+    } else {
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
+    }
+  }
+
+  return await Principal.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: Principal.t.point,
+  );
+} */
 
 }

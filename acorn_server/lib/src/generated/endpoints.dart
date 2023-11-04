@@ -963,13 +963,13 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principalUser',
       endpoint: endpoints['principalUser']!,
       methodConnectors: {
-        'getUser': _i1.MethodConnector(
-          name: 'getUser',
+        'getPUserId': _i1.MethodConnector(
+          name: 'getPUserId',
           params: {
             'userId': _i1.ParameterDescription(
               name: 'userId',
-              type: _i1.getType<int>(),
-              nullable: false,
+              type: _i1.getType<int?>(),
+              nullable: true,
             )
           },
           call: (
@@ -977,9 +977,9 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalUser'] as _i19.PrincipalUserEndpoint)
-                  .getUser(
+                  .getPUserId(
             session,
-            params['userId'],
+            userId: params['userId'],
           ),
         ),
         'addPrincipalUser': _i1.MethodConnector(
@@ -1418,6 +1418,25 @@ class Endpoints extends _i1.EndpointDispatch {
                   .getPrincipalByTermId(
             session,
             termIds: params['termIds'],
+          ),
+        ),
+        'getPrincipalByUserId': _i1.MethodConnector(
+          name: 'getPrincipalByUserId',
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i24.PrincipalEndpoint)
+                  .getPrincipalByUserId(
+            session,
+            userId: params['userId'],
           ),
         ),
       },

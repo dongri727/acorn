@@ -394,10 +394,10 @@ class _EndpointPrincipalUser extends _i1.EndpointRef {
   @override
   String get name => 'principalUser';
 
-  _i2.Future<List<_i19.PrincipalUser>> getUser(int userId) =>
+  _i2.Future<List<_i19.PrincipalUser>> getPUserId({int? userId}) =>
       caller.callServerEndpoint<List<_i19.PrincipalUser>>(
         'principalUser',
-        'getUser',
+        'getPUserId',
         {'userId': userId},
       );
 
@@ -594,6 +594,14 @@ class _EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByTermId',
         {'termIds': termIds},
+      );
+
+  ///単一user version
+  _i2.Future<List<_i24.Principal>> getPrincipalByUserId({int? userId}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByUserId',
+        {'userId': userId},
       );
 }
 

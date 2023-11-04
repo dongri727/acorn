@@ -8,6 +8,7 @@ class Confirm {
   int month = 0;
   int day = 0;
   int point = 0;
+  double logarithm = 0.0;
 
   //principal
   String name = "";

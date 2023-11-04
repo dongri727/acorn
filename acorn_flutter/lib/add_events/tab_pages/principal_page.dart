@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:acorn_client/acorn_client.dart';
@@ -11,8 +13,6 @@ import '../../confirm/confirm.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
 
-import 'dart:math' as math;
-
 import '../../utils/theme.dart';
 import 'principal_model.dart';
 
@@ -20,7 +20,7 @@ var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
 class PrincipalPage extends StatelessWidget{
-  PrincipalPage({super.key});
+  PrincipalPage({ super.key });
 
   var newYearD = 0.0;
   var newYearI = 0;
@@ -28,6 +28,7 @@ class PrincipalPage extends StatelessWidget{
   var newMonth = 0;
   var newDay = 0;
   var newPoint = 0;
+  var newLogarithm = 0.0;
   var newName= '';
   String isSelectedCalendar = 'Common-Era';
   var calendarNo = 0;
@@ -274,7 +275,6 @@ class PrincipalPage extends StatelessWidget{
     'Ocean-name',
   ];
 
-
   @override
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
@@ -333,10 +333,6 @@ class PrincipalPage extends StatelessWidget{
                                             value: value,
                                             child: Text(
                                                 style: AcornTheme.textTheme.bodyMedium,
-/*                                              style: TextStyle(
-                                              color: Colors.green,
-                                              fontSize: 18)*/
-
                                                 value),
                                           );
                                         }).toList(),
@@ -475,7 +471,6 @@ class PrincipalPage extends StatelessWidget{
                                       break;
                                   }
                                 },
-
                               ),
                             ),
                             Padding(
@@ -548,6 +543,9 @@ class PrincipalPage extends StatelessWidget{
                     ///make data of point
                     newPoint = (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay).toDouble()).round();
 
+                    ///make data of logarithm
+                    newLogarithm = 5885.0 - double.parse((1000 * (math.log((newPoint - 768600).abs()))).toStringAsFixed(4));
+
                     switch (isSelectedCalendar) {
                       case 'Billion Years':
                         newAnnee = '${newYearD}B years ago';
@@ -575,6 +573,7 @@ class PrincipalPage extends StatelessWidget{
                     confirm.month = newMonth;
                     confirm.day = newDay;
                     confirm.point = newPoint;
+                    confirm.logarithm = newLogarithm;
                     print(newPoint);
 
                     ///選択されたlocation
