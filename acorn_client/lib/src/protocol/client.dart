@@ -35,9 +35,11 @@ import 'package:acorn_client/src/protocol/stars.dart' as _i26;
 import 'package:acorn_client/src/protocol/stars_involved.dart' as _i27;
 import 'package:acorn_client/src/protocol/terms.dart' as _i28;
 import 'package:acorn_client/src/protocol/universe.dart' as _i29;
-import 'package:serverpod_auth_client/module.dart' as _i30;
-import 'dart:io' as _i31;
-import 'protocol.dart' as _i32;
+import 'package:acorn_client/src/protocol/with_globe.dart' as _i30;
+import 'package:acorn_client/src/protocol/with_map.dart' as _i31;
+import 'package:serverpod_auth_client/module.dart' as _i32;
+import 'dart:io' as _i33;
+import 'protocol.dart' as _i34;
 
 class _EndpointAttInvolved extends _i1.EndpointRef {
   _EndpointAttInvolved(_i1.EndpointCaller caller) : super(caller);
@@ -707,22 +709,64 @@ class _EndpointUniverse extends _i1.EndpointRef {
       );
 }
 
+class _EndpointWithGlobe extends _i1.EndpointRef {
+  _EndpointWithGlobe(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'withGlobe';
+
+  _i2.Future<List<_i30.WithGlobe>> getWithMap({int? keyword}) =>
+      caller.callServerEndpoint<List<_i30.WithGlobe>>(
+        'withGlobe',
+        'getWithMap',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addWithGlobe(_i30.WithGlobe withGlobe) =>
+      caller.callServerEndpoint<int>(
+        'withGlobe',
+        'addWithGlobe',
+        {'withGlobe': withGlobe},
+      );
+}
+
+class _EndpointWithMap extends _i1.EndpointRef {
+  _EndpointWithMap(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'withMap';
+
+  _i2.Future<List<_i31.WithMap>> getWithMap({int? keyword}) =>
+      caller.callServerEndpoint<List<_i31.WithMap>>(
+        'withMap',
+        'getWithMap',
+        {'keyword': keyword},
+      );
+
+  _i2.Future<int> addWithMap(_i31.WithMap withMap) =>
+      caller.callServerEndpoint<int>(
+        'withMap',
+        'addWithMap',
+        {'withMap': withMap},
+      );
+}
+
 class _Modules {
   _Modules(Client client) {
-    auth = _i30.Caller(client);
+    auth = _i32.Caller(client);
   }
 
-  late final _i30.Caller auth;
+  late final _i32.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i31.SecurityContext? context,
+    _i33.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i32.Protocol(),
+          _i34.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -754,6 +798,8 @@ class Client extends _i1.ServerpodClient {
     starsInvolved = _EndpointStarsInvolved(this);
     terms = _EndpointTerms(this);
     universe = _EndpointUniverse(this);
+    withGlobe = _EndpointWithGlobe(this);
+    withMap = _EndpointWithMap(this);
     modules = _Modules(this);
   }
 
@@ -813,6 +859,10 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointUniverse universe;
 
+  late final _EndpointWithGlobe withGlobe;
+
+  late final _EndpointWithMap withMap;
+
   late final _Modules modules;
 
   @override
@@ -845,6 +895,8 @@ class Client extends _i1.ServerpodClient {
         'starsInvolved': starsInvolved,
         'terms': terms,
         'universe': universe,
+        'withGlobe': withGlobe,
+        'withMap': withMap,
       };
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>

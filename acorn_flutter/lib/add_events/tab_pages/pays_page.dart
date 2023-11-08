@@ -18,8 +18,14 @@ class PaysPage extends StatelessWidget {
   PaysPage({super.key});
 
   var newCATT = '';
+  var newPATT = '';
   var newStar = '';
-  List<String> options = ['Current Country Name', 'Country Name At That Time', 'Stars Observed'];
+  List<String> options = [
+    'Current Name of Country Involved',
+    'Current Name of Place Involved',
+    'Name of Country Involved at that time',
+    'Name of Place Involved at that time',
+    'Stars Observed'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -62,7 +68,9 @@ class PaysPage extends StatelessWidget {
                                       child: Column(
                                         children: [
                                           BlankTextFormat(text: model.filtersPays.join(', ')),
+                                          BlankTextFormat(text: model.filtersPlaces.join(', ')),
                                           BlankTextFormat(text: model.filtersCATTs.join(', ')),
+                                          BlankTextFormat(text: model.filtersPATTs.join(', ')),
                                           BlankTextFormat(text: model.filtersStars.join(', ')),
                                         ],
                                       )),
@@ -75,13 +83,21 @@ class PaysPage extends StatelessWidget {
                                   child: const Text('Show and Select Options'),
                                   onPressed: () async {
                                     switch (isSelectedOption) {
-                                      case 'Current Country Name':
+                                      case 'Current Name of Country Involved':
                                         await model.fetchPaysInvolved();
                                         currentDisplayList = model.listPays;
                                         break;
-                                      case 'Country Name At That Time':
-                                        await model.fetchCountriesAtt();
+                                      case 'Current Name of Place Involved':
+                                        await model.fetchPlacesInvolved();
                                         currentDisplayList = model.listCATTs;
+                                        break;
+                                      case 'Name of Country Involved at that time':
+                                        await model.fetchCountryAtt();
+                                        currentDisplayList = model.listCATTs;
+                                        break;
+                                      case 'Name of Place Involved at that time':
+                                        await model.fetchPatt();
+                                        currentDisplayList = model.listPATTs;
                                         break;
                                       case 'Stars Observed':
                                         await model.fetchStars();
@@ -94,7 +110,7 @@ class PaysPage extends StatelessWidget {
                               Padding(
                                   padding: const EdgeInsets.all(28.0),
                                 child: FormatGreyEnable(
-                                  enabled: isSelectedOption != 'Current Country Name',
+                                  enabled: isSelectedOption != 'Current Name of Country Involved',
                                   controller: controller,
                                   hintText: 'A New Name You Want',
                                   onChanged: (text) {
@@ -138,6 +154,16 @@ class PaysPage extends StatelessWidget {
                                               model.selectedPaysInv = filterKey;
                                               model.selectedPaysInvId = filterId;
                                             });
+                                      } else if (item is Places) {
+                                        return FilterFormatImediat(
+                                            filteredImKeys: model.filtersPlaces,
+                                            filteredImValues: model.filtersPlacesId,
+                                            filterImKey: item.place,
+                                            filterImValue: item.id,
+                                            onSelected: (filterKey, filterId) {
+                                              model.selectedPlaceInv = filterKey;
+                                              model.selectedPlaceInvId = filterId;
+                                            });
                                       } else if (item is Countryatts) {
                                         return FilterFormatImediat(
                                             filteredImKeys: model.filtersCATTs,
@@ -147,6 +173,16 @@ class PaysPage extends StatelessWidget {
                                             onSelected: (filterKey, filterId) {
                                               model.selectedPaysInv = filterKey;
                                               model.selectedPaysInvId = filterId;
+                                            });
+                                      } else if (item is Placeatts) {
+                                        return FilterFormatImediat(
+                                            filteredImKeys: model.filtersPATTs,
+                                            filteredImValues: model.filtersPATTId,
+                                            filterImKey: (item.placeatt),
+                                            filterImValue: item.id,
+                                            onSelected: (filterKey, filterId) {
+                                              model.selectedPlaceInv = filterKey;
+                                              model.selectedPlaceInvId = filterId;
                                             });
                                       }  else if (item is Stars) {
                                         return FilterFormatImediat(

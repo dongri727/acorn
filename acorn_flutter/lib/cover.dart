@@ -35,29 +35,26 @@ class CoverPageState extends State<CoverPage> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(400.0),
-        child: OutlinedButton(
-            child: Text(
-              "WELCOME",
-              style: AcornTheme.textTheme.bodyLarge,
+      child: TextButton(
+          child: Text(
+            "WELCOME",
+            style: AcornTheme.textTheme.bodyLarge,
 /*              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-              ),*/
-            ),
-            onPressed: () {
-              Navigator.push<String>(
-                context,
-                MaterialPageRoute(
-                  //builder: (context) => const IndexPage(),
-              builder: (context) => sessionManager.isSignedIn
-                  ? const AccountPage()
-                  : const SignInPage(),
-                ),
-              );
-            }),
-      ),
+              color: Colors.white,
+              fontSize: 30,
+            ),*/
+          ),
+          onPressed: () {
+            Navigator.push<String>(
+              context,
+              MaterialPageRoute(
+                //builder: (context) => const IndexPage(),
+            builder: (context) => sessionManager.isSignedIn
+                ? const AccountPage()
+                : const SignInPage(),
+              ),
+            );
+          }),
     );
   }
 }

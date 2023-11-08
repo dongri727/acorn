@@ -111,12 +111,6 @@ class ConfirmPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-/*                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ConfirmText(
-                                    confirmText: _confirm.isSelectedCalendar,
-                                    confirmColor: const Color(0xFFF0E68C)),
-                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ConfirmText(
@@ -135,8 +129,6 @@ class ConfirmPage extends StatelessWidget {
                                     confirmText: _confirm.day.toString(),
                                     confirmColor: const Color(0xFF8fbc8f)),
                               ),
-
-
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                                 child: Text(
@@ -212,10 +204,6 @@ class ConfirmPage extends StatelessWidget {
                                   padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                   child: Text('Countries Involved',
                                       style: AcornTheme.textTheme.headlineSmall,
-/*                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                  ),*/
                                 ),
                                 ),
                                 Padding(
@@ -232,11 +220,26 @@ class ConfirmPage extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Places Involved',
+                                    style: AcornTheme.textTheme.headlineSmall,
+                                  ),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: _confirm.selectedPlaces.length,
+                                        itemBuilder: (context, index) {
+                                          return TermCard(
+                                            _confirm.selectedPlaces[index],
+                                          );
+                                        })
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                   child: Text('Countries Involved at that time',
                                       style: AcornTheme.textTheme.headlineSmall,
-/*                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 18,*/
                                   ),
                                 ),
                                 Padding(
@@ -253,14 +256,10 @@ class ConfirmPage extends StatelessWidget {
                                         }
                                     )
                                 ),
-                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                  child: Text('Stars Observed',
-                                      style: AcornTheme.textTheme.headlineSmall
-/*                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                    ),*/
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Places Involved at that time',
+                                    style: AcornTheme.textTheme.headlineSmall,
                                   ),
                                 ),
                                 Padding(
@@ -269,14 +268,15 @@ class ConfirmPage extends StatelessWidget {
                                     child: ListView.builder(
                                         shrinkWrap: true,
                                         physics: const NeverScrollableScrollPhysics(),
-                                        itemCount: _confirm.selectedStar.length,
+                                        itemCount: _confirm.selectedPATT.length,
                                         itemBuilder: (context, index) {
                                           return TermCard(
-                                            _confirm.selectedStar[index],
+                                            _confirm.selectedPATT[index],
                                           );
                                         }
                                     )
                                 ),
+
                               ],
                             ),
                           ),
@@ -285,6 +285,26 @@ class ConfirmPage extends StatelessWidget {
                           flex: 1,
                           child: SingleChildScrollView(
                             child: Column(children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: Text('Stars Observed',
+                                    style: AcornTheme.textTheme.headlineSmall
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      30, 8, 30, 8),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _confirm.selectedStar.length,
+                                      itemBuilder: (context, index) {
+                                        return TermCard(
+                                          _confirm.selectedStar[index],
+                                        );
+                                      }
+                                  )
+                              ),
                               Padding(
                                 padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Organizations Involved',

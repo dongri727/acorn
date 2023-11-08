@@ -29,9 +29,9 @@ class WherePage extends StatelessWidget{
 
   var newLatitude = 0.0;
   var newLongitude = 0.0;
-  double x = 0.0;
-  double y = 0.0;
-  double z = 0.0;
+  double cx = 0.0;
+  double cy = 0.0;
+  double cz = 0.0;
 
 
   ///Stars
@@ -346,9 +346,9 @@ class WherePage extends StatelessWidget{
               onPressed: () {
                 double sn = (math.pi * newLatitude) / 180;
                 double ew = (math.pi * newLongitude) / 180;
-                x = math.cos(sn) * math.cos(ew);
-                y = math.sin(sn);
-                z = math.cos(sn) * math.sin(ew);
+                cx = math.cos(sn) * math.cos(ew) * confirm.coefficient;
+                cy = math.sin(sn) * confirm.coefficient;
+                cz = math.cos(sn) * math.sin(ew) * confirm.coefficient;
 
                 showDialog<void>(
                     context: context,
@@ -388,9 +388,9 @@ class WherePage extends StatelessWidget{
 
                 confirm.latitude = newLatitude;
                 confirm.longitude = newLongitude;
-                confirm.x = x;
-                confirm.y = y;
-                confirm.z = z;
+                confirm.x = cx;
+                confirm.y = cy;
+                confirm.z = cz;
                 print('save where');
               },
 

@@ -9,6 +9,7 @@ class Confirm {
   int day = 0;
   int point = 0;
   double logarithm = 0.0;
+  double coefficient = 0.0;
 
   //principal
   String name = "";
@@ -43,9 +44,17 @@ class Confirm {
   List<String> selectedCountries = [];
   List<int> selectedCountriesId = [];
 
+  //place involved
+  List<String> selectedPlaces = [];
+  List<int> selectedPlacesId = [];
+
   //pays involved at that time
   List<String> selectedATT = [];
   List<int> selectedATTId = [];
+
+  //place involved at that time
+  List<String> selectedPATT = [];
+  List<int> selectedPATTId = [];
 
   //stars observed
   List<String> selectedStar = [];

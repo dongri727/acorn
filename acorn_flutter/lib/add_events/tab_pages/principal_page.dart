@@ -29,6 +29,7 @@ class PrincipalPage extends StatelessWidget{
   var newDay = 0;
   var newPoint = 0;
   var newLogarithm = 0.0;
+  var newCoefficient = 0.0;
   var newName= '';
   String isSelectedCalendar = 'Common-Era';
   var calendarNo = 0;
@@ -546,6 +547,9 @@ class PrincipalPage extends StatelessWidget{
                     ///make data of logarithm
                     newLogarithm = 5885.0 - double.parse((1000 * (math.log((newPoint - 768600).abs()))).toStringAsFixed(4));
 
+                    ///make data of reverseLogarithm
+                    newCoefficient = 6820.0 + newLogarithm;
+
                     switch (isSelectedCalendar) {
                       case 'Billion Years':
                         newAnnee = '${newYearD}B years ago';
@@ -574,7 +578,8 @@ class PrincipalPage extends StatelessWidget{
                     confirm.day = newDay;
                     confirm.point = newPoint;
                     confirm.logarithm = newLogarithm;
-                    print(newPoint);
+                    confirm.coefficient = newCoefficient;
+
 
                     ///選択されたlocation
                     confirm.selectedLocation = model.location;

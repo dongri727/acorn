@@ -32,8 +32,26 @@ class ConfirmModel extends ChangeNotifier {
             three_d_z: confirm.z,
         );
         var principalId = await client.principal.addPrincipal(principal);
-
         debugPrint('Add principal : $principalId');
+
+        //with map
+        var withMap = WithMap(
+            principal_id: principalId,
+            latitude: confirm.latitude,
+            longitude: confirm.longitude,
+            logarithm: confirm.logarithm);
+        var withMapId = await client.withMap.addWithMap(withMap);
+        debugPrint('add WithMap : $withMapId');
+
+        //with globe
+        var withGlobe = WithGlobe(
+            principal_id: principalId,
+            x_coordinate: confirm.x,
+            y_coordinate: confirm.y,
+            z_coordinate: confirm.z,
+          coefficient: confirm.coefficient);
+        var withGlobeId = await client.withGlobe.addWithGlobe(withGlobe);
+        debugPrint('add WithGlobe : $withGlobeId');
 
         //CATT 単
         if (confirm.selectedCattId != 0) {

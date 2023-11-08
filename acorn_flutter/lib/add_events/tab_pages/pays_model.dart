@@ -14,10 +14,20 @@ class PaysModel extends ChangeNotifier {
   final List<String> filtersPays = <String>[];
   final List<int> filtersPaysId = <int>[];
 
+  ///関係都市等の現在名
+  List<Places> listPlaces = [];
+  final List<String> filtersPlaces = <String>[];
+  final List<int> filtersPlacesId = <int>[];
+
   ///関係国の当時の名称
   List<Countryatts> listCATTs = [];
   final List<String> filtersCATTs = <String>[];
   final List<int> filtersCATTId = <int>[];
+
+  ///関係都市等の当時の名称
+  List<Placeatts> listPATTs = [];
+  final List<String> filtersPATTs = <String>[];
+  final List<int> filtersPATTId = <int>[];
 
   ///観測された星
   List<Stars> listStars = [];
@@ -27,16 +37,35 @@ class PaysModel extends ChangeNotifier {
   fetchPaysInvolved() async {
     try {
       listPays = await client.pays.getPays();
-      print(listPays);
+      print('list of pays gotten');
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
   }
 
-  fetchCountriesAtt() async {
+  fetchPlacesInvolved() async {
+    try {
+      listPlaces = await client.places.getPlaces();
+      print('list of places gotten');
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchCountryAtt() async {
     try {
       listCATTs = await client.countryatts.getCountryATTs();
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPatt() async {
+    try {
+      listPATTs = await client.placeatts.getPlaceATTs();
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -52,13 +81,37 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
+  addPlaceAndFetch(String newPlace) async {
+    try {
+      var place = Places(place: newPlace);
+      await client.places.addPlaces(place);
+      await fetchPlacesInvolved();
+      print(place);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
   addCountryATTandFetch(String newCATT) async {
     try {
     var catts = Countryatts(countryatt: newCATT);
     await client.countryatts.addCountryATTs(catts);
-    await fetchCountriesAtt();
+    await fetchCountryAtt();
     print(catts);
     notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  addPATTandFetch(String newPATT) async {
+    try {
+      var patts = Placeatts(placeatt: newPATT);
+      await client.placeatts.addPlaceATTs(patts);
+      await fetchCountryAtt();
+      print(patts);
+      notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
@@ -91,6 +144,21 @@ class PaysModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _selectedPlaceInv = '';
+  int _selectedPlaceInvId = 0;
+  String get selectedPlaceInv => _selectedPlaceInv;
+  int get selectedPlaceInvId => _selectedPlaceInvId;
+
+  set selectedPlaceInv(String place) {
+    _selectedPlaceInv = place;
+    notifyListeners();
+  }
+
+  set selectedPlaceInvId(int value) {
+    _selectedPlaceInvId = value;
+    notifyListeners();
+  }
+
   String _selectedCattInv = '';
   int _selectedCattInvId = 0;
   String get selectedCattInv => _selectedCattInv;
@@ -103,6 +171,21 @@ class PaysModel extends ChangeNotifier {
 
   set selectedCattInvId(int value) {
     _selectedCattInvId = value;
+    notifyListeners();
+  }
+
+  String _selectedPattInv = '';
+  int _selectedPattInvId = 0;
+  String get selectedPattInv => _selectedPattInv;
+  int get selectedPattInvId => _selectedPattInvId;
+
+  set selectedPattInv(String catt) {
+    _selectedPattInv = catt;
+    notifyListeners();
+  }
+
+  set selectedPattInvId(int value) {
+    _selectedPattInvId = value;
     notifyListeners();
   }
 

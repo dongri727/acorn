@@ -382,3 +382,36 @@ ALTER TABLE ONLY "universe"
   ADD CONSTRAINT universe_pkey PRIMARY KEY (id);
 
 
+--
+-- Class WithGlobe as table with_globe
+--
+
+CREATE TABLE "with_globe" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "x_coordinate" double precision NOT NULL,
+  "y_coordinate" double precision NOT NULL,
+  "z_coordinate" double precision NOT NULL,
+  "coefficient" double precision NOT NULL
+);
+
+ALTER TABLE ONLY "with_globe"
+  ADD CONSTRAINT with_globe_pkey PRIMARY KEY (id);
+
+
+--
+-- Class WithMap as table with_map
+--
+
+CREATE TABLE "with_map" (
+  "id" serial,
+  "principal_id" integer NOT NULL,
+  "latitude" double precision NOT NULL,
+  "longitude" double precision NOT NULL,
+  "logarithm" double precision NOT NULL
+);
+
+ALTER TABLE ONLY "with_map"
+  ADD CONSTRAINT with_map_pkey PRIMARY KEY (id);
+
+
