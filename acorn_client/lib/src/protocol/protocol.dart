@@ -52,22 +52,23 @@ import 'package:acorn_client/src/protocol/p_catt.dart' as _i42;
 import 'package:acorn_client/src/protocol/p_orgs.dart' as _i43;
 import 'package:acorn_client/src/protocol/p_patt.dart' as _i44;
 import 'package:acorn_client/src/protocol/p_people.dart' as _i45;
-import 'package:acorn_client/src/protocol/p_seas.dart' as _i46;
-import 'package:acorn_client/src/protocol/p_terms.dart' as _i47;
-import 'package:acorn_client/src/protocol/p-user.dart' as _i48;
-import 'package:acorn_client/src/protocol/pays.dart' as _i49;
-import 'package:acorn_client/src/protocol/people.dart' as _i50;
-import 'package:acorn_client/src/protocol/placeatts.dart' as _i51;
-import 'package:acorn_client/src/protocol/places.dart' as _i52;
-import 'package:acorn_client/src/protocol/principal.dart' as _i53;
-import 'package:acorn_client/src/protocol/seas.dart' as _i54;
-import 'package:acorn_client/src/protocol/stars.dart' as _i55;
-import 'package:acorn_client/src/protocol/stars_involved.dart' as _i56;
-import 'package:acorn_client/src/protocol/terms.dart' as _i57;
-import 'package:acorn_client/src/protocol/universe.dart' as _i58;
-import 'package:acorn_client/src/protocol/with_globe.dart' as _i59;
-import 'package:acorn_client/src/protocol/with_map.dart' as _i60;
-import 'package:serverpod_auth_client/module.dart' as _i61;
+import 'package:acorn_client/src/protocol/p_place.dart' as _i46;
+import 'package:acorn_client/src/protocol/p_seas.dart' as _i47;
+import 'package:acorn_client/src/protocol/p_terms.dart' as _i48;
+import 'package:acorn_client/src/protocol/p-user.dart' as _i49;
+import 'package:acorn_client/src/protocol/pays.dart' as _i50;
+import 'package:acorn_client/src/protocol/people.dart' as _i51;
+import 'package:acorn_client/src/protocol/placeatts.dart' as _i52;
+import 'package:acorn_client/src/protocol/places.dart' as _i53;
+import 'package:acorn_client/src/protocol/principal.dart' as _i54;
+import 'package:acorn_client/src/protocol/seas.dart' as _i55;
+import 'package:acorn_client/src/protocol/stars.dart' as _i56;
+import 'package:acorn_client/src/protocol/stars_involved.dart' as _i57;
+import 'package:acorn_client/src/protocol/terms.dart' as _i58;
+import 'package:acorn_client/src/protocol/universe.dart' as _i59;
+import 'package:acorn_client/src/protocol/with_globe.dart' as _i60;
+import 'package:acorn_client/src/protocol/with_map.dart' as _i61;
+import 'package:serverpod_auth_client/module.dart' as _i62;
 export 'att_involved.dart';
 export 'c_involved.dart';
 export 'categories.dart';
@@ -379,48 +380,44 @@ class Protocol extends _i1.SerializationManager {
           .map((e) => deserialize<_i45.PrincipalPeople>(e))
           .toList() as dynamic;
     }
-    if (t == List<Map<String, dynamic>>) {
+    if (t == List<_i46.PrincipalPlace>) {
       return (data as List)
-          .map((e) => deserialize<Map<String, dynamic>>(e))
+          .map((e) => deserialize<_i46.PrincipalPlace>(e))
           .toList() as dynamic;
     }
-    if (t == Map<String, dynamic>) {
-      return (data as Map).map((k, v) =>
-          MapEntry(deserialize<String>(k), deserialize<dynamic>(v))) as dynamic;
-    }
-    if (t == List<_i46.PrincipalSeas>) {
+    if (t == List<_i47.PrincipalSeas>) {
       return (data as List)
-          .map((e) => deserialize<_i46.PrincipalSeas>(e))
+          .map((e) => deserialize<_i47.PrincipalSeas>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i47.PrincipalTerms>) {
+    if (t == List<_i48.PrincipalTerms>) {
       return (data as List)
-          .map((e) => deserialize<_i47.PrincipalTerms>(e))
+          .map((e) => deserialize<_i48.PrincipalTerms>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i48.PrincipalUser>) {
+    if (t == List<_i49.PrincipalUser>) {
       return (data as List)
-          .map((e) => deserialize<_i48.PrincipalUser>(e))
+          .map((e) => deserialize<_i49.PrincipalUser>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i49.Pays>) {
-      return (data as List).map((e) => deserialize<_i49.Pays>(e)).toList()
+    if (t == List<_i50.Pays>) {
+      return (data as List).map((e) => deserialize<_i50.Pays>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i50.People>) {
-      return (data as List).map((e) => deserialize<_i50.People>(e)).toList()
+    if (t == List<_i51.People>) {
+      return (data as List).map((e) => deserialize<_i51.People>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i51.Placeatts>) {
-      return (data as List).map((e) => deserialize<_i51.Placeatts>(e)).toList()
+    if (t == List<_i52.Placeatts>) {
+      return (data as List).map((e) => deserialize<_i52.Placeatts>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i52.Places>) {
-      return (data as List).map((e) => deserialize<_i52.Places>(e)).toList()
+    if (t == List<_i53.Places>) {
+      return (data as List).map((e) => deserialize<_i53.Places>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i53.Principal>) {
-      return (data as List).map((e) => deserialize<_i53.Principal>(e)).toList()
+    if (t == List<_i54.Principal>) {
+      return (data as List).map((e) => deserialize<_i54.Principal>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<String>?>()) {
@@ -483,37 +480,37 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i54.Seas>) {
-      return (data as List).map((e) => deserialize<_i54.Seas>(e)).toList()
+    if (t == List<_i55.Seas>) {
+      return (data as List).map((e) => deserialize<_i55.Seas>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i55.Stars>) {
-      return (data as List).map((e) => deserialize<_i55.Stars>(e)).toList()
+    if (t == List<_i56.Stars>) {
+      return (data as List).map((e) => deserialize<_i56.Stars>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i56.StarsInvolved>) {
+    if (t == List<_i57.StarsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i56.StarsInvolved>(e))
+          .map((e) => deserialize<_i57.StarsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i57.Terms>) {
-      return (data as List).map((e) => deserialize<_i57.Terms>(e)).toList()
+    if (t == List<_i58.Terms>) {
+      return (data as List).map((e) => deserialize<_i58.Terms>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i58.Universe>) {
-      return (data as List).map((e) => deserialize<_i58.Universe>(e)).toList()
+    if (t == List<_i59.Universe>) {
+      return (data as List).map((e) => deserialize<_i59.Universe>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i59.WithGlobe>) {
-      return (data as List).map((e) => deserialize<_i59.WithGlobe>(e)).toList()
+    if (t == List<_i60.WithGlobe>) {
+      return (data as List).map((e) => deserialize<_i60.WithGlobe>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i60.WithMap>) {
-      return (data as List).map((e) => deserialize<_i60.WithMap>(e)).toList()
+    if (t == List<_i61.WithMap>) {
+      return (data as List).map((e) => deserialize<_i61.WithMap>(e)).toList()
           as dynamic;
     }
     try {
-      return _i61.Protocol().deserialize<T>(data, t);
+      return _i62.Protocol().deserialize<T>(data, t);
     } catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -521,7 +518,7 @@ class Protocol extends _i1.SerializationManager {
   @override
   String? getClassNameForObject(Object data) {
     String? className;
-    className = _i61.Protocol().getClassNameForObject(data);
+    className = _i62.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -625,7 +622,7 @@ class Protocol extends _i1.SerializationManager {
   dynamic deserializeByClassName(Map<String, dynamic> data) {
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i61.Protocol().deserializeByClassName(data);
+      return _i62.Protocol().deserializeByClassName(data);
     }
     if (data['className'] == 'AttsInvolved') {
       return deserialize<_i2.AttsInvolved>(data['data']);

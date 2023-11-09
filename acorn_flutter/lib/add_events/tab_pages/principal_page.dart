@@ -1,5 +1,4 @@
-import 'dart:developer';
-import 'dart:math' as math;
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:acorn_client/acorn_client.dart';
@@ -22,14 +21,16 @@ var client = Client('http://localhost:8080/')
 class PrincipalPage extends StatelessWidget{
   PrincipalPage({ super.key });
 
+  double log10(num x) => log(x) / ln10;
+
   var newYearD = 0.0;
   var newYearI = 0;
   var newAnnee = '';
   var newMonth = 0;
   var newDay = 0;
-  var newPoint = 0;
-  var newLogarithm = 0.0;
-  var newCoefficient = 0.0;
+  late int newPoint;
+  late double newLogarithm;
+  late double newCoefficient;
   var newName= '';
   String isSelectedCalendar = 'Common-Era';
   var calendarNo = 0;
@@ -516,7 +517,7 @@ class PrincipalPage extends StatelessWidget{
                           );
                         });
 
-                    // convert the years depending on the selected calendar period
+                    /// convert the years depending on the selected calendar period
                     switch (isSelectedCalendar) {
                       case 'Billion Years':
                         newYearI = (newYearD * 1000000000).round();
@@ -541,14 +542,21 @@ class PrincipalPage extends StatelessWidget{
                         newYearI = (newYearD).round();
                         break;
                     }
+
                     ///make data of point
                     newPoint = (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay).toDouble()).round();
+                    print(newPoint);
 
                     ///make data of logarithm
-                    newLogarithm = 5885.0 - double.parse((1000 * (math.log((newPoint - 768600).abs()))).toStringAsFixed(4));
+                    newLogarithm =
+                        double.parse((5885.0 - (1000 * (log10((newPoint -
+                            768600).abs())))).toStringAsFixed(4));
+                    print(newLogarithm);
 
                     ///make data of reverseLogarithm
                     newCoefficient = 6820.0 + newLogarithm;
+                    print(newCoefficient);
+
 
                     switch (isSelectedCalendar) {
                       case 'Billion Years':

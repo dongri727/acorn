@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
+import 'users/account_page.dart';
 import 'utils/theme.dart';
 
 class IndexPage extends StatelessWidget {
@@ -63,6 +64,26 @@ class IndexPage extends StatelessWidget {
                           },
                           child: Text(
                             "Search & View",
+                            style: AcornTheme.textTheme.bodyLarge,
+/*                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,),*/
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.push<String>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AccountPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Account Page",
                             style: AcornTheme.textTheme.bodyLarge,
 /*                            style: TextStyle(
                               color: Colors.white,

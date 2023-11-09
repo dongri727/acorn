@@ -847,8 +847,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principalPlace',
       endpoint: endpoints['principalPlace']!,
       methodConnectors: {
-        'getPrincipalPlace': _i1.MethodConnector(
-          name: 'getPrincipalPlace',
+        'getPPlace': _i1.MethodConnector(
+          name: 'getPPlace',
           params: {
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
@@ -861,13 +861,13 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalPlace'] as _i16.PrincipalPlaceEndpoint)
-                  .getPrincipalPlace(
+                  .getPPlace(
             session,
             keyword: params['keyword'],
           ),
         ),
-        'addPrincipalPlace': _i1.MethodConnector(
-          name: 'addPrincipalPlace',
+        'addPPlace': _i1.MethodConnector(
+          name: 'addPPlace',
           params: {
             'principalPlace': _i1.ParameterDescription(
               name: 'principalPlace',
@@ -880,7 +880,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalPlace'] as _i16.PrincipalPlaceEndpoint)
-                  .addPrincipalPlace(
+                  .addPPlace(
             session,
             params['principalPlace'],
           ),

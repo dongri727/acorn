@@ -17,9 +17,11 @@ var client = Client('http://localhost:8080/')
 class PaysPage extends StatelessWidget {
   PaysPage({super.key});
 
+  var newPlace = '';
   var newCATT = '';
   var newPATT = '';
   var newStar = '';
+
   List<String> options = [
     'Current Name of Country Involved',
     'Current Name of Place Involved',
@@ -89,18 +91,18 @@ class PaysPage extends StatelessWidget {
                                         break;
                                       case 'Current Name of Place Involved':
                                         await model.fetchPlacesInvolved();
-                                        currentDisplayList = model.listCATTs;
+                                        currentDisplayList = model.listPlaces;
                                         break;
                                       case 'Name of Country Involved at that time':
-                                        await model.fetchCountryAtt();
+                                        await model.fetchCountryAttInv();
                                         currentDisplayList = model.listCATTs;
                                         break;
                                       case 'Name of Place Involved at that time':
-                                        await model.fetchPatt();
+                                        await model.fetchPattInv();
                                         currentDisplayList = model.listPATTs;
                                         break;
                                       case 'Stars Observed':
-                                        await model.fetchStars();
+                                        await model.fetchStarsObserved();
                                         currentDisplayList = model.listStars;
                                         break;
                                     }
@@ -114,8 +116,12 @@ class PaysPage extends StatelessWidget {
                                   controller: controller,
                                   hintText: 'A New Name You Want',
                                   onChanged: (text) {
-                                    if (isSelectedOption == 'Country Name At That Time') {
+                                    if (isSelectedOption == 'Current Name of Place Involved') {
+                                      newPlace = text;
+                                    } else if (isSelectedOption == 'Country Name At That Time') {
                                       newCATT = text;
+                                    } else if (isSelectedOption == 'Place Name At That Time') {
+                                      newPATT = text;
                                     } else if (isSelectedOption == 'Stars Observed') {
                                       newStar = text;
                                     } else {
@@ -127,9 +133,15 @@ class PaysPage extends StatelessWidget {
                               ButtonFormat(
                                   label: 'Add A New Name',
                                   onPressed: () async {
-                                    if (isSelectedOption == 'Country Name At That Time') {
+                                    if (isSelectedOption == 'Current Name of Place Involved') {
+                                      await model.addPlaceAndFetch(newPlace);
+                                      currentDisplayList = model.listPlaces;
+                                    } else if (isSelectedOption == 'Country Name At That Time') {
                                       await model.addCountryATTandFetch(newCATT);
                                       currentDisplayList = model.listCATTs;
+                                    } else if (isSelectedOption == 'Place Name At That Time') {
+                                      await model.addPATTandFetch(newPATT);
+                                      currentDisplayList = model.listPATTs;
                                     } else if (isSelectedOption == 'Stars Observed') {
                                       await model.addStarAndFetch(newStar);
                                       currentDisplayList = model.listStars;
@@ -225,15 +237,23 @@ class PaysPage extends StatelessWidget {
 
               confirm.selectedCountries = model.filtersPays;
               confirm.selectedCountriesId = model.filtersPaysId;
-              print("${model.filtersPays}");
+              print("pays:${model.filtersPays}");
+
+              confirm.selectedPlaces = model.filtersPlaces;
+              confirm.selectedPlacesId = model.filtersPlacesId;
+              print("places:${model.filtersPlaces}");
 
               confirm.selectedATT = model.filtersCATTs;
               confirm.selectedATTId = model.filtersCATTId;
-              print("${model.filtersCATTs}");
+              print("catt:${model.filtersCATTs}");
+
+              confirm.selectedPATT = model.filtersPATTs;
+              confirm.selectedPATTId = model.filtersPATTId;
+              print("patt:${model.filtersPATTs}");
 
               confirm.selectedStar = model.filtersStars;
               confirm.selectedStarId = model.filtersStarId;
-              print("${model.filtersStars}");
+              print("stars:${model.filtersStars}");
             },
             label: const Text('Temporarily Save'),
           ));

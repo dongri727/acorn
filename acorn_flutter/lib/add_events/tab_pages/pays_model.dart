@@ -47,14 +47,14 @@ class PaysModel extends ChangeNotifier {
   fetchPlacesInvolved() async {
     try {
       listPlaces = await client.places.getPlaces();
-      print('list of places gotten');
+      print('list of places gotten: $listPlaces');
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
   }
 
-  fetchCountryAtt() async {
+  fetchCountryAttInv() async {
     try {
       listCATTs = await client.countryatts.getCountryATTs();
       notifyListeners();
@@ -63,7 +63,7 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
-  fetchPatt() async {
+  fetchPattInv() async {
     try {
       listPATTs = await client.placeatts.getPlaceATTs();
       notifyListeners();
@@ -72,7 +72,7 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
-  fetchStars() async {
+  fetchStarsObserved() async {
     try {
       listStars = await client.stars.getStars();
       notifyListeners();
@@ -97,7 +97,7 @@ class PaysModel extends ChangeNotifier {
     try {
     var catts = Countryatts(countryatt: newCATT);
     await client.countryatts.addCountryATTs(catts);
-    await fetchCountryAtt();
+    await fetchCountryAttInv();
     print(catts);
     notifyListeners();
     } catch (e) {
@@ -109,7 +109,7 @@ class PaysModel extends ChangeNotifier {
     try {
       var patts = Placeatts(placeatt: newPATT);
       await client.placeatts.addPlaceATTs(patts);
-      await fetchCountryAtt();
+      await fetchPattInv();
       print(patts);
       notifyListeners();
     } catch (e) {
@@ -121,7 +121,7 @@ class PaysModel extends ChangeNotifier {
     try {
       var stars = Stars(star: newStar);
       await client.stars.addStars(stars);
-      await fetchStars();
+      await fetchStarsObserved();
       print(stars);
       notifyListeners();
     } catch (e) {
