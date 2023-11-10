@@ -116,6 +116,21 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
+  ///関係地域の現在名
+  List<Places> listPlaceInv = [];
+  final List<String> filtersPlaceInv = <String>[];
+  final List<int> filtersPlaceInvId = <int>[];
+
+  fetchPlaceInvolvedLookedFor() async {
+    try {
+      listPlaceInv = await client.places.getPlaces();
+      print(listPlaceInv);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
   ///当時の関係国名
   List<Countryatts> listPaysInvATT = [];
   final List<String> filtersPaysInvATT = <String>[];
@@ -131,15 +146,30 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
-  ///観測された星
-  List<Stars> listStarsInvolved = [];
-  final List<String> filtersStarsInvolved = <String>[];
-  final List<int> filtersStarsInvolvedId = <int>[];
+  ///当時の関係国名
+  List<Placeatts> listPlaceInvATT = [];
+  final List<String> filtersPlaceInvATT = <String>[];
+  final List<int> filtersPlaceInvATTId = <int>[];
 
-  fetchStarsInvolvedLookedFor() async {
+  fetchPlaceInvolvedATTLookedFor() async {
     try {
-      listStarsInvolved = await client.stars.getStars();
-      print(listStarsInvolved);
+      listPlaceInvATT = await client.placeatts.getPlaceATTs();
+      print(listPlaceInvATT);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  ///観測された星
+  List<Stars> listStarsObserved = [];
+  final List<String> filtersStarsObserved = <String>[];
+  final List<int> filtersStarsObservedId = <int>[];
+
+  fetchStarsObservedLookedFor() async {
+    try {
+      listStarsObserved = await client.stars.getStars();
+      print(listStarsObserved);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -215,10 +245,14 @@ class MultipleSearchModel extends ChangeNotifier {
     filtersSeas.clear();
     listPaysInv.clear();
     filtersPaysInv.clear();
+    listPlaceInv.clear();
+    filtersPlaceInv.clear();
     listPaysInvATT.clear();
     filtersPaysInvATT.clear();
-    listStarsInvolved.clear();
-    filtersStarsInvolved.clear();
+    listPlaceInvATT.clear();
+    filtersPlaceInvATT.clear();
+    listStarsObserved.clear();
+    filtersStarsObserved.clear();
     listCategories.clear();
     filtersCategories.clear();
     listPeople.clear();
@@ -370,6 +404,21 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _selectedPlaceInvolved = '';
+  int _selectedPlaceInvolvedId = 0;
+  String get selectedPlaceInvolved => _selectedPlaceInvolved;
+  int get selectedPlaceInvolvedId => _selectedPlaceInvolvedId;
+
+  set selectedPlaceInvolved(String pInvolved) {
+    _selectedPlaceInvolved = pInvolved;
+    notifyListeners();
+  }
+
+  set selectedPlaceInvolvedId(int value) {
+    _selectedPlaceInvolvedId = value;
+    notifyListeners();
+  }
+
   String _selectedCountryInvolvedATT = '';
   int _selectedCountryInvolvedATTId = 0;
   String get selectedCountryInvolvedATT => _selectedCountryInvolvedATT;
@@ -385,18 +434,33 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _selectedStarsInvolved = '';
-  int _selectedStarsInvolvedId = 0;
-  String get selectedStarsInvolved => _selectedStarsInvolved;
-  int get selectedStarsInvolvedATTId => _selectedStarsInvolvedId;
+  String _selectedPlaceInvolvedATT = '';
+  int _selectedPlaceInvolvedATTId = 0;
+  String get selectedPlaceInvolvedATT => _selectedPlaceInvolvedATT;
+  int get selectedPlaceInvolvedATTId => _selectedPlaceInvolvedATTId;
 
-  set selectedStarsInvolved(String starsInvolved) {
-    _selectedStarsInvolved = starsInvolved;
+  set selectedPlaceInvolvedATT(String pattsInvolved) {
+    _selectedPlaceInvolvedATT = pattsInvolved;
     notifyListeners();
   }
 
-  set selectedStarsInvolvedId(int value) {
-    _selectedStarsInvolvedId = value;
+  set selectedPlaceInvolvedATTId(int value) {
+    _selectedPlaceInvolvedATTId = value;
+    notifyListeners();
+  }
+
+  String _selectedStarsObserved = '';
+  int _selectedStarsObservedId = 0;
+  String get selectedStarsObserved => _selectedStarsObserved;
+  int get selectedStarsInvolvedATTId => _selectedStarsObservedId;
+
+  set selectedStarsObserved(String starsObserved) {
+    _selectedStarsObserved = starsObserved;
+    notifyListeners();
+  }
+
+  set selectedStarsObservedId(int value) {
+    _selectedStarsObservedId = value;
     notifyListeners();
   }
 
@@ -543,6 +607,16 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
+  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
+      print("Getting principal with PInvolvedIds: $pInvolvedIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
   fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
@@ -553,10 +627,20 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
-  fetchPrincipalByStarsInvolvedId({List<int>? starInvolvedIds}) async {
+  fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
     try {
-      _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starInvolvedIds);
-      print("Getting principal with StarInvolvedIds: $starInvolvedIds");
+      _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
+      print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  fetchPrincipalByStarsObservedId({List<int>? starObservedIds}) async {
+    try {
+      _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starObservedIds);
+      print("Getting principal with StarObservedIds: $starObservedIds");
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');

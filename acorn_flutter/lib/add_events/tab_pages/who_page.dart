@@ -19,7 +19,7 @@ class WhoPage extends StatelessWidget {
   var newOrg = '';
   var newPerson = '';
 
-  List<String> options = ['Organisations', 'People'];
+  List<String> options = ['Institutions,Organisations etc', 'People'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -82,7 +82,7 @@ class WhoPage extends StatelessWidget {
                       child: const Text('Show and Select Options'),
                       onPressed: () async {
                         switch (isSelectedOption) {
-                          case 'Organisations':
+                          case 'Institutions,Organisations etc':
                             await model.fetchOrgsInvolved();
                             currentDisplayList = model.listOrgs;
                             break;
@@ -101,7 +101,7 @@ class WhoPage extends StatelessWidget {
                       hintText: 'a New Name You Want',
                       onChanged: (text) {
                         switch (isSelectedOption) {
-                          case 'Organisations':
+                          case 'Institutions,Organisations etc':
                             newOrg = text;
                             break;
                           case 'People':
@@ -115,7 +115,7 @@ class WhoPage extends StatelessWidget {
                     label: 'Add a New Name',
                     onPressed: () async {
                       switch (isSelectedOption) {
-                        case 'Organisations':
+                        case 'Institutions,Organisations etc':
                           await model.addOrgsAndFetch(newOrg);
                           currentDisplayList = model.listOrgs;
                           break;

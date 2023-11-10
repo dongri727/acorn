@@ -25,11 +25,6 @@ class ConfirmModel extends ChangeNotifier {
             affair: confirm.name,
             location: confirm.selectedLocation,
             precise: confirm.selectedPrecise,
-            latitude: confirm.latitude,
-            longitude: confirm.longitude,
-            three_d_x: confirm.x,
-            three_d_y: confirm.y,
-            three_d_z: confirm.z,
         );
         var principalId = await client.principal.addPrincipal(principal);
         debugPrint('Add principal : $principalId');
@@ -77,6 +72,16 @@ class ConfirmModel extends ChangeNotifier {
             var countryInvolvedId = await client.countryInvolved
                 .addCInvolved(countryInvolved);
             debugPrint('Added country involved : $countryInvolvedId');
+          }
+        }
+
+        if (confirm.selectedPlacesId.isNotEmpty) {
+          for (var placeId in confirm.selectedPlacesId) {
+            var placeInvolved = PrincipalPlace(
+                principal_id: principalId, place_id: placeId);
+            var placeInvolvedId = await client.principalPlace
+                .addPPlace(placeInvolved);
+            debugPrint('Added country involved : $placeInvolvedId');
           }
         }
 

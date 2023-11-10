@@ -388,9 +388,9 @@ class WherePage extends StatelessWidget{
 
                 confirm.latitude = newLatitude;
                 confirm.longitude = newLongitude;
-                confirm.x = cx;
-                confirm.y = cy;
-                confirm.z = cz;
+                confirm.x = double.parse((cx).toStringAsFixed(4));
+                confirm.y = double.parse((cy).toStringAsFixed(4));
+                confirm.z = double.parse((cz).toStringAsFixed(4));
                 print('save where');
               },
 

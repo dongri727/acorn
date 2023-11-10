@@ -175,12 +175,7 @@ CREATE TABLE "principal" (
   "point" integer NOT NULL,
   "affair" text NOT NULL,
   "location" text NOT NULL,
-  "precise" text NOT NULL,
-  "latitude" double precision NOT NULL,
-  "longitude" double precision NOT NULL,
-  "three_d_x" double precision NOT NULL,
-  "three_d_y" double precision NOT NULL,
-  "three_d_z" double precision NOT NULL
+  "precise" text NOT NULL
 );
 
 ALTER TABLE ONLY "principal"

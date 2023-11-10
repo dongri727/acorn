@@ -19,11 +19,6 @@ class Principal extends _i1.TableRow {
     required this.affair,
     required this.location,
     required this.precise,
-    required this.latitude,
-    required this.longitude,
-    required this.three_d_x,
-    required this.three_d_y,
-    required this.three_d_z,
   }) : super(id);
 
   factory Principal.fromJson(
@@ -45,16 +40,6 @@ class Principal extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['location']),
       precise: serializationManager
           .deserialize<String>(jsonSerialization['precise']),
-      latitude: serializationManager
-          .deserialize<double>(jsonSerialization['latitude']),
-      longitude: serializationManager
-          .deserialize<double>(jsonSerialization['longitude']),
-      three_d_x: serializationManager
-          .deserialize<double>(jsonSerialization['three_d_x']),
-      three_d_y: serializationManager
-          .deserialize<double>(jsonSerialization['three_d_y']),
-      three_d_z: serializationManager
-          .deserialize<double>(jsonSerialization['three_d_z']),
     );
   }
 
@@ -76,16 +61,6 @@ class Principal extends _i1.TableRow {
 
   String precise;
 
-  double latitude;
-
-  double longitude;
-
-  double three_d_x;
-
-  double three_d_y;
-
-  double three_d_z;
-
   @override
   String get tableName => 'principal';
   @override
@@ -100,11 +75,6 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'precise': precise,
-      'latitude': latitude,
-      'longitude': longitude,
-      'three_d_x': three_d_x,
-      'three_d_y': three_d_y,
-      'three_d_z': three_d_z,
     };
   }
 
@@ -120,11 +90,6 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'precise': precise,
-      'latitude': latitude,
-      'longitude': longitude,
-      'three_d_x': three_d_x,
-      'three_d_y': three_d_y,
-      'three_d_z': three_d_z,
     };
   }
 
@@ -140,11 +105,6 @@ class Principal extends _i1.TableRow {
       'affair': affair,
       'location': location,
       'precise': precise,
-      'latitude': latitude,
-      'longitude': longitude,
-      'three_d_x': three_d_x,
-      'three_d_y': three_d_y,
-      'three_d_z': three_d_z,
     };
   }
 
@@ -180,21 +140,6 @@ class Principal extends _i1.TableRow {
         return;
       case 'precise':
         precise = value;
-        return;
-      case 'latitude':
-        latitude = value;
-        return;
-      case 'longitude':
-        longitude = value;
-        return;
-      case 'three_d_x':
-        three_d_x = value;
-        return;
-      case 'three_d_y':
-        three_d_y = value;
-        return;
-      case 'three_d_z':
-        three_d_z = value;
         return;
       default:
         throw UnimplementedError();
@@ -336,16 +281,6 @@ class PrincipalTable extends _i1.Table {
 
   final precise = _i1.ColumnString('precise');
 
-  final latitude = _i1.ColumnDouble('latitude');
-
-  final longitude = _i1.ColumnDouble('longitude');
-
-  final three_d_x = _i1.ColumnDouble('three_d_x');
-
-  final three_d_y = _i1.ColumnDouble('three_d_y');
-
-  final three_d_z = _i1.ColumnDouble('three_d_z');
-
   @override
   List<_i1.Column> get columns => [
         id,
@@ -357,11 +292,6 @@ class PrincipalTable extends _i1.Table {
         affair,
         location,
         precise,
-        latitude,
-        longitude,
-        three_d_x,
-        three_d_y,
-        three_d_z,
       ];
 }
 

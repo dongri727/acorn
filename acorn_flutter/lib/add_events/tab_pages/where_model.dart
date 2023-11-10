@@ -21,7 +21,6 @@ class WhereModel extends ChangeNotifier {
   ///Place
   List<Places> listPlaces = [];
 
-
   ///Seas
   List<Seas> listSeas = [];
 

@@ -106,11 +106,14 @@ class AccountPage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
-                              leading: Text(model.principal[index].annee ,
+                              leading: Text('${model.principal[index].annee}-${model.principal[index].month}-${model.principal[index].day}' ,
                                 style: const TextStyle(fontSize: 16),
                               ),
                               title: Text(model.principal[index].affair,
-                                style: const TextStyle(fontSize: 24),
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                              trailing: Text('${model.principal[index].location}, ${model.principal[index].precise}',
+                                style: const TextStyle(fontSize: 16),
                               ),
                               ),
                             ),

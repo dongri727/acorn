@@ -41,7 +41,9 @@ class MultiSearchPage extends StatelessWidget {
     'Country-name at that time',
     'Place-name at that time',
     'Countries involved',
+    'Places involved',
     'Names of Countries involved at that time',
+    'Names of Places involved at that time',
     'Stars Observed',
     'Organisations',
     'People',
@@ -371,11 +373,8 @@ class MultiSearchPage extends StatelessWidget {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(
-                                          style: AcornTheme.textTheme.headlineMedium,
-/*                                      style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      ),*/
+                                          style: AcornTheme
+                                              .textTheme.headlineMedium,
                                           value),
                                     );
                                   }).toList()),
@@ -401,52 +400,78 @@ class MultiSearchPage extends StatelessWidget {
                               onPressed: () {
                                 switch (isSelectedOption) {
                                   case 'Period':
-                                    model.fetchPrincipalByPeriod(period: filtersPeriod);
+                                    model.fetchPrincipalByPeriod(
+                                        period: filtersPeriod);
                                     break;
                                   case 'Universe':
-                                    model.fetchPrincipal(location: filtersUniverse);
+                                    model.fetchPrincipal(
+                                        location: filtersUniverse);
                                     break;
                                   case 'Stars':
-                                    model.fetchPrincipalByPrecise(precise: model.filtersStars);
+                                    model.fetchPrincipalByPrecise(
+                                        precise: model.filtersStars);
                                     break;
                                   case 'Current Country where it happened':
                                     model.fetchPrincipal(location: filtersPays);
                                     break;
                                   case 'Current Place-name where it happened':
-                                    model.fetchPrincipalByPrecise(precise: model.filtersVilles);
+                                    model.fetchPrincipalByPrecise(
+                                        precise: model.filtersVilles);
                                     break;
                                   case 'Oceans':
-                                    model.fetchPrincipal(location: filtersOceans);
+                                    model.fetchPrincipal(
+                                        location: filtersOceans);
                                     break;
                                   case 'Seas':
-                                    model.fetchPrincipalByPrecise(precise: model.filtersSeas);
+                                    model.fetchPrincipalByPrecise(
+                                        precise: model.filtersSeas);
                                     break;
                                   case 'Country-name at that time':
-                                    model.fetchPrincipalByCattId(cattIds: model.filtersCattsId);
+                                    model.fetchPrincipalByCattId(
+                                        cattIds: model.filtersCattsId);
                                     break;
                                   case 'Place-name at that time':
-                                    model.fetchPrincipalByPattId(pattIds: model.filtersPattsId);
+                                    model.fetchPrincipalByPattId(
+                                        pattIds: model.filtersPattsId);
                                     break;
                                   case 'Countries involved':
-                                    model.fetchPrincipalByCInvolvedId(cInvolvedIds: model.filtersPaysInvId);
+                                    model.fetchPrincipalByCInvolvedId(
+                                        cInvolvedIds: model.filtersPaysInvId);
+                                    break;
+                                  case 'Places involved':
+                                    model.fetchPrincipalByPInvolvedId(
+                                        pInvolvedIds: model.filtersPlaceInvId);
                                     break;
                                   case 'Names of Countries involved at that time':
-                                    model.fetchPrincipalByAttInvolvedId(attsInvolvedIds: model.filtersPaysInvATTId);
+                                    model.fetchPrincipalByAttInvolvedId(
+                                        attsInvolvedIds:
+                                            model.filtersPaysInvATTId);
+                                    break;
+                                  case 'Names of Places involved at that time':
+                                    model.fetchPrincipalByPAttInvolvedId(
+                                        pattsInvolvedIds:
+                                        model.filtersPlaceInvATTId);
                                     break;
                                   case 'Stars Observed':
-                                    model.fetchPrincipalByStarsInvolvedId(starInvolvedIds: model.filtersStarsInvolvedId);
+                                    model.fetchPrincipalByStarsObservedId(
+                                        starObservedIds:
+                                            model.filtersStarsObservedId);
                                     break;
                                   case 'Organisations':
-                                    model.fetchPrincipalByOrgsId(orgIds: model.filtersOrgsId);
+                                    model.fetchPrincipalByOrgsId(
+                                        orgIds: model.filtersOrgsId);
                                     break;
                                   case 'People':
-                                    model.fetchPrincipalByPersonId(personIds: model.filtersPeopleId);
+                                    model.fetchPrincipalByPersonId(
+                                        personIds: model.filtersPeopleId);
                                     break;
                                   case 'Categories':
-                                    model.fetchPrincipalByCategoryId(categoryIds: model.filtersCategoriesId);
+                                    model.fetchPrincipalByCategoryId(
+                                        categoryIds: model.filtersCategoriesId);
                                     break;
                                   case 'Other Terms':
-                                    model.fetchPrincipalByTermId(termIds: model.filtersTermsId);
+                                    model.fetchPrincipalByTermId(
+                                        termIds: model.filtersTermsId);
                                     break;
                                 }
                               },
@@ -474,8 +499,10 @@ class MultiSearchPage extends StatelessWidget {
                               ...model.filtersCatts,
                               ...model.filtersPatts,
                               ...model.filtersPaysInv,
+                              ...model.filtersPlaceInv,
                               ...model.filtersPaysInvATT,
-                              ...model.filtersStarsInvolved,
+                              ...model.filtersPlaceInvATT,
+                              ...model.filtersStarsObserved,
                               ...model.filtersOrgs,
                               ...model.filtersPeople,
                               ...model.filtersCategories,
@@ -527,14 +554,22 @@ class MultiSearchPage extends StatelessWidget {
                                     await model.fetchPaysInvolvedLookedFor();
                                     currentDisplayList = model.listPaysInv;
                                     break;
+                                  case 'Places involved':
+                                    await model.fetchPlaceInvolvedLookedFor();
+                                    currentDisplayList = model.listPlaceInv;
+                                    break;
                                   case 'Names of Countries involved at that time':
                                     await model.fetchPaysInvolvedATTLookedFor();
                                     currentDisplayList = model.listPaysInvATT;
                                     break;
+                                  case 'Names of Places involved at that time':
+                                    await model.fetchPlaceInvolvedATTLookedFor();
+                                    currentDisplayList = model.listPlaceInvATT;
+                                    break;
                                   case 'Stars Observed':
-                                    await model.fetchStarsInvolvedLookedFor();
+                                    await model.fetchStarsObservedLookedFor();
                                     currentDisplayList =
-                                        model.listStarsInvolved;
+                                        model.listStarsObserved;
                                     break;
                                   case 'Organisations':
                                     await model.fetchOrgsLookedFor();
@@ -650,6 +685,17 @@ class MultiSearchPage extends StatelessWidget {
                                           model.selectedPays = filterKey;
                                           model.selectedPaysId = filterId;
                                         });
+                                  case 'Places involved':
+                                    return FilterFormatImediat(
+                                        filteredImKeys: model.filtersPlaceInv,
+                                        filteredImValues:
+                                            model.filtersPlaceInvId,
+                                        filterImKey: item.place,
+                                        filterImValue: item.id,
+                                        onSelected: (filterKey, filterId) {
+                                          model.selectedPlace = filterKey;
+                                          model.selectedPlaceId = filterId;
+                                        });
                                   case 'Names of Countries involved at that time':
                                     return FilterFormatImediat(
                                         filteredImKeys: model.filtersPaysInvATT,
@@ -663,18 +709,31 @@ class MultiSearchPage extends StatelessWidget {
                                           model.selectedCountryInvolvedATTId =
                                               filterId;
                                         });
+                                  case 'Names of Places involved at that time':
+                                    return FilterFormatImediat(
+                                        filteredImKeys: model.filtersPlaceInvATT,
+                                        filteredImValues:
+                                        model.filtersPlaceInvATTId,
+                                        filterImKey: item.placeatt,
+                                        filterImValue: item.id,
+                                        onSelected: (filterKey, filterId) {
+                                          model.selectedPlaceInvolvedATT =
+                                              filterKey;
+                                          model.selectedPlaceInvolvedATTId =
+                                              filterId;
+                                        });
                                   case 'Stars Observed':
                                     return FilterFormatImediat(
                                         filteredImKeys:
-                                            model.filtersStarsInvolved,
+                                            model.filtersStarsObserved,
                                         filteredImValues:
-                                            model.filtersStarsInvolvedId,
+                                            model.filtersStarsObservedId,
                                         filterImKey: item.star,
                                         filterImValue: item.id,
                                         onSelected: (filterKey, filterId) {
-                                          model.selectedStarsInvolved =
+                                          model.selectedStarsObserved =
                                               filterKey;
-                                          model.selectedStarsInvolvedId =
+                                          model.selectedStarsObservedId =
                                               filterId;
                                         });
                                   case 'Organisations':
@@ -740,14 +799,16 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ResultPage(principal: model.principal)));
+                            builder: (context) =>
+                                ResultPage(principal: model.principal)));
                     print('send: ${model.principal}');
                     break;
                   case 'SCALABLE':
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Scalable(principal: model.principal)));
+                            builder: (context) =>
+                                Scalable(principal: model.principal)));
                     print('send: ${model.principal}');
                     break;
 

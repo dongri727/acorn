@@ -1029,36 +1029,6 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'String',
         ),
-        _i2.ColumnDefinition(
-          name: 'latitude',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: false,
-          dartType: 'double',
-        ),
-        _i2.ColumnDefinition(
-          name: 'longitude',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: false,
-          dartType: 'double',
-        ),
-        _i2.ColumnDefinition(
-          name: 'three_d_x',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: false,
-          dartType: 'double',
-        ),
-        _i2.ColumnDefinition(
-          name: 'three_d_y',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: false,
-          dartType: 'double',
-        ),
-        _i2.ColumnDefinition(
-          name: 'three_d_z',
-          columnType: _i2.ColumnType.doublePrecision,
-          isNullable: false,
-          dartType: 'double',
-        ),
       ],
       foreignKeys: [],
       indexes: [
@@ -1730,6 +1700,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {
