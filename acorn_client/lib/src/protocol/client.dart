@@ -346,6 +346,13 @@ class _EndpointPrincipalPlace extends _i1.EndpointRef {
         'addPPlace',
         {'principalPlace': principalPlace},
       );
+
+  _i2.Future<List<dynamic>> getPPlaceNarrowed() =>
+      caller.callServerEndpoint<List<dynamic>>(
+        'principalPlace',
+        'getPPlaceNarrowed',
+        {},
+      );
 }
 
 class _EndpointPrincipalSeas extends _i1.EndpointRef {
@@ -491,6 +498,13 @@ class _EndpointPlaces extends _i1.EndpointRef {
         'places',
         'addPlaces',
         {'places': places},
+      );
+
+  _i2.Future<List<_i23.Places>> getPlacesInv({List<dynamic>? placeInvIds}) =>
+      caller.callServerEndpoint<List<_i23.Places>>(
+        'places',
+        'getPlacesInv',
+        {'placeInvIds': placeInvIds},
       );
 }
 

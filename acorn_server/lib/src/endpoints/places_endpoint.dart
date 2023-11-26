@@ -16,4 +16,30 @@ class PlacesEndpoint extends Endpoint {
     await Places.insert(session, places);
     return places.id!;
   }
+
+  Future<List<Places>> getPlacesInv(Session session,
+      {List<dynamic>? placeInvIds}) async {
+    print("Getting places with keynumbers: $placeInvIds");
+
+    var whereClause;
+    if (placeInvIds != null && placeInvIds.isNotEmpty) {
+      for (var placeInvId in placeInvIds) {
+        if (whereClause == null) {
+          whereClause = Places.t.id.equals(placeInvId);
+        } else {
+          whereClause = whereClause | Places.t.id.equals(placeInvId);
+        }
+      }
+    } else {
+      whereClause = Constant(true);
+    }
+
+    return await Places.find(
+      session,
+      where: (_) => whereClause,
+      orderBy: Places.t.place, 
+    );
+  }
+
+
 }

@@ -17,4 +17,11 @@ class PrincipalPlaceEndpoint extends Endpoint {
     await PrincipalPlace.insert(session, principalPlace);
     return principalPlace.id!;
   }
+
+  Future<List<dynamic>> getPPlaceNarrowed(Session session) async {
+    var placeInvIds = await session.db
+        .query('SELECT DISTINCT place_id FROM principal_place');
+
+    return placeInvIds.map((row) => row[0]).toList();
+  }
 }

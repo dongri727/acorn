@@ -885,6 +885,16 @@ class Endpoints extends _i1.EndpointDispatch {
             params['principalPlace'],
           ),
         ),
+        'getPPlaceNarrowed': _i1.MethodConnector(
+          name: 'getPPlaceNarrowed',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principalPlace'] as _i16.PrincipalPlaceEndpoint)
+                  .getPPlaceNarrowed(session),
+        ),
       },
     );
     connectors['principalSeas'] = _i1.EndpointConnector(
@@ -1183,6 +1193,24 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['places'] as _i23.PlacesEndpoint).addPlaces(
             session,
             params['places'],
+          ),
+        ),
+        'getPlacesInv': _i1.MethodConnector(
+          name: 'getPlacesInv',
+          params: {
+            'placeInvIds': _i1.ParameterDescription(
+              name: 'placeInvIds',
+              type: _i1.getType<List<dynamic>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['places'] as _i23.PlacesEndpoint).getPlacesInv(
+            session,
+            placeInvIds: params['placeInvIds'],
           ),
         ),
       },

@@ -154,7 +154,7 @@ class WherePage extends StatelessWidget{
                                             case 'S': newLatitude = -double.tryParse(value)!;
                                             break;
                                           }
-                                          print(newLatitude);
+                                          //print(newLatitude);
                                         },
                                         tffColor1: Colors.black54,
                                         tffColor2: const Color(0x99e6e6fa),
@@ -182,7 +182,7 @@ class WherePage extends StatelessWidget{
                                             case 'W': newLongitude = -double.tryParse(value)!;
                                             break;
                                           }
-                                          print(newLongitude);
+                                          //print(newLongitude);
                                         },
                                         tffColor1: Colors.black54,
                                         tffColor2: const Color(0x99e6e6fa),

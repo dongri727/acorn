@@ -12,7 +12,7 @@ class AcornTheme {
     headlineLarge: GoogleFonts.kalam(
         fontSize: 50, fontWeight: FontWeight.bold, color: const Color(0xFF006400)),//green
     headlineMedium: GoogleFonts.kalam(
-        fontSize: 20, fontWeight: FontWeight.normal, color: const Color(0xFFf5f5f5)),//white
+        fontSize: 18, fontWeight: FontWeight.normal, color: const Color(0xFFf5f5f5)),//white
     headlineSmall: GoogleFonts.kalam(
         fontSize: 16, fontWeight: FontWeight.normal, color: const Color(0xFFa9a9a9)),
     bodyLarge: GoogleFonts.kalam(

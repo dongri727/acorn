@@ -299,6 +299,35 @@ class PrincipalPage extends StatelessWidget{
                             Row(
                               children: [
                                 const Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(100, 20, 100, 20),
+                                    child: Text('WHAT',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                        )),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: TffFormat(
+                                        hintText: "Event　(within 50 letters)",
+                                        onChanged: (text) {
+                                          newName = text;
+                                        },
+                                        tffColor1: const Color(0xFF2f4f4f),
+                                        tffColor2: const Color(0x99e6e6fa),
+                                      )
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                const Expanded(
                                   flex: 3,
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(100, 20, 100, 20),
@@ -425,35 +454,7 @@ class PrincipalPage extends StatelessWidget{
                                           )),
                                   ),
                                 ]),
-                            Row(
-                              children: [
-                                const Expanded(
-                                  flex: 1,
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(100, 20, 100, 20),
-                                    child: Text('WHAT',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        color: Colors.white,
-                                      )),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TffFormat(
-                                        hintText: "Event　(within 50 letters)",
-                                        onChanged: (text) {
-                                          newName = text;
-                                        },
-                                        tffColor1: const Color(0xFF2f4f4f),
-                                        tffColor2: const Color(0x99e6e6fa),
-                                      )
-                                  ),
-                                ),
-                              ],
-                            ),
+
                             Center(
                               child: ElevatedButton(
                                 child: const Text('Show and Select Options'),

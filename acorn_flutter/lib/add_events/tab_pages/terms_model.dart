@@ -51,7 +51,7 @@ class TermsModel extends ChangeNotifier {
   fetchCategories() async {
     try {
       listCategories = await client.categories.getCategories();
-      print(listCategories);
+      //print(listCategories);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');

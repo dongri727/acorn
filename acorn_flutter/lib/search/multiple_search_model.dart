@@ -117,13 +117,15 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///関係地域の現在名
+  List<dynamic> placeInvIds = [];
   List<Places> listPlaceInv = [];
   final List<String> filtersPlaceInv = <String>[];
   final List<int> filtersPlaceInvId = <int>[];
 
   fetchPlaceInvolvedLookedFor() async {
     try {
-      listPlaceInv = await client.places.getPlaces();
+      placeInvIds = await client.principalPlace.getPPlaceNarrowed();  //HERE
+      listPlaceInv = await client.places.getPlacesInv(placeInvIds: placeInvIds);
       print(listPlaceInv);
       notifyListeners();
     } catch (e) {

@@ -385,6 +385,10 @@ class Protocol extends _i1.SerializationManager {
           .map((e) => deserialize<_i46.PrincipalPlace>(e))
           .toList() as dynamic;
     }
+    if (t == List<dynamic>) {
+      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
+          as dynamic;
+    }
     if (t == List<_i47.PrincipalSeas>) {
       return (data as List)
           .map((e) => deserialize<_i47.PrincipalSeas>(e))
@@ -415,6 +419,11 @@ class Protocol extends _i1.SerializationManager {
     if (t == List<_i53.Places>) {
       return (data as List).map((e) => deserialize<_i53.Places>(e)).toList()
           as dynamic;
+    }
+    if (t == _i1.getType<List<dynamic>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<dynamic>(e)).toList()
+          : null) as dynamic;
     }
     if (t == List<_i54.Principal>) {
       return (data as List).map((e) => deserialize<_i54.Principal>(e)).toList()

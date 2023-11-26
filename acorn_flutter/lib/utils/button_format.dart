@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///Used for the Add Term Buttons on Input Pages.
 class ButtonFormat extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
@@ -17,12 +18,14 @@ class ButtonFormat extends StatelessWidget {
         onPressed: onPressed,
         child: Text(label,
         style: const TextStyle(
+          fontSize: 18,
           color: Colors.white),
         ),
     );
   }
 }
 
+///Vertically aligned RadioButton showing choices
 class RadioButtonFormat extends StatefulWidget {
   final List<String> options;
   final String? initialOption;
@@ -54,7 +57,10 @@ class _RadioButtonFormatState extends State<RadioButtonFormat> {
       children: widget.options.map((option) {
         return ListTile(
           textColor: Colors.white,
-          title: Text(option),
+          title: Text(
+              option,
+            style: const TextStyle(fontSize: 18),
+          ),
           leading: Radio<String>(
             activeColor: Colors.yellow,
             value: option,
@@ -72,6 +78,8 @@ class _RadioButtonFormatState extends State<RadioButtonFormat> {
   }
 }
 
+///Side-by-side RadioButton showing choices
+///Used for latitude and longitude input and search page
 class RadioButtonRowFormat extends StatefulWidget {
   final List<String> options;
   final String? initialOption;
@@ -104,7 +112,11 @@ class _RadioButtonRowFormatState extends State<RadioButtonRowFormat> {
         return Expanded(
           child: ListTile(
             textColor: Colors.white,
-            title: Text(option),
+            title: Text(
+                option,
+              style: const TextStyle(
+                fontSize: 18),
+            ),
             leading: Radio<String>(
               activeColor: Colors.yellow,
               value: option,

@@ -76,9 +76,9 @@ class PaysPage extends StatelessWidget {
                                           BlankTextFormat(text: model.filtersStars.join(', ')),
                                         ],
                                       )),
-                                  Expanded(
+/*                                  Expanded(
                                     flex: 1,
-                                      child: Container()),
+                                      child: Container()),*/
                                 ]),
                               Center(
                                 child: ElevatedButton(
