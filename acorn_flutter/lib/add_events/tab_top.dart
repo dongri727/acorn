@@ -1,3 +1,4 @@
+import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +58,7 @@ class TabPage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           PrincipalPage(), // 必須
-                          WherePage(), // 地名･座標
+                          const WherePageGate(), // 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者
                           TermsPage(), // 検索語

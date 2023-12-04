@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import '../../confirm/confirm.dart';
 
 var client = Client('http://localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
@@ -14,6 +15,7 @@ class WhereModel extends ChangeNotifier {
   var newPaysatt = '';*/
   var newCountryatt = '';
   var newPlaceatt = '';
+  var keyCountry = '';
 
   ///Stars
   List<Stars> listStars = [];
@@ -52,10 +54,10 @@ class WhereModel extends ChangeNotifier {
   }
 
   ///DBからPlaceを取得
-  fetchPlaces() async {
+  fetchPlaces(keyCountry) async {
     try {
-      listPlaces = await client.places.getPlaces();
-      print('getPlaces');
+      listPlaces = await client.places.getPlaces(keyword: keyCountry);
+      print('getPlaces with $keyCountry');
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -64,9 +66,9 @@ class WhereModel extends ChangeNotifier {
 
   ///DBに新規placeを挿入・再取得･再描画
   addPlacesAndFetch(String newPlace) async {
-    var places = Places(place: newPlace);
+    var places = Places(place: newPlace, country: keyCountry);
     await client.places.addPlaces(places);
-    await fetchPlaces();
+    await fetchPlaces(keyCountry);
     notifyListeners();
   }
 

@@ -12,6 +12,7 @@ class Places extends _i1.TableRow {
   Places({
     int? id,
     required this.place,
+    required this.country,
   }) : super(id);
 
   factory Places.fromJson(
@@ -22,12 +23,16 @@ class Places extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       place:
           serializationManager.deserialize<String>(jsonSerialization['place']),
+      country: serializationManager
+          .deserialize<String>(jsonSerialization['country']),
     );
   }
 
   static final t = PlacesTable();
 
   String place;
+
+  String country;
 
   @override
   String get tableName => 'places';
@@ -36,6 +41,7 @@ class Places extends _i1.TableRow {
     return {
       'id': id,
       'place': place,
+      'country': country,
     };
   }
 
@@ -44,6 +50,7 @@ class Places extends _i1.TableRow {
     return {
       'id': id,
       'place': place,
+      'country': country,
     };
   }
 
@@ -52,6 +59,7 @@ class Places extends _i1.TableRow {
     return {
       'id': id,
       'place': place,
+      'country': country,
     };
   }
 
@@ -66,6 +74,9 @@ class Places extends _i1.TableRow {
         return;
       case 'place':
         place = value;
+        return;
+      case 'country':
+        country = value;
         return;
       default:
         throw UnimplementedError();
@@ -193,10 +204,13 @@ class PlacesTable extends _i1.Table {
 
   final place = _i1.ColumnString('place');
 
+  final country = _i1.ColumnString('country');
+
   @override
   List<_i1.Column> get columns => [
         id,
         place,
+        country,
       ];
 }
 

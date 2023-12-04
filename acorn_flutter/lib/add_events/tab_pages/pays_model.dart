@@ -9,6 +9,8 @@ var client = Client('http://localhost:8080/')
 
 class PaysModel extends ChangeNotifier {
 
+  var keyCountry = '';
+
   ///関係国の現在名
   List<Pays> listPays = [];
   final List<String> filtersPays = <String>[];
@@ -47,7 +49,6 @@ class PaysModel extends ChangeNotifier {
   fetchPlacesInvolved() async {
     try {
       listPlaces = await client.places.getPlaces();
-      print('list of places gotten: $listPlaces');
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -83,7 +84,7 @@ class PaysModel extends ChangeNotifier {
 
   addPlaceAndFetch(String newPlace) async {
     try {
-      var place = Places(place: newPlace);
+      var place = Places(place: newPlace, country: keyCountry);
       await client.places.addPlaces(place);
       await fetchPlacesInvolved();
       print(place);

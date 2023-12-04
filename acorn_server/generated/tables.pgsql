@@ -155,7 +155,8 @@ ALTER TABLE ONLY "placeatts"
 
 CREATE TABLE "places" (
   "id" serial,
-  "place" text NOT NULL
+  "place" text NOT NULL,
+  "country" text NOT NULL
 );
 
 ALTER TABLE ONLY "places"

@@ -12,6 +12,7 @@ class Places extends _i1.SerializableEntity {
   Places({
     this.id,
     required this.place,
+    required this.country,
   });
 
   factory Places.fromJson(
@@ -22,6 +23,8 @@ class Places extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       place:
           serializationManager.deserialize<String>(jsonSerialization['place']),
+      country: serializationManager
+          .deserialize<String>(jsonSerialization['country']),
     );
   }
 
@@ -32,11 +35,14 @@ class Places extends _i1.SerializableEntity {
 
   String place;
 
+  String country;
+
   @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'place': place,
+      'country': country,
     };
   }
 }

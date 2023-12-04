@@ -114,8 +114,7 @@ class _RadioButtonRowFormatState extends State<RadioButtonRowFormat> {
             textColor: Colors.white,
             title: Text(
                 option,
-              style: const TextStyle(
-                fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             leading: Radio<String>(
               activeColor: Colors.yellow,
