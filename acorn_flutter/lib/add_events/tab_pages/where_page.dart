@@ -52,7 +52,6 @@ class WherePage extends StatelessWidget{
 
   final Confirm _confirm;
 
-
   var newStar = '';
   var newPlace = '';
   var newSea = '';
@@ -72,10 +71,11 @@ class WherePage extends StatelessWidget{
 
   ///Place
   List<Places> listPlaces = [];
+  String keyCountry = '';
 
   ///Seas
   List<Seas> listSeas = [];
-  String keyCountry = '';
+
 
 
   List<Countryatts> listCountryatts = [];
@@ -293,7 +293,7 @@ class WherePage extends StatelessWidget{
                                     currentDisplayList = model.listStars;
                                     break;
                                   case 'Current Place-name':
-                                    await model.addPlacesAndFetch(newPlace);
+                                    await model.addPlacesAndFetch(newPlace, keyCountry);
                                     currentDisplayList = model.listPlaces;
                                     break;
                                   case 'Sea-name':
@@ -378,11 +378,11 @@ class WherePage extends StatelessWidget{
                 ),
                 floatingActionButton: FloatingActionButton.extended(
                   onPressed: () {
-                    double sn = (math.pi * newLatitude) / 180;
+                    double ns = (math.pi * newLatitude) / 180;
                     double ew = (math.pi * newLongitude) / 180;
-                    cx = math.cos(sn) * math.cos(ew) * confirm.coefficient;
-                    cy = math.sin(sn) * confirm.coefficient;
-                    cz = math.cos(sn) * math.sin(ew) * confirm.coefficient;
+                    cx = math.cos(ns) * math.cos(ew) * confirm.coefficient;
+                    cy = math.sin(ns) * confirm.coefficient;
+                    cz = math.cos(ns) * math.sin(ew) * confirm.coefficient;
 
                     showDialog<void>(
                         context: context,

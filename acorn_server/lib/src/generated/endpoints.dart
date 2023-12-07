@@ -1720,11 +1720,11 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'withGlobe',
       endpoint: endpoints['withGlobe']!,
       methodConnectors: {
-        'getWithMap': _i1.MethodConnector(
-          name: 'getWithMap',
+        'getWithGlobe': _i1.MethodConnector(
+          name: 'getWithGlobe',
           params: {
-            'keyword': _i1.ParameterDescription(
-              name: 'keyword',
+            'keynumber': _i1.ParameterDescription(
+              name: 'keynumber',
               type: _i1.getType<int?>(),
               nullable: true,
             )
@@ -1733,9 +1733,9 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['withGlobe'] as _i30.WithGlobeEndpoint).getWithMap(
+              (endpoints['withGlobe'] as _i30.WithGlobeEndpoint).getWithGlobe(
             session,
-            keyword: params['keyword'],
+            keynumber: params['keynumber'],
           ),
         ),
         'addWithGlobe': _i1.MethodConnector(
@@ -1765,8 +1765,8 @@ class Endpoints extends _i1.EndpointDispatch {
         'getWithMap': _i1.MethodConnector(
           name: 'getWithMap',
           params: {
-            'keyword': _i1.ParameterDescription(
-              name: 'keyword',
+            'keynumber': _i1.ParameterDescription(
+              name: 'keynumber',
               type: _i1.getType<int?>(),
               nullable: true,
             )
@@ -1777,7 +1777,7 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['withMap'] as _i31.WithMapEndpoint).getWithMap(
             session,
-            keyword: params['keyword'],
+            keynumber: params['keynumber'],
           ),
         ),
         'addWithMap': _i1.MethodConnector(

@@ -32,6 +32,10 @@ class ConfirmModel extends ChangeNotifier {
         //with map
         var withMap = WithMap(
             principal_id: principalId,
+            annee: confirm.annee,
+            affair: confirm.name,
+            location: confirm.selectedLocation,
+            precise: confirm.selectedPrecise,
             latitude: confirm.latitude,
             longitude: confirm.longitude,
             logarithm: confirm.logarithm);
@@ -41,6 +45,10 @@ class ConfirmModel extends ChangeNotifier {
         //with globe
         var withGlobe = WithGlobe(
             principal_id: principalId,
+            annee: confirm.annee,
+            affair: confirm.name,
+            location: confirm.selectedLocation,
+            precise: confirm.selectedPrecise,
             x_coordinate: confirm.x,
             y_coordinate: confirm.y,
             z_coordinate: confirm.z,

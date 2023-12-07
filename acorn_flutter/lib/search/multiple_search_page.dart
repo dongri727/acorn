@@ -381,6 +381,94 @@ class MultiSearchPage extends StatelessWidget {
                             ),
                           ),
                           Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: OutlinedButton(
+                              onPressed: () async {
+                                switch (isSelectedOption) {
+                                  case 'Period':
+                                    currentDisplayList = period;
+                                    model.updateDisplayList(period);
+                                    break;
+                                  case 'Universe':
+                                    currentDisplayList = universe;
+                                    model.updateDisplayList(universe);
+                                    break;
+                                  case 'Stars':
+                                    await model.fetchStarsLookedFor();
+                                    currentDisplayList = model.listStars;
+                                    break;
+                                  case 'Current Country where it happened':
+                                    currentDisplayList = pays;
+                                    model.updateDisplayList(pays);
+                                    break;
+                                  case 'Current Place-name where it happened':
+                                    await model.fetchVillesLookedFor();
+                                    currentDisplayList = model.listVilles;
+                                    break;
+                                  case 'Oceans':
+                                    currentDisplayList = oceans;
+                                    model.updateDisplayList(oceans);
+                                    break;
+                                  case 'Seas':
+                                    await model.fetchSeasLookedFor();
+                                    currentDisplayList = model.listSeas;
+                                    break;
+                                  case 'Country-name at that time':
+                                    await model.fetchCattLookedFor();
+                                    currentDisplayList = model.listCatts;
+                                    break;
+                                  case 'Place-name at that time':
+                                    await model.fetchPattLookedFor();
+                                    currentDisplayList = model.listPatts;
+                                    break;
+                                  case 'Countries involved':
+                                    await model.fetchPaysInvolvedLookedFor();
+                                    currentDisplayList = model.listPaysInv;
+                                    break;
+                                  case 'Places involved':
+                                    await model.fetchPlaceInvolvedLookedFor();
+                                    currentDisplayList = model.listPlaceInv;
+                                    break;
+                                  case 'Names of Countries involved at that time':
+                                    await model.fetchPaysInvolvedATTLookedFor();
+                                    currentDisplayList = model.listPaysInvATT;
+                                    break;
+                                  case 'Names of Places involved at that time':
+                                    await model.fetchPlaceInvolvedATTLookedFor();
+                                    currentDisplayList = model.listPlaceInvATT;
+                                    break;
+                                  case 'Stars Observed':
+                                    await model.fetchStarsObservedLookedFor();
+                                    currentDisplayList =
+                                        model.listStarsObserved;
+                                    break;
+                                  case 'Organisations':
+                                    await model.fetchOrgsLookedFor();
+                                    currentDisplayList =
+                                        model.listOrganisations;
+                                    break;
+                                  case 'People':
+                                    await model.fetchPeopleLookedFor();
+                                    currentDisplayList = model.listPeople;
+                                    break;
+                                  case 'Categories':
+                                    await model.fetchCategoriesLookedFor();
+                                    currentDisplayList = model.listCategories;
+                                    break;
+                                  case 'Other Terms':
+                                    await model.fetchTermsLookedFor();
+                                    currentDisplayList = model.listTerms;
+                                    break;
+                                }
+                              },
+                              child: const Text(
+                                'Show and Select your options',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            ),
+                          ),
+                          Padding(
                             padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                             child: ElevatedButton(
                               onPressed: () {
@@ -509,94 +597,7 @@ class MultiSearchPage extends StatelessWidget {
                               ...model.filtersTerms,
                             ].join(', ')),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                switch (isSelectedOption) {
-                                  case 'Period':
-                                    currentDisplayList = period;
-                                    model.updateDisplayList(period);
-                                    break;
-                                  case 'Universe':
-                                    currentDisplayList = universe;
-                                    model.updateDisplayList(universe);
-                                    break;
-                                  case 'Stars':
-                                    await model.fetchStarsLookedFor();
-                                    currentDisplayList = model.listStars;
-                                    break;
-                                  case 'Current Country where it happened':
-                                    currentDisplayList = pays;
-                                    model.updateDisplayList(pays);
-                                    break;
-                                  case 'Current Place-name where it happened':
-                                    await model.fetchVillesLookedFor();
-                                    currentDisplayList = model.listVilles;
-                                    break;
-                                  case 'Oceans':
-                                    currentDisplayList = oceans;
-                                    model.updateDisplayList(oceans);
-                                    break;
-                                  case 'Seas':
-                                    await model.fetchSeasLookedFor();
-                                    currentDisplayList = model.listSeas;
-                                    break;
-                                  case 'Country-name at that time':
-                                    await model.fetchCattLookedFor();
-                                    currentDisplayList = model.listCatts;
-                                    break;
-                                  case 'Place-name at that time':
-                                    await model.fetchPattLookedFor();
-                                    currentDisplayList = model.listPatts;
-                                    break;
-                                  case 'Countries involved':
-                                    await model.fetchPaysInvolvedLookedFor();
-                                    currentDisplayList = model.listPaysInv;
-                                    break;
-                                  case 'Places involved':
-                                    await model.fetchPlaceInvolvedLookedFor();
-                                    currentDisplayList = model.listPlaceInv;
-                                    break;
-                                  case 'Names of Countries involved at that time':
-                                    await model.fetchPaysInvolvedATTLookedFor();
-                                    currentDisplayList = model.listPaysInvATT;
-                                    break;
-                                  case 'Names of Places involved at that time':
-                                    await model.fetchPlaceInvolvedATTLookedFor();
-                                    currentDisplayList = model.listPlaceInvATT;
-                                    break;
-                                  case 'Stars Observed':
-                                    await model.fetchStarsObservedLookedFor();
-                                    currentDisplayList =
-                                        model.listStarsObserved;
-                                    break;
-                                  case 'Organisations':
-                                    await model.fetchOrgsLookedFor();
-                                    currentDisplayList =
-                                        model.listOrganisations;
-                                    break;
-                                  case 'People':
-                                    await model.fetchPeopleLookedFor();
-                                    currentDisplayList = model.listPeople;
-                                    break;
-                                  case 'Categories':
-                                    await model.fetchCategoriesLookedFor();
-                                    currentDisplayList = model.listCategories;
-                                    break;
-                                  case 'Other Terms':
-                                    await model.fetchTermsLookedFor();
-                                    currentDisplayList = model.listTerms;
-                                    break;
-                                }
-                              },
-                              child: const Text(
-                                'Show and Select your options',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                            ),
-                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(

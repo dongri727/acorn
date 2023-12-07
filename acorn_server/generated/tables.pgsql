@@ -385,6 +385,10 @@ ALTER TABLE ONLY "universe"
 CREATE TABLE "with_globe" (
   "id" serial,
   "principal_id" integer NOT NULL,
+  "annee" text NOT NULL,
+  "affair" text NOT NULL,
+  "location" text NOT NULL,
+  "precise" text NOT NULL,
   "x_coordinate" double precision NOT NULL,
   "y_coordinate" double precision NOT NULL,
   "z_coordinate" double precision NOT NULL,
@@ -402,6 +406,10 @@ ALTER TABLE ONLY "with_globe"
 CREATE TABLE "with_map" (
   "id" serial,
   "principal_id" integer NOT NULL,
+  "annee" text NOT NULL,
+  "affair" text NOT NULL,
+  "location" text NOT NULL,
+  "precise" text NOT NULL,
   "latitude" double precision NOT NULL,
   "longitude" double precision NOT NULL,
   "logarithm" double precision NOT NULL

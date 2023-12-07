@@ -10,20 +10,17 @@ class WhereModel extends ChangeNotifier {
 
   String locationPrecise = '';
 
-/*  var newPlace = '';
-  var newSea = '';
-  var newPaysatt = '';*/
+  // todo なぜこれが必要か考える
   var newCountryatt = '';
   var newPlaceatt = '';
-  var keyCountry = '';
 
-  ///Stars
+  ///Stars gotten from DB
   List<Stars> listStars = [];
 
-  ///Place
+  ///Place gotten from DB
   List<Places> listPlaces = [];
 
-  ///Seas
+  ///Seas gotten from DB
   List<Seas> listSeas = [];
 
   ///当時の国名
@@ -34,7 +31,7 @@ class WhereModel extends ChangeNotifier {
   List<Placeatts> listPlaceatts = [];
   List<Map<String, String>> displayListPlaceatts = [];
 
-  ///DBからStarsを取得
+  ///gets stars from DB
   fetchStars() async {
     try {
       listStars = await client.stars.getStars();
@@ -45,7 +42,7 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  ///DBに新規starを挿入・再取得･再描画
+  ///adds and gets again stars, and rebuilds listStars
   addStarsAndFetch(String newStar) async {
     var stars = Stars(star: newStar);
     await client.stars.addStars(stars);
@@ -58,6 +55,7 @@ class WhereModel extends ChangeNotifier {
     try {
       listPlaces = await client.places.getPlaces(keyword: keyCountry);
       print('getPlaces with $keyCountry');
+      print(listPlaces);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -65,11 +63,12 @@ class WhereModel extends ChangeNotifier {
   }
 
   ///DBに新規placeを挿入・再取得･再描画
-  addPlacesAndFetch(String newPlace) async {
+  addPlacesAndFetch(String newPlace, keyCountry) async {
     var places = Places(place: newPlace, country: keyCountry);
     await client.places.addPlaces(places);
     await fetchPlaces(keyCountry);
     notifyListeners();
+    print('save place with $keyCountry');
   }
 
   ///DBからSeasを取得

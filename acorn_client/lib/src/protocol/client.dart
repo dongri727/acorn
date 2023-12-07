@@ -737,11 +737,11 @@ class _EndpointWithGlobe extends _i1.EndpointRef {
   @override
   String get name => 'withGlobe';
 
-  _i2.Future<List<_i30.WithGlobe>> getWithMap({int? keyword}) =>
+  _i2.Future<List<_i30.WithGlobe>> getWithGlobe({int? keynumber}) =>
       caller.callServerEndpoint<List<_i30.WithGlobe>>(
         'withGlobe',
-        'getWithMap',
-        {'keyword': keyword},
+        'getWithGlobe',
+        {'keynumber': keynumber},
       );
 
   _i2.Future<int> addWithGlobe(_i30.WithGlobe withGlobe) =>
@@ -758,11 +758,11 @@ class _EndpointWithMap extends _i1.EndpointRef {
   @override
   String get name => 'withMap';
 
-  _i2.Future<List<_i31.WithMap>> getWithMap({int? keyword}) =>
+  _i2.Future<List<_i31.WithMap>> getWithMap({int? keynumber}) =>
       caller.callServerEndpoint<List<_i31.WithMap>>(
         'withMap',
         'getWithMap',
-        {'keyword': keyword},
+        {'keynumber': keynumber},
       );
 
   _i2.Future<int> addWithMap(_i31.WithMap withMap) =>
