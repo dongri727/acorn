@@ -4,7 +4,8 @@ import '../utils/custom_page_route.dart';
 
 
 class ThreeDViewPage extends StatelessWidget {
-  const ThreeDViewPage({Key? key}) : super(key: key);
+  final List<int>? principalIds;
+  const ThreeDViewPage({super.key, this.principalIds});
 
   @override
   Widget build(BuildContext context) {

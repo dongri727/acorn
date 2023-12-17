@@ -10,5 +10,22 @@
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.acornFlutter</string>
+
+	<!-- 以下の行を追加 -->
+    <key>SERVER_CLIENT_ID</key>
+    <string>849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com</string>
+
+	    <!-- Google Sign-In URL schemeの設定 -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

@@ -1,0 +1,11 @@
+class: WithMap
+table: with_map
+fields: 
+  principal_id: int
+  annee: String
+  affair: String
+  location: String
+  precise: String
+  latitude: double
+  longitude: double
+  logarithm: double

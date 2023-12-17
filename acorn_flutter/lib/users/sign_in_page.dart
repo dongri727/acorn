@@ -5,11 +5,11 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:serverpod_auth_google_flutter/serverpod_auth_google_flutter.dart';
 import 'account_page.dart';
 
-const _googleClientId = '849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com';
+var _googleClientId = '849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com';
 const _googleServerClientId = '849604984098-hgp1ddeqslbrsn70vrd8grvp3cbvji0s.apps.googleusercontent.com';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super. key});
 
   @override
   Widget build(BuildContext context) {

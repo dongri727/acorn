@@ -4,7 +4,8 @@ import '../utils/custom_page_route.dart';
 
 
 class MRViewPage extends StatelessWidget {
-  const MRViewPage({Key? key}) : super(key: key);
+  final List<int>? principalIds;
+  const MRViewPage({super.key, this.principalIds});
 
   @override
   Widget build(BuildContext context) {

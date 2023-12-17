@@ -548,11 +548,15 @@ class MultipleSearchModel extends ChangeNotifier {
 
   List<Principal> _principal = [];
   List<Principal> get principal => _principal;
+  List<int> _principalIds = [];
+  List<int> get principalIds => _principalIds;
 
   Future<void>fetchPrincipalByPeriod({List<String>? period}) async {
     try {
       _principal = await client.principal.getPrincipalByPeriod(keywords: period);
       print('got: $_principal');
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -563,6 +567,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipal(keywords: location);
       print("Getting principal with keywords: $location");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -573,6 +579,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByPrecise(keywords: precise);
       print("Getting principal with keywords: $precise");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -583,6 +591,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByCattId(cattIds: cattIds);
       print("Getting principal with CattIds: $cattIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -593,6 +603,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByPattId(pattIds: pattIds);
       print("Getting principal with PattIds: $pattIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -603,6 +615,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByCInvolvedId(cInvolvedIds: cInvolvedIds);
       print("Getting principal with CInvolvedIds: $cInvolvedIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -613,6 +627,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
       print("Getting principal with PInvolvedIds: $pInvolvedIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -623,6 +639,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
       print("Getting principal with AttsInvolvedIds: $attsInvolvedIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -633,6 +651,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
       print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -643,6 +663,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starObservedIds);
       print("Getting principal with StarObservedIds: $starObservedIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -653,6 +675,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
       print("Getting principal with OrgIds: $orgIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -663,6 +687,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByPersonId(personIds: personIds);
       print("Getting principal with PersonIds: $personIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -673,6 +699,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByCategoryId(categoryIds: categoryIds);
       print("Getting principal with CategoryIds: $categoryIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -683,6 +711,8 @@ class MultipleSearchModel extends ChangeNotifier {
     try {
       _principal = await client.principal.getPrincipalByTermId(termIds: termIds);
       print("Getting principal with TermIds: $termIds");
+      _principalIds = _principal.map((item) => item.id as int).toList();
+      print(_principalIds);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -693,4 +723,10 @@ class MultipleSearchModel extends ChangeNotifier {
     _principal = [];
     notifyListeners();
   }
+
+  set principalIds (dynamic value) {
+    _principalIds = [];
+    notifyListeners();
+  }
+
 }

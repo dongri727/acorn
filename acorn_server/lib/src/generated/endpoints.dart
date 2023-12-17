@@ -1723,9 +1723,9 @@ class Endpoints extends _i1.EndpointDispatch {
         'getWithGlobe': _i1.MethodConnector(
           name: 'getWithGlobe',
           params: {
-            'keynumber': _i1.ParameterDescription(
-              name: 'keynumber',
-              type: _i1.getType<int?>(),
+            'keyNumbers': _i1.ParameterDescription(
+              name: 'keyNumbers',
+              type: _i1.getType<List<int>?>(),
               nullable: true,
             )
           },
@@ -1735,7 +1735,7 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['withGlobe'] as _i30.WithGlobeEndpoint).getWithGlobe(
             session,
-            keynumber: params['keynumber'],
+            keyNumbers: params['keyNumbers'],
           ),
         ),
         'addWithGlobe': _i1.MethodConnector(

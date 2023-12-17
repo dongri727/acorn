@@ -817,7 +817,7 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ThreeDViewPage(),
+                          builder: (context) => ThreeDViewPage(principalIds: model.principalIds),
                         ));
                     break;
 
@@ -825,7 +825,7 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FourDViewPage(),
+                          builder: (context) => FourDViewPage(principalIds: model.principalIds),
                         ));
                     break;
 
@@ -833,7 +833,7 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MRViewPage(),
+                          builder: (context) => MRViewPage(principalIds: model.principalIds),
                         ));
                     break;
                 }

@@ -737,11 +737,11 @@ class _EndpointWithGlobe extends _i1.EndpointRef {
   @override
   String get name => 'withGlobe';
 
-  _i2.Future<List<_i30.WithGlobe>> getWithGlobe({int? keynumber}) =>
+  _i2.Future<List<_i30.WithGlobe>> getWithGlobe({List<int>? keyNumbers}) =>
       caller.callServerEndpoint<List<_i30.WithGlobe>>(
         'withGlobe',
         'getWithGlobe',
-        {'keynumber': keynumber},
+        {'keyNumbers': keyNumbers},
       );
 
   _i2.Future<int> addWithGlobe(_i30.WithGlobe withGlobe) =>

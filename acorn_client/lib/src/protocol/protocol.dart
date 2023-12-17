@@ -519,6 +519,11 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i60.WithGlobe>(e)).toList()
           as dynamic;
     }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == List<_i61.WithMap>) {
       return (data as List).map((e) => deserialize<_i61.WithMap>(e)).toList()
           as dynamic;
