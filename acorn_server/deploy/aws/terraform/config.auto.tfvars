@@ -31,7 +31,7 @@ enable_redis = false
 hosted_zone_id             = "Z0985936S82CRU0Z1EJG"
 top_domain                 = "laporte.academy"
 certificate_arn            = "arn:aws:acm:ap-northeast-1:839144709839:certificate/fa46d64a-dcbf-41b6-b38e-2424e52b270c"
-cloudfront_certificate_arn = "arn:aws:acm:eu-west-3:839144709839:certificate/ff8c5ad4-2d25-400d-b8c7-29b1b5f2abd6"
+cloudfront_certificate_arn = "arn:aws:acm:us-east-1:839144709839:certificate/9df1caf2-a9a5-435b-9556-9761cc586098"
 
 # Subdomains for different services. Default values are recommended, but you
 # may want to change the subdomain_web to www if you are using the top domain
