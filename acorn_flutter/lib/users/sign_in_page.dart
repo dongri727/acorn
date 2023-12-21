@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
                             },
                           ),
                         ),
-                        Padding(
+/*                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SignInWithGoogleButton(
                             caller: client.modules.auth,
@@ -74,7 +74,7 @@ class SignInPage extends StatelessWidget {
                           child: SignInWithAppleButton(
                             caller: client.modules.auth,
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
@@ -89,7 +89,12 @@ class SignInPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                            child: Image.asset('assets/images/wallet.png'))),
+                            child: ElevatedButton(
+                              child: const Text('Sign-in as Guest'),
+                              onPressed: () async {
+
+                              },
+                            ))),
                   ))
             ],
           ),
