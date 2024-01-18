@@ -1,7 +1,7 @@
 class: WithMap
 table: with_map
 fields: 
-  principal_id: int
+  principalId: int
   annee: String
   affair: String
   location: String

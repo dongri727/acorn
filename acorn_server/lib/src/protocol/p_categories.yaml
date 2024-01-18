@@ -1,5 +1,5 @@
 class: PrincipalCategories
 table: principal_categories
 fields: 
-  principal_id: int
-  category_id: int
+  principalId: int
+  categoryId: int

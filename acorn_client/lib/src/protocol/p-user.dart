@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalUser extends _i1.SerializableEntity {
-  PrincipalUser({
+abstract class PrincipalUser extends _i1.SerializableEntity {
+  PrincipalUser._({
     this.id,
-    required this.principal_id,
-    required this.user_id,
+    required this.principalId,
+    required this.userId,
   });
+
+  factory PrincipalUser({
+    int? id,
+    required int principalId,
+    required int userId,
+  }) = _PrincipalUserImpl;
 
   factory PrincipalUser.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalUser extends _i1.SerializableEntity {
   ) {
     return PrincipalUser(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      user_id:
-          serializationManager.deserialize<int>(jsonSerialization['user_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      userId:
+          serializationManager.deserialize<int>(jsonSerialization['userId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalUser extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int user_id;
+  int userId;
 
+  PrincipalUser copyWith({
+    int? id,
+    int? principalId,
+    int? userId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'user_id': user_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'userId': userId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalUserImpl extends PrincipalUser {
+  _PrincipalUserImpl({
+    int? id,
+    required int principalId,
+    required int userId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          userId: userId,
+        );
+
+  @override
+  PrincipalUser copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? userId,
+  }) {
+    return PrincipalUser(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      userId: userId ?? this.userId,
+    );
   }
 }

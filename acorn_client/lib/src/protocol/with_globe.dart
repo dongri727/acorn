@@ -4,23 +4,38 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class WithGlobe extends _i1.SerializableEntity {
-  WithGlobe({
+abstract class WithGlobe extends _i1.SerializableEntity {
+  WithGlobe._({
     this.id,
-    required this.principal_id,
+    required this.principalId,
     required this.annee,
     required this.affair,
     required this.location,
     required this.precise,
-    required this.x_coordinate,
-    required this.y_coordinate,
-    required this.z_coordinate,
+    required this.xCoordinate,
+    required this.yCoordinate,
+    required this.zCoordinate,
     required this.coefficient,
   });
+
+  factory WithGlobe({
+    int? id,
+    required int principalId,
+    required String annee,
+    required String affair,
+    required String location,
+    required String precise,
+    required double xCoordinate,
+    required double yCoordinate,
+    required double zCoordinate,
+    required double coefficient,
+  }) = _WithGlobeImpl;
 
   factory WithGlobe.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -28,8 +43,8 @@ class WithGlobe extends _i1.SerializableEntity {
   ) {
     return WithGlobe(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
       annee:
           serializationManager.deserialize<String>(jsonSerialization['annee']),
       affair:
@@ -38,12 +53,12 @@ class WithGlobe extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['location']),
       precise: serializationManager
           .deserialize<String>(jsonSerialization['precise']),
-      x_coordinate: serializationManager
-          .deserialize<double>(jsonSerialization['x_coordinate']),
-      y_coordinate: serializationManager
-          .deserialize<double>(jsonSerialization['y_coordinate']),
-      z_coordinate: serializationManager
-          .deserialize<double>(jsonSerialization['z_coordinate']),
+      xCoordinate: serializationManager
+          .deserialize<double>(jsonSerialization['xCoordinate']),
+      yCoordinate: serializationManager
+          .deserialize<double>(jsonSerialization['yCoordinate']),
+      zCoordinate: serializationManager
+          .deserialize<double>(jsonSerialization['zCoordinate']),
       coefficient: serializationManager
           .deserialize<double>(jsonSerialization['coefficient']),
     );
@@ -54,7 +69,7 @@ class WithGlobe extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
   String annee;
 
@@ -64,27 +79,94 @@ class WithGlobe extends _i1.SerializableEntity {
 
   String precise;
 
-  double x_coordinate;
+  double xCoordinate;
 
-  double y_coordinate;
+  double yCoordinate;
 
-  double z_coordinate;
+  double zCoordinate;
 
   double coefficient;
 
+  WithGlobe copyWith({
+    int? id,
+    int? principalId,
+    String? annee,
+    String? affair,
+    String? location,
+    String? precise,
+    double? xCoordinate,
+    double? yCoordinate,
+    double? zCoordinate,
+    double? coefficient,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
       'annee': annee,
       'affair': affair,
       'location': location,
       'precise': precise,
-      'x_coordinate': x_coordinate,
-      'y_coordinate': y_coordinate,
-      'z_coordinate': z_coordinate,
+      'xCoordinate': xCoordinate,
+      'yCoordinate': yCoordinate,
+      'zCoordinate': zCoordinate,
       'coefficient': coefficient,
     };
+  }
+}
+
+class _Undefined {}
+
+class _WithGlobeImpl extends WithGlobe {
+  _WithGlobeImpl({
+    int? id,
+    required int principalId,
+    required String annee,
+    required String affair,
+    required String location,
+    required String precise,
+    required double xCoordinate,
+    required double yCoordinate,
+    required double zCoordinate,
+    required double coefficient,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          annee: annee,
+          affair: affair,
+          location: location,
+          precise: precise,
+          xCoordinate: xCoordinate,
+          yCoordinate: yCoordinate,
+          zCoordinate: zCoordinate,
+          coefficient: coefficient,
+        );
+
+  @override
+  WithGlobe copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    String? annee,
+    String? affair,
+    String? location,
+    String? precise,
+    double? xCoordinate,
+    double? yCoordinate,
+    double? zCoordinate,
+    double? coefficient,
+  }) {
+    return WithGlobe(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      annee: annee ?? this.annee,
+      affair: affair ?? this.affair,
+      location: location ?? this.location,
+      precise: precise ?? this.precise,
+      xCoordinate: xCoordinate ?? this.xCoordinate,
+      yCoordinate: yCoordinate ?? this.yCoordinate,
+      zCoordinate: zCoordinate ?? this.zCoordinate,
+      coefficient: coefficient ?? this.coefficient,
+    );
   }
 }

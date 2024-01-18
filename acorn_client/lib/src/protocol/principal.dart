@@ -4,12 +4,14 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class Principal extends _i1.SerializableEntity {
-  Principal({
+abstract class Principal extends _i1.SerializableEntity {
+  Principal._({
     this.id,
     required this.period,
     required this.annee,
@@ -20,6 +22,18 @@ class Principal extends _i1.SerializableEntity {
     required this.location,
     required this.precise,
   });
+
+  factory Principal({
+    int? id,
+    required String period,
+    required String annee,
+    required int month,
+    required int day,
+    required int point,
+    required String affair,
+    required String location,
+    required String precise,
+  }) = _PrincipalImpl;
 
   factory Principal.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -64,10 +78,21 @@ class Principal extends _i1.SerializableEntity {
 
   String precise;
 
+  Principal copyWith({
+    int? id,
+    String? period,
+    String? annee,
+    int? month,
+    int? day,
+    int? point,
+    String? affair,
+    String? location,
+    String? precise,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'period': period,
       'annee': annee,
       'month': month,
@@ -77,5 +102,56 @@ class Principal extends _i1.SerializableEntity {
       'location': location,
       'precise': precise,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalImpl extends Principal {
+  _PrincipalImpl({
+    int? id,
+    required String period,
+    required String annee,
+    required int month,
+    required int day,
+    required int point,
+    required String affair,
+    required String location,
+    required String precise,
+  }) : super._(
+          id: id,
+          period: period,
+          annee: annee,
+          month: month,
+          day: day,
+          point: point,
+          affair: affair,
+          location: location,
+          precise: precise,
+        );
+
+  @override
+  Principal copyWith({
+    Object? id = _Undefined,
+    String? period,
+    String? annee,
+    int? month,
+    int? day,
+    int? point,
+    String? affair,
+    String? location,
+    String? precise,
+  }) {
+    return Principal(
+      id: id is int? ? id : this.id,
+      period: period ?? this.period,
+      annee: annee ?? this.annee,
+      month: month ?? this.month,
+      day: day ?? this.day,
+      point: point ?? this.point,
+      affair: affair ?? this.affair,
+      location: location ?? this.location,
+      precise: precise ?? this.precise,
+    );
   }
 }

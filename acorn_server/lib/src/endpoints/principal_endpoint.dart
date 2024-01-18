@@ -5,7 +5,7 @@ class PrincipalEndpoint extends Endpoint {
   //Principal
 
   Future<int> addPrincipal(Session session, Principal principal) async {
-    await Principal.insert(session, principal);
+    await Principal.db.insert(session, principal as List<Principal>);
     return principal.id!;
   }
 
@@ -50,10 +50,10 @@ class PrincipalEndpoint extends Endpoint {
       whereClause = Constant(true);
     }
 
-    return await Principal.find(
+    return await Principal.db.find(
       session,
       where: (_) => whereClause,
-      orderBy: Principal.t.point, 
+      //orderBy: Principal.t.point, 
     );
   }
 
@@ -75,10 +75,10 @@ class PrincipalEndpoint extends Endpoint {
       whereClause = Constant(true);
     }
 
-    return await Principal.find(
+    return await Principal.db.find(
       session,
       where: (_) => whereClause,
-      orderBy: Principal.t.annee,
+      //orderBy: Principal.t.annee,
     );
 }
 
@@ -93,14 +93,14 @@ Future<List<Principal>> getPrincipalByCattId(Session session, {List<int>? cattId
   var whereClausePrincipalCatt;
   for (var cattId in cattIds) {
     if (whereClausePrincipalCatt == null) {
-      whereClausePrincipalCatt = PrincipalCatt.t.catt_id.equals(cattId);
+      whereClausePrincipalCatt = PrincipalCatt.t.cattId.equals(cattId);
     } else {
-      whereClausePrincipalCatt = whereClausePrincipalCatt | PrincipalCatt.t.catt_id.equals(cattId);
+      whereClausePrincipalCatt = whereClausePrincipalCatt | PrincipalCatt.t.cattId.equals(cattId);
     }
   }
 
   var PrincipalCattResults = await PrincipalCatt.find(session, where: (_) => whereClausePrincipalCatt);
-  var principalIds = PrincipalCattResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalCattResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -112,10 +112,10 @@ Future<List<Principal>> getPrincipalByCattId(Session session, {List<int>? cattId
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -130,14 +130,14 @@ Future<List<Principal>> getPrincipalByPattId(Session session, {List<int>? pattId
   var whereClausePrincipalPatt;
   for (var pattId in pattIds) {
     if (whereClausePrincipalPatt == null) {
-      whereClausePrincipalPatt = PrincipalPatt.t.patt_id.equals(pattId);
+      whereClausePrincipalPatt = PrincipalPatt.t.pattId.equals(pattId);
     } else {
-      whereClausePrincipalPatt = whereClausePrincipalPatt | PrincipalPatt.t.patt_id.equals(pattId);
+      whereClausePrincipalPatt = whereClausePrincipalPatt | PrincipalPatt.t.pattId.equals(pattId);
     }
   }
 
   var PrincipalPattResults = await PrincipalPatt.find(session, where: (_) => whereClausePrincipalPatt);
-  var principalIds = PrincipalPattResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalPattResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -167,14 +167,14 @@ Future<List<Principal>> getPrincipalByPersonId(Session session, {List<int>? pers
   var whereClausePrincipalPeople;
   for (var personId in personIds) {
     if (whereClausePrincipalPeople == null) {
-      whereClausePrincipalPeople = PrincipalPeople.t.person_id.equals(personId);
+      whereClausePrincipalPeople = PrincipalPeople.t.personId.equals(personId);
     } else {
-      whereClausePrincipalPeople = whereClausePrincipalPeople | PrincipalPeople.t.person_id.equals(personId);
+      whereClausePrincipalPeople = whereClausePrincipalPeople | PrincipalPeople.t.personId.equals(personId);
     }
   }
 
   var PrincipalPeopleResults = await PrincipalPeople.find(session, where: (_) => whereClausePrincipalPeople);
-  var principalIds = PrincipalPeopleResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalPeopleResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -186,10 +186,10 @@ Future<List<Principal>> getPrincipalByPersonId(Session session, {List<int>? pers
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -204,14 +204,14 @@ Future<List<Principal>> getPrincipalByPInvolvedId(Session session, {List<int>? p
   var whereClausePrincipalPlace;
   for (var pInvolvedId in pInvolvedIds) {
     if (whereClausePrincipalPlace == null) {
-      whereClausePrincipalPlace = PrincipalPlace.t.place_id.equals(pInvolvedId);
+      whereClausePrincipalPlace = PrincipalPlace.t.placeId.equals(pInvolvedId);
     } else {
-      whereClausePrincipalPlace = whereClausePrincipalPlace | PrincipalPlace.t.place_id.equals(pInvolvedId);
+      whereClausePrincipalPlace = whereClausePrincipalPlace | PrincipalPlace.t.placeId.equals(pInvolvedId);
     }
   }
 
   var PInvolvedResults = await PrincipalPlace.find(session, where: (_) => whereClausePrincipalPlace);
-  var principalIds = PInvolvedResults.map((row) => row.principal_id).toList();
+  var principalIds = PInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -223,10 +223,10 @@ Future<List<Principal>> getPrincipalByPInvolvedId(Session session, {List<int>? p
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -241,14 +241,14 @@ Future<List<Principal>> getPrincipalByCInvolvedId(Session session, {List<int>? c
   var whereClauseCountryInvolved;
   for (var cInvolvedId in cInvolvedIds) {
     if (whereClauseCountryInvolved == null) {
-      whereClauseCountryInvolved = CountryInvolved.t.pays_id.equals(cInvolvedId);
+      whereClauseCountryInvolved = CountryInvolved.t.paysId.equals(cInvolvedId);
     } else {
-      whereClauseCountryInvolved = whereClauseCountryInvolved | CountryInvolved.t.pays_id.equals(cInvolvedId);
+      whereClauseCountryInvolved = whereClauseCountryInvolved | CountryInvolved.t.paysId.equals(cInvolvedId);
     }
   }
 
   var CInvolvedResults = await CountryInvolved.find(session, where: (_) => whereClauseCountryInvolved);
-  var principalIds = CInvolvedResults.map((row) => row.principal_id).toList();
+  var principalIds = CInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -260,10 +260,10 @@ Future<List<Principal>> getPrincipalByCInvolvedId(Session session, {List<int>? c
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -278,14 +278,14 @@ Future<List<Principal>> getPrincipalByAttInvolvedId(Session session, {List<int>?
   var whereClauseAttsInvolved;
   for (var attInvolvedId in attInvolvedIds) {
     if (whereClauseAttsInvolved == null) {
-      whereClauseAttsInvolved = AttsInvolved.t.att_id.equals(attInvolvedId);
+      whereClauseAttsInvolved = AttsInvolved.t.attId.equals(attInvolvedId);
     } else {
-      whereClauseAttsInvolved = whereClauseAttsInvolved | AttsInvolved.t.att_id.equals(attInvolvedId);
+      whereClauseAttsInvolved = whereClauseAttsInvolved | AttsInvolved.t.attId.equals(attInvolvedId);
     }
   }
 
   var AttInvolvedResults = await AttsInvolved.find(session, where: (_) => whereClauseAttsInvolved);
-  var principalIds = AttInvolvedResults.map((row) => row.principal_id).toList();
+  var principalIds = AttInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -315,14 +315,14 @@ Future<List<Principal>> getPrincipalByStarsInvolvedId(Session session, {List<int
   var whereClauseStarsInvolved;
   for (var starInvId in starInvolvedIds) {
     if (whereClauseStarsInvolved == null) {
-      whereClauseStarsInvolved = StarsInvolved.t.star_id.equals(starInvId);
+      whereClauseStarsInvolved = StarsInvolved.t.starId.equals(starInvId);
     } else {
-      whereClauseStarsInvolved = whereClauseStarsInvolved | StarsInvolved.t.star_id.equals(starInvId);
+      whereClauseStarsInvolved = whereClauseStarsInvolved | StarsInvolved.t.starId.equals(starInvId);
     }
   }
 
   var StarsInvolvedResults = await StarsInvolved.find(session, where: (_) => whereClauseStarsInvolved);
-  var principalIds = StarsInvolvedResults.map((row) => row.principal_id).toList();
+  var principalIds = StarsInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -352,14 +352,14 @@ Future<List<Principal>> getPrincipalByOrgsId(Session session, {List<int>? orgIds
   var whereClausePrincipalOrganisations;
   for (var orgId in orgIds) {
     if (whereClausePrincipalOrganisations == null) {
-      whereClausePrincipalOrganisations = PrincipalOrgs.t.org_id.equals(orgId);
+      whereClausePrincipalOrganisations = PrincipalOrgs.t.orgId.equals(orgId);
     } else {
-      whereClausePrincipalOrganisations = whereClausePrincipalOrganisations | PrincipalOrgs.t.org_id.equals(orgId);
+      whereClausePrincipalOrganisations = whereClausePrincipalOrganisations | PrincipalOrgs.t.orgId.equals(orgId);
     }
   }
 
   var PrincipalOrgsResults = await PrincipalOrgs.find(session, where: (_) => whereClausePrincipalOrganisations);
-  var principalIds = PrincipalOrgsResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalOrgsResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -389,14 +389,14 @@ Future<List<Principal>> getPrincipalByCategoryId(Session session, {List<int>? ca
   var whereClausePrincipalCategories;
   for (var categoryId in categoryIds) {
     if (whereClausePrincipalCategories == null) {
-      whereClausePrincipalCategories = PrincipalCategories.t.category_id.equals(categoryId);
+      whereClausePrincipalCategories = PrincipalCategories.t.categoryId.equals(categoryId);
     } else {
-      whereClausePrincipalCategories = whereClausePrincipalCategories | PrincipalCategories.t.category_id.equals(categoryId);
+      whereClausePrincipalCategories = whereClausePrincipalCategories | PrincipalCategories.t.categoryId.equals(categoryId);
     }
   }
 
   var PrincipalCategoriesResults = await PrincipalCategories.find(session, where: (_) => whereClausePrincipalCategories);
-  var principalIds = PrincipalCategoriesResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalCategoriesResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -426,14 +426,14 @@ Future<List<Principal>> getPrincipalByTermId(Session session, {List<int>? termId
   var whereClausePrincipalTerms;
   for (var termId in termIds) {
     if (whereClausePrincipalTerms == null) {
-      whereClausePrincipalTerms = PrincipalTerms.t.term_id.equals(termId);
+      whereClausePrincipalTerms = PrincipalTerms.t.termId.equals(termId);
     } else {
-      whereClausePrincipalTerms = whereClausePrincipalTerms | PrincipalTerms.t.term_id.equals(termId);
+      whereClausePrincipalTerms = whereClausePrincipalTerms | PrincipalTerms.t.termId.equals(termId);
     }
   }
 
   var PrincipalTermsResults = await PrincipalTerms.find(session, where: (_) => whereClausePrincipalTerms);
-  var principalIds = PrincipalTermsResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalTermsResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
   var whereClausePrincipal;
@@ -461,10 +461,10 @@ Future<List<Principal>> getPrincipalByUserId(Session session, {int? userId}) asy
   }
 
   // Step 1: Get principalIds from PrincipalUser using userId
-  var whereClausePrincipalUser = PrincipalUser.t.user_id.equals(userId);
+  var whereClausePrincipalUser = PrincipalUser.t.userId.equals(userId);
   
   var PrincipalUserResults = await PrincipalUser.find(session, where: (_) => whereClausePrincipalUser);
-  var principalIds = PrincipalUserResults.map((row) => row.principal_id).toList();
+  var principalIds = PrincipalUserResults.map((row) => row.principalId).toList();
 
   if (principalIds.isEmpty) {
     return Future.value([]);

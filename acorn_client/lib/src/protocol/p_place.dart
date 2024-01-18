@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalPlace extends _i1.SerializableEntity {
-  PrincipalPlace({
+abstract class PrincipalPlace extends _i1.SerializableEntity {
+  PrincipalPlace._({
     this.id,
-    required this.principal_id,
-    required this.place_id,
+    required this.principalId,
+    required this.placeId,
   });
+
+  factory PrincipalPlace({
+    int? id,
+    required int principalId,
+    required int placeId,
+  }) = _PrincipalPlaceImpl;
 
   factory PrincipalPlace.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalPlace extends _i1.SerializableEntity {
   ) {
     return PrincipalPlace(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      place_id:
-          serializationManager.deserialize<int>(jsonSerialization['place_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      placeId:
+          serializationManager.deserialize<int>(jsonSerialization['placeId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalPlace extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int place_id;
+  int placeId;
 
+  PrincipalPlace copyWith({
+    int? id,
+    int? principalId,
+    int? placeId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'place_id': place_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'placeId': placeId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalPlaceImpl extends PrincipalPlace {
+  _PrincipalPlaceImpl({
+    int? id,
+    required int principalId,
+    required int placeId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          placeId: placeId,
+        );
+
+  @override
+  PrincipalPlace copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? placeId,
+  }) {
+    return PrincipalPlace(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      placeId: placeId ?? this.placeId,
+    );
   }
 }

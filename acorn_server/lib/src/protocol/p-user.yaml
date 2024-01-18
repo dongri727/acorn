@@ -1,5 +1,5 @@
 class: PrincipalUser
 table: principal_user
 fields: 
-  principal_id: int
-  user_id: int
+  principalId: int
+  userId: int

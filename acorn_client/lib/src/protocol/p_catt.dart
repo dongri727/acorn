@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalCatt extends _i1.SerializableEntity {
-  PrincipalCatt({
+abstract class PrincipalCatt extends _i1.SerializableEntity {
+  PrincipalCatt._({
     this.id,
-    required this.principal_id,
-    required this.catt_id,
+    required this.principalId,
+    required this.cattId,
   });
+
+  factory PrincipalCatt({
+    int? id,
+    required int principalId,
+    required int cattId,
+  }) = _PrincipalCattImpl;
 
   factory PrincipalCatt.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalCatt extends _i1.SerializableEntity {
   ) {
     return PrincipalCatt(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      catt_id:
-          serializationManager.deserialize<int>(jsonSerialization['catt_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      cattId:
+          serializationManager.deserialize<int>(jsonSerialization['cattId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalCatt extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int catt_id;
+  int cattId;
 
+  PrincipalCatt copyWith({
+    int? id,
+    int? principalId,
+    int? cattId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'catt_id': catt_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'cattId': cattId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalCattImpl extends PrincipalCatt {
+  _PrincipalCattImpl({
+    int? id,
+    required int principalId,
+    required int cattId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          cattId: cattId,
+        );
+
+  @override
+  PrincipalCatt copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? cattId,
+  }) {
+    return PrincipalCatt(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      cattId: cattId ?? this.cattId,
+    );
   }
 }

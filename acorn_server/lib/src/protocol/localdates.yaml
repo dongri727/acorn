@@ -1,5 +1,5 @@
 class: LocalDates
 table: localdates
 fields: 
-  principal_id: int
+  principalId: int
   localdate: String

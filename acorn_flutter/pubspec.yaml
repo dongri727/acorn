@@ -28,10 +28,10 @@ dependencies:
   acorn_client:
     path: ../acorn_client
 
-  serverpod_auth_shared_flutter: ^1.1.1
-  serverpod_auth_email_flutter: ^1.1.1
-  serverpod_auth_google_flutter: ^1.1.1
-  serverpod_auth_apple_flutter: ^1.1.1
+  serverpod_auth_shared_flutter: ^1.2.0
+  serverpod_auth_email_flutter: ^1.2.0
+  serverpod_auth_google_flutter: ^1.2.0
+  serverpod_auth_apple_flutter: ^1.2.0
 
   mailer: ^6.0.1
 
@@ -48,7 +48,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
 

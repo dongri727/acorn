@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class StarsInvolved extends _i1.TableRow {
-  StarsInvolved({
+abstract class StarsInvolved extends _i1.TableRow {
+  StarsInvolved._({
     int? id,
-    required this.principal_id,
-    required this.star_id,
+    required this.principalId,
+    required this.starId,
   }) : super(id);
+
+  factory StarsInvolved({
+    int? id,
+    required int principalId,
+    required int starId,
+  }) = _StarsInvolvedImpl;
 
   factory StarsInvolved.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,36 +29,45 @@ class StarsInvolved extends _i1.TableRow {
   ) {
     return StarsInvolved(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      star_id:
-          serializationManager.deserialize<int>(jsonSerialization['star_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      starId:
+          serializationManager.deserialize<int>(jsonSerialization['starId']),
     );
   }
 
   static final t = StarsInvolvedTable();
 
-  int principal_id;
+  static const db = StarsInvolvedRepository._();
 
-  int star_id;
+  int principalId;
+
+  int starId;
 
   @override
-  String get tableName => 'stars_involved';
+  _i1.Table get table => t;
+
+  StarsInvolved copyWith({
+    int? id,
+    int? principalId,
+    int? starId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'star_id': star_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'starId': starId,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'star_id': star_id,
+      'principalId': principalId,
+      'starId': starId,
     };
   }
 
@@ -58,8 +75,8 @@ class StarsInvolved extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'star_id': star_id,
+      'principalId': principalId,
+      'starId': starId,
     };
   }
 
@@ -72,20 +89,21 @@ class StarsInvolved extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'principal_id':
-        principal_id = value;
+      case 'principalId':
+        principalId = value;
         return;
-      case 'star_id':
-        star_id = value;
+      case 'starId':
+        starId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<StarsInvolved>> find(
     _i1.Session session, {
-    StarsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +124,10 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<StarsInvolved?> findSingleRow(
     _i1.Session session, {
-    StarsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +144,7 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<StarsInvolved?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +152,10 @@ class StarsInvolved extends _i1.TableRow {
     return session.db.findById<StarsInvolved>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required StarsInvolvedExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<StarsInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<StarsInvolved>(
@@ -143,6 +164,7 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     StarsInvolved row, {
@@ -154,6 +176,7 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     StarsInvolved row, {
@@ -165,6 +188,8 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     StarsInvolved row, {
@@ -176,9 +201,10 @@ class StarsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    StarsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,30 +216,262 @@ class StarsInvolved extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static StarsInvolvedInclude include() {
+    return StarsInvolvedInclude._();
+  }
+
+  static StarsInvolvedIncludeList includeList({
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StarsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
+    StarsInvolvedInclude? include,
+  }) {
+    return StarsInvolvedIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(StarsInvolved.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(StarsInvolved.t),
+      include: include,
+    );
+  }
 }
 
-typedef StarsInvolvedExpressionBuilder = _i1.Expression Function(
-    StarsInvolvedTable);
+class _Undefined {}
+
+class _StarsInvolvedImpl extends StarsInvolved {
+  _StarsInvolvedImpl({
+    int? id,
+    required int principalId,
+    required int starId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          starId: starId,
+        );
+
+  @override
+  StarsInvolved copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? starId,
+  }) {
+    return StarsInvolved(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      starId: starId ?? this.starId,
+    );
+  }
+}
 
 class StarsInvolvedTable extends _i1.Table {
-  StarsInvolvedTable() : super(tableName: 'stars_involved');
+  StarsInvolvedTable({super.tableRelation})
+      : super(tableName: 'stars_involved') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
+    starId = _i1.ColumnInt(
+      'starId',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnInt principalId;
 
-  final principal_id = _i1.ColumnInt('principal_id');
-
-  final star_id = _i1.ColumnInt('star_id');
+  late final _i1.ColumnInt starId;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        principal_id,
-        star_id,
+        principalId,
+        starId,
       ];
 }
 
 @Deprecated('Use StarsInvolvedTable.t instead.')
 StarsInvolvedTable tStarsInvolved = StarsInvolvedTable();
+
+class StarsInvolvedInclude extends _i1.IncludeObject {
+  StarsInvolvedInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => StarsInvolved.t;
+}
+
+class StarsInvolvedIncludeList extends _i1.IncludeList {
+  StarsInvolvedIncludeList._({
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(StarsInvolved.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => StarsInvolved.t;
+}
+
+class StarsInvolvedRepository {
+  const StarsInvolvedRepository._();
+
+  Future<List<StarsInvolved>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StarsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<StarsInvolved>(
+      where: where?.call(StarsInvolved.t),
+      orderBy: orderBy?.call(StarsInvolved.t),
+      orderByList: orderByList?.call(StarsInvolved.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<StarsInvolved?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<StarsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<StarsInvolved>(
+      where: where?.call(StarsInvolved.t),
+      orderBy: orderBy?.call(StarsInvolved.t),
+      orderByList: orderByList?.call(StarsInvolved.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<StarsInvolved?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<StarsInvolved>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<StarsInvolved>> insert(
+    _i1.Session session,
+    List<StarsInvolved> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<StarsInvolved>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<StarsInvolved> insertRow(
+    _i1.Session session,
+    StarsInvolved row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<StarsInvolved>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<StarsInvolved>> update(
+    _i1.Session session,
+    List<StarsInvolved> rows, {
+    _i1.ColumnSelections<StarsInvolvedTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<StarsInvolved>(
+      rows,
+      columns: columns?.call(StarsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<StarsInvolved> updateRow(
+    _i1.Session session,
+    StarsInvolved row, {
+    _i1.ColumnSelections<StarsInvolvedTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<StarsInvolved>(
+      row,
+      columns: columns?.call(StarsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<StarsInvolved> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<StarsInvolved>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    StarsInvolved row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<StarsInvolved>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<StarsInvolvedTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<StarsInvolved>(
+      where: where(StarsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<StarsInvolved>(
+      where: where?.call(StarsInvolved.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalPatt extends _i1.SerializableEntity {
-  PrincipalPatt({
+abstract class PrincipalPatt extends _i1.SerializableEntity {
+  PrincipalPatt._({
     this.id,
-    required this.principal_id,
-    required this.patt_id,
+    required this.principalId,
+    required this.pattId,
   });
+
+  factory PrincipalPatt({
+    int? id,
+    required int principalId,
+    required int pattId,
+  }) = _PrincipalPattImpl;
 
   factory PrincipalPatt.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalPatt extends _i1.SerializableEntity {
   ) {
     return PrincipalPatt(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      patt_id:
-          serializationManager.deserialize<int>(jsonSerialization['patt_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      pattId:
+          serializationManager.deserialize<int>(jsonSerialization['pattId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalPatt extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int patt_id;
+  int pattId;
 
+  PrincipalPatt copyWith({
+    int? id,
+    int? principalId,
+    int? pattId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'patt_id': patt_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'pattId': pattId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalPattImpl extends PrincipalPatt {
+  _PrincipalPattImpl({
+    int? id,
+    required int principalId,
+    required int pattId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          pattId: pattId,
+        );
+
+  @override
+  PrincipalPatt copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? pattId,
+  }) {
+    return PrincipalPatt(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      pattId: pattId ?? this.pattId,
+    );
   }
 }

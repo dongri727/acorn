@@ -5,16 +5,16 @@ class CategoriesEndpoint extends Endpoint {
   //Fetch categories from DB
   Future<List<Categories>> getCategories(Session session,
       {String? keyword}) async {
-    return await Categories.find(
+    return await Categories.db.find(
       session,
       //where: (t) => keyword !=null ? t.title.like('%$keyword%') : Constant(true),
-      orderBy: Categories.t.category,
+      //orderBy: Categories.t.category,
     );
   }
 
   //Add a category in DB
   Future<int> addCategories(Session session, Categories categories) async {
-    await Categories.insert(session, categories);
+    await Categories.db.insert(session, categories as List<Categories>);
     //var categoryLastVal = await session.db.query('SELECT LASTVAL()');
     //return categoryLastVal[0][0] as int;
     return categories.id!;

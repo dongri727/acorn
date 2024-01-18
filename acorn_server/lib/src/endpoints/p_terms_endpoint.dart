@@ -5,16 +5,16 @@ class PrincipalTermsEndpoint extends Endpoint {
   //Fetch principal-Terms from DB
   Future<List<PrincipalTerms>> getPTerms(Session session,
       {String? keyword}) async {
-    return await PrincipalTerms.find(
+    return await PrincipalTerms.db.find(
       session,
       //where: (t) => keyword !=null ? t.pTerms.like('%$keyword%') : Constant(true),
-      orderBy: PrincipalTerms.t.term_id,
+      //orderBy: PrincipalTerms.t.termId,
     );
   }
 
   //Add principal terms in DB
   Future<int> addPrincipalTerms(Session session, PrincipalTerms pTerms) async {
-    await PrincipalTerms.insert(session, pTerms);
+    await PrincipalTerms.db.insert(session, pTerms as List<PrincipalTerms>);
     return pTerms.id!;
   }
 }

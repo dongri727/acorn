@@ -31,7 +31,7 @@ class CoverPageState extends State<CoverPage> {
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/cover.png'),
+          image: AssetImage('assets/images/www.png'),
           fit: BoxFit.cover,
         ),
       ),

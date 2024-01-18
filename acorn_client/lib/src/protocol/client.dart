@@ -4,6 +4,8 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -38,11 +40,11 @@ import 'package:acorn_client/src/protocol/universe.dart' as _i29;
 import 'package:acorn_client/src/protocol/with_globe.dart' as _i30;
 import 'package:acorn_client/src/protocol/with_map.dart' as _i31;
 import 'package:serverpod_auth_client/module.dart' as _i32;
-import 'dart:io' as _i33;
-import 'protocol.dart' as _i34;
+import 'protocol.dart' as _i33;
 
-class _EndpointAttInvolved extends _i1.EndpointRef {
-  _EndpointAttInvolved(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointAttInvolved extends _i1.EndpointRef {
+  EndpointAttInvolved(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'attInvolved';
@@ -62,8 +64,9 @@ class _EndpointAttInvolved extends _i1.EndpointRef {
       );
 }
 
-class _EndpointCountryInvolved extends _i1.EndpointRef {
-  _EndpointCountryInvolved(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointCountryInvolved extends _i1.EndpointRef {
+  EndpointCountryInvolved(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'countryInvolved';
@@ -83,8 +86,9 @@ class _EndpointCountryInvolved extends _i1.EndpointRef {
       );
 }
 
-class _EndpointCategories extends _i1.EndpointRef {
-  _EndpointCategories(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointCategories extends _i1.EndpointRef {
+  EndpointCategories(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'categories';
@@ -104,8 +108,9 @@ class _EndpointCategories extends _i1.EndpointRef {
       );
 }
 
-class _EndpointCountryatts extends _i1.EndpointRef {
-  _EndpointCountryatts(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointCountryatts extends _i1.EndpointRef {
+  EndpointCountryatts(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'countryatts';
@@ -125,8 +130,9 @@ class _EndpointCountryatts extends _i1.EndpointRef {
       );
 }
 
-class _EndpointExample extends _i1.EndpointRef {
-  _EndpointExample(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointExample extends _i1.EndpointRef {
+  EndpointExample(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'example';
@@ -138,8 +144,9 @@ class _EndpointExample extends _i1.EndpointRef {
       );
 }
 
-class _EndpointLieux extends _i1.EndpointRef {
-  _EndpointLieux(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointLieux extends _i1.EndpointRef {
+  EndpointLieux(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'lieux';
@@ -158,8 +165,9 @@ class _EndpointLieux extends _i1.EndpointRef {
       );
 }
 
-class _EndpointLocalDates extends _i1.EndpointRef {
-  _EndpointLocalDates(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointLocalDates extends _i1.EndpointRef {
+  EndpointLocalDates(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'localDates';
@@ -179,8 +187,9 @@ class _EndpointLocalDates extends _i1.EndpointRef {
       );
 }
 
-class _EndpointOceans extends _i1.EndpointRef {
-  _EndpointOceans(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointOceans extends _i1.EndpointRef {
+  EndpointOceans(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'oceans';
@@ -200,8 +209,9 @@ class _EndpointOceans extends _i1.EndpointRef {
       );
 }
 
-class _EndpointOrganisations extends _i1.EndpointRef {
-  _EndpointOrganisations(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointOrganisations extends _i1.EndpointRef {
+  EndpointOrganisations(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'organisations';
@@ -221,8 +231,9 @@ class _EndpointOrganisations extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalCategories extends _i1.EndpointRef {
-  _EndpointPrincipalCategories(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalCategories extends _i1.EndpointRef {
+  EndpointPrincipalCategories(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalCategories';
@@ -243,8 +254,9 @@ class _EndpointPrincipalCategories extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalCatt extends _i1.EndpointRef {
-  _EndpointPrincipalCatt(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalCatt extends _i1.EndpointRef {
+  EndpointPrincipalCatt(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalCatt';
@@ -264,8 +276,9 @@ class _EndpointPrincipalCatt extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalOrgs extends _i1.EndpointRef {
-  _EndpointPrincipalOrgs(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalOrgs extends _i1.EndpointRef {
+  EndpointPrincipalOrgs(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalOrgs';
@@ -285,8 +298,9 @@ class _EndpointPrincipalOrgs extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalPatt extends _i1.EndpointRef {
-  _EndpointPrincipalPatt(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalPatt extends _i1.EndpointRef {
+  EndpointPrincipalPatt(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalPatt';
@@ -306,8 +320,9 @@ class _EndpointPrincipalPatt extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalPeople extends _i1.EndpointRef {
-  _EndpointPrincipalPeople(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalPeople extends _i1.EndpointRef {
+  EndpointPrincipalPeople(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalPeople';
@@ -327,8 +342,9 @@ class _EndpointPrincipalPeople extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalPlace extends _i1.EndpointRef {
-  _EndpointPrincipalPlace(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalPlace extends _i1.EndpointRef {
+  EndpointPrincipalPlace(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalPlace';
@@ -346,17 +362,11 @@ class _EndpointPrincipalPlace extends _i1.EndpointRef {
         'addPPlace',
         {'principalPlace': principalPlace},
       );
-
-  _i2.Future<List<dynamic>> getPPlaceNarrowed() =>
-      caller.callServerEndpoint<List<dynamic>>(
-        'principalPlace',
-        'getPPlaceNarrowed',
-        {},
-      );
 }
 
-class _EndpointPrincipalSeas extends _i1.EndpointRef {
-  _EndpointPrincipalSeas(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalSeas extends _i1.EndpointRef {
+  EndpointPrincipalSeas(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalSeas';
@@ -376,8 +386,9 @@ class _EndpointPrincipalSeas extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalTerms extends _i1.EndpointRef {
-  _EndpointPrincipalTerms(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalTerms extends _i1.EndpointRef {
+  EndpointPrincipalTerms(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalTerms';
@@ -397,8 +408,9 @@ class _EndpointPrincipalTerms extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipalUser extends _i1.EndpointRef {
-  _EndpointPrincipalUser(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipalUser extends _i1.EndpointRef {
+  EndpointPrincipalUser(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principalUser';
@@ -418,8 +430,9 @@ class _EndpointPrincipalUser extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPays extends _i1.EndpointRef {
-  _EndpointPays(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPays extends _i1.EndpointRef {
+  EndpointPays(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'pays';
@@ -438,8 +451,9 @@ class _EndpointPays extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPeople extends _i1.EndpointRef {
-  _EndpointPeople(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPeople extends _i1.EndpointRef {
+  EndpointPeople(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'people';
@@ -459,8 +473,9 @@ class _EndpointPeople extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPlaceatts extends _i1.EndpointRef {
-  _EndpointPlaceatts(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPlaceatts extends _i1.EndpointRef {
+  EndpointPlaceatts(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'placeatts';
@@ -480,8 +495,9 @@ class _EndpointPlaceatts extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPlaces extends _i1.EndpointRef {
-  _EndpointPlaces(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPlaces extends _i1.EndpointRef {
+  EndpointPlaces(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'places';
@@ -508,8 +524,9 @@ class _EndpointPlaces extends _i1.EndpointRef {
       );
 }
 
-class _EndpointPrincipal extends _i1.EndpointRef {
-  _EndpointPrincipal(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointPrincipal extends _i1.EndpointRef {
+  EndpointPrincipal(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'principal';
@@ -629,8 +646,9 @@ class _EndpointPrincipal extends _i1.EndpointRef {
       );
 }
 
-class _EndpointSeas extends _i1.EndpointRef {
-  _EndpointSeas(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointSeas extends _i1.EndpointRef {
+  EndpointSeas(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'seas';
@@ -649,8 +667,9 @@ class _EndpointSeas extends _i1.EndpointRef {
       );
 }
 
-class _EndpointStars extends _i1.EndpointRef {
-  _EndpointStars(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointStars extends _i1.EndpointRef {
+  EndpointStars(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'stars';
@@ -669,8 +688,9 @@ class _EndpointStars extends _i1.EndpointRef {
       );
 }
 
-class _EndpointStarsInvolved extends _i1.EndpointRef {
-  _EndpointStarsInvolved(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointStarsInvolved extends _i1.EndpointRef {
+  EndpointStarsInvolved(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'starsInvolved';
@@ -690,8 +710,9 @@ class _EndpointStarsInvolved extends _i1.EndpointRef {
       );
 }
 
-class _EndpointTerms extends _i1.EndpointRef {
-  _EndpointTerms(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointTerms extends _i1.EndpointRef {
+  EndpointTerms(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'terms';
@@ -710,8 +731,9 @@ class _EndpointTerms extends _i1.EndpointRef {
       );
 }
 
-class _EndpointUniverse extends _i1.EndpointRef {
-  _EndpointUniverse(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointUniverse extends _i1.EndpointRef {
+  EndpointUniverse(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'universe';
@@ -731,8 +753,9 @@ class _EndpointUniverse extends _i1.EndpointRef {
       );
 }
 
-class _EndpointWithGlobe extends _i1.EndpointRef {
-  _EndpointWithGlobe(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointWithGlobe extends _i1.EndpointRef {
+  EndpointWithGlobe(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'withGlobe';
@@ -752,8 +775,9 @@ class _EndpointWithGlobe extends _i1.EndpointRef {
       );
 }
 
-class _EndpointWithMap extends _i1.EndpointRef {
-  _EndpointWithMap(_i1.EndpointCaller caller) : super(caller);
+/// {@category Endpoint}
+class EndpointWithMap extends _i1.EndpointRef {
+  EndpointWithMap(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'withMap';
@@ -784,106 +808,110 @@ class _Modules {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i33.SecurityContext? context,
+    dynamic securityContext,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
+    Duration? streamingConnectionTimeout,
+    Duration? connectionTimeout,
   }) : super(
           host,
-          _i34.Protocol(),
-          context: context,
+          _i33.Protocol(),
+          securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
+          streamingConnectionTimeout: streamingConnectionTimeout,
+          connectionTimeout: connectionTimeout,
         ) {
-    attInvolved = _EndpointAttInvolved(this);
-    countryInvolved = _EndpointCountryInvolved(this);
-    categories = _EndpointCategories(this);
-    countryatts = _EndpointCountryatts(this);
-    example = _EndpointExample(this);
-    lieux = _EndpointLieux(this);
-    localDates = _EndpointLocalDates(this);
-    oceans = _EndpointOceans(this);
-    organisations = _EndpointOrganisations(this);
-    principalCategories = _EndpointPrincipalCategories(this);
-    principalCatt = _EndpointPrincipalCatt(this);
-    principalOrgs = _EndpointPrincipalOrgs(this);
-    principalPatt = _EndpointPrincipalPatt(this);
-    principalPeople = _EndpointPrincipalPeople(this);
-    principalPlace = _EndpointPrincipalPlace(this);
-    principalSeas = _EndpointPrincipalSeas(this);
-    principalTerms = _EndpointPrincipalTerms(this);
-    principalUser = _EndpointPrincipalUser(this);
-    pays = _EndpointPays(this);
-    people = _EndpointPeople(this);
-    placeatts = _EndpointPlaceatts(this);
-    places = _EndpointPlaces(this);
-    principal = _EndpointPrincipal(this);
-    seas = _EndpointSeas(this);
-    stars = _EndpointStars(this);
-    starsInvolved = _EndpointStarsInvolved(this);
-    terms = _EndpointTerms(this);
-    universe = _EndpointUniverse(this);
-    withGlobe = _EndpointWithGlobe(this);
-    withMap = _EndpointWithMap(this);
+    attInvolved = EndpointAttInvolved(this);
+    countryInvolved = EndpointCountryInvolved(this);
+    categories = EndpointCategories(this);
+    countryatts = EndpointCountryatts(this);
+    example = EndpointExample(this);
+    lieux = EndpointLieux(this);
+    localDates = EndpointLocalDates(this);
+    oceans = EndpointOceans(this);
+    organisations = EndpointOrganisations(this);
+    principalCategories = EndpointPrincipalCategories(this);
+    principalCatt = EndpointPrincipalCatt(this);
+    principalOrgs = EndpointPrincipalOrgs(this);
+    principalPatt = EndpointPrincipalPatt(this);
+    principalPeople = EndpointPrincipalPeople(this);
+    principalPlace = EndpointPrincipalPlace(this);
+    principalSeas = EndpointPrincipalSeas(this);
+    principalTerms = EndpointPrincipalTerms(this);
+    principalUser = EndpointPrincipalUser(this);
+    pays = EndpointPays(this);
+    people = EndpointPeople(this);
+    placeatts = EndpointPlaceatts(this);
+    places = EndpointPlaces(this);
+    principal = EndpointPrincipal(this);
+    seas = EndpointSeas(this);
+    stars = EndpointStars(this);
+    starsInvolved = EndpointStarsInvolved(this);
+    terms = EndpointTerms(this);
+    universe = EndpointUniverse(this);
+    withGlobe = EndpointWithGlobe(this);
+    withMap = EndpointWithMap(this);
     modules = _Modules(this);
   }
 
-  late final _EndpointAttInvolved attInvolved;
+  late final EndpointAttInvolved attInvolved;
 
-  late final _EndpointCountryInvolved countryInvolved;
+  late final EndpointCountryInvolved countryInvolved;
 
-  late final _EndpointCategories categories;
+  late final EndpointCategories categories;
 
-  late final _EndpointCountryatts countryatts;
+  late final EndpointCountryatts countryatts;
 
-  late final _EndpointExample example;
+  late final EndpointExample example;
 
-  late final _EndpointLieux lieux;
+  late final EndpointLieux lieux;
 
-  late final _EndpointLocalDates localDates;
+  late final EndpointLocalDates localDates;
 
-  late final _EndpointOceans oceans;
+  late final EndpointOceans oceans;
 
-  late final _EndpointOrganisations organisations;
+  late final EndpointOrganisations organisations;
 
-  late final _EndpointPrincipalCategories principalCategories;
+  late final EndpointPrincipalCategories principalCategories;
 
-  late final _EndpointPrincipalCatt principalCatt;
+  late final EndpointPrincipalCatt principalCatt;
 
-  late final _EndpointPrincipalOrgs principalOrgs;
+  late final EndpointPrincipalOrgs principalOrgs;
 
-  late final _EndpointPrincipalPatt principalPatt;
+  late final EndpointPrincipalPatt principalPatt;
 
-  late final _EndpointPrincipalPeople principalPeople;
+  late final EndpointPrincipalPeople principalPeople;
 
-  late final _EndpointPrincipalPlace principalPlace;
+  late final EndpointPrincipalPlace principalPlace;
 
-  late final _EndpointPrincipalSeas principalSeas;
+  late final EndpointPrincipalSeas principalSeas;
 
-  late final _EndpointPrincipalTerms principalTerms;
+  late final EndpointPrincipalTerms principalTerms;
 
-  late final _EndpointPrincipalUser principalUser;
+  late final EndpointPrincipalUser principalUser;
 
-  late final _EndpointPays pays;
+  late final EndpointPays pays;
 
-  late final _EndpointPeople people;
+  late final EndpointPeople people;
 
-  late final _EndpointPlaceatts placeatts;
+  late final EndpointPlaceatts placeatts;
 
-  late final _EndpointPlaces places;
+  late final EndpointPlaces places;
 
-  late final _EndpointPrincipal principal;
+  late final EndpointPrincipal principal;
 
-  late final _EndpointSeas seas;
+  late final EndpointSeas seas;
 
-  late final _EndpointStars stars;
+  late final EndpointStars stars;
 
-  late final _EndpointStarsInvolved starsInvolved;
+  late final EndpointStarsInvolved starsInvolved;
 
-  late final _EndpointTerms terms;
+  late final EndpointTerms terms;
 
-  late final _EndpointUniverse universe;
+  late final EndpointUniverse universe;
 
-  late final _EndpointWithGlobe withGlobe;
+  late final EndpointWithGlobe withGlobe;
 
-  late final _EndpointWithMap withMap;
+  late final EndpointWithMap withMap;
 
   late final _Modules modules;
 
@@ -920,6 +948,7 @@ class Client extends _i1.ServerpodClient {
         'withGlobe': withGlobe,
         'withMap': withMap,
       };
+
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
       {'auth': modules.auth};

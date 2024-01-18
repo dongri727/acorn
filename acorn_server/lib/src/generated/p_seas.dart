@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class PrincipalSeas extends _i1.TableRow {
-  PrincipalSeas({
+abstract class PrincipalSeas extends _i1.TableRow {
+  PrincipalSeas._({
     int? id,
-    required this.principal_id,
-    required this.seas_id,
+    required this.principalId,
+    required this.seasId,
   }) : super(id);
+
+  factory PrincipalSeas({
+    int? id,
+    required int principalId,
+    required int seasId,
+  }) = _PrincipalSeasImpl;
 
   factory PrincipalSeas.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,36 +29,45 @@ class PrincipalSeas extends _i1.TableRow {
   ) {
     return PrincipalSeas(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      seas_id:
-          serializationManager.deserialize<int>(jsonSerialization['seas_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      seasId:
+          serializationManager.deserialize<int>(jsonSerialization['seasId']),
     );
   }
 
   static final t = PrincipalSeasTable();
 
-  int principal_id;
+  static const db = PrincipalSeasRepository._();
 
-  int seas_id;
+  int principalId;
+
+  int seasId;
 
   @override
-  String get tableName => 'principal_seas';
+  _i1.Table get table => t;
+
+  PrincipalSeas copyWith({
+    int? id,
+    int? principalId,
+    int? seasId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'seas_id': seas_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'seasId': seasId,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'seas_id': seas_id,
+      'principalId': principalId,
+      'seasId': seasId,
     };
   }
 
@@ -58,8 +75,8 @@ class PrincipalSeas extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'seas_id': seas_id,
+      'principalId': principalId,
+      'seasId': seasId,
     };
   }
 
@@ -72,20 +89,21 @@ class PrincipalSeas extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'principal_id':
-        principal_id = value;
+      case 'principalId':
+        principalId = value;
         return;
-      case 'seas_id':
-        seas_id = value;
+      case 'seasId':
+        seasId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<PrincipalSeas>> find(
     _i1.Session session, {
-    PrincipalSeasExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +124,10 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<PrincipalSeas?> findSingleRow(
     _i1.Session session, {
-    PrincipalSeasExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +144,7 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<PrincipalSeas?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +152,10 @@ class PrincipalSeas extends _i1.TableRow {
     return session.db.findById<PrincipalSeas>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required PrincipalSeasExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<PrincipalSeasTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<PrincipalSeas>(
@@ -143,6 +164,7 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     PrincipalSeas row, {
@@ -154,6 +176,7 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     PrincipalSeas row, {
@@ -165,6 +188,8 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     PrincipalSeas row, {
@@ -176,9 +201,10 @@ class PrincipalSeas extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    PrincipalSeasExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,30 +216,262 @@ class PrincipalSeas extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static PrincipalSeasInclude include() {
+    return PrincipalSeasInclude._();
+  }
+
+  static PrincipalSeasIncludeList includeList({
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalSeasTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalSeasTable>? orderByList,
+    PrincipalSeasInclude? include,
+  }) {
+    return PrincipalSeasIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalSeas.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(PrincipalSeas.t),
+      include: include,
+    );
+  }
 }
 
-typedef PrincipalSeasExpressionBuilder = _i1.Expression Function(
-    PrincipalSeasTable);
+class _Undefined {}
+
+class _PrincipalSeasImpl extends PrincipalSeas {
+  _PrincipalSeasImpl({
+    int? id,
+    required int principalId,
+    required int seasId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          seasId: seasId,
+        );
+
+  @override
+  PrincipalSeas copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? seasId,
+  }) {
+    return PrincipalSeas(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      seasId: seasId ?? this.seasId,
+    );
+  }
+}
 
 class PrincipalSeasTable extends _i1.Table {
-  PrincipalSeasTable() : super(tableName: 'principal_seas');
+  PrincipalSeasTable({super.tableRelation})
+      : super(tableName: 'principal_seas') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
+    seasId = _i1.ColumnInt(
+      'seasId',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnInt principalId;
 
-  final principal_id = _i1.ColumnInt('principal_id');
-
-  final seas_id = _i1.ColumnInt('seas_id');
+  late final _i1.ColumnInt seasId;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        principal_id,
-        seas_id,
+        principalId,
+        seasId,
       ];
 }
 
 @Deprecated('Use PrincipalSeasTable.t instead.')
 PrincipalSeasTable tPrincipalSeas = PrincipalSeasTable();
+
+class PrincipalSeasInclude extends _i1.IncludeObject {
+  PrincipalSeasInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => PrincipalSeas.t;
+}
+
+class PrincipalSeasIncludeList extends _i1.IncludeList {
+  PrincipalSeasIncludeList._({
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(PrincipalSeas.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => PrincipalSeas.t;
+}
+
+class PrincipalSeasRepository {
+  const PrincipalSeasRepository._();
+
+  Future<List<PrincipalSeas>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalSeasTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalSeasTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<PrincipalSeas>(
+      where: where?.call(PrincipalSeas.t),
+      orderBy: orderBy?.call(PrincipalSeas.t),
+      orderByList: orderByList?.call(PrincipalSeas.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalSeas?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalSeasTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalSeasTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<PrincipalSeas>(
+      where: where?.call(PrincipalSeas.t),
+      orderBy: orderBy?.call(PrincipalSeas.t),
+      orderByList: orderByList?.call(PrincipalSeas.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalSeas?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<PrincipalSeas>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalSeas>> insert(
+    _i1.Session session,
+    List<PrincipalSeas> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<PrincipalSeas>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalSeas> insertRow(
+    _i1.Session session,
+    PrincipalSeas row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<PrincipalSeas>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalSeas>> update(
+    _i1.Session session,
+    List<PrincipalSeas> rows, {
+    _i1.ColumnSelections<PrincipalSeasTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<PrincipalSeas>(
+      rows,
+      columns: columns?.call(PrincipalSeas.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalSeas> updateRow(
+    _i1.Session session,
+    PrincipalSeas row, {
+    _i1.ColumnSelections<PrincipalSeasTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<PrincipalSeas>(
+      row,
+      columns: columns?.call(PrincipalSeas.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<PrincipalSeas> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<PrincipalSeas>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    PrincipalSeas row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<PrincipalSeas>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<PrincipalSeasTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<PrincipalSeas>(
+      where: where(PrincipalSeas.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalSeasTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<PrincipalSeas>(
+      where: where?.call(PrincipalSeas.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

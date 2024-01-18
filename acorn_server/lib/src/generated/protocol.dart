@@ -4,6 +4,8 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
@@ -111,10 +113,12 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static final Protocol _instance = Protocol._();
 
-  static final targetDatabaseDefinition = _i2.DatabaseDefinition(tables: [
+  static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
       name: 'atts_involved',
+      dartName: 'AttsInvolved',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -124,13 +128,13 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'atts_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'att_id',
+          name: 'attId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -155,50 +159,10 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'country_involved',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'country_involved_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'pays_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'country_involved_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
       name: 'categories',
+      dartName: 'Categories',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -233,8 +197,54 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'countryatts',
+      name: 'country_involved',
+      dartName: 'CountryInvolved',
       schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'country_involved_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'paysId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'country_involved_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'countryatts',
+      dartName: 'Countryatts',
+      schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -270,7 +280,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'lieux',
+      dartName: 'Lieux',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -280,7 +292,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'lieux_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -298,19 +310,19 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'three_d_x',
+          name: 'threeDX',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'three_d_y',
+          name: 'threeDY',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'three_d_z',
+          name: 'threeDZ',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
@@ -336,7 +348,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'localdates',
+      dartName: 'LocalDates',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -346,7 +360,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'localdates_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -378,7 +392,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'oceans',
+      dartName: 'Oceans',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -414,7 +430,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'organisations',
+      dartName: 'Organisations',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -449,386 +467,10 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'principal_user',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_user_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'user_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_user_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_categories',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_categories_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'category_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_categories_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_catt',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_catt_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'catt_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_catt_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_orgs',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_orgs_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'org_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_orgs_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_patt',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_patt_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'patt_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_patt_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_people',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_people_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'person_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_people_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_place',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_place_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'place_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_place_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_seas',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_seas_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'seas_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_seas_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'principal_terms',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'principal_terms_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'principal_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'term_id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'principal_terms_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
       name: 'pays',
+      dartName: 'Pays',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -864,7 +506,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'people',
+      dartName: 'People',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -900,7 +544,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'placeatts',
+      dartName: 'Placeatts',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -936,7 +582,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'places',
+      dartName: 'Places',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -978,7 +626,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'principal',
+      dartName: 'Principal',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1081,8 +731,406 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'seas',
+      name: 'principal_categories',
+      dartName: 'PrincipalCategories',
       schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_categories_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'categoryId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_categories_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_catt',
+      dartName: 'PrincipalCatt',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_catt_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'cattId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_catt_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_orgs',
+      dartName: 'PrincipalOrgs',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_orgs_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'orgId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_orgs_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_patt',
+      dartName: 'PrincipalPatt',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_patt_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'pattId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_patt_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_people',
+      dartName: 'PrincipalPeople',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_people_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'personId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_people_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_place',
+      dartName: 'PrincipalPlace',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_place_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'placeId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_place_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_seas',
+      dartName: 'PrincipalSeas',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_seas_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'seasId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_seas_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_terms',
+      dartName: 'PrincipalTerms',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_terms_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'termId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_terms_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'principal_user',
+      dartName: 'PrincipalUser',
+      schema: 'public',
+      module: 'acorn',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'principal_user_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'principalId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'principal_user_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'seas',
+      dartName: 'Seas',
+      schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1118,7 +1166,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'stars',
+      dartName: 'Stars',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1154,7 +1204,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'stars_involved',
+      dartName: 'StarsInvolved',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1164,13 +1216,13 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'stars_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'star_id',
+          name: 'starId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -1196,7 +1248,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'terms',
+      dartName: 'Terms',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1232,7 +1286,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'universe',
+      dartName: 'Universe',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1268,7 +1324,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'with_globe',
+      dartName: 'WithGlobe',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1278,7 +1336,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'with_globe_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -1308,19 +1366,19 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
-          name: 'x_coordinate',
+          name: 'xCoordinate',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'y_coordinate',
+          name: 'yCoordinate',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
         ),
         _i2.ColumnDefinition(
-          name: 'z_coordinate',
+          name: 'zCoordinate',
           columnType: _i2.ColumnType.doublePrecision,
           isNullable: false,
           dartType: 'double',
@@ -1352,7 +1410,9 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'with_map',
+      dartName: 'WithMap',
       schema: 'public',
+      module: 'acorn',
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
@@ -1362,7 +1422,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'nextval(\'with_map_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
-          name: 'principal_id',
+          name: 'principalId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -1428,9 +1488,9 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
-    ..._i3.Protocol.targetDatabaseDefinition.tables,
-    ..._i2.Protocol.targetDatabaseDefinition.tables,
-  ]);
+    ..._i3.Protocol.targetTableDefinitions,
+    ..._i2.Protocol.targetTableDefinitions,
+  ];
 
   @override
   T deserialize<T>(
@@ -1705,10 +1765,6 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data as List)
           .map((e) => deserialize<_i48.PrincipalPlace>(e))
           .toList() as dynamic;
-    }
-    if (t == List<dynamic>) {
-      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
-          as dynamic;
     }
     if (t == List<_i49.PrincipalSeas>) {
       return (data as List)
@@ -2141,6 +2197,9 @@ class Protocol extends _i1.SerializationManagerServer {
   }
 
   @override
-  _i2.DatabaseDefinition getTargetDatabaseDefinition() =>
-      targetDatabaseDefinition;
+  List<_i2.TableDefinition> getTargetTableDefinitions() =>
+      targetTableDefinitions;
+
+  @override
+  String getModuleName() => 'acorn';
 }

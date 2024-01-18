@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalPeople extends _i1.SerializableEntity {
-  PrincipalPeople({
+abstract class PrincipalPeople extends _i1.SerializableEntity {
+  PrincipalPeople._({
     this.id,
-    required this.principal_id,
-    required this.person_id,
+    required this.principalId,
+    required this.personId,
   });
+
+  factory PrincipalPeople({
+    int? id,
+    required int principalId,
+    required int personId,
+  }) = _PrincipalPeopleImpl;
 
   factory PrincipalPeople.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalPeople extends _i1.SerializableEntity {
   ) {
     return PrincipalPeople(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      person_id:
-          serializationManager.deserialize<int>(jsonSerialization['person_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      personId:
+          serializationManager.deserialize<int>(jsonSerialization['personId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalPeople extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int person_id;
+  int personId;
 
+  PrincipalPeople copyWith({
+    int? id,
+    int? principalId,
+    int? personId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'person_id': person_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'personId': personId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalPeopleImpl extends PrincipalPeople {
+  _PrincipalPeopleImpl({
+    int? id,
+    required int principalId,
+    required int personId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          personId: personId,
+        );
+
+  @override
+  PrincipalPeople copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? personId,
+  }) {
+    return PrincipalPeople(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      personId: personId ?? this.personId,
+    );
   }
 }

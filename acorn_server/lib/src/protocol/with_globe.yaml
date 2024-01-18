@@ -1,12 +1,12 @@
 class: WithGlobe
 table: with_globe
 fields: 
-  principal_id: int
+  principalId: int
   annee: String
   affair: String
   location: String
   precise: String
-  x_coordinate: double
-  y_coordinate: double
-  z_coordinate: double
+  xCoordinate: double
+  yCoordinate: double
+  zCoordinate: double
   coefficient: double

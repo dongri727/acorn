@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class AttsInvolved extends _i1.SerializableEntity {
-  AttsInvolved({
+abstract class AttsInvolved extends _i1.SerializableEntity {
+  AttsInvolved._({
     this.id,
-    required this.principal_id,
-    required this.att_id,
+    required this.principalId,
+    required this.attId,
   });
+
+  factory AttsInvolved({
+    int? id,
+    required int principalId,
+    required int attId,
+  }) = _AttsInvolvedImpl;
 
   factory AttsInvolved.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,9 @@ class AttsInvolved extends _i1.SerializableEntity {
   ) {
     return AttsInvolved(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      att_id:
-          serializationManager.deserialize<int>(jsonSerialization['att_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      attId: serializationManager.deserialize<int>(jsonSerialization['attId']),
     );
   }
 
@@ -33,16 +40,48 @@ class AttsInvolved extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int att_id;
+  int attId;
 
+  AttsInvolved copyWith({
+    int? id,
+    int? principalId,
+    int? attId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'att_id': att_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'attId': attId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _AttsInvolvedImpl extends AttsInvolved {
+  _AttsInvolvedImpl({
+    int? id,
+    required int principalId,
+    required int attId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          attId: attId,
+        );
+
+  @override
+  AttsInvolved copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? attId,
+  }) {
+    return AttsInvolved(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      attId: attId ?? this.attId,
+    );
   }
 }

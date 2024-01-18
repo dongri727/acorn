@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class PrincipalPatt extends _i1.TableRow {
-  PrincipalPatt({
+abstract class PrincipalPatt extends _i1.TableRow {
+  PrincipalPatt._({
     int? id,
-    required this.principal_id,
-    required this.patt_id,
+    required this.principalId,
+    required this.pattId,
   }) : super(id);
+
+  factory PrincipalPatt({
+    int? id,
+    required int principalId,
+    required int pattId,
+  }) = _PrincipalPattImpl;
 
   factory PrincipalPatt.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,36 +29,45 @@ class PrincipalPatt extends _i1.TableRow {
   ) {
     return PrincipalPatt(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      patt_id:
-          serializationManager.deserialize<int>(jsonSerialization['patt_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      pattId:
+          serializationManager.deserialize<int>(jsonSerialization['pattId']),
     );
   }
 
   static final t = PrincipalPattTable();
 
-  int principal_id;
+  static const db = PrincipalPattRepository._();
 
-  int patt_id;
+  int principalId;
+
+  int pattId;
 
   @override
-  String get tableName => 'principal_patt';
+  _i1.Table get table => t;
+
+  PrincipalPatt copyWith({
+    int? id,
+    int? principalId,
+    int? pattId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'patt_id': patt_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'pattId': pattId,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'patt_id': patt_id,
+      'principalId': principalId,
+      'pattId': pattId,
     };
   }
 
@@ -58,8 +75,8 @@ class PrincipalPatt extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'patt_id': patt_id,
+      'principalId': principalId,
+      'pattId': pattId,
     };
   }
 
@@ -72,20 +89,21 @@ class PrincipalPatt extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'principal_id':
-        principal_id = value;
+      case 'principalId':
+        principalId = value;
         return;
-      case 'patt_id':
-        patt_id = value;
+      case 'pattId':
+        pattId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<PrincipalPatt>> find(
     _i1.Session session, {
-    PrincipalPattExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +124,10 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<PrincipalPatt?> findSingleRow(
     _i1.Session session, {
-    PrincipalPattExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +144,7 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<PrincipalPatt?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +152,10 @@ class PrincipalPatt extends _i1.TableRow {
     return session.db.findById<PrincipalPatt>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required PrincipalPattExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<PrincipalPattTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<PrincipalPatt>(
@@ -143,6 +164,7 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     PrincipalPatt row, {
@@ -154,6 +176,7 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     PrincipalPatt row, {
@@ -165,6 +188,8 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     PrincipalPatt row, {
@@ -176,9 +201,10 @@ class PrincipalPatt extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    PrincipalPattExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,30 +216,262 @@ class PrincipalPatt extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static PrincipalPattInclude include() {
+    return PrincipalPattInclude._();
+  }
+
+  static PrincipalPattIncludeList includeList({
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalPattTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
+    PrincipalPattInclude? include,
+  }) {
+    return PrincipalPattIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalPatt.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(PrincipalPatt.t),
+      include: include,
+    );
+  }
 }
 
-typedef PrincipalPattExpressionBuilder = _i1.Expression Function(
-    PrincipalPattTable);
+class _Undefined {}
+
+class _PrincipalPattImpl extends PrincipalPatt {
+  _PrincipalPattImpl({
+    int? id,
+    required int principalId,
+    required int pattId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          pattId: pattId,
+        );
+
+  @override
+  PrincipalPatt copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? pattId,
+  }) {
+    return PrincipalPatt(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      pattId: pattId ?? this.pattId,
+    );
+  }
+}
 
 class PrincipalPattTable extends _i1.Table {
-  PrincipalPattTable() : super(tableName: 'principal_patt');
+  PrincipalPattTable({super.tableRelation})
+      : super(tableName: 'principal_patt') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
+    pattId = _i1.ColumnInt(
+      'pattId',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnInt principalId;
 
-  final principal_id = _i1.ColumnInt('principal_id');
-
-  final patt_id = _i1.ColumnInt('patt_id');
+  late final _i1.ColumnInt pattId;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        principal_id,
-        patt_id,
+        principalId,
+        pattId,
       ];
 }
 
 @Deprecated('Use PrincipalPattTable.t instead.')
 PrincipalPattTable tPrincipalPatt = PrincipalPattTable();
+
+class PrincipalPattInclude extends _i1.IncludeObject {
+  PrincipalPattInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => PrincipalPatt.t;
+}
+
+class PrincipalPattIncludeList extends _i1.IncludeList {
+  PrincipalPattIncludeList._({
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(PrincipalPatt.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => PrincipalPatt.t;
+}
+
+class PrincipalPattRepository {
+  const PrincipalPattRepository._();
+
+  Future<List<PrincipalPatt>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalPattTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<PrincipalPatt>(
+      where: where?.call(PrincipalPatt.t),
+      orderBy: orderBy?.call(PrincipalPatt.t),
+      orderByList: orderByList?.call(PrincipalPatt.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalPatt?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalPattTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<PrincipalPatt>(
+      where: where?.call(PrincipalPatt.t),
+      orderBy: orderBy?.call(PrincipalPatt.t),
+      orderByList: orderByList?.call(PrincipalPatt.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalPatt?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<PrincipalPatt>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalPatt>> insert(
+    _i1.Session session,
+    List<PrincipalPatt> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<PrincipalPatt>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalPatt> insertRow(
+    _i1.Session session,
+    PrincipalPatt row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<PrincipalPatt>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalPatt>> update(
+    _i1.Session session,
+    List<PrincipalPatt> rows, {
+    _i1.ColumnSelections<PrincipalPattTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<PrincipalPatt>(
+      rows,
+      columns: columns?.call(PrincipalPatt.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalPatt> updateRow(
+    _i1.Session session,
+    PrincipalPatt row, {
+    _i1.ColumnSelections<PrincipalPattTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<PrincipalPatt>(
+      row,
+      columns: columns?.call(PrincipalPatt.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<PrincipalPatt> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<PrincipalPatt>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    PrincipalPatt row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<PrincipalPatt>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<PrincipalPattTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<PrincipalPatt>(
+      where: where(PrincipalPatt.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<PrincipalPatt>(
+      where: where?.call(PrincipalPatt.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

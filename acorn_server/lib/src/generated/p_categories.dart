@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class PrincipalCategories extends _i1.TableRow {
-  PrincipalCategories({
+abstract class PrincipalCategories extends _i1.TableRow {
+  PrincipalCategories._({
     int? id,
-    required this.principal_id,
-    required this.category_id,
+    required this.principalId,
+    required this.categoryId,
   }) : super(id);
+
+  factory PrincipalCategories({
+    int? id,
+    required int principalId,
+    required int categoryId,
+  }) = _PrincipalCategoriesImpl;
 
   factory PrincipalCategories.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,36 +29,45 @@ class PrincipalCategories extends _i1.TableRow {
   ) {
     return PrincipalCategories(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      category_id: serializationManager
-          .deserialize<int>(jsonSerialization['category_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      categoryId: serializationManager
+          .deserialize<int>(jsonSerialization['categoryId']),
     );
   }
 
   static final t = PrincipalCategoriesTable();
 
-  int principal_id;
+  static const db = PrincipalCategoriesRepository._();
 
-  int category_id;
+  int principalId;
+
+  int categoryId;
 
   @override
-  String get tableName => 'principal_categories';
+  _i1.Table get table => t;
+
+  PrincipalCategories copyWith({
+    int? id,
+    int? principalId,
+    int? categoryId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'category_id': category_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'categoryId': categoryId,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'category_id': category_id,
+      'principalId': principalId,
+      'categoryId': categoryId,
     };
   }
 
@@ -58,8 +75,8 @@ class PrincipalCategories extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'category_id': category_id,
+      'principalId': principalId,
+      'categoryId': categoryId,
     };
   }
 
@@ -72,20 +89,21 @@ class PrincipalCategories extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'principal_id':
-        principal_id = value;
+      case 'principalId':
+        principalId = value;
         return;
-      case 'category_id':
-        category_id = value;
+      case 'categoryId':
+        categoryId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<PrincipalCategories>> find(
     _i1.Session session, {
-    PrincipalCategoriesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +124,10 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<PrincipalCategories?> findSingleRow(
     _i1.Session session, {
-    PrincipalCategoriesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +144,7 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<PrincipalCategories?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +152,10 @@ class PrincipalCategories extends _i1.TableRow {
     return session.db.findById<PrincipalCategories>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required PrincipalCategoriesExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<PrincipalCategoriesTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<PrincipalCategories>(
@@ -143,6 +164,7 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     PrincipalCategories row, {
@@ -154,6 +176,7 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     PrincipalCategories row, {
@@ -165,6 +188,8 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     PrincipalCategories row, {
@@ -176,9 +201,10 @@ class PrincipalCategories extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    PrincipalCategoriesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,30 +216,262 @@ class PrincipalCategories extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static PrincipalCategoriesInclude include() {
+    return PrincipalCategoriesInclude._();
+  }
+
+  static PrincipalCategoriesIncludeList includeList({
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalCategoriesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalCategoriesTable>? orderByList,
+    PrincipalCategoriesInclude? include,
+  }) {
+    return PrincipalCategoriesIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalCategories.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(PrincipalCategories.t),
+      include: include,
+    );
+  }
 }
 
-typedef PrincipalCategoriesExpressionBuilder = _i1.Expression Function(
-    PrincipalCategoriesTable);
+class _Undefined {}
+
+class _PrincipalCategoriesImpl extends PrincipalCategories {
+  _PrincipalCategoriesImpl({
+    int? id,
+    required int principalId,
+    required int categoryId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          categoryId: categoryId,
+        );
+
+  @override
+  PrincipalCategories copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? categoryId,
+  }) {
+    return PrincipalCategories(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      categoryId: categoryId ?? this.categoryId,
+    );
+  }
+}
 
 class PrincipalCategoriesTable extends _i1.Table {
-  PrincipalCategoriesTable() : super(tableName: 'principal_categories');
+  PrincipalCategoriesTable({super.tableRelation})
+      : super(tableName: 'principal_categories') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
+    categoryId = _i1.ColumnInt(
+      'categoryId',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnInt principalId;
 
-  final principal_id = _i1.ColumnInt('principal_id');
-
-  final category_id = _i1.ColumnInt('category_id');
+  late final _i1.ColumnInt categoryId;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        principal_id,
-        category_id,
+        principalId,
+        categoryId,
       ];
 }
 
 @Deprecated('Use PrincipalCategoriesTable.t instead.')
 PrincipalCategoriesTable tPrincipalCategories = PrincipalCategoriesTable();
+
+class PrincipalCategoriesInclude extends _i1.IncludeObject {
+  PrincipalCategoriesInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => PrincipalCategories.t;
+}
+
+class PrincipalCategoriesIncludeList extends _i1.IncludeList {
+  PrincipalCategoriesIncludeList._({
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(PrincipalCategories.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => PrincipalCategories.t;
+}
+
+class PrincipalCategoriesRepository {
+  const PrincipalCategoriesRepository._();
+
+  Future<List<PrincipalCategories>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalCategoriesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalCategoriesTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<PrincipalCategories>(
+      where: where?.call(PrincipalCategories.t),
+      orderBy: orderBy?.call(PrincipalCategories.t),
+      orderByList: orderByList?.call(PrincipalCategories.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalCategories?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalCategoriesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PrincipalCategoriesTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<PrincipalCategories>(
+      where: where?.call(PrincipalCategories.t),
+      orderBy: orderBy?.call(PrincipalCategories.t),
+      orderByList: orderByList?.call(PrincipalCategories.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalCategories?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<PrincipalCategories>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalCategories>> insert(
+    _i1.Session session,
+    List<PrincipalCategories> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<PrincipalCategories>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalCategories> insertRow(
+    _i1.Session session,
+    PrincipalCategories row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<PrincipalCategories>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<PrincipalCategories>> update(
+    _i1.Session session,
+    List<PrincipalCategories> rows, {
+    _i1.ColumnSelections<PrincipalCategoriesTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<PrincipalCategories>(
+      rows,
+      columns: columns?.call(PrincipalCategories.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<PrincipalCategories> updateRow(
+    _i1.Session session,
+    PrincipalCategories row, {
+    _i1.ColumnSelections<PrincipalCategoriesTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<PrincipalCategories>(
+      row,
+      columns: columns?.call(PrincipalCategories.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<PrincipalCategories> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<PrincipalCategories>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    PrincipalCategories row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<PrincipalCategories>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<PrincipalCategoriesTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<PrincipalCategories>(
+      where: where(PrincipalCategories.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<PrincipalCategories>(
+      where: where?.call(PrincipalCategories.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

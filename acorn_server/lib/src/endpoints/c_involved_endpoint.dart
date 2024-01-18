@@ -5,16 +5,16 @@ class CountryInvolvedEndpoint extends Endpoint {
   //Fetch countries-involved from DB
   Future<List<CountryInvolved>> getCInvolved(Session session,
       {String? keyword}) async {
-    return await CountryInvolved.find(
+    return await CountryInvolved.db.find(
       session,
       //where: (t) => keyword !=null ? t.countryInvolved.like('%$keyword%') : Constant(true),
-      orderBy: CountryInvolved.t.pays_id,
+      //orderBy: CountryInvolved.t.paysId,
     );
   }
 
   //Add country involved in DB
   Future<int> addCInvolved(Session session, CountryInvolved cInvolved) async {
-    await CountryInvolved.insert(session, cInvolved);
+    await CountryInvolved.db.insert(session, cInvolved as List<CountryInvolved>);
     return cInvolved.id!;
   }
 }

@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class CountryInvolved extends _i1.SerializableEntity {
-  CountryInvolved({
+abstract class CountryInvolved extends _i1.SerializableEntity {
+  CountryInvolved._({
     this.id,
-    required this.principal_id,
-    required this.pays_id,
+    required this.principalId,
+    required this.paysId,
   });
+
+  factory CountryInvolved({
+    int? id,
+    required int principalId,
+    required int paysId,
+  }) = _CountryInvolvedImpl;
 
   factory CountryInvolved.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class CountryInvolved extends _i1.SerializableEntity {
   ) {
     return CountryInvolved(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      pays_id:
-          serializationManager.deserialize<int>(jsonSerialization['pays_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      paysId:
+          serializationManager.deserialize<int>(jsonSerialization['paysId']),
     );
   }
 
@@ -33,16 +41,48 @@ class CountryInvolved extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int pays_id;
+  int paysId;
 
+  CountryInvolved copyWith({
+    int? id,
+    int? principalId,
+    int? paysId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'pays_id': pays_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'paysId': paysId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _CountryInvolvedImpl extends CountryInvolved {
+  _CountryInvolvedImpl({
+    int? id,
+    required int principalId,
+    required int paysId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          paysId: paysId,
+        );
+
+  @override
+  CountryInvolved copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? paysId,
+  }) {
+    return CountryInvolved(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      paysId: paysId ?? this.paysId,
+    );
   }
 }

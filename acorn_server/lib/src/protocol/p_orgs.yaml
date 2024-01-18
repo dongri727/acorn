@@ -1,5 +1,5 @@
 class: PrincipalOrgs
 table: principal_orgs
 fields: 
-  principal_id: int
-  org_id: int
+  principalId: int
+  orgId: int

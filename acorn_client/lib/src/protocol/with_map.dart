@@ -4,14 +4,16 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class WithMap extends _i1.SerializableEntity {
-  WithMap({
+abstract class WithMap extends _i1.SerializableEntity {
+  WithMap._({
     this.id,
-    required this.principal_id,
+    required this.principalId,
     required this.annee,
     required this.affair,
     required this.location,
@@ -21,14 +23,26 @@ class WithMap extends _i1.SerializableEntity {
     required this.logarithm,
   });
 
+  factory WithMap({
+    int? id,
+    required int principalId,
+    required String annee,
+    required String affair,
+    required String location,
+    required String precise,
+    required double latitude,
+    required double longitude,
+    required double logarithm,
+  }) = _WithMapImpl;
+
   factory WithMap.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
     return WithMap(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
       annee:
           serializationManager.deserialize<String>(jsonSerialization['annee']),
       affair:
@@ -51,7 +65,7 @@ class WithMap extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
   String annee;
 
@@ -67,11 +81,22 @@ class WithMap extends _i1.SerializableEntity {
 
   double logarithm;
 
+  WithMap copyWith({
+    int? id,
+    int? principalId,
+    String? annee,
+    String? affair,
+    String? location,
+    String? precise,
+    double? latitude,
+    double? longitude,
+    double? logarithm,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
       'annee': annee,
       'affair': affair,
       'location': location,
@@ -80,5 +105,56 @@ class WithMap extends _i1.SerializableEntity {
       'longitude': longitude,
       'logarithm': logarithm,
     };
+  }
+}
+
+class _Undefined {}
+
+class _WithMapImpl extends WithMap {
+  _WithMapImpl({
+    int? id,
+    required int principalId,
+    required String annee,
+    required String affair,
+    required String location,
+    required String precise,
+    required double latitude,
+    required double longitude,
+    required double logarithm,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          annee: annee,
+          affair: affair,
+          location: location,
+          precise: precise,
+          latitude: latitude,
+          longitude: longitude,
+          logarithm: logarithm,
+        );
+
+  @override
+  WithMap copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    String? annee,
+    String? affair,
+    String? location,
+    String? precise,
+    double? latitude,
+    double? longitude,
+    double? logarithm,
+  }) {
+    return WithMap(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      annee: annee ?? this.annee,
+      affair: affair ?? this.affair,
+      location: location ?? this.location,
+      precise: precise ?? this.precise,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      logarithm: logarithm ?? this.logarithm,
+    );
   }
 }

@@ -4,6 +4,8 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
@@ -384,10 +386,6 @@ class Protocol extends _i1.SerializationManager {
       return (data as List)
           .map((e) => deserialize<_i46.PrincipalPlace>(e))
           .toList() as dynamic;
-    }
-    if (t == List<dynamic>) {
-      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
-          as dynamic;
     }
     if (t == List<_i47.PrincipalSeas>) {
       return (data as List)

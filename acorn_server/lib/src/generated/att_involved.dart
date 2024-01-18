@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class AttsInvolved extends _i1.TableRow {
-  AttsInvolved({
+abstract class AttsInvolved extends _i1.TableRow {
+  AttsInvolved._({
     int? id,
-    required this.principal_id,
-    required this.att_id,
+    required this.principalId,
+    required this.attId,
   }) : super(id);
+
+  factory AttsInvolved({
+    int? id,
+    required int principalId,
+    required int attId,
+  }) = _AttsInvolvedImpl;
 
   factory AttsInvolved.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,36 +29,44 @@ class AttsInvolved extends _i1.TableRow {
   ) {
     return AttsInvolved(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      att_id:
-          serializationManager.deserialize<int>(jsonSerialization['att_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      attId: serializationManager.deserialize<int>(jsonSerialization['attId']),
     );
   }
 
   static final t = AttsInvolvedTable();
 
-  int principal_id;
+  static const db = AttsInvolvedRepository._();
 
-  int att_id;
+  int principalId;
+
+  int attId;
 
   @override
-  String get tableName => 'atts_involved';
+  _i1.Table get table => t;
+
+  AttsInvolved copyWith({
+    int? id,
+    int? principalId,
+    int? attId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'att_id': att_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'attId': attId,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'att_id': att_id,
+      'principalId': principalId,
+      'attId': attId,
     };
   }
 
@@ -58,8 +74,8 @@ class AttsInvolved extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'principal_id': principal_id,
-      'att_id': att_id,
+      'principalId': principalId,
+      'attId': attId,
     };
   }
 
@@ -72,20 +88,21 @@ class AttsInvolved extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'principal_id':
-        principal_id = value;
+      case 'principalId':
+        principalId = value;
         return;
-      case 'att_id':
-        att_id = value;
+      case 'attId':
+        attId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<AttsInvolved>> find(
     _i1.Session session, {
-    AttsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +123,10 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<AttsInvolved?> findSingleRow(
     _i1.Session session, {
-    AttsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +143,7 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<AttsInvolved?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +151,10 @@ class AttsInvolved extends _i1.TableRow {
     return session.db.findById<AttsInvolved>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required AttsInvolvedExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<AttsInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<AttsInvolved>(
@@ -143,6 +163,7 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     AttsInvolved row, {
@@ -154,6 +175,7 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     AttsInvolved row, {
@@ -165,6 +187,8 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     AttsInvolved row, {
@@ -176,9 +200,10 @@ class AttsInvolved extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    AttsInvolvedExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,30 +215,261 @@ class AttsInvolved extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static AttsInvolvedInclude include() {
+    return AttsInvolvedInclude._();
+  }
+
+  static AttsInvolvedIncludeList includeList({
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<AttsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<AttsInvolvedTable>? orderByList,
+    AttsInvolvedInclude? include,
+  }) {
+    return AttsInvolvedIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(AttsInvolved.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(AttsInvolved.t),
+      include: include,
+    );
+  }
 }
 
-typedef AttsInvolvedExpressionBuilder = _i1.Expression Function(
-    AttsInvolvedTable);
+class _Undefined {}
+
+class _AttsInvolvedImpl extends AttsInvolved {
+  _AttsInvolvedImpl({
+    int? id,
+    required int principalId,
+    required int attId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          attId: attId,
+        );
+
+  @override
+  AttsInvolved copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? attId,
+  }) {
+    return AttsInvolved(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      attId: attId ?? this.attId,
+    );
+  }
+}
 
 class AttsInvolvedTable extends _i1.Table {
-  AttsInvolvedTable() : super(tableName: 'atts_involved');
+  AttsInvolvedTable({super.tableRelation}) : super(tableName: 'atts_involved') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
+    attId = _i1.ColumnInt(
+      'attId',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnInt principalId;
 
-  final principal_id = _i1.ColumnInt('principal_id');
-
-  final att_id = _i1.ColumnInt('att_id');
+  late final _i1.ColumnInt attId;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        principal_id,
-        att_id,
+        principalId,
+        attId,
       ];
 }
 
 @Deprecated('Use AttsInvolvedTable.t instead.')
 AttsInvolvedTable tAttsInvolved = AttsInvolvedTable();
+
+class AttsInvolvedInclude extends _i1.IncludeObject {
+  AttsInvolvedInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => AttsInvolved.t;
+}
+
+class AttsInvolvedIncludeList extends _i1.IncludeList {
+  AttsInvolvedIncludeList._({
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(AttsInvolved.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => AttsInvolved.t;
+}
+
+class AttsInvolvedRepository {
+  const AttsInvolvedRepository._();
+
+  Future<List<AttsInvolved>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<AttsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<AttsInvolvedTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<AttsInvolved>(
+      where: where?.call(AttsInvolved.t),
+      orderBy: orderBy?.call(AttsInvolved.t),
+      orderByList: orderByList?.call(AttsInvolved.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<AttsInvolved?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<AttsInvolvedTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<AttsInvolvedTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<AttsInvolved>(
+      where: where?.call(AttsInvolved.t),
+      orderBy: orderBy?.call(AttsInvolved.t),
+      orderByList: orderByList?.call(AttsInvolved.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<AttsInvolved?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<AttsInvolved>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<AttsInvolved>> insert(
+    _i1.Session session,
+    List<AttsInvolved> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<AttsInvolved>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<AttsInvolved> insertRow(
+    _i1.Session session,
+    AttsInvolved row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<AttsInvolved>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<AttsInvolved>> update(
+    _i1.Session session,
+    List<AttsInvolved> rows, {
+    _i1.ColumnSelections<AttsInvolvedTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<AttsInvolved>(
+      rows,
+      columns: columns?.call(AttsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<AttsInvolved> updateRow(
+    _i1.Session session,
+    AttsInvolved row, {
+    _i1.ColumnSelections<AttsInvolvedTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<AttsInvolved>(
+      row,
+      columns: columns?.call(AttsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<AttsInvolved> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<AttsInvolved>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    AttsInvolved row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<AttsInvolved>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<AttsInvolvedTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<AttsInvolved>(
+      where: where(AttsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<AttsInvolvedTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<AttsInvolved>(
+      where: where?.call(AttsInvolved.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

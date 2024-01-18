@@ -4,15 +4,22 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class Stars extends _i1.SerializableEntity {
-  Stars({
+abstract class Stars extends _i1.SerializableEntity {
+  Stars._({
     this.id,
     required this.star,
   });
+
+  factory Stars({
+    int? id,
+    required String star,
+  }) = _StarsImpl;
 
   factory Stars.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -31,11 +38,38 @@ class Stars extends _i1.SerializableEntity {
 
   String star;
 
+  Stars copyWith({
+    int? id,
+    String? star,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'star': star,
     };
+  }
+}
+
+class _Undefined {}
+
+class _StarsImpl extends Stars {
+  _StarsImpl({
+    int? id,
+    required String star,
+  }) : super._(
+          id: id,
+          star: star,
+        );
+
+  @override
+  Stars copyWith({
+    Object? id = _Undefined,
+    String? star,
+  }) {
+    return Stars(
+      id: id is int? ? id : this.id,
+      star: star ?? this.star,
+    );
   }
 }

@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class Places extends _i1.TableRow {
-  Places({
+abstract class Places extends _i1.TableRow {
+  Places._({
     int? id,
     required this.place,
     required this.country,
   }) : super(id);
+
+  factory Places({
+    int? id,
+    required String place,
+    required String country,
+  }) = _PlacesImpl;
 
   factory Places.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -30,22 +38,31 @@ class Places extends _i1.TableRow {
 
   static final t = PlacesTable();
 
+  static const db = PlacesRepository._();
+
   String place;
 
   String country;
 
   @override
-  String get tableName => 'places';
+  _i1.Table get table => t;
+
+  Places copyWith({
+    int? id,
+    String? place,
+    String? country,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'place': place,
       'country': country,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
@@ -83,9 +100,10 @@ class Places extends _i1.TableRow {
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<Places>> find(
     _i1.Session session, {
-    PlacesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -106,9 +124,10 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<Places?> findSingleRow(
     _i1.Session session, {
-    PlacesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -125,6 +144,7 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<Places?> findById(
     _i1.Session session,
     int id,
@@ -132,9 +152,10 @@ class Places extends _i1.TableRow {
     return session.db.findById<Places>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required PlacesExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<PlacesTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<Places>(
@@ -143,6 +164,7 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     Places row, {
@@ -154,6 +176,7 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     Places row, {
@@ -165,6 +188,8 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     Places row, {
@@ -176,9 +201,10 @@ class Places extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    PlacesExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -190,21 +216,74 @@ class Places extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static PlacesInclude include() {
+    return PlacesInclude._();
+  }
+
+  static PlacesIncludeList includeList({
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PlacesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PlacesTable>? orderByList,
+    PlacesInclude? include,
+  }) {
+    return PlacesIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Places.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(Places.t),
+      include: include,
+    );
+  }
 }
 
-typedef PlacesExpressionBuilder = _i1.Expression Function(PlacesTable);
+class _Undefined {}
+
+class _PlacesImpl extends Places {
+  _PlacesImpl({
+    int? id,
+    required String place,
+    required String country,
+  }) : super._(
+          id: id,
+          place: place,
+          country: country,
+        );
+
+  @override
+  Places copyWith({
+    Object? id = _Undefined,
+    String? place,
+    String? country,
+  }) {
+    return Places(
+      id: id is int? ? id : this.id,
+      place: place ?? this.place,
+      country: country ?? this.country,
+    );
+  }
+}
 
 class PlacesTable extends _i1.Table {
-  PlacesTable() : super(tableName: 'places');
+  PlacesTable({super.tableRelation}) : super(tableName: 'places') {
+    place = _i1.ColumnString(
+      'place',
+      this,
+    );
+    country = _i1.ColumnString(
+      'country',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
+  late final _i1.ColumnString place;
 
-  final place = _i1.ColumnString('place');
-
-  final country = _i1.ColumnString('country');
+  late final _i1.ColumnString country;
 
   @override
   List<_i1.Column> get columns => [
@@ -216,3 +295,182 @@ class PlacesTable extends _i1.Table {
 
 @Deprecated('Use PlacesTable.t instead.')
 PlacesTable tPlaces = PlacesTable();
+
+class PlacesInclude extends _i1.IncludeObject {
+  PlacesInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => Places.t;
+}
+
+class PlacesIncludeList extends _i1.IncludeList {
+  PlacesIncludeList._({
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(Places.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => Places.t;
+}
+
+class PlacesRepository {
+  const PlacesRepository._();
+
+  Future<List<Places>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PlacesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PlacesTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<Places>(
+      where: where?.call(Places.t),
+      orderBy: orderBy?.call(Places.t),
+      orderByList: orderByList?.call(Places.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<Places?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<PlacesTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<PlacesTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<Places>(
+      where: where?.call(Places.t),
+      orderBy: orderBy?.call(Places.t),
+      orderByList: orderByList?.call(Places.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<Places?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<Places>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<Places>> insert(
+    _i1.Session session,
+    List<Places> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<Places>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<Places> insertRow(
+    _i1.Session session,
+    Places row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<Places>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<Places>> update(
+    _i1.Session session,
+    List<Places> rows, {
+    _i1.ColumnSelections<PlacesTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<Places>(
+      rows,
+      columns: columns?.call(Places.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<Places> updateRow(
+    _i1.Session session,
+    Places row, {
+    _i1.ColumnSelections<PlacesTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<Places>(
+      row,
+      columns: columns?.call(Places.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<Places> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<Places>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    Places row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<Places>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<PlacesTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<Places>(
+      where: where(Places.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<PlacesTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<Places>(
+      where: where?.call(Places.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}

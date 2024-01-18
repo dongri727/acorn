@@ -4,15 +4,22 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class Placeatts extends _i1.SerializableEntity {
-  Placeatts({
+abstract class Placeatts extends _i1.SerializableEntity {
+  Placeatts._({
     this.id,
     required this.placeatt,
   });
+
+  factory Placeatts({
+    int? id,
+    required String placeatt,
+  }) = _PlaceattsImpl;
 
   factory Placeatts.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -32,11 +39,38 @@ class Placeatts extends _i1.SerializableEntity {
 
   String placeatt;
 
+  Placeatts copyWith({
+    int? id,
+    String? placeatt,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'placeatt': placeatt,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PlaceattsImpl extends Placeatts {
+  _PlaceattsImpl({
+    int? id,
+    required String placeatt,
+  }) : super._(
+          id: id,
+          placeatt: placeatt,
+        );
+
+  @override
+  Placeatts copyWith({
+    Object? id = _Undefined,
+    String? placeatt,
+  }) {
+    return Placeatts(
+      id: id is int? ? id : this.id,
+      placeatt: placeatt ?? this.placeatt,
+    );
   }
 }

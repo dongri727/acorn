@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalSeas extends _i1.SerializableEntity {
-  PrincipalSeas({
+abstract class PrincipalSeas extends _i1.SerializableEntity {
+  PrincipalSeas._({
     this.id,
-    required this.principal_id,
-    required this.seas_id,
+    required this.principalId,
+    required this.seasId,
   });
+
+  factory PrincipalSeas({
+    int? id,
+    required int principalId,
+    required int seasId,
+  }) = _PrincipalSeasImpl;
 
   factory PrincipalSeas.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalSeas extends _i1.SerializableEntity {
   ) {
     return PrincipalSeas(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      seas_id:
-          serializationManager.deserialize<int>(jsonSerialization['seas_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      seasId:
+          serializationManager.deserialize<int>(jsonSerialization['seasId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalSeas extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int seas_id;
+  int seasId;
 
+  PrincipalSeas copyWith({
+    int? id,
+    int? principalId,
+    int? seasId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'seas_id': seas_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'seasId': seasId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalSeasImpl extends PrincipalSeas {
+  _PrincipalSeasImpl({
+    int? id,
+    required int principalId,
+    required int seasId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          seasId: seasId,
+        );
+
+  @override
+  PrincipalSeas copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? seasId,
+  }) {
+    return PrincipalSeas(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      seasId: seasId ?? this.seasId,
+    );
   }
 }

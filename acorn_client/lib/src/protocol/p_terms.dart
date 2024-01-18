@@ -4,16 +4,24 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class PrincipalTerms extends _i1.SerializableEntity {
-  PrincipalTerms({
+abstract class PrincipalTerms extends _i1.SerializableEntity {
+  PrincipalTerms._({
     this.id,
-    required this.principal_id,
-    required this.term_id,
+    required this.principalId,
+    required this.termId,
   });
+
+  factory PrincipalTerms({
+    int? id,
+    required int principalId,
+    required int termId,
+  }) = _PrincipalTermsImpl;
 
   factory PrincipalTerms.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -21,10 +29,10 @@ class PrincipalTerms extends _i1.SerializableEntity {
   ) {
     return PrincipalTerms(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principal_id: serializationManager
-          .deserialize<int>(jsonSerialization['principal_id']),
-      term_id:
-          serializationManager.deserialize<int>(jsonSerialization['term_id']),
+      principalId: serializationManager
+          .deserialize<int>(jsonSerialization['principalId']),
+      termId:
+          serializationManager.deserialize<int>(jsonSerialization['termId']),
     );
   }
 
@@ -33,16 +41,48 @@ class PrincipalTerms extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  int principal_id;
+  int principalId;
 
-  int term_id;
+  int termId;
 
+  PrincipalTerms copyWith({
+    int? id,
+    int? principalId,
+    int? termId,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'principal_id': principal_id,
-      'term_id': term_id,
+      if (id != null) 'id': id,
+      'principalId': principalId,
+      'termId': termId,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PrincipalTermsImpl extends PrincipalTerms {
+  _PrincipalTermsImpl({
+    int? id,
+    required int principalId,
+    required int termId,
+  }) : super._(
+          id: id,
+          principalId: principalId,
+          termId: termId,
+        );
+
+  @override
+  PrincipalTerms copyWith({
+    Object? id = _Undefined,
+    int? principalId,
+    int? termId,
+  }) {
+    return PrincipalTerms(
+      id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
+      termId: termId ?? this.termId,
+    );
   }
 }

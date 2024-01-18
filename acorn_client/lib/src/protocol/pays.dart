@@ -4,15 +4,22 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class Pays extends _i1.SerializableEntity {
-  Pays({
+abstract class Pays extends _i1.SerializableEntity {
+  Pays._({
     this.id,
     required this.pays,
   });
+
+  factory Pays({
+    int? id,
+    required String pays,
+  }) = _PaysImpl;
 
   factory Pays.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -31,11 +38,38 @@ class Pays extends _i1.SerializableEntity {
 
   String pays;
 
+  Pays copyWith({
+    int? id,
+    String? pays,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'pays': pays,
     };
+  }
+}
+
+class _Undefined {}
+
+class _PaysImpl extends Pays {
+  _PaysImpl({
+    int? id,
+    required String pays,
+  }) : super._(
+          id: id,
+          pays: pays,
+        );
+
+  @override
+  Pays copyWith({
+    Object? id = _Undefined,
+    String? pays,
+  }) {
+    return Pays(
+      id: id is int? ? id : this.id,
+      pays: pays ?? this.pays,
+    );
   }
 }

@@ -1,5 +1,5 @@
 class: StarsInvolved
 table: stars_involved
 fields: 
-  principal_id: int
-  star_id: int
+  principalId: int
+  starId: int

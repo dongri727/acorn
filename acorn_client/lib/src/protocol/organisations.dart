@@ -4,15 +4,22 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-class Organisations extends _i1.SerializableEntity {
-  Organisations({
+abstract class Organisations extends _i1.SerializableEntity {
+  Organisations._({
     this.id,
     required this.organisation,
   });
+
+  factory Organisations({
+    int? id,
+    required String organisation,
+  }) = _OrganisationsImpl;
 
   factory Organisations.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -32,11 +39,38 @@ class Organisations extends _i1.SerializableEntity {
 
   String organisation;
 
+  Organisations copyWith({
+    int? id,
+    String? organisation,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'organisation': organisation,
     };
+  }
+}
+
+class _Undefined {}
+
+class _OrganisationsImpl extends Organisations {
+  _OrganisationsImpl({
+    int? id,
+    required String organisation,
+  }) : super._(
+          id: id,
+          organisation: organisation,
+        );
+
+  @override
+  Organisations copyWith({
+    Object? id = _Undefined,
+    String? organisation,
+  }) {
+    return Organisations(
+      id: id is int? ? id : this.id,
+      organisation: organisation ?? this.organisation,
+    );
   }
 }

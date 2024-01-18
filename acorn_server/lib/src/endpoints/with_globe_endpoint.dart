@@ -10,20 +10,20 @@ class WithGlobeEndpoint extends Endpoint {
     if (keyNumbers != null && keyNumbers.isNotEmpty) {
       for (var keyNumber in keyNumbers) {
         if (whereClauseWithGlobe == null) {
-          whereClauseWithGlobe = WithGlobe.t.principal_id.equals(keyNumber);
+          whereClauseWithGlobe = WithGlobe.t.principalId.equals(keyNumber);
         } else {
           whereClauseWithGlobe =
-              whereClauseWithGlobe | WithGlobe.t.principal_id.equals(keyNumber);
+              whereClauseWithGlobe | WithGlobe.t.principalId.equals(keyNumber);
         }
       }
     } else {
-      whereClauseWithGlobe = Constant(true);
+      whereClauseWithGlobe = Constant.bool(true);
     }
 
-    return await WithGlobe.find(
+    return await WithGlobe.db.find(
       session,
       where: (_) => whereClauseWithGlobe,
-      orderBy: WithGlobe.t.coefficient,
+      //orderBy: WithGlobe.t.coefficient,
     );
   }
 

@@ -1,5 +1,5 @@
 class: PrincipalPatt
 table: principal_patt
 fields: 
-  principal_id: int
-  patt_id: int
+  principalId: int
+  pattId: int

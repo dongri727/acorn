@@ -1,0 +1,103 @@
+attInvolved:
+  - getAttsInvolved:
+  - addAttsInvolved:
+countryInvolved:
+  - getCInvolved:
+  - addCInvolved:
+categories:
+  - getCategories:
+  - addCategories:
+countryatts:
+  - getCountryATTs:
+  - addCountryATTs:
+example:
+  - hello:
+lieux:
+  - getLieux:
+  - addLieux:
+localDates:
+  - getLocalDates:
+  - addLocalDates:
+oceans:
+  - getOceans:
+  - addOceans:
+organisations:
+  - getOrganisations:
+  - addOrganisations:
+principalCategories:
+  - getPCategories:
+  - addPCategories:
+principalCatt:
+  - getPCatt:
+  - addPCatt:
+principalOrgs:
+  - getPOrgs:
+  - addPOrgs:
+principalPatt:
+  - getPPatt:
+  - addPPatt:
+principalPeople:
+  - getPPeople:
+  - addPPeople:
+principalPlace:
+  - getPPlace:
+  - addPPlace:
+principalSeas:
+  - getPrincipalSeas:
+  - addPrincipalSeas:
+principalTerms:
+  - getPTerms:
+  - addPrincipalTerms:
+principalUser:
+  - getPUserId:
+  - addPrincipalUser:
+pays:
+  - getPays:
+  - addPays:
+people:
+  - getPeople:
+  - addPeople:
+placeatts:
+  - getPlaceATTs:
+  - addPlaceATTs:
+places:
+  - getPlaces:
+  - addPlaces:
+  - getPlacesInv:
+principal:
+  - addPrincipal:
+  - getPrincipal:
+  - getPrincipalByPeriod:
+  - getPrincipalByPrecise:
+  - getPrincipalByCattId:
+  - getPrincipalByPattId:
+  - getPrincipalByPersonId:
+  - getPrincipalByPInvolvedId:
+  - getPrincipalByCInvolvedId:
+  - getPrincipalByAttInvolvedId:
+  - getPrincipalByStarsInvolvedId:
+  - getPrincipalByOrgsId:
+  - getPrincipalByCategoryId:
+  - getPrincipalByTermId:
+  - getPrincipalByUserId:
+seas:
+  - getSeas:
+  - addSeas:
+stars:
+  - getStars:
+  - addStars:
+starsInvolved:
+  - getStarsInvolved:
+  - addStarsInvolved:
+terms:
+  - getTerms:
+  - addTerms:
+universe:
+  - getUniverse:
+  - addUniverse:
+withGlobe:
+  - getWithGlobe:
+  - addWithGlobe:
+withMap:
+  - getWithMap:
+  - addWithMap:

@@ -4,15 +4,22 @@
 // ignore_for_file: library_private_types_in_public_api
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
+// ignore_for_file: use_super_parameters
+// ignore_for_file: type_literal_in_constant_pattern
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class Terms extends _i1.TableRow {
-  Terms({
+abstract class Terms extends _i1.TableRow {
+  Terms._({
     int? id,
     required this.term,
   }) : super(id);
+
+  factory Terms({
+    int? id,
+    required String term,
+  }) = _TermsImpl;
 
   factory Terms.fromJson(
     Map<String, dynamic> jsonSerialization,
@@ -26,19 +33,27 @@ class Terms extends _i1.TableRow {
 
   static final t = TermsTable();
 
+  static const db = TermsRepository._();
+
   String term;
 
   @override
-  String get tableName => 'terms';
+  _i1.Table get table => t;
+
+  Terms copyWith({
+    int? id,
+    String? term,
+  });
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'term': term,
     };
   }
 
   @override
+  @Deprecated('Will be removed in 2.0.0')
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
@@ -71,9 +86,10 @@ class Terms extends _i1.TableRow {
     }
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
   static Future<List<Terms>> find(
     _i1.Session session, {
-    TermsExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<TermsTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -94,9 +110,10 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
   static Future<Terms?> findSingleRow(
     _i1.Session session, {
-    TermsExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<TermsTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
@@ -113,6 +130,7 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<Terms?> findById(
     _i1.Session session,
     int id,
@@ -120,9 +138,10 @@ class Terms extends _i1.TableRow {
     return session.db.findById<Terms>(id);
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required TermsExpressionBuilder where,
+    required _i1.WhereExpressionBuilder<TermsTable> where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<Terms>(
@@ -131,6 +150,7 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
     Terms row, {
@@ -142,6 +162,7 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
     Terms row, {
@@ -153,6 +174,8 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated(
+      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
     Terms row, {
@@ -164,9 +187,10 @@ class Terms extends _i1.TableRow {
     );
   }
 
+  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    TermsExpressionBuilder? where,
+    _i1.WhereExpressionBuilder<TermsTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
@@ -178,19 +202,64 @@ class Terms extends _i1.TableRow {
       transaction: transaction,
     );
   }
+
+  static TermsInclude include() {
+    return TermsInclude._();
+  }
+
+  static TermsIncludeList includeList({
+    _i1.WhereExpressionBuilder<TermsTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<TermsTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<TermsTable>? orderByList,
+    TermsInclude? include,
+  }) {
+    return TermsIncludeList._(
+      where: where,
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Terms.t),
+      orderDescending: orderDescending,
+      orderByList: orderByList?.call(Terms.t),
+      include: include,
+    );
+  }
 }
 
-typedef TermsExpressionBuilder = _i1.Expression Function(TermsTable);
+class _Undefined {}
+
+class _TermsImpl extends Terms {
+  _TermsImpl({
+    int? id,
+    required String term,
+  }) : super._(
+          id: id,
+          term: term,
+        );
+
+  @override
+  Terms copyWith({
+    Object? id = _Undefined,
+    String? term,
+  }) {
+    return Terms(
+      id: id is int? ? id : this.id,
+      term: term ?? this.term,
+    );
+  }
+}
 
 class TermsTable extends _i1.Table {
-  TermsTable() : super(tableName: 'terms');
+  TermsTable({super.tableRelation}) : super(tableName: 'terms') {
+    term = _i1.ColumnString(
+      'term',
+      this,
+    );
+  }
 
-  /// The database id, set if the object has been inserted into the
-  /// database or if it has been fetched from the database. Otherwise,
-  /// the id will be null.
-  final id = _i1.ColumnInt('id');
-
-  final term = _i1.ColumnString('term');
+  late final _i1.ColumnString term;
 
   @override
   List<_i1.Column> get columns => [
@@ -201,3 +270,182 @@ class TermsTable extends _i1.Table {
 
 @Deprecated('Use TermsTable.t instead.')
 TermsTable tTerms = TermsTable();
+
+class TermsInclude extends _i1.IncludeObject {
+  TermsInclude._();
+
+  @override
+  Map<String, _i1.Include?> get includes => {};
+
+  @override
+  _i1.Table get table => Terms.t;
+}
+
+class TermsIncludeList extends _i1.IncludeList {
+  TermsIncludeList._({
+    _i1.WhereExpressionBuilder<TermsTable>? where,
+    super.limit,
+    super.offset,
+    super.orderBy,
+    super.orderDescending,
+    super.orderByList,
+    super.include,
+  }) {
+    super.where = where?.call(Terms.t);
+  }
+
+  @override
+  Map<String, _i1.Include?> get includes => include?.includes ?? {};
+
+  @override
+  _i1.Table get table => Terms.t;
+}
+
+class TermsRepository {
+  const TermsRepository._();
+
+  Future<List<Terms>> find(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<TermsTable>? where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<TermsTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<TermsTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.find<Terms>(
+      where: where?.call(Terms.t),
+      orderBy: orderBy?.call(Terms.t),
+      orderByList: orderByList?.call(Terms.t),
+      orderDescending: orderDescending,
+      limit: limit,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<Terms?> findFirstRow(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<TermsTable>? where,
+    int? offset,
+    _i1.OrderByBuilder<TermsTable>? orderBy,
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<TermsTable>? orderByList,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findFirstRow<Terms>(
+      where: where?.call(Terms.t),
+      orderBy: orderBy?.call(Terms.t),
+      orderByList: orderByList?.call(Terms.t),
+      orderDescending: orderDescending,
+      offset: offset,
+      transaction: transaction,
+    );
+  }
+
+  Future<Terms?> findById(
+    _i1.Session session,
+    int id, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.findById<Terms>(
+      id,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<Terms>> insert(
+    _i1.Session session,
+    List<Terms> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insert<Terms>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<Terms> insertRow(
+    _i1.Session session,
+    Terms row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.insertRow<Terms>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<Terms>> update(
+    _i1.Session session,
+    List<Terms> rows, {
+    _i1.ColumnSelections<TermsTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.update<Terms>(
+      rows,
+      columns: columns?.call(Terms.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<Terms> updateRow(
+    _i1.Session session,
+    Terms row, {
+    _i1.ColumnSelections<TermsTable>? columns,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.updateRow<Terms>(
+      row,
+      columns: columns?.call(Terms.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> delete(
+    _i1.Session session,
+    List<Terms> rows, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.delete<Terms>(
+      rows,
+      transaction: transaction,
+    );
+  }
+
+  Future<int> deleteRow(
+    _i1.Session session,
+    Terms row, {
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteRow<Terms>(
+      row,
+      transaction: transaction,
+    );
+  }
+
+  Future<List<int>> deleteWhere(
+    _i1.Session session, {
+    required _i1.WhereExpressionBuilder<TermsTable> where,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.deleteWhere<Terms>(
+      where: where(Terms.t),
+      transaction: transaction,
+    );
+  }
+
+  Future<int> count(
+    _i1.Session session, {
+    _i1.WhereExpressionBuilder<TermsTable>? where,
+    int? limit,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.dbNext.count<Terms>(
+      where: where?.call(Terms.t),
+      limit: limit,
+      transaction: transaction,
+    );
+  }
+}
