@@ -2,7 +2,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class WithGlobeEndpoint extends Endpoint {
-  // Fetch WithGlobe from DB
+  /// Fetches WithGlobe from DB
   Future<List<WithGlobe>> getWithGlobe(Session session,
       {List<int>? keyNumbers}) async {
     // 条件の構築
@@ -27,9 +27,9 @@ class WithGlobeEndpoint extends Endpoint {
     );
   }
 
-  //Add a WithGlobe in DB
+  ///Adds a WithGlobe in DB
   Future<int> addWithGlobe(Session session, WithGlobe withGlobe) async {
-    await WithGlobe.insert(session, withGlobe);
+    await WithGlobe.db.insertRow(session, withGlobe);
     return withGlobe.id!;
   }
 }

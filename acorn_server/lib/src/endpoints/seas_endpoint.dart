@@ -2,7 +2,7 @@ import 'package:acorn_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 
 class SeasEndpoint extends Endpoint {
-  //Fetch seas from DB
+  ///Fetches seas from DB
   Future<List<Seas>> getSeas(Session session, {String? keyword}) async {
     return await Seas.db.find(
       session,
@@ -11,9 +11,9 @@ class SeasEndpoint extends Endpoint {
     );
   }
 
-  //Add sea in DB
+  ///Adds sea in DB
   Future<int> addSeas(Session session, Seas seas) async {
-    await Seas.db.insert(session, seas as List<Seas>);
+    await Seas.db.insertRow(session, seas);
     return seas.id!;
   }
 }

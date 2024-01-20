@@ -2,7 +2,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class TermsEndpoint extends Endpoint {
-  //Fetch terms from DB
+  ///Fetches terms from DB
   Future<List<Terms>> getTerms(Session session, {String? keyword}) async {
     return await Terms.db.find(
       session,
@@ -11,11 +11,9 @@ class TermsEndpoint extends Endpoint {
     );
   }
 
-  //Add a term in DB
+  ///Adds a term in DB
   Future<int> addTerms(Session session, Terms terms) async {
-    await Terms.db.insert(session, terms as List<Terms>);
-    //var termLastVal = await session.db.query('SELECT LASTVAL()');
-    //return termLastVal[0][0] as int;
+    await Terms.db.insertRow(session, terms);
     return terms.id!;
   }
 }

@@ -2,7 +2,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class StarsInvolvedEndpoint extends Endpoint {
-  //Fetch stars-involved from DB
+  ///Fetches stars-involved from DB
   Future<List<StarsInvolved>> getStarsInvolved(Session session,
       {String? keyword}) async {
     return await StarsInvolved.db.find(
@@ -12,9 +12,9 @@ class StarsInvolvedEndpoint extends Endpoint {
     );
   }
 
-  //Add stars involved in DB
+  ///Adds stars involved in DB
   Future<int> addStarsInvolved(Session session, StarsInvolved starsInvolved) async {
-    await StarsInvolved.db.insert(session, starsInvolved as List<StarsInvolved>);
+    await StarsInvolved.db.insertRow(session, starsInvolved);
     return starsInvolved.id!;
   }
 }

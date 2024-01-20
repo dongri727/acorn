@@ -5,7 +5,7 @@ class PrincipalEndpoint extends Endpoint {
   //Principal
 
   Future<int> addPrincipal(Session session, Principal principal) async {
-    await Principal.db.insert(session, principal as List<Principal>);
+    await Principal.db.insertRow(session, principal);
     return principal.id!;
   }
 
@@ -26,10 +26,10 @@ class PrincipalEndpoint extends Endpoint {
       whereClause = Constant.bool(true);
     }
 
-    return await Principal.find(
+    return await Principal.db.find(
       session,
       where: (_) => whereClause,
-      orderBy: Principal.t.point, 
+      //orderBy: Principal.t.point, 
     );
   }
   
@@ -72,7 +72,7 @@ class PrincipalEndpoint extends Endpoint {
         }
       }
     } else {
-      whereClause = Constant(true);
+      whereClause = Constant.bool(true);
     }
 
     return await Principal.db.find(
@@ -149,10 +149,10 @@ Future<List<Principal>> getPrincipalByPattId(Session session, {List<int>? pattId
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -173,7 +173,7 @@ Future<List<Principal>> getPrincipalByPersonId(Session session, {List<int>? pers
     }
   }
 
-  var PrincipalPeopleResults = await PrincipalPeople.find(session, where: (_) => whereClausePrincipalPeople);
+  var PrincipalPeopleResults = await PrincipalPeople.db.find(session, where: (_) => whereClausePrincipalPeople);
   var principalIds = PrincipalPeopleResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -210,7 +210,7 @@ Future<List<Principal>> getPrincipalByPInvolvedId(Session session, {List<int>? p
     }
   }
 
-  var PInvolvedResults = await PrincipalPlace.find(session, where: (_) => whereClausePrincipalPlace);
+  var PInvolvedResults = await PrincipalPlace.db.find(session, where: (_) => whereClausePrincipalPlace);
   var principalIds = PInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -247,7 +247,7 @@ Future<List<Principal>> getPrincipalByCInvolvedId(Session session, {List<int>? c
     }
   }
 
-  var CInvolvedResults = await CountryInvolved.find(session, where: (_) => whereClauseCountryInvolved);
+  var CInvolvedResults = await CountryInvolved.db.find(session, where: (_) => whereClauseCountryInvolved);
   var principalIds = CInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -284,7 +284,7 @@ Future<List<Principal>> getPrincipalByAttInvolvedId(Session session, {List<int>?
     }
   }
 
-  var AttInvolvedResults = await AttsInvolved.find(session, where: (_) => whereClauseAttsInvolved);
+  var AttInvolvedResults = await AttsInvolved.db.find(session, where: (_) => whereClauseAttsInvolved);
   var principalIds = AttInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -321,7 +321,7 @@ Future<List<Principal>> getPrincipalByStarsInvolvedId(Session session, {List<int
     }
   }
 
-  var StarsInvolvedResults = await StarsInvolved.find(session, where: (_) => whereClauseStarsInvolved);
+  var StarsInvolvedResults = await StarsInvolved.db.find(session, where: (_) => whereClauseStarsInvolved);
   var principalIds = StarsInvolvedResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -334,10 +334,10 @@ Future<List<Principal>> getPrincipalByStarsInvolvedId(Session session, {List<int
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -358,7 +358,7 @@ Future<List<Principal>> getPrincipalByOrgsId(Session session, {List<int>? orgIds
     }
   }
 
-  var PrincipalOrgsResults = await PrincipalOrgs.find(session, where: (_) => whereClausePrincipalOrganisations);
+  var PrincipalOrgsResults = await PrincipalOrgs.db.find(session, where: (_) => whereClausePrincipalOrganisations);
   var principalIds = PrincipalOrgsResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -371,10 +371,10 @@ Future<List<Principal>> getPrincipalByOrgsId(Session session, {List<int>? orgIds
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -395,7 +395,7 @@ Future<List<Principal>> getPrincipalByCategoryId(Session session, {List<int>? ca
     }
   }
 
-  var PrincipalCategoriesResults = await PrincipalCategories.find(session, where: (_) => whereClausePrincipalCategories);
+  var PrincipalCategoriesResults = await PrincipalCategories.db.find(session, where: (_) => whereClausePrincipalCategories);
   var principalIds = PrincipalCategoriesResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -408,10 +408,10 @@ Future<List<Principal>> getPrincipalByCategoryId(Session session, {List<int>? ca
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
@@ -432,7 +432,7 @@ Future<List<Principal>> getPrincipalByTermId(Session session, {List<int>? termId
     }
   }
 
-  var PrincipalTermsResults = await PrincipalTerms.find(session, where: (_) => whereClausePrincipalTerms);
+  var PrincipalTermsResults = await PrincipalTerms.db.find(session, where: (_) => whereClausePrincipalTerms);
   var principalIds = PrincipalTermsResults.map((row) => row.principalId).toList();
 
   // Step 2: Get Principals using principalIds
@@ -445,10 +445,10 @@ Future<List<Principal>> getPrincipalByTermId(Session session, {List<int>? termId
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.point,
   );
 }
 
