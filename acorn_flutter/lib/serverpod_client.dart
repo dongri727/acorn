@@ -18,7 +18,8 @@ Future<void> initializeServerpodClient() async {
   // the default port. You will need to modify this to connect to staging or
   // production servers.
   client = Client(
-    'http://$ipAddress:8080/',
+    //'http://$ipAddress:8080/',
+    'https://api.laporte.academy/',
     authenticationKeyManager: FlutterAuthenticationKeyManager(),
   )..connectivityMonitor = FlutterConnectivityMonitor();
 

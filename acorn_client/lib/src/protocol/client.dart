@@ -216,6 +216,7 @@ class EndpointOrganisations extends _i1.EndpointRef {
   @override
   String get name => 'organisations';
 
+  ///Fetches places from DB
   _i2.Future<List<_i10.Organisations>> getOrganisations({String? keyword}) =>
       caller.callServerEndpoint<List<_i10.Organisations>>(
         'organisations',
@@ -223,6 +224,7 @@ class EndpointOrganisations extends _i1.EndpointRef {
         {'keyword': keyword},
       );
 
+  ///Adds place in DB
   _i2.Future<int> addOrganisations(_i10.Organisations organisations) =>
       caller.callServerEndpoint<int>(
         'organisations',
@@ -437,6 +439,7 @@ class EndpointPays extends _i1.EndpointRef {
   @override
   String get name => 'pays';
 
+  ///Fetches pays involved from DB
   _i2.Future<List<_i20.Pays>> getPays({String? keyword}) =>
       caller.callServerEndpoint<List<_i20.Pays>>(
         'pays',
@@ -444,6 +447,7 @@ class EndpointPays extends _i1.EndpointRef {
         {'keyword': keyword},
       );
 
+  ///Adds pays in DB
   _i2.Future<int> addPays(_i20.Pays pays) => caller.callServerEndpoint<int>(
         'pays',
         'addPays',

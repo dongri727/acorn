@@ -43,9 +43,9 @@ class _FourDViewPageState extends State<FourDViewPage> {
         withGlobe.affair,
         withGlobe.location,
         withGlobe.precise,
-        withGlobe.x_coordinate,
-        withGlobe.y_coordinate,
-        withGlobe.z_coordinate,
+        withGlobe.xCoordinate,
+        withGlobe.yCoordinate,
+        withGlobe.zCoordinate,
         withGlobe.coefficient,
       ];
       rows.add(row.join(','));

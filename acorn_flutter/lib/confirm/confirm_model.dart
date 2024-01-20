@@ -31,7 +31,7 @@ class ConfirmModel extends ChangeNotifier {
 
         //with map
         var withMap = WithMap(
-            principal_id: principalId,
+            principalId: principalId,
             annee: confirm.annee,
             affair: confirm.name,
             location: confirm.selectedLocation,
@@ -44,14 +44,14 @@ class ConfirmModel extends ChangeNotifier {
 
         //with globe
         var withGlobe = WithGlobe(
-            principal_id: principalId,
+            principalId: principalId,
             annee: confirm.annee,
             affair: confirm.name,
             location: confirm.selectedLocation,
             precise: confirm.selectedPrecise,
-            x_coordinate: confirm.x,
-            y_coordinate: confirm.y,
-            z_coordinate: confirm.z,
+            xCoordinate: confirm.x,
+            yCoordinate: confirm.y,
+            zCoordinate: confirm.z,
           coefficient: confirm.coefficient);
         var withGlobeId = await client.withGlobe.addWithGlobe(withGlobe);
         debugPrint('add WithGlobe : $withGlobeId');
@@ -59,7 +59,7 @@ class ConfirmModel extends ChangeNotifier {
         //CATT 単
         if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalCatt(
-                principal_id: principalId, catt_id: confirm.selectedCattId);
+                principalId: principalId, cattId: confirm.selectedCattId);
             var principalCattsId = await client.principalCatt.addPCatt(pCatt);
             debugPrint('added principal-catt : $principalCattsId');
         }
@@ -67,7 +67,7 @@ class ConfirmModel extends ChangeNotifier {
         //PATT 単
         if (confirm.selectedPattId != 0) {
             var pPatt = PrincipalPatt(
-              principal_id: principalId, patt_id: confirm.selectedPattId);
+              principalId: principalId, pattId: confirm.selectedPattId);
             var principalPattId = await client.principalPatt.addPPatt(pPatt);
             debugPrint('add principal-patt : $principalPattId');
         }
@@ -76,7 +76,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedCountriesId.isNotEmpty) {
           for (var countryId in confirm.selectedCountriesId) {
             var countryInvolved = CountryInvolved(
-                principal_id: principalId, pays_id: countryId);
+                principalId: principalId, paysId: countryId);
             var countryInvolvedId = await client.countryInvolved
                 .addCInvolved(countryInvolved);
             debugPrint('Added country involved : $countryInvolvedId');
@@ -86,7 +86,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedPlacesId.isNotEmpty) {
           for (var placeId in confirm.selectedPlacesId) {
             var placeInvolved = PrincipalPlace(
-                principal_id: principalId, place_id: placeId);
+                principalId: principalId, placeId: placeId);
             var placeInvolvedId = await client.principalPlace
                 .addPPlace(placeInvolved);
             debugPrint('Added country involved : $placeInvolvedId');
@@ -96,7 +96,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedATTId.isNotEmpty) {
           for (var attId in confirm.selectedATTId) {
             var attsInvolved = AttsInvolved(
-                principal_id: principalId, att_id: attId);
+                principalId: principalId, attId: attId);
             var attInvolvedId = await client.attInvolved.addAttsInvolved(attsInvolved);
             debugPrint('Added Att involved : $attInvolvedId');
           }
@@ -105,7 +105,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedStarId.isNotEmpty) {
           for (var starId in confirm.selectedStarId) {
             var starsInvolved = StarsInvolved(
-                principal_id: principalId, star_id: starId);
+                principalId: principalId, starId: starId);
             var starInvolvedId = await client.starsInvolved.addStarsInvolved(starsInvolved);
             debugPrint('Added Star involved : $starInvolvedId');
           }
@@ -115,7 +115,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedOrgId.isNotEmpty) {
           for (var orgId in confirm.selectedOrgId) {
             var pOrgs = PrincipalOrgs(
-                principal_id: principalId, org_id: orgId);
+                principalId: principalId, orgId: orgId);
             var principalOrgsId = await client.principalOrgs.addPOrgs(pOrgs);
             debugPrint('Added Orgs involved : $principalOrgsId');
           }
@@ -124,7 +124,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedWhoId.isNotEmpty) {
           for (var whoId in confirm.selectedWhoId) {
             var principalPeople = PrincipalPeople(
-                principal_id: principalId, person_id: whoId);
+                principalId: principalId, personId: whoId);
             var principalPeopleId = await client.principalPeople.addPPeople(principalPeople);
             debugPrint('Added people involved : $principalPeopleId');
           }
@@ -134,7 +134,7 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedCategoryId.isNotEmpty) {
           for (var categoryId in confirm.selectedCategoryId) {
             var principalCategories = PrincipalCategories(
-                principal_id: principalId, category_id: categoryId);
+                principalId: principalId, categoryId: categoryId);
             var principalCategoriesId = await client.principalCategories.addPCategories(principalCategories);
             debugPrint('Added principal Categories : $principalCategoriesId');
           }
@@ -142,7 +142,7 @@ class ConfirmModel extends ChangeNotifier {
 
         if (confirm.selectedTermId.isNotEmpty) {
           for (var termId in confirm.selectedTermId) {
-            var principalTerms = PrincipalTerms(principal_id: principalId, term_id: termId);
+            var principalTerms = PrincipalTerms(principalId: principalId, termId: termId);
             var principalTermsId = await client.principalTerms.addPrincipalTerms(principalTerms);
             debugPrint('Added principal Terms : $principalTermsId');
           }
@@ -150,7 +150,7 @@ class ConfirmModel extends ChangeNotifier {
 
         var userId = sessionManager.signedInUser?.id ?? 0;
         print('written by user: $userId');
-        var principalUser = PrincipalUser(principal_id: principalId, user_id: userId);
+        var principalUser = PrincipalUser(principalId: principalId, userId: userId);
         var principalUserId = await client.principalUser.addPrincipalUser(principalUser);
         debugPrint('Added principal User : $principalUserId');
 

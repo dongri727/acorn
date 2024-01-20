@@ -425,10 +425,10 @@ class MultiSearchPage extends StatelessWidget {
                                     await model.fetchPaysInvolvedLookedFor();
                                     currentDisplayList = model.listPaysInv;
                                     break;
-                                  case 'Places involved':
+                        /*           case 'Places involved':
                                     await model.fetchPlaceInvolvedLookedFor();
                                     currentDisplayList = model.listPlaceInv;
-                                    break;
+                                    break; */
                                   case 'Names of Countries involved at that time':
                                     await model.fetchPaysInvolvedATTLookedFor();
                                     currentDisplayList = model.listPaysInvATT;

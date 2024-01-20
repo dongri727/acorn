@@ -2,22 +2,20 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class OrganisationsEndpoint extends Endpoint {
-  //Fetch places from DB
+  ///Fetches places from DB
   Future<List<Organisations>> getOrganisations(Session session,
       {String? keyword}) async {
-    return await Organisations.find(
+    return await Organisations.db.find(
       session,
-      //where: (t) => keyword !=null ? t.title.like('%$keyword%') : Constant(true),
-      orderBy: Organisations.t.organisation,
+      //where: (t) => keyword !=null ? t.organisation.like('%$keyword%') : Constant.bool(true),
+      //orderBy: Organisations.t.organisation,
     );
   }
 
-  //Add place in DB
+  ///Adds place in DB
   Future<int> addOrganisations(
       Session session, Organisations organisations) async {
-    await Organisations.insert(session, organisations);
-    //var organisationLastVal = await session.db.query('SELECT LASTVAL()');
-    //return organisationLastVal[0][0] as int;
+    await Organisations.db.insert(session, organisations as List<Organisations>);
     return organisations.id!;
   }
 }

@@ -23,7 +23,7 @@ class PrincipalEndpoint extends Endpoint {
         }
       }
     } else {
-      whereClause = Constant(true);
+      whereClause = Constant.bool(true);
     }
 
     return await Principal.find(
@@ -47,7 +47,7 @@ class PrincipalEndpoint extends Endpoint {
         }
       }
     } else {
-      whereClause = Constant(true);
+      whereClause = Constant.bool(true);
     }
 
     return await Principal.db.find(
@@ -463,7 +463,7 @@ Future<List<Principal>> getPrincipalByUserId(Session session, {int? userId}) asy
   // Step 1: Get principalIds from PrincipalUser using userId
   var whereClausePrincipalUser = PrincipalUser.t.userId.equals(userId);
   
-  var PrincipalUserResults = await PrincipalUser.find(session, where: (_) => whereClausePrincipalUser);
+  var PrincipalUserResults = await PrincipalUser.db.find(session, where: (_) => whereClausePrincipalUser);
   var principalIds = PrincipalUserResults.map((row) => row.principalId).toList();
 
   if (principalIds.isEmpty) {
@@ -480,10 +480,10 @@ Future<List<Principal>> getPrincipalByUserId(Session session, {int? userId}) asy
     }
   }
 
-  return await Principal.find(
+  return await Principal.db.find(
     session,
     where: (_) => whereClausePrincipal,
-    orderBy: Principal.t.point,
+    //orderBy: Principal.t.id,
   );
 }
 

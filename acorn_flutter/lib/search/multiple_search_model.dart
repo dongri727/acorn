@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
-var client = Client('http://localhost:8080/')
+var client = Client('https://api.laporte.academy/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
+
+/*var client = Client('http://localhost:8080/')
+  ..connectivityMonitor = FlutterConnectivityMonitor();*/
 
 class MultipleSearchModel extends ChangeNotifier {
 
@@ -122,7 +125,7 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> filtersPlaceInv = <String>[];
   final List<int> filtersPlaceInvId = <int>[];
 
-  fetchPlaceInvolvedLookedFor() async {
+/*   fetchPlaceInvolvedLookedFor() async {
     try {
       placeInvIds = await client.principalPlace.getPPlaceNarrowed();  //HERE
       listPlaceInv = await client.places.getPlacesInv(placeInvIds: placeInvIds);
@@ -131,7 +134,7 @@ class MultipleSearchModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  } */
 
   ///当時の関係国名
   List<Countryatts> listPaysInvATT = [];
@@ -554,6 +557,7 @@ class MultipleSearchModel extends ChangeNotifier {
   Future<void>fetchPrincipalByPeriod({List<String>? period}) async {
     try {
       _principal = await client.principal.getPrincipalByPeriod(keywords: period);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print('got: $_principal');
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -566,6 +570,7 @@ class MultipleSearchModel extends ChangeNotifier {
   Future<void>fetchPrincipal({List<String>? location}) async {
     try {
       _principal = await client.principal.getPrincipal(keywords: location);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with keywords: $location");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -578,6 +583,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByPrecise({List<String>? precise}) async {
     try {
       _principal = await client.principal.getPrincipalByPrecise(keywords: precise);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with keywords: $precise");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -590,6 +596,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByCattId({List<int>? cattIds}) async {
     try {
       _principal = await client.principal.getPrincipalByCattId(cattIds: cattIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with CattIds: $cattIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -602,6 +609,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByPattId({List<int>? pattIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPattId(pattIds: pattIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with PattIds: $pattIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -614,6 +622,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByCInvolvedId({List<int>? cInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByCInvolvedId(cInvolvedIds: cInvolvedIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with CInvolvedIds: $cInvolvedIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -626,6 +635,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with PInvolvedIds: $pInvolvedIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -638,6 +648,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with AttsInvolvedIds: $attsInvolvedIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -650,6 +661,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -662,6 +674,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByStarsObservedId({List<int>? starObservedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starObservedIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with StarObservedIds: $starObservedIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -674,6 +687,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByOrgsId({List<int>? orgIds}) async {
     try {
       _principal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with OrgIds: $orgIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -686,6 +700,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByPersonId({List<int>? personIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPersonId(personIds: personIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with PersonIds: $personIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -698,6 +713,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByCategoryId({List<int>? categoryIds}) async {
     try {
       _principal = await client.principal.getPrincipalByCategoryId(categoryIds: categoryIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with CategoryIds: $categoryIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
@@ -710,6 +726,7 @@ class MultipleSearchModel extends ChangeNotifier {
   fetchPrincipalByTermId({List<int>? termIds}) async {
     try {
       _principal = await client.principal.getPrincipalByTermId(termIds: termIds);
+      _principal.sort((a,b) => a.point.compareTo(b.point));
       print("Getting principal with TermIds: $termIds");
       _principalIds = _principal.map((item) => item.id as int).toList();
       print(_principalIds);
