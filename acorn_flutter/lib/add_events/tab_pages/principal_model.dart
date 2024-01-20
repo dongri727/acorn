@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import 'package:acorn_flutter/serverpod_client.dart';
 
 import 'dart:math' as math;
 
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
+/*var client = Client('https://api.laporte.academy/')
+  ..connectivityMonitor = FlutterConnectivityMonitor();*/
+
+/*var client = Client('http://localhost:8080/')
+  ..connectivityMonitor = FlutterConnectivityMonitor();*/
 
 class PrincipalModel extends ChangeNotifier {
 

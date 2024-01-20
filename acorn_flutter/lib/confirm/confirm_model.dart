@@ -5,9 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'confirm.dart';
+import 'package:acorn_flutter/serverpod_client.dart';
 
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
+/*var client = Client('http://localhost:8080/')
+  ..connectivityMonitor = FlutterConnectivityMonitor();*/
 
 class ConfirmModel extends ChangeNotifier {
   ConfirmModel();

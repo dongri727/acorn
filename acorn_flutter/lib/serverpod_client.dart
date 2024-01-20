@@ -10,7 +10,7 @@ Future<void> initializeServerpodClient() async {
   // const ipAddress = '10.0.2.2'; // Android emulator ip for the host
 
   // On a real device replace the ipAddress with the IP address of your computer.
-  const ipAddress = 'localhost';
+  //const ipAddress = 'localhost';
 
   // Sets up a singleton client object that can be used to talk to the server from
   // anywhere in our app. The client is generated from your server code.
