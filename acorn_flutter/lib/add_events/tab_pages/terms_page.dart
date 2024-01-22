@@ -1,4 +1,3 @@
-
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/add_events/tab_pages/terms_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
@@ -11,9 +10,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../../confirm/confirm.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
-
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
 
 class TermsPage extends StatelessWidget {
   TermsPage({super.key});

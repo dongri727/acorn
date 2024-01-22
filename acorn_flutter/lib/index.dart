@@ -5,7 +5,7 @@ import 'users/account_page.dart';
 import 'utils/theme.dart';
 
 class IndexPage extends StatelessWidget {
-  const IndexPage({Key? key}) : super(key: key);
+  const IndexPage({super.key});
 
   @override
   Widget build(BuildContext context) {

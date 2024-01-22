@@ -5,9 +5,6 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
-/*var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();*/
-
 class PaysModel extends ChangeNotifier {
 
   var keyCountry = '';

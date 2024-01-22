@@ -2,18 +2,16 @@ import 'package:acorn_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 
 class SeasEndpoint extends Endpoint {
-  ///Fetches seas from DB
+  ///Fetches all seas from DB
   Future<List<Seas>> getSeas(Session session, {String? keyword}) async {
     return await Seas.db.find(
       session,
-      //where: (t) => keyword !=null ? t.seas.like('%$keyword%') : Constant(true),
-      //orderBy: Seas.t.sea,
+      orderBy: (seas) => seas.sea,
     );
   }
 
-  ///Adds sea in DB
-  Future<int> addSeas(Session session, Seas seas) async {
+  ///Adds a sea in DB
+  Future<void> addSeas(Session session, Seas seas) async {
     await Seas.db.insertRow(session, seas);
-    return seas.id!;
   }
 }

@@ -2,19 +2,18 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class PrincipalPeopleEndpoint extends Endpoint {
-  //Fetch principal-People from DB
+  ///Selects some junctions of principal-People from DB
   Future<List<PrincipalPeople>> getPPeople(Session session,
-      {String? keyword}) async {
+      {int? keynumber}) async {
     return await PrincipalPeople.db.find(
       session,
-      //where: (t) => keyword !=null ? t.pPeople.like('%$keyword%') : Constant(true),
-      //orderBy: PrincipalPeople.t.personId,
+      where: (t) => keynumber !=null ? t.personId.equals(keynumber) : Constant.bool(true),
+      orderBy: (principalPeople) => principalPeople.principalId,
     );
   }
 
-  //Add Principal people in DB
-  Future<int> addPPeople(Session session, PrincipalPeople principalPeople) async {
-    await PrincipalPeople.db.insert(session, principalPeople as List<PrincipalPeople>);
-    return principalPeople.id!;
+  ///Adds a junction of Principal people in DB
+  Future<void> addPPeople(Session session, PrincipalPeople principalPeople) async {
+    await PrincipalPeople.db.insertRow(session, principalPeople);
   }
 }

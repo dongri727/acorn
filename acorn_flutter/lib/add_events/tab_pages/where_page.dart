@@ -16,9 +16,6 @@ import '../../utils/tff_format.dart';
 
 import 'dart:math' as math;
 
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
-
 class WherePageGate extends StatelessWidget {
   const WherePageGate({super.key});
 
@@ -46,9 +43,8 @@ class WherePageGate extends StatelessWidget {
 }
 
 class WherePage extends StatelessWidget{
-  WherePage({Key? key, required Confirm confirm})
-      :_confirm = confirm,
-  super(key: key);
+  WherePage({super.key, required Confirm confirm})
+      :_confirm = confirm;
 
   final Confirm _confirm;
 

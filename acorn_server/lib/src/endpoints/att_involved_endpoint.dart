@@ -2,19 +2,18 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class AttInvolvedEndpoint extends Endpoint {
-  //Fetch atts-involved from DB
+  ///Selects some junctions of catts-involved from DB.
   Future<List<AttsInvolved>> getAttsInvolved(Session session,
-      {String? keyword}) async {
+      {int? keynumber}) async {
     return await AttsInvolved.db.find(
       session,
-      //where: (t) => keyword !=null ? t.attsInvolved.like('%$keyword%') : Constant(true),
-      //orderBy: AttsInvolved.t.attId,
+      where: (t) => keynumber !=null ? t.attId.equals(keynumber) : Constant.bool(true),
+      orderBy: (attsInvolved) => attsInvolved.principalId,
     );
   }
 
-  //Add country involved in DB
-  Future<int> addAttsInvolved(Session session, AttsInvolved attsInvolved) async {
-    await AttsInvolved.db.insert(session, attsInvolved as List<AttsInvolved>);
-    return attsInvolved.id!;
+  ///Adds a junction of country-att involved in DB
+  Future<void> addAttsInvolved(Session session, AttsInvolved attsInvolved) async {
+    await AttsInvolved.db.insertRow(session, attsInvolved);
   }
 }

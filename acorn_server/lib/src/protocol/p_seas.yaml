@@ -1,5 +1,0 @@
-class: PrincipalSeas
-table: principal_seas
-fields: 
-  principalId: int
-  seasId: int

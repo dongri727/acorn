@@ -1,5 +1,0 @@
-class: LocalDates
-table: localdates
-fields: 
-  principalId: int
-  localdate: String

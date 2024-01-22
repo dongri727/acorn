@@ -1,5 +1,0 @@
-class: PrincipalPlace
-table: principal_place
-fields: 
-  principalId: int
-  placeId: int

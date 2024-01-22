@@ -1,4 +1,3 @@
-import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:acorn_flutter/users/account_page.dart';
 import 'package:flutter/material.dart';

@@ -9,9 +9,8 @@ import 'confirm_model.dart';
 
 
 class ConfirmPage extends StatelessWidget {
-  const ConfirmPage({Key? key, required Confirm confirm})
-      :_confirm = confirm,
-        super(key: key);
+  const ConfirmPage({super.key, required Confirm confirm})
+      :_confirm = confirm;
 
   final Confirm _confirm;
 

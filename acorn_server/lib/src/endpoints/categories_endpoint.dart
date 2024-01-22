@@ -2,21 +2,19 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class CategoriesEndpoint extends Endpoint {
-  //Fetch categories from DB
+  ///Fetches all categories from DB
   Future<List<Categories>> getCategories(Session session,
       {String? keyword}) async {
     return await Categories.db.find(
       session,
-      //where: (t) => keyword !=null ? t.title.like('%$keyword%') : Constant(true),
-      //orderBy: Categories.t.category,
+      orderBy: (categories) => categories.category,
     );
   }
 
-  //Add a category in DB
+  ///Adds a category in DB
   Future<int> addCategories(Session session, Categories categories) async {
-    await Categories.db.insert(session, categories as List<Categories>);
-    //var categoryLastVal = await session.db.query('SELECT LASTVAL()');
-    //return categoryLastVal[0][0] as int;
-    return categories.id!;
+    var newCategory = await Categories.db.insertRow(session, categories);
+    var newCategoryId = newCategory.id;
+    return newCategoryId!;
   }
 }

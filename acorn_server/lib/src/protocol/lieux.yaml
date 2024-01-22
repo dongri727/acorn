@@ -1,9 +1,0 @@
-class: Lieux
-table: lieux
-fields: 
-  principalId: int
-  latitude: double
-  longitude: double
-  threeDX: double
-  threeDY: double
-  threeDZ: double

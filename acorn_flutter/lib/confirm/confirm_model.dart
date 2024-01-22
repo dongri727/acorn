@@ -7,9 +7,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'confirm.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
-/*var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();*/
-
 class ConfirmModel extends ChangeNotifier {
   ConfirmModel();
 
@@ -32,7 +29,7 @@ class ConfirmModel extends ChangeNotifier {
 
         //with map
         var withMap = WithMap(
-            principalId: principalId,
+            principalId: principalId!,
             annee: confirm.annee,
             affair: confirm.name,
             location: confirm.selectedLocation,

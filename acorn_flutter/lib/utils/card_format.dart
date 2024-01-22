@@ -12,8 +12,8 @@ class CardGreenA extends StatelessWidget {
     required this.textA,
     required this.textB,
     //required this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,8 @@ class CardGreenB extends StatelessWidget {
     //required this.textA,
     required this.textB,
     //required this.onPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +86,8 @@ class CardGrey extends StatelessWidget {
     required this.textB,
     //required this.textC,
     //required this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

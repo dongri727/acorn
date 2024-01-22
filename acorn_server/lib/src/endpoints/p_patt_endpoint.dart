@@ -2,19 +2,18 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class PrincipalPattEndpoint extends Endpoint {
-  //Fetch principal-Patt from DB
+  ///Selects some junctions of principal-Patt from DB
   Future<List<PrincipalPatt>> getPPatt(Session session,
-      {String? keyword}) async {
+      {int? keynumber}) async {
     return await PrincipalPatt.db.find(
       session,
-      //where: (t) => keyword !=null ? t.pPatt.like('%$keyword%') : Constant(true),
-      //orderBy: PrincipalPatt.t.patt_id,
+      where: (t) => keynumber !=null ? t.pattId.equals(keynumber) : Constant.bool(true),
+      orderBy: (principalPatt) => principalPatt.principalId,
     );
   }
 
-  //Add PCatt in DB
-  Future<int> addPPatt(Session session, PrincipalPatt pPatt) async {
-    await PrincipalPatt.db.insert(session, pPatt as List<PrincipalPatt>);
-    return pPatt.id!;
+  ///Adds a junction of PCatt in DB
+  Future<void> addPPatt(Session session, PrincipalPatt pPatt) async {
+    await PrincipalPatt.db.insertRow(session, pPatt);
   }
 }

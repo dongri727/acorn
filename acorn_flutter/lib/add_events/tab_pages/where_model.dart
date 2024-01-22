@@ -4,9 +4,6 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../../confirm/confirm.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
-/*var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();*/
-
 class WhereModel extends ChangeNotifier {
 
   String locationPrecise = '';

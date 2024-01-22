@@ -12,7 +12,7 @@ import 'tab_pages/who_page.dart';
 
 
 class TabPage extends StatelessWidget {
-  const TabPage ({Key? key}) : super(key: key);
+  const TabPage ({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -23,13 +23,12 @@ class WithGlobeEndpoint extends Endpoint {
     return await WithGlobe.db.find(
       session,
       where: (_) => whereClauseWithGlobe,
-      //orderBy: WithGlobe.t.coefficient,
+      orderBy: (withGlobe) => withGlobe.coefficient,
     );
   }
 
   ///Adds a WithGlobe in DB
-  Future<int> addWithGlobe(Session session, WithGlobe withGlobe) async {
+  Future<void> addWithGlobe(Session session, WithGlobe withGlobe) async {
     await WithGlobe.db.insertRow(session, withGlobe);
-    return withGlobe.id!;
   }
 }

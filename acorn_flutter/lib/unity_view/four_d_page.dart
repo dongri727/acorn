@@ -2,6 +2,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../search/multiple_search_page.dart';
+import 'package:acorn_flutter/serverpod_client.dart';
 
 class FourDViewPage extends StatefulWidget {
   final List<int>? principalIds;

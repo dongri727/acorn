@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'chips_format.dart';
-
 typedef OnChoiceSelected = void Function(String choiceKey, int choiceId);
 
 class ChoiceFormat extends StatefulWidget {

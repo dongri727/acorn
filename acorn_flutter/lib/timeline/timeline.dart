@@ -9,9 +9,6 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'entry.dart';
 import 'timeline_utils.dart';
 
-/*var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();*/
-
 typedef PaintCallback = Function();
 
 class Timeline {

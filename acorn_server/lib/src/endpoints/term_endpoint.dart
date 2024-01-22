@@ -2,12 +2,11 @@ import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
 class TermsEndpoint extends Endpoint {
-  ///Fetches terms from DB
+  ///Fetches all terms from DB
   Future<List<Terms>> getTerms(Session session, {String? keyword}) async {
     return await Terms.db.find(
       session,
-      //where: (t) => keyword !=null ? t.title.like('%$keyword%') : Constant(true),
-      //orderBy: Terms.t.term,
+      orderBy: (terms) => terms.term,
     );
   }
 

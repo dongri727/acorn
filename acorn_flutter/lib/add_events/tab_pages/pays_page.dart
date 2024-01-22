@@ -27,7 +27,7 @@ class PaysPage extends StatelessWidget {
     'Current Name of Place Involved',
     'Name of Country Involved at that time',
     'Name of Place Involved at that time',
-    'Stars Observed'];
+    'Stars Observed or Aimed at'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -101,7 +101,7 @@ class PaysPage extends StatelessWidget {
                                         await model.fetchPattInv();
                                         currentDisplayList = model.listPATTs;
                                         break;
-                                      case 'Stars Observed':
+                                      case 'Stars Observed or Aimed at':
                                         await model.fetchStarsObserved();
                                         currentDisplayList = model.listStars;
                                         break;
@@ -122,7 +122,7 @@ class PaysPage extends StatelessWidget {
                                       newCATT = text;
                                     } else if (isSelectedOption == 'Place Name At That Time') {
                                       newPATT = text;
-                                    } else if (isSelectedOption == 'Stars Observed') {
+                                    } else if (isSelectedOption == 'Stars Observed or Aimed at') {
                                       newStar = text;
                                     } else {
                                       return;
@@ -142,7 +142,7 @@ class PaysPage extends StatelessWidget {
                                     } else if (isSelectedOption == 'Place Name At That Time') {
                                       await model.addPATTandFetch(newPATT);
                                       currentDisplayList = model.listPATTs;
-                                    } else if (isSelectedOption == 'Stars Observed') {
+                                    } else if (isSelectedOption == 'Stars Observed or Aimed at') {
                                       await model.addStarAndFetch(newStar);
                                       currentDisplayList = model.listStars;
                                     } else {

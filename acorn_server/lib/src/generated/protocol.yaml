@@ -10,14 +10,6 @@ categories:
 countryatts:
   - getCountryATTs:
   - addCountryATTs:
-example:
-  - hello:
-lieux:
-  - getLieux:
-  - addLieux:
-localDates:
-  - getLocalDates:
-  - addLocalDates:
 oceans:
   - getOceans:
   - addOceans:
@@ -39,12 +31,6 @@ principalPatt:
 principalPeople:
   - getPPeople:
   - addPPeople:
-principalPlace:
-  - getPPlace:
-  - addPPlace:
-principalSeas:
-  - getPrincipalSeas:
-  - addPrincipalSeas:
 principalTerms:
   - getPTerms:
   - addPrincipalTerms:
@@ -72,7 +58,6 @@ principal:
   - getPrincipalByCattId:
   - getPrincipalByPattId:
   - getPrincipalByPersonId:
-  - getPrincipalByPInvolvedId:
   - getPrincipalByCInvolvedId:
   - getPrincipalByAttInvolvedId:
   - getPrincipalByStarsInvolvedId:

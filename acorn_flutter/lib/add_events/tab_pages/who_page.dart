@@ -10,9 +10,6 @@ import '../../confirm/confirm.dart';
 import '../../utils/tff_format.dart';
 import 'who_model.dart';
 
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
-
 class WhoPage extends StatelessWidget {
   WhoPage({super.key});
 

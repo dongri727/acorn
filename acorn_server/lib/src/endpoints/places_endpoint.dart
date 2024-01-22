@@ -2,21 +2,23 @@ import 'package:acorn_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
 
 class PlacesEndpoint extends Endpoint {
-  ///Fetches places from DB
+  ///Fetches places belonging to the destinated country
   Future<List<Places>> getPlaces(Session session, {String? keyword}) async {
     return await Places.db.find(
       session,
-      where: (t) => keyword !=null ? t.country.equals(keyword) : Constant.bool(true),
-      //orderBy: Places.t.place,
+      where: (t) =>
+          keyword != null ? t.country.equals(keyword) : Constant.bool(true),
+      orderBy: (places) => places.place,
+      orderDescending: false,
     );
   }
 
   ///Adds place in DB
-  Future<int> addPlaces(Session session, Places places) async {
+  Future<void> addPlaces(Session session, Places places) async {
     await Places.db.insertRow(session, places);
-    return places.id!;
   }
 
+  ///
   Future<List<Places>> getPlacesInv(Session session,
       {List<dynamic>? placeInvIds}) async {
     print("Getting places with keynumbers: $placeInvIds");
@@ -37,7 +39,7 @@ class PlacesEndpoint extends Endpoint {
     return await Places.db.find(
       session,
       where: (_) => whereClause,
-      //orderBy: Places.t.place, 
+      orderBy: (places) => places.place,
     );
   }
 }
