@@ -1,0 +1,5 @@
+class: PattsInvolved
+table: patts_involved
+fields: 
+  principalId: int
+  pattId: int

@@ -1,3 +1,5 @@
+import 'dart:mirrors';
+
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
@@ -16,5 +18,40 @@ class CountryattsEndpoint extends Endpoint {
     var newCatt = await Countryatts.db.insertRow(session, countryatts);
     var newCattId = newCatt.id;
     return newCattId!;
+  }
+
+  //Catt where it happend, uniquely determined for principal
+
+  ///Adds a catt and re-fetch all from DB
+  Future<List<Countryatts>> addAndGetCatts(
+      Session session, Countryatts countryatts) async {
+    await Countryatts.db.insertRow(session, countryatts);
+    return await Countryatts.db.find(
+      session,
+      orderBy: (countryatts) => countryatts.countryatt,
+    );
+  }
+
+  //Catt which involved, multiple possibilities for principal
+
+  ///Adds list and re-fetch all from DB
+  Future<List<Countryatts>> addListAndGetCatts(
+      Session session, List<String>? newCatts) async {
+    if (newCatts == null || newCatts.isEmpty) {
+      return await Countryatts.db.find(
+        session,
+        orderBy: (countryatts) => countryatts.countryatt,
+      );
+    }
+    var rows = newCatts.map((catt) => Countryatts(countryatt: catt)).toList();
+    try {
+      await Countryatts.db.insert(session, rows);
+    } catch(e) {
+      print('Error inserting catts: $e');
+    }
+    return await Countryatts.db.find(
+      session,
+      orderBy: (countryatts) => countryatts.countryatt,
+    );
   }
 }

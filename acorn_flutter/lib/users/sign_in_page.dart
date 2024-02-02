@@ -4,6 +4,7 @@ import 'package:serverpod_auth_email_flutter/serverpod_auth_email_flutter.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:serverpod_auth_google_flutter/serverpod_auth_google_flutter.dart';
 import 'account_page.dart';
+import 'package:acorn_flutter/index.dart';
 
 var _googleClientId = '849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com';
 const _googleServerClientId = '849604984098-hgp1ddeqslbrsn70vrd8grvp3cbvji0s.apps.googleusercontent.com';
@@ -92,7 +93,12 @@ class SignInPage extends StatelessWidget {
                             child: ElevatedButton(
                               child: const Text('Sign-in as Guest'),
                               onPressed: () async {
-
+                                Navigator.push<String>(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => IndexPage(),
+                                  ),
+                                );
                               },
                             ))),
                   ))

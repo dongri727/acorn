@@ -15,19 +15,21 @@ class WhoModel extends ChangeNotifier {
   Future<void> fetchOrgsInvolved() async {
     try {
       listOrgs = await client.organisations.getOrganisations();
-      print('get Orgs');
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
 
+  //todo 複数語を同時に挿入できるようにする
   Future<void> addOrgsAndFetch(String newOrg) async {
-    var organisations = Organisations(organisation: newOrg);
-    await client.organisations.addOrganisations(organisations);
-    debugPrint("add a organisation");
-    await fetchOrgsInvolved();
-    notifyListeners();
+    try{
+      var orgs = Organisations(organisation: newOrg);
+      listOrgs = await client.organisations.addAndReturnOrgs(orgs);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 
   Future<void> fetchPeopleInvolved() async {
@@ -39,12 +41,15 @@ class WhoModel extends ChangeNotifier {
     }
   }
 
+  //todo 複数語を同時に挿入できるようにする
   Future<void> addPeopleAndFetch(String newPerson) async {
-    var people = People(person: newPerson);
-    await client.people.addPeople(people);
-    debugPrint("add a person");
-    await fetchPeopleInvolved();
-    notifyListeners();
+    try{
+      var people = People(person: newPerson);
+      listPeople = await client.people.addAndReturnPeople(people);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 
   ///RadioButton

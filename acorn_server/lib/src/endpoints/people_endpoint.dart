@@ -14,4 +14,15 @@ class PeopleEndpoint extends Endpoint {
   Future<void> addPeople(Session session, People people) async {
     await People.db.insertRow(session, people);
   }
+
+  ///Adds a new person and returns all People
+  Future<List<People>> addAndReturnPeople(
+      Session session, People people) async {
+    await People.db.insertRow(session, people);
+    var allPeople = await People.db.find(
+      session,
+      orderBy: (people) => people.person,
+    );
+    return allPeople;
+  }
 }

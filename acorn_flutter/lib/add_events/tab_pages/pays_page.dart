@@ -11,9 +11,6 @@ import '../../confirm/confirm.dart';
 import '../../utils/button_format.dart';
 import '../../utils/tff_format.dart';
 
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
-
 class PaysPage extends StatelessWidget {
   PaysPage({super.key});
 
@@ -136,9 +133,9 @@ class PaysPage extends StatelessWidget {
                                     if (isSelectedOption == 'Current Name of Place Involved') {
                                       await model.addPlaceAndFetch(newPlace);
                                       currentDisplayList = model.listPlaces;
-                                    } else if (isSelectedOption == 'Country Name At That Time') {
+/*                                    } else if (isSelectedOption == 'Country Name At That Time') {
                                       await model.addCountryATTandFetch(newCATT);
-                                      currentDisplayList = model.listCATTs;
+                                      currentDisplayList = model.listCATTs;*/
                                     } else if (isSelectedOption == 'Place Name At That Time') {
                                       await model.addPATTandFetch(newPATT);
                                       currentDisplayList = model.listPATTs;

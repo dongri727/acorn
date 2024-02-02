@@ -49,19 +49,17 @@ class TermsModel extends ChangeNotifier {
   fetchCategories() async {
     try {
       listCategories = await client.categories.getCategories();
-      //print(listCategories);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
   }
 
+  //todo 複数語を同時に挿入できるようにする
   addCategoriesAndFetch(String newCategory) async {
     try {
       var categories = Categories(category: newCategory);
-      await client.categories.addCategories(categories);
-      await fetchCategories();
-      print(categories);
+      listCategories = await client.categories.addAndReturnCategories(categories);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -77,12 +75,11 @@ class TermsModel extends ChangeNotifier {
     }
   }
 
+  //todo 複数語を同時に挿入できるようにする
   addTermsAndFetch(String newTerm) async {
     try {
       var terms = Terms(term: newTerm);
-      await client.terms.addTerms(terms);
-      await fetchTerms();
-      print(terms);
+      listTerms = await client.terms.addAndReturnTerms(terms);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');

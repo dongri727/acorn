@@ -1,6 +1,8 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
+//Catt where it happend, uniquely determined for principal
+
 class PrincipalCattEndpoint extends Endpoint {
   ///Selects some junctions of principal-Catt from DB
   Future<List<PrincipalCatt>> getPCatt(Session session,

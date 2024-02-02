@@ -37,8 +37,8 @@ class ConfirmModel extends ChangeNotifier {
             latitude: confirm.latitude,
             longitude: confirm.longitude,
             logarithm: confirm.logarithm);
-        var withMapId = await client.withMap.addWithMap(withMap);
-        debugPrint('add WithMap : $withMapId');
+        await client.withMap.addWithMap(withMap);
+        debugPrint('add WithMap');
 
         //with globe
         var withGlobe = WithGlobe(
@@ -51,15 +51,15 @@ class ConfirmModel extends ChangeNotifier {
             yCoordinate: confirm.y,
             zCoordinate: confirm.z,
           coefficient: confirm.coefficient);
-        var withGlobeId = await client.withGlobe.addWithGlobe(withGlobe);
-        debugPrint('add WithGlobe : $withGlobeId');
+        await client.withGlobe.addWithGlobe(withGlobe);
+        debugPrint('add WithGlobe');
 
         //CATT 単
         if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalCatt(
                 principalId: principalId, cattId: confirm.selectedCattId);
             var principalCattsId = await client.principalCatt.addPCatt(pCatt);
-            debugPrint('added principal-catt : $principalCattsId');
+            debugPrint('added principal-catt');
         }
 
         //PATT 単
@@ -67,7 +67,7 @@ class ConfirmModel extends ChangeNotifier {
             var pPatt = PrincipalPatt(
               principalId: principalId, pattId: confirm.selectedPattId);
             var principalPattId = await client.principalPatt.addPPatt(pPatt);
-            debugPrint('add principal-patt : $principalPattId');
+            debugPrint('add principal-patt');
         }
 
         ///participants A
@@ -75,13 +75,13 @@ class ConfirmModel extends ChangeNotifier {
           for (var countryId in confirm.selectedCountriesId) {
             var countryInvolved = CountryInvolved(
                 principalId: principalId, paysId: countryId);
-            var countryInvolvedId = await client.countryInvolved
+            await client.countryInvolved
                 .addCInvolved(countryInvolved);
-            debugPrint('Added country involved : $countryInvolvedId');
+            debugPrint('Added country involved');
           }
         }
 
-        if (confirm.selectedPlacesId.isNotEmpty) {
+/*        if (confirm.selectedPlacesId.isNotEmpty) {
           for (var placeId in confirm.selectedPlacesId) {
             var placeInvolved = PrincipalPlace(
                 principalId: principalId, placeId: placeId);
@@ -89,14 +89,14 @@ class ConfirmModel extends ChangeNotifier {
                 .addPPlace(placeInvolved);
             debugPrint('Added country involved : $placeInvolvedId');
           }
-        }
+        }*/
 
         if (confirm.selectedATTId.isNotEmpty) {
           for (var attId in confirm.selectedATTId) {
-            var attsInvolved = AttsInvolved(
-                principalId: principalId, attId: attId);
-            var attInvolvedId = await client.attInvolved.addAttsInvolved(attsInvolved);
-            debugPrint('Added Att involved : $attInvolvedId');
+            var cattsInvolved = CattsInvolved(
+                principalId: principalId, cattId: attId);
+            var cattInvolvedId = await client.cattInvolved.addCattsInvolved(cattsInvolved);
+            debugPrint('Added Att involved');
           }
         }
 
@@ -105,7 +105,7 @@ class ConfirmModel extends ChangeNotifier {
             var starsInvolved = StarsInvolved(
                 principalId: principalId, starId: starId);
             var starInvolvedId = await client.starsInvolved.addStarsInvolved(starsInvolved);
-            debugPrint('Added Star involved : $starInvolvedId');
+            debugPrint('Added Star involved');
           }
         }
 
@@ -115,7 +115,7 @@ class ConfirmModel extends ChangeNotifier {
             var pOrgs = PrincipalOrgs(
                 principalId: principalId, orgId: orgId);
             var principalOrgsId = await client.principalOrgs.addPOrgs(pOrgs);
-            debugPrint('Added Orgs involved : $principalOrgsId');
+            debugPrint('Added Orgs involved');
           }
         }
 
@@ -124,7 +124,7 @@ class ConfirmModel extends ChangeNotifier {
             var principalPeople = PrincipalPeople(
                 principalId: principalId, personId: whoId);
             var principalPeopleId = await client.principalPeople.addPPeople(principalPeople);
-            debugPrint('Added people involved : $principalPeopleId');
+            debugPrint('Added people involved');
           }
         }
 
@@ -134,7 +134,7 @@ class ConfirmModel extends ChangeNotifier {
             var principalCategories = PrincipalCategories(
                 principalId: principalId, categoryId: categoryId);
             var principalCategoriesId = await client.principalCategories.addPCategories(principalCategories);
-            debugPrint('Added principal Categories : $principalCategoriesId');
+            debugPrint('Added principal Categories');
           }
         }
 
@@ -142,7 +142,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var termId in confirm.selectedTermId) {
             var principalTerms = PrincipalTerms(principalId: principalId, termId: termId);
             var principalTermsId = await client.principalTerms.addPrincipalTerms(principalTerms);
-            debugPrint('Added principal Terms : $principalTermsId');
+            debugPrint('Added principal Terms');
           }
         }
 
@@ -150,7 +150,7 @@ class ConfirmModel extends ChangeNotifier {
         print('written by user: $userId');
         var principalUser = PrincipalUser(principalId: principalId, userId: userId);
         var principalUserId = await client.principalUser.addPrincipalUser(principalUser);
-        debugPrint('Added principal User : $principalUserId');
+        debugPrint('Added principal User');
 
         return 0;
 

@@ -17,4 +17,15 @@ class CategoriesEndpoint extends Endpoint {
     var newCategoryId = newCategory.id;
     return newCategoryId!;
   }
+
+  ///Adds a new categories and returns all Categories
+  Future<List<Categories>> addAndReturnCategories(
+      Session session, Categories categories) async {
+    await Categories.db.insertRow(session, categories);
+    var allCategories = await Categories.db.find(
+      session,
+      orderBy: (categories) => categories.category,
+    );
+    return allCategories;
+  }
 }

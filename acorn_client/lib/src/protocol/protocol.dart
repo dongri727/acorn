@@ -10,9 +10,9 @@
 library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'att_involved.dart' as _i2;
-import 'c_involved.dart' as _i3;
-import 'categories.dart' as _i4;
+import 'c_involved.dart' as _i2;
+import 'categories.dart' as _i3;
+import 'catts_involved.dart' as _i4;
 import 'countryatts.dart' as _i5;
 import 'myclass.dart' as _i6;
 import 'oceans.dart' as _i7;
@@ -24,47 +24,49 @@ import 'p_orgs.dart' as _i12;
 import 'p_patt.dart' as _i13;
 import 'p_people.dart' as _i14;
 import 'p_terms.dart' as _i15;
-import 'pays.dart' as _i16;
-import 'people.dart' as _i17;
-import 'placeatts.dart' as _i18;
-import 'places.dart' as _i19;
-import 'principal.dart' as _i20;
-import 'seas.dart' as _i21;
-import 'stars.dart' as _i22;
-import 'stars_involved.dart' as _i23;
-import 'terms.dart' as _i24;
-import 'universe.dart' as _i25;
-import 'with_globe.dart' as _i26;
-import 'with_map.dart' as _i27;
-import 'package:acorn_client/src/protocol/att_involved.dart' as _i28;
+import 'patts_involved.dart' as _i16;
+import 'pays.dart' as _i17;
+import 'people.dart' as _i18;
+import 'placeatts.dart' as _i19;
+import 'places.dart' as _i20;
+import 'principal.dart' as _i21;
+import 'seas.dart' as _i22;
+import 'stars.dart' as _i23;
+import 'stars_involved.dart' as _i24;
+import 'terms.dart' as _i25;
+import 'universe.dart' as _i26;
+import 'with_globe.dart' as _i27;
+import 'with_map.dart' as _i28;
 import 'package:acorn_client/src/protocol/c_involved.dart' as _i29;
 import 'package:acorn_client/src/protocol/categories.dart' as _i30;
-import 'package:acorn_client/src/protocol/countryatts.dart' as _i31;
-import 'package:acorn_client/src/protocol/oceans.dart' as _i32;
-import 'package:acorn_client/src/protocol/organisations.dart' as _i33;
-import 'package:acorn_client/src/protocol/p_categories.dart' as _i34;
-import 'package:acorn_client/src/protocol/p_catt.dart' as _i35;
-import 'package:acorn_client/src/protocol/p_orgs.dart' as _i36;
-import 'package:acorn_client/src/protocol/p_patt.dart' as _i37;
-import 'package:acorn_client/src/protocol/p_people.dart' as _i38;
-import 'package:acorn_client/src/protocol/p_terms.dart' as _i39;
-import 'package:acorn_client/src/protocol/p-user.dart' as _i40;
-import 'package:acorn_client/src/protocol/pays.dart' as _i41;
-import 'package:acorn_client/src/protocol/people.dart' as _i42;
-import 'package:acorn_client/src/protocol/placeatts.dart' as _i43;
-import 'package:acorn_client/src/protocol/places.dart' as _i44;
-import 'package:acorn_client/src/protocol/principal.dart' as _i45;
-import 'package:acorn_client/src/protocol/seas.dart' as _i46;
-import 'package:acorn_client/src/protocol/stars.dart' as _i47;
-import 'package:acorn_client/src/protocol/stars_involved.dart' as _i48;
-import 'package:acorn_client/src/protocol/terms.dart' as _i49;
-import 'package:acorn_client/src/protocol/universe.dart' as _i50;
-import 'package:acorn_client/src/protocol/with_globe.dart' as _i51;
-import 'package:acorn_client/src/protocol/with_map.dart' as _i52;
-import 'package:serverpod_auth_client/module.dart' as _i53;
-export 'att_involved.dart';
+import 'package:acorn_client/src/protocol/catts_involved.dart' as _i31;
+import 'package:acorn_client/src/protocol/countryatts.dart' as _i32;
+import 'package:acorn_client/src/protocol/oceans.dart' as _i33;
+import 'package:acorn_client/src/protocol/organisations.dart' as _i34;
+import 'package:acorn_client/src/protocol/p_categories.dart' as _i35;
+import 'package:acorn_client/src/protocol/p_catt.dart' as _i36;
+import 'package:acorn_client/src/protocol/p_orgs.dart' as _i37;
+import 'package:acorn_client/src/protocol/p_patt.dart' as _i38;
+import 'package:acorn_client/src/protocol/p_people.dart' as _i39;
+import 'package:acorn_client/src/protocol/p_terms.dart' as _i40;
+import 'package:acorn_client/src/protocol/p-user.dart' as _i41;
+import 'package:acorn_client/src/protocol/patts_involved.dart' as _i42;
+import 'package:acorn_client/src/protocol/pays.dart' as _i43;
+import 'package:acorn_client/src/protocol/people.dart' as _i44;
+import 'package:acorn_client/src/protocol/placeatts.dart' as _i45;
+import 'package:acorn_client/src/protocol/places.dart' as _i46;
+import 'package:acorn_client/src/protocol/principal.dart' as _i47;
+import 'package:acorn_client/src/protocol/seas.dart' as _i48;
+import 'package:acorn_client/src/protocol/stars.dart' as _i49;
+import 'package:acorn_client/src/protocol/stars_involved.dart' as _i50;
+import 'package:acorn_client/src/protocol/terms.dart' as _i51;
+import 'package:acorn_client/src/protocol/universe.dart' as _i52;
+import 'package:acorn_client/src/protocol/with_globe.dart' as _i53;
+import 'package:acorn_client/src/protocol/with_map.dart' as _i54;
+import 'package:serverpod_auth_client/module.dart' as _i55;
 export 'c_involved.dart';
 export 'categories.dart';
+export 'catts_involved.dart';
 export 'countryatts.dart';
 export 'myclass.dart';
 export 'oceans.dart';
@@ -76,6 +78,7 @@ export 'p_orgs.dart';
 export 'p_patt.dart';
 export 'p_people.dart';
 export 'p_terms.dart';
+export 'patts_involved.dart';
 export 'pays.dart';
 export 'people.dart';
 export 'placeatts.dart';
@@ -108,14 +111,14 @@ class Protocol extends _i1.SerializationManager {
     if (customConstructors.containsKey(t)) {
       return customConstructors[t]!(data, this) as T;
     }
-    if (t == _i2.AttsInvolved) {
-      return _i2.AttsInvolved.fromJson(data, this) as T;
+    if (t == _i2.CountryInvolved) {
+      return _i2.CountryInvolved.fromJson(data, this) as T;
     }
-    if (t == _i3.CountryInvolved) {
-      return _i3.CountryInvolved.fromJson(data, this) as T;
+    if (t == _i3.Categories) {
+      return _i3.Categories.fromJson(data, this) as T;
     }
-    if (t == _i4.Categories) {
-      return _i4.Categories.fromJson(data, this) as T;
+    if (t == _i4.CattsInvolved) {
+      return _i4.CattsInvolved.fromJson(data, this) as T;
     }
     if (t == _i5.Countryatts) {
       return _i5.Countryatts.fromJson(data, this) as T;
@@ -150,51 +153,55 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i15.PrincipalTerms) {
       return _i15.PrincipalTerms.fromJson(data, this) as T;
     }
-    if (t == _i16.Pays) {
-      return _i16.Pays.fromJson(data, this) as T;
+    if (t == _i16.PattsInvolved) {
+      return _i16.PattsInvolved.fromJson(data, this) as T;
     }
-    if (t == _i17.People) {
-      return _i17.People.fromJson(data, this) as T;
+    if (t == _i17.Pays) {
+      return _i17.Pays.fromJson(data, this) as T;
     }
-    if (t == _i18.Placeatts) {
-      return _i18.Placeatts.fromJson(data, this) as T;
+    if (t == _i18.People) {
+      return _i18.People.fromJson(data, this) as T;
     }
-    if (t == _i19.Places) {
-      return _i19.Places.fromJson(data, this) as T;
+    if (t == _i19.Placeatts) {
+      return _i19.Placeatts.fromJson(data, this) as T;
     }
-    if (t == _i20.Principal) {
-      return _i20.Principal.fromJson(data, this) as T;
+    if (t == _i20.Places) {
+      return _i20.Places.fromJson(data, this) as T;
     }
-    if (t == _i21.Seas) {
-      return _i21.Seas.fromJson(data, this) as T;
+    if (t == _i21.Principal) {
+      return _i21.Principal.fromJson(data, this) as T;
     }
-    if (t == _i22.Stars) {
-      return _i22.Stars.fromJson(data, this) as T;
+    if (t == _i22.Seas) {
+      return _i22.Seas.fromJson(data, this) as T;
     }
-    if (t == _i23.StarsInvolved) {
-      return _i23.StarsInvolved.fromJson(data, this) as T;
+    if (t == _i23.Stars) {
+      return _i23.Stars.fromJson(data, this) as T;
     }
-    if (t == _i24.Terms) {
-      return _i24.Terms.fromJson(data, this) as T;
+    if (t == _i24.StarsInvolved) {
+      return _i24.StarsInvolved.fromJson(data, this) as T;
     }
-    if (t == _i25.Universe) {
-      return _i25.Universe.fromJson(data, this) as T;
+    if (t == _i25.Terms) {
+      return _i25.Terms.fromJson(data, this) as T;
     }
-    if (t == _i26.WithGlobe) {
-      return _i26.WithGlobe.fromJson(data, this) as T;
+    if (t == _i26.Universe) {
+      return _i26.Universe.fromJson(data, this) as T;
     }
-    if (t == _i27.WithMap) {
-      return _i27.WithMap.fromJson(data, this) as T;
+    if (t == _i27.WithGlobe) {
+      return _i27.WithGlobe.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i2.AttsInvolved?>()) {
-      return (data != null ? _i2.AttsInvolved.fromJson(data, this) : null) as T;
+    if (t == _i28.WithMap) {
+      return _i28.WithMap.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i3.CountryInvolved?>()) {
-      return (data != null ? _i3.CountryInvolved.fromJson(data, this) : null)
+    if (t == _i1.getType<_i2.CountryInvolved?>()) {
+      return (data != null ? _i2.CountryInvolved.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i4.Categories?>()) {
-      return (data != null ? _i4.Categories.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i3.Categories?>()) {
+      return (data != null ? _i3.Categories.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i4.CattsInvolved?>()) {
+      return (data != null ? _i4.CattsInvolved.fromJson(data, this) : null)
+          as T;
     }
     if (t == _i1.getType<_i5.Countryatts?>()) {
       return (data != null ? _i5.Countryatts.fromJson(data, this) : null) as T;
@@ -238,47 +245,46 @@ class Protocol extends _i1.SerializationManager {
       return (data != null ? _i15.PrincipalTerms.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i16.Pays?>()) {
-      return (data != null ? _i16.Pays.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i17.People?>()) {
-      return (data != null ? _i17.People.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i18.Placeatts?>()) {
-      return (data != null ? _i18.Placeatts.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i19.Places?>()) {
-      return (data != null ? _i19.Places.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i20.Principal?>()) {
-      return (data != null ? _i20.Principal.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i21.Seas?>()) {
-      return (data != null ? _i21.Seas.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i22.Stars?>()) {
-      return (data != null ? _i22.Stars.fromJson(data, this) : null) as T;
-    }
-    if (t == _i1.getType<_i23.StarsInvolved?>()) {
-      return (data != null ? _i23.StarsInvolved.fromJson(data, this) : null)
+    if (t == _i1.getType<_i16.PattsInvolved?>()) {
+      return (data != null ? _i16.PattsInvolved.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i24.Terms?>()) {
-      return (data != null ? _i24.Terms.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i17.Pays?>()) {
+      return (data != null ? _i17.Pays.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i25.Universe?>()) {
-      return (data != null ? _i25.Universe.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i18.People?>()) {
+      return (data != null ? _i18.People.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i26.WithGlobe?>()) {
-      return (data != null ? _i26.WithGlobe.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i19.Placeatts?>()) {
+      return (data != null ? _i19.Placeatts.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i27.WithMap?>()) {
-      return (data != null ? _i27.WithMap.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i20.Places?>()) {
+      return (data != null ? _i20.Places.fromJson(data, this) : null) as T;
     }
-    if (t == List<_i28.AttsInvolved>) {
-      return (data as List)
-          .map((e) => deserialize<_i28.AttsInvolved>(e))
-          .toList() as dynamic;
+    if (t == _i1.getType<_i21.Principal?>()) {
+      return (data != null ? _i21.Principal.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i22.Seas?>()) {
+      return (data != null ? _i22.Seas.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i23.Stars?>()) {
+      return (data != null ? _i23.Stars.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i24.StarsInvolved?>()) {
+      return (data != null ? _i24.StarsInvolved.fromJson(data, this) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i25.Terms?>()) {
+      return (data != null ? _i25.Terms.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i26.Universe?>()) {
+      return (data != null ? _i26.Universe.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i27.WithGlobe?>()) {
+      return (data != null ? _i27.WithGlobe.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i28.WithMap?>()) {
+      return (data != null ? _i28.WithMap.fromJson(data, this) : null) as T;
     }
     if (t == List<_i29.CountryInvolved>) {
       return (data as List)
@@ -289,69 +295,84 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i30.Categories>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i31.Countryatts>) {
+    if (t == List<_i31.CattsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i31.Countryatts>(e))
+          .map((e) => deserialize<_i31.CattsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i32.Oceans>) {
-      return (data as List).map((e) => deserialize<_i32.Oceans>(e)).toList()
+    if (t == List<_i32.Countryatts>) {
+      return (data as List)
+          .map((e) => deserialize<_i32.Countryatts>(e))
+          .toList() as dynamic;
+    }
+    if (t == _i1.getType<List<String>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i33.Oceans>) {
+      return (data as List).map((e) => deserialize<_i33.Oceans>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i33.Organisations>) {
+    if (t == List<_i34.Organisations>) {
       return (data as List)
-          .map((e) => deserialize<_i33.Organisations>(e))
+          .map((e) => deserialize<_i34.Organisations>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i34.PrincipalCategories>) {
+    if (t == List<_i35.PrincipalCategories>) {
       return (data as List)
-          .map((e) => deserialize<_i34.PrincipalCategories>(e))
+          .map((e) => deserialize<_i35.PrincipalCategories>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i35.PrincipalCatt>) {
+    if (t == List<_i36.PrincipalCatt>) {
       return (data as List)
-          .map((e) => deserialize<_i35.PrincipalCatt>(e))
+          .map((e) => deserialize<_i36.PrincipalCatt>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i36.PrincipalOrgs>) {
+    if (t == List<_i37.PrincipalOrgs>) {
       return (data as List)
-          .map((e) => deserialize<_i36.PrincipalOrgs>(e))
+          .map((e) => deserialize<_i37.PrincipalOrgs>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i37.PrincipalPatt>) {
+    if (t == List<_i38.PrincipalPatt>) {
       return (data as List)
-          .map((e) => deserialize<_i37.PrincipalPatt>(e))
+          .map((e) => deserialize<_i38.PrincipalPatt>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i38.PrincipalPeople>) {
+    if (t == List<_i39.PrincipalPeople>) {
       return (data as List)
-          .map((e) => deserialize<_i38.PrincipalPeople>(e))
+          .map((e) => deserialize<_i39.PrincipalPeople>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i39.PrincipalTerms>) {
+    if (t == List<_i40.PrincipalTerms>) {
       return (data as List)
-          .map((e) => deserialize<_i39.PrincipalTerms>(e))
+          .map((e) => deserialize<_i40.PrincipalTerms>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i40.PrincipalUser>) {
+    if (t == List<_i41.PrincipalUser>) {
       return (data as List)
-          .map((e) => deserialize<_i40.PrincipalUser>(e))
+          .map((e) => deserialize<_i41.PrincipalUser>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i41.Pays>) {
-      return (data as List).map((e) => deserialize<_i41.Pays>(e)).toList()
+    if (t == List<_i42.PattsInvolved>) {
+      return (data as List)
+          .map((e) => deserialize<_i42.PattsInvolved>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i43.Pays>) {
+      return (data as List).map((e) => deserialize<_i43.Pays>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i42.People>) {
-      return (data as List).map((e) => deserialize<_i42.People>(e)).toList()
+    if (t == List<_i44.People>) {
+      return (data as List).map((e) => deserialize<_i44.People>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i43.Placeatts>) {
-      return (data as List).map((e) => deserialize<_i43.Placeatts>(e)).toList()
+    if (t == List<_i45.Placeatts>) {
+      return (data as List).map((e) => deserialize<_i45.Placeatts>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i44.Places>) {
-      return (data as List).map((e) => deserialize<_i44.Places>(e)).toList()
+    if (t == List<_i46.Places>) {
+      return (data as List).map((e) => deserialize<_i46.Places>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<dynamic>?>()) {
@@ -359,8 +380,8 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<dynamic>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i45.Principal>) {
-      return (data as List).map((e) => deserialize<_i45.Principal>(e)).toList()
+    if (t == List<_i47.Principal>) {
+      return (data as List).map((e) => deserialize<_i47.Principal>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<String>?>()) {
@@ -423,29 +444,29 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i46.Seas>) {
-      return (data as List).map((e) => deserialize<_i46.Seas>(e)).toList()
+    if (t == List<_i48.Seas>) {
+      return (data as List).map((e) => deserialize<_i48.Seas>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i47.Stars>) {
-      return (data as List).map((e) => deserialize<_i47.Stars>(e)).toList()
+    if (t == List<_i49.Stars>) {
+      return (data as List).map((e) => deserialize<_i49.Stars>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i48.StarsInvolved>) {
+    if (t == List<_i50.StarsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i48.StarsInvolved>(e))
+          .map((e) => deserialize<_i50.StarsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i49.Terms>) {
-      return (data as List).map((e) => deserialize<_i49.Terms>(e)).toList()
+    if (t == List<_i51.Terms>) {
+      return (data as List).map((e) => deserialize<_i51.Terms>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i50.Universe>) {
-      return (data as List).map((e) => deserialize<_i50.Universe>(e)).toList()
+    if (t == List<_i52.Universe>) {
+      return (data as List).map((e) => deserialize<_i52.Universe>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i51.WithGlobe>) {
-      return (data as List).map((e) => deserialize<_i51.WithGlobe>(e)).toList()
+    if (t == List<_i53.WithGlobe>) {
+      return (data as List).map((e) => deserialize<_i53.WithGlobe>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {
@@ -453,12 +474,12 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i52.WithMap>) {
-      return (data as List).map((e) => deserialize<_i52.WithMap>(e)).toList()
+    if (t == List<_i54.WithMap>) {
+      return (data as List).map((e) => deserialize<_i54.WithMap>(e)).toList()
           as dynamic;
     }
     try {
-      return _i53.Protocol().deserialize<T>(data, t);
+      return _i55.Protocol().deserialize<T>(data, t);
     } catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -466,18 +487,18 @@ class Protocol extends _i1.SerializationManager {
   @override
   String? getClassNameForObject(Object data) {
     String? className;
-    className = _i53.Protocol().getClassNameForObject(data);
+    className = _i55.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
-    if (data is _i2.AttsInvolved) {
-      return 'AttsInvolved';
-    }
-    if (data is _i3.CountryInvolved) {
+    if (data is _i2.CountryInvolved) {
       return 'CountryInvolved';
     }
-    if (data is _i4.Categories) {
+    if (data is _i3.Categories) {
       return 'Categories';
+    }
+    if (data is _i4.CattsInvolved) {
+      return 'CattsInvolved';
     }
     if (data is _i5.Countryatts) {
       return 'Countryatts';
@@ -512,40 +533,43 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i15.PrincipalTerms) {
       return 'PrincipalTerms';
     }
-    if (data is _i16.Pays) {
+    if (data is _i16.PattsInvolved) {
+      return 'PattsInvolved';
+    }
+    if (data is _i17.Pays) {
       return 'Pays';
     }
-    if (data is _i17.People) {
+    if (data is _i18.People) {
       return 'People';
     }
-    if (data is _i18.Placeatts) {
+    if (data is _i19.Placeatts) {
       return 'Placeatts';
     }
-    if (data is _i19.Places) {
+    if (data is _i20.Places) {
       return 'Places';
     }
-    if (data is _i20.Principal) {
+    if (data is _i21.Principal) {
       return 'Principal';
     }
-    if (data is _i21.Seas) {
+    if (data is _i22.Seas) {
       return 'Seas';
     }
-    if (data is _i22.Stars) {
+    if (data is _i23.Stars) {
       return 'Stars';
     }
-    if (data is _i23.StarsInvolved) {
+    if (data is _i24.StarsInvolved) {
       return 'StarsInvolved';
     }
-    if (data is _i24.Terms) {
+    if (data is _i25.Terms) {
       return 'Terms';
     }
-    if (data is _i25.Universe) {
+    if (data is _i26.Universe) {
       return 'Universe';
     }
-    if (data is _i26.WithGlobe) {
+    if (data is _i27.WithGlobe) {
       return 'WithGlobe';
     }
-    if (data is _i27.WithMap) {
+    if (data is _i28.WithMap) {
       return 'WithMap';
     }
     return super.getClassNameForObject(data);
@@ -555,16 +579,16 @@ class Protocol extends _i1.SerializationManager {
   dynamic deserializeByClassName(Map<String, dynamic> data) {
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i53.Protocol().deserializeByClassName(data);
-    }
-    if (data['className'] == 'AttsInvolved') {
-      return deserialize<_i2.AttsInvolved>(data['data']);
+      return _i55.Protocol().deserializeByClassName(data);
     }
     if (data['className'] == 'CountryInvolved') {
-      return deserialize<_i3.CountryInvolved>(data['data']);
+      return deserialize<_i2.CountryInvolved>(data['data']);
     }
     if (data['className'] == 'Categories') {
-      return deserialize<_i4.Categories>(data['data']);
+      return deserialize<_i3.Categories>(data['data']);
+    }
+    if (data['className'] == 'CattsInvolved') {
+      return deserialize<_i4.CattsInvolved>(data['data']);
     }
     if (data['className'] == 'Countryatts') {
       return deserialize<_i5.Countryatts>(data['data']);
@@ -599,41 +623,44 @@ class Protocol extends _i1.SerializationManager {
     if (data['className'] == 'PrincipalTerms') {
       return deserialize<_i15.PrincipalTerms>(data['data']);
     }
+    if (data['className'] == 'PattsInvolved') {
+      return deserialize<_i16.PattsInvolved>(data['data']);
+    }
     if (data['className'] == 'Pays') {
-      return deserialize<_i16.Pays>(data['data']);
+      return deserialize<_i17.Pays>(data['data']);
     }
     if (data['className'] == 'People') {
-      return deserialize<_i17.People>(data['data']);
+      return deserialize<_i18.People>(data['data']);
     }
     if (data['className'] == 'Placeatts') {
-      return deserialize<_i18.Placeatts>(data['data']);
+      return deserialize<_i19.Placeatts>(data['data']);
     }
     if (data['className'] == 'Places') {
-      return deserialize<_i19.Places>(data['data']);
+      return deserialize<_i20.Places>(data['data']);
     }
     if (data['className'] == 'Principal') {
-      return deserialize<_i20.Principal>(data['data']);
+      return deserialize<_i21.Principal>(data['data']);
     }
     if (data['className'] == 'Seas') {
-      return deserialize<_i21.Seas>(data['data']);
+      return deserialize<_i22.Seas>(data['data']);
     }
     if (data['className'] == 'Stars') {
-      return deserialize<_i22.Stars>(data['data']);
+      return deserialize<_i23.Stars>(data['data']);
     }
     if (data['className'] == 'StarsInvolved') {
-      return deserialize<_i23.StarsInvolved>(data['data']);
+      return deserialize<_i24.StarsInvolved>(data['data']);
     }
     if (data['className'] == 'Terms') {
-      return deserialize<_i24.Terms>(data['data']);
+      return deserialize<_i25.Terms>(data['data']);
     }
     if (data['className'] == 'Universe') {
-      return deserialize<_i25.Universe>(data['data']);
+      return deserialize<_i26.Universe>(data['data']);
     }
     if (data['className'] == 'WithGlobe') {
-      return deserialize<_i26.WithGlobe>(data['data']);
+      return deserialize<_i27.WithGlobe>(data['data']);
     }
     if (data['className'] == 'WithMap') {
-      return deserialize<_i27.WithMap>(data['data']);
+      return deserialize<_i28.WithMap>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

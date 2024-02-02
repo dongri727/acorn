@@ -627,7 +627,7 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
-  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
+/*  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
       _principal.sort((a,b) => a.point.compareTo(b.point));
@@ -638,9 +638,9 @@ class MultipleSearchModel extends ChangeNotifier {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
+/*  fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
       _principal.sort((a,b) => a.point.compareTo(b.point));
@@ -651,9 +651,9 @@ class MultipleSearchModel extends ChangeNotifier {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
+/*  fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
     try {
       _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
       _principal.sort((a,b) => a.point.compareTo(b.point));
@@ -664,7 +664,7 @@ class MultipleSearchModel extends ChangeNotifier {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
   fetchPrincipalByStarsObservedId({List<int>? starObservedIds}) async {
     try {

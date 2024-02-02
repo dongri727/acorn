@@ -1,21 +1,25 @@
-attInvolved:
-  - getAttsInvolved:
-  - addAttsInvolved:
 countryInvolved:
   - getCInvolved:
   - addCInvolved:
 categories:
   - getCategories:
   - addCategories:
+  - addAndReturnCategories:
+cattInvolved:
+  - getAttsInvolved:
+  - addCattsInvolved:
 countryatts:
   - getCountryATTs:
   - addCountryATTs:
+  - addAndGetCatts:
+  - addListAndGetCatts:
 oceans:
   - getOceans:
   - addOceans:
 organisations:
   - getOrganisations:
   - addOrganisations:
+  - addAndReturnOrgs:
 principalCategories:
   - getPCategories:
   - addPCategories:
@@ -37,15 +41,20 @@ principalTerms:
 principalUser:
   - getPUserId:
   - addPrincipalUser:
+pattInvolved:
+  - getPattsInvolved:
+  - addPattsInvolved:
 pays:
   - getPays:
   - addPays:
 people:
   - getPeople:
   - addPeople:
+  - addAndReturnPeople:
 placeatts:
   - getPlaceATTs:
   - addPlaceATTs:
+  - addAndGetPatts:
 places:
   - getPlaces:
   - addPlaces:
@@ -68,15 +77,18 @@ principal:
 seas:
   - getSeas:
   - addSeas:
+  - addAndReturnSeas:
 stars:
   - getStars:
   - addStars:
+  - addAndReturnStars:
 starsInvolved:
   - getStarsInvolved:
   - addStarsInvolved:
 terms:
   - getTerms:
   - addTerms:
+  - addAndReturnTerms:
 universe:
   - getUniverse:
   - addUniverse:

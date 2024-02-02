@@ -92,17 +92,17 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
-  addCountryATTandFetch(String newCATT) async {
+/*  addCountryATTandFetch(String newCATT) async {
+    List<string> newCatts = newCATT.split(,).map((s) => s.trim()).toList();
     try {
-    var catts = Countryatts(countryatt: newCATT);
-    await client.countryatts.addCountryATTs(catts);
-    await fetchCountryAttInv();
-    print(catts);
-    notifyListeners();
+      var catts = Countryatts(countryatt: newCatts);
+      await client.countryatts.addListAndGetCatts(catts);
+      print(catts);
+      notifyListeners();
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
   addPATTandFetch(String newPATT) async {
     try {

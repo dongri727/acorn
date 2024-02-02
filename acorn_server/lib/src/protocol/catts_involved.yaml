@@ -1,0 +1,5 @@
+class: CattsInvolved
+table: catts_involved
+fields: 
+  principalId: int
+  cattId: int

@@ -43,8 +43,8 @@ class MultiSearchPage extends StatelessWidget {
     'Place-name at that time',
     'Countries involved',
     'Places involved',
-    'Names of Countries involved at that time',
-    'Names of Places involved at that time',
+    //'Names of Countries involved at that time',
+    //'Names of Places involved at that time',
     'Stars Observed',
     'Organisations',
     'People',
@@ -206,7 +206,7 @@ class MultiSearchPage extends StatelessWidget {
                                     await model.fetchPaysInvolvedLookedFor();
                                     currentDisplayList = model.listPaysInv;
                                     break;
-                        /*           case 'Places involved':
+                                  /*           case 'Places involved':
                                     await model.fetchPlaceInvolvedLookedFor();
                                     currentDisplayList = model.listPlaceInv;
                                     break; */
@@ -215,7 +215,8 @@ class MultiSearchPage extends StatelessWidget {
                                     currentDisplayList = model.listPaysInvATT;
                                     break;
                                   case 'Names of Places involved at that time':
-                                    await model.fetchPlaceInvolvedATTLookedFor();
+                                    await model
+                                        .fetchPlaceInvolvedATTLookedFor();
                                     currentDisplayList = model.listPlaceInvATT;
                                     break;
                                   case 'Stars Observed':
@@ -249,104 +250,6 @@ class MultiSearchPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                model.clearSearch();
-                                currentDisplayList.clear();
-                                filtersPeriod.clear();
-                                filtersUniverse.clear();
-                                filtersPays.clear();
-                                filtersOceans.clear();
-                              },
-                              child: const Text("clear"),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                switch (isSelectedOption) {
-                                  case 'Period':
-                                    model.fetchPrincipalByPeriod(
-                                        period: filtersPeriod);
-                                    break;
-                                  case 'Universe':
-                                    model.fetchPrincipal(
-                                        location: filtersUniverse);
-                                    break;
-                                  case 'Stars':
-                                    model.fetchPrincipalByPrecise(
-                                        precise: model.filtersStars);
-                                    break;
-                                  case 'Current Country where it happened':
-                                    model.fetchPrincipal(location: filtersPays);
-                                    break;
-                                  case 'Current Place-name where it happened':
-                                    model.fetchPrincipalByPrecise(
-                                        precise: model.filtersVilles);
-                                    break;
-                                  case 'Oceans':
-                                    model.fetchPrincipal(
-                                        location: filtersOceans);
-                                    break;
-                                  case 'Seas':
-                                    model.fetchPrincipalByPrecise(
-                                        precise: model.filtersSeas);
-                                    break;
-                                  case 'Country-name at that time':
-                                    model.fetchPrincipalByCattId(
-                                        cattIds: model.filtersCattsId);
-                                    break;
-                                  case 'Place-name at that time':
-                                    model.fetchPrincipalByPattId(
-                                        pattIds: model.filtersPattsId);
-                                    break;
-                                  case 'Countries involved':
-                                    model.fetchPrincipalByCInvolvedId(
-                                        cInvolvedIds: model.filtersPaysInvId);
-                                    break;
-                                  case 'Places involved':
-                                    model.fetchPrincipalByPInvolvedId(
-                                        pInvolvedIds: model.filtersPlaceInvId);
-                                    break;
-                                  case 'Names of Countries involved at that time':
-                                    model.fetchPrincipalByAttInvolvedId(
-                                        attsInvolvedIds:
-                                            model.filtersPaysInvATTId);
-                                    break;
-                                  case 'Names of Places involved at that time':
-                                    model.fetchPrincipalByPAttInvolvedId(
-                                        pattsInvolvedIds:
-                                        model.filtersPlaceInvATTId);
-                                    break;
-                                  case 'Stars Observed':
-                                    model.fetchPrincipalByStarsObservedId(
-                                        starObservedIds:
-                                            model.filtersStarsObservedId);
-                                    break;
-                                  case 'Organisations':
-                                    model.fetchPrincipalByOrgsId(
-                                        orgIds: model.filtersOrgsId);
-                                    break;
-                                  case 'People':
-                                    model.fetchPrincipalByPersonId(
-                                        personIds: model.filtersPeopleId);
-                                    break;
-                                  case 'Categories':
-                                    model.fetchPrincipalByCategoryId(
-                                        categoryIds: model.filtersCategoriesId);
-                                    break;
-                                  case 'Other Terms':
-                                    model.fetchPrincipalByTermId(
-                                        termIds: model.filtersTermsId);
-                                    break;
-                                }
-                              },
-                              child: const Text("submit"),
-                            ),
-                          ),
                         ],
                       )),
                   Expanded(
@@ -354,31 +257,132 @@ class MultiSearchPage extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: BlankTextFormat(
-                                text: [
-                              ...filtersPeriod,
-                              ...filtersUniverse,
-                              ...model.filtersStars,
-                              ...filtersPays,
-                              ...model.filtersVilles,
-                              ...filtersOceans,
-                              ...model.filtersSeas,
-                              ...model.filtersCatts,
-                              ...model.filtersPatts,
-                              ...model.filtersPaysInv,
-                              ...model.filtersPlaceInv,
-                              ...model.filtersPaysInvATT,
-                              ...model.filtersPlaceInvATT,
-                              ...model.filtersStarsObserved,
-                              ...model.filtersOrgs,
-                              ...model.filtersPeople,
-                              ...model.filtersCategories,
-                              ...model.filtersTerms,
-                            ].join(', ')),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(700, 8, 8, 8),
+                                child: BlankTextFormat(
+                                    text: [
+                                  ...filtersPeriod,
+                                  ...filtersUniverse,
+                                  ...model.filtersStars,
+                                  ...filtersPays,
+                                  ...model.filtersVilles,
+                                  ...filtersOceans,
+                                  ...model.filtersSeas,
+                                  ...model.filtersCatts,
+                                  ...model.filtersPatts,
+                                  ...model.filtersPaysInv,
+                                  ...model.filtersPlaceInv,
+                                  ...model.filtersPaysInvATT,
+                                  ...model.filtersPlaceInvATT,
+                                  ...model.filtersStarsObserved,
+                                  ...model.filtersOrgs,
+                                  ...model.filtersPeople,
+                                  ...model.filtersCategories,
+                                  ...model.filtersTerms,
+                                ].join(', ')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    model.clearSearch();
+                                    currentDisplayList.clear();
+                                    filtersPeriod.clear();
+                                    filtersUniverse.clear();
+                                    filtersPays.clear();
+                                    filtersOceans.clear();
+                                  },
+                                  child: const Text("clear"),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    switch (isSelectedOption) {
+                                      case 'Period':
+                                        model.fetchPrincipalByPeriod(
+                                            period: filtersPeriod);
+                                        break;
+                                      case 'Universe':
+                                        model.fetchPrincipal(
+                                            location: filtersUniverse);
+                                        break;
+                                      case 'Stars':
+                                        model.fetchPrincipalByPrecise(
+                                            precise: model.filtersStars);
+                                        break;
+                                      case 'Current Country where it happened':
+                                        model.fetchPrincipal(location: filtersPays);
+                                        break;
+                                      case 'Current Place-name where it happened':
+                                        model.fetchPrincipalByPrecise(
+                                            precise: model.filtersVilles);
+                                        break;
+                                      case 'Oceans':
+                                        model.fetchPrincipal(
+                                            location: filtersOceans);
+                                        break;
+                                      case 'Seas':
+                                        model.fetchPrincipalByPrecise(
+                                            precise: model.filtersSeas);
+                                        break;
+                                      case 'Country-name at that time':
+                                        model.fetchPrincipalByCattId(
+                                            cattIds: model.filtersCattsId);
+                                        break;
+                                      case 'Place-name at that time':
+                                        model.fetchPrincipalByPattId(
+                                            pattIds: model.filtersPattsId);
+                                        break;
+                                      case 'Countries involved':
+                                        model.fetchPrincipalByCInvolvedId(
+                                            cInvolvedIds: model.filtersPaysInvId);
+                                        break;
+/*                                  case 'Places involved':
+                                    model.fetchPrincipalByPInvolvedId(
+                                        pInvolvedIds: model.filtersPlaceInvId);
+                                    break;*/
+/*                                      case 'Names of Countries involved at that time':
+                                        model.fetchPrincipalByAttInvolvedId(
+                                            attsInvolvedIds:
+                                            model.filtersPaysInvATTId);
+                                        break;*/
+/*                                  case 'Names of Places involved at that time':
+                                    model.fetchPrincipalByPAttInvolvedId(
+                                        pattsInvolvedIds:
+                                        model.filtersPlaceInvATTId);
+                                    break;*/
+                                      case 'Stars Observed':
+                                        model.fetchPrincipalByStarsObservedId(
+                                            starObservedIds:
+                                            model.filtersStarsObservedId);
+                                        break;
+                                      case 'Organisations':
+                                        model.fetchPrincipalByOrgsId(
+                                            orgIds: model.filtersOrgsId);
+                                        break;
+                                      case 'People':
+                                        model.fetchPrincipalByPersonId(
+                                            personIds: model.filtersPeopleId);
+                                        break;
+                                      case 'Categories':
+                                        model.fetchPrincipalByCategoryId(
+                                            categoryIds: model.filtersCategoriesId);
+                                        break;
+                                      case 'Other Terms':
+                                        model.fetchPrincipalByTermId(
+                                            termIds: model.filtersTermsId);
+                                        break;
+                                    }
+                                  },
+                                  child: const Text("submit"),
+                                ),
+                              ),
+                            ],
                           ),
-
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
@@ -493,9 +497,10 @@ class MultiSearchPage extends StatelessWidget {
                                         });
                                   case 'Names of Places involved at that time':
                                     return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPlaceInvATT,
+                                        filteredImKeys:
+                                            model.filtersPlaceInvATT,
                                         filteredImValues:
-                                        model.filtersPlaceInvATTId,
+                                            model.filtersPlaceInvATTId,
                                         filterImKey: item.placeatt,
                                         filterImValue: item.id,
                                         onSelected: (filterKey, filterId) {
@@ -598,7 +603,8 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ThreeDViewPage(principalIds: model.principalIds),
+                          builder: (context) =>
+                              ThreeDViewPage(principalIds: model.principalIds),
                         ));
                     break;
 
@@ -606,7 +612,8 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FourDViewPage(principalIds: model.principalIds),
+                          builder: (context) =>
+                              FourDViewPage(principalIds: model.principalIds),
                         ));
                     break;
 
@@ -614,7 +621,8 @@ class MultiSearchPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MRViewPage(principalIds: model.principalIds),
+                          builder: (context) =>
+                              MRViewPage(principalIds: model.principalIds),
                         ));
                     break;
                 }

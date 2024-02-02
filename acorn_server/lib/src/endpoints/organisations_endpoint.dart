@@ -18,4 +18,15 @@ class OrganisationsEndpoint extends Endpoint {
     var newOrgId = newOrg.id;
     return newOrgId!;
   }
+
+  ///Adds a new Org and returns all Orgs
+  Future<List<Organisations>> addAndReturnOrgs(
+      Session session, Organisations organisations) async {
+    await Organisations.db.insertRow(session, organisations);
+    var allOrgs = await Organisations.db.find(
+      session,
+      orderBy: (organisations) => organisations.organisation,
+    );
+    return allOrgs;
+  }
 }

@@ -10,28 +10,29 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class AttsInvolved extends _i1.SerializableEntity {
-  AttsInvolved._({
+abstract class PattsInvolved extends _i1.SerializableEntity {
+  PattsInvolved._({
     this.id,
     required this.principalId,
-    required this.attId,
+    required this.pattId,
   });
 
-  factory AttsInvolved({
+  factory PattsInvolved({
     int? id,
     required int principalId,
-    required int attId,
-  }) = _AttsInvolvedImpl;
+    required int pattId,
+  }) = _PattsInvolvedImpl;
 
-  factory AttsInvolved.fromJson(
+  factory PattsInvolved.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return AttsInvolved(
+    return PattsInvolved(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       principalId: serializationManager
           .deserialize<int>(jsonSerialization['principalId']),
-      attId: serializationManager.deserialize<int>(jsonSerialization['attId']),
+      pattId:
+          serializationManager.deserialize<int>(jsonSerialization['pattId']),
     );
   }
 
@@ -42,46 +43,46 @@ abstract class AttsInvolved extends _i1.SerializableEntity {
 
   int principalId;
 
-  int attId;
+  int pattId;
 
-  AttsInvolved copyWith({
+  PattsInvolved copyWith({
     int? id,
     int? principalId,
-    int? attId,
+    int? pattId,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
-      'attId': attId,
+      'pattId': pattId,
     };
   }
 }
 
 class _Undefined {}
 
-class _AttsInvolvedImpl extends AttsInvolved {
-  _AttsInvolvedImpl({
+class _PattsInvolvedImpl extends PattsInvolved {
+  _PattsInvolvedImpl({
     int? id,
     required int principalId,
-    required int attId,
+    required int pattId,
   }) : super._(
           id: id,
           principalId: principalId,
-          attId: attId,
+          pattId: pattId,
         );
 
   @override
-  AttsInvolved copyWith({
+  PattsInvolved copyWith({
     Object? id = _Undefined,
     int? principalId,
-    int? attId,
+    int? pattId,
   }) {
-    return AttsInvolved(
+    return PattsInvolved(
       id: id is int? ? id : this.id,
       principalId: principalId ?? this.principalId,
-      attId: attId ?? this.attId,
+      pattId: pattId ?? this.pattId,
     );
   }
 }

@@ -30,9 +30,7 @@ abstract class MyClass extends _i1.SerializableEntity {
   MyClass copyWith({_i2.UserInfo? userInfo});
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'userInfo': userInfo,
-    };
+    return {'userInfo': userInfo.toJson()};
   }
 }
 

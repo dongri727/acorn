@@ -40,12 +40,16 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  ///adds and gets again stars, and rebuilds listStars
+  ///DBに新規starを挿入・再取得･再描画
+  //todo 複数語を同時に挿入できるようにする
   addStarsAndFetch(String newStar) async {
-    var stars = Stars(star: newStar);
-    await client.stars.addStars(stars);
-    await fetchStars();
-    notifyListeners();
+    try {
+      var stars = Stars(star: newStar);
+      listStars = await client.stars.addAndReturnStars(stars);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 
   ///DBからPlaceを取得
@@ -81,33 +85,39 @@ class WhereModel extends ChangeNotifier {
   }
 
   ///DBに新規seaを挿入・再取得･再描画
+  //todo 複数語を同時に挿入できるようにする
   addSeasAndFetch(String newSea) async {
-    var seas = Seas(sea: newSea);
-    await client.seas.addSeas(seas);
-    fetchSeas();
-    notifyListeners();
-  }
-
-  ///CATT
-  ///DBからCATTを取得
-  Future<void> fetchCountryATT() async {
     try {
-      listCountryatts = await client.countryatts.getCountryATTs();
-      print('getCatt');
+      var seas = Seas(sea: newSea);
+      listSeas = await client.seas.addAndReturnSeas(seas);
       notifyListeners();
-    } on Exception catch (e) {
+    } catch (e) {
       debugPrint('$e');
     }
   }
 
-  int? countryattId;
-  ///DBに新規CATTを挿入・再取得･再描画
+/*  ///CATT
+  ///DBからCATTを取得
+  Future<void> fetchCountryATT() async {
+    try {
+      listCountryatts = await client.countryatts.getCountryATTs();
+      print('getCatts');
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }*/
+
+/*  ///DBに新規CATTを挿入・再取得･再描画
   addCountryATTandFetch() async {
-    var catts = Countryatts(countryatt: newCountryatt);
-    countryattId = await client.countryatts.addCountryATTs(catts);
-    fetchCountryATT();
-    notifyListeners();
-  }
+    try {
+      listCountryatts = await client.countryatts.addAndGetCatts();
+      print('getNewCatts');
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }*/
 
   ///DBからPATTを取得
   Future<void> fetchPlaceATT() async {
@@ -119,14 +129,16 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  int? placeattId;
-  ///DBに新規PATTを挿入・再取得･再描画
+/*  ///DBに新規PATTを挿入・再取得･再描画
   addPlaceATTandFetch() async {
-    var patts = Placeatts(placeatt: newPlaceatt);
-    placeattId = await client.placeatts.addPlaceATTs(patts);
-    fetchPlaceATT();
-    notifyListeners();
-  }
+    try {
+      listPlaceatts = await client.placeatts.addAndGetPatts(newPlaceatt);
+      print('getNewPatts');
+      notifyListeners();
+    } on Exception catch (e) {
+      debugPrint('$e');
+    }
+  }*/
 
   ///RadioButton
   String _selectedOption = '';

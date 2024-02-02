@@ -28,10 +28,10 @@ dependencies:
   acorn_client:
     path: ../acorn_client
 
-  serverpod_auth_shared_flutter: ^1.2.0
-  serverpod_auth_email_flutter: ^1.2.0
-  serverpod_auth_google_flutter: ^1.2.0
-  serverpod_auth_apple_flutter: ^1.2.0
+  serverpod_auth_shared_flutter: ^1.2.2
+  serverpod_auth_email_flutter: ^1.2.2
+  serverpod_auth_google_flutter: ^1.2.2
+  serverpod_auth_apple_flutter: ^1.2.2
 
   mailer: ^6.0.1
 

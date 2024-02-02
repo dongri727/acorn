@@ -15,4 +15,15 @@ class TermsEndpoint extends Endpoint {
     await Terms.db.insertRow(session, terms);
     return terms.id!;
   }
+
+  ///Adds a new Term and returns all Terms
+  Future<List<Terms>> addAndReturnTerms(
+      Session session, Terms terms) async {
+    await Terms.db.insertRow(session, terms);
+    var allTerms = await Terms.db.find(
+      session,
+      orderBy: (terms) => terms.term,
+    );
+    return allTerms;
+  }
 }
