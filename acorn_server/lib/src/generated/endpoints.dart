@@ -415,8 +415,8 @@ class Endpoints extends _i1.EndpointDispatch {
             params['countryatts'],
           ),
         ),
-        'addAndGetCatts': _i1.MethodConnector(
-          name: 'addAndGetCatts',
+        'addAndReturnCatts': _i1.MethodConnector(
+          name: 'addAndReturnCatts',
           params: {
             'countryatts': _i1.ParameterDescription(
               name: 'countryatts',
@@ -429,7 +429,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['countryatts'] as _i5.CountryattsEndpoint)
-                  .addAndGetCatts(
+                  .addAndReturnCatts(
             session,
             params['countryatts'],
           ),
@@ -1114,6 +1114,49 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['places'] as _i19.PlacesEndpoint).addPlaces(
             session,
             params['places'],
+          ),
+        ),
+        'addAndReturnPlaces': _i1.MethodConnector(
+          name: 'addAndReturnPlaces',
+          params: {
+            'places': _i1.ParameterDescription(
+              name: 'places',
+              type: _i1.getType<_i45.Places>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['places'] as _i19.PlacesEndpoint).addAndReturnPlaces(
+            session,
+            params['places'],
+          ),
+        ),
+        'addAndReturnPlacesWithKeyCountry': _i1.MethodConnector(
+          name: 'addAndReturnPlacesWithKeyCountry',
+          params: {
+            'places': _i1.ParameterDescription(
+              name: 'places',
+              type: _i1.getType<_i45.Places>(),
+              nullable: false,
+            ),
+            'keyword': _i1.ParameterDescription(
+              name: 'keyword',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['places'] as _i19.PlacesEndpoint)
+                  .addAndReturnPlacesWithKeyCountry(
+            session,
+            params['places'],
+            keyword: params['keyword'],
           ),
         ),
         'getPlacesInv': _i1.MethodConnector(

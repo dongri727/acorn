@@ -143,12 +143,12 @@ class EndpointCountryatts extends _i1.EndpointRef {
         {'countryatts': countryatts},
       );
 
-  ///Adds a catt and re-fetch all from DB
-  _i2.Future<List<_i6.Countryatts>> addAndGetCatts(
+  ///Adds a new Catt and returns all Catts
+  _i2.Future<List<_i6.Countryatts>> addAndReturnCatts(
           _i6.Countryatts countryatts) =>
       caller.callServerEndpoint<List<_i6.Countryatts>>(
         'countryatts',
-        'addAndGetCatts',
+        'addAndReturnCatts',
         {'countryatts': countryatts},
       );
 
@@ -518,6 +518,28 @@ class EndpointPlaces extends _i1.EndpointRef {
         'places',
         'addPlaces',
         {'places': places},
+      );
+
+  ///Adds a new Place and returns all Places
+  _i2.Future<List<_i20.Places>> addAndReturnPlaces(_i20.Places places) =>
+      caller.callServerEndpoint<List<_i20.Places>>(
+        'places',
+        'addAndReturnPlaces',
+        {'places': places},
+      );
+
+  ///Adds a new Place and returns all Places
+  _i2.Future<List<_i20.Places>> addAndReturnPlacesWithKeyCountry(
+    _i20.Places places, {
+    String? keyword,
+  }) =>
+      caller.callServerEndpoint<List<_i20.Places>>(
+        'places',
+        'addAndReturnPlacesWithKeyCountry',
+        {
+          'places': places,
+          'keyword': keyword,
+        },
       );
 
   ///

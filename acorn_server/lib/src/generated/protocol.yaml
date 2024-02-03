@@ -11,7 +11,7 @@ cattInvolved:
 countryatts:
   - getCountryATTs:
   - addCountryATTs:
-  - addAndGetCatts:
+  - addAndReturnCatts:
   - addListAndGetCatts:
 oceans:
   - getOceans:
@@ -58,6 +58,8 @@ placeatts:
 places:
   - getPlaces:
   - addPlaces:
+  - addAndReturnPlaces:
+  - addAndReturnPlacesWithKeyCountry:
   - getPlacesInv:
 principal:
   - addPrincipal:

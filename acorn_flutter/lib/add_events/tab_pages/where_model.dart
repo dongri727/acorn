@@ -64,13 +64,15 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-  ///DBに新規placeを挿入・再取得･再描画
-  addPlacesAndFetch(String newPlace, keyCountry) async {
-    var places = Places(place: newPlace, country: keyCountry);
-    await client.places.addPlaces(places);
-    await fetchPlaces(keyCountry);
-    notifyListeners();
-    print('save place with $keyCountry');
+  //todo 複数語を同時に挿入できるようにする
+  addPlacesAndFetch(String newPlace, String keyCountry) async {
+    try {
+      var places = Places(place: newPlace, country: keyCountry);
+      listPlaces = await client.places.addAndReturnPlacesWithKeyCountry(places);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 
   ///DBからSeasを取得
@@ -96,7 +98,7 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
-/*  ///CATT
+  ///CATT
   ///DBからCATTを取得
   Future<void> fetchCountryATT() async {
     try {
@@ -106,18 +108,19 @@ class WhereModel extends ChangeNotifier {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
-/*  ///DBに新規CATTを挿入・再取得･再描画
-  addCountryATTandFetch() async {
+  ///DBに新規CATTを挿入・再取得･再描画
+  //todo 複数語を同時に挿入できるようにする
+  addCountryATTandFetch(String newCountryatt) async {
     try {
-      listCountryatts = await client.countryatts.addAndGetCatts();
-      print('getNewCatts');
+      var catts = Countryatts(countryatt: newCountryatt);
+      listCountryatts = await client.countryatts.addAndReturnCatts(catts);
       notifyListeners();
-    } on Exception catch (e) {
+    } catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
   ///DBからPATTを取得
   Future<void> fetchPlaceATT() async {

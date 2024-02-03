@@ -242,10 +242,10 @@ class WherePage extends StatelessWidget{
                                       currentDisplayList = model.listSeas;
                                       model.updateLocationPrecise(model.chosenSea);
                                       break;
-/*                                    case 'Country-name at that time':
+                                    case 'Country-name at that time':
                                       await model.fetchCountryATT();
                                       currentDisplayList = model.listCountryatts;
-                                      break;*/
+                                      break;
                                     case 'Place-name at that time':
                                       await model.fetchPlaceATT();
                                       currentDisplayList = model.listPlaceatts;
@@ -296,10 +296,10 @@ class WherePage extends StatelessWidget{
                                     await model.addSeasAndFetch(newSea);
                                     currentDisplayList = model.listSeas;
                                     break;
-/*                                  case 'Country-name at that time':
-                                    await model.addCountryATTandFetch();
+                                  case 'Country-name at that time':
+                                    await model.addCountryATTandFetch(newCountryatt);
                                     currentDisplayList = model.listCountryatts;
-                                    break;*/
+                                    break;
 /*                                  case 'Place-name at that time':
                                     await model.addPlaceATTandFetch();
                                     currentDisplayList = model.listPlaceatts;

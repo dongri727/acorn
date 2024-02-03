@@ -18,6 +18,25 @@ class PlacesEndpoint extends Endpoint {
     await Places.db.insertRow(session, places);
   }
 
+  ///Adds a new Place and returns all Places
+  Future<List<Places>> addAndReturnPlaces(
+      Session session, Places places) async {
+    await Places.db.insertRow(session, places);
+    var allPlaces = await Places.db.find(
+      session,
+      orderBy: (places) => places.place,
+    );
+    return allPlaces;
+  }
+
+  ///Adds a new Place and returns all Places
+  Future<List<Places>> addAndReturnPlacesWithKeyCountry(
+      Session session, Places places, {String? keyword}) async {
+    await Places.db.insertRow(session, places);
+    var allPlacesWithKeyCountry = await getPlaces(session, keyword: keyword);
+    return allPlacesWithKeyCountry;
+  }
+
   ///
   Future<List<Places>> getPlacesInv(Session session,
       {List<dynamic>? placeInvIds}) async {
