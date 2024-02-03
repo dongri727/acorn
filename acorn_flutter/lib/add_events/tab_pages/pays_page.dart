@@ -3,16 +3,10 @@ import 'package:acorn_flutter/utils/blank_text_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//import '../../confirm/confirm.dart';
 import '../../utils/button_format.dart';
 import '../../utils/tff_format.dart';
-import '../../lists/pays_options_list.dart';
 
-List<String> options = paysOptions;
 String isSelectedOption = '';
-List<dynamic> currentDisplayList = [];
-
-var keyCountry = '';
 
 class PaysPage extends StatelessWidget {
   const PaysPage({super.key});

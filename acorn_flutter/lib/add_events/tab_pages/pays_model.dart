@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'package:acorn_flutter/add_events/tab_pages/pays_model.dart';
 import 'package:acorn_flutter/lists/pays_options_list.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +95,7 @@ class PaysModel extends ChangeNotifier {
     }
   }
 
+  //todo 都市名を追加するには国名が必要だが･･･。
   addPlaceAndFetch(String newPlace) async {
     try {
       var place = Places(place: newPlace, country: keyCountry);
@@ -324,80 +324,50 @@ class PaysModel extends ChangeNotifier {
     print("stars:$filtersStars");
   }  
 
-  String _selectedPaysInv = '';
-  int _selectedPaysInvId = 0;
-  String get selectedPaysInv => _selectedPaysInv;
-  int get selectedPaysInvId => _selectedPaysInvId;
+  String selectedPaysInv = '';
+  int selectedPaysInvId = 0;
 
-  set selectedPaysInv(String pays) {
-    _selectedPaysInv = pays;
-    notifyListeners();
-  }
+  String selectedPlaceInv = '';
+  int selectedPlaceInvId = 0;
 
-  set selectedPaysInvId(int value) {
-    _selectedPaysInvId = value;
-    notifyListeners();
-  }
+  String selectedCattInv = '';
+  int selectedCattInvId = 0;
 
-  String _selectedPlaceInv = '';
-  int _selectedPlaceInvId = 0;
-  String get selectedPlaceInv => _selectedPlaceInv;
-  int get selectedPlaceInvId => _selectedPlaceInvId;
+/*   set selectedCattInv(String catt) {
+    selectedCattInv = catt;
+    //notifyListeners();
+  } */
 
-  set selectedPlaceInv(String place) {
-    _selectedPlaceInv = place;
-    notifyListeners();
-  }
-
-  set selectedPlaceInvId(int value) {
-    _selectedPlaceInvId = value;
-    notifyListeners();
-  }
-
-  String _selectedCattInv = '';
-  int _selectedCattInvId = 0;
-  String get selectedCattInv => _selectedCattInv;
-  int get selectedCattInvId => _selectedCattInvId;
-
-  set selectedCattInv(String catt) {
-    _selectedCattInv = catt;
-    notifyListeners();
-  }
-
-  set selectedCattInvId(int value) {
+/*   set selectedCattInvId(int value) {
     _selectedCattInvId = value;
-    notifyListeners();
-  }
+    //notifyListeners();
+  } */
 
-  String _selectedPattInv = '';
-  int _selectedPattInvId = 0;
-  String get selectedPattInv => _selectedPattInv;
-  int get selectedPattInvId => _selectedPattInvId;
+  String selectedPattInv = '';
+  int selectedPattInvId = 0;
 
-  set selectedPattInv(String catt) {
+/*   set selectedPattInv(String catt) {
     _selectedPattInv = catt;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set selectedPattInvId(int value) {
     _selectedPattInvId = value;
-    notifyListeners();
-  }
+    //notifyListeners();
+  } */
 
-  String _selectedStarInv = '';
-  int _selectedStarInvId = 0;
-  String get selectedStarInv => _selectedStarInv;
-  int get selectedStarInvId => _selectedStarInvId;
+  String selectedStarInv = '';
+  int selectedStarInvId = 0;
 
-  set selectedStarInv(String star) {
+/*   set selectedStarInv(String star) {
     _selectedStarInv = star;
-    notifyListeners();
+    //notifyListeners();
   }
 
   set selectedStarInvId(int value) {
     _selectedStarInvId = value;
     notifyListeners();
-  }
+  } */
 
   ///RadioButton
   String _selectedOption = '';

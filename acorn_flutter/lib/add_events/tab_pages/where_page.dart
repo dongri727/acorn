@@ -1,13 +1,10 @@
-import 'dart:ui';
-
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/add_events/tab_pages/principal_model.dart';
 import 'package:acorn_flutter/add_events/tab_pages/where_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
+import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../../confirm/confirm.dart';
 import '../../confirm/confirm_model.dart';
@@ -29,22 +26,21 @@ class WherePageGate extends StatelessWidget {
             return Scaffold(
               body: SafeArea(
                   child: Center(
-                    child: Column(children: [
-                      Expanded(
-                          child: WherePage(
-                            confirm: confirm,
-                          )),
-                    ]),
+                child: Column(children: [
+                  Expanded(
+                      child: WherePage(
+                    confirm: confirm,
                   )),
+                ]),
+              )),
             );
           },
         ));
   }
 }
 
-class WherePage extends StatelessWidget{
-  WherePage({super.key, required Confirm confirm})
-      :_confirm = confirm;
+class WherePage extends StatelessWidget {
+  WherePage({super.key, required Confirm confirm}) : _confirm = confirm;
 
   final Confirm _confirm;
 
@@ -61,7 +57,6 @@ class WherePage extends StatelessWidget{
   double cy = 0.0;
   double cz = 0.0;
 
-
   ///Stars
   List<Stars> listStars = [];
 
@@ -71,8 +66,6 @@ class WherePage extends StatelessWidget{
 
   ///Seas
   List<Seas> listSeas = [];
-
-
 
   List<Countryatts> listCountryatts = [];
   List<Map<String, String>> displayListCountryatts = [];
@@ -85,7 +78,7 @@ class WherePage extends StatelessWidget{
   final List<String> _filtersPlaceatts = <String>[];
   //final List<int> _filtersPlaceattsId = <int>[];
 
-  List<dynamic> currentDisplayList= [];
+  List<dynamic> currentDisplayList = [];
 
   String? isSelectedOption = '';
 
@@ -118,317 +111,311 @@ class WherePage extends StatelessWidget{
 
     return ChangeNotifierProvider<WhereModel>(
       create: (_) => WhereModel(),
-      child: Consumer<WhereModel>(
-              builder: (_, model, child) {
-             return Scaffold(
-                body: Container(
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/both.png'),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Row(
+      child: Consumer<WhereModel>(builder: (_, model, child) {
+        return Scaffold(
+            body: Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage('assets/images/both.png'),
+                  fit: BoxFit.cover,
+                )),
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(children: [
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                              child: RadioButtonFormat(
+                                  options: options,
+                                  onChanged: (String? value) {
+                                    model.selectedOption = value!;
+                                    isSelectedOption = value;
+                                    print("selected: $value");
+                                  }),
+                            ),
+                          ),
+                          Expanded(
+                              flex: 1,
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
-                                      child: RadioButtonFormat(
-                                          options: options,
-                                          onChanged: (String? value) {
-                                            model.selectedOption = value!;
-                                            isSelectedOption = value;
-                                            print("selected: $value");
-                                          }),
-                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 20, 20, 60),
+                                    child: BlankTextFormat(
+                                        text: model.locationPrecise),
                                   ),
-                                  Expanded(
-                                      flex: 1,
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
-                                            child: BlankTextFormat(text: model.locationPrecise),
-                                          ),
-                                          BlankTextFormat(text: model.chosenCatt),
-                                          BlankTextFormat(text: model.chosenPatt),
-                                        ],
-                                      )
+                                  BlankTextFormat(text: model.chosenCatt),
+                                  BlankTextFormat(text: model.chosenPatt),
+                                ],
+                              )),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 8, 200, 8),
+                                  child: RadioButtonRowFormat(
+                                      options: ns,
+                                      onChanged: (String? value) {
+                                        model.selectedOption = value!;
+                                        isSelectedOption = value;
+                                        print("selected: $value");
+                                      }),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
+                                  child: TffFormat(
+                                    hintText: "Latitude",
+                                    onChanged: (value) {
+                                      switch (isSelectedOption) {
+                                        case 'N':
+                                          newLatitude = double.tryParse(value)!;
+                                          break;
+                                        case 'S':
+                                          newLatitude =
+                                              -double.tryParse(value)!;
+                                          break;
+                                      }
+                                    },
+                                    tffColor1: Colors.black54,
+                                    tffColor2: const Color(0x99e6e6fa),
                                   ),
-
-                                  Expanded(
-                                    flex: 1,
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 8, 200, 8),
-                                          child: RadioButtonRowFormat(
-                                              options: ns,
-                                              onChanged: (String? value) {
-                                                model.selectedOption = value!;
-                                                isSelectedOption = value;
-                                                print("selected: $value");
-                                              }),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              50, 8, 100, 8),
-                                          child: TffFormat(
-                                            hintText: "Latitude",
-                                            onChanged: (value) {
-                                              switch (isSelectedOption) {
-                                                case 'N': newLatitude = double.tryParse(value)!;
-                                                break;
-                                                case 'S': newLatitude = -double.tryParse(value)!;
-                                                break;
-                                              }
-                                            },
-                                            tffColor1: Colors.black54,
-                                            tffColor2: const Color(0x99e6e6fa),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(50, 8, 200, 8),
-                                          child: RadioButtonRowFormat(
-                                              options: ew,
-                                              onChanged: (String? value) {
-                                                model.selectedOption = value!;
-                                                isSelectedOption = value;
-                                                print("selected: $value");
-                                              }),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              50, 8, 100, 40),
-                                          child: TffFormat(
-                                            hintText: "Longitude",
-                                            onChanged: (value) {
-                                              switch (isSelectedOption) {
-                                                case 'E': newLongitude = double.tryParse(value)!;
-                                                break;
-                                                case 'W': newLongitude = -double.tryParse(value)!;
-                                                break;
-                                              }
-                                            },
-                                            tffColor1: Colors.black54,
-                                            tffColor2: const Color(0x99e6e6fa),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                  )
-                                ]),
-                            Center(
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  switch (isSelectedOption) {
-                                    case 'Stars':
-                                      await model.fetchStars();
-                                      currentDisplayList = model.listStars;
-                                      model.updateLocationPrecise(model.chosenStar);
-                                      break;
-                                    case 'Current Place-name':
-                                      await model.fetchPlaces(keyCountry);
-                                      currentDisplayList = model.listPlaces;
-                                      model.updateLocationPrecise(model.chosenPlace);
-                                      break;
-                                    case 'Sea-name':
-                                      await model.fetchSeas();
-                                      currentDisplayList = model.listSeas;
-                                      model.updateLocationPrecise(model.chosenSea);
-                                      break;
-                                    case 'Country-name at that time':
-                                      await model.fetchCountryATT();
-                                      currentDisplayList = model.listCountryatts;
-                                      break;
-                                    case 'Place-name at that time':
-                                      await model.fetchPlaceATT();
-                                      currentDisplayList = model.listPlaceatts;
-                                      break;
-                                  }
-                                },
-                                child: const Text('Show and Select Options'),
-                              ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 8, 200, 8),
+                                  child: RadioButtonRowFormat(
+                                      options: ew,
+                                      onChanged: (String? value) {
+                                        model.selectedOption = value!;
+                                        isSelectedOption = value;
+                                        print("selected: $value");
+                                      }),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 8, 100, 40),
+                                  child: TffFormat(
+                                    hintText: "Longitude",
+                                    onChanged: (value) {
+                                      switch (isSelectedOption) {
+                                        case 'E':
+                                          newLongitude =
+                                              double.tryParse(value)!;
+                                          break;
+                                        case 'W':
+                                          newLongitude =
+                                              -double.tryParse(value)!;
+                                          break;
+                                      }
+                                    },
+                                    tffColor1: Colors.black54,
+                                    tffColor2: const Color(0x99e6e6fa),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(30.0),
-                              child: FormatGrey(
-                                controller: controller,
-                                hintText: 'a New Name You Want',
-                                onChanged: (text) {
-                                  switch (isSelectedOption) {
-                                    case 'Stars':
-                                      newStar = text;
-                                      break;
-                                    case 'Current Place-name':
-                                      newPlace = text;
-                                      break;
-                                    case 'Sea-name':
-                                      newSea = text;
-                                      break;
-                                    case 'Country-name at that time':
-                                      newCountryatt = text;
-                                      break;
-                                    case 'Place-name at that time':
-                                      newPlaceatt = text;
-                                      break;
-                                  }
-                                },
-                              ),
-                            ),
-                            ButtonFormat(
-                              onPressed: () async {
-                                switch (isSelectedOption) {
-                                  case 'Stars':
-                                    await model.addStarsAndFetch(newStar);
-                                    currentDisplayList = model.listStars;
-                                    break;
-                                  case 'Current Place-name':
-                                    await model.addPlacesAndFetch(newPlace, keyCountry);
-                                    currentDisplayList = model.listPlaces;
-                                    break;
-                                  case 'Sea-name':
-                                    await model.addSeasAndFetch(newSea);
-                                    currentDisplayList = model.listSeas;
-                                    break;
-                                  case 'Country-name at that time':
-                                    await model.addCountryATTandFetch(newCountryatt);
-                                    currentDisplayList = model.listCountryatts;
-                                    break;
+                          )
+                        ]),
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              switch (isSelectedOption) {
+                                case 'Stars':
+                                  await model.fetchStars();
+                                  currentDisplayList = model.listStars;
+                                  model.updateLocationPrecise(model.chosenStar);
+                                  break;
+                                case 'Current Place-name':
+                                  await model.fetchPlaces(keyCountry);
+                                  currentDisplayList = model.listPlaces;
+                                  model
+                                      .updateLocationPrecise(model.chosenPlace);
+                                  break;
+                                case 'Sea-name':
+                                  await model.fetchSeas();
+                                  currentDisplayList = model.listSeas;
+                                  model.updateLocationPrecise(model.chosenSea);
+                                  break;
+                                case 'Country-name at that time':
+                                  await model.fetchCountryATT();
+                                  currentDisplayList = model.listCountryatts;
+                                  break;
+                                case 'Place-name at that time':
+                                  await model.fetchPlaceATT();
+                                  currentDisplayList = model.listPlaceatts;
+                                  break;
+                              }
+                            },
+                            child: const Text('Show and Select Options'),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: FormatGrey(
+                            controller: controller,
+                            hintText: 'a New Name You Want',
+                            onChanged: (text) {
+                              switch (isSelectedOption) {
+                                case 'Stars':
+                                  newStar = text;
+                                  break;
+                                case 'Current Place-name':
+                                  newPlace = text;
+                                  break;
+                                case 'Sea-name':
+                                  newSea = text;
+                                  break;
+                                case 'Country-name at that time':
+                                  newCountryatt = text;
+                                  break;
+                                case 'Place-name at that time':
+                                  newPlaceatt = text;
+                                  break;
+                              }
+                            },
+                          ),
+                        ),
+                        ButtonFormat(
+                          onPressed: () async {
+                            switch (isSelectedOption) {
+                              case 'Stars':
+                                await model.addStarsAndFetch(newStar);
+                                currentDisplayList = model.listStars;
+                                break;
+                              case 'Current Place-name':
+                                await model.addPlacesAndFetch(
+                                    newPlace, keyCountry);
+                                currentDisplayList = model.listPlaces;
+                                break;
+                              case 'Sea-name':
+                                await model.addSeasAndFetch(newSea);
+                                currentDisplayList = model.listSeas;
+                                break;
+                              case 'Country-name at that time':
+                                await model
+                                    .addCountryATTandFetch(newCountryatt);
+                                currentDisplayList = model.listCountryatts;
+                                break;
 /*                                  case 'Place-name at that time':
                                     await model.addPlaceATTandFetch();
                                     currentDisplayList = model.listPlaceatts;
                                     break;*/
-                                }
-                                controller.clear();
-                              },
-                              label: 'Add a New Name',
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Wrap(
-                                spacing: 5.0,
-                                children: currentDisplayList.map<Widget>((item) {
-                                  if (item is Stars) {
-                                    return ChoiceSIFormat(
-                                        choiceSIList: _filtersLocationPrecise,
-                                        choiceSIKey: item.star,
-                                        onChoiceSISelected: (choiceKey) {
-                                          model.chosenLocationPrecise = choiceKey;
-                                          model.updateLocationPrecise(choiceKey);
-                                          print(choiceKey);
-                                        });
-                                  } else if (item is Places) {
-                                    return ChoiceSIFormat(
-                                        choiceSIList: _filtersLocationPrecise,
-                                        choiceSIKey: item.place,
-                                        onChoiceSISelected: (choiceKey) {
-                                            model.chosenLocationPrecise = choiceKey;
-                                            model.updateLocationPrecise(choiceKey);
-                                            print(choiceKey);
-                                        });
-                                  } else if (item is Seas) {
-                                    return ChoiceSIFormat(
-                                      choiceSIList: _filtersLocationPrecise,
-                                      choiceSIKey: item.sea,
-                                      onChoiceSISelected: (choiceKey) {
-                                          model.chosenLocationPrecise = choiceKey;
-                                          model.updateLocationPrecise(choiceKey);
-                                          print(choiceKey);
-                                      });
-                                  } else if (item is Countryatts) {
-                                    return ChoiceFormat(
-                                      choiceList: _filtersCountryatts,
-                                      choiceKey: item.countryatt,
-                                      choiceId: item.id!,
-                                      onChoiceSelected: (choiceKey, choiceId) {
-                                          model.chosenCatt = choiceKey;
-                                          model.chosenCattId = choiceId;
-                                      },
-                                    );
-                                  } else if (item is Placeatts) {
-                                    return ChoiceFormat(
-                                      choiceList: _filtersPlaceatts,
-                                      choiceKey: item.placeatt,
-                                      choiceId: item.id!,
-                                      onChoiceSelected: (choiceKey, choiceId) {
-                                          model.chosenPatt = choiceKey;
-                                          model.chosenPattId = choiceId;
-                                          print(choiceId);
-                                      },
-                                    );
-                                  }
-                                  return const SizedBox.shrink();
-                                }).toList(),
-                              ),
-                            ),
-                          ],
+                            }
+                            controller.clear();
+                          },
+                          label: 'Add a New Name',
                         ),
-                      ),
-                    )
-                ),
-                floatingActionButton: FloatingActionButton.extended(
-                  onPressed: () {
-                    double ns = (math.pi * newLatitude) / 180;
-                    double ew = (math.pi * newLongitude) / 180;
-                    cx = math.cos(ns) * math.cos(ew) * confirm.coefficient;
-                    cy = math.sin(ns) * confirm.coefficient;
-                    cz = math.cos(ns) * math.sin(ew) * confirm.coefficient;
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Wrap(
+                            spacing: 5.0,
+                            children: currentDisplayList.map<Widget>((item) {
+                              if (item is Stars) {
+                                return ChoiceSIFormat(
+                                    choiceSIList: _filtersLocationPrecise,
+                                    choiceSIKey: item.star,
+                                    onChoiceSISelected: (choiceKey) {
+                                      model.chosenLocationPrecise = choiceKey;
+                                      model.updateLocationPrecise(choiceKey);
+                                      print(choiceKey);
+                                    });
+                              } else if (item is Places) {
+                                return ChoiceSIFormat(
+                                    choiceSIList: _filtersLocationPrecise,
+                                    choiceSIKey: item.place,
+                                    onChoiceSISelected: (choiceKey) {
+                                      model.chosenLocationPrecise = choiceKey;
+                                      model.updateLocationPrecise(choiceKey);
+                                      print(choiceKey);
+                                    });
+                              } else if (item is Seas) {
+                                return ChoiceSIFormat(
+                                    choiceSIList: _filtersLocationPrecise,
+                                    choiceSIKey: item.sea,
+                                    onChoiceSISelected: (choiceKey) {
+                                      model.chosenLocationPrecise = choiceKey;
+                                      model.updateLocationPrecise(choiceKey);
+                                      print(choiceKey);
+                                    });
+                              } else if (item is Countryatts) {
+                                return ChoiceFormat(
+                                  choiceList: _filtersCountryatts,
+                                  choiceKey: item.countryatt,
+                                  choiceId: item.id!,
+                                  onChoiceSelected: (choiceKey, choiceId) {
+                                    model.chosenCatt = choiceKey;
+                                    model.chosenCattId = choiceId;
+                                  },
+                                );
+                              } else if (item is Placeatts) {
+                                return ChoiceFormat(
+                                  choiceList: _filtersPlaceatts,
+                                  choiceKey: item.placeatt,
+                                  choiceId: item.id!,
+                                  onChoiceSelected: (choiceKey, choiceId) {
+                                    model.chosenPatt = choiceKey;
+                                    model.chosenPattId = choiceId;
+                                    print(choiceId);
+                                  },
+                                );
+                              }
+                              return const SizedBox.shrink();
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                double ns = (math.pi * newLatitude) / 180;
+                double ew = (math.pi * newLongitude) / 180;
+                cx = math.cos(ns) * math.cos(ew) * confirm.coefficient;
+                cy = math.sin(ns) * confirm.coefficient;
+                cz = math.cos(ns) * math.sin(ew) * confirm.coefficient;
 
-                    showDialog<void>(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            title: const Text('Data has been temporarily stored.'),
-                            content: const Text(
-                                'They are not uploaded yet. please continue to fill in the other fields.'),
-                            actions: <Widget>[
-                              GestureDetector(
-                                child: const Text('OK'),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
-                          );
-                        });
+                showDialog<void>(
+                    context: context,
+                    builder: (_) {
+                      return const ConfirmDialog();
+                    });
 
-                    ///選択されたLocationPrecise
-                      confirm.selectedPrecise = model.locationPrecise;
-                      print("kept Selected Precise ${model.chosenLocationPrecise}");
+                ///選択されたLocationPrecise
+                confirm.selectedPrecise = model.locationPrecise;
+                print("kept Selected Precise ${model.chosenLocationPrecise}");
 
-                    ///選択されたCatt
-                    if (model.chosenCatt != '') {
-                      confirm.selectedCatt = model.chosenCatt;
-                      confirm.selectedCattId = model.chosenCattId;
-                      print("kept selected Catt ${model.chosenCattId}");
-                    }
+                ///選択されたCatt
+                if (model.chosenCatt != '') {
+                  confirm.selectedCatt = model.chosenCatt;
+                  confirm.selectedCattId = model.chosenCattId;
+                  print("kept selected Catt ${model.chosenCattId}");
+                }
 
-                    ///選択されたPatt
-                    if (model.chosenPatt != '') {
-                      confirm.selectedPatt = model.chosenPatt;
-                      print('kept selected Patt ${model.chosenPatt}');
-                      confirm.selectedPattId = model.chosenPattId;
-                    }
+                ///選択されたPatt
+                if (model.chosenPatt != '') {
+                  confirm.selectedPatt = model.chosenPatt;
+                  print('kept selected Patt ${model.chosenPatt}');
+                  confirm.selectedPattId = model.chosenPattId;
+                }
 
-                    confirm.latitude = newLatitude;
-                    confirm.longitude = newLongitude;
-                    confirm.x = double.parse((cx).toStringAsFixed(4));
-                    confirm.y = double.parse((cy).toStringAsFixed(4));
-                    confirm.z = double.parse((cz).toStringAsFixed(4));
-                    print('save where');
-                  },
-
-                  label: const Text('Temporarily Save'),
-                )
-                );
-             }
-          ),
+                confirm.latitude = newLatitude;
+                confirm.longitude = newLongitude;
+                confirm.x = double.parse((cx).toStringAsFixed(4));
+                confirm.y = double.parse((cy).toStringAsFixed(4));
+                confirm.z = double.parse((cz).toStringAsFixed(4));
+                print('save where');
+              },
+              label: const Text('Temporarily Save'),
+            ));
+      }),
     );
-   }
+  }
 }

@@ -1,16 +1,24 @@
 import 'dart:core';
 
+import 'package:acorn_flutter/confirm/confirm.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
+import 'package:provider/provider.dart';
+
+import '../../utils/chips_format.dart';
 
 class TermsModel extends ChangeNotifier {
+  List<String> options = ['Categories', 'Terms'];
+  String isSelectedOption = '';
+  List<dynamic> currentDisplayList = [];
 
+  var newCategory = '';
   List<Categories> listCategories = [];
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
 
+  var newTerm = '';
   List<Terms> listTerms = [];
   final List<String> filtersTerms = <String>[];
   final List<int> filtersTermsId = <int>[];
@@ -45,7 +53,6 @@ class TermsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
   fetchCategories() async {
     try {
       listCategories = await client.categories.getCategories();
@@ -59,7 +66,8 @@ class TermsModel extends ChangeNotifier {
   addCategoriesAndFetch(String newCategory) async {
     try {
       var categories = Categories(category: newCategory);
-      listCategories = await client.categories.addAndReturnCategories(categories);
+      listCategories =
+          await client.categories.addAndReturnCategories(categories);
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -86,13 +94,113 @@ class TermsModel extends ChangeNotifier {
     }
   }
 
-  ///RadioButton
-  String _selectedOption = '';
-  String get selectedOption => _selectedOption;
-
-  set selectedOption(String value) {
-    _selectedOption = value;
-    notifyListeners();
+  Future<void> fetchRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      case 'Categories':
+        await fetchCategories();
+        break;
+      case 'Terms':
+        await fetchTerms();
+        break;
+    }
   }
 
+  setNewWord(text) {
+    switch (selectedOption) {
+      case 'Categories':
+        newCategory = text;
+        notifyListeners();
+        break;
+      case 'Terms':
+        newTerm = text;
+        notifyListeners();
+        break;
+    }
+  }
+
+  Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      case 'Categories':
+        await addCategoriesAndFetch(newCategory);
+        break;
+      case 'Terms':
+        await addTermsAndFetch(newTerm);
+        break;
+    }
+  }
+  Widget buildItemWidget(dynamic item) {
+    String itemType = _getItemType(item);
+    switch (itemType) {
+      case 'Category':
+        return _buildFilterFormatImediat(
+          filteredKeys: filtersCategories,
+          filteredValues: filtersCategoriesId,
+          filterKey: (item as Categories).category,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedCategory = key;
+            selectedCategoryId = value;
+          },
+        );
+      case 'Terms':
+        return _buildFilterFormatImediat(
+          filteredKeys: filtersTerms,
+          filteredValues: filtersTermsId,
+          filterKey: (item as Terms).term,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedTerm = key;
+            selectedTermId = value;
+          },
+        );           
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  String _getItemType(dynamic item) {
+    if (item is Categories) return 'Categories';
+    if (item is Terms) return 'Terms';
+    return 'Unknown';
+  }
+
+  Widget _buildFilterFormatImediat({
+    required List<String> filteredKeys,
+    required List<int> filteredValues,
+    required String filterKey,
+    required int filterValue,
+    required Function(String, int) onSelected,
+  }) {
+    return FilterFormatImediat(
+        filteredImKeys: filteredKeys,
+        filteredImValues: filteredValues,
+        filterImKey: filterKey,
+        filterImValue: filterValue,
+        onSelected: onSelected);
+  } 
+
+  void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
+    // ダイアログ表示
+    showDialogCallback(context);
+    final confirm = Provider.of<Confirm>(context, listen: false);
+
+    // データの一時保存処理
+    confirm.selectedCountries = filtersCategories;
+    confirm.selectedCountriesId = filtersCategoriesId;
+    print("pays:$filtersCategories");
+
+    confirm.selectedPlaces = filtersTerms;
+    confirm.selectedPlacesId = filtersTermsId;
+    print("places:$filtersTerms");
+
+  }         
+
+  ///RadioButton
+  String selectedOption = '';
+  //String get selectedOption => _selectedOption;
+
+/*   set selectedOption(String value) {
+    _selectedOption = value;
+    notifyListeners();
+  } */
 }

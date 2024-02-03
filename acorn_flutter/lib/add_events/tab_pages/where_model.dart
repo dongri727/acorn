@@ -6,11 +6,67 @@ import 'package:acorn_flutter/serverpod_client.dart';
 
 class WhereModel extends ChangeNotifier {
 
-  String locationPrecise = '';
+    final Confirm _confirm;
 
-  // todo なぜこれが必要か考える
+  var newStar = '';
+  var newPlace = '';
+  var newSea = '';
+  var newPaysatt = '';
   var newCountryatt = '';
   var newPlaceatt = '';
+
+  var newLatitude = 0.0;
+  var newLongitude = 0.0;
+  double cx = 0.0;
+  double cy = 0.0;
+  double cz = 0.0;
+
+  ///Stars
+  List<Stars> listStars = [];
+
+  ///Place
+  List<Places> listPlaces = [];
+  String keyCountry = '';
+
+  ///Seas
+  List<Seas> listSeas = [];
+
+  List<Countryatts> listCountryatts = [];
+  List<Map<String, String>> displayListCountryatts = [];
+  final List<String> _filtersCountryatts = <String>[];
+  //final List<int> _fltersCountryattsId = <int>[];
+
+  ///当時の地名
+  List<Placeatts> listPlaceatts = [];
+  List<Map<String, String>> displayListPlaceatts = [];
+  final List<String> _filtersPlaceatts = <String>[];
+  //final List<int> _filtersPlaceattsId = <int>[];
+
+  List<dynamic> currentDisplayList = [];
+
+  String? isSelectedOption = '';
+
+  List<String> options = [
+    'Stars',
+    'Current Place-name',
+    'Sea-name',
+    'Country-name at that time',
+    'Place-name at that time'
+  ];
+
+  List<String> ns = [
+    'N',
+    'S',
+  ];
+
+  List<String> ew = [
+    'E',
+    'W',
+  ];
+
+  final List<String> _filtersLocationPrecise = <String>[];
+
+  String locationPrecise = '';
 
   ///Stars gotten from DB
   List<Stars> listStars = [];

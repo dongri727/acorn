@@ -2,6 +2,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/blank_text_format.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
+import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -163,19 +164,7 @@ class WhoPage extends StatelessWidget {
               showDialog<void>(
                   context: context,
                   builder: (_) {
-                    return AlertDialog(
-                      title: const Text('Data has been temporarily stored.'),
-                      content: const Text(
-                          'They are not uploaded yet. please continue to fill in the other fields.'),
-                      actions: <Widget>[
-                        GestureDetector(
-                          child: const Text('OK'),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        )
-                      ],
-                    );
+                    return const ConfirmDialog();
                   });
 
               confirm.selectedOrg = model.filtersOrgs;
