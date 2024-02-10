@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
+import 'package:acorn_flutter/utils/dropdown_button.format.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -139,7 +140,14 @@ class MultiSearchPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: const Color(0x99e6e6fa),
                               ),
-                              child: DropdownButton<String>(
+                                child: CustomDropdownButton(
+                                  selectedValue: isSelectedOption,
+                                  options: options,
+                                  onChanged: (String? value) {
+                                    model.isSelectedOption = value!;
+                                  },
+                                ),
+/*                              child: DropdownButton<String>(
                                   value: isSelectedOption,
                                   alignment: Alignment.center,
                                   dropdownColor: const Color(0x99e6e6fa),
@@ -158,7 +166,7 @@ class MultiSearchPage extends StatelessWidget {
                                               .textTheme.headlineMedium,
                                           value),
                                     );
-                                  }).toList()),
+                                  }).toList()),*/
                             ),
                           ),
                           Padding(

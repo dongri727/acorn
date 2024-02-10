@@ -530,9 +530,9 @@ class EndpointPlaces extends _i1.EndpointRef {
 
   ///Adds a new Place and returns all Places
   _i2.Future<List<_i20.Places>> addAndReturnPlacesWithKeyCountry(
-    _i20.Places places, {
-    String? keyword,
-  }) =>
+    _i20.Places places,
+    String keyword,
+  ) =>
       caller.callServerEndpoint<List<_i20.Places>>(
         'places',
         'addAndReturnPlacesWithKeyCountry',

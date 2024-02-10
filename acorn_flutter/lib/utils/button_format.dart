@@ -62,6 +62,7 @@ class _RadioButtonFormatState extends State<RadioButtonFormat> {
             style: const TextStyle(fontSize: 18),
           ),
           leading: Radio<String>(
+            focusColor: Colors.white,
             activeColor: Colors.yellow,
             value: option,
             groupValue: _selectedOption,

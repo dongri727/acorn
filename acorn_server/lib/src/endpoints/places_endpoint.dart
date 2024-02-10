@@ -31,9 +31,13 @@ class PlacesEndpoint extends Endpoint {
 
   ///Adds a new Place and returns all Places
   Future<List<Places>> addAndReturnPlacesWithKeyCountry(
-      Session session, Places places, {String? keyword}) async {
+      Session session, Places places, String keyword) async {
     await Places.db.insertRow(session, places);
-    var allPlacesWithKeyCountry = await getPlaces(session, keyword: keyword);
+    var allPlacesWithKeyCountry = await Places.db.find(
+      session,
+      where: (t) => t.country.equals(keyword),
+      orderBy: (places) => places.place,
+    );
     return allPlacesWithKeyCountry;
   }
 

@@ -6,6 +6,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/build_chips.dart';
 import '../../utils/chips_format.dart';
 
 class TermsModel extends ChangeNotifier {
@@ -132,7 +133,7 @@ class TermsModel extends ChangeNotifier {
     String itemType = _getItemType(item);
     switch (itemType) {
       case 'Category':
-        return _buildFilterFormatImediat(
+        return buildFilterFormatImediat(
           filteredKeys: filtersCategories,
           filteredValues: filtersCategoriesId,
           filterKey: (item as Categories).category,
@@ -143,7 +144,7 @@ class TermsModel extends ChangeNotifier {
           },
         );
       case 'Terms':
-        return _buildFilterFormatImediat(
+        return buildFilterFormatImediat(
           filteredKeys: filtersTerms,
           filteredValues: filtersTermsId,
           filterKey: (item as Terms).term,
@@ -164,7 +165,7 @@ class TermsModel extends ChangeNotifier {
     return 'Unknown';
   }
 
-  Widget _buildFilterFormatImediat({
+/*  Widget _buildFilterFormatImediat({
     required List<String> filteredKeys,
     required List<int> filteredValues,
     required String filterKey,
@@ -176,8 +177,8 @@ class TermsModel extends ChangeNotifier {
         filteredImValues: filteredValues,
         filterImKey: filterKey,
         filterImValue: filterValue,
-        onSelected: onSelected);
-  } 
+        onSelected: onSelected);*/
+ // }
 
   void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
@@ -185,12 +186,12 @@ class TermsModel extends ChangeNotifier {
     final confirm = Provider.of<Confirm>(context, listen: false);
 
     // データの一時保存処理
-    confirm.selectedCountries = filtersCategories;
-    confirm.selectedCountriesId = filtersCategoriesId;
+    confirm.selectedCategory = filtersCategories;
+    confirm.selectedCategoryId = filtersCategoriesId;
     print("pays:$filtersCategories");
 
-    confirm.selectedPlaces = filtersTerms;
-    confirm.selectedPlacesId = filtersTermsId;
+    confirm.selectedTerm = filtersTerms;
+    confirm.selectedTermId = filtersTermsId;
     print("places:$filtersTerms");
 
   }         

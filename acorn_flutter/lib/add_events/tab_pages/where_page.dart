@@ -1,7 +1,5 @@
-import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/add_events/tab_pages/where_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +8,6 @@ import '../../confirm/confirm.dart';
 import '../../confirm/confirm_model.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
-
-import 'dart:math' as math;
 
 class WherePageGate extends StatelessWidget {
   const WherePageGate({super.key});
@@ -40,77 +36,20 @@ class WherePageGate extends StatelessWidget {
 }
 
 class WherePage extends StatelessWidget {
-  WherePage({super.key, required Confirm confirm}) : _confirm = confirm;
+  const WherePage({super.key, required Confirm confirm}) /* : _confirm = confirm */;
 
-  final Confirm _confirm;
-
-  var newStar = '';
-  var newPlace = '';
-  var newSea = '';
-  var newPaysatt = '';
-  var newCountryatt = '';
-  var newPlaceatt = '';
-
-  var newLatitude = 0.0;
-  var newLongitude = 0.0;
-  double cx = 0.0;
-  double cy = 0.0;
-  double cz = 0.0;
-
-  ///Stars
-  List<Stars> listStars = [];
-
-  ///Place
-  List<Places> listPlaces = [];
-  String keyCountry = '';
-
-  ///Seas
-  List<Seas> listSeas = [];
-
-  List<Countryatts> listCountryatts = [];
-  List<Map<String, String>> displayListCountryatts = [];
-  final List<String> _filtersCountryatts = <String>[];
-  //final List<int> _fltersCountryattsId = <int>[];
-
-  ///当時の地名
-  List<Placeatts> listPlaceatts = [];
-  List<Map<String, String>> displayListPlaceatts = [];
-  final List<String> _filtersPlaceatts = <String>[];
-  //final List<int> _filtersPlaceattsId = <int>[];
-
-  List<dynamic> currentDisplayList = [];
-
-  String? isSelectedOption = '';
-
-  List<String> options = [
-    'Stars',
-    'Current Place-name',
-    'Sea-name',
-    'Country-name at that time',
-    'Place-name at that time'
-  ];
-
-  List<String> ns = [
-    'N',
-    'S',
-  ];
-
-  List<String> ew = [
-    'E',
-    'W',
-  ];
-
-  final List<String> _filtersLocationPrecise = <String>[];
+  //final Confirm _confirm;
+  //String keyCountry = '';
 
   @override
   Widget build(BuildContext context) {
-    final confirm = Provider.of<Confirm>(context);
     final TextEditingController controller = TextEditingController();
+    final confirm = Provider.of<Confirm>(context);
 
-    keyCountry = _confirm.selectedLocation;
+    //final keyCountry = _confirm.selectedLocation;
 
     return ChangeNotifierProvider<WhereModel>(
-      create: (_) => WhereModel(),
+      create: (_) => WhereModel(keyCountry: confirm.selectedLocation),
       child: Consumer<WhereModel>(builder: (_, model, child) {
         return Scaffold(
             body: Container(
@@ -130,10 +69,9 @@ class WherePage extends StatelessWidget {
                               padding:
                                   const EdgeInsets.fromLTRB(100, 20, 20, 20),
                               child: RadioButtonFormat(
-                                  options: options,
+                                  options: model.options,
                                   onChanged: (String? value) {
                                     model.selectedOption = value!;
-                                    isSelectedOption = value;
                                     print("selected: $value");
                                   }),
                             ),
@@ -160,10 +98,10 @@ class WherePage extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(50, 8, 200, 8),
                                   child: RadioButtonRowFormat(
-                                      options: ns,
+                                      options: model.ns,
                                       onChanged: (String? value) {
                                         model.selectedOption = value!;
-                                        isSelectedOption = value;
+                                        //isSelectedOption = value;
                                         print("selected: $value");
                                       }),
                                 ),
@@ -173,15 +111,7 @@ class WherePage extends StatelessWidget {
                                   child: TffFormat(
                                     hintText: "Latitude",
                                     onChanged: (value) {
-                                      switch (isSelectedOption) {
-                                        case 'N':
-                                          newLatitude = double.tryParse(value)!;
-                                          break;
-                                        case 'S':
-                                          newLatitude =
-                                              -double.tryParse(value)!;
-                                          break;
-                                      }
+                                      model.nsSwitch(value);
                                     },
                                     tffColor1: Colors.black54,
                                     tffColor2: const Color(0x99e6e6fa),
@@ -191,10 +121,9 @@ class WherePage extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(50, 8, 200, 8),
                                   child: RadioButtonRowFormat(
-                                      options: ew,
+                                      options: model.ew,
                                       onChanged: (String? value) {
                                         model.selectedOption = value!;
-                                        isSelectedOption = value;
                                         print("selected: $value");
                                       }),
                                 ),
@@ -204,16 +133,7 @@ class WherePage extends StatelessWidget {
                                   child: TffFormat(
                                     hintText: "Longitude",
                                     onChanged: (value) {
-                                      switch (isSelectedOption) {
-                                        case 'E':
-                                          newLongitude =
-                                              double.tryParse(value)!;
-                                          break;
-                                        case 'W':
-                                          newLongitude =
-                                              -double.tryParse(value)!;
-                                          break;
-                                      }
+                                      model.ewSwitch(value);
                                     },
                                     tffColor1: Colors.black54,
                                     tffColor2: const Color(0x99e6e6fa),
@@ -226,32 +146,7 @@ class WherePage extends StatelessWidget {
                         Center(
                           child: ElevatedButton(
                             onPressed: () async {
-                              switch (isSelectedOption) {
-                                case 'Stars':
-                                  await model.fetchStars();
-                                  currentDisplayList = model.listStars;
-                                  model.updateLocationPrecise(model.chosenStar);
-                                  break;
-                                case 'Current Place-name':
-                                  await model.fetchPlaces(keyCountry);
-                                  currentDisplayList = model.listPlaces;
-                                  model
-                                      .updateLocationPrecise(model.chosenPlace);
-                                  break;
-                                case 'Sea-name':
-                                  await model.fetchSeas();
-                                  currentDisplayList = model.listSeas;
-                                  model.updateLocationPrecise(model.chosenSea);
-                                  break;
-                                case 'Country-name at that time':
-                                  await model.fetchCountryATT();
-                                  currentDisplayList = model.listCountryatts;
-                                  break;
-                                case 'Place-name at that time':
-                                  await model.fetchPlaceATT();
-                                  currentDisplayList = model.listPlaceatts;
-                                  break;
-                              }
+                              model.fetchRadioButtonBasis(model.selectedOption);
                             },
                             child: const Text('Show and Select Options'),
                           ),
@@ -262,52 +157,14 @@ class WherePage extends StatelessWidget {
                             controller: controller,
                             hintText: 'a New Name You Want',
                             onChanged: (text) {
-                              switch (isSelectedOption) {
-                                case 'Stars':
-                                  newStar = text;
-                                  break;
-                                case 'Current Place-name':
-                                  newPlace = text;
-                                  break;
-                                case 'Sea-name':
-                                  newSea = text;
-                                  break;
-                                case 'Country-name at that time':
-                                  newCountryatt = text;
-                                  break;
-                                case 'Place-name at that time':
-                                  newPlaceatt = text;
-                                  break;
-                              }
+                              model.setNewWord(text);
                             },
                           ),
                         ),
                         ButtonFormat(
                           onPressed: () async {
-                            switch (isSelectedOption) {
-                              case 'Stars':
-                                await model.addStarsAndFetch(newStar);
-                                currentDisplayList = model.listStars;
-                                break;
-                              case 'Current Place-name':
-                                await model.addPlacesAndFetch(
-                                    newPlace, keyCountry);
-                                currentDisplayList = model.listPlaces;
-                                break;
-                              case 'Sea-name':
-                                await model.addSeasAndFetch(newSea);
-                                currentDisplayList = model.listSeas;
-                                break;
-                              case 'Country-name at that time':
-                                await model
-                                    .addCountryATTandFetch(newCountryatt);
-                                currentDisplayList = model.listCountryatts;
-                                break;
-/*                                  case 'Place-name at that time':
-                                    await model.addPlaceATTandFetch();
-                                    currentDisplayList = model.listPlaceatts;
-                                    break;*/
-                            }
+                            model.addAndFetchRadioButtonBasis(
+                                model.selectedOption);
                             controller.clear();
                           },
                           label: 'Add a New Name',
@@ -316,57 +173,9 @@ class WherePage extends StatelessWidget {
                           padding: const EdgeInsets.all(20.0),
                           child: Wrap(
                             spacing: 5.0,
-                            children: currentDisplayList.map<Widget>((item) {
-                              if (item is Stars) {
-                                return ChoiceSIFormat(
-                                    choiceSIList: _filtersLocationPrecise,
-                                    choiceSIKey: item.star,
-                                    onChoiceSISelected: (choiceKey) {
-                                      model.chosenLocationPrecise = choiceKey;
-                                      model.updateLocationPrecise(choiceKey);
-                                      print(choiceKey);
-                                    });
-                              } else if (item is Places) {
-                                return ChoiceSIFormat(
-                                    choiceSIList: _filtersLocationPrecise,
-                                    choiceSIKey: item.place,
-                                    onChoiceSISelected: (choiceKey) {
-                                      model.chosenLocationPrecise = choiceKey;
-                                      model.updateLocationPrecise(choiceKey);
-                                      print(choiceKey);
-                                    });
-                              } else if (item is Seas) {
-                                return ChoiceSIFormat(
-                                    choiceSIList: _filtersLocationPrecise,
-                                    choiceSIKey: item.sea,
-                                    onChoiceSISelected: (choiceKey) {
-                                      model.chosenLocationPrecise = choiceKey;
-                                      model.updateLocationPrecise(choiceKey);
-                                      print(choiceKey);
-                                    });
-                              } else if (item is Countryatts) {
-                                return ChoiceFormat(
-                                  choiceList: _filtersCountryatts,
-                                  choiceKey: item.countryatt,
-                                  choiceId: item.id!,
-                                  onChoiceSelected: (choiceKey, choiceId) {
-                                    model.chosenCatt = choiceKey;
-                                    model.chosenCattId = choiceId;
-                                  },
-                                );
-                              } else if (item is Placeatts) {
-                                return ChoiceFormat(
-                                  choiceList: _filtersPlaceatts,
-                                  choiceKey: item.placeatt,
-                                  choiceId: item.id!,
-                                  onChoiceSelected: (choiceKey, choiceId) {
-                                    model.chosenPatt = choiceKey;
-                                    model.chosenPattId = choiceId;
-                                    print(choiceId);
-                                  },
-                                );
-                              }
-                              return const SizedBox.shrink();
+                            children:
+                                model.currentDisplayList.map<Widget>((item) {
+                              return model.buildItemWidget(item);
                             }).toList(),
                           ),
                         ),
@@ -376,42 +185,13 @@ class WherePage extends StatelessWidget {
                 )),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
-                double ns = (math.pi * newLatitude) / 180;
-                double ew = (math.pi * newLongitude) / 180;
-                cx = math.cos(ns) * math.cos(ew) * confirm.coefficient;
-                cy = math.sin(ns) * confirm.coefficient;
-                cz = math.cos(ns) * math.sin(ew) * confirm.coefficient;
-
-                showDialog<void>(
-                    context: context,
-                    builder: (_) {
-                      return const ConfirmDialog();
-                    });
-
-                ///選択されたLocationPrecise
-                confirm.selectedPrecise = model.locationPrecise;
-                print("kept Selected Precise ${model.chosenLocationPrecise}");
-
-                ///選択されたCatt
-                if (model.chosenCatt != '') {
-                  confirm.selectedCatt = model.chosenCatt;
-                  confirm.selectedCattId = model.chosenCattId;
-                  print("kept selected Catt ${model.chosenCattId}");
-                }
-
-                ///選択されたPatt
-                if (model.chosenPatt != '') {
-                  confirm.selectedPatt = model.chosenPatt;
-                  print('kept selected Patt ${model.chosenPatt}');
-                  confirm.selectedPattId = model.chosenPattId;
-                }
-
-                confirm.latitude = newLatitude;
-                confirm.longitude = newLongitude;
-                confirm.x = double.parse((cx).toStringAsFixed(4));
-                confirm.y = double.parse((cy).toStringAsFixed(4));
-                confirm.z = double.parse((cz).toStringAsFixed(4));
-                print('save where');
+                model.temporarilySaveData((context) {
+                  showDialog<void>(
+                      context: context,
+                      builder: (_) {
+                        return const ConfirmDialog();
+                      });
+                }, context);
               },
               label: const Text('Temporarily Save'),
             ));

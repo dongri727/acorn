@@ -1,20 +1,18 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/blank_text_format.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 import '../../confirm/confirm.dart';
 import '../../utils/tff_format.dart';
 import 'who_model.dart';
 
 class WhoPage extends StatelessWidget {
-  WhoPage({super.key});
+  const WhoPage({super.key});
 
-  var newOrg = '';
+/*  var newOrg = '';
   var newPerson = '';
 
   List<String> options = ['Institutions,Organisations etc', 'People'];
@@ -28,7 +26,7 @@ class WhoPage extends StatelessWidget {
   List<People> listPeople = [];
   List<Map<String, String>> displayListPeople = [];
   final List<String> filtersPeople = <String>[];
-  final List<int> filtersPeopleId = <int>[];
+  final List<int> filtersPeopleId = <int>[];*/
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +54,10 @@ class WhoPage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
                             child: RadioButtonFormat(
-                                options: options,
+                                options: model.options,
                                 onChanged: (String? value) {
                                   model.selectedOption = value!;
-                                  isSelectedOption = value;
+                                  //isSelectedOption = value;
                                   print("selected: $value");
                                 }),
                           )),
@@ -79,7 +77,8 @@ class WhoPage extends StatelessWidget {
                     child: ElevatedButton(
                       child: const Text('Show and Select Options'),
                       onPressed: () async {
-                        switch (isSelectedOption) {
+                        model.fetchRadioButtonBasis(model.selectedOption);
+/*                        switch (isSelectedOption) {
                           case 'Institutions,Organisations etc':
                             await model.fetchOrgsInvolved();
                             currentDisplayList = model.listOrgs;
@@ -88,7 +87,7 @@ class WhoPage extends StatelessWidget {
                             await model.fetchPeopleInvolved();
                             currentDisplayList = model.listPeople;
                             break;
-                        }
+                        }*/
                       },
                     ),
                   ),
@@ -98,21 +97,23 @@ class WhoPage extends StatelessWidget {
                       controller: controller,
                       hintText: 'a New Name You Want',
                       onChanged: (text) {
-                        switch (isSelectedOption) {
+                        model.setNewWord(text);
+/*                        switch (isSelectedOption) {
                           case 'Institutions,Organisations etc':
                             newOrg = text;
                             break;
                           case 'People':
                             newPerson = text;
                             break;
-                        }
+                        }*/
                       },
                     ),
                   ),
                   ButtonFormat(
                     label: 'Add a New Name',
                     onPressed: () async {
-                      switch (isSelectedOption) {
+                      model.addAndFetchRadioButtonBasis(model.selectedOption);
+/*                      switch (isSelectedOption) {
                         case 'Institutions,Organisations etc':
                           await model.addOrgsAndFetch(newOrg);
                           currentDisplayList = model.listOrgs;
@@ -121,7 +122,7 @@ class WhoPage extends StatelessWidget {
                           await model.addPeopleAndFetch(newPerson);
                           currentDisplayList = model.listPeople;
                           break;
-                      }
+                      }*/
                       controller.clear();
                     },
                   ),
@@ -129,8 +130,9 @@ class WhoPage extends StatelessWidget {
                       padding: const EdgeInsets.all(20.0),
                       child: Wrap(
                         spacing: 5.0,
-                        children: currentDisplayList.map<Widget>((item) {
-                          if (item is Organisations) {
+                        children: model.currentDisplayList.map<Widget>((item) {
+                          return model.buildItemWidget(item);
+/*                          if (item is Organisations) {
                             return FilterFormatImediat(
                                 filteredImKeys: model.filtersOrgs,
                                 filteredImValues: model.filtersOrgsId,
@@ -152,7 +154,7 @@ class WhoPage extends StatelessWidget {
                               },
                             );
                           }
-                          return const SizedBox.shrink();
+                          return const SizedBox.shrink();*/
                         }).toList(),
                       )),
                 ]),
@@ -161,19 +163,13 @@ class WhoPage extends StatelessWidget {
           )),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-              showDialog<void>(
-                  context: context,
-                  builder: (_) {
-                    return const ConfirmDialog();
-                  });
-
-              confirm.selectedOrg = model.filtersOrgs;
-              confirm.selectedOrgId = model.filtersOrgsId;
-              print("${model.filtersOrgs}");
-
-              confirm.selectedWho = model.filtersPeople;
-              confirm.selectedWhoId = model.filtersPeopleId;
-              print("${model.filtersPeople}");
+              model.temporarilySaveData((context){
+                showDialog<void>(
+                    context: context,
+                    builder: (_) {
+                      return const ConfirmDialog();
+                    });
+              }, context);
             },
             label: const Text('Temporarily Save'),
           ),

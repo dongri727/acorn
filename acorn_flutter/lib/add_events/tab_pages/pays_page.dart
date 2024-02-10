@@ -1,12 +1,11 @@
 import 'package:acorn_flutter/add_events/tab_pages/pays_model.dart';
 import 'package:acorn_flutter/utils/blank_text_format.dart';
+import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/button_format.dart';
 import '../../utils/tff_format.dart';
-
-String isSelectedOption = '';
 
 class PaysPage extends StatelessWidget {
   const PaysPage({super.key});
@@ -39,7 +38,6 @@ class PaysPage extends StatelessWidget {
                                       options: model.options,
                                       onChanged: (String? value) {
                                         model.selectedOption = value!;
-                                        isSelectedOption = value;
                                         print("selected: $value");
                                       }),
                                 )),
@@ -72,7 +70,7 @@ class PaysPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(28.0),
                             child: FormatGreyEnable(
-                              enabled: isSelectedOption !=
+                              enabled: model.selectedOption !=
                                   'Current Name of Country Involved',
                               controller: controller,
                               hintText: 'A New Name You Want',
@@ -107,20 +105,7 @@ class PaysPage extends StatelessWidget {
                     showDialog<void>(
                       context: context,
                       builder: (_) {
-                        return AlertDialog(
-                          title:
-                              const Text('Data has been temporarily stored.'),
-                          content: const Text(
-                              'They are not uploaded yet. please continue to fill in the other fields.'),
-                          actions: <Widget>[
-                            GestureDetector(
-                              child: const Text('OK'),
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                            )
-                          ],
-                        );
+                        return const ConfirmDialog();
                       });
                 }, context);
                 },

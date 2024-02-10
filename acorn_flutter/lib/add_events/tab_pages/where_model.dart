@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
+import 'package:provider/provider.dart';
 import '../../confirm/confirm.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
+import '../../lists/where_options_list.dart';
+import 'dart:math' as math;
+
+import '../../utils/chips_format.dart';
+
 class WhereModel extends ChangeNotifier {
-
-    final Confirm _confirm;
-
+  final String keyCountry;
+  WhereModel({required this.keyCountry});
+  
   var newStar = '';
   var newPlace = '';
   var newSea = '';
   var newPaysatt = '';
-  var newCountryatt = '';
   var newPlaceatt = '';
 
   var newLatitude = 0.0;
@@ -26,7 +30,6 @@ class WhereModel extends ChangeNotifier {
 
   ///Place
   List<Places> listPlaces = [];
-  String keyCountry = '';
 
   ///Seas
   List<Seas> listSeas = [];
@@ -44,52 +47,54 @@ class WhereModel extends ChangeNotifier {
 
   List<dynamic> currentDisplayList = [];
 
-  String? isSelectedOption = '';
+  String? selectedOption = '';
 
-  List<String> options = [
-    'Stars',
-    'Current Place-name',
-    'Sea-name',
-    'Country-name at that time',
-    'Place-name at that time'
-  ];
+  List<String> options = whereOptions;
 
   List<String> ns = [
     'N',
     'S',
   ];
 
+  nsSwitch(value) async {
+    switch (selectedOption) {
+      case 'N':
+        newLatitude = double.tryParse(value)!;
+        break;
+      case 'S':
+        newLatitude = -double.tryParse(value)!;
+        break;
+    }
+  }
+
   List<String> ew = [
     'E',
     'W',
   ];
 
+  ewSwitch(value) async {
+    switch (selectedOption) {
+      case 'E':
+        newLongitude = double.tryParse(value)!;
+        break;
+      case 'W':
+        newLongitude = -double.tryParse(value)!;
+        break;
+    }
+  }
+
   final List<String> _filtersLocationPrecise = <String>[];
 
   String locationPrecise = '';
 
-  ///Stars gotten from DB
-  List<Stars> listStars = [];
-
-  ///Place gotten from DB
-  List<Places> listPlaces = [];
-
-  ///Seas gotten from DB
-  List<Seas> listSeas = [];
-
-  ///当時の国名
-  List<Countryatts> listCountryatts = [];
-  List<Map<String, String>> displayListCountryatts = [];
-
-  ///当時の地名
-  List<Placeatts> listPlaceatts = [];
-  List<Map<String, String>> displayListPlaceatts = [];
+  String chosenCatt = '';
+  int chosenCattId = 0;
 
   ///gets stars from DB
   fetchStars() async {
     try {
       listStars = await client.stars.getStars();
-      print('getStars');
+      currentDisplayList = listStars;
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -102,7 +107,9 @@ class WhereModel extends ChangeNotifier {
     try {
       var stars = Stars(star: newStar);
       listStars = await client.stars.addAndReturnStars(stars);
+      currentDisplayList = listStars;
       notifyListeners();
+      print('getStars');
     } catch (e) {
       debugPrint('$e');
     }
@@ -112,8 +119,8 @@ class WhereModel extends ChangeNotifier {
   fetchPlaces(keyCountry) async {
     try {
       listPlaces = await client.places.getPlaces(keyword: keyCountry);
+      currentDisplayList = listPlaces;
       print('getPlaces with $keyCountry');
-      print(listPlaces);
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
@@ -124,7 +131,10 @@ class WhereModel extends ChangeNotifier {
   addPlacesAndFetch(String newPlace, String keyCountry) async {
     try {
       var places = Places(place: newPlace, country: keyCountry);
-      listPlaces = await client.places.addAndReturnPlacesWithKeyCountry(places);
+      var keyword = keyCountry;
+      listPlaces =
+          await client.places.addAndReturnPlacesWithKeyCountry(places, keyword);
+      currentDisplayList = listPlaces;
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -135,6 +145,7 @@ class WhereModel extends ChangeNotifier {
   fetchSeas() async {
     try {
       listSeas = await client.seas.getSeas();
+      currentDisplayList = listSeas;
       print('getSeas');
       notifyListeners();
     } on Exception catch (e) {
@@ -148,6 +159,7 @@ class WhereModel extends ChangeNotifier {
     try {
       var seas = Seas(sea: newSea);
       listSeas = await client.seas.addAndReturnSeas(seas);
+      currentDisplayList = listSeas;
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -159,6 +171,7 @@ class WhereModel extends ChangeNotifier {
   Future<void> fetchCountryATT() async {
     try {
       listCountryatts = await client.countryatts.getCountryATTs();
+      currentDisplayList = listCountryatts;
       print('getCatts');
       notifyListeners();
     } on Exception catch (e) {
@@ -168,10 +181,11 @@ class WhereModel extends ChangeNotifier {
 
   ///DBに新規CATTを挿入・再取得･再描画
   //todo 複数語を同時に挿入できるようにする
-  addCountryATTandFetch(String newCountryatt) async {
+  addCountryATTandFetch(String newPaysatt) async {
     try {
-      var catts = Countryatts(countryatt: newCountryatt);
+      var catts = Countryatts(countryatt: newPaysatt);
       listCountryatts = await client.countryatts.addAndReturnCatts(catts);
+      currentDisplayList = listCountryatts;
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -182,50 +196,244 @@ class WhereModel extends ChangeNotifier {
   Future<void> fetchPlaceATT() async {
     try {
       listPlaceatts = await client.placeatts.getPlaceATTs();
+      currentDisplayList = listPlaceatts;
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
   }
 
-/*  ///DBに新規PATTを挿入・再取得･再描画
-  addPlaceATTandFetch() async {
+  ///DBに新規PATTを挿入・再取得･再描画
+  addPlaceATTandFetch(String newPlaceatt) async {
     try {
-      listPlaceatts = await client.placeatts.addAndGetPatts(newPlaceatt);
+      var patts = Placeatts(placeatt: newPlaceatt);
+      listPlaceatts = await client.placeatts.addAndGetPatts(patts);
+      currentDisplayList = listPlaceatts;
       print('getNewPatts');
       notifyListeners();
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
-  ///RadioButton
-  String _selectedOption = '';
-  String get selectedOption => _selectedOption;
+  Future<void> fetchRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      case 'Stars':
+        await fetchStars();
+        break;
+      case 'Current Place-name':
+        await fetchPlaces(keyCountry);
+        break;
+      case 'Sea-name':
+        await fetchSeas();
+        break;
+      case 'Country-name at that time':
+        await fetchCountryATT();
+        break;
+      case 'Place-name at that time':
+        await fetchPlaceATT();
+        break;
+    }
+  }
+
+  setNewWord(text) {
+    switch (selectedOption) {
+      case 'Stars':
+        newStar = text;
+        notifyListeners();
+        break;
+      case 'Current Place-name':
+        newPlace = text;
+        notifyListeners();
+        break;
+      case 'Sea-name':
+        newSea = text;
+        notifyListeners();
+        break;
+      case 'Country-name at that time':
+        newPaysatt = text;
+        notifyListeners();
+        break;
+      case 'Place-name at that time':
+        newPlaceatt = text;
+        notifyListeners();
+        break;
+    }
+  }
+
+  Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      //country must not be added
+      case 'Stars':
+        await addStarsAndFetch(newStar);
+        break;
+      case 'Current Place-name':
+        await addPlacesAndFetch(newPlace, keyCountry);
+        break;
+      case 'Sea-name':
+        await addSeasAndFetch(newSea);
+        break;
+      case 'Country-name at that time':
+        await addCountryATTandFetch(newPaysatt);
+        break;
+      case 'Place-name at that time':
+        await addPlaceATTandFetch(newPlaceatt);
+        break;
+    }
+  }
+
+  Widget buildItemWidget(dynamic item) {
+    String itemType = _getItemType(item);
+    switch (itemType) {
+      case 'Stars':
+        return _buildChoiceSIFormat(
+            choiceSIList: _filtersLocationPrecise,
+            choiceSIKey: (item as Stars).star,
+            onChoiceSISelected: (choiceKey) {
+              chosenLocationPrecise = choiceKey;
+              updateLocationPrecise(choiceKey);
+              print(choiceKey);
+            });
+      case 'Current Place-name':
+        return _buildChoiceSIFormat(
+            choiceSIList: _filtersLocationPrecise,
+            choiceSIKey: (item as Places).place,
+            onChoiceSISelected: (choiceKey) {
+              chosenLocationPrecise = choiceKey;
+              updateLocationPrecise(choiceKey);
+              print(choiceKey);
+            });
+      case 'Sea-name':
+        return _buildChoiceSIFormat(
+            choiceSIList: _filtersLocationPrecise,
+            choiceSIKey: (item as Seas).sea,
+            onChoiceSISelected: (choiceKey) {
+              chosenLocationPrecise = choiceKey;
+              updateLocationPrecise(choiceKey);
+              print(choiceKey);
+            });
+      case 'Country-name at that time':
+        return _buildChoiceFormat(
+            choiceList: _filtersCountryatts,
+            choiceKey: (item as Countryatts).countryatt,
+            choiceId: item.id!,
+            onChoiceSelected: (choiceKey, choiceId) {
+              chosenCatt = choiceKey;
+              chosenCattId = choiceId;
+              updateChosenCatt(choiceKey);
+              print(choiceKey);
+            });
+      case 'Place-name at that time':
+        return _buildChoiceFormat(
+            choiceList: _filtersPlaceatts,
+            choiceKey: (item as Placeatts).placeatt,
+            choiceId: item.id!,
+            onChoiceSelected: (choiceKey, choiceId) {
+              chosenPatt = choiceKey;
+              chosenPattId = choiceId;
+              updateChosenPatt(choiceKey);
+              print(choiceKey);
+            });
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  String _getItemType(dynamic item) {
+    if (item is Stars) return 'Stars';
+    if (item is Places) return 'Current Place-name';
+    if (item is Seas) return 'Sea-name';
+    if (item is Countryatts) return 'Country-name at that time';
+    if (item is Placeatts) return 'Place-name at that time';
+    return 'Unknown';
+  }
+
+  Widget _buildChoiceSIFormat({
+    required List<String> choiceSIList,
+    required String choiceSIKey,
+    required OnChoiceSISelected onChoiceSISelected,
+  }) {
+    return ChoiceSIFormat(
+        choiceSIList: choiceSIList,
+        choiceSIKey: choiceSIKey,
+        onChoiceSISelected: onChoiceSISelected);
+  }
+
+  Widget _buildChoiceFormat({
+    required List<String> choiceList,
+    required String choiceKey,
+    required int choiceId,
+    required OnChoiceSelected onChoiceSelected,
+  }) {
+    return ChoiceFormat(
+        choiceList: choiceList,
+        choiceKey: choiceKey,
+        choiceId: choiceId,
+        onChoiceSelected: onChoiceSelected);
+  }
+
+  void temporarilySaveData(
+      Function(BuildContext) showDialogCallback, BuildContext context) {
+    // ダイアログ表示
+    showDialogCallback(context);
+    final confirm = Provider.of<Confirm>(context, listen: false);
+
+    double ns = (math.pi * newLatitude) / 180;
+    double ew = (math.pi * newLongitude) / 180;
+    cx = math.cos(ns) * math.cos(ew) * confirm.coefficient;
+    cy = math.sin(ns) * confirm.coefficient;
+    cz = math.cos(ns) * math.sin(ew) * confirm.coefficient;
+
+    ///選択されたLocationPrecise
+    confirm.selectedPrecise = locationPrecise;
+
+    ///選択されたCatt
+    if (chosenCatt != '') {
+      confirm.selectedCatt = chosenCatt;
+      confirm.selectedCattId = chosenCattId;
+    }
+
+    ///選択されたPatt
+    if (chosenPatt != '') {
+      confirm.selectedPatt = chosenPatt;
+      confirm.selectedPattId = chosenPattId;
+    }
+
+    confirm.latitude = newLatitude;
+    confirm.longitude = newLongitude;
+    confirm.x = double.parse((cx).toStringAsFixed(4));
+    confirm.y = double.parse((cy).toStringAsFixed(4));
+    confirm.z = double.parse((cz).toStringAsFixed(4));
+    print('save where');
+  }
+
+/*   ///RadioButton
+  String selectedOption = ''; */
+/*   String get selectedOption => _selectedOption;
 
   set selectedOption(String value) {
     _selectedOption = value;
     notifyListeners();
-  }
+  } */
 
   ///仮表示
-  String _chosenStar = '';
+  //String _chosenStar = '';
   //int _chosenStarId = 0;
-  String get chosenStar => _chosenStar;
+  //String get chosenStar => _chosenStar;
   //int get chosenStarId => _chosenStarId;
 
-  set chosenStar(String choice){
+/*   set chosenStar(String choice) {
     _chosenStar = choice;
     print(chosenStar);
     notifyListeners();
-  }
+  } */
 /*  set chosenStarId(int value){
     _chosenStarId = value;
     print(chosenStarId);
     notifyListeners();
   }*/
 
-  String _chosenPlace = '';
+/*   String _chosenPlace = '';
   //int _chosenPlaceId = 0;
   String get chosenPlace => _chosenPlace;
   //int get chosenPlaceId => _chosenPlaceId;
@@ -234,7 +442,7 @@ class WhereModel extends ChangeNotifier {
     _chosenPlace = choice;
     print(chosenPlace);
     notifyListeners();
-  }
+  } */
 
 /*  set chosenPlaceId(int value) {
     _chosenPlaceId = value;
@@ -242,7 +450,7 @@ class WhereModel extends ChangeNotifier {
     notifyListeners();
   }*/
 
-  String _chosenSea = '';
+/*   String _chosenSea = '';
   //int _chosenSeaId = 0;
   String get chosenSea => _chosenSea;
   //int get chosenSeaId => _chosenSeaId;
@@ -250,24 +458,22 @@ class WhereModel extends ChangeNotifier {
   set chosenSea(String choice) {
     _chosenSea = choice;
     notifyListeners();
-  }
+  } */
 
 /*  set chosenSeaId(int value) {
     _chosenSeaId = value;
     notifyListeners();
   }*/
 
-  String _chosenLocationPrecise = '';
+  String chosenLocationPrecise = '';
   //int _chosenLocationPreciseId = 0;
-  String get chosenLocationPrecise => _chosenLocationPrecise;
+  //String get chosenLocationPrecise => _chosenLocationPrecise;
   //int get chosenLocationPreciseId => _chosenLocationPreciseId;
 
-  List<dynamic> currentDisplayList = [];
-
-  set chosenLocationPrecise(String locationPrecise) {
+/*  set chosenLocationPrecise(String locationPrecise) {
     _chosenLocationPrecise = "";
     notifyListeners();
-  }
+  }*/
 
 /*  set chosenLocationPreciseId(int value) {
     _chosenLocationPreciseId = value;
@@ -279,34 +485,43 @@ class WhereModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _chosenCatt = '';
-  int _chosenCattId = 0;
-  String get chosenCatt => _chosenCatt;
-  int get chosenCattId => _chosenCattId;
+  void updateChosenCatt(String newChosenCatt) {
+    chosenCatt = newChosenCatt;
+    notifyListeners();
+  }
 
-  set chosenCatt(String choice) {
+  void updateChosenPatt(String newChosenPatt) {
+    chosenPatt = newChosenPatt;
+    notifyListeners();
+  }
+
+/*   String get chosenCatt => _chosenCatt;
+  int get chosenCattId => _chosenCattId; */
+
+/*   set chosenCatt(String choice) {
     _chosenCatt = choice;
     notifyListeners();
   }
-
-  set chosenCattId(int value) {
+ */
+/*   set chosenCattId(int value) {
     _chosenCattId = value;
     notifyListeners();
-  }
+  } */
 
-  String _chosenPatt = '';
-  int _chosenPattId = 0;
-  String get chosenPatt => _chosenPatt;
+  String chosenPatt = '';
+  int chosenPattId = 0;
+/*   String get chosenPatt => _chosenPatt;
   int get chosenPattId => _chosenPattId;
-
-  set chosenPatt(String choice) {
+ */
+/*   set chosenPatt(String choice) {
     _chosenPatt = choice;
     print(_chosenPatt);
     notifyListeners();
   }
-  set chosenPattId(int value) {
+ */
+/*   set chosenPattId(int value) {
     _chosenPattId = value;
     print(chosenPattId);
     notifyListeners();
-  }
+  } */
 }

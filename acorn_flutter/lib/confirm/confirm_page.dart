@@ -329,7 +329,7 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('People Involved',
                                     style: AcornTheme.textTheme.headlineSmall,
 /*                                  style: TextStyle(

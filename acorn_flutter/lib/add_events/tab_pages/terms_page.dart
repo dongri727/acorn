@@ -3,12 +3,11 @@ import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../confirm/confirm.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/confirm_dialog.dart';
 import '../../utils/tff_format.dart';
 
-String isSelectedOption = '';
+//String isSelectedOption = '';
 
 class TermsPage extends StatelessWidget {
   const TermsPage({super.key});
@@ -55,7 +54,7 @@ class TermsPage extends StatelessWidget {
                                 options: model.options,
                                 onChanged: (String? value) {
                                   model.selectedOption = value!;
-                                  isSelectedOption = value;
+                                  //isSelectedOption = value;
                                   print("selected: $value");
                                 }),
                           )),

@@ -1,11 +1,13 @@
 import 'dart:core';
 import 'package:acorn_flutter/lists/pays_options_list.dart';
-import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import '../../confirm/confirm.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/build_chips.dart';
+import '../../utils/chips_format.dart';
 
 class PaysModel extends ChangeNotifier {
   var newPlace = '';
@@ -117,7 +119,7 @@ class PaysModel extends ChangeNotifier {
       debugPrint('$e');
     }
   }
-
+//todo 複数語同時挿入に対応する
 /*  addCountryATTandFetch(String newCATT) async {
     List<string> newCatts = newCATT.split(,).map((s) => s.trim()).toList();
     try {
@@ -222,8 +224,8 @@ class PaysModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedPaysInv = key;
             selectedPaysInvId = value;
-          },
-        );
+            updateSelectedPaysInv(key);
+          });
       case 'Places':
         return _buildFilterFormatImediat(
           filteredKeys: filtersPlaces,
@@ -233,6 +235,7 @@ class PaysModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedPlaceInv = key;
             selectedPlaceInvId = value;
+            updateSelectedPlaceInv(key);
           },
         );
       case 'Catts':
@@ -244,6 +247,7 @@ class PaysModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedCattInv = key;
             selectedCattInvId = value;
+            updateSelectedCattInv(key);
           },
         ); 
       case 'Patts':
@@ -255,6 +259,7 @@ class PaysModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedPattInv = key;
             selectedPattInvId = value;
+            updateSelectedPattInv(key);
           },
         ); 
       case 'Stars':
@@ -266,8 +271,9 @@ class PaysModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedStarInv = key;
             selectedStarInvId = value;
+            updateSelectedStarInv(key);
           },
-        );            
+        );
       default:
         return const SizedBox.shrink();
     }
@@ -296,6 +302,32 @@ class PaysModel extends ChangeNotifier {
         filterImValue: filterValue,
         onSelected: onSelected);
   }
+
+  void updateSelectedPaysInv(String newSelectedPaysInv) {
+    selectedPaysInv = newSelectedPaysInv;
+    notifyListeners();
+  }
+
+  void updateSelectedPlaceInv(String newSelectedPlaceInv) {
+    selectedPlaceInv = newSelectedPlaceInv;
+    notifyListeners();
+  }
+
+  void updateSelectedCattInv(String newSelectedCattInv) {
+    selectedCattInv = newSelectedCattInv;
+    notifyListeners();
+  }
+
+  void updateSelectedPattInv(String newSelectedPattInv) {
+    selectedPattInv = newSelectedPattInv;
+    notifyListeners();
+  }
+
+  void updateSelectedStarInv(String newSelectedStarInv) {
+    selectedStarInv = newSelectedStarInv;
+    notifyListeners();
+  }
+
 
   void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
@@ -333,48 +365,18 @@ class PaysModel extends ChangeNotifier {
   String selectedCattInv = '';
   int selectedCattInvId = 0;
 
-/*   set selectedCattInv(String catt) {
-    selectedCattInv = catt;
-    //notifyListeners();
-  } */
-
-/*   set selectedCattInvId(int value) {
-    _selectedCattInvId = value;
-    //notifyListeners();
-  } */
-
   String selectedPattInv = '';
   int selectedPattInvId = 0;
-
-/*   set selectedPattInv(String catt) {
-    _selectedPattInv = catt;
-    //notifyListeners();
-  }
-
-  set selectedPattInvId(int value) {
-    _selectedPattInvId = value;
-    //notifyListeners();
-  } */
 
   String selectedStarInv = '';
   int selectedStarInvId = 0;
 
-/*   set selectedStarInv(String star) {
-    _selectedStarInv = star;
-    //notifyListeners();
-  }
-
-  set selectedStarInvId(int value) {
-    _selectedStarInvId = value;
-    notifyListeners();
-  } */
-
   ///RadioButton
-  String _selectedOption = '';
-  String get selectedOption => _selectedOption;
+  String selectedOption = '';
+/*  String get selectedOption => _selectedOption;
 
   set selectedOption(String value) {
     _selectedOption = value;
     notifyListeners();
-  }
+  }*/
 }

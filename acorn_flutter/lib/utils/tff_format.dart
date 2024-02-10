@@ -22,7 +22,7 @@ class TffFormat extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 20,
-        color: tffColor1),
+        color: Colors.white),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(5.0),
         hintText: hintText,

@@ -1,67 +1,264 @@
 import 'package:flutter/material.dart';
-import 'package:acorn_client/acorn_client.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
-import 'package:acorn_flutter/serverpod_client.dart';
+import 'package:provider/provider.dart';
 
-import 'dart:math' as math;
+import 'dart:math';
+
+import '../../confirm/confirm.dart';
+import '../../lists/countries_list.dart';
+import '../../lists/oceans_list.dart';
+import '../../lists/period_list.dart';
+import '../../lists/universe_list.dart';
+import '../../utils/build_chips.dart';
 
 class PrincipalModel extends ChangeNotifier {
 
+  double log10(num x) => log(x) / ln10;
+
+  var newYearD = 0.0;
+  var newYearI = 0;
+  var newAnnee = '';
+  var newMonth = 0;
+  var newDay = 0;
+  late int newPoint;
+  late double newLogarithm;
+  late double newCoefficient;
+  var newName = '';
+  var calendarNo = 0;
+
+  List<String> periods = epoch;
+
+  final List<String> filtersLocation = <String>[];
+
+  ///Universe
+  List<String> universe = cosmos;
+
+  ///Pays
+  List<String> pays = countries;
+
+  ///Oceans
+  List<String> oceans = mer;
+
+  List<String> currentDisplayList = [];
+  String? selectedOption = '';
+
+  List<String> principalOptions = [
+    'Universe',
+    'Current Country-name',
+    'Ocean-name',
+  ];
+
   String location = "";
 
-  ///DropdownButton
-  String _selectedCalendar = '';
-  String get selectedCalendar => _selectedCalendar;
-
-  set selectedCalendar(String value) {
-    _selectedCalendar = value;
+  setNewName (text) {
+    newName = text;
     notifyListeners();
   }
 
+  ///DropdownButton
+  String selectedCalendar = 'Common-Era';
+
+  void setCalendar(String? value) {
+    if (value != null) {
+      selectedCalendar = value;
+    }
+    notifyListeners();
+  }
+
+  setNewYearD (value) {
+    newYearD = double.parse(value);
+    notifyListeners();
+  }
+
+  setNewMonth (value) {
+    try {
+      newMonth = int.parse(value);
+    } catch (e) {
+      newMonth = 0;
+    }
+    notifyListeners();
+  }
+
+  setNewDay (value) {
+    try {
+      newDay = int.parse(value);
+    } catch (e) {
+      newDay = 0;
+    }
+    notifyListeners();
+  }
+
+  void setSelectedOption(String? value) {
+    if (value != null) {
+      selectedOption = value;
+    }
+    notifyListeners();
+  }
+
+  Future<void> listRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      case 'Universe':
+        currentDisplayList = universe;
+        notifyListeners();
+        break;
+      case 'Current Country-name':
+        currentDisplayList = pays;
+        notifyListeners();
+        break;
+      case 'Ocean-name':
+        currentDisplayList = oceans;
+        notifyListeners();
+        break;
+    }
+  }
+
+  Widget buildItemWidget(dynamic item) {
+    return buildChoiceSIFormat(
+        choiceSIList: filtersLocation,
+        choiceSIKey: item,
+        onChoiceSISelected: (choiceSIKey) {
+          chosenLocation = choiceSIKey;
+        }
+    );
+  }
+
+  void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
+    // ダイアログ表示
+    showDialogCallback(context);
+    final confirm = Provider.of<Confirm>(context, listen: false);
+
+    /// convert the years depending on the selected calendar period
+    switch (selectedCalendar) {
+      case 'Billion Years':
+        newYearI = (newYearD * 1000000000).round();
+        newYearI = -newYearI.abs();
+        break;
+      case 'Million Years':
+        newYearI = (newYearD * 1000000).round();
+        newYearI = -newYearI.abs();
+        break;
+      case 'Thousand Years':
+        newYearI = (newYearD * 1000).round();
+        newYearI = -newYearI.abs();
+        break;
+      case 'Years by Dating Methods':
+        newYearI = (2000 - newYearD).round();
+        break;
+      case 'Before-CommonEra':
+        newYearI = (newYearD).round();
+        newYearI = -newYearI.abs();
+        break;
+      case 'Common-Era':
+        newYearI = (newYearD).round();
+        break;
+    }
+
+    ///make data of point
+    newPoint =
+        (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay)
+            .toDouble())
+            .round();
+    print(newPoint);
+
+    ///make data of logarithm
+    newLogarithm = double.parse(
+        (5885.0 - (1000 * (log10((newPoint - 768600).abs()))))
+            .toStringAsFixed(4));
+    print(newLogarithm);
+
+    ///make data of reverseLogarithm
+    newCoefficient = 6820.0 + newLogarithm;
+    print(newCoefficient);
+
+    switch (selectedCalendar) {
+      case 'Billion Years':
+        newAnnee = '${newYearD}B years ago';
+        break;
+      case 'Million Years':
+        newAnnee = '${newYearD}M years ago';
+        break;
+      case 'Thousand Years':
+        newAnnee = '${newYearD}K years ago';
+        break;
+      case 'Years by Dating Methods':
+        newAnnee = 'about $newYearD years ago';
+        break;
+      case 'Before-CommonEra':
+        newAnnee = 'BCE ${(newYearD).round()}';
+        break;
+      case 'Common-Era':
+        newAnnee = 'CE ${(newYearD).round()}';
+        break;
+    }
+
+    // データの一時保存処理
+    confirm.isSelectedCalendar = selectedCalendar;
+    confirm.year = newYearI;
+    confirm.annee = newAnnee;
+    confirm.month = newMonth;
+    confirm.day = newDay;
+    confirm.point = newPoint;
+    confirm.logarithm = newLogarithm;
+    confirm.coefficient = newCoefficient;
+
+    ///選択されたlocation
+    confirm.selectedLocation = location;
+    print(location);
+
+    confirm.name = newName;
+    print(newName);
+    print("save name");
+
+    ///選択されたlocation
+    confirm.selectedLocation = location;
+    print(location);
+
+    print('save principal');
+  }
+
+
+
+
   ///RadioButton
-  String _selectedOption = '';
-  String get selectedOption => _selectedOption;
+/*  String get selectedOption => _selectedOption;
 
   set selectedOption(String value) {
     _selectedOption = value;
     notifyListeners();
-  }
+  }*/
 
   ///仮表示
-  String _chosenUniverse = '';
-  String get chosenUniverse => _chosenUniverse;
+  String chosenUniverse = '';
+/*  String get chosenUniverse => _chosenUniverse;
 
   set chosenUniverse(String choice) {
     _chosenUniverse = choice;
     print(chosenUniverse);
     notifyListeners();
-  }
+  }*/
 
-  String _chosenPays = '';
-  String get chosenPays => _chosenPays;
+  String chosenPays = '';
+/*  String get chosenPays => _chosenPays;
 
   set chosenPays(String choice) {
     _chosenPays = choice;
     notifyListeners();
-  }
+  }*/
 
-  String _chosenOcean = '';
-  String get chosenOcean => _chosenOcean;
+  String chosenOcean = '';
+/*  String get chosenOcean => _chosenOcean;
 
   set chosenOcean(String choice) {
     _chosenOcean = choice;
     notifyListeners();
-  }
+  }*/
 
-  String _chosenLocation = '';
-  String get chosenLocation => _chosenLocation;
-
-  List<String> currentDisplayList = [];
+  String chosenLocation = '';
+/*  String get chosenLocation => _chosenLocation;
 
   set chosenLocation(String location) {
     _chosenLocation = "";
     notifyListeners();
-  }
+  }*/
 
   void updateLocation(String newLocation) {
     location = newLocation;
@@ -72,5 +269,4 @@ class PrincipalModel extends ChangeNotifier {
     currentDisplayList = newList;
     notifyListeners();
   }
-
 }

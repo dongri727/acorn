@@ -1144,8 +1144,8 @@ class Endpoints extends _i1.EndpointDispatch {
             ),
             'keyword': _i1.ParameterDescription(
               name: 'keyword',
-              type: _i1.getType<String?>(),
-              nullable: true,
+              type: _i1.getType<String>(),
+              nullable: false,
             ),
           },
           call: (
@@ -1156,7 +1156,7 @@ class Endpoints extends _i1.EndpointDispatch {
                   .addAndReturnPlacesWithKeyCountry(
             session,
             params['places'],
-            keyword: params['keyword'],
+            params['keyword'],
           ),
         ),
         'getPlacesInv': _i1.MethodConnector(
