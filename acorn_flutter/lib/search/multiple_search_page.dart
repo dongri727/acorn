@@ -3,6 +3,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/dropdown_button.format.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,58 +23,7 @@ import '../lists/universe_list.dart';
 import '../lists/oceans_list.dart';
 
 class MultiSearchPage extends StatelessWidget {
-  MultiSearchPage({super.key});
-
-  final List<String> formats = [
-    'CLASSIC',
-    'SCALABLE',
-    '3D',
-    '4D',
-    'MR',
-  ];
-
-  final List<String> options = [
-    'Period',
-    'Universe',
-    'Stars',
-    'Current Country where it happened',
-    'Current Place-name where it happened',
-    'Oceans',
-    'Seas',
-    'Country-name at that time',
-    'Place-name at that time',
-    'Countries involved',
-    'Places involved',
-    //'Names of Countries involved at that time',
-    //'Names of Places involved at that time',
-    'Stars Observed',
-    'Organisations',
-    'People',
-    'Categories',
-    'Other Terms'
-  ];
-
-  ///Period
-  final List<String> period = epoch;
-  final List<String> filtersPeriod = <String>[];
-
-  ///Universe
-  final List<String> universe = cosmos;
-  final List<String> filtersUniverse = <String>[];
-
-  ///Pays
-  final List<String> pays = countries;
-  final List<String> filtersPays = <String>[];
-
-  ///Oceans
-  final List<String> oceans = mer;
-  final List<String> filtersOceans = <String>[];
-
-  String? isSelectedFormat = 'CLASSIC';
-
-  String? isSelectedOption = 'Period';
-
-  List<dynamic> currentDisplayList = [];
+  const MultiSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +64,14 @@ class MultiSearchPage extends StatelessWidget {
                             ),
                           ),
                           Flexible(
-                            child: RadioButtonRowFormat(
-                                options: formats,
-                                onChanged: (String? value) {
-                                  isSelectedFormat = value;
-                                  print("selected: $value");
-                                }),
+                            child: ShadowedContainer(
+                              child: RadioButtonRowFormat(
+                                  options: model.formats,
+                                  onChanged: (String? value) {
+                                    model.selectedFormat = value!;
+                                    print("selected: $value");
+                                  }),
+                            ),
                           ),
                         ],
                       )),
@@ -134,122 +86,29 @@ class MultiSearchPage extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.fromLTRB(80, 20, 20, 20),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: const Color(0x99e6e6fa),
                               ),
-                                child: CustomDropdownButton(
-                                  selectedValue: isSelectedOption,
-                                  options: options,
-                                  onChanged: (String? value) {
-                                    model.isSelectedOption = value!;
-                                  },
+                                child: ShadowedContainer(
+                                  child: CustomDropdownButton(
+                                    selectedValue: model.selectedOption,
+                                    options: model.options,
+                                    onChanged: (String? value) {
+                                      model.selectedOption = value!;
+                                      print("selected: $value");
+                                    },
+                                  ),
                                 ),
-/*                              child: DropdownButton<String>(
-                                  value: isSelectedOption,
-                                  alignment: Alignment.center,
-                                  dropdownColor: const Color(0x99e6e6fa),
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  onChanged: (String? value) {
-                                    model.isSelectedOption = value!;
-                                    isSelectedOption = value;
-                                    print(isSelectedOption);
-                                  },
-                                  items: options.map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                          style: AcornTheme
-                                              .textTheme.headlineMedium,
-                                          value),
-                                    );
-                                  }).toList()),*/
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: OutlinedButton(
                               onPressed: () async {
-                                switch (isSelectedOption) {
-                                  case 'Period':
-                                    currentDisplayList = period;
-                                    model.updateDisplayList(period);
-                                    break;
-                                  case 'Universe':
-                                    currentDisplayList = universe;
-                                    model.updateDisplayList(universe);
-                                    break;
-                                  case 'Stars':
-                                    await model.fetchStarsLookedFor();
-                                    currentDisplayList = model.listStars;
-                                    break;
-                                  case 'Current Country where it happened':
-                                    currentDisplayList = pays;
-                                    model.updateDisplayList(pays);
-                                    break;
-                                  case 'Current Place-name where it happened':
-                                    await model.fetchVillesLookedFor();
-                                    currentDisplayList = model.listVilles;
-                                    break;
-                                  case 'Oceans':
-                                    currentDisplayList = oceans;
-                                    model.updateDisplayList(oceans);
-                                    break;
-                                  case 'Seas':
-                                    await model.fetchSeasLookedFor();
-                                    currentDisplayList = model.listSeas;
-                                    break;
-                                  case 'Country-name at that time':
-                                    await model.fetchCattLookedFor();
-                                    currentDisplayList = model.listCatts;
-                                    break;
-                                  case 'Place-name at that time':
-                                    await model.fetchPattLookedFor();
-                                    currentDisplayList = model.listPatts;
-                                    break;
-                                  case 'Countries involved':
-                                    await model.fetchPaysInvolvedLookedFor();
-                                    currentDisplayList = model.listPaysInv;
-                                    break;
-                                  /*           case 'Places involved':
-                                    await model.fetchPlaceInvolvedLookedFor();
-                                    currentDisplayList = model.listPlaceInv;
-                                    break; */
-                                  case 'Names of Countries involved at that time':
-                                    await model.fetchPaysInvolvedATTLookedFor();
-                                    currentDisplayList = model.listPaysInvATT;
-                                    break;
-                                  case 'Names of Places involved at that time':
-                                    await model
-                                        .fetchPlaceInvolvedATTLookedFor();
-                                    currentDisplayList = model.listPlaceInvATT;
-                                    break;
-                                  case 'Stars Observed':
-                                    await model.fetchStarsObservedLookedFor();
-                                    currentDisplayList =
-                                        model.listStarsObserved;
-                                    break;
-                                  case 'Organisations':
-                                    await model.fetchOrgsLookedFor();
-                                    currentDisplayList =
-                                        model.listOrganisations;
-                                    break;
-                                  case 'People':
-                                    await model.fetchPeopleLookedFor();
-                                    currentDisplayList = model.listPeople;
-                                    break;
-                                  case 'Categories':
-                                    await model.fetchCategoriesLookedFor();
-                                    currentDisplayList = model.listCategories;
-                                    break;
-                                  case 'Other Terms':
-                                    await model.fetchTermsLookedFor();
-                                    currentDisplayList = model.listTerms;
-                                    break;
-                                }
+                                model.fetchRadioButtonBasis(model.selectedOption);
                               },
                               child: const Text(
                                 'Show and Select your options',
@@ -268,15 +127,15 @@ class MultiSearchPage extends StatelessWidget {
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(700, 8, 8, 8),
+                                padding: const EdgeInsets.fromLTRB(400, 8, 8, 8),
                                 child: BlankTextFormat(
                                     text: [
-                                  ...filtersPeriod,
-                                  ...filtersUniverse,
+                                  ...model.filtersPeriod,
+                                  ...model.filtersUniverse,
                                   ...model.filtersStars,
-                                  ...filtersPays,
+                                  ...model.filtersPays,
                                   ...model.filtersVilles,
-                                  ...filtersOceans,
+                                  ...model.filtersOceans,
                                   ...model.filtersSeas,
                                   ...model.filtersCatts,
                                   ...model.filtersPatts,
@@ -296,11 +155,6 @@ class MultiSearchPage extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     model.clearSearch();
-                                    currentDisplayList.clear();
-                                    filtersPeriod.clear();
-                                    filtersUniverse.clear();
-                                    filtersPays.clear();
-                                    filtersOceans.clear();
                                   },
                                   child: const Text("clear"),
                                 ),
@@ -309,82 +163,7 @@ class MultiSearchPage extends StatelessWidget {
                                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    switch (isSelectedOption) {
-                                      case 'Period':
-                                        model.fetchPrincipalByPeriod(
-                                            period: filtersPeriod);
-                                        break;
-                                      case 'Universe':
-                                        model.fetchPrincipal(
-                                            location: filtersUniverse);
-                                        break;
-                                      case 'Stars':
-                                        model.fetchPrincipalByPrecise(
-                                            precise: model.filtersStars);
-                                        break;
-                                      case 'Current Country where it happened':
-                                        model.fetchPrincipal(location: filtersPays);
-                                        break;
-                                      case 'Current Place-name where it happened':
-                                        model.fetchPrincipalByPrecise(
-                                            precise: model.filtersVilles);
-                                        break;
-                                      case 'Oceans':
-                                        model.fetchPrincipal(
-                                            location: filtersOceans);
-                                        break;
-                                      case 'Seas':
-                                        model.fetchPrincipalByPrecise(
-                                            precise: model.filtersSeas);
-                                        break;
-                                      case 'Country-name at that time':
-                                        model.fetchPrincipalByCattId(
-                                            cattIds: model.filtersCattsId);
-                                        break;
-                                      case 'Place-name at that time':
-                                        model.fetchPrincipalByPattId(
-                                            pattIds: model.filtersPattsId);
-                                        break;
-                                      case 'Countries involved':
-                                        model.fetchPrincipalByCInvolvedId(
-                                            cInvolvedIds: model.filtersPaysInvId);
-                                        break;
-/*                                  case 'Places involved':
-                                    model.fetchPrincipalByPInvolvedId(
-                                        pInvolvedIds: model.filtersPlaceInvId);
-                                    break;*/
-/*                                      case 'Names of Countries involved at that time':
-                                        model.fetchPrincipalByAttInvolvedId(
-                                            attsInvolvedIds:
-                                            model.filtersPaysInvATTId);
-                                        break;*/
-/*                                  case 'Names of Places involved at that time':
-                                    model.fetchPrincipalByPAttInvolvedId(
-                                        pattsInvolvedIds:
-                                        model.filtersPlaceInvATTId);
-                                    break;*/
-                                      case 'Stars Observed':
-                                        model.fetchPrincipalByStarsObservedId(
-                                            starObservedIds:
-                                            model.filtersStarsObservedId);
-                                        break;
-                                      case 'Organisations':
-                                        model.fetchPrincipalByOrgsId(
-                                            orgIds: model.filtersOrgsId);
-                                        break;
-                                      case 'People':
-                                        model.fetchPrincipalByPersonId(
-                                            personIds: model.filtersPeopleId);
-                                        break;
-                                      case 'Categories':
-                                        model.fetchPrincipalByCategoryId(
-                                            categoryIds: model.filtersCategoriesId);
-                                        break;
-                                      case 'Other Terms':
-                                        model.fetchPrincipalByTermId(
-                                            termIds: model.filtersTermsId);
-                                        break;
-                                    }
+                                    model.submitSelection();
                                   },
                                   child: const Text("submit"),
                                 ),
@@ -395,185 +174,8 @@ class MultiSearchPage extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
                               spacing: 5.0, // Gap between FilterChips
-                              children: currentDisplayList.map<Widget>((item) {
-                                switch (isSelectedOption) {
-                                  case 'Period':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: filtersPeriod,
-                                        filterImSiKey: item,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedPeriod = filterImSiKey;
-                                        });
-                                  case 'Universe':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: filtersUniverse,
-                                        filterImSiKey: item,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedUniverse =
-                                              filterImSiKey;
-                                        });
-                                  case 'Stars':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: model.filtersStars,
-                                        filterImSiKey: item.star,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedStar = filterImSiKey;
-                                        });
-                                  case 'Current Country where it happened':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: filtersPays,
-                                        filterImSiKey: item,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedPays = filterImSiKey;
-                                        });
-                                  case 'Current Place-name where it happened':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: model.filtersVilles,
-                                        filterImSiKey: item.place,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedPlace = filterImSiKey;
-                                        });
-                                  case 'Oceans':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: filtersOceans,
-                                        filterImSiKey: item,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedOcean = filterImSiKey;
-                                        });
-                                  case 'Seas':
-                                    return FilterFormatImediatSI(
-                                        filteredImSiKeys: model.filtersSeas,
-                                        filterImSiKey: item.sea,
-                                        onSelectedSI: (filterImSiKey) {
-                                          model.selectedSea = filterImSiKey;
-                                        });
-                                  case 'Country-name at that time':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersCatts,
-                                        filteredImValues: model.filtersCattsId,
-                                        filterImKey: item.countryatt,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedCatt = filterKey;
-                                          model.selectedCattId = filterId;
-                                          print(filterId);
-                                        });
-                                  case 'Place-name at that time':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPatts,
-                                        filteredImValues: model.filtersPattsId,
-                                        filterImKey: item.placeatt,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPatt = filterKey;
-                                          model.selectedPattId = filterId;
-                                        });
-                                  case 'Countries involved':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPaysInv,
-                                        filteredImValues:
-                                            model.filtersPaysInvId,
-                                        filterImKey: item.pays,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPays = filterKey;
-                                          model.selectedPaysId = filterId;
-                                        });
-                                  case 'Places involved':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPlaceInv,
-                                        filteredImValues:
-                                            model.filtersPlaceInvId,
-                                        filterImKey: item.place,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPlace = filterKey;
-                                          model.selectedPlaceId = filterId;
-                                        });
-                                  case 'Names of Countries involved at that time':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPaysInvATT,
-                                        filteredImValues:
-                                            model.filtersPaysInvATTId,
-                                        filterImKey: item.countryatt,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedCountryInvolvedATT =
-                                              filterKey;
-                                          model.selectedCountryInvolvedATTId =
-                                              filterId;
-                                        });
-                                  case 'Names of Places involved at that time':
-                                    return FilterFormatImediat(
-                                        filteredImKeys:
-                                            model.filtersPlaceInvATT,
-                                        filteredImValues:
-                                            model.filtersPlaceInvATTId,
-                                        filterImKey: item.placeatt,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPlaceInvolvedATT =
-                                              filterKey;
-                                          model.selectedPlaceInvolvedATTId =
-                                              filterId;
-                                        });
-                                  case 'Stars Observed':
-                                    return FilterFormatImediat(
-                                        filteredImKeys:
-                                            model.filtersStarsObserved,
-                                        filteredImValues:
-                                            model.filtersStarsObservedId,
-                                        filterImKey: item.star,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedStarsObserved =
-                                              filterKey;
-                                          model.selectedStarsObservedId =
-                                              filterId;
-                                        });
-                                  case 'Organisations':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersOrgs,
-                                        filteredImValues: model.filtersOrgsId,
-                                        filterImKey: item.organisation,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedOrg = filterKey;
-                                          model.selectedOrgId = filterId;
-                                        });
-                                  case 'People':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersPeople,
-                                        filteredImValues: model.filtersPeopleId,
-                                        filterImKey: item.person,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedPeople = filterKey;
-                                          model.selectedPeopleId = filterId;
-                                        });
-                                  case 'Categories':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersCategories,
-                                        filteredImValues:
-                                            model.filtersCategoriesId,
-                                        filterImKey: item.category,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedCategory = filterKey;
-                                          model.selectedCategoryId = filterId;
-                                        });
-                                  case 'Other Terms':
-                                    return FilterFormatImediat(
-                                        filteredImKeys: model.filtersTerms,
-                                        filteredImValues: model.filtersTermsId,
-                                        filterImKey: item.term,
-                                        filterImValue: item.id,
-                                        onSelected: (filterKey, filterId) {
-                                          model.selectedTerm = filterKey;
-                                          model.selectedTermId = filterId;
-                                        });
-                                }
-                                return const SizedBox.shrink();
+                              children: model.currentDisplayList.map<Widget>((item) {
+                                return model.buildItemWidget(item);
                               }).toList(),
                             ),
                           ),
@@ -589,51 +191,7 @@ class MultiSearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                switch (isSelectedFormat) {
-                  case 'CLASSIC':
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ResultPage(principal: model.principal)));
-                    print('send: ${model.principal}');
-                    break;
-                  case 'SCALABLE':
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Scalable(principal: model.principal)));
-                    print('send: ${model.principal}');
-                    break;
-
-                  case '3D':
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ThreeDViewPage(principalIds: model.principalIds),
-                        ));
-                    break;
-
-                  case '4D':
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              FourDViewPage(principalIds: model.principalIds),
-                        ));
-                    break;
-
-                  case 'MR':
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              MRViewPage(principalIds: model.principalIds),
-                        ));
-                    break;
-                }
+                model.navigateBasedOnSelection(context, model.selectedFormat);
               },
               label: const Text('SHOW'),
             ),

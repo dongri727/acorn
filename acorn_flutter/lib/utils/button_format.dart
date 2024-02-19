@@ -1,3 +1,4 @@
+import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 ///Used for the Add Term Buttons on Input Pages.
@@ -59,11 +60,11 @@ class _RadioButtonFormatState extends State<RadioButtonFormat> {
           textColor: Colors.white,
           title: Text(
               option,
-            style: const TextStyle(fontSize: 18),
+            style: AcornTheme.textTheme.bodySmall,
           ),
           leading: Radio<String>(
             focusColor: Colors.white,
-            activeColor: Colors.yellow,
+            activeColor: Colors.black,
             value: option,
             groupValue: _selectedOption,
             onChanged: (String? value) {
@@ -87,11 +88,11 @@ class RadioButtonRowFormat extends StatefulWidget {
   final ValueChanged<String?> onChanged;
 
   const RadioButtonRowFormat({
-    Key? key,
+    super.key,
     required this.options,
     this.initialOption,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<RadioButtonRowFormat> createState() => _RadioButtonRowFormatState();
@@ -115,10 +116,10 @@ class _RadioButtonRowFormatState extends State<RadioButtonRowFormat> {
             textColor: Colors.white,
             title: Text(
                 option,
-              style: const TextStyle(fontSize: 18),
+              style: AcornTheme.textTheme.bodySmall,
             ),
             leading: Radio<String>(
-              activeColor: Colors.yellow,
+              activeColor: Colors.black,
               value: option,
               groupValue: _selectedOption,
               onChanged: (String? value) {

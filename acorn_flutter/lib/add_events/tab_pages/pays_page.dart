@@ -1,6 +1,7 @@
 import 'package:acorn_flutter/add_events/tab_pages/pays_model.dart';
 import 'package:acorn_flutter/utils/blank_text_format.dart';
 import 'package:acorn_flutter/utils/confirm_dialog.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,12 +35,14 @@ class PaysPage extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       100, 20, 20, 20),
-                                  child: RadioButtonFormat(
-                                      options: model.options,
-                                      onChanged: (String? value) {
-                                        model.selectedOption = value!;
-                                        print("selected: $value");
-                                      }),
+                                  child: ShadowedContainer(
+                                    child: RadioButtonFormat(
+                                        options: model.options,
+                                        onChanged: (String? value) {
+                                          model.selectedOption = value!;
+                                          print("selected: $value");
+                                        }),
+                                  ),
                                 )),
                             Expanded(
                                 flex: 1,
@@ -69,14 +72,16 @@ class PaysPage extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(28.0),
-                            child: FormatGreyEnable(
-                              enabled: model.selectedOption !=
-                                  'Current Name of Country Involved',
-                              controller: controller,
-                              hintText: 'A New Name You Want',
-                              onChanged: (text) {
-                                model.setNewWord(text);
-                              },
+                            child: ShadowedContainer(
+                              child: FormatGreyEnable(
+                                enabled: model.selectedOption !=
+                                    'Current Name of Country Involved',
+                                controller: controller,
+                                hintText: 'A New Name You Want',
+                                onChanged: (text) {
+                                  model.setNewWord(text);
+                                },
+                              ),
                             ),
                           ),
                           ButtonFormat(

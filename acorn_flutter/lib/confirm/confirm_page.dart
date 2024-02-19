@@ -285,7 +285,7 @@ class ConfirmPage extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Stars Observed',
                                     style: AcornTheme.textTheme.headlineSmall
                                 ),
@@ -305,13 +305,9 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Organizations Involved',
                                     style: AcornTheme.textTheme.headlineSmall,
-/*                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  ),*/
                                 ),
                               ),
                               Padding(
@@ -332,10 +328,6 @@ class ConfirmPage extends StatelessWidget {
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('People Involved',
                                     style: AcornTheme.textTheme.headlineSmall,
-/*                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  ),*/
                                 ),
                               ),
                               Padding(
@@ -353,13 +345,9 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Category',
                                     style: AcornTheme.textTheme.headlineSmall,
-/*                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  ),*/
                                 ),
                               ),
                               Padding(
@@ -379,13 +367,9 @@ class ConfirmPage extends StatelessWidget {
                                   )
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
                                 child: Text('Search Terms',
                                     style: AcornTheme.textTheme.headlineSmall,
-/*                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  ),*/
                                 ),
                               ),
                               Padding(

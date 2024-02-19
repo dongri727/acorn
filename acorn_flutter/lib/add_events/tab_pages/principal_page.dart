@@ -1,14 +1,11 @@
-import 'dart:math';
-
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/chips_format.dart';
 import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:acorn_flutter/utils/dropdown_button.format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../confirm/confirm.dart';
 import '../../utils/blank_text_format.dart';
+import '../../utils/shadowed_container.dart';
 import '../../utils/tff_format.dart';
 
 import 'principal_model.dart';
@@ -50,13 +47,15 @@ class PrincipalPage extends StatelessWidget {
                               flex: 2,
                               child: Padding(
                                   padding: const EdgeInsets.all(20.0),
-                                  child: TffFormat(
-                                    hintText: "Event (within 50 letters)",
-                                    onChanged: (text) {
-                                      model.setNewName(text);
-                                    },
-                                    tffColor1: const Color(0xFF2f4f4f),
-                                    tffColor2: const Color(0x99e6e6fa),
+                                  child: ShadowedContainer(
+                                    child: TffFormat(
+                                      hintText: "Event (within 50 letters)",
+                                      onChanged: (text) {
+                                        model.setNewName(text);
+                                      },
+                                      tffColor1: const Color(0xFF2f4f4f),
+                                      tffColor2: const Color(0x99e6e6fa),
+                                    ),
                                   )),
                             ),
                           ],
@@ -84,11 +83,7 @@ class PrincipalPage extends StatelessWidget {
                                       flex: 2,
                                       child: Padding(
                                         padding: const EdgeInsets.all(20.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15.0),
-                                            color: const Color(0x99e6e6fa),
-                                          ),
+                                        child: ShadowedContainer(
                                           child: CustomDropdownButton(
                                             selectedValue: model.selectedCalendar,
                                             options: model.periods,
@@ -103,25 +98,29 @@ class PrincipalPage extends StatelessWidget {
                                         flex: 1,
                                         child: Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: TffFormat(
-                                              hintText: "year",
-                                              onChanged: (value) {
-                                                model.setNewYearD(value);
-                                              },
-                                              tffColor1: Colors.black54,
-                                              tffColor2: const Color(0x99e6e6fa),
+                                            child: ShadowedContainer(
+                                              child: TffFormat(
+                                                hintText: "year",
+                                                onChanged: (value) {
+                                                  model.setNewYearD(value);
+                                                },
+                                                tffColor1: Colors.black54,
+                                                tffColor2: const Color(0x99e6e6fa),
+                                              ),
                                             ))),
                                     Expanded(
                                       flex: 1,
                                       child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: TffFormat(
-                                            hintText: "Month 1-12 or 0",
-                                            onChanged: (value) {
-                                              model.setNewMonth(value);
-                                            },
-                                            tffColor1: Colors.black54,
-                                            tffColor2: const Color(0x99e6e6fa),
+                                          child: ShadowedContainer(
+                                            child: TffFormat(
+                                              hintText: "Month 1-12 or 0",
+                                              onChanged: (value) {
+                                                model.setNewMonth(value);
+                                              },
+                                              tffColor1: Colors.black54,
+                                              tffColor2: const Color(0x99e6e6fa),
+                                            ),
                                           )),
                                     ),
                                     Expanded(
@@ -129,13 +128,15 @@ class PrincipalPage extends StatelessWidget {
                                       child: Padding(
                                           padding:
                                           const EdgeInsets.fromLTRB(8, 8, 20, 8),
-                                          child: TffFormat(
-                                            hintText: "Date 1-31 or 0",
-                                            onChanged: (value) {
-                                              model.setNewDay(value);
-                                            },
-                                            tffColor1: Colors.black54,
-                                            tffColor2: const Color(0x99e6e6fa),
+                                          child: ShadowedContainer(
+                                            child: TffFormat(
+                                              hintText: "Date 1-31 or 0",
+                                              onChanged: (value) {
+                                                model.setNewDay(value);
+                                              },
+                                              tffColor1: Colors.black54,
+                                              tffColor2: const Color(0x99e6e6fa),
+                                            ),
                                           )),
                                     ),
                                   ],
@@ -162,12 +163,7 @@ class PrincipalPage extends StatelessWidget {
                             child: Padding(
                               padding:
                                   const EdgeInsets.all(20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: const Color(0x99e6e6fa),
-                                ),
-
+                              child: ShadowedContainer(
                                 child: RadioButtonFormat(
                                     options: model.principalOptions,
                                     onChanged: (String? value) {

@@ -5,11 +5,24 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import '../../confirm/confirm.dart';
 import 'package:provider/provider.dart';
-
+import '../../fetch/fetch_catt.dart';
+import '../../fetch/fetch_patt.dart';
+import '../../fetch/fetch_stars.dart';
 import '../../utils/build_chips.dart';
-import '../../utils/chips_format.dart';
+
 
 class PaysModel extends ChangeNotifier {
+
+  late final FetchStarsRepository  _fetchStarsRepository;
+  late final FetchCattRepository _fetchCattRepository;
+  late final FetchPattRepository _fetchPattRepository;
+
+  PaysModel(){
+    _fetchStarsRepository = FetchStarsRepository();
+    _fetchCattRepository = FetchCattRepository();
+    _fetchPattRepository = FetchPattRepository();
+  }
+
   var newPlace = '';
   var newCATT = '';
   var newPATT = '';
@@ -61,36 +74,6 @@ class PaysModel extends ChangeNotifier {
     try {
       listPlaces = await client.places.getPlaces();
       currentDisplayList = listPlaces;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchCountryAttInv() async {
-    try {
-      listCATTs = await client.countryatts.getCountryATTs();
-      currentDisplayList = listCATTs;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPattInv() async {
-    try {
-      listPATTs = await client.placeatts.getPlaceATTs();
-      currentDisplayList = listPATTs;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchStarsObserved() async {
-    try {
-      listStars = await client.stars.getStars();
-      currentDisplayList = listStars;
       notifyListeners();
     } catch (e) {
       debugPrint('$e');
@@ -161,13 +144,19 @@ class PaysModel extends ChangeNotifier {
         await fetchPlacesInvolved();
         break;
       case 'Name of Country Involved at that time':
-        await fetchCountryAttInv();
+        await _fetchCattRepository.fetchCatt();
+        currentDisplayList = _fetchCattRepository.listCatt;
+        notifyListeners();
         break;
       case 'Name of Place Involved at that time':
-        await fetchPattInv();
+        await _fetchPattRepository.fetchPatt();
+        currentDisplayList = _fetchPattRepository.listPatt;
+        notifyListeners();
         break;
       case 'Stars Observed or Aimed at':
-        await fetchStarsObserved();
+        await _fetchStarsRepository.fetchStars();
+        currentDisplayList = _fetchStarsRepository.listStars;
+        notifyListeners();
         break;
     }
   }
@@ -201,7 +190,7 @@ class PaysModel extends ChangeNotifier {
         await addPlaceAndFetch(newPlace);
         break;
       case 'Name of Country Involved at that time':
-        await fetchCountryAttInv();
+        await addCattAndFetch(newCATT);
         break;
       case 'Name of Place Involved at that time':
         await addPATTandFetch(newPATT);
@@ -213,10 +202,10 @@ class PaysModel extends ChangeNotifier {
   }
 
   Widget buildItemWidget(dynamic item) {
-    String itemType = _getItemType(item);
-    switch (itemType) {
-      case 'Pays':
-        return _buildFilterFormatImediat(
+    //String itemType = _getItemType(item);
+    switch (selectedOption) {
+      case 'Current Name of Country Involved':
+        return buildFilterFormatImediat(
           filteredKeys: filtersPays,
           filteredValues: filtersPaysId,
           filterKey: (item as Pays).pays,
@@ -226,8 +215,8 @@ class PaysModel extends ChangeNotifier {
             selectedPaysInvId = value;
             updateSelectedPaysInv(key);
           });
-      case 'Places':
-        return _buildFilterFormatImediat(
+      case 'Current Name of Place Involved':
+        return buildFilterFormatImediat(
           filteredKeys: filtersPlaces,
           filteredValues: filtersPlacesId,
           filterKey: (item as Places).place,
@@ -238,8 +227,8 @@ class PaysModel extends ChangeNotifier {
             updateSelectedPlaceInv(key);
           },
         );
-      case 'Catts':
-        return _buildFilterFormatImediat(
+      case 'Name of Country Involved at that time':
+        return buildFilterFormatImediat(
           filteredKeys: filtersCATTs,
           filteredValues: filtersCATTId,
           filterKey: (item as Countryatts).countryatt,
@@ -250,8 +239,8 @@ class PaysModel extends ChangeNotifier {
             updateSelectedCattInv(key);
           },
         ); 
-      case 'Patts':
-        return _buildFilterFormatImediat(
+      case 'Name of Place Involved at that time':
+        return buildFilterFormatImediat(
           filteredKeys: filtersPATTs,
           filteredValues: filtersPATTId,
           filterKey: (item as Placeatts).placeatt,
@@ -262,8 +251,8 @@ class PaysModel extends ChangeNotifier {
             updateSelectedPattInv(key);
           },
         ); 
-      case 'Stars':
-        return _buildFilterFormatImediat(
+      case 'Stars Observed or Aimed at':
+        return buildFilterFormatImediat(
           filteredKeys: filtersStars,
           filteredValues: filtersStarId,
           filterKey: (item as Stars).star,
@@ -277,30 +266,6 @@ class PaysModel extends ChangeNotifier {
       default:
         return const SizedBox.shrink();
     }
-  }
-
-  String _getItemType(dynamic item) {
-    if (item is Pays) return 'Pays';
-    if (item is Places) return 'Places';
-    if (item is Countryatts) return 'Catts';
-    if (item is Placeatts) return 'Patts';
-    if (item is Stars) return 'Stars';
-    return 'Unknown';
-  }
-
-  Widget _buildFilterFormatImediat({
-    required List<String> filteredKeys,
-    required List<int> filteredValues,
-    required String filterKey,
-    required int filterValue,
-    required Function(String, int) onSelected,
-  }) {
-    return FilterFormatImediat(
-        filteredImKeys: filteredKeys,
-        filteredImValues: filteredValues,
-        filterImKey: filterKey,
-        filterImValue: filterValue,
-        onSelected: onSelected);
   }
 
   void updateSelectedPaysInv(String newSelectedPaysInv) {
@@ -373,10 +338,4 @@ class PaysModel extends ChangeNotifier {
 
   ///RadioButton
   String selectedOption = '';
-/*  String get selectedOption => _selectedOption;
-
-  set selectedOption(String value) {
-    _selectedOption = value;
-    notifyListeners();
-  }*/
 }

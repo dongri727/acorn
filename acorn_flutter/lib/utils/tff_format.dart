@@ -13,8 +13,8 @@ class TffFormat extends StatelessWidget {
     required this.onChanged,
     required this.tffColor1,
     required this.tffColor2,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,8 @@ class ConfirmText extends StatelessWidget {
     required this.confirmText,
     required this.confirmColor,
 
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +92,8 @@ class ConfirmTextBig extends StatelessWidget {
     required this.confirmText,
     required this.confirmColor,
 
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +126,8 @@ class HintText extends StatelessWidget {
   const HintText({
     required this.hintText,
 
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +155,8 @@ class FormatGrey extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.onChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +169,7 @@ class FormatGrey extends StatelessWidget {
         hintStyle: const TextStyle(
             fontSize: 14,
             color: Colors.black54),
-        fillColor: Colors.grey[200],
+        fillColor: const Color(0x99e6e6fa),
         filled: true,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -202,8 +202,8 @@ class FormatGreyEnable extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.onChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +217,7 @@ class FormatGreyEnable extends StatelessWidget {
         hintStyle: const TextStyle(
             fontSize: 14,
             color: Colors.black54),
-        fillColor: Colors.grey[200],
+        fillColor: const Color(0x99e6e6fa),
         filled: true,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -227,7 +227,7 @@ class FormatGreyEnable extends StatelessWidget {
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(
             color: Colors.grey,
             width: 1.0,

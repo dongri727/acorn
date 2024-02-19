@@ -1,8 +1,7 @@
-import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 // Custom Dropdown Button Widget
-class CustomDropdownButton extends StatelessWidget {
+class CustomDropdownButton extends StatefulWidget {
   final String? selectedValue;
   final List<String> options;
   final ValueChanged<String?> onChanged;
@@ -15,23 +14,31 @@ class CustomDropdownButton extends StatelessWidget {
   });
 
   @override
+  CustomDropdownButtonState createState() => CustomDropdownButtonState();
+}
+
+class CustomDropdownButtonState extends State<CustomDropdownButton> {
+  String? selectedValue;
+
+  @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: selectedValue,
       alignment: Alignment.center,
-      dropdownColor: const Color(0x99e6e6fa),
-      borderRadius: BorderRadius.circular(15.0),
-      onChanged: onChanged,
-      items: options.map<DropdownMenuItem<String>>((String value) {
+      dropdownColor: Colors.lightBlue[50],
+      borderRadius: BorderRadius.circular(20.0),
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedValue = newValue;
+          widget.onChanged(newValue);
+        });
+      },
+      items: widget.options.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(
-            value,
-            style: AcornTheme.textTheme.bodySmall, // Adjusted to use context for theme
-          ),
+          child: Text(value),
         );
       }).toList(),
     );
   }
 }
-

@@ -216,49 +216,14 @@ class PrincipalModel extends ChangeNotifier {
   }
 
 
-
-
-  ///RadioButton
-/*  String get selectedOption => _selectedOption;
-
-  set selectedOption(String value) {
-    _selectedOption = value;
-    notifyListeners();
-  }*/
-
   ///仮表示
   String chosenUniverse = '';
-/*  String get chosenUniverse => _chosenUniverse;
-
-  set chosenUniverse(String choice) {
-    _chosenUniverse = choice;
-    print(chosenUniverse);
-    notifyListeners();
-  }*/
 
   String chosenPays = '';
-/*  String get chosenPays => _chosenPays;
-
-  set chosenPays(String choice) {
-    _chosenPays = choice;
-    notifyListeners();
-  }*/
 
   String chosenOcean = '';
-/*  String get chosenOcean => _chosenOcean;
-
-  set chosenOcean(String choice) {
-    _chosenOcean = choice;
-    notifyListeners();
-  }*/
 
   String chosenLocation = '';
-/*  String get chosenLocation => _chosenLocation;
-
-  set chosenLocation(String location) {
-    _chosenLocation = "";
-    notifyListeners();
-  }*/
 
   void updateLocation(String newLocation) {
     location = newLocation;

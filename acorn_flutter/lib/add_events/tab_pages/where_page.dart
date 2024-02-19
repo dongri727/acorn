@@ -1,6 +1,7 @@
 import 'package:acorn_flutter/add_events/tab_pages/where_model.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
 import 'package:acorn_flutter/utils/confirm_dialog.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,15 +39,10 @@ class WherePageGate extends StatelessWidget {
 class WherePage extends StatelessWidget {
   const WherePage({super.key, required Confirm confirm}) /* : _confirm = confirm */;
 
-  //final Confirm _confirm;
-  //String keyCountry = '';
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-    final confirm = Provider.of<Confirm>(context);
-
-    //final keyCountry = _confirm.selectedLocation;
+    final confirm = Provider.of<Confirm>(context); //for getting keyCountry
 
     return ChangeNotifierProvider<WhereModel>(
       create: (_) => WhereModel(keyCountry: confirm.selectedLocation),
@@ -68,12 +64,14 @@ class WherePage extends StatelessWidget {
                             child: Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(100, 20, 20, 20),
-                              child: RadioButtonFormat(
-                                  options: model.options,
-                                  onChanged: (String? value) {
-                                    model.selectedOption = value!;
-                                    print("selected: $value");
-                                  }),
+                              child: ShadowedContainer(
+                                child: RadioButtonFormat(
+                                    options: model.options,
+                                    onChanged: (String? value) {
+                                      model.selectedOption = value!;
+                                      print("selected: $value");
+                                    }),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -96,47 +94,55 @@ class WherePage extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 200, 8),
-                                  child: RadioButtonRowFormat(
-                                      options: model.ns,
-                                      onChanged: (String? value) {
-                                        model.selectedOption = value!;
-                                        //isSelectedOption = value;
-                                        print("selected: $value");
-                                      }),
-                                ),
-                                Padding(
-                                  padding:
                                       const EdgeInsets.fromLTRB(50, 8, 100, 8),
-                                  child: TffFormat(
-                                    hintText: "Latitude",
-                                    onChanged: (value) {
-                                      model.nsSwitch(value);
-                                    },
-                                    tffColor1: Colors.black54,
-                                    tffColor2: const Color(0x99e6e6fa),
+                                  child: ShadowedContainer(
+                                    child: RadioButtonRowFormat(
+                                        options: model.ns,
+                                        onChanged: (String? value) {
+                                          model.selectedOption = value!;
+                                          //isSelectedOption = value;
+                                          print("selected: $value");
+                                        }),
                                   ),
                                 ),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 200, 8),
-                                  child: RadioButtonRowFormat(
-                                      options: model.ew,
-                                      onChanged: (String? value) {
-                                        model.selectedOption = value!;
-                                        print("selected: $value");
-                                      }),
+                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
+                                  child: ShadowedContainer(
+                                    child: TffFormat(
+                                      hintText: "Latitude",
+                                      onChanged: (value) {
+                                        model.nsSwitch(value);
+                                      },
+                                      tffColor1: Colors.black54,
+                                      tffColor2: const Color(0x99e6e6fa),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
+                                  child: ShadowedContainer(
+                                    child: RadioButtonRowFormat(
+                                        options: model.ew,
+                                        onChanged: (String? value) {
+                                          model.selectedOption = value!;
+                                          print("selected: $value");
+                                        }),
+                                  ),
                                 ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(50, 8, 100, 40),
-                                  child: TffFormat(
-                                    hintText: "Longitude",
-                                    onChanged: (value) {
-                                      model.ewSwitch(value);
-                                    },
-                                    tffColor1: Colors.black54,
-                                    tffColor2: const Color(0x99e6e6fa),
+                                  child: ShadowedContainer(
+                                    child: TffFormat(
+                                      hintText: "Longitude",
+                                      onChanged: (value) {
+                                        model.ewSwitch(value);
+                                      },
+                                      tffColor1: Colors.black54,
+                                      tffColor2: const Color(0x99e6e6fa),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -153,12 +159,14 @@ class WherePage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
-                          child: FormatGrey(
-                            controller: controller,
-                            hintText: 'a New Name You Want',
-                            onChanged: (text) {
-                              model.setNewWord(text);
-                            },
+                          child: ShadowedContainer(
+                            child: FormatGrey(
+                              controller: controller,
+                              hintText: 'a New Name You Want',
+                              onChanged: (text) {
+                                model.setNewWord(text);
+                              },
+                            ),
                           ),
                         ),
                         ButtonFormat(

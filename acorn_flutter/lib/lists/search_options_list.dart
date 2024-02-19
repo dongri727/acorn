@@ -1,0 +1,20 @@
+final List<String> searchOptions = [
+  'Period',
+  'Universe',
+  'Stars',
+  'Current Country where it happened',
+  'Current Place-name where it happened',
+  'Oceans',
+  'Seas',
+  'Country-name at that time',
+  'Place-name at that time',
+  'Countries involved',
+  'Places involved',
+  //'Names of Countries involved at that time',
+  //'Names of Places involved at that time',
+  'Stars Observed',
+  'Organisations',
+  'People',
+  'Categories',
+  'Other Terms'
+];

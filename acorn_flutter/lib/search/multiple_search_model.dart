@@ -1,105 +1,191 @@
 import 'dart:core';
-
+import 'package:acorn_flutter/fetch/fetch_catt.dart';
+import 'package:acorn_flutter/fetch/fetch_orgs.dart';
+import 'package:acorn_flutter/fetch/fetch_patt.dart';
+import 'package:acorn_flutter/fetch/fetch_people.dart';
+import 'package:acorn_flutter/fetch/fetch_seas.dart';
+import 'package:acorn_flutter/fetch/fetch_stars.dart';
+import 'package:acorn_flutter/search/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
+import '../../lists/search_options_list.dart';
+import '../fetch/fetch_categories.dart';
+import '../fetch/fetch_principal.dart';
+import '../fetch/fetch_terms.dart';
+import '../fetch/fetch_place.dart';
+import '../lists/countries_list.dart';
+import '../lists/oceans_list.dart';
+import '../lists/period_list.dart';
+import '../lists/universe_list.dart';
+import '../timeline/scalable.dart';
+import '../unity_view/four_d_page.dart';
+import '../unity_view/mr_page.dart';
+import '../unity_view/three_d_page.dart';
+import '../utils/build_chips.dart';
 
 class MultipleSearchModel extends ChangeNotifier {
 
-  String _isSelectedOption = '';
-  String get selectedOption => _isSelectedOption;
+  late final FetchSeasRepository _fetchSeasRepository;
+  late final FetchPlaceRepository _fetchPlaceRepository;
+  late final FetchStarsRepository _fetchStarsRepository;
+  late final FetchCattRepository _fetchCattRepository;
+  late final FetchPattRepository _fetchPattRepository;
+  late final FetchOrgsRepository _fetchOrgsRepository;
+  late final FetchPeopleRepository _fetchPeopleRepository;
+  late final FetchCategoriesRepository _fetchCategoriesRepository;
+  late final FetchTermsRepository _fetchTermsRepository;
 
-  set isSelectedOption(String value) {
-    _isSelectedOption = value;
+  late final FetchPrincipalRepository _fetchPrincipalRepository;
+
+  MultipleSearchModel(){
+    _fetchSeasRepository = FetchSeasRepository();
+    _fetchPlaceRepository = FetchPlaceRepository();
+    _fetchStarsRepository = FetchStarsRepository();
+    _fetchCattRepository = FetchCattRepository();
+    _fetchPattRepository = FetchPattRepository();
+    _fetchOrgsRepository = FetchOrgsRepository();
+    _fetchPeopleRepository = FetchPeopleRepository();
+    _fetchCategoriesRepository = FetchCategoriesRepository();
+    _fetchTermsRepository = FetchTermsRepository();
+
+    _fetchPrincipalRepository = FetchPrincipalRepository();
+  }
+
+  final List<String> formats = [
+    'CLASSIC',
+    'SCALABLE',
+    '3D',
+    '4D',
+    'MR',
+  ];
+  //radioButton
+  String selectedFormat = 'CLASSIC';
+
+  List<String> options = searchOptions;
+  //dropdownButton
+  String selectedOption = 'Period';
+  List<dynamic> currentDisplayList = [];
+
+  void updateDisplayList(List<String> newList) {
+    currentDisplayList = newList;
     notifyListeners();
   }
 
-  List<String> currentDisplayList = [];
+  ///Period
+  final List<String> period = epoch;
+  final List<String> filtersPeriod = <String>[];
 
-  ///時代別検索
+  String selectedPeriod = '';
+  int selectedPeriodId = 0;
 
-  ///宇宙の検索
+  void updateSelectedPeriod(String newSelectedPeriod) {
+    selectedPeriod = newSelectedPeriod;
+    notifyListeners();
+  }
 
-  ///星の検索
+  ///Universe
+  final List<String> universe = cosmos;
+  final List<String> filtersUniverse = <String>[];
+
+  String selectedUniverse = '';
+  int selectedUniverseId = 0;
+
+  void updateSelectedUniverse(String newSelectedUniverse) {
+    selectedUniverse = newSelectedUniverse;
+    notifyListeners();
+  }
+
+  //Stars(where it happened) 機能している
   List<Stars> listStars = [];
   final List<String> filtersStars = <String>[];
 
-  fetchStarsLookedFor() async {
-    try {
-      listStars = await client.stars.getStars();
-      print(listStars);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedStar = '';
+  int selectedStarId = 0;
+
+  void updateSelectedStar(String newSelectedStar) {
+    selectedStar = newSelectedStar;
+    notifyListeners();
   }
 
-  ///検索対象国の現在名
+  //Current Country where it happened
+  //Pays is country in french
+  final List<String> pays = countries;
+  final List<String> filtersPays = <String>[];
 
-  ///検索対象都市の現在名
-  List<Places> listVilles = [];
+  String selectedPays = '';
+  int selectedPaysId = 0;
+
+  void updateSelectedPays(String newSelectedPays) {
+    selectedPays = newSelectedPays;
+    notifyListeners();
+  }
+
+  //Current Place-name where it happened 機能している
+  //ville is city in french
   final List<String> filtersVilles = <String>[];
   final List<int> filtersVillesId = <int>[];
 
-  fetchVillesLookedFor() async {
-    try {
-      listVilles = await client.places.getPlaces();
-      print(listVilles);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedPlace = '';
+  int selectedPlaceId = 0;
+
+  void updateSelectedPlace(String newSelectedPlace) {
+    selectedPlace = newSelectedPlace;
+    notifyListeners();
   }
 
-  ///検索対象海洋名
+  //Oceans
+  final List<String> oceans = mer;
+  final List<String> filtersOceans = <String>[];
 
-  ///検索対象海域名
+  String selectedOcean = '';
+  int selectedOceanId = 0;
+
+  void updateSelectedOcean(String newSelectedOcean) {
+    selectedOcean = newSelectedOcean;
+    notifyListeners();
+  }
+
+  //Seas 機能している
   List<Seas> listSeas = [];
   final List<String> filtersSeas = <String>[];
   final List<int> filtersSeasId = <int>[];
 
-  fetchSeasLookedFor() async {
-    try {
-      listSeas = await client.seas.getSeas();
-      print(listSeas);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedSea = '';
+  int selectedSeaId = 0;
+
+  void updateSelectedSea(String newSelectedSea) {
+    selectedSea = newSelectedSea;
+    notifyListeners();
   }
 
-  ///当時の国名
+  ///Country-name at that time(unique)
   List<Countryatts> listCatts = [];
   final List<String> filtersCatts = <String>[];
   final List<int> filtersCattsId = <int>[];
 
-  fetchCattLookedFor() async {
-    try {
-      listCatts = await client.countryatts.getCountryATTs();
-      print(listCatts);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedCatt = '';
+  int selectedCattId = 0;
+
+  void updateSelectedCatt(String newSelectedCatt) {
+    selectedCatt = newSelectedCatt;
+    notifyListeners();
   }
 
-  ///当時の地名
+  //Place-name at that time(unique)
   List<Placeatts> listPatts = [];
   final List<String> filtersPatts = <String>[];
   final List<int> filtersPattsId = <int>[];
 
-  fetchPattLookedFor() async {
-    try {
-      listPatts = await client.placeatts.getPlaceATTs();
-      print(listPatts);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedPatt = '';
+  int selectedPattId = 0;
+
+  void updateSelectedPatt(String newSelectedPatt) {
+    selectedPatt = newSelectedPatt;
+    notifyListeners();
   }
 
-  ///関係国の現在名
+  //Countries involved
   List<Pays> listPaysInv = [];
   final List<String> filtersPaysInv = <String>[];
   final List<int> filtersPaysInvId = <int>[];
@@ -114,7 +200,15 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   }
 
-  ///関係地域の現在名
+  String selectedCountryInvolved = '';
+  int selectedCountryInvolvedId = 0;
+
+  void updateSelectedCountryInvolved(String newSelectedCountryInvolved) {
+    selectedCountryInvolved = newSelectedCountryInvolved;
+    notifyListeners();
+  }
+
+  //Places involved
   List<dynamic> placeInvIds = [];
   List<Places> listPlaceInv = [];
   final List<String> filtersPlaceInv = <String>[];
@@ -131,614 +225,547 @@ class MultipleSearchModel extends ChangeNotifier {
     }
   } */
 
-  ///当時の関係国名
+  String selectedPlaceInvolved = '';
+  int selectedPlaceInvolvedId = 0;
+
+  void updateSelectedPlaceInvolve(String newSelectedPlaceInvolved) {
+    selectedPlaceInvolved = newSelectedPlaceInvolved;
+    notifyListeners();
+  }
+
+  //Names of Countries involved at that time
   List<Countryatts> listPaysInvATT = [];
   final List<String> filtersPaysInvATT = <String>[];
   final List<int> filtersPaysInvATTId = <int>[];
 
-  fetchPaysInvolvedATTLookedFor() async {
-    try {
-      listPaysInvATT = await client.countryatts.getCountryATTs();
-      print(listPaysInvATT);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+
+
+  String selectedCountryInvolvedATT = '';
+  int selectedCountryInvolvedATTId = 0;
+
+  void updateSelectedCountryInvolvedATT(String newSelectedCountryInvolvedATT) {
+    selectedCountryInvolvedATT = newSelectedCountryInvolvedATT;
+    notifyListeners();
   }
 
-  ///当時の関係国名
+  //Names of Places involved at that time
   List<Placeatts> listPlaceInvATT = [];
   final List<String> filtersPlaceInvATT = <String>[];
   final List<int> filtersPlaceInvATTId = <int>[];
 
-  fetchPlaceInvolvedATTLookedFor() async {
-    try {
-      listPlaceInvATT = await client.placeatts.getPlaceATTs();
-      print(listPlaceInvATT);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
+  String selectedPlaceInvolvedATT = '';
+  int selectedPlaceInvolvedATTId = 0;
+
+  void updateSelectedPlaceInvolvedATT(String newSelectedPlaceInvolvedATT) {
+    selectedPlaceInvolvedATT = newSelectedPlaceInvolvedATT;
+    notifyListeners();
   }
 
-  ///観測された星
+  //Star Observed or Aimed
   List<Stars> listStarsObserved = [];
   final List<String> filtersStarsObserved = <String>[];
   final List<int> filtersStarsObservedId = <int>[];
 
-  fetchStarsObservedLookedFor() async {
-    try {
-      listStarsObserved = await client.stars.getStars();
-      print(listStarsObserved);
+    String selectedStarsObserved = '';
+    int selectedStarsObservedId = 0;
+
+    //Organisation
+    List<Organisations> listOrganisations = [];
+    final List<String> filtersOrgs = <String>[];
+    final List<int> filtersOrgsId = <int>[];
+
+    String selectedOrg = '';
+    int selectedOrgId = 0;
+
+    void updateSelectedOrg(String newSelectedOrg) {
+      selectedOrg = newSelectedOrg;
       notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
+    }
+
+    //People
+    List<People> listPeople = [];
+    final List<String> filtersPeople = <String>[];
+    final List<int> filtersPeopleId = <int>[];
+
+    String selectedPeople = '';
+    int selectedPeopleId = 0;
+
+    void updateSelectedPeople(String newSelectedPeople) {
+      selectedPeople = newSelectedPeople;
+      notifyListeners();
+    }
+
+    //Categories
+    List<Categories> listCategories = [];
+    final List<String> filtersCategories = <String>[];
+    final List<int> filtersCategoriesId = <int>[];
+
+    String selectedCategory = '';
+    int selectedCategoryId = 0;
+
+    void updateSelectedCategory(String newSelectedCategory) {
+      selectedCategory = newSelectedCategory;
+      notifyListeners();
+    }
+
+    //Other Terms
+    List<Terms> listTerms = [];
+    final List<String> filtersTerms = <String>[];
+    final List<int> filtersTermsId = <int>[];
+
+    String selectedTerm = '';
+    int selectedTermId = 0;
+
+    void updateSelectedTerm(String newSelectedTerm) {
+      selectedTerm = newSelectedTerm;
+      notifyListeners();
+    }
+
+    Future<void> fetchRadioButtonBasis(selectedOption) async {
+      switch (selectedOption) {
+        case 'Period':
+          currentDisplayList = period;
+          updateDisplayList(period);
+          print(period);
+          break;
+        case 'Universe':
+          currentDisplayList = universe;
+          updateDisplayList(universe);
+          print(universe);
+          break;
+        case 'Stars':
+          await _fetchStarsRepository.fetchStars();
+          currentDisplayList = _fetchStarsRepository.listStars;
+          notifyListeners();
+          break;
+        case 'Current Country where it happened':
+          currentDisplayList = pays;
+          updateDisplayList(pays);
+          break;
+        case 'Current Place-name where it happened':
+          await _fetchPlaceRepository.fetchVillesLookedFor();
+          currentDisplayList = _fetchPlaceRepository.listPlaces;
+          break;
+        case 'Oceans':
+          currentDisplayList = oceans;
+          updateDisplayList(oceans);
+          break;
+        case 'Seas': //機能している
+          await _fetchSeasRepository.fetchSeas();
+          currentDisplayList = _fetchSeasRepository.listSeas;
+          notifyListeners();
+          break;
+        case 'Country-name at that time':
+          await _fetchCattRepository.fetchCatt();
+          currentDisplayList = _fetchCattRepository.listCatt;
+          notifyListeners();
+          break;
+        case 'Place-name at that time':
+          await _fetchPattRepository.fetchPatt();
+          currentDisplayList = _fetchPattRepository.listPatt;
+          notifyListeners();
+          break;
+        case 'Countries involved':
+          await fetchPaysInvolvedLookedFor();
+          currentDisplayList = listPaysInv;
+          break;
+
+        case 'Places involved':
+        //await fetchPlaceInvolvedLookedFor();
+          currentDisplayList = listPlaceInv;
+          break;
+
+        case 'Names of Countries involved at that time':
+          await _fetchCattRepository.fetchCatt();
+          currentDisplayList = _fetchCattRepository.listCatt;
+          break;
+        case 'Names of Places involved at that time':
+          await _fetchPattRepository.fetchPatt();
+          currentDisplayList = _fetchPattRepository.listPatt;
+          break;
+        case 'Stars Observed':
+          await _fetchStarsRepository.fetchStars();
+          currentDisplayList = _fetchStarsRepository.listStars;
+          break;
+        case 'Organisations':
+          await _fetchOrgsRepository.fetchOrgs();
+          currentDisplayList = _fetchOrgsRepository.listOrgs;
+          break;
+        case 'People':
+          await _fetchPeopleRepository.fetchPeople();
+          currentDisplayList = _fetchPeopleRepository.listPeople;
+          break;
+        case 'Categories':
+          await _fetchCategoriesRepository.fetchCategories();
+          currentDisplayList = _fetchCategoriesRepository.listCategories;
+          break;
+        case 'Other Terms':
+          await _fetchTermsRepository.fetchTerms();
+          currentDisplayList = _fetchTermsRepository.listTerms;
+          break;
+      }
+      notifyListeners();
+    }
+
+    Widget buildItemWidget(dynamic item) {
+      switch (selectedOption) {
+        case 'Period':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersPeriod,
+              filterKey: item,
+              onSelected: (filterImSiKey) {
+                selectedPeriod = filterImSiKey;
+                updateSelectedPeriod(filterImSiKey);
+              });
+        case 'Universe':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersUniverse,
+              filterKey: item,
+              onSelected: (filterImSiKey) {
+                selectedUniverse = filterImSiKey;
+                updateSelectedUniverse(filterImSiKey);
+              });
+        case 'Stars':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersStars,
+              filterKey: item.star,
+              onSelected: (filterImSiKey) {
+                selectedStar = filterImSiKey;
+                updateSelectedStar(filterImSiKey);
+              });
+        case 'Current Country where it happened':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersPays,
+              filterKey: item,
+              onSelected: (filterImSiKey) {
+                selectedPays = filterImSiKey;
+                updateSelectedPays(filterImSiKey);
+              });
+        case 'Current Place-name where it happened':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersVilles,
+              filterKey: item.place,
+              onSelected: (filterImSiKey) {
+                selectedPlace = filterImSiKey;
+                updateSelectedPlace(filterImSiKey);
+              });
+        case 'Oceans':
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersOceans,
+              filterKey: item,
+              onSelected: (filterImSiKey) {
+                selectedOcean = filterImSiKey;
+                updateSelectedOcean(filterImSiKey);
+              });
+        case 'Seas': //機能している
+          return buildFilterFormatImediatSI(
+              filteredKeys: filtersSeas,
+              filterKey: item.sea,
+              onSelected: (filterImSiKey) {
+                selectedSea = filterImSiKey;
+                updateSelectedSea(filterImSiKey);
+              });
+        case 'Country-name at that time':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersCatts,
+              filteredValues: filtersCattsId,
+              filterKey: item.countryatt,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedCatt = filterKey;
+                selectedCattId = filterId;
+                updateSelectedCatt(filterKey);
+              });
+        case 'Place-name at that time':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersPatts,
+              filteredValues: filtersPattsId,
+              filterKey: item.placeatt,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedPatt = filterKey;
+                selectedPattId = filterId;
+                updateSelectedPatt(filterKey);
+              });
+        case 'Countries involved':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersPaysInv,
+              filteredValues:
+              filtersPaysInvId,
+              filterKey: item.pays,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedPays = filterKey;
+                selectedPaysId = filterId;
+                updateSelectedPays(filterKey);
+              });
+        case 'Places involved':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersPlaceInv,
+              filteredValues:
+              filtersPlaceInvId,
+              filterKey: item.place,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedPlace = filterKey;
+                selectedPlaceId = filterId;
+                updateSelectedPlace(filterKey);
+              });
+        case 'Names of Countries involved at that time':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersPaysInvATT,
+              filteredValues:
+              filtersPaysInvATTId,
+              filterKey: item.countryatt,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedCountryInvolvedATT =
+                    filterKey;
+                selectedCountryInvolvedATTId =
+                    filterId;
+                updateSelectedCountryInvolved(filterKey);
+              });
+        case 'Names of Places involved at that time':
+          return buildFilterFormatImediat(
+              filteredKeys:
+              filtersPlaceInvATT,
+              filteredValues:
+              filtersPlaceInvATTId,
+              filterKey: item.placeatt,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedPlaceInvolvedATT =
+                    filterKey;
+                selectedPlaceInvolvedATTId =
+                    filterId;
+                updateSelectedPlaceInvolve(filterKey);
+              });
+        case 'Stars Observed':
+          return buildFilterFormatImediat(
+              filteredKeys:
+              filtersStarsObserved,
+              filteredValues:
+              filtersStarsObservedId,
+              filterKey: item.star,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedStarsObserved =
+                    filterKey;
+                selectedStarsObservedId =
+                    filterId;
+                updateSelectedStar(filterKey);
+              });
+        case 'Organisations':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersOrgs,
+              filteredValues: filtersOrgsId,
+              filterKey: item.organisation,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedOrg = filterKey;
+                selectedOrgId = filterId;
+                updateSelectedOrg(filterKey);
+              });
+        case 'People':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersPeople,
+              filteredValues: filtersPeopleId,
+              filterKey: item.person,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedPeople = filterKey;
+                selectedPeopleId = filterId;
+                updateSelectedPeople(filterKey);
+              });
+        case 'Categories':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersCategories,
+              filteredValues:
+              filtersCategoriesId,
+              filterKey: item.category,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedCategory = filterKey;
+                selectedCategoryId = filterId;
+                updateSelectedCategory(filterKey);
+              });
+        case 'Other Terms':
+          return buildFilterFormatImediat(
+              filteredKeys: filtersTerms,
+              filteredValues: filtersTermsId,
+              filterKey: item.term,
+              filterValue: item.id,
+              onSelected: (filterKey, filterId) {
+                selectedTerm = filterKey;
+                selectedTermId = filterId;
+                updateSelectedTerm(filterKey);
+              });
+      }
+      return const SizedBox.shrink();
+    }
+
+    void clearSearch() {
+      period.clear();
+      universe.clear();
+      _fetchStarsRepository.listStars.clear();
+      filtersStars.clear();
+      pays.clear();
+      _fetchPlaceRepository.listPlaces.clear();
+      filtersVilles.clear();
+      oceans.clear();
+      listSeas.clear();
+      filtersSeas.clear();
+      listPaysInv.clear();
+      filtersPaysInv.clear();
+      listPlaceInv.clear();
+      filtersPlaceInv.clear();
+      listPaysInvATT.clear();
+      filtersPaysInvATT.clear();
+      listPlaceInvATT.clear();
+      filtersPlaceInvATT.clear();
+      listStarsObserved.clear();
+      filtersStarsObserved.clear();
+      listCategories.clear();
+      filtersCategories.clear();
+      listPeople.clear();
+      filtersPeople.clear();
+      listOrganisations.clear();
+      filtersOrgs.clear();
+      listTerms.clear();
+      filtersTerms.clear();
+      listCatts.clear();
+      filtersCatts.clear();
+      listPatts.clear();
+      filtersPatts.clear();
+
+      notifyListeners(); // 状態が変更されたことを通知
+    }
+
+    List<int> principalIds = [];
+
+    void submitSelection() {
+      switch (selectedOption) {
+        case 'Period':
+          _fetchPrincipalRepository.fetchPrincipalByPeriod(
+              period: filtersPeriod);
+          break;
+        case 'Universe':
+          _fetchPrincipalRepository.fetchPrincipalByLocation(
+              location: filtersUniverse);
+          break;
+        case 'Stars':
+          _fetchPrincipalRepository.fetchPrincipalByPrecise(
+              precise: filtersStars);
+          break;
+        case 'Current Country where it happened':
+          _fetchPrincipalRepository.fetchPrincipalByLocation(location: filtersPays);
+          break;
+        case 'Current Place-name where it happened':
+          _fetchPrincipalRepository.fetchPrincipalByPrecise(
+              precise: filtersVilles);
+          break;
+        case 'Oceans':
+          _fetchPrincipalRepository.fetchPrincipalByLocation(
+              location: filtersOceans);
+          break;
+        case 'Seas':
+          _fetchPrincipalRepository.fetchPrincipalByPrecise(
+              precise: filtersSeas);
+          break;
+        case 'Country-name at that time':
+          _fetchPrincipalRepository.fetchPrincipalByCattId(
+              cattIds: filtersCattsId);
+          break;
+        case 'Place-name at that time':
+          _fetchPrincipalRepository.fetchPrincipalByPattId(
+              pattIds: filtersPattsId);
+          break;
+        case 'Countries involved':
+          _fetchPrincipalRepository.fetchPrincipalByCInvolvedId(
+              cInvolvedIds: filtersPaysInvId);
+          break;
+
+/*          case 'Places involved':
+            _fetchPrincipalRepository.fetchPrincipalByPInvolvedId(pInvolvedIds: filtersPlaceInvId);
+            break;*/
+/*        case 'Names of Countries involved at that time':
+          _fetchPrincipalRepository.fetchPrincipalByAttInvolvedId(attsInvolvedIds: filtersPaysInvATTId);
+          break;*/
+/*        case 'Names of Places involved at that time':
+          _fetchPrincipalRepository.fetchPrincipalByPAttInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
+          break;*/
+        case 'Stars Observed':
+          _fetchPrincipalRepository.fetchPrincipalByStarsObservedId(
+              starObservedIds:
+              filtersStarsObservedId);
+          break;
+        case 'Organisations':
+          _fetchPrincipalRepository.fetchPrincipalByOrgsId(
+              orgIds: filtersOrgsId);
+          break;
+        case 'People':
+          _fetchPrincipalRepository.fetchPrincipalByPersonId(
+              personIds: filtersPeopleId);
+          break;
+        case 'Categories':
+          _fetchPrincipalRepository.fetchPrincipalByCategoryId(
+              categoryIds: filtersCategoriesId);
+          break;
+        case 'Other Terms':
+          _fetchPrincipalRepository.fetchPrincipalByTermId(
+              termIds: filtersTermsId);
+          break;
+      }
+      principalIds = _fetchPrincipalRepository.listPrincipal.map((item) => item.id as int).toList();
+      notifyListeners();
+    }
+
+    void navigateBasedOnSelection(BuildContext context,
+        String isSelectedFormat) {
+      switch (isSelectedFormat) {
+        case 'CLASSIC':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResultPage(principal: _fetchPrincipalRepository.listPrincipal),
+            ),
+          );
+          break;
+        case 'SCALABLE':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Scalable(principal: _fetchPrincipalRepository.listPrincipal),
+            ),
+          );
+          break;
+        case '3D':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ThreeDViewPage(principalIds: principalIds),
+            ),
+          );
+          break;
+        case '4D':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FourDViewPage(principalIds: principalIds),
+            ),
+          );
+          break;
+        case 'MR':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MRViewPage(principalIds: principalIds),
+            ),
+          );
+          break;
+        default:
+        // 未知の選択肢に対する処理
+          break;
+      }
     }
   }
-
-  ///検索対象の団体名
-  List<Organisations> listOrganisations = [];
-  final List<String> filtersOrgs = <String>[];
-  final List<int> filtersOrgsId = <int>[];
-
-  fetchOrgsLookedFor() async {
-    try {
-      listOrganisations = await client.organisations.getOrganisations();
-      print(listOrganisations);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  ///検索対象の人名
-  List<People> listPeople = [];
-  final List<String> filtersPeople = <String>[];
-  final List<int> filtersPeopleId = <int>[];
-
-  fetchPeopleLookedFor() async {
-    try {
-      listPeople = await client.people.getPeople();
-      print(listPeople);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  ///検索対象のカテゴリー名
-  List<Categories> listCategories = [];
-  final List<String> filtersCategories = <String>[];
-  final List<int> filtersCategoriesId = <int>[];
-
-  fetchCategoriesLookedFor() async {
-    try {
-      listCategories = await client.categories.getCategories();
-      print(listCategories);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  ///その他の検索語
-  List<Terms> listTerms = [];
-  final List<String> filtersTerms = <String>[];
-  final List<int> filtersTermsId = <int>[];
-
-  fetchTermsLookedFor() async {
-    try {
-      listTerms = await client.terms.getTerms();
-      print(listTerms);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  void clearSearch() {
-    listStars.clear();
-    filtersStars.clear();
-    listVilles.clear();
-    filtersVilles.clear();
-    listSeas.clear();
-    filtersSeas.clear();
-    listPaysInv.clear();
-    filtersPaysInv.clear();
-    listPlaceInv.clear();
-    filtersPlaceInv.clear();
-    listPaysInvATT.clear();
-    filtersPaysInvATT.clear();
-    listPlaceInvATT.clear();
-    filtersPlaceInvATT.clear();
-    listStarsObserved.clear();
-    filtersStarsObserved.clear();
-    listCategories.clear();
-    filtersCategories.clear();
-    listPeople.clear();
-    filtersPeople.clear();
-    listOrganisations.clear();
-    filtersOrgs.clear();
-    listTerms.clear();
-    filtersTerms.clear();
-    listCatts.clear();
-    filtersCatts.clear();
-    listPatts.clear();
-    filtersPatts.clear();
-
-    notifyListeners(); // 状態が変更されたことを通知
-  }
-
-  String _selectedPays = '';
-  int _selectedPaysId = 0;
-  String get selectedPays => _selectedPays;
-  int get selectedPaysId => _selectedPaysId;
-
-  set selectedPays(String pays) {
-    _selectedPays = pays;
-    notifyListeners();
-  }
-
-  set selectedPaysId(int value) {
-    _selectedPaysId = value;
-    notifyListeners();
-  }
-
-  String _selectedPlace = '';
-  int _selectedPlaceId = 0;
-  String get selectedPlace => _selectedPlace;
-  int get selectedPlaceId => _selectedPlaceId;
-
-  set selectedPlace(String place) {
-    _selectedPlace = place;
-    notifyListeners();
-  }
-
-  set selectedPlaceId(int value) {
-    _selectedPlaceId = value;
-    notifyListeners();
-  }
-
-  String _selectedUniverse = '';
-  int _selectedUniverseId = 0;
-  String get selectedUniverse => _selectedUniverse;
-  int get selectedUniverseId => _selectedUniverseId;
-
-  set selectedUniverse(String place) {
-    _selectedUniverse = place;
-    notifyListeners();
-  }
-
-  set selectedUniverseId(int value) {
-    _selectedUniverseId = value;
-    notifyListeners();
-  }
-
-  String _selectedStar = '';
-  int _selectedStarId = 0;
-  String get selectedStar => _selectedStar;
-  int get selectedStarId => _selectedStarId;
-
-  set selectedStar(String star) {
-    _selectedStar = star;
-    notifyListeners();
-  }
-
-  set selectedStarId(int value) {
-    _selectedStarId = value;
-    notifyListeners();
-  }
-
-  String _selectedOcean = '';
-  int _selectedOceanId = 0;
-  String get selectedOcean => _selectedOcean;
-  int get selectedOceanId => _selectedOceanId;
-
-  set selectedOcean(String ocean) {
-    _selectedOcean = ocean;
-    notifyListeners();
-  }
-
-  set selectedOceanId(int value) {
-    _selectedOceanId = value;
-    notifyListeners();
-  }
-
-  String _selectedSea = '';
-  int _selectedSeaId = 0;
-  String get selectedSea => _selectedSea;
-  int get selectedSeaId => _selectedSeaId;
-
-  set selectedSea(String sea) {
-    _selectedSea = sea;
-    notifyListeners();
-  }
-
-  set selectedSeaId(int value) {
-    _selectedSeaId = value;
-    notifyListeners();
-  }
-
-  String _selectedCatt = '';
-  int _selectedCattId = 0;
-  String get selectedCatt => _selectedCatt;
-  int get selectedCattId => _selectedCattId;
-
-  set selectedCatt(String catt) {
-    _selectedCatt = catt;
-    notifyListeners();
-  }
-
-  set selectedCattId(int value) {
-    _selectedCattId = value;
-    notifyListeners();
-  }
-
-  String _selectedPatt = '';
-  int _selectedPattId = 0;
-  String get selectedPatt => _selectedPatt;
-  int get selectedPattId => _selectedPattId;
-
-  set selectedPatt(String patt) {
-    _selectedPatt = patt;
-    notifyListeners();
-  }
-
-  set selectedPattId(int value) {
-    _selectedPattId = value;
-    notifyListeners();
-  }
-
-  String _selectedCountryInvolved = '';
-  int _selectedCountryInvolvedId = 0;
-  String get selectedCountryInvolved => _selectedCountryInvolved;
-  int get selectedCountryInvolvedId => _selectedCountryInvolvedId;
-
-  set selectedCountryInvolved(String cInvolved) {
-    _selectedCountryInvolved = cInvolved;
-    notifyListeners();
-  }
-
-  set selectedCountryInvolvedId(int value) {
-    _selectedCountryInvolvedId = value;
-    notifyListeners();
-  }
-
-  String _selectedPlaceInvolved = '';
-  int _selectedPlaceInvolvedId = 0;
-  String get selectedPlaceInvolved => _selectedPlaceInvolved;
-  int get selectedPlaceInvolvedId => _selectedPlaceInvolvedId;
-
-  set selectedPlaceInvolved(String pInvolved) {
-    _selectedPlaceInvolved = pInvolved;
-    notifyListeners();
-  }
-
-  set selectedPlaceInvolvedId(int value) {
-    _selectedPlaceInvolvedId = value;
-    notifyListeners();
-  }
-
-  String _selectedCountryInvolvedATT = '';
-  int _selectedCountryInvolvedATTId = 0;
-  String get selectedCountryInvolvedATT => _selectedCountryInvolvedATT;
-  int get selectedCountryInvolvedATTId => _selectedCountryInvolvedATTId;
-
-  set selectedCountryInvolvedATT(String attsInvolved) {
-    _selectedCountryInvolvedATT = attsInvolved;
-    notifyListeners();
-  }
-
-  set selectedCountryInvolvedATTId(int value) {
-    _selectedCountryInvolvedATTId = value;
-    notifyListeners();
-  }
-
-  String _selectedPlaceInvolvedATT = '';
-  int _selectedPlaceInvolvedATTId = 0;
-  String get selectedPlaceInvolvedATT => _selectedPlaceInvolvedATT;
-  int get selectedPlaceInvolvedATTId => _selectedPlaceInvolvedATTId;
-
-  set selectedPlaceInvolvedATT(String pattsInvolved) {
-    _selectedPlaceInvolvedATT = pattsInvolved;
-    notifyListeners();
-  }
-
-  set selectedPlaceInvolvedATTId(int value) {
-    _selectedPlaceInvolvedATTId = value;
-    notifyListeners();
-  }
-
-  String _selectedStarsObserved = '';
-  int _selectedStarsObservedId = 0;
-  String get selectedStarsObserved => _selectedStarsObserved;
-  int get selectedStarsInvolvedATTId => _selectedStarsObservedId;
-
-  set selectedStarsObserved(String starsObserved) {
-    _selectedStarsObserved = starsObserved;
-    notifyListeners();
-  }
-
-  set selectedStarsObservedId(int value) {
-    _selectedStarsObservedId = value;
-    notifyListeners();
-  }
-
-  String _selectedOrg = '';
-  int _selectedOrgId = 0;
-  String get selectedOrg => _selectedOrg;
-  int get selectedOrgId => _selectedOrgId;
-
-  set selectedOrg(String org) {
-    _selectedOrg = org;
-    notifyListeners();
-  }
-
-  set selectedOrgId(int value) {
-    _selectedOrgId = value;
-    notifyListeners();
-  }
-
-  String _selectedPeople = '';
-  int _selectedPeopleId = 0;
-  String get selectedPeople => _selectedPeople;
-  int get selectedPeopleId => _selectedPeopleId;
-
-  set selectedPeople(String people) {
-    _selectedPeople = people;
-    notifyListeners();
-  }
-
-  set selectedPeopleId(int value) {
-    _selectedPeopleId = value;
-    notifyListeners();
-  }
-
-  String _selectedCategory = '';
-  int _selectedCategoryId = 0;
-  String get selectedCategory => _selectedCategory;
-  int get selectedCategoryId => _selectedCategoryId;
-
-  set selectedCategory(String category) {
-    _selectedCategory = category;
-    notifyListeners();
-  }
-
-  set selectedCategoryId(int value) {
-    _selectedCategoryId = value;
-    notifyListeners();
-  }
-
-  String _selectedTerm = '';
-  int _selectedTermId = 0;
-  String get selectedTerm => _selectedTerm;
-  int get selectedTermId => _selectedTermId;
-
-  set selectedTerm(String term) {
-    _selectedTerm = term;
-    notifyListeners();
-  }
-
-  set selectedTermId(int value) {
-    _selectedTermId = value;
-    notifyListeners();
-  }
-
-  String _selectedPeriod = '';
-  int _selectedPeriodId = 0;
-  String get selectedPeriod => _selectedPeriod;
-  int get selectedPeriodId => _selectedPeriodId;
-
-  set selectedPeriod(String period) {
-    _selectedPeriod = period;
-    notifyListeners();
-  }
-
-  set selectedPeriodId(int value) {
-    _selectedPeriodId = value;
-    notifyListeners();
-  }
-
-  void updateDisplayList(List<String> newList) {
-    currentDisplayList = newList;
-    notifyListeners();
-  }
-
-  List<Principal> _principal = [];
-  List<Principal> get principal => _principal;
-  List<int> _principalIds = [];
-  List<int> get principalIds => _principalIds;
-
-  Future<void>fetchPrincipalByPeriod({List<String>? period}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPeriod(keywords: period);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print('got: $_principal');
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  Future<void>fetchPrincipal({List<String>? location}) async {
-    try {
-      _principal = await client.principal.getPrincipal(keywords: location);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with keywords: $location");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByPrecise({List<String>? precise}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPrecise(keywords: precise);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with keywords: $precise");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByCattId({List<int>? cattIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByCattId(cattIds: cattIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with CattIds: $cattIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByPattId({List<int>? pattIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPattId(pattIds: pattIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with PattIds: $pattIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByCInvolvedId({List<int>? cInvolvedIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByCInvolvedId(cInvolvedIds: cInvolvedIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with CInvolvedIds: $cInvolvedIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-/*  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with PInvolvedIds: $pInvolvedIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with AttsInvolvedIds: $attsInvolvedIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-  fetchPrincipalByStarsObservedId({List<int>? starObservedIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByStarsInvolvedId(starInvolvedIds: starObservedIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with StarObservedIds: $starObservedIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByOrgsId({List<int>? orgIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with OrgIds: $orgIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByPersonId({List<int>? personIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByPersonId(personIds: personIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with PersonIds: $personIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByCategoryId({List<int>? categoryIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByCategoryId(categoryIds: categoryIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with CategoryIds: $categoryIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchPrincipalByTermId({List<int>? termIds}) async {
-    try {
-      _principal = await client.principal.getPrincipalByTermId(termIds: termIds);
-      _principal.sort((a,b) => a.point.compareTo(b.point));
-      print("Getting principal with TermIds: $termIds");
-      _principalIds = _principal.map((item) => item.id as int).toList();
-      print(_principalIds);
-      notifyListeners();
-    } on Exception catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  set principal (dynamic value) {
-    _principal = [];
-    notifyListeners();
-  }
-
-  set principalIds (dynamic value) {
-    _principalIds = [];
-    notifyListeners();
-  }
-
-}

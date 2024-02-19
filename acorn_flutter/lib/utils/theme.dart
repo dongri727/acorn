@@ -20,6 +20,6 @@ class AcornTheme {
     bodyMedium: GoogleFonts.kalam(
         fontSize: 20, fontWeight: FontWeight.normal, color: const Color(0xFF006400)),//green
     bodySmall: GoogleFonts.kalam(
-      fontSize: 20, fontWeight: FontWeight.normal, color: const Color(0xFFf5f5f5)),//white
+      fontSize: 20, fontWeight: FontWeight.normal, color: Colors.black54),//black
   );
 }

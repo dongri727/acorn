@@ -1,138 +1,86 @@
 import 'dart:core';
 
 import 'package:acorn_flutter/confirm/confirm.dart';
+import 'package:acorn_flutter/fetch/fetch_categories.dart';
+import 'package:acorn_flutter/fetch/fetch_terms.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/build_chips.dart';
-import '../../utils/chips_format.dart';
+
 
 class TermsModel extends ChangeNotifier {
+
+  late final FetchCategoriesRepository _fetchCategoriesRepository;
+  late final FetchTermsRepository _fetchTermsRepository;
+
+  TermsModel(){
+    _fetchCategoriesRepository = FetchCategoriesRepository();
+    _fetchTermsRepository = FetchTermsRepository();
+  }
+
+  ///RadioButton
+  String selectedOption = '';
+
   List<String> options = ['Categories', 'Terms'];
-  String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
   var newCategory = '';
-  List<Categories> listCategories = [];
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
 
   var newTerm = '';
-  List<Terms> listTerms = [];
   final List<String> filtersTerms = <String>[];
   final List<int> filtersTermsId = <int>[];
 
-  String _selectedCategory = '';
-  int _selectedCategoryId = 0;
-  String get selectedCategory => _selectedCategory;
-  int get selectedCategoryId => _selectedCategoryId;
+  String selectedCategory = '';
+  int selectedCategoryId = 0;
 
-  set selectedCategory(String category) {
-    _selectedCategory = category;
-    notifyListeners();
-  }
-
-  set selectedCategoryId(int value) {
-    _selectedCategoryId = value;
-    notifyListeners();
-  }
-
-  String _selectedTerm = '';
-  int _selectedTermId = 0;
-  String get selectedTerm => _selectedTerm;
-  int get selectedTermId => _selectedTermId;
-
-  set selectedTerm(String term) {
-    _selectedTerm = term;
-    notifyListeners();
-  }
-
-  set selectedTermId(int value) {
-    _selectedTermId = value;
-    notifyListeners();
-  }
-
-  fetchCategories() async {
-    try {
-      listCategories = await client.categories.getCategories();
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  //todo 複数語を同時に挿入できるようにする
-  addCategoriesAndFetch(String newCategory) async {
-    try {
-      var categories = Categories(category: newCategory);
-      listCategories =
-          await client.categories.addAndReturnCategories(categories);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  fetchTerms() async {
-    try {
-      listTerms = await client.terms.getTerms();
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  //todo 複数語を同時に挿入できるようにする
-  addTermsAndFetch(String newTerm) async {
-    try {
-      var terms = Terms(term: newTerm);
-      listTerms = await client.terms.addAndReturnTerms(terms);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
+  String selectedTerm = '';
+  int selectedTermId = 0;
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Categories':
-        await fetchCategories();
+        await _fetchCategoriesRepository.fetchCategories();
+        currentDisplayList = _fetchCategoriesRepository.listCategories;
         break;
       case 'Terms':
-        await fetchTerms();
+        await _fetchTermsRepository.fetchTerms();
+        currentDisplayList = _fetchTermsRepository.listTerms;
         break;
     }
+    notifyListeners();
   }
 
   setNewWord(text) {
     switch (selectedOption) {
       case 'Categories':
         newCategory = text;
-        notifyListeners();
         break;
       case 'Terms':
         newTerm = text;
-        notifyListeners();
         break;
     }
+    notifyListeners();
   }
 
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Categories':
-        await addCategoriesAndFetch(newCategory);
+        await _fetchCategoriesRepository.addCategoriesAndFetch(newCategory);
+        currentDisplayList = _fetchCategoriesRepository.listCategories;
         break;
       case 'Terms':
-        await addTermsAndFetch(newTerm);
+        await _fetchTermsRepository.addTermsAndFetch(newTerm);
+        currentDisplayList = _fetchTermsRepository.listTerms;
         break;
     }
+    notifyListeners();
   }
   Widget buildItemWidget(dynamic item) {
-    String itemType = _getItemType(item);
-    switch (itemType) {
-      case 'Category':
+    switch (selectedOption) {
+      case 'Categories':
         return buildFilterFormatImediat(
           filteredKeys: filtersCategories,
           filteredValues: filtersCategoriesId,
@@ -141,6 +89,7 @@ class TermsModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedCategory = key;
             selectedCategoryId = value;
+            updateSelectedCategory(key);
           },
         );
       case 'Terms':
@@ -152,6 +101,7 @@ class TermsModel extends ChangeNotifier {
           onSelected: (key, value) {
             selectedTerm = key;
             selectedTermId = value;
+            updateSelectedTerm(key);
           },
         );           
       default:
@@ -159,26 +109,15 @@ class TermsModel extends ChangeNotifier {
     }
   }
 
-  String _getItemType(dynamic item) {
-    if (item is Categories) return 'Categories';
-    if (item is Terms) return 'Terms';
-    return 'Unknown';
+  void updateSelectedCategory(String newSelectedCategory) {
+    selectedCategory = newSelectedCategory;
+    notifyListeners();
   }
 
-/*  Widget _buildFilterFormatImediat({
-    required List<String> filteredKeys,
-    required List<int> filteredValues,
-    required String filterKey,
-    required int filterValue,
-    required Function(String, int) onSelected,
-  }) {
-    return FilterFormatImediat(
-        filteredImKeys: filteredKeys,
-        filteredImValues: filteredValues,
-        filterImKey: filterKey,
-        filterImValue: filterValue,
-        onSelected: onSelected);*/
- // }
+  void updateSelectedTerm(String newSelectedTerm) {
+    selectedTerm = newSelectedTerm;
+    notifyListeners();
+  }
 
   void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
@@ -194,14 +133,5 @@ class TermsModel extends ChangeNotifier {
     confirm.selectedTermId = filtersTermsId;
     print("places:$filtersTerms");
 
-  }         
-
-  ///RadioButton
-  String selectedOption = '';
-  //String get selectedOption => _selectedOption;
-
-/*   set selectedOption(String value) {
-    _selectedOption = value;
-    notifyListeners();
-  } */
+  }
 }
