@@ -4,6 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../search/multiple_search_page.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
+/// 検索結果を持ってtempo-spacoに飛ぶ設定になっているが、
+/// Dataが多すぎると飛べない。（７件なら飛べる）
+/// tempo-spaco側がDataを受け取る設定になっていないため、まだ機能しない。
+
 class FourDViewPage extends StatefulWidget {
   final List<int>? principalIds;
 

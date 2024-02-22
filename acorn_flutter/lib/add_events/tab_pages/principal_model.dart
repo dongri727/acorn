@@ -33,7 +33,7 @@ class PrincipalModel extends ChangeNotifier {
   List<String> universe = cosmos;
 
   ///Pays
-  List<String> pays = countries;
+  List<Map<String, dynamic>> pays = countries;
 
   ///Oceans
   List<String> oceans = mer;
@@ -101,7 +101,7 @@ class PrincipalModel extends ChangeNotifier {
         notifyListeners();
         break;
       case 'Current Country-name':
-        currentDisplayList = pays;
+        currentDisplayList = pays.map((country) => country['name'] as String).toList();
         notifyListeners();
         break;
       case 'Ocean-name':

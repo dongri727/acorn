@@ -8,7 +8,6 @@ import 'package:acorn_flutter/fetch/fetch_stars.dart';
 import 'package:acorn_flutter/search/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/serverpod_client.dart';
 import '../../lists/search_options_list.dart';
 import '../fetch/fetch_categories.dart';
 import '../fetch/fetch_principal.dart';
@@ -89,19 +88,18 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> filtersUniverse = <String>[];
 
   String selectedUniverse = '';
-  int selectedUniverseId = 0;
+  //int selectedUniverseId = 0;
 
   void updateSelectedUniverse(String newSelectedUniverse) {
     selectedUniverse = newSelectedUniverse;
     notifyListeners();
   }
 
-  //Stars(where it happened) 機能している
-  List<Stars> listStars = [];
+  //Stars(where it happened)
   final List<String> filtersStars = <String>[];
 
   String selectedStar = '';
-  int selectedStarId = 0;
+  //int selectedStarId = 0;
 
   void updateSelectedStar(String newSelectedStar) {
     selectedStar = newSelectedStar;
@@ -110,7 +108,7 @@ class MultipleSearchModel extends ChangeNotifier {
 
   //Current Country where it happened
   //Pays is country in french
-  final List<String> pays = countries;
+  final List<Map<String, dynamic>> pays = countries;
   final List<String> filtersPays = <String>[];
 
   String selectedPays = '';
@@ -121,7 +119,7 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  //Current Place-name where it happened 機能している
+  //Current Place-name where it happened
   //ville is city in french
   final List<String> filtersVilles = <String>[];
   final List<int> filtersVillesId = <int>[];
@@ -146,8 +144,7 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  //Seas 機能している
-  List<Seas> listSeas = [];
+  //Seas
   final List<String> filtersSeas = <String>[];
   final List<int> filtersSeasId = <int>[];
 
@@ -160,7 +157,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   ///Country-name at that time(unique)
-  List<Countryatts> listCatts = [];
   final List<String> filtersCatts = <String>[];
   final List<int> filtersCattsId = <int>[];
 
@@ -173,7 +169,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Place-name at that time(unique)
-  List<Placeatts> listPatts = [];
   final List<String> filtersPatts = <String>[];
   final List<int> filtersPattsId = <int>[];
 
@@ -186,19 +181,9 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Countries involved
-  List<Pays> listPaysInv = [];
+  List<Map<String, dynamic>> listPaysInv = countries;
   final List<String> filtersPaysInv = <String>[];
   final List<int> filtersPaysInvId = <int>[];
-
-  fetchPaysInvolvedLookedFor() async {
-    try {
-      listPaysInv = await client.pays.getPays();
-      print(listPaysInv);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
 
   String selectedCountryInvolved = '';
   int selectedCountryInvolvedId = 0;
@@ -234,11 +219,8 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Names of Countries involved at that time
-  List<Countryatts> listPaysInvATT = [];
   final List<String> filtersPaysInvATT = <String>[];
   final List<int> filtersPaysInvATTId = <int>[];
-
-
 
   String selectedCountryInvolvedATT = '';
   int selectedCountryInvolvedATTId = 0;
@@ -249,7 +231,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Names of Places involved at that time
-  List<Placeatts> listPlaceInvATT = [];
   final List<String> filtersPlaceInvATT = <String>[];
   final List<int> filtersPlaceInvATTId = <int>[];
 
@@ -262,85 +243,87 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Star Observed or Aimed
-  List<Stars> listStarsObserved = [];
+  //List<Stars> listStarsObserved = [];
   final List<String> filtersStarsObserved = <String>[];
   final List<int> filtersStarsObservedId = <int>[];
 
-    String selectedStarsObserved = '';
-    int selectedStarsObservedId = 0;
+  String selectedStarsObserved = '';
+  int selectedStarsObservedId = 0;
 
-    //Organisation
-    List<Organisations> listOrganisations = [];
-    final List<String> filtersOrgs = <String>[];
-    final List<int> filtersOrgsId = <int>[];
+  //Organisation
+  //List<Organisations> listOrganisations = [];
+  final List<String> filtersOrgs = <String>[];
+  final List<int> filtersOrgsId = <int>[];
 
-    String selectedOrg = '';
-    int selectedOrgId = 0;
+  String selectedOrg = '';
+  int selectedOrgId = 0;
 
-    void updateSelectedOrg(String newSelectedOrg) {
-      selectedOrg = newSelectedOrg;
-      notifyListeners();
-    }
+  void updateSelectedOrg(String newSelectedOrg) {
+    selectedOrg = newSelectedOrg;
+    notifyListeners();
+  }
 
-    //People
-    List<People> listPeople = [];
-    final List<String> filtersPeople = <String>[];
-    final List<int> filtersPeopleId = <int>[];
+  //People
+  //List<People> listPeople = [];
+  final List<String> filtersPeople = <String>[];
+  final List<int> filtersPeopleId = <int>[];
 
-    String selectedPeople = '';
-    int selectedPeopleId = 0;
+  String selectedPeople = '';
+  int selectedPeopleId = 0;
 
-    void updateSelectedPeople(String newSelectedPeople) {
-      selectedPeople = newSelectedPeople;
-      notifyListeners();
-    }
+  void updateSelectedPeople(String newSelectedPeople) {
+    selectedPeople = newSelectedPeople;
+    notifyListeners();
+  }
 
-    //Categories
-    List<Categories> listCategories = [];
-    final List<String> filtersCategories = <String>[];
-    final List<int> filtersCategoriesId = <int>[];
+  //Categories
+  // List<Categories> listCategories = [];
+  final List<String> filtersCategories = <String>[];
+  final List<int> filtersCategoriesId = <int>[];
 
-    String selectedCategory = '';
-    int selectedCategoryId = 0;
+  String selectedCategory = '';
+  int selectedCategoryId = 0;
 
-    void updateSelectedCategory(String newSelectedCategory) {
-      selectedCategory = newSelectedCategory;
-      notifyListeners();
-    }
+  void updateSelectedCategory(String newSelectedCategory) {
+    selectedCategory = newSelectedCategory;
+    notifyListeners();
+  }
 
-    //Other Terms
-    List<Terms> listTerms = [];
-    final List<String> filtersTerms = <String>[];
-    final List<int> filtersTermsId = <int>[];
+  //Other Terms
+  //List<Terms> listTerms = [];
+  final List<String> filtersTerms = <String>[];
+  final List<int> filtersTermsId = <int>[];
 
-    String selectedTerm = '';
-    int selectedTermId = 0;
+  String selectedTerm = '';
+  int selectedTermId = 0;
 
-    void updateSelectedTerm(String newSelectedTerm) {
-      selectedTerm = newSelectedTerm;
-      notifyListeners();
-    }
+  void updateSelectedTerm(String newSelectedTerm) {
+    selectedTerm = newSelectedTerm;
+    notifyListeners();
+  }
 
-    Future<void> fetchRadioButtonBasis(selectedOption) async {
-      switch (selectedOption) {
-        case 'Period':
-          currentDisplayList = period;
-          updateDisplayList(period);
-          print(period);
-          break;
+  Future<void> fetchRadioButtonBasis(selectedOption) async {
+    switch (selectedOption) {
+      case 'Period':
+        currentDisplayList = period;
+        updateDisplayList(period);
+        print(period);
+        break;
+
         case 'Universe':
           currentDisplayList = universe;
           updateDisplayList(universe);
           print(universe);
           break;
-        case 'Stars':
+
+          case 'Stars':
           await _fetchStarsRepository.fetchStars();
           currentDisplayList = _fetchStarsRepository.listStars;
-          notifyListeners();
           break;
+
         case 'Current Country where it happened':
-          currentDisplayList = pays;
-          updateDisplayList(pays);
+          currentDisplayList = pays.map((country) => country['name'] as String).toList();
+          //updateDisplayList(pays.map((country) => country['name'] as String).toList());
           break;
         case 'Current Place-name where it happened':
           await _fetchPlaceRepository.fetchVillesLookedFor();
@@ -350,23 +333,19 @@ class MultipleSearchModel extends ChangeNotifier {
           currentDisplayList = oceans;
           updateDisplayList(oceans);
           break;
-        case 'Seas': //機能している
+        case 'Seas':
           await _fetchSeasRepository.fetchSeas();
           currentDisplayList = _fetchSeasRepository.listSeas;
-          notifyListeners();
           break;
         case 'Country-name at that time':
           await _fetchCattRepository.fetchCatt();
           currentDisplayList = _fetchCattRepository.listCatt;
-          notifyListeners();
           break;
         case 'Place-name at that time':
           await _fetchPattRepository.fetchPatt();
           currentDisplayList = _fetchPattRepository.listPatt;
-          notifyListeners();
           break;
         case 'Countries involved':
-          await fetchPaysInvolvedLookedFor();
           currentDisplayList = listPaysInv;
           break;
 
@@ -492,8 +471,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersPaysInv,
               filteredValues:
               filtersPaysInvId,
-              filterKey: item.pays,
-              filterValue: item.id,
+              filterKey: item['name'],
+              filterValue: item['id'],
               onSelected: (filterKey, filterId) {
                 selectedPays = filterKey;
                 selectedPaysId = filterId;
@@ -613,35 +592,35 @@ class MultipleSearchModel extends ChangeNotifier {
       _fetchPlaceRepository.listPlaces.clear();
       filtersVilles.clear();
       oceans.clear();
-      listSeas.clear();
+      _fetchSeasRepository.listSeas.clear();
       filtersSeas.clear();
       listPaysInv.clear();
       filtersPaysInv.clear();
       listPlaceInv.clear();
       filtersPlaceInv.clear();
-      listPaysInvATT.clear();
+      _fetchCattRepository.listCatt.clear();
       filtersPaysInvATT.clear();
-      listPlaceInvATT.clear();
+      _fetchPattRepository.listPatt.clear();
       filtersPlaceInvATT.clear();
-      listStarsObserved.clear();
+      _fetchStarsRepository.listStars.clear();
       filtersStarsObserved.clear();
-      listCategories.clear();
+      _fetchCategoriesRepository.listCategories.clear();
       filtersCategories.clear();
-      listPeople.clear();
+      _fetchPeopleRepository.listPeople.clear();
       filtersPeople.clear();
-      listOrganisations.clear();
+      _fetchOrgsRepository.listOrgs.clear();
       filtersOrgs.clear();
-      listTerms.clear();
+      _fetchTermsRepository.listTerms.clear();
       filtersTerms.clear();
-      listCatts.clear();
+      //listCatts.clear();
       filtersCatts.clear();
-      listPatts.clear();
+      //listPatts.clear();
       filtersPatts.clear();
 
       notifyListeners(); // 状態が変更されたことを通知
     }
 
-    List<int> principalIds = [];
+    //List<int> principalIds = [];
 
     void submitSelection() {
       switch (selectedOption) {
@@ -716,7 +695,6 @@ class MultipleSearchModel extends ChangeNotifier {
               termIds: filtersTermsId);
           break;
       }
-      principalIds = _fetchPrincipalRepository.listPrincipal.map((item) => item.id as int).toList();
       notifyListeners();
     }
 
@@ -743,7 +721,7 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ThreeDViewPage(principalIds: principalIds),
+              builder: (context) => ThreeDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
           break;
@@ -751,7 +729,7 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FourDViewPage(principalIds: principalIds),
+              builder: (context) => FourDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
           break;
@@ -759,7 +737,7 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MRViewPage(principalIds: principalIds),
+              builder: (context) => MRViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
           break;

@@ -2,16 +2,18 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/material.dart';
 
+///idの取得Codeが冗長なようだが、Model側で変換すると全件取得になってしまう。
+
 class FetchPrincipalRepository {
     List<Principal> listPrincipal = [];
-    //List<int> principalIds = [];
+    List<int> principalIds = [];
 
     Future<void> fetchPrincipalByPeriod({List<String>? period}) async {
         try {
             listPrincipal =
             await client.principal.getPrincipalByPeriod(keywords: period);
             print("Getting principal with keywords: $period");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -21,7 +23,7 @@ class FetchPrincipalRepository {
         try {
             listPrincipal = await client.principal.getPrincipal(keywords: location);
             print("Getting principal with keywords: $location");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -32,7 +34,7 @@ class FetchPrincipalRepository {
             listPrincipal =
             await client.principal.getPrincipalByPrecise(keywords: precise);
             print("Getting principal with keywords: $precise");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -43,7 +45,7 @@ class FetchPrincipalRepository {
             listPrincipal =
             await client.principal.getPrincipalByCattId(cattIds: cattIds);
             print("Getting principal with CattIds: $cattIds");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -54,7 +56,7 @@ class FetchPrincipalRepository {
             listPrincipal =
             await client.principal.getPrincipalByPattId(pattIds: pattIds);
             print("Getting principal with PattIds: $pattIds");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -65,7 +67,7 @@ class FetchPrincipalRepository {
             listPrincipal = await client.principal.getPrincipalByCInvolvedId(
                 cInvolvedIds: cInvolvedIds);
             print("Getting principal with CInvolvedIds: $cInvolvedIds");
-            //principalIds = listPrincipal.map((item) => item.id as int).toList();
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -108,6 +110,7 @@ class FetchPrincipalRepository {
             listPrincipal = await client.principal.getPrincipalByStarsInvolvedId(
                 starInvolvedIds: starObservedIds);
             print("Getting principal with StarObservedIds: $starObservedIds");
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -127,6 +130,7 @@ class FetchPrincipalRepository {
             listPrincipal =
             await client.principal.getPrincipalByPersonId(personIds: personIds);
             print("Getting principal with PersonIds: $personIds");
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -137,6 +141,7 @@ class FetchPrincipalRepository {
             listPrincipal = await client.principal.getPrincipalByCategoryId(
                 categoryIds: categoryIds);
             print("Getting principal with CategoryIds: $categoryIds");
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
@@ -147,6 +152,7 @@ class FetchPrincipalRepository {
             listPrincipal =
             await client.principal.getPrincipalByTermId(termIds: termIds);
             print("Getting principal with TermIds: $termIds");
+            principalIds = listPrincipal.map((item) => item.id as int).toList();
         } on Exception catch (e) {
             debugPrint('$e');
         }
