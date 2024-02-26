@@ -210,16 +210,35 @@ class PrincipalPage extends StatelessWidget {
                   ),
                 )),
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                model.temporarilySaveData((context) {
-                  showDialog<void>(
-                      context: context,
-                      builder: (_) {
-                        return const ConfirmDialog();
-                      });
-                }, context);
-              },
               label: const Text('Temporarily Save'),
+              onPressed: () {
+                if (model.isAllFieldFilled()) {
+                  model.temporarilySaveData((context) {
+                    showDialog<void>(
+                        context: context,
+                        builder: (_) {
+                          return const ConfirmDialog();
+                        });
+                  },context);
+                } else {
+                  showDialog(
+                      context: context, 
+                      builder: (_) => AlertDialog(
+                        title: const Text('Warning'),
+                        content: const Text(
+                            'There are some fields that have not been filled in \n'
+                                'All required',
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('OK'),
+                              onPressed: () {
+                              Navigator.of(context).pop();
+                              })
+                        ],
+                      ));
+                }
+              },
             ));
       }),
     );

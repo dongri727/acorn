@@ -119,6 +119,15 @@ class PrincipalModel extends ChangeNotifier {
     );
   }
 
+  bool isAllFieldFilled() {
+    return newName.isNotEmpty &&
+    selectedCalendar.isNotEmpty &&
+    newYearD >= 0 &&
+    newMonth >= 0 &&
+    newDay >= 0 &&
+    location.isNotEmpty;
+  }
+
   void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
     showDialogCallback(context);
