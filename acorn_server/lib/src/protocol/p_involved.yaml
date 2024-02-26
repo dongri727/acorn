@@ -1,0 +1,5 @@
+class: PlaceInvolved
+table: place_involved
+fields: 
+  principalId: int
+  placeId: int
