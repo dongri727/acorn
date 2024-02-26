@@ -100,7 +100,6 @@ class WherePage extends StatelessWidget {
                                         options: model.ns,
                                         onChanged: (String? value) {
                                           model.selectedOption = value!;
-                                          //isSelectedOption = value;
                                           print("selected: $value");
                                         }),
                                   ),

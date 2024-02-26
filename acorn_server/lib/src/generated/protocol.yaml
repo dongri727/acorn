@@ -1,12 +1,13 @@
 countryInvolved:
   - getCInvolved:
   - addCInvolved:
+  - getPrincipalIdsByCInvolvedIds:
 categories:
   - getCategories:
   - addCategories:
   - addAndReturnCategories:
-cattInvolved:
-  - getAttsInvolved:
+cattsInvolved:
+  - getCattsInvolved:
   - addCattsInvolved:
 countryatts:
   - getCountryATTs:
@@ -26,6 +27,9 @@ principalCategories:
 principalCatt:
   - getPCatt:
   - addPCatt:
+placeInvolved:
+  - getPInvolved:
+  - addPInvolved:
 principalOrgs:
   - getPOrgs:
   - addPOrgs:
@@ -70,12 +74,15 @@ principal:
   - getPrincipalByPattId:
   - getPrincipalByPersonId:
   - getPrincipalByCInvolvedId:
-  - getPrincipalByAttInvolvedId:
+  - getPrincipalByPInvolvedId:
+  - getPrincipalByCattInvolvedId:
+  - getPrincipalByPattInvolvedId:
   - getPrincipalByStarsInvolvedId:
   - getPrincipalByOrgsId:
   - getPrincipalByCategoryId:
   - getPrincipalByTermId:
   - getPrincipalByUserId:
+  - getPrincipalsByIds:
 seas:
   - getSeas:
   - addSeas:

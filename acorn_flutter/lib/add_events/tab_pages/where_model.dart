@@ -41,6 +41,7 @@ class WhereModel extends ChangeNotifier {
   double cy = 0.0;
   double cz = 0.0;
 
+  ///当時の国名
   List<Map<String, String>> displayListCountryatts = [];
   final List<String> _filtersCountryatts = <String>[];
   //final List<int> _fltersCountryattsId = <int>[];
@@ -154,6 +155,8 @@ class WhereModel extends ChangeNotifier {
         await _fetchStarsRepository.addStarsAndFetch(newStar);
         currentDisplayList = _fetchStarsRepository.listStars;
         break;
+
+        //keyCountryが取得されているので、国名付きで保存される。
       case 'Current Place-name':
         await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyCountry);
         currentDisplayList = _fetchPlaceRepository.listPlaces;

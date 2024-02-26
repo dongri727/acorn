@@ -16,4 +16,24 @@ class CountryInvolvedEndpoint extends Endpoint {
   Future<void> addCInvolved(Session session, CountryInvolved cInvolved) async {
     await CountryInvolved.db.insertRow(session, cInvolved);
   }
+
+    /// Gets a list of principalIds based on a list of cInvolvedIds
+  Future<List<int>> getPrincipalIdsByCInvolvedIds(Session session, {List<int>? cInvolvedIds}) async {
+    if (cInvolvedIds == null || cInvolvedIds.isEmpty) {
+      return Future.value([]); // Return empty list if no cInvolvedIds are provided
+    }
+
+    dynamic whereClauseCountryInvolved;
+    for (var cInvolvedId in cInvolvedIds) {
+      if (whereClauseCountryInvolved == null) {
+        whereClauseCountryInvolved = CountryInvolved.t.paysId.equals(cInvolvedId);
+      } else {
+        whereClauseCountryInvolved = whereClauseCountryInvolved | CountryInvolved.t.paysId.equals(cInvolvedId);
+      }
+    }
+
+    var cInvolvedResults = await CountryInvolved.db
+        .find(session, where: (_) => whereClauseCountryInvolved);
+    return cInvolvedResults.map((row) => row.principalId).toList();
+  }
 }

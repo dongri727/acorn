@@ -34,4 +34,17 @@ class FetchCattRepository {
       debugPrint('$e');
     }
   }*/
+
+//todo 複数語同時挿入に対応する
+/*  addCountryATTandFetch(String newCATT) async {
+    List<string> newCatts = newCATT.split(,).map((s) => s.trim()).toList();
+    try {
+      var catts = Countryatts(countryatt: newCatts);
+      await client.countryatts.addListAndGetCatts(catts);
+      print(catts);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }*/
 }

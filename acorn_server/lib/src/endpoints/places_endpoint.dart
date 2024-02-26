@@ -13,7 +13,7 @@ class PlacesEndpoint extends Endpoint {
     );
   }
 
-  ///Adds place in DB
+  ///Adds place in DB 
   Future<void> addPlaces(Session session, Places places) async {
     await Places.db.insertRow(session, places);
   }
@@ -29,7 +29,7 @@ class PlacesEndpoint extends Endpoint {
     return allPlaces;
   }
 
-  ///Adds a new Place and returns all Places
+  ///Adds a new Place and returns Places in the same country
   Future<List<Places>> addAndReturnPlacesWithKeyCountry(
       Session session, Places places, String keyword) async {
     await Places.db.insertRow(session, places);

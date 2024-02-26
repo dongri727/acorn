@@ -88,7 +88,6 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> filtersUniverse = <String>[];
 
   String selectedUniverse = '';
-  //int selectedUniverseId = 0;
 
   void updateSelectedUniverse(String newSelectedUniverse) {
     selectedUniverse = newSelectedUniverse;
@@ -99,7 +98,6 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> filtersStars = <String>[];
 
   String selectedStar = '';
-  //int selectedStarId = 0;
 
   void updateSelectedStar(String newSelectedStar) {
     selectedStar = newSelectedStar;
@@ -251,7 +249,6 @@ class MultipleSearchModel extends ChangeNotifier {
   int selectedStarsObservedId = 0;
 
   //Organisation
-  //List<Organisations> listOrganisations = [];
   final List<String> filtersOrgs = <String>[];
   final List<int> filtersOrgsId = <int>[];
 
@@ -264,7 +261,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //People
-  //List<People> listPeople = [];
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
 
@@ -277,7 +273,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Categories
-  // List<Categories> listCategories = [];
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
 
@@ -290,7 +285,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Other Terms
-  //List<Terms> listTerms = [];
   final List<String> filtersTerms = <String>[];
   final List<int> filtersTermsId = <int>[];
 
@@ -348,12 +342,10 @@ class MultipleSearchModel extends ChangeNotifier {
         case 'Countries involved':
           currentDisplayList = listPaysInv;
           break;
-
         case 'Places involved':
         //await fetchPlaceInvolvedLookedFor();
           currentDisplayList = listPlaceInv;
           break;
-
         case 'Names of Countries involved at that time':
           await _fetchCattRepository.fetchCatt();
           currentDisplayList = _fetchCattRepository.listCatt;
@@ -667,12 +659,12 @@ class MultipleSearchModel extends ChangeNotifier {
 /*          case 'Places involved':
             _fetchPrincipalRepository.fetchPrincipalByPInvolvedId(pInvolvedIds: filtersPlaceInvId);
             break;*/
-/*        case 'Names of Countries involved at that time':
-          _fetchPrincipalRepository.fetchPrincipalByAttInvolvedId(attsInvolvedIds: filtersPaysInvATTId);
-          break;*/
-/*        case 'Names of Places involved at that time':
-          _fetchPrincipalRepository.fetchPrincipalByPAttInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
-          break;*/
+        case 'Names of Countries involved at that time':
+          _fetchPrincipalRepository.fetchPrincipalByCattInvolvedId(cattsInvolvedIds: filtersPaysInvATTId);
+          break;
+        case 'Names of Places involved at that time':
+          _fetchPrincipalRepository.fetchPrincipalByPattInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
+          break;
         case 'Stars Observed':
           _fetchPrincipalRepository.fetchPrincipalByStarsObservedId(
               starObservedIds:

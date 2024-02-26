@@ -7,7 +7,9 @@ import '../../confirm/confirm.dart';
 import 'package:provider/provider.dart';
 import '../../fetch/fetch_catt.dart';
 import '../../fetch/fetch_patt.dart';
+import '../../fetch/fetch_place.dart';
 import '../../fetch/fetch_stars.dart';
+import '../../lists/countries_list.dart';
 import '../../utils/build_chips.dart';
 
 
@@ -16,11 +18,13 @@ class PaysModel extends ChangeNotifier {
   late final FetchStarsRepository  _fetchStarsRepository;
   late final FetchCattRepository _fetchCattRepository;
   late final FetchPattRepository _fetchPattRepository;
+  late final FetchPlaceRepository _fetchPlaceRepository;
 
   PaysModel(){
     _fetchStarsRepository = FetchStarsRepository();
     _fetchCattRepository = FetchCattRepository();
     _fetchPattRepository = FetchPattRepository();
+    _fetchPlaceRepository = FetchPlaceRepository();
   }
 
   var newPlace = '';
@@ -35,9 +39,9 @@ class PaysModel extends ChangeNotifier {
   var keyCountry = '';
 
   ///関係国の現在名
-  List<Pays> listPays = [];
-  final List<String> filtersPays = <String>[];
-  final List<int> filtersPaysId = <int>[];
+  List<Map<String, dynamic>> listPaysInv = countries;
+  final List<String> filtersPaysInv = <String>[];
+  final List<int> filtersPaysInvId = <int>[];
 
   ///関係都市等の現在名
   List<Places> listPlaces = [];
@@ -59,17 +63,7 @@ class PaysModel extends ChangeNotifier {
   final List<String> filtersStars = <String>[];
   final List<int> filtersStarId = <int>[];
 
-  fetchPaysInvolved() async {
-    try {
-      listPays = await client.pays.getPays();
-      currentDisplayList = listPays;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  // without KeyCountry
+/*  // without KeyCountry
   fetchPlacesInvolved() async {
     try {
       listPlaces = await client.places.getPlaces();
@@ -78,9 +72,9 @@ class PaysModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  //todo 都市名を追加するには国名が必要だが･･･。
+/*  //todo 都市名を追加するには国名が必要だが･･･。
   addPlaceAndFetch(String newPlace) async {
     try {
       var place = Places(place: newPlace, country: keyCountry);
@@ -90,75 +84,31 @@ class PaysModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('$e');
     }
-  }
-
-  addCattAndFetch(String newCatt) async {
-    try {
-      var catt = Countryatts(countryatt: newCatt);
-      listCATTs = await client.countryatts.addAndReturnCatts(catt);
-      currentDisplayList = listCATTs;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-//todo 複数語同時挿入に対応する
-/*  addCountryATTandFetch(String newCATT) async {
-    List<string> newCatts = newCATT.split(,).map((s) => s.trim()).toList();
-    try {
-      var catts = Countryatts(countryatt: newCatts);
-      await client.countryatts.addListAndGetCatts(catts);
-      print(catts);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
   }*/
-
-  addPATTandFetch(String newPATT) async {
-    try {
-      var patts = Placeatts(placeatt: newPATT);
-      listPATTs = await client.placeatts.addAndGetPatts(patts);
-      currentDisplayList = listPATTs;
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
-
-  addStarAndFetch(String newStar) async {
-    try {
-      var stars = Stars(star: newStar);
-      listStars = await client.stars.addAndReturnStars(stars);
-      currentDisplayList = listStars;
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Current Name of Country Involved':
-        await fetchPaysInvolved();
+        currentDisplayList = listPaysInv;
         break;
       case 'Current Name of Place Involved':
-        await fetchPlacesInvolved();
+        await _fetchPlaceRepository.fetchVillesLookedFor();
+        currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Name of Country Involved at that time':
         await _fetchCattRepository.fetchCatt();
         currentDisplayList = _fetchCattRepository.listCatt;
-        notifyListeners();
         break;
       case 'Name of Place Involved at that time':
         await _fetchPattRepository.fetchPatt();
         currentDisplayList = _fetchPattRepository.listPatt;
-        notifyListeners();
         break;
       case 'Stars Observed or Aimed at':
         await _fetchStarsRepository.fetchStars();
         currentDisplayList = _fetchStarsRepository.listStars;
-        notifyListeners();
         break;
     }
+    notifyListeners();
   }
 
   setNewWord(text) {
@@ -166,50 +116,46 @@ class PaysModel extends ChangeNotifier {
       //country must not be added
       case 'Current Name of Place Involved':
         newPlace = text;
-        notifyListeners();
         break;
       case 'Name of Country Involved at that time':
         newCATT = text;
-        notifyListeners();
         break;
       case 'Name of Place Involved at that time':
         newPATT = text;
-        notifyListeners();
         break;
       case 'Stars Observed or Aimed at':
         newStar = text;
-        notifyListeners();
         break;
     }
+    notifyListeners();
   }
 
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       //country must not be added
       case 'Current Name of Place Involved':
-        await addPlaceAndFetch(newPlace);
+        await _fetchPlaceRepository.addVillesAndFetch(newPlace);
         break;
       case 'Name of Country Involved at that time':
-        await addCattAndFetch(newCATT);
+        await _fetchCattRepository.addCountryATTandFetch(newCATT);
         break;
       case 'Name of Place Involved at that time':
-        await addPATTandFetch(newPATT);
+        await _fetchPattRepository.addPlaceATTandFetch(newPATT);
         break;
       case 'Stars Observed or Aimed at':
-        await addStarAndFetch(newStar);
+        await _fetchStarsRepository.addStarsAndFetch(newStar);
         break;
     }
   }
 
   Widget buildItemWidget(dynamic item) {
-    //String itemType = _getItemType(item);
     switch (selectedOption) {
       case 'Current Name of Country Involved':
         return buildFilterFormatImediat(
-          filteredKeys: filtersPays,
-          filteredValues: filtersPaysId,
-          filterKey: (item as Pays).pays,
-          filterValue: item.id!,
+          filteredKeys: filtersPaysInv,
+          filteredValues: filtersPaysInvId,
+          filterKey: item['name'],
+          filterValue: item['id'],
           onSelected: (key, value) {
             selectedPaysInv = key;
             selectedPaysInvId = value;
@@ -300,9 +246,9 @@ class PaysModel extends ChangeNotifier {
     final confirm = Provider.of<Confirm>(context, listen: false);
 
     // データの一時保存処理
-    confirm.selectedCountries = filtersPays;
-    confirm.selectedCountriesId = filtersPaysId;
-    print("pays:$filtersPays");
+    confirm.selectedCountries = filtersPaysInv;
+    confirm.selectedCountriesId = filtersPaysInvId;
+    print("pays:$filtersPaysInv");
 
     confirm.selectedPlaces = filtersPlaces;
     confirm.selectedPlacesId = filtersPlacesId;

@@ -49,7 +49,7 @@ class PaysPage extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     BlankTextFormat(
-                                        text: model.filtersPays.join(', ')),
+                                        text: model.filtersPaysInv.join(', ')),
                                     BlankTextFormat(
                                         text: model.filtersPlaces.join(', ')),
                                     BlankTextFormat(

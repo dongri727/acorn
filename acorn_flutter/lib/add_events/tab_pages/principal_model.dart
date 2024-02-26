@@ -98,17 +98,15 @@ class PrincipalModel extends ChangeNotifier {
     switch (selectedOption) {
       case 'Universe':
         currentDisplayList = universe;
-        notifyListeners();
         break;
       case 'Current Country-name':
         currentDisplayList = pays.map((country) => country['name'] as String).toList();
-        notifyListeners();
         break;
       case 'Ocean-name':
         currentDisplayList = oceans;
-        notifyListeners();
         break;
     }
+    notifyListeners();
   }
 
   Widget buildItemWidget(dynamic item) {

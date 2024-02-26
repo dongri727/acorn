@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import '../generated/protocol.dart';
+//import '../endpoints/c_involved_endpoint.dart';
 
 class PrincipalEndpoint extends Endpoint {
   //Principal
@@ -56,7 +57,6 @@ class PrincipalEndpoint extends Endpoint {
       session,
       where: (_) => quellePeriod,
       orderBy: (principal) => principal.point,
-      orderDescending: false,
     );
   }
 
@@ -85,8 +85,6 @@ class PrincipalEndpoint extends Endpoint {
     );
   }
 
-  
-
   Future<List<Principal>> getPrincipalByCattId(Session session,
       {List<int>? cattIds}) async {
 
@@ -111,22 +109,7 @@ class PrincipalEndpoint extends Endpoint {
         pCattResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    dynamic selectedPrincipal;
-    for (var principalId in principalIds) {
-      if (selectedPrincipal == null) {
-        selectedPrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        selectedPrincipal =
-            selectedPrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => selectedPrincipal,
-      orderBy: (principal) => principal.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByPattId(Session session,
@@ -153,22 +136,7 @@ class PrincipalEndpoint extends Endpoint {
         pPattResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    dynamic selectedPrincipal;
-    for (var principalId in principalIds) {
-      if (selectedPrincipal == null) {
-        selectedPrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        selectedPrincipal =
-            selectedPrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => selectedPrincipal,
-      orderBy: (principal) => principal.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByPersonId(Session session,
@@ -196,24 +164,10 @@ class PrincipalEndpoint extends Endpoint {
         pPeopleResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    dynamic selectedPrincipal;
-    for (var principalId in principalIds) {
-      if (selectedPrincipal == null) {
-        selectedPrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        selectedPrincipal =
-            selectedPrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => selectedPrincipal,
-      orderBy: (principal) => principal.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
+  ///Get list-principal using country-involved-id
   Future<List<Principal>> getPrincipalByCInvolvedId(Session session,
       {List<int>? cInvolvedIds}) async {
     print("Getting principal with cInvolvedIds: $cInvolvedIds");
@@ -223,7 +177,9 @@ class PrincipalEndpoint extends Endpoint {
     }
 
     // Step 1: Get principalIds from TableA using cattIds
-    var whereClauseCountryInvolved;
+    //var principalIds = await countryInvolvedEndpoint.getPrincipalIdsByCInvolvedIds(session, cInvolvedIds: cInvolvedIds);
+
+    dynamic whereClauseCountryInvolved;
     for (var cInvolvedId in cInvolvedIds) {
       if (whereClauseCountryInvolved == null) {
         whereClauseCountryInvolved =
@@ -234,39 +190,52 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var CInvolvedResults = await CountryInvolved.db
+    var cInvolvedResults = await CountryInvolved.db
         .find(session, where: (_) => whereClauseCountryInvolved);
-    var principalIds = CInvolvedResults.map((row) => row.principalId).toList();
+    var principalIds = cInvolvedResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
+    return await getPrincipalsByIds(session, principalIds);
+  }
+
+   Future<List<Principal>> getPrincipalByPInvolvedId(Session session,
+      {List<int>? pInvolvedIds}) async {
+    print("Getting principal with pInvolvedIds: $pInvolvedIds");
+
+    if (pInvolvedIds == null || pInvolvedIds.isEmpty) {
+      return Future.value([]); // Return empty list if no pattIds are provided
+    }
+
+    // Step 1: Get principalIds from TableA using cattIds
+    dynamic whereClausePlaceInvolved;
+    for (var pInvolvedId in pInvolvedIds) {
+      if (whereClausePlaceInvolved == null) {
+        whereClausePlaceInvolved =
+            PlaceInvolved.t.placeId.equals(pInvolvedId);
       } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
+        whereClausePlaceInvolved = whereClausePlaceInvolved |
+            PlaceInvolved.t.placeId.equals(pInvolvedId);
       }
     }
 
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.point,
-    );
+    var pInvolvedResults = await PlaceInvolved.db
+        .find(session, where: (_) => whereClausePlaceInvolved);
+    var principalIds = pInvolvedResults.map((row) => row.principalId).toList();
+
+    // Step 2: Get Principals using principalIds
+    return await getPrincipalsByIds(session, principalIds);
   }
 
-  Future<List<Principal>> getPrincipalByAttInvolvedId(Session session,
+  Future<List<Principal>> getPrincipalByCattInvolvedId(Session session,
       {List<int>? cattInvolvedIds}) async {
-    print("Getting principal with attInvolvedIds: $cattInvolvedIds");
+    print("Getting principal with cattInvolvedIds: $cattInvolvedIds");
 
     if (cattInvolvedIds == null || cattInvolvedIds.isEmpty) {
-      return Future.value([]); // Return empty list if no attInvIds are provided
+      return Future.value([]); // Return empty list if no cattInvIds are provided
     }
 
     // Step 1: Get principalIds from attinvolved using cattIds
-    var whereClauseCattsInvolved;
+    dynamic whereClauseCattsInvolved;
     for (var cattInvolvedId in cattInvolvedIds) {
       if (whereClauseCattsInvolved == null) {
         whereClauseCattsInvolved = CattsInvolved.t.cattId.equals(cattInvolvedId);
@@ -276,28 +245,41 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var CattInvolvedResults = await CattsInvolved.db
+    var cattInvolvedResults = await CattsInvolved.db
         .find(session, where: (_) => whereClauseCattsInvolved);
     var principalIds =
-        CattInvolvedResults.map((row) => row.principalId).toList();
+        cattInvolvedResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
+    return await getPrincipalsByIds(session, principalIds);
+  }
+
+    Future<List<Principal>> getPrincipalByPattInvolvedId(Session session,
+      {List<int>? pattInvolvedIds}) async {
+    print("Getting principal with pattInvolvedIds: $pattInvolvedIds");
+
+    if (pattInvolvedIds == null || pattInvolvedIds.isEmpty) {
+      return Future.value([]); // Return empty list if no pattInvIds are provided
+    }
+
+    // Step 1: Get principalIds from attinvolved using pattIds
+    dynamic whereClausePattsInvolved;
+    for (var pattInvolvedId in pattInvolvedIds) {
+      if (whereClausePattsInvolved == null) {
+        whereClausePattsInvolved = CattsInvolved.t.cattId.equals(pattInvolvedId);
       } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
+        whereClausePattsInvolved = whereClausePattsInvolved |
+            PattsInvolved.t.pattId.equals(pattInvolvedId);
       }
     }
 
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      orderBy: (principal) => principal.point,
-    );
+    var pattInvolvedResults = await PattsInvolved.db
+        .find(session, where: (_) => whereClausePattsInvolved);
+    var principalIds =
+        pattInvolvedResults.map((row) => row.principalId).toList();
+
+    // Step 2: Get Principals using principalIds
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByStarsInvolvedId(Session session,
@@ -310,7 +292,7 @@ class PrincipalEndpoint extends Endpoint {
     }
 
     // Step 1: Get principalIds from starsInvolved using orgIds
-    var whereClauseStarsInvolved;
+    dynamic whereClauseStarsInvolved;
     for (var starInvId in starInvolvedIds) {
       if (whereClauseStarsInvolved == null) {
         whereClauseStarsInvolved = StarsInvolved.t.starId.equals(starInvId);
@@ -320,28 +302,13 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var StarsInvolvedResults = await StarsInvolved.db
+    var starsInvolvedResults = await StarsInvolved.db
         .find(session, where: (_) => whereClauseStarsInvolved);
     var principalIds =
-        StarsInvolvedResults.map((row) => row.principalId).toList();
+        starsInvolvedResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByOrgsId(Session session,
@@ -353,7 +320,7 @@ class PrincipalEndpoint extends Endpoint {
     }
 
     // Step 1: Get principalIds from PrincipalOrganisation using orgIds
-    var whereClausePrincipalOrganisations;
+    dynamic whereClausePrincipalOrganisations;
     for (var orgId in orgIds) {
       if (whereClausePrincipalOrganisations == null) {
         whereClausePrincipalOrganisations = PrincipalOrgs.t.orgId.equals(orgId);
@@ -363,28 +330,13 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var PrincipalOrgsResults = await PrincipalOrgs.db
+    var principalOrgsResults = await PrincipalOrgs.db
         .find(session, where: (_) => whereClausePrincipalOrganisations);
     var principalIds =
-        PrincipalOrgsResults.map((row) => row.principalId).toList();
+        principalOrgsResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByCategoryId(Session session,
@@ -397,7 +349,7 @@ class PrincipalEndpoint extends Endpoint {
     }
 
     // Step 1: Get principalIds from PrincipalOrganisation using orgIds
-    var whereClausePrincipalCategories;
+    dynamic whereClausePrincipalCategories;
     for (var categoryId in categoryIds) {
       if (whereClausePrincipalCategories == null) {
         whereClausePrincipalCategories =
@@ -408,28 +360,13 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var PrincipalCategoriesResults = await PrincipalCategories.db
+    var principalCategoriesResults = await PrincipalCategories.db
         .find(session, where: (_) => whereClausePrincipalCategories);
     var principalIds =
-        PrincipalCategoriesResults.map((row) => row.principalId).toList();
+        principalCategoriesResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   Future<List<Principal>> getPrincipalByTermId(Session session,
@@ -441,7 +378,7 @@ class PrincipalEndpoint extends Endpoint {
     }
 
     // Step 1: Get principalIds from PrincipalTerms using termIds
-    var whereClausePrincipalTerms;
+    dynamic whereClausePrincipalTerms;
     for (var termId in termIds) {
       if (whereClausePrincipalTerms == null) {
         whereClausePrincipalTerms = PrincipalTerms.t.termId.equals(termId);
@@ -451,28 +388,13 @@ class PrincipalEndpoint extends Endpoint {
       }
     }
 
-    var PrincipalTermsResults = await PrincipalTerms.db
+    var principalTermsResults = await PrincipalTerms.db
         .find(session, where: (_) => whereClausePrincipalTerms);
     var principalIds =
-        PrincipalTermsResults.map((row) => row.principalId).toList();
+        principalTermsResults.map((row) => row.principalId).toList();
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.point,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
 
   ///単一user version
@@ -487,31 +409,41 @@ class PrincipalEndpoint extends Endpoint {
     // Step 1: Get principalIds from PrincipalUser using userId
     var whereClausePrincipalUser = PrincipalUser.t.userId.equals(userId);
 
-    var PrincipalUserResults = await PrincipalUser.db
+    var principalUserResults = await PrincipalUser.db
         .find(session, where: (_) => whereClausePrincipalUser);
     var principalIds =
-        PrincipalUserResults.map((row) => row.principalId).toList();
+        principalUserResults.map((row) => row.principalId).toList();
 
     if (principalIds.isEmpty) {
       return Future.value([]);
     }
 
     // Step 2: Get Principals using principalIds
-    var whereClausePrincipal;
-    for (var principalId in principalIds) {
-      if (whereClausePrincipal == null) {
-        whereClausePrincipal = Principal.t.id.equals(
-            principalId); // Assuming the id field in Principal table is named 'id'
-      } else {
-        whereClausePrincipal =
-            whereClausePrincipal | Principal.t.id.equals(principalId);
-      }
-    }
-
-    return await Principal.db.find(
-      session,
-      where: (_) => whereClausePrincipal,
-      //orderBy: Principal.t.id,
-    );
+    return await getPrincipalsByIds(session, principalIds);
   }
+
+  ///二段階検索共通第２Step
+  Future<List<Principal>> getPrincipalsByIds(Session session, List<int> principalIds) async {
+  if (principalIds.isEmpty) {
+    return Future.value([]); // 空のIDリストが与えられた場合は、空のリストを返します。
+  }
+
+  dynamic whereClausePrincipal;
+  for (var principalId in principalIds) {
+    if (whereClausePrincipal == null) {
+      whereClausePrincipal = Principal.t.id.equals(principalId);
+    } else {
+      whereClausePrincipal = whereClausePrincipal | Principal.t.id.equals(principalId);
+    }
+  }
+
+  return await Principal.db.find(
+    session,
+    where: (_) => whereClausePrincipal,
+    orderBy: (principal) => principal.point,
+  );
 }
+}
+
+
+

@@ -95,7 +95,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var attId in confirm.selectedATTId) {
             var cattsInvolved = CattsInvolved(
                 principalId: principalId, cattId: attId);
-            var cattInvolvedId = await client.cattInvolved.addCattsInvolved(cattsInvolved);
+            var cattInvolvedId = await client.cattsInvolved.addCattsInvolved(cattsInvolved);
             debugPrint('Added Att involved');
           }
         }

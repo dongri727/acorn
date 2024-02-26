@@ -73,36 +73,35 @@ class FetchPrincipalRepository {
         }
     }
 
-/*  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
+  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
     try {
-      principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
+      listPrincipal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
       print("Getting principal with PInvolvedIds: $pInvolvedIds");
-      principalIds = principal.map((item) => item.id as int).toList();
+      principalIds = listPrincipal.map((item) => item.id as int).toList();
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
-/*  fetchPrincipalByAttInvolvedId({List<int>? attsInvolvedIds}) async {
+  fetchPrincipalByCattInvolvedId({List<int>? cattsInvolvedIds}) async {
     try {
-      principal = await client.principal.getPrincipalByAttInvolvedId(attInvolvedIds: attsInvolvedIds);
-      print("Getting principal with AttsInvolvedIds: $attsInvolvedIds");
-      principalIds = principal.map((item) => item.id as int).toList();
+      listPrincipal = await client.principal.getPrincipalByCattInvolvedId(cattInvolvedIds: cattsInvolvedIds);
+      print("Getting principal with CattsInvolvedIds: $cattsInvolvedIds");
+      principalIds = listPrincipal.map((item) => item.id as int).toList();
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
-/*  fetchPrincipalByPAttInvolvedId({List<int>? pattsInvolvedIds}) async {
+  fetchPrincipalByPattInvolvedId({List<int>? pattsInvolvedIds}) async {
     try {
-      principal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pattsInvolvedIds);
-      principal.sort((a,b) => a.point.compareTo(b.point));
+      listPrincipal = await client.principal.getPrincipalByPattInvolvedId(pattInvolvedIds: pattsInvolvedIds);
       print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
-      principalIds = principal.map((item) => item.id as int).toList();
+      principalIds = listPrincipal.map((item) => item.id as int).toList();
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }*/
+  }
 
     Future<void> fetchPrincipalByStarsObservedId(
         {List<int>? starObservedIds}) async {

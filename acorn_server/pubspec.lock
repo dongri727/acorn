@@ -429,50 +429,50 @@ packages:
     dependency: "direct main"
     description:
       name: serverpod
-      sha256: c7f488b869287f798783c2238b09df785a83b8b93c7aaf6294b8476928e5afd6
+      sha256: ce56fcd13fcf5fa0d736ec05603e8aba38f65d40f9fbabfc02c18e3889785dae
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   serverpod_auth_server:
     dependency: "direct main"
     description:
       name: serverpod_auth_server
-      sha256: "32f6736afd4f0a2897b4895c8daa3926a1da64a721ffbb31c4ac3e5f8df17e33"
+      sha256: a7f3ecb07dfd38b5d89a741e216498a20dd940142719ddfb34d47d4ea92ac4f8
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   serverpod_client:
     dependency: transitive
     description:
       name: serverpod_client
-      sha256: "826b09479efca43b0fe32fe0da1ae9d6cec0a4db222837da811f4396d9930819"
+      sha256: "6e76c50d8aa5c7f796dd0af8307355740db01291931ab1fca5971505497e9547"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: "38b1d8c7a30b611a88e0aee11139ba3b2e6463a065296d857404aa6314d720ce"
+      sha256: "295695cfcf5641bd38bd5c56dd322a9e1f6e2462bc2a539913e7e2d9ef6a6c0c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   serverpod_service_client:
     dependency: transitive
     description:
       name: serverpod_service_client
-      sha256: "8ae62c1c32d527e5fb650d7ce45aea850443dd06a7bbc54deb47054497ed72cf"
+      sha256: c73bf40a203727346213b563473cca77cd4256594725c4f67c93b73a05f82048
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   serverpod_shared:
     dependency: transitive
     description:
       name: serverpod_shared
-      sha256: "7c502eb0b0ebe797cdbe600ceb6ed1d4f7874273c67c55a8dd1af31ebba57dc4"
+      sha256: "43ef6abd4c14fec5d7180b305c4b9b81c1f75bb05407ed72d65b3335bb160d4c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.4"
   sortedmap:
     dependency: transitive
     description:

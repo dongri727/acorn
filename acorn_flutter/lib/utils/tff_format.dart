@@ -20,9 +20,9 @@ class TffFormat extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textAlign: TextAlign.center,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 20,
-        color: Colors.white),
+        color: Colors.green),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(5.0),
         hintText: hintText,

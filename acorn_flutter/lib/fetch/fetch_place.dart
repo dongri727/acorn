@@ -35,6 +35,19 @@ class FetchPlaceRepository{
       debugPrint('$e');
     }
   }
+
+
+  ///国なしで登録・取得
+  addVillesAndFetch(String newPlace) async {
+    try {
+      var places = Places(place: newPlace, country: 'blanc');
+      var keyword = 'blanc';
+      listPlaces =
+      await client.places.addAndReturnPlaces(places);
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
 }
 
 
