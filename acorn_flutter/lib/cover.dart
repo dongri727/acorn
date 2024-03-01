@@ -5,9 +5,7 @@ import 'users/sign_in_page.dart';
 import 'utils/theme.dart';
 
 class CoverPage extends StatefulWidget {
-  const CoverPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const CoverPage({super.key});
 
   @override
   CoverPageState createState() => CoverPageState();
@@ -34,26 +32,62 @@ class CoverPageState extends State<CoverPage> {
           fit: BoxFit.cover,
         ),
       ),
-      child: TextButton(
-          child: Text(
-            "WELCOME",
-            style: AcornTheme.textTheme.bodyLarge,
-/*              style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-            ),*/
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(100.0),
+            child: Text(
+              'Welcome to our Database',
+              style: AcornTheme.textTheme.headlineLarge,
+            ),
           ),
-          onPressed: () {
-            Navigator.push<String>(
-              context,
-              MaterialPageRoute(
-                //builder: (context) => const IndexPage(),
-            builder: (context) => sessionManager.isSignedIn
-                ? const AccountPage()
-                : const SignInPage(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton(
+              child: Text(
+                'About this Database',
+                style: AcornTheme.textTheme.bodyLarge,
               ),
-            );
-          }),
+                onPressed: (){
+                showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('This is YOUR Database'),
+                    content: const Text('Create a uniquely global platform\n'
+                        'where YOU contribute to expanding the wealth of data'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('close'),
+                          onPressed: () {
+                          Navigator.of(context).pop();
+                          })
+                    ],
+                  );
+                });
+                }, ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton(
+                child: Text(
+                  "Enter",
+                  style: AcornTheme.textTheme.bodyLarge,
+                ),
+                onPressed: () {
+                  Navigator.push<String>(
+                    context,
+                    MaterialPageRoute(
+                      //builder: (context) => const IndexPage(),
+                  builder: (context) => sessionManager.isSignedIn
+                      ? const AccountPage()
+                      : const SignInPage(),
+                    ),
+                  );
+                }),
+          ),
+        ],
+      ),
     );
   }
 }

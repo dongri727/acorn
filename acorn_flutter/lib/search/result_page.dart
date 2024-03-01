@@ -1,7 +1,10 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
+import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../add_events/tab_top.dart';
 import 'multiple_search_page.dart';
 
 class ResultPage extends StatelessWidget {
@@ -26,6 +29,28 @@ class ResultPage extends StatelessWidget {
             },
           ),
           title: const Text('CLASSIC VIEW'),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+              child: ShadowedContainer(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.blueGrey),
+                child: const Text('Add New',
+                style: TextStyle(
+                  color: Colors.white,
+                ),),
+                  onPressed: () {
+                    Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TabPage()),
+                    );
+                  },
+                ),
+              ),
+            )
+        ],
         ),
         body: Consumer<MultipleSearchModel>(
           builder: (context, model, child) {

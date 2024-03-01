@@ -7,8 +7,8 @@ import 'package:serverpod_auth_google_flutter/serverpod_auth_google_flutter.dart
 import 'account_page.dart';
 import 'package:acorn_flutter/index.dart';
 
-var _googleClientId = '849604984098-kr0n5fr7eiem1eo0q20do2dgmppkko9d.apps.googleusercontent.com';
-const _googleServerClientId = '849604984098-hgp1ddeqslbrsn70vrd8grvp3cbvji0s.apps.googleusercontent.com';
+var _googleClientId = '';
+const _googleServerClientId = '';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super. key});
@@ -28,32 +28,38 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                   flex: 1,
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(100, 300, 20, 300),
+                  child: Dialog(
                       child: ShadowedContainer(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             const Padding(
                               padding: EdgeInsets.all(20.0),
-                              child: Text('Investor\n'
-                                  'Please authenticate as a paid member.\n'
-                                  'Your contributions will be recorded on your personal page.\n'
-                                  'You can participate in improving this project.\n'
-                                  'Ads are not displayed.'),
+                              child: Text("Hey, Investor!\n"
+                                  "Ready to unlock premium features?\n"
+                                  "Authenticate and become a paid member.\n"
+                                  "Your awesome contributions will shine on your personal page.\n"
+                                  "Join us in making this project even better.\n"
+                                  "Plus, enjoy an ad-free experience!"),
                             ),
-                            ElevatedButton(
-                              child: const Text('Sign-in as an Investor'),
-                              onPressed: () async {
-                                Navigator.push<String>(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const IndexPage(),
-                                  ),
-                                );
-                              },
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: ElevatedButton(
+                                child: const Text('Sign-in as an Investor'),
+                                onPressed: () async {
+                                  Navigator.push<String>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const IndexPage(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                             const Icon(Icons.build),
                           ],
@@ -69,10 +75,11 @@ class SignInPage extends StatelessWidget {
                       children: [
                         const Padding(
                           padding: EdgeInsets.all(20.0),
-                          child: Text('Free Member\n'
-                              'Please authenticate with one of the following.\n'
-                              'Your contributions will be recorded on your personal page.\n'
-                              'Ads may be displayed.'),
+                          child: Text("Welcome, Free Member!\n"
+                              "Let's get you started with one of the following options.\n"
+                              "We'll keep a record of your contributions on your personal page.\n"
+                              "Heads up: You might see some ads."),
+
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
@@ -129,29 +136,33 @@ class SignInPage extends StatelessWidget {
               ),
               Expanded(
                 flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 300, 100, 300),
+                  child: Dialog(
                       child: ShadowedContainer(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             const Padding(
                               padding: EdgeInsets.all(20.0),
-                              child: Text('Guest\n'
-                                  'No need to register your email.\n'
-                                  'Your input data is stored anonymously.\n'
-                                  'There is no personal page.\n'
-                                  'Ads may be displayed.'),
+                              child: Text("Hello, Guest!\n"
+                                  "Skip the signup - no email registration required.\n"
+                                  "Rest easy, your input stays anonymous.\n"
+                                  "No personal page, no strings attached.\n"
+                                  "Heads up: Ads might pop up."),
                             ),
-                            ElevatedButton(
-                              child: const Text('Sign-in as a Guest'),
-                              onPressed: () async {
-                                Navigator.push<String>(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const IndexPage(),
-                                  ),
-                                );
-                              },
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: ElevatedButton(
+                                child: const Text('Sign-in as a Guest'),
+                                onPressed: () async {
+                                  Navigator.push<String>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const IndexPage(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

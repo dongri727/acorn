@@ -24,14 +24,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  serverpod_flutter: ^1.2.4
+  serverpod_flutter: ^1.2.5
   acorn_client:
     path: ../acorn_client
 
-  serverpod_auth_shared_flutter: ^1.2.4
-  serverpod_auth_email_flutter: ^1.2.4
-  serverpod_auth_google_flutter: ^1.2.4
-  serverpod_auth_apple_flutter: ^1.2.4
+  serverpod_auth_shared_flutter: ^1.2.5
+  serverpod_auth_email_flutter: ^1.2.5
+  serverpod_auth_google_flutter: ^1.2.5
+  serverpod_auth_apple_flutter: ^1.2.5
 
   mailer: ^6.0.1
 

@@ -79,7 +79,7 @@ class ScalableState extends State<Scalable> {
           onPressed: () {
             Navigator.push<String>(
               context,
-              MaterialPageRoute(builder: (context) => MultiSearchPage()),
+              MaterialPageRoute(builder: (context) => const MultiSearchPage()),
             );
           },
         ),

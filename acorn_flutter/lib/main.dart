@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const CoverPage(title: 'Acorn Login'),
+          home: const CoverPage(),
         ));
   }
 }
