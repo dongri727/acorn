@@ -3,7 +3,7 @@
 # Makes sure we break the script on any error.
 set -e
 
-# Build the web app.
+# Build the web app
 cd acorn_flutter
 flutter build web --release --web-renderer canvaskit --no-tree-shake-icons
 cd ..
