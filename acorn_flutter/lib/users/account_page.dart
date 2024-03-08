@@ -1,4 +1,3 @@
-import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/users/account_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

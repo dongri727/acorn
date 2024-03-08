@@ -26,11 +26,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        //platform: Theme.of(context).platform,
         t: Timeline(Theme.of(context).platform),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'ACORN',
+          title: 'WhenWhereWhatDatabase',
           theme: ThemeData(
             textTheme: GoogleFonts.kalamTextTheme(
               Theme.of(context).textTheme

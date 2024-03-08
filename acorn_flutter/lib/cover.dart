@@ -78,7 +78,6 @@ class CoverPageState extends State<CoverPage> {
                   Navigator.push<String>(
                     context,
                     MaterialPageRoute(
-                      //builder: (context) => const IndexPage(),
                   builder: (context) => sessionManager.isSignedIn
                       ? const AccountPage()
                       : const SignInPage(),

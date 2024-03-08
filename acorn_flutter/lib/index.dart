@@ -44,10 +44,6 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             "Register Events",
                             style: AcornTheme.textTheme.bodyLarge,
-/*                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                          ),*/
                         ),
                       ),
                       ),
@@ -65,9 +61,6 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             "Search & View",
                             style: AcornTheme.textTheme.bodyLarge,
-/*                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,),*/
                           ),
                         ),
                       ),
@@ -85,9 +78,6 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             "Account Page",
                             style: AcornTheme.textTheme.bodyLarge,
-/*                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,),*/
                           ),
                         ),
                       ),
