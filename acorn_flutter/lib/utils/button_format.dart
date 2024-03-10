@@ -33,11 +33,11 @@ class RadioButtonFormat extends StatefulWidget {
   final ValueChanged<String?> onChanged;
 
   const RadioButtonFormat({
-    Key? key,
+    super.key,
     required this.options,
     this.initialOption,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<RadioButtonFormat> createState() => _RadioButtonFormatState();

@@ -19,8 +19,8 @@ Future<void> initializeServerpodClient() async {
   // production servers.
   client = Client(
     //todo switch server
-    //'http://$ipAddress:8080/',
-    'https://api.laporte.academy/',
+    'http://$ipAddress:8080/',
+    //'https://api.laporte.academy/',
     authenticationKeyManager: FlutterAuthenticationKeyManager(),
   )..connectivityMonitor = FlutterConnectivityMonitor();
 

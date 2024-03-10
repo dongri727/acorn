@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/tff_format.dart';
 import '../../../utils/card_format.dart';
+import '../add_events/tab_top.dart';
 import 'confirm.dart';
 import 'confirm_model.dart';
 
@@ -37,7 +38,12 @@ class ConfirmPage extends StatelessWidget {
                                   GestureDetector(
                                     child: const Text('OK'),
                                     onTap: () {
-                                      Navigator.pop(context);
+                                      //Navigator.pop(context);
+                                      Navigator.push<String>(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const TabPage()),
+                                      );
                                     },
                                   ),
                                 ],
@@ -357,8 +363,6 @@ class ConfirmPage extends StatelessWidget {
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
                                       itemCount: _confirm.selectedCategory.length,
-                                      //gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      //  crossAxisCount: 2),
                                       itemBuilder: (context, index) {
                                         return TermCard(
                                             _confirm.selectedCategory[index]

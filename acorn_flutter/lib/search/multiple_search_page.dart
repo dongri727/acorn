@@ -66,6 +66,7 @@ class MultiSearchPage extends StatelessWidget {
                           Flexible(
                             child: ShadowedContainer(
                               child: RadioButtonRowFormat(
+                                initialOption: 'CLASSIC',
                                   options: model.formats,
                                   onChanged: (String? value) {
                                     model.selectedFormat = value!;
@@ -165,7 +166,7 @@ class MultiSearchPage extends StatelessWidget {
                                   onPressed: () {
                                     model.submitSelection();
                                   },
-                                  child: const Text("submit"),
+                                  child: const Text("Fix, => Show-button in the lower right corner"),
                                 ),
                               ),
                             ],
@@ -191,6 +192,7 @@ class MultiSearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
+                model.submitSelection();
                 model.navigateBasedOnSelection(context, model.selectedFormat);
               },
               label: const Text('SHOW'),
