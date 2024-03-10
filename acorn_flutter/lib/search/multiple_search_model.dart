@@ -690,52 +690,96 @@ class MultipleSearchModel extends ChangeNotifier {
       notifyListeners();
     }
 
-    void navigateBasedOnSelection(BuildContext context,
-        String isSelectedFormat) {
-      switch (isSelectedFormat) {
-        case 'CLASSIC':
+  void navigateBasedOnSelection(BuildContext context, String isSelectedFormat) {
+    // ダイアログを表示する関数
+    void showNoItemDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Sorry'),
+            content: const Text('No applicable events.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop(); // ダイアログを閉じる
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    // 選択に基づいて処理を分岐
+    switch (isSelectedFormat) {
+      case 'CLASSIC':
+        if (_fetchPrincipalRepository.listPrincipal.isEmpty) {
+          showNoItemDialog();
+        } else {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ResultPage(principal: _fetchPrincipalRepository.listPrincipal),
             ),
           );
-          break;
-        case 'SCALABLE':
+        }
+        break;
+      case 'SCALABLE':
+        if (_fetchPrincipalRepository.listPrincipal.isEmpty) {
+          showNoItemDialog();
+        } else {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => Scalable(principal: _fetchPrincipalRepository.listPrincipal),
             ),
           );
-          break;
-        case '3D':
+        }
+        break;
+      case '3D':
+        if (_fetchPrincipalRepository.principalIds.isEmpty) {
+          showNoItemDialog();
+        } else {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ThreeDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
-          break;
-        case '4D':
+        }
+        break;
+      case '4D':
+        if (_fetchPrincipalRepository.principalIds.isEmpty) {
+          showNoItemDialog();
+        } else {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => FourDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
-          break;
-        case 'MR':
+        }
+        break;
+      case 'MR':
+        if (_fetchPrincipalRepository.principalIds.isEmpty) {
+          showNoItemDialog();
+        } else {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => MRViewPage(principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
-          break;
-        default:
-        // 未知の選択肢に対する処理
-          break;
-      }
+        }
+        break;
+      default:
+      // 未知の選択肢に対する処理（必要に応じてここにコードを追加）
+        break;
     }
   }
+
+
+
+}

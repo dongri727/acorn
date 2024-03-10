@@ -38,7 +38,6 @@ class ConfirmPage extends StatelessWidget {
                                   GestureDetector(
                                     child: const Text('OK'),
                                     onTap: () {
-                                      //Navigator.pop(context);
                                       Navigator.push<String>(
                                         context,
                                         MaterialPageRoute(

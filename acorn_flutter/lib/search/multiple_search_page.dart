@@ -192,7 +192,6 @@ class MultiSearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                model.submitSelection();
                 model.navigateBasedOnSelection(context, model.selectedFormat);
               },
               label: const Text('SHOW'),
