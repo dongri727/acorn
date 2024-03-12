@@ -40,6 +40,10 @@ class SignInPage extends StatelessWidget {
                           children: [
                             const Padding(
                               padding: EdgeInsets.all(20.0),
+                              child: Icon(Icons.build),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(20.0),
                               child: Text("Hey, Investor!\n"
                                   "Ready to unlock premium features?\n"
                                   "Authenticate and become a paid member.\n"
@@ -61,7 +65,7 @@ class SignInPage extends StatelessWidget {
                                 },
                               ),
                             ),
-                            const Icon(Icons.build),
+
                           ],
                         ),
                       ))),
@@ -73,6 +77,10 @@ class SignInPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Icon(Icons.build),
+                        ),
                         const Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Text("Welcome, Free Member!\n"
@@ -97,36 +105,26 @@ class SignInPage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.build),
-                              SignInWithGoogleButton(
-                                caller: client.modules.auth,
-                                clientId: _googleClientId,
-                                //clientId: null,
-                                serverClientId: _googleServerClientId,
-                                redirectUri: Uri.parse('http://localhost:8082/googlesignin'),
-                                onSignedIn: () {
-                                  Navigator.push<String>(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AccountPage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
+                          child: SignInWithGoogleButton(
+                            caller: client.modules.auth,
+                            clientId: _googleClientId,
+                            //clientId: null,
+                            serverClientId: _googleServerClientId,
+                            redirectUri: Uri.parse('http://localhost:8082/googlesignin'),
+                            onSignedIn: () {
+                              Navigator.push<String>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AccountPage(),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Padding(
                             padding: const EdgeInsets.fromLTRB(20, 8, 20, 50),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.build),
-                              SignInWithAppleButton(
-                                caller: client.modules.auth,
-                              ),
-                            ],
+                          child: SignInWithAppleButton(
+                            caller: client.modules.auth,
                           ),
                         ),
                       ],
@@ -149,6 +147,15 @@ class SignInPage extends StatelessWidget {
                                   "Rest easy, your input stays anonymous.\n"
                                   "No personal page, no strings attached.\n"
                                   "Heads up: Ads might pop up."),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Text("Now you can enter here.",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(20.0),

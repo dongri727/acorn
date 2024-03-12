@@ -1,4 +1,8 @@
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/index.dart';
+import 'package:acorn_flutter/search/multiple_search_page.dart';
+import 'package:acorn_flutter/utils/navigation_button.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +31,20 @@ class TabPage extends StatelessWidget {
             title: const Text(
               "Register an Event",
             ),
+            backgroundColor: Colors.grey[200],
+            //automaticallyImplyLeading: false,
+            leading: const ShadowedContainer(
+              child: NavigationButton(
+                destinationPage: IndexPage(),
+                buttonText: 'index',
+              )
+            ),
+            leadingWidth: 100,
+            actions: const [
+              NavigationButton(
+                  destinationPage: MultiSearchPage(),
+                  buttonText: 'search')
+            ],
           ),
           body: Container(
             decoration: const BoxDecoration(
@@ -35,12 +53,12 @@ class TabPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: SafeArea(
+            child: const SafeArea(
               child: DefaultTabController(
                 length: 6,
                 child: Column(
                   children: [
-                    const TabBar(
+                    TabBar(
                       labelColor: Colors.yellow,
                       indicatorColor: Colors.yellow,
                       unselectedLabelColor: Colors.white,
@@ -55,14 +73,14 @@ class TabPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           PrincipalPage(), // 必須
-                          const WherePageGate(), // 地名･座標
+                          WherePageGate(), // 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者
                           TermsPage(), // 検索語
-                          const PreviewPage(), // プレビュー
+                          PreviewPage(), // プレビュー
                         ],
                       ),
                     )

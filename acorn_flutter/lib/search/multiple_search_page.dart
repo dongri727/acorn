@@ -3,6 +3,7 @@ import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/dropdown_button.format.dart';
+import 'package:acorn_flutter/utils/navigation_button.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +33,12 @@ class MultiSearchPage extends StatelessWidget {
       child: Consumer<MultipleSearchModel>(builder: (_, model, child) {
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.push<String>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const IndexPage(),
-                    ));
-              },
+            backgroundColor: Colors.grey[200],
+            leading: const NavigationButton(
+              destinationPage: IndexPage(),
+              buttonText: 'index',
             ),
+            leadingWidth: 100,
             title: const Text('Multiple Search Page'),
           ),
           body: Container(

@@ -1,7 +1,6 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:acorn_flutter/utils/theme.dart';
+import 'package:acorn_flutter/utils/navigation_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../add_events/tab_top.dart';
@@ -17,39 +16,17 @@ class ResultPage extends StatelessWidget {
         create: (_) => MultipleSearchModel(),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon:const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push<String>(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MultiSearchPage(),
-                ),
-              );
-            },
+          backgroundColor: Colors.grey[200],
+          leading: const NavigationButton(
+            destinationPage: MultiSearchPage(),
+            buttonText: 'search again',
           ),
+          leadingWidth: 150,
           title: const Text('CLASSIC VIEW'),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: ShadowedContainer(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: Colors.blueGrey),
-                child: const Text('Add New',
-                style: TextStyle(
-                  color: Colors.white,
-                ),),
-                  onPressed: () {
-                    Navigator.push<String>(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TabPage()),
-                    );
-                  },
-                ),
-              ),
-            )
+          actions: const [
+            NavigationButton(
+                destinationPage: TabPage(),
+                buttonText: 'add a new event')
         ],
         ),
         body: Consumer<MultipleSearchModel>(
