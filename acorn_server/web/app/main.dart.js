@@ -28176,7 +28176,7 @@ aAb(){var s=0,r=A.w(t.H),q,p,o,n,m
 var $async$aAb=A.r(function(a,b){if(a===1)return A.t(b,r)
 while(true)switch(s){case 0:n=$.aNO()
 m=A.b([],t.c)
-n=new A.KA("http://localhost:8080/",m,n,!0,new A.a8T(new A.Q0()),B.I7)
+n=new A.KA("https://api.laporte.academy/",m,n,!0,new A.a8T(new A.Q0()),B.I7)
 A.aNd()
 n.at=new A.yB(A.aI(t.lZ))
 m=t.Ui
