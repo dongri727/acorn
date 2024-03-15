@@ -27,4 +27,72 @@ class PlaceattsEndpoint extends Endpoint {
       orderBy: (placeatts) => placeatts.placeatt,
     );
   }
+
+    ///Fetches selected PattsInv with principalId
+  Future<List<Placeatts>> getPattsInvByPrincipalId(Session session,
+      {int? principalId}) async {
+    if (principalId == null) {
+      return Future.value([]);
+    }
+    //Step 1: Get PattIds from PrincipalPatts using principalId
+    var whereClausePattsInv =
+        PattsInvolved.t.principalId.equals(principalId);
+
+    var pattsInvResults = await PattsInvolved.db
+        .find(session, where: (_) => whereClausePattsInv);
+    var cattIds =
+        pattsInvResults.map((row) => row.pattId).toList();
+
+    if (cattIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    //Step 2: Get Placeatts using pattIds
+    return await getPlaceattsByIds(session, cattIds);
+  }
+
+    ///Fetches selected Catt where it happened with principalId
+  Future<List<Placeatts>> getPattsByPrincipalId(Session session,
+      {int? principalId}) async {
+    if (principalId == null) {
+      return Future.value([]);
+    }
+    //Step 1: Get PattIds from PrincipalPatts using principalId
+    var whereClausePrincipalPatts =
+        PrincipalCatt.t.principalId.equals(principalId);
+
+    var principalPattsResults = await PrincipalCatt.db
+        .find(session, where: (_) => whereClausePrincipalPatts);
+    var cattIds =
+        principalPattsResults.map((row) => row.cattId).toList();
+
+    if (cattIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    //Step 2: Get Placeatts using pattIds
+    return await getPlaceattsByIds(session, cattIds);
+  }
+
+  Future<List<Placeatts>> getPlaceattsByIds(
+      Session session, List<int> pattIds) async {
+    if (pattIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    dynamic whereClausePlaceatts;
+    for (var pattId in pattIds) {
+      if (whereClausePlaceatts == null) {
+        whereClausePlaceatts = Placeatts.t.id.equals(pattId);
+      } else {
+        whereClausePlaceatts =
+            whereClausePlaceatts | Placeatts.t.id.equals(pattId);
+      }
+    }
+    return await Placeatts.db.find(
+      session,
+      where: (_) => whereClausePlaceatts,
+      orderBy: (placeatts) => placeatts.placeatt,
+    );
+  }
 }

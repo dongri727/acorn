@@ -29,4 +29,49 @@ class OrganisationsEndpoint extends Endpoint {
     );
     return allOrgs;
   }
+
+    ///Fetches selected Organisations with principalId
+  Future<List<Organisations>> getOrgsByPrincipalId(Session session,
+      {int? principalId}) async {
+    if (principalId == null) {
+      return Future.value([]);
+    }
+    //Step 1: Get OrgIds from PrincipalOrgs using principalId
+    var whereClausePrincipalOrgs =
+        PrincipalOrgs.t.principalId.equals(principalId);
+
+    var principalOrgsResults = await PrincipalOrgs.db
+        .find(session, where: (_) => whereClausePrincipalOrgs);
+    var orgIds =
+        principalOrgsResults.map((row) => row.orgId).toList();
+
+    if (orgIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    //Step 2: Get Organisations using orgIds
+    return await getOrganisationsByIds(session, orgIds);
+  }
+
+  Future<List<Organisations>> getOrganisationsByIds(
+      Session session, List<int> orgIds) async {
+    if (orgIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    dynamic whereClauseOrganisations;
+    for (var orgId in orgIds) {
+      if (whereClauseOrganisations == null) {
+        whereClauseOrganisations = Organisations.t.id.equals(orgId);
+      } else {
+        whereClauseOrganisations =
+            whereClauseOrganisations | Organisations.t.id.equals(orgId);
+      }
+    }
+    return await Organisations.db.find(
+      session,
+      where: (_) => whereClauseOrganisations,
+      orderBy: (organisations) => organisations.organisation,
+    );
+  }
 }

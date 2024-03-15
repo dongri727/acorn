@@ -354,6 +354,44 @@ class Endpoints extends _i1.EndpointDispatch {
             params['categories'],
           ),
         ),
+        'getCategoriesByPrincipalId': _i1.MethodConnector(
+          name: 'getCategoriesByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['categories'] as _i3.CategoriesEndpoint)
+                  .getCategoriesByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getCategoriesByIds': _i1.MethodConnector(
+          name: 'getCategoriesByIds',
+          params: {
+            'categoryIds': _i1.ParameterDescription(
+              name: 'categoryIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['categories'] as _i3.CategoriesEndpoint)
+                  .getCategoriesByIds(
+            session,
+            params['categoryIds'],
+          ),
+        ),
       },
     );
     connectors['cattsInvolved'] = _i1.EndpointConnector(
@@ -480,6 +518,63 @@ class Endpoints extends _i1.EndpointDispatch {
             params['newCatts'],
           ),
         ),
+        'getCattsInvByPrincipalId': _i1.MethodConnector(
+          name: 'getCattsInvByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['countryatts'] as _i5.CountryattsEndpoint)
+                  .getCattsInvByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getCattsByPrincipalId': _i1.MethodConnector(
+          name: 'getCattsByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['countryatts'] as _i5.CountryattsEndpoint)
+                  .getCattsByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getCountryattsByIds': _i1.MethodConnector(
+          name: 'getCountryattsByIds',
+          params: {
+            'cattIds': _i1.ParameterDescription(
+              name: 'cattIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['countryatts'] as _i5.CountryattsEndpoint)
+                  .getCountryattsByIds(
+            session,
+            params['cattIds'],
+          ),
+        ),
       },
     );
     connectors['oceans'] = _i1.EndpointConnector(
@@ -583,6 +678,44 @@ class Endpoints extends _i1.EndpointDispatch {
                   .addAndReturnOrgs(
             session,
             params['organisations'],
+          ),
+        ),
+        'getOrgsByPrincipalId': _i1.MethodConnector(
+          name: 'getOrgsByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+                  .getOrgsByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getOrganisationsByIds': _i1.MethodConnector(
+          name: 'getOrganisationsByIds',
+          params: {
+            'orgIds': _i1.ParameterDescription(
+              name: 'orgIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+                  .getOrganisationsByIds(
+            session,
+            params['orgIds'],
           ),
         ),
       },
@@ -1025,6 +1158,42 @@ class Endpoints extends _i1.EndpointDispatch {
             params['pays'],
           ),
         ),
+        'getPaysByPrincipalId': _i1.MethodConnector(
+          name: 'getPaysByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['pays'] as _i17.PaysEndpoint).getPaysByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getPaysByIds': _i1.MethodConnector(
+          name: 'getPaysByIds',
+          params: {
+            'paysIds': _i1.ParameterDescription(
+              name: 'paysIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['pays'] as _i17.PaysEndpoint).getPaysByIds(
+            session,
+            params['paysIds'],
+          ),
+        ),
       },
     );
     connectors['people'] = _i1.EndpointConnector(
@@ -1085,6 +1254,43 @@ class Endpoints extends _i1.EndpointDispatch {
             params['people'],
           ),
         ),
+        'getPeopleByPrincipalId': _i1.MethodConnector(
+          name: 'getPeopleByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['people'] as _i18.PeopleEndpoint)
+                  .getPeopleByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getPeopleByIds': _i1.MethodConnector(
+          name: 'getPeopleByIds',
+          params: {
+            'personIds': _i1.ParameterDescription(
+              name: 'personIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['people'] as _i18.PeopleEndpoint).getPeopleByIds(
+            session,
+            params['personIds'],
+          ),
+        ),
       },
     );
     connectors['placeatts'] = _i1.EndpointConnector(
@@ -1143,6 +1349,63 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['placeatts'] as _i19.PlaceattsEndpoint).addAndGetPatts(
             session,
             params['placeatts'],
+          ),
+        ),
+        'getPattsInvByPrincipalId': _i1.MethodConnector(
+          name: 'getPattsInvByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+                  .getPattsInvByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getPattsByPrincipalId': _i1.MethodConnector(
+          name: 'getPattsByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+                  .getPattsByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getPlaceattsByIds': _i1.MethodConnector(
+          name: 'getPlaceattsByIds',
+          params: {
+            'pattIds': _i1.ParameterDescription(
+              name: 'pattIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+                  .getPlaceattsByIds(
+            session,
+            params['pattIds'],
           ),
         ),
       },
@@ -1246,6 +1509,43 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['places'] as _i20.PlacesEndpoint).getPlacesInv(
             session,
             placeInvIds: params['placeInvIds'],
+          ),
+        ),
+        'getPlacesByPrincipalId': _i1.MethodConnector(
+          name: 'getPlacesByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['places'] as _i20.PlacesEndpoint)
+                  .getPlacesByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getPlacesByIds': _i1.MethodConnector(
+          name: 'getPlacesByIds',
+          params: {
+            'placeIds': _i1.ParameterDescription(
+              name: 'placeIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['places'] as _i20.PlacesEndpoint).getPlacesByIds(
+            session,
+            params['placeIds'],
           ),
         ),
       },
@@ -1695,6 +1995,42 @@ class Endpoints extends _i1.EndpointDispatch {
             params['stars'],
           ),
         ),
+        'getStarsByPrincipalId': _i1.MethodConnector(
+          name: 'getStarsByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['stars'] as _i23.StarsEndpoint).getStarsByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getStarsByIds': _i1.MethodConnector(
+          name: 'getStarsByIds',
+          params: {
+            'starIds': _i1.ParameterDescription(
+              name: 'starIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['stars'] as _i23.StarsEndpoint).getStarsByIds(
+            session,
+            params['starIds'],
+          ),
+        ),
       },
     );
     connectors['starsInvolved'] = _i1.EndpointConnector(
@@ -1797,6 +2133,42 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['terms'] as _i25.TermsEndpoint).addAndReturnTerms(
             session,
             params['terms'],
+          ),
+        ),
+        'getTermsByPrincipalId': _i1.MethodConnector(
+          name: 'getTermsByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['terms'] as _i25.TermsEndpoint).getTermsByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getTermsByIds': _i1.MethodConnector(
+          name: 'getTermsByIds',
+          params: {
+            'termIds': _i1.ParameterDescription(
+              name: 'termIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['terms'] as _i25.TermsEndpoint).getTermsByIds(
+            session,
+            params['termIds'],
           ),
         ),
       },

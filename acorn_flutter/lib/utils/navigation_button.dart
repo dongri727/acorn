@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'shadowed_container.dart';
 
 class NavigationButton extends StatelessWidget {
@@ -26,6 +25,29 @@ class NavigationButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PopBackButton extends StatelessWidget {
+  final String buttonText;
+
+  const PopBackButton({
+    super.key,
+    required this.buttonText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ShadowedContainer(
+        child: TextButton(
+          style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+          child: Text(buttonText, style: const TextStyle(color: Colors.white)),
+          onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
     );
   }
 }

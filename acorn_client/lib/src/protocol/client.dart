@@ -104,6 +104,22 @@ class EndpointCategories extends _i1.EndpointRef {
         'addAndReturnCategories',
         {'categories': categories},
       );
+
+  ///Fetches selected categories with principalId
+  _i2.Future<List<_i4.Categories>> getCategoriesByPrincipalId(
+          {int? principalId}) =>
+      caller.callServerEndpoint<List<_i4.Categories>>(
+        'categories',
+        'getCategoriesByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i4.Categories>> getCategoriesByIds(List<int> categoryIds) =>
+      caller.callServerEndpoint<List<_i4.Categories>>(
+        'categories',
+        'getCategoriesByIds',
+        {'categoryIds': categoryIds},
+      );
 }
 
 /// {@category Endpoint}
@@ -170,6 +186,30 @@ class EndpointCountryatts extends _i1.EndpointRef {
         'addListAndGetCatts',
         {'newCatts': newCatts},
       );
+
+  ///Fetches selected CattsInv with principalId
+  _i2.Future<List<_i6.Countryatts>> getCattsInvByPrincipalId(
+          {int? principalId}) =>
+      caller.callServerEndpoint<List<_i6.Countryatts>>(
+        'countryatts',
+        'getCattsInvByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  ///Fetches selected Catt where it happened with principalId
+  _i2.Future<List<_i6.Countryatts>> getCattsByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i6.Countryatts>>(
+        'countryatts',
+        'getCattsByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i6.Countryatts>> getCountryattsByIds(List<int> cattIds) =>
+      caller.callServerEndpoint<List<_i6.Countryatts>>(
+        'countryatts',
+        'getCountryattsByIds',
+        {'cattIds': cattIds},
+      );
 }
 
 /// {@category Endpoint}
@@ -226,6 +266,22 @@ class EndpointOrganisations extends _i1.EndpointRef {
         'organisations',
         'addAndReturnOrgs',
         {'organisations': organisations},
+      );
+
+  ///Fetches selected Organisations with principalId
+  _i2.Future<List<_i8.Organisations>> getOrgsByPrincipalId(
+          {int? principalId}) =>
+      caller.callServerEndpoint<List<_i8.Organisations>>(
+        'organisations',
+        'getOrgsByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i8.Organisations>> getOrganisationsByIds(List<int> orgIds) =>
+      caller.callServerEndpoint<List<_i8.Organisations>>(
+        'organisations',
+        'getOrganisationsByIds',
+        {'orgIds': orgIds},
       );
 }
 
@@ -292,7 +348,7 @@ class EndpointPlaceInvolved extends _i1.EndpointRef {
         {'keynumber': keynumber},
       );
 
-  ///Adds a junction of country involved in DB
+  ///Adds a junction of Place involved in DB
   _i2.Future<void> addPInvolved(_i11.PlaceInvolved pInvolved) =>
       caller.callServerEndpoint<void>(
         'placeInvolved',
@@ -466,6 +522,21 @@ class EndpointPays extends _i1.EndpointRef {
         'addPays',
         {'pays': pays},
       );
+
+  ///Fetches selected country involved with principalId
+  _i2.Future<List<_i18.Pays>> getPaysByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i18.Pays>>(
+        'pays',
+        'getPaysByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i18.Pays>> getPaysByIds(List<int> paysIds) =>
+      caller.callServerEndpoint<List<_i18.Pays>>(
+        'pays',
+        'getPaysByIds',
+        {'paysIds': paysIds},
+      );
 }
 
 /// {@category Endpoint}
@@ -496,6 +567,21 @@ class EndpointPeople extends _i1.EndpointRef {
         'people',
         'addAndReturnPeople',
         {'people': people},
+      );
+
+  ///Fetches selected People with principalId
+  _i2.Future<List<_i19.People>> getPeopleByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i19.People>>(
+        'people',
+        'getPeopleByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i19.People>> getPeopleByIds(List<int> personIds) =>
+      caller.callServerEndpoint<List<_i19.People>>(
+        'people',
+        'getPeopleByIds',
+        {'personIds': personIds},
       );
 }
 
@@ -528,6 +614,30 @@ class EndpointPlaceatts extends _i1.EndpointRef {
         'placeatts',
         'addAndGetPatts',
         {'placeatts': placeatts},
+      );
+
+  ///Fetches selected PattsInv with principalId
+  _i2.Future<List<_i20.Placeatts>> getPattsInvByPrincipalId(
+          {int? principalId}) =>
+      caller.callServerEndpoint<List<_i20.Placeatts>>(
+        'placeatts',
+        'getPattsInvByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  ///Fetches selected Catt where it happened with principalId
+  _i2.Future<List<_i20.Placeatts>> getPattsByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i20.Placeatts>>(
+        'placeatts',
+        'getPattsByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i20.Placeatts>> getPlaceattsByIds(List<int> pattIds) =>
+      caller.callServerEndpoint<List<_i20.Placeatts>>(
+        'placeatts',
+        'getPlaceattsByIds',
+        {'pattIds': pattIds},
       );
 }
 
@@ -582,6 +692,21 @@ class EndpointPlaces extends _i1.EndpointRef {
         'places',
         'getPlacesInv',
         {'placeInvIds': placeInvIds},
+      );
+
+  ///Fetches selected place involved with principalId
+  _i2.Future<List<_i21.Places>> getPlacesByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i21.Places>>(
+        'places',
+        'getPlacesByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i21.Places>> getPlacesByIds(List<int> placeIds) =>
+      caller.callServerEndpoint<List<_i21.Places>>(
+        'places',
+        'getPlacesByIds',
+        {'placeIds': placeIds},
       );
 }
 
@@ -784,6 +909,21 @@ class EndpointStars extends _i1.EndpointRef {
         'addAndReturnStars',
         {'stars': stars},
       );
+
+  ///Fetches selected stars involved with principalId
+  _i2.Future<List<_i24.Stars>> getStarsByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i24.Stars>>(
+        'stars',
+        'getStarsByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i24.Stars>> getStarsByIds(List<int> starIds) =>
+      caller.callServerEndpoint<List<_i24.Stars>>(
+        'stars',
+        'getStarsByIds',
+        {'starIds': starIds},
+      );
 }
 
 /// {@category Endpoint}
@@ -838,6 +978,21 @@ class EndpointTerms extends _i1.EndpointRef {
         'terms',
         'addAndReturnTerms',
         {'terms': terms},
+      );
+
+  ///Fetches selected terms with principalId
+  _i2.Future<List<_i26.Terms>> getTermsByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i26.Terms>>(
+        'terms',
+        'getTermsByPrincipalId',
+        {'principalId': principalId},
+      );
+
+  _i2.Future<List<_i26.Terms>> getTermsByIds(List<int> termIds) =>
+      caller.callServerEndpoint<List<_i26.Terms>>(
+        'terms',
+        'getTermsByIds',
+        {'termIds': termIds},
       );
 }
 

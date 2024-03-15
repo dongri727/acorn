@@ -12,7 +12,7 @@ class PlaceInvolvedEndpoint extends Endpoint {
     );
   }
 
-  ///Adds a junction of country involved in DB
+  ///Adds a junction of Place involved in DB
   Future<void> addPInvolved(Session session, PlaceInvolved pInvolved) async {
     await PlaceInvolved.db.insertRow(session, pInvolved);
   }

@@ -65,4 +65,49 @@ class PlacesEndpoint extends Endpoint {
       orderBy: (places) => places.place,
     );
   }
+
+  ///Fetches selected place involved with principalId
+  Future<List<Places>> getPlacesByPrincipalId(Session session,
+      {int? principalId}) async {
+    if (principalId == null) {
+      return Future.value([]);
+    }
+    //Step 1: Get paysIds from country-involved using principalId
+    var whereClausePlaceInvolved =
+        PlaceInvolved.t.principalId.equals(principalId);
+
+    var placeInvolvedResults = await PlaceInvolved.db
+        .find(session, where: (_) => whereClausePlaceInvolved);
+    var placeIds =
+        placeInvolvedResults.map((row) => row.placeId).toList();
+
+    if (placeIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    //Step 2: Get Pays using paysIds
+    return await getPlacesByIds(session, placeIds);
+  }
+
+  Future<List<Places>> getPlacesByIds(
+      Session session, List<int> placeIds) async {
+    if (placeIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    dynamic whereClausePlaces;
+    for (var placeId in placeIds) {
+      if (whereClausePlaces == null) {
+        whereClausePlaces = Places.t.id.equals(placeId);
+      } else {
+        whereClausePlaces =
+            whereClausePlaces | Places.t.id.equals(placeId);
+      }
+    }
+    return await Places.db.find(
+      session,
+      where: (_) => whereClausePlaces,
+      orderBy: (places) => places.place,
+    );
+  }
 }

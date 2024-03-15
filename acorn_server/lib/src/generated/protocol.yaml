@@ -6,6 +6,8 @@ categories:
   - getCategories:
   - addCategories:
   - addAndReturnCategories:
+  - getCategoriesByPrincipalId:
+  - getCategoriesByIds:
 cattsInvolved:
   - getCattsInvolved:
   - addCattsInvolved:
@@ -14,6 +16,9 @@ countryatts:
   - addCountryATTs:
   - addAndReturnCatts:
   - addListAndGetCatts:
+  - getCattsInvByPrincipalId:
+  - getCattsByPrincipalId:
+  - getCountryattsByIds:
 oceans:
   - getOceans:
   - addOceans:
@@ -21,6 +26,8 @@ organisations:
   - getOrganisations:
   - addOrganisations:
   - addAndReturnOrgs:
+  - getOrgsByPrincipalId:
+  - getOrganisationsByIds:
 principalCategories:
   - getPCategories:
   - addPCategories:
@@ -51,20 +58,29 @@ pattInvolved:
 pays:
   - getPays:
   - addPays:
+  - getPaysByPrincipalId:
+  - getPaysByIds:
 people:
   - getPeople:
   - addPeople:
   - addAndReturnPeople:
+  - getPeopleByPrincipalId:
+  - getPeopleByIds:
 placeatts:
   - getPlaceATTs:
   - addPlaceATTs:
   - addAndGetPatts:
+  - getPattsInvByPrincipalId:
+  - getPattsByPrincipalId:
+  - getPlaceattsByIds:
 places:
   - getPlaces:
   - addPlaces:
   - addAndReturnPlaces:
   - addAndReturnPlacesWithKeyCountry:
   - getPlacesInv:
+  - getPlacesByPrincipalId:
+  - getPlacesByIds:
 principal:
   - addPrincipal:
   - getPrincipal:
@@ -91,6 +107,8 @@ stars:
   - getStars:
   - addStars:
   - addAndReturnStars:
+  - getStarsByPrincipalId:
+  - getStarsByIds:
 starsInvolved:
   - getStarsInvolved:
   - addStarsInvolved:
@@ -98,6 +116,8 @@ terms:
   - getTerms:
   - addTerms:
   - addAndReturnTerms:
+  - getTermsByPrincipalId:
+  - getTermsByIds:
 universe:
   - getUniverse:
   - addUniverse:

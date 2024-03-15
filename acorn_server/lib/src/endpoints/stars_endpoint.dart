@@ -26,4 +26,49 @@ class StarsEndpoint extends Endpoint {
     );
     return allStars;
   }
+
+  ///Fetches selected stars involved with principalId
+  Future<List<Stars>> getStarsByPrincipalId(Session session,
+      {int? principalId}) async {
+    if (principalId == null) {
+      return Future.value([]);
+    }
+    //Step 1: Get starIds from stars-involved using principalId
+    var whereClauseStarsInvolved =
+        StarsInvolved.t.principalId.equals(principalId);
+
+    var starsInvolvedResults = await StarsInvolved.db
+        .find(session, where: (_) => whereClauseStarsInvolved);
+    var starIds =
+        starsInvolvedResults.map((row) => row.starId).toList();
+
+    if (starIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    //Step 2: Get Stars using paysIds
+    return await getStarsByIds(session, starIds);
+  }
+
+  Future<List<Stars>> getStarsByIds(
+      Session session, List<int> starIds) async {
+    if (starIds.isEmpty) {
+      return Future.value([]);
+    }
+
+    dynamic whereClauseStars;
+    for (var starId in starIds) {
+      if (whereClauseStars == null) {
+        whereClauseStars = Stars.t.id.equals(starId);
+      } else {
+        whereClauseStars =
+            whereClauseStars | Stars.t.id.equals(starId);
+      }
+    }
+    return await Stars.db.find(
+      session,
+      where: (_) => whereClauseStars,
+      orderBy: (stars) => stars.star,
+    );
+  }
 }

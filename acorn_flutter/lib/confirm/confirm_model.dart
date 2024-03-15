@@ -52,22 +52,19 @@ class ConfirmModel extends ChangeNotifier {
             zCoordinate: confirm.z,
           coefficient: confirm.coefficient);
         await client.withGlobe.addWithGlobe(withGlobe);
-        debugPrint('add WithGlobe');
 
         //CATT 単
         if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalCatt(
                 principalId: principalId, cattId: confirm.selectedCattId);
-            var principalCattsId = await client.principalCatt.addPCatt(pCatt);
-            debugPrint('added principal-catt');
+            await client.principalCatt.addPCatt(pCatt);
         }
 
         //PATT 単
         if (confirm.selectedPattId != 0) {
             var pPatt = PrincipalPatt(
               principalId: principalId, pattId: confirm.selectedPattId);
-            var principalPattId = await client.principalPatt.addPPatt(pPatt);
-            debugPrint('add principal-patt');
+            await client.principalPatt.addPPatt(pPatt);
         }
 
         ///participants A
@@ -77,7 +74,6 @@ class ConfirmModel extends ChangeNotifier {
                 principalId: principalId, paysId: countryId);
             await client.countryInvolved
                 .addCInvolved(countryInvolved);
-            debugPrint('Added country involved');
           }
         }
 
@@ -95,8 +91,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var attId in confirm.selectedATTId) {
             var cattsInvolved = CattsInvolved(
                 principalId: principalId, cattId: attId);
-            var cattInvolvedId = await client.cattsInvolved.addCattsInvolved(cattsInvolved);
-            debugPrint('Added Att involved');
+            await client.cattsInvolved.addCattsInvolved(cattsInvolved);
           }
         }
 
@@ -104,8 +99,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var starId in confirm.selectedStarId) {
             var starsInvolved = StarsInvolved(
                 principalId: principalId, starId: starId);
-            var starInvolvedId = await client.starsInvolved.addStarsInvolved(starsInvolved);
-            debugPrint('Added Star involved');
+            await client.starsInvolved.addStarsInvolved(starsInvolved);
           }
         }
 
@@ -114,8 +108,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var orgId in confirm.selectedOrgId) {
             var pOrgs = PrincipalOrgs(
                 principalId: principalId, orgId: orgId);
-            var principalOrgsId = await client.principalOrgs.addPOrgs(pOrgs);
-            debugPrint('Added Orgs involved');
+            await client.principalOrgs.addPOrgs(pOrgs);
           }
         }
 
@@ -123,8 +116,7 @@ class ConfirmModel extends ChangeNotifier {
           for (var whoId in confirm.selectedWhoId) {
             var principalPeople = PrincipalPeople(
                 principalId: principalId, personId: whoId);
-            var principalPeopleId = await client.principalPeople.addPPeople(principalPeople);
-            debugPrint('Added people involved');
+            await client.principalPeople.addPPeople(principalPeople);
           }
         }
 
@@ -133,33 +125,27 @@ class ConfirmModel extends ChangeNotifier {
           for (var categoryId in confirm.selectedCategoryId) {
             var principalCategories = PrincipalCategories(
                 principalId: principalId, categoryId: categoryId);
-            var principalCategoriesId = await client.principalCategories.addPCategories(principalCategories);
-            debugPrint('Added principal Categories');
+            await client.principalCategories.addPCategories(principalCategories);
           }
         }
 
         if (confirm.selectedTermId.isNotEmpty) {
           for (var termId in confirm.selectedTermId) {
             var principalTerms = PrincipalTerms(principalId: principalId, termId: termId);
-            var principalTermsId = await client.principalTerms.addPrincipalTerms(principalTerms);
-            debugPrint('Added principal Terms');
+            await client.principalTerms.addPrincipalTerms(principalTerms);
           }
         }
 
         var userId = sessionManager.signedInUser?.id ?? 0;
-        print('written by user: $userId');
         var principalUser = PrincipalUser(principalId: principalId, userId: userId);
-        var principalUserId = await client.principalUser.addPrincipalUser(principalUser);
-        debugPrint('Added principal User');
+        await client.principalUser.addPrincipalUser(principalUser);
 
         return 0;
 
       } catch (e) {
-        debugPrint('Error: $e');
         return 1;
       }
     } else {
-      print("必須項目不足");
       return 2;
     }
   }
