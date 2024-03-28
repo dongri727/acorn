@@ -24,68 +24,77 @@ class CoverPageState extends State<CoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/www.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(100.0),
-            child: Text(
-              'Welcome to our Database',
-              style: AcornTheme.textTheme.headlineLarge,
-            ),
+    return Scaffold(
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/www.png'),
+            fit: BoxFit.cover,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
               child: Text(
-                'About this Database',
+                'Global ChronoMap',
+                style: AcornTheme.textTheme.headlineLarge,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+              child: Text(
+                'A 3D Journey Through Time and Space',
                 style: AcornTheme.textTheme.bodyLarge,
               ),
-                onPressed: (){
-                showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('This is YOUR Database'),
-                    content: const Text('Create a uniquely global platform\n'
-                        'where YOU contribute to expanding the wealth of data'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('close'),
-                          onPressed: () {
-                          Navigator.of(context).pop();
-                          })
-                    ],
-                  );
-                });
-                }, ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
                 child: Text(
-                  "Enter",
+                  'About this Database',
                   style: AcornTheme.textTheme.bodyLarge,
                 ),
-                onPressed: () {
-                  Navigator.push<String>(
-                    context,
-                    MaterialPageRoute(
-                  builder: (context) => sessionManager.isSignedIn
-                      ? const AccountPage()
-                      : const SignInPage(),
-                    ),
-                  );
-                }),
-          ),
-        ],
+                  onPressed: (){
+                  showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('This is YOUR Database'),
+                      content: const Text('Create a uniquely global platform\n'
+                          'where YOU contribute to expanding the wealth of data'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('close'),
+                            onPressed: () {
+                            Navigator.of(context).pop();
+                            })
+                      ],
+                    );
+                  });
+                  }, ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                  child: Text(
+                    "Enter",
+                    style: AcornTheme.textTheme.bodyLarge,
+                  ),
+                  onPressed: () {
+                    Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(
+                    builder: (context) => sessionManager.isSignedIn
+                        ? const AccountPage()
+                        : const SignInPage(),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }

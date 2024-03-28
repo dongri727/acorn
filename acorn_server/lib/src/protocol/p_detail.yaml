@@ -1,0 +1,5 @@
+class: PrincipalDetail
+table: principal_detail
+fields: 
+  principalId: int
+  detailId: int

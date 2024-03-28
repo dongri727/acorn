@@ -13,57 +13,61 @@ import '../endpoints/c_involved_endpoint.dart' as _i2;
 import '../endpoints/categories_endpoint.dart' as _i3;
 import '../endpoints/catts_involved_endpoint.dart' as _i4;
 import '../endpoints/countryatts_endpoint.dart' as _i5;
-import '../endpoints/oceans_endpoint.dart' as _i6;
-import '../endpoints/organisations_endpoint.dart' as _i7;
-import '../endpoints/p_categories_endpoint.dart' as _i8;
-import '../endpoints/p_catt_endpoint.dart' as _i9;
-import '../endpoints/p_involved_endpoint.dart' as _i10;
-import '../endpoints/p_orgs_endpoint.dart' as _i11;
-import '../endpoints/p_patt_endpoint.dart' as _i12;
-import '../endpoints/p_people_endpoint.dart' as _i13;
-import '../endpoints/p_terms_endpoint.dart' as _i14;
-import '../endpoints/p_user_endpoint.dart' as _i15;
-import '../endpoints/patt_involved_endpoint.dart' as _i16;
-import '../endpoints/pays_endpoint.dart' as _i17;
-import '../endpoints/people_endpoint.dart' as _i18;
-import '../endpoints/placeatts_endpoint.dart' as _i19;
-import '../endpoints/places_endpoint.dart' as _i20;
-import '../endpoints/principal_endpoint.dart' as _i21;
-import '../endpoints/seas_endpoint.dart' as _i22;
-import '../endpoints/stars_endpoint.dart' as _i23;
-import '../endpoints/stars_involved_endpoint.dart' as _i24;
-import '../endpoints/term_endpoint.dart' as _i25;
-import '../endpoints/universe_endpoint.dart' as _i26;
-import '../endpoints/with_globe_endpoint.dart' as _i27;
-import '../endpoints/with_map_endpoint.dart' as _i28;
-import 'package:acorn_server/src/generated/c_involved.dart' as _i29;
-import 'package:acorn_server/src/generated/categories.dart' as _i30;
-import 'package:acorn_server/src/generated/catts_involved.dart' as _i31;
-import 'package:acorn_server/src/generated/countryatts.dart' as _i32;
-import 'package:acorn_server/src/generated/oceans.dart' as _i33;
-import 'package:acorn_server/src/generated/organisations.dart' as _i34;
-import 'package:acorn_server/src/generated/p_categories.dart' as _i35;
-import 'package:acorn_server/src/generated/p_catt.dart' as _i36;
-import 'package:acorn_server/src/generated/p_involved.dart' as _i37;
-import 'package:acorn_server/src/generated/p_orgs.dart' as _i38;
-import 'package:acorn_server/src/generated/p_patt.dart' as _i39;
-import 'package:acorn_server/src/generated/p_people.dart' as _i40;
-import 'package:acorn_server/src/generated/p_terms.dart' as _i41;
-import 'package:acorn_server/src/generated/p-user.dart' as _i42;
-import 'package:acorn_server/src/generated/patts_involved.dart' as _i43;
-import 'package:acorn_server/src/generated/pays.dart' as _i44;
-import 'package:acorn_server/src/generated/people.dart' as _i45;
-import 'package:acorn_server/src/generated/placeatts.dart' as _i46;
-import 'package:acorn_server/src/generated/places.dart' as _i47;
-import 'package:acorn_server/src/generated/principal.dart' as _i48;
-import 'package:acorn_server/src/generated/seas.dart' as _i49;
-import 'package:acorn_server/src/generated/stars.dart' as _i50;
-import 'package:acorn_server/src/generated/stars_involved.dart' as _i51;
-import 'package:acorn_server/src/generated/terms.dart' as _i52;
-import 'package:acorn_server/src/generated/universe.dart' as _i53;
-import 'package:acorn_server/src/generated/with_globe.dart' as _i54;
-import 'package:acorn_server/src/generated/with_map.dart' as _i55;
-import 'package:serverpod_auth_server/module.dart' as _i56;
+import '../endpoints/detail_endpoint.dart' as _i6;
+import '../endpoints/oceans_endpoint.dart' as _i7;
+import '../endpoints/organisations_endpoint.dart' as _i8;
+import '../endpoints/p_categories_endpoint.dart' as _i9;
+import '../endpoints/p_catt_endpoint.dart' as _i10;
+import '../endpoints/p_detail_endpoint.dart' as _i11;
+import '../endpoints/p_involved_endpoint.dart' as _i12;
+import '../endpoints/p_orgs_endpoint.dart' as _i13;
+import '../endpoints/p_patt_endpoint.dart' as _i14;
+import '../endpoints/p_people_endpoint.dart' as _i15;
+import '../endpoints/p_terms_endpoint.dart' as _i16;
+import '../endpoints/p_user_endpoint.dart' as _i17;
+import '../endpoints/patt_involved_endpoint.dart' as _i18;
+import '../endpoints/pays_endpoint.dart' as _i19;
+import '../endpoints/people_endpoint.dart' as _i20;
+import '../endpoints/placeatts_endpoint.dart' as _i21;
+import '../endpoints/places_endpoint.dart' as _i22;
+import '../endpoints/principal_endpoint.dart' as _i23;
+import '../endpoints/seas_endpoint.dart' as _i24;
+import '../endpoints/stars_endpoint.dart' as _i25;
+import '../endpoints/stars_involved_endpoint.dart' as _i26;
+import '../endpoints/term_endpoint.dart' as _i27;
+import '../endpoints/universe_endpoint.dart' as _i28;
+import '../endpoints/with_globe_endpoint.dart' as _i29;
+import '../endpoints/with_map_endpoint.dart' as _i30;
+import 'package:acorn_server/src/generated/c_involved.dart' as _i31;
+import 'package:acorn_server/src/generated/categories.dart' as _i32;
+import 'package:acorn_server/src/generated/catts_involved.dart' as _i33;
+import 'package:acorn_server/src/generated/countryatts.dart' as _i34;
+import 'package:acorn_server/src/generated/detail.dart' as _i35;
+import 'package:acorn_server/src/generated/oceans.dart' as _i36;
+import 'package:acorn_server/src/generated/organisations.dart' as _i37;
+import 'package:acorn_server/src/generated/p_categories.dart' as _i38;
+import 'package:acorn_server/src/generated/p_catt.dart' as _i39;
+import 'package:acorn_server/src/generated/p_detail.dart' as _i40;
+import 'package:acorn_server/src/generated/p_involved.dart' as _i41;
+import 'package:acorn_server/src/generated/p_orgs.dart' as _i42;
+import 'package:acorn_server/src/generated/p_patt.dart' as _i43;
+import 'package:acorn_server/src/generated/p_people.dart' as _i44;
+import 'package:acorn_server/src/generated/p_terms.dart' as _i45;
+import 'package:acorn_server/src/generated/p-user.dart' as _i46;
+import 'package:acorn_server/src/generated/patts_involved.dart' as _i47;
+import 'package:acorn_server/src/generated/pays.dart' as _i48;
+import 'package:acorn_server/src/generated/people.dart' as _i49;
+import 'package:acorn_server/src/generated/placeatts.dart' as _i50;
+import 'package:acorn_server/src/generated/places.dart' as _i51;
+import 'package:acorn_server/src/generated/principal.dart' as _i52;
+import 'package:acorn_server/src/generated/seas.dart' as _i53;
+import 'package:acorn_server/src/generated/stars.dart' as _i54;
+import 'package:acorn_server/src/generated/stars_involved.dart' as _i55;
+import 'package:acorn_server/src/generated/terms.dart' as _i56;
+import 'package:acorn_server/src/generated/universe.dart' as _i57;
+import 'package:acorn_server/src/generated/with_globe.dart' as _i58;
+import 'package:acorn_server/src/generated/with_map.dart' as _i59;
+import 'package:serverpod_auth_server/module.dart' as _i60;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -93,139 +97,151 @@ class Endpoints extends _i1.EndpointDispatch {
           'countryatts',
           null,
         ),
-      'oceans': _i6.OceansEndpoint()
+      'detail': _i6.DetailEndpoint()
+        ..initialize(
+          server,
+          'detail',
+          null,
+        ),
+      'oceans': _i7.OceansEndpoint()
         ..initialize(
           server,
           'oceans',
           null,
         ),
-      'organisations': _i7.OrganisationsEndpoint()
+      'organisations': _i8.OrganisationsEndpoint()
         ..initialize(
           server,
           'organisations',
           null,
         ),
-      'principalCategories': _i8.PrincipalCategoriesEndpoint()
+      'principalCategories': _i9.PrincipalCategoriesEndpoint()
         ..initialize(
           server,
           'principalCategories',
           null,
         ),
-      'principalCatt': _i9.PrincipalCattEndpoint()
+      'principalCatt': _i10.PrincipalCattEndpoint()
         ..initialize(
           server,
           'principalCatt',
           null,
         ),
-      'placeInvolved': _i10.PlaceInvolvedEndpoint()
+      'principalDetail': _i11.PrincipalDetailEndpoint()
+        ..initialize(
+          server,
+          'principalDetail',
+          null,
+        ),
+      'placeInvolved': _i12.PlaceInvolvedEndpoint()
         ..initialize(
           server,
           'placeInvolved',
           null,
         ),
-      'principalOrgs': _i11.PrincipalOrgsEndpoint()
+      'principalOrgs': _i13.PrincipalOrgsEndpoint()
         ..initialize(
           server,
           'principalOrgs',
           null,
         ),
-      'principalPatt': _i12.PrincipalPattEndpoint()
+      'principalPatt': _i14.PrincipalPattEndpoint()
         ..initialize(
           server,
           'principalPatt',
           null,
         ),
-      'principalPeople': _i13.PrincipalPeopleEndpoint()
+      'principalPeople': _i15.PrincipalPeopleEndpoint()
         ..initialize(
           server,
           'principalPeople',
           null,
         ),
-      'principalTerms': _i14.PrincipalTermsEndpoint()
+      'principalTerms': _i16.PrincipalTermsEndpoint()
         ..initialize(
           server,
           'principalTerms',
           null,
         ),
-      'principalUser': _i15.PrincipalUserEndpoint()
+      'principalUser': _i17.PrincipalUserEndpoint()
         ..initialize(
           server,
           'principalUser',
           null,
         ),
-      'pattInvolved': _i16.PattInvolvedEndpoint()
+      'pattInvolved': _i18.PattInvolvedEndpoint()
         ..initialize(
           server,
           'pattInvolved',
           null,
         ),
-      'pays': _i17.PaysEndpoint()
+      'pays': _i19.PaysEndpoint()
         ..initialize(
           server,
           'pays',
           null,
         ),
-      'people': _i18.PeopleEndpoint()
+      'people': _i20.PeopleEndpoint()
         ..initialize(
           server,
           'people',
           null,
         ),
-      'placeatts': _i19.PlaceattsEndpoint()
+      'placeatts': _i21.PlaceattsEndpoint()
         ..initialize(
           server,
           'placeatts',
           null,
         ),
-      'places': _i20.PlacesEndpoint()
+      'places': _i22.PlacesEndpoint()
         ..initialize(
           server,
           'places',
           null,
         ),
-      'principal': _i21.PrincipalEndpoint()
+      'principal': _i23.PrincipalEndpoint()
         ..initialize(
           server,
           'principal',
           null,
         ),
-      'seas': _i22.SeasEndpoint()
+      'seas': _i24.SeasEndpoint()
         ..initialize(
           server,
           'seas',
           null,
         ),
-      'stars': _i23.StarsEndpoint()
+      'stars': _i25.StarsEndpoint()
         ..initialize(
           server,
           'stars',
           null,
         ),
-      'starsInvolved': _i24.StarsInvolvedEndpoint()
+      'starsInvolved': _i26.StarsInvolvedEndpoint()
         ..initialize(
           server,
           'starsInvolved',
           null,
         ),
-      'terms': _i25.TermsEndpoint()
+      'terms': _i27.TermsEndpoint()
         ..initialize(
           server,
           'terms',
           null,
         ),
-      'universe': _i26.UniverseEndpoint()
+      'universe': _i28.UniverseEndpoint()
         ..initialize(
           server,
           'universe',
           null,
         ),
-      'withGlobe': _i27.WithGlobeEndpoint()
+      'withGlobe': _i29.WithGlobeEndpoint()
         ..initialize(
           server,
           'withGlobe',
           null,
         ),
-      'withMap': _i28.WithMapEndpoint()
+      'withMap': _i30.WithMapEndpoint()
         ..initialize(
           server,
           'withMap',
@@ -260,7 +276,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'cInvolved': _i1.ParameterDescription(
               name: 'cInvolved',
-              type: _i1.getType<_i29.CountryInvolved>(),
+              type: _i1.getType<_i31.CountryInvolved>(),
               nullable: false,
             )
           },
@@ -322,7 +338,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'categories': _i1.ParameterDescription(
               name: 'categories',
-              type: _i1.getType<_i30.Categories>(),
+              type: _i1.getType<_i32.Categories>(),
               nullable: false,
             )
           },
@@ -340,7 +356,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'categories': _i1.ParameterDescription(
               name: 'categories',
-              type: _i1.getType<_i30.Categories>(),
+              type: _i1.getType<_i32.Categories>(),
               nullable: false,
             )
           },
@@ -422,7 +438,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'cattsInvolved': _i1.ParameterDescription(
               name: 'cattsInvolved',
-              type: _i1.getType<_i31.CattsInvolved>(),
+              type: _i1.getType<_i33.CattsInvolved>(),
               nullable: false,
             )
           },
@@ -466,7 +482,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'countryatts': _i1.ParameterDescription(
               name: 'countryatts',
-              type: _i1.getType<_i32.Countryatts>(),
+              type: _i1.getType<_i34.Countryatts>(),
               nullable: false,
             )
           },
@@ -485,7 +501,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'countryatts': _i1.ParameterDescription(
               name: 'countryatts',
-              type: _i1.getType<_i32.Countryatts>(),
+              type: _i1.getType<_i34.Countryatts>(),
               nullable: false,
             )
           },
@@ -577,6 +593,122 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['detail'] = _i1.EndpointConnector(
+      name: 'detail',
+      endpoint: endpoints['detail']!,
+      methodConnectors: {
+        'addDetail': _i1.MethodConnector(
+          name: 'addDetail',
+          params: {
+            'detail': _i1.ParameterDescription(
+              name: 'detail',
+              type: _i1.getType<_i35.Detail>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint).addDetail(
+            session,
+            params['detail'],
+          ),
+        ),
+        'getDetail': _i1.MethodConnector(
+          name: 'getDetail',
+          params: {
+            'keyword': _i1.ParameterDescription(
+              name: 'keyword',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint).getDetail(
+            session,
+            keyword: params['keyword'],
+          ),
+        ),
+        'getDetailByGenre': _i1.MethodConnector(
+          name: 'getDetailByGenre',
+          params: {
+            'genre': _i1.ParameterDescription(
+              name: 'genre',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint).getDetailByGenre(
+            session,
+            genre: params['genre'],
+          ),
+        ),
+        'addAndReturnDetailByGenre': _i1.MethodConnector(
+          name: 'addAndReturnDetailByGenre',
+          params: {
+            'detail': _i1.ParameterDescription(
+              name: 'detail',
+              type: _i1.getType<_i35.Detail>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint)
+                  .addAndReturnDetailByGenre(
+            session,
+            params['detail'],
+          ),
+        ),
+        'getDetailByPrincipalId': _i1.MethodConnector(
+          name: 'getDetailByPrincipalId',
+          params: {
+            'principalId': _i1.ParameterDescription(
+              name: 'principalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint)
+                  .getDetailByPrincipalId(
+            session,
+            principalId: params['principalId'],
+          ),
+        ),
+        'getDetailByIds': _i1.MethodConnector(
+          name: 'getDetailByIds',
+          params: {
+            'detailIds': _i1.ParameterDescription(
+              name: 'detailIds',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['detail'] as _i6.DetailEndpoint).getDetailByIds(
+            session,
+            params['detailIds'],
+          ),
+        ),
+      },
+    );
     connectors['oceans'] = _i1.EndpointConnector(
       name: 'oceans',
       endpoint: endpoints['oceans']!,
@@ -594,7 +726,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['oceans'] as _i6.OceansEndpoint).getOceans(
+              (endpoints['oceans'] as _i7.OceansEndpoint).getOceans(
             session,
             keyword: params['keyword'],
           ),
@@ -604,7 +736,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'oceans': _i1.ParameterDescription(
               name: 'oceans',
-              type: _i1.getType<_i33.Oceans>(),
+              type: _i1.getType<_i36.Oceans>(),
               nullable: false,
             )
           },
@@ -612,7 +744,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['oceans'] as _i6.OceansEndpoint).addOceans(
+              (endpoints['oceans'] as _i7.OceansEndpoint).addOceans(
             session,
             params['oceans'],
           ),
@@ -636,7 +768,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+              (endpoints['organisations'] as _i8.OrganisationsEndpoint)
                   .getOrganisations(
             session,
             keyword: params['keyword'],
@@ -647,7 +779,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'organisations': _i1.ParameterDescription(
               name: 'organisations',
-              type: _i1.getType<_i34.Organisations>(),
+              type: _i1.getType<_i37.Organisations>(),
               nullable: false,
             )
           },
@@ -655,7 +787,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+              (endpoints['organisations'] as _i8.OrganisationsEndpoint)
                   .addOrganisations(
             session,
             params['organisations'],
@@ -666,7 +798,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'organisations': _i1.ParameterDescription(
               name: 'organisations',
-              type: _i1.getType<_i34.Organisations>(),
+              type: _i1.getType<_i37.Organisations>(),
               nullable: false,
             )
           },
@@ -674,7 +806,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+              (endpoints['organisations'] as _i8.OrganisationsEndpoint)
                   .addAndReturnOrgs(
             session,
             params['organisations'],
@@ -693,7 +825,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+              (endpoints['organisations'] as _i8.OrganisationsEndpoint)
                   .getOrgsByPrincipalId(
             session,
             principalId: params['principalId'],
@@ -712,7 +844,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['organisations'] as _i7.OrganisationsEndpoint)
+              (endpoints['organisations'] as _i8.OrganisationsEndpoint)
                   .getOrganisationsByIds(
             session,
             params['orgIds'],
@@ -738,7 +870,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalCategories']
-                      as _i8.PrincipalCategoriesEndpoint)
+                      as _i9.PrincipalCategoriesEndpoint)
                   .getPCategories(
             session,
             keynumber: params['keynumber'],
@@ -749,7 +881,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pCategories': _i1.ParameterDescription(
               name: 'pCategories',
-              type: _i1.getType<_i35.PrincipalCategories>(),
+              type: _i1.getType<_i38.PrincipalCategories>(),
               nullable: false,
             )
           },
@@ -758,7 +890,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['principalCategories']
-                      as _i8.PrincipalCategoriesEndpoint)
+                      as _i9.PrincipalCategoriesEndpoint)
                   .addPCategories(
             session,
             params['pCategories'],
@@ -783,7 +915,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalCatt'] as _i9.PrincipalCattEndpoint)
+              (endpoints['principalCatt'] as _i10.PrincipalCattEndpoint)
                   .getPCatt(
             session,
             keynumber: params['keynumber'],
@@ -794,7 +926,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pCatt': _i1.ParameterDescription(
               name: 'pCatt',
-              type: _i1.getType<_i36.PrincipalCatt>(),
+              type: _i1.getType<_i39.PrincipalCatt>(),
               nullable: false,
             )
           },
@@ -802,10 +934,54 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalCatt'] as _i9.PrincipalCattEndpoint)
+              (endpoints['principalCatt'] as _i10.PrincipalCattEndpoint)
                   .addPCatt(
             session,
             params['pCatt'],
+          ),
+        ),
+      },
+    );
+    connectors['principalDetail'] = _i1.EndpointConnector(
+      name: 'principalDetail',
+      endpoint: endpoints['principalDetail']!,
+      methodConnectors: {
+        'addPDetail': _i1.MethodConnector(
+          name: 'addPDetail',
+          params: {
+            'pDetail': _i1.ParameterDescription(
+              name: 'pDetail',
+              type: _i1.getType<_i40.PrincipalDetail>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principalDetail'] as _i11.PrincipalDetailEndpoint)
+                  .addPDetail(
+            session,
+            params['pDetail'],
+          ),
+        ),
+        'getPDetail': _i1.MethodConnector(
+          name: 'getPDetail',
+          params: {
+            'pricipalId': _i1.ParameterDescription(
+              name: 'pricipalId',
+              type: _i1.getType<int?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principalDetail'] as _i11.PrincipalDetailEndpoint)
+                  .getPDetail(
+            session,
+            pricipalId: params['pricipalId'],
           ),
         ),
       },
@@ -827,7 +1003,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeInvolved'] as _i10.PlaceInvolvedEndpoint)
+              (endpoints['placeInvolved'] as _i12.PlaceInvolvedEndpoint)
                   .getPInvolved(
             session,
             keynumber: params['keynumber'],
@@ -838,7 +1014,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pInvolved': _i1.ParameterDescription(
               name: 'pInvolved',
-              type: _i1.getType<_i37.PlaceInvolved>(),
+              type: _i1.getType<_i41.PlaceInvolved>(),
               nullable: false,
             )
           },
@@ -846,7 +1022,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeInvolved'] as _i10.PlaceInvolvedEndpoint)
+              (endpoints['placeInvolved'] as _i12.PlaceInvolvedEndpoint)
                   .addPInvolved(
             session,
             params['pInvolved'],
@@ -871,7 +1047,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalOrgs'] as _i11.PrincipalOrgsEndpoint)
+              (endpoints['principalOrgs'] as _i13.PrincipalOrgsEndpoint)
                   .getPOrgs(
             session,
             keynumber: params['keynumber'],
@@ -882,7 +1058,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pOrgs': _i1.ParameterDescription(
               name: 'pOrgs',
-              type: _i1.getType<_i38.PrincipalOrgs>(),
+              type: _i1.getType<_i42.PrincipalOrgs>(),
               nullable: false,
             )
           },
@@ -890,7 +1066,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalOrgs'] as _i11.PrincipalOrgsEndpoint)
+              (endpoints['principalOrgs'] as _i13.PrincipalOrgsEndpoint)
                   .addPOrgs(
             session,
             params['pOrgs'],
@@ -915,7 +1091,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalPatt'] as _i12.PrincipalPattEndpoint)
+              (endpoints['principalPatt'] as _i14.PrincipalPattEndpoint)
                   .getPPatt(
             session,
             keynumber: params['keynumber'],
@@ -926,7 +1102,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pPatt': _i1.ParameterDescription(
               name: 'pPatt',
-              type: _i1.getType<_i39.PrincipalPatt>(),
+              type: _i1.getType<_i43.PrincipalPatt>(),
               nullable: false,
             )
           },
@@ -934,7 +1110,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalPatt'] as _i12.PrincipalPattEndpoint)
+              (endpoints['principalPatt'] as _i14.PrincipalPattEndpoint)
                   .addPPatt(
             session,
             params['pPatt'],
@@ -959,7 +1135,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalPeople'] as _i13.PrincipalPeopleEndpoint)
+              (endpoints['principalPeople'] as _i15.PrincipalPeopleEndpoint)
                   .getPPeople(
             session,
             keynumber: params['keynumber'],
@@ -970,7 +1146,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'principalPeople': _i1.ParameterDescription(
               name: 'principalPeople',
-              type: _i1.getType<_i40.PrincipalPeople>(),
+              type: _i1.getType<_i44.PrincipalPeople>(),
               nullable: false,
             )
           },
@@ -978,7 +1154,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalPeople'] as _i13.PrincipalPeopleEndpoint)
+              (endpoints['principalPeople'] as _i15.PrincipalPeopleEndpoint)
                   .addPPeople(
             session,
             params['principalPeople'],
@@ -1003,7 +1179,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalTerms'] as _i14.PrincipalTermsEndpoint)
+              (endpoints['principalTerms'] as _i16.PrincipalTermsEndpoint)
                   .getPTerms(
             session,
             keynumber: params['keynumber'],
@@ -1014,7 +1190,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pTerms': _i1.ParameterDescription(
               name: 'pTerms',
-              type: _i1.getType<_i41.PrincipalTerms>(),
+              type: _i1.getType<_i45.PrincipalTerms>(),
               nullable: false,
             )
           },
@@ -1022,7 +1198,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalTerms'] as _i14.PrincipalTermsEndpoint)
+              (endpoints['principalTerms'] as _i16.PrincipalTermsEndpoint)
                   .addPrincipalTerms(
             session,
             params['pTerms'],
@@ -1047,7 +1223,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalUser'] as _i15.PrincipalUserEndpoint)
+              (endpoints['principalUser'] as _i17.PrincipalUserEndpoint)
                   .getPUserId(
             session,
             userId: params['userId'],
@@ -1058,7 +1234,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pUser': _i1.ParameterDescription(
               name: 'pUser',
-              type: _i1.getType<_i42.PrincipalUser>(),
+              type: _i1.getType<_i46.PrincipalUser>(),
               nullable: false,
             )
           },
@@ -1066,7 +1242,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principalUser'] as _i15.PrincipalUserEndpoint)
+              (endpoints['principalUser'] as _i17.PrincipalUserEndpoint)
                   .addPrincipalUser(
             session,
             params['pUser'],
@@ -1091,7 +1267,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pattInvolved'] as _i16.PattInvolvedEndpoint)
+              (endpoints['pattInvolved'] as _i18.PattInvolvedEndpoint)
                   .getPattsInvolved(
             session,
             keynumber: params['keynumber'],
@@ -1102,7 +1278,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pattsInvolved': _i1.ParameterDescription(
               name: 'pattsInvolved',
-              type: _i1.getType<_i43.PattsInvolved>(),
+              type: _i1.getType<_i47.PattsInvolved>(),
               nullable: false,
             )
           },
@@ -1110,7 +1286,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pattInvolved'] as _i16.PattInvolvedEndpoint)
+              (endpoints['pattInvolved'] as _i18.PattInvolvedEndpoint)
                   .addPattsInvolved(
             session,
             params['pattsInvolved'],
@@ -1135,7 +1311,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pays'] as _i17.PaysEndpoint).getPays(
+              (endpoints['pays'] as _i19.PaysEndpoint).getPays(
             session,
             keyword: params['keyword'],
           ),
@@ -1145,7 +1321,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'pays': _i1.ParameterDescription(
               name: 'pays',
-              type: _i1.getType<_i44.Pays>(),
+              type: _i1.getType<_i48.Pays>(),
               nullable: false,
             )
           },
@@ -1153,7 +1329,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pays'] as _i17.PaysEndpoint).addPays(
+              (endpoints['pays'] as _i19.PaysEndpoint).addPays(
             session,
             params['pays'],
           ),
@@ -1171,7 +1347,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pays'] as _i17.PaysEndpoint).getPaysByPrincipalId(
+              (endpoints['pays'] as _i19.PaysEndpoint).getPaysByPrincipalId(
             session,
             principalId: params['principalId'],
           ),
@@ -1189,7 +1365,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['pays'] as _i17.PaysEndpoint).getPaysByIds(
+              (endpoints['pays'] as _i19.PaysEndpoint).getPaysByIds(
             session,
             params['paysIds'],
           ),
@@ -1213,7 +1389,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['people'] as _i18.PeopleEndpoint).getPeople(
+              (endpoints['people'] as _i20.PeopleEndpoint).getPeople(
             session,
             keyword: params['keyword'],
           ),
@@ -1223,7 +1399,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'people': _i1.ParameterDescription(
               name: 'people',
-              type: _i1.getType<_i45.People>(),
+              type: _i1.getType<_i49.People>(),
               nullable: false,
             )
           },
@@ -1231,7 +1407,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['people'] as _i18.PeopleEndpoint).addPeople(
+              (endpoints['people'] as _i20.PeopleEndpoint).addPeople(
             session,
             params['people'],
           ),
@@ -1241,7 +1417,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'people': _i1.ParameterDescription(
               name: 'people',
-              type: _i1.getType<_i45.People>(),
+              type: _i1.getType<_i49.People>(),
               nullable: false,
             )
           },
@@ -1249,7 +1425,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['people'] as _i18.PeopleEndpoint).addAndReturnPeople(
+              (endpoints['people'] as _i20.PeopleEndpoint).addAndReturnPeople(
             session,
             params['people'],
           ),
@@ -1267,7 +1443,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['people'] as _i18.PeopleEndpoint)
+              (endpoints['people'] as _i20.PeopleEndpoint)
                   .getPeopleByPrincipalId(
             session,
             principalId: params['principalId'],
@@ -1286,7 +1462,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['people'] as _i18.PeopleEndpoint).getPeopleByIds(
+              (endpoints['people'] as _i20.PeopleEndpoint).getPeopleByIds(
             session,
             params['personIds'],
           ),
@@ -1310,7 +1486,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint).getPlaceATTs(
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint).getPlaceATTs(
             session,
             keyword: params['keyword'],
           ),
@@ -1320,7 +1496,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'placeatts': _i1.ParameterDescription(
               name: 'placeatts',
-              type: _i1.getType<_i46.Placeatts>(),
+              type: _i1.getType<_i50.Placeatts>(),
               nullable: false,
             )
           },
@@ -1328,7 +1504,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint).addPlaceATTs(
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint).addPlaceATTs(
             session,
             params['placeatts'],
           ),
@@ -1338,7 +1514,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'placeatts': _i1.ParameterDescription(
               name: 'placeatts',
-              type: _i1.getType<_i46.Placeatts>(),
+              type: _i1.getType<_i50.Placeatts>(),
               nullable: false,
             )
           },
@@ -1346,7 +1522,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint).addAndGetPatts(
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint).addAndGetPatts(
             session,
             params['placeatts'],
           ),
@@ -1364,7 +1540,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint)
                   .getPattsInvByPrincipalId(
             session,
             principalId: params['principalId'],
@@ -1383,7 +1559,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint)
                   .getPattsByPrincipalId(
             session,
             principalId: params['principalId'],
@@ -1402,7 +1578,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['placeatts'] as _i19.PlaceattsEndpoint)
+              (endpoints['placeatts'] as _i21.PlaceattsEndpoint)
                   .getPlaceattsByIds(
             session,
             params['pattIds'],
@@ -1427,7 +1603,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint).getPlaces(
+              (endpoints['places'] as _i22.PlacesEndpoint).getPlaces(
             session,
             keyword: params['keyword'],
           ),
@@ -1437,7 +1613,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'places': _i1.ParameterDescription(
               name: 'places',
-              type: _i1.getType<_i47.Places>(),
+              type: _i1.getType<_i51.Places>(),
               nullable: false,
             )
           },
@@ -1445,7 +1621,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint).addPlaces(
+              (endpoints['places'] as _i22.PlacesEndpoint).addPlaces(
             session,
             params['places'],
           ),
@@ -1455,7 +1631,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'places': _i1.ParameterDescription(
               name: 'places',
-              type: _i1.getType<_i47.Places>(),
+              type: _i1.getType<_i51.Places>(),
               nullable: false,
             )
           },
@@ -1463,7 +1639,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint).addAndReturnPlaces(
+              (endpoints['places'] as _i22.PlacesEndpoint).addAndReturnPlaces(
             session,
             params['places'],
           ),
@@ -1473,7 +1649,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'places': _i1.ParameterDescription(
               name: 'places',
-              type: _i1.getType<_i47.Places>(),
+              type: _i1.getType<_i51.Places>(),
               nullable: false,
             ),
             'keyword': _i1.ParameterDescription(
@@ -1486,7 +1662,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint)
+              (endpoints['places'] as _i22.PlacesEndpoint)
                   .addAndReturnPlacesWithKeyCountry(
             session,
             params['places'],
@@ -1506,7 +1682,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint).getPlacesInv(
+              (endpoints['places'] as _i22.PlacesEndpoint).getPlacesInv(
             session,
             placeInvIds: params['placeInvIds'],
           ),
@@ -1524,7 +1700,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint)
+              (endpoints['places'] as _i22.PlacesEndpoint)
                   .getPlacesByPrincipalId(
             session,
             principalId: params['principalId'],
@@ -1543,7 +1719,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['places'] as _i20.PlacesEndpoint).getPlacesByIds(
+              (endpoints['places'] as _i22.PlacesEndpoint).getPlacesByIds(
             session,
             params['placeIds'],
           ),
@@ -1559,7 +1735,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'principal': _i1.ParameterDescription(
               name: 'principal',
-              type: _i1.getType<_i48.Principal>(),
+              type: _i1.getType<_i52.Principal>(),
               nullable: false,
             )
           },
@@ -1567,7 +1743,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint).addPrincipal(
+              (endpoints['principal'] as _i23.PrincipalEndpoint).addPrincipal(
             session,
             params['principal'],
           ),
@@ -1585,7 +1761,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint).getPrincipal(
+              (endpoints['principal'] as _i23.PrincipalEndpoint).getPrincipal(
             session,
             keywords: params['keywords'],
           ),
@@ -1603,7 +1779,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPeriod(
             session,
             keywords: params['keywords'],
@@ -1622,7 +1798,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPrecise(
             session,
             keywords: params['keywords'],
@@ -1641,7 +1817,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByCattId(
             session,
             cattIds: params['cattIds'],
@@ -1660,7 +1836,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPattId(
             session,
             pattIds: params['pattIds'],
@@ -1679,7 +1855,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPersonId(
             session,
             personIds: params['personIds'],
@@ -1698,7 +1874,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByCInvolvedId(
             session,
             cInvolvedIds: params['cInvolvedIds'],
@@ -1717,7 +1893,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPInvolvedId(
             session,
             pInvolvedIds: params['pInvolvedIds'],
@@ -1736,7 +1912,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByCattInvolvedId(
             session,
             cattInvolvedIds: params['cattInvolvedIds'],
@@ -1755,7 +1931,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByPattInvolvedId(
             session,
             pattInvolvedIds: params['pattInvolvedIds'],
@@ -1774,7 +1950,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByStarsInvolvedId(
             session,
             starInvolvedIds: params['starInvolvedIds'],
@@ -1793,7 +1969,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByOrgsId(
             session,
             orgIds: params['orgIds'],
@@ -1812,7 +1988,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByCategoryId(
             session,
             categoryIds: params['categoryIds'],
@@ -1831,7 +2007,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByTermId(
             session,
             termIds: params['termIds'],
@@ -1850,7 +2026,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalByUserId(
             session,
             userId: params['userId'],
@@ -1869,7 +2045,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['principal'] as _i21.PrincipalEndpoint)
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
                   .getPrincipalsByIds(
             session,
             params['principalIds'],
@@ -1894,7 +2070,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['seas'] as _i22.SeasEndpoint).getSeas(
+              (endpoints['seas'] as _i24.SeasEndpoint).getSeas(
             session,
             keyword: params['keyword'],
           ),
@@ -1904,7 +2080,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'seas': _i1.ParameterDescription(
               name: 'seas',
-              type: _i1.getType<_i49.Seas>(),
+              type: _i1.getType<_i53.Seas>(),
               nullable: false,
             )
           },
@@ -1912,7 +2088,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['seas'] as _i22.SeasEndpoint).addSeas(
+              (endpoints['seas'] as _i24.SeasEndpoint).addSeas(
             session,
             params['seas'],
           ),
@@ -1922,7 +2098,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'seas': _i1.ParameterDescription(
               name: 'seas',
-              type: _i1.getType<_i49.Seas>(),
+              type: _i1.getType<_i53.Seas>(),
               nullable: false,
             )
           },
@@ -1930,7 +2106,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['seas'] as _i22.SeasEndpoint).addAndReturnSeas(
+              (endpoints['seas'] as _i24.SeasEndpoint).addAndReturnSeas(
             session,
             params['seas'],
           ),
@@ -1954,7 +2130,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['stars'] as _i23.StarsEndpoint).getStars(
+              (endpoints['stars'] as _i25.StarsEndpoint).getStars(
             session,
             keyword: params['keyword'],
           ),
@@ -1964,7 +2140,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'stars': _i1.ParameterDescription(
               name: 'stars',
-              type: _i1.getType<_i50.Stars>(),
+              type: _i1.getType<_i54.Stars>(),
               nullable: false,
             )
           },
@@ -1972,7 +2148,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['stars'] as _i23.StarsEndpoint).addStars(
+              (endpoints['stars'] as _i25.StarsEndpoint).addStars(
             session,
             params['stars'],
           ),
@@ -1982,7 +2158,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'stars': _i1.ParameterDescription(
               name: 'stars',
-              type: _i1.getType<_i50.Stars>(),
+              type: _i1.getType<_i54.Stars>(),
               nullable: false,
             )
           },
@@ -1990,7 +2166,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['stars'] as _i23.StarsEndpoint).addAndReturnStars(
+              (endpoints['stars'] as _i25.StarsEndpoint).addAndReturnStars(
             session,
             params['stars'],
           ),
@@ -2008,7 +2184,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['stars'] as _i23.StarsEndpoint).getStarsByPrincipalId(
+              (endpoints['stars'] as _i25.StarsEndpoint).getStarsByPrincipalId(
             session,
             principalId: params['principalId'],
           ),
@@ -2026,7 +2202,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['stars'] as _i23.StarsEndpoint).getStarsByIds(
+              (endpoints['stars'] as _i25.StarsEndpoint).getStarsByIds(
             session,
             params['starIds'],
           ),
@@ -2050,7 +2226,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['starsInvolved'] as _i24.StarsInvolvedEndpoint)
+              (endpoints['starsInvolved'] as _i26.StarsInvolvedEndpoint)
                   .getStarsInvolved(
             session,
             keynumber: params['keynumber'],
@@ -2061,7 +2237,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'starsInvolved': _i1.ParameterDescription(
               name: 'starsInvolved',
-              type: _i1.getType<_i51.StarsInvolved>(),
+              type: _i1.getType<_i55.StarsInvolved>(),
               nullable: false,
             )
           },
@@ -2069,7 +2245,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['starsInvolved'] as _i24.StarsInvolvedEndpoint)
+              (endpoints['starsInvolved'] as _i26.StarsInvolvedEndpoint)
                   .addStarsInvolved(
             session,
             params['starsInvolved'],
@@ -2094,7 +2270,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['terms'] as _i25.TermsEndpoint).getTerms(
+              (endpoints['terms'] as _i27.TermsEndpoint).getTerms(
             session,
             keyword: params['keyword'],
           ),
@@ -2104,7 +2280,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'terms': _i1.ParameterDescription(
               name: 'terms',
-              type: _i1.getType<_i52.Terms>(),
+              type: _i1.getType<_i56.Terms>(),
               nullable: false,
             )
           },
@@ -2112,7 +2288,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['terms'] as _i25.TermsEndpoint).addTerms(
+              (endpoints['terms'] as _i27.TermsEndpoint).addTerms(
             session,
             params['terms'],
           ),
@@ -2122,7 +2298,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'terms': _i1.ParameterDescription(
               name: 'terms',
-              type: _i1.getType<_i52.Terms>(),
+              type: _i1.getType<_i56.Terms>(),
               nullable: false,
             )
           },
@@ -2130,7 +2306,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['terms'] as _i25.TermsEndpoint).addAndReturnTerms(
+              (endpoints['terms'] as _i27.TermsEndpoint).addAndReturnTerms(
             session,
             params['terms'],
           ),
@@ -2148,7 +2324,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['terms'] as _i25.TermsEndpoint).getTermsByPrincipalId(
+              (endpoints['terms'] as _i27.TermsEndpoint).getTermsByPrincipalId(
             session,
             principalId: params['principalId'],
           ),
@@ -2166,7 +2342,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['terms'] as _i25.TermsEndpoint).getTermsByIds(
+              (endpoints['terms'] as _i27.TermsEndpoint).getTermsByIds(
             session,
             params['termIds'],
           ),
@@ -2190,7 +2366,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['universe'] as _i26.UniverseEndpoint).getUniverse(
+              (endpoints['universe'] as _i28.UniverseEndpoint).getUniverse(
             session,
             keyword: params['keyword'],
           ),
@@ -2200,7 +2376,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'universe': _i1.ParameterDescription(
               name: 'universe',
-              type: _i1.getType<_i53.Universe>(),
+              type: _i1.getType<_i57.Universe>(),
               nullable: false,
             )
           },
@@ -2208,7 +2384,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['universe'] as _i26.UniverseEndpoint).addUniverse(
+              (endpoints['universe'] as _i28.UniverseEndpoint).addUniverse(
             session,
             params['universe'],
           ),
@@ -2232,7 +2408,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['withGlobe'] as _i27.WithGlobeEndpoint).getWithGlobe(
+              (endpoints['withGlobe'] as _i29.WithGlobeEndpoint).getWithGlobe(
             session,
             keyNumbers: params['keyNumbers'],
           ),
@@ -2242,7 +2418,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'withGlobe': _i1.ParameterDescription(
               name: 'withGlobe',
-              type: _i1.getType<_i54.WithGlobe>(),
+              type: _i1.getType<_i58.WithGlobe>(),
               nullable: false,
             )
           },
@@ -2250,7 +2426,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['withGlobe'] as _i27.WithGlobeEndpoint).addWithGlobe(
+              (endpoints['withGlobe'] as _i29.WithGlobeEndpoint).addWithGlobe(
             session,
             params['withGlobe'],
           ),
@@ -2274,7 +2450,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['withMap'] as _i28.WithMapEndpoint).getWithMap(
+              (endpoints['withMap'] as _i30.WithMapEndpoint).getWithMap(
             session,
             keyNumbers: params['keyNumbers'],
           ),
@@ -2284,7 +2460,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'withMap': _i1.ParameterDescription(
               name: 'withMap',
-              type: _i1.getType<_i55.WithMap>(),
+              type: _i1.getType<_i59.WithMap>(),
               nullable: false,
             )
           },
@@ -2292,13 +2468,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['withMap'] as _i28.WithMapEndpoint).addWithMap(
+              (endpoints['withMap'] as _i30.WithMapEndpoint).addWithMap(
             session,
             params['withMap'],
           ),
         ),
       },
     );
-    modules['serverpod_auth'] = _i56.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i60.Endpoints()..initializeEndpoints(server);
   }
 }

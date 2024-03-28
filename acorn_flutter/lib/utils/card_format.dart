@@ -147,7 +147,7 @@ class TermCard extends StatelessWidget {
       color: const Color(0x99e6e6fa),
       child: ListTile(
         title: Text(term??"",
-            style: AcornTheme.textTheme.bodySmall,
+            style: AcornTheme.textTheme.headlineMedium,
           ),
         ),
     );

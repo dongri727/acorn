@@ -6,7 +6,9 @@ import 'package:serverpod_flutter/serverpod_flutter.dart';
 import '../serverpod_client.dart';
 
 class DetailModel extends ChangeNotifier {
-  List<String> detailCatt = [];
+  List<Detail> listDetail = [];
+
+/*  List<String> detailCatt = [];
   List<String> detailPatt =[];
 
   List<String> detailCountriesInv = [];
@@ -18,9 +20,9 @@ class DetailModel extends ChangeNotifier {
   List<String> detailOrgs = [];
   List<String> detailPeople = [];
   List<String> detailCategories = [];
-  List<String> detailTerms = [];
+  List<String> detailTerms = [];*/
 
-  Future<void> fetchDetail(int principalId) async {
+/*  Future<void> fetchDetail(int principalId) async {
     try {
       var catt = await client.countryatts.getCattsByPrincipalId(principalId: principalId);
       detailCatt = catt.map((countryatts) => countryatts.countryatt).toList();
@@ -50,6 +52,18 @@ class DetailModel extends ChangeNotifier {
     } catch (e) {
       debugPrint('Error fetching detail: $e');
     }
+  }*/
+
+  Future<void> fetchDetailBundled(int principalId) async {
+    try {
+      listDetail = await client.detail.getDetailByPrincipalId(principalId: principalId);
+      print(principalId);
+      notifyListeners();
+
+    } catch (e) {
+      debugPrint('Error fetching detail: $e');
+    }
   }
+
 }
 

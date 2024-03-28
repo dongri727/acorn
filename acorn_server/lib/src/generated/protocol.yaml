@@ -19,6 +19,13 @@ countryatts:
   - getCattsInvByPrincipalId:
   - getCattsByPrincipalId:
   - getCountryattsByIds:
+detail:
+  - addDetail:
+  - getDetail:
+  - getDetailByGenre:
+  - addAndReturnDetailByGenre:
+  - getDetailByPrincipalId:
+  - getDetailByIds:
 oceans:
   - getOceans:
   - addOceans:
@@ -34,6 +41,9 @@ principalCategories:
 principalCatt:
   - getPCatt:
   - addPCatt:
+principalDetail:
+  - addPDetail:
+  - getPDetail:
 placeInvolved:
   - getPInvolved:
   - addPInvolved:

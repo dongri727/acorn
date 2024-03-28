@@ -1,0 +1,5 @@
+class: Detail
+table: detail
+fields: 
+  genre: String
+  mot: String
