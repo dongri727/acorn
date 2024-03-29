@@ -42,12 +42,16 @@ class TermsModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Categories':
-        await _fetchCategoriesRepository.fetchCategories();
-        currentDisplayList = _fetchCategoriesRepository.listCategories;
+        //await _fetchCategoriesRepository.fetchCategories();
+        await _fetchCategoriesRepository.fetchCategoriesInDetail();
+        //currentDisplayList = _fetchCategoriesRepository.listCategories;
+        currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
         break;
       case 'Terms':
-        await _fetchTermsRepository.fetchTerms();
-        currentDisplayList = _fetchTermsRepository.listTerms;
+        //await _fetchTermsRepository.fetchTerms();
+        await _fetchTermsRepository.fetchTermsInDetail();
+        //currentDisplayList = _fetchTermsRepository.listTerms;
+        currentDisplayList = _fetchTermsRepository.listDetailTerms;
         break;
     }
     notifyListeners();
@@ -68,12 +72,16 @@ class TermsModel extends ChangeNotifier {
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Categories':
-        await _fetchCategoriesRepository.addCategoriesAndFetch(newCategory);
-        currentDisplayList = _fetchCategoriesRepository.listCategories;
+        //await _fetchCategoriesRepository.addCategoriesAndFetch(newCategory);
+        await _fetchCategoriesRepository.addDetailCategoriesAndFetch('categories', newCategory);
+        //currentDisplayList = _fetchCategoriesRepository.listCategories;
+        currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
         break;
       case 'Terms':
-        await _fetchTermsRepository.addTermsAndFetch(newTerm);
-        currentDisplayList = _fetchTermsRepository.listTerms;
+        //await _fetchTermsRepository.addTermsAndFetch(newTerm);
+        await _fetchTermsRepository.addDetailTermsAndFetch('terms', newTerm);
+        //currentDisplayList = _fetchTermsRepository.listTerms;
+        currentDisplayList = _fetchTermsRepository.listDetailTerms;
         break;
     }
     notifyListeners();
@@ -84,7 +92,8 @@ class TermsModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersCategories,
           filteredValues: filtersCategoriesId,
-          filterKey: (item as Categories).category,
+          //filterKey: (item as Categories).category,
+          filterKey: (item as Detail).mot,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedCategory = key;
@@ -96,7 +105,8 @@ class TermsModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersTerms,
           filteredValues: filtersTermsId,
-          filterKey: (item as Terms).term,
+          //filterKey: (item as Terms).term,
+          filterKey: (item as Detail).mot,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedTerm = key;

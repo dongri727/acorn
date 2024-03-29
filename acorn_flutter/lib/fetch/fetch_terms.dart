@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class FetchTermsRepository {
   List<Terms> listTerms = [];
+  List<Detail> listDetailTerms = [];
 
   fetchTerms() async {
     try {
@@ -18,6 +19,25 @@ class FetchTermsRepository {
     try {
       var terms = Terms(term: newTerm);
       listTerms = await client.terms.addAndReturnTerms(terms);
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  ///get detail with genre
+  fetchTermsInDetail() async {
+    try {
+      listDetailTerms = await client.detail.getDetailByGenre(genre: 'terms');
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  ///add and get detail with genre
+  addDetailTermsAndFetch(String terms, String newTerm) async {
+    try {
+      var detailTerms = Detail(genre: terms, mot: newTerm);
+      listDetailTerms = await client.detail.addAndReturnDetailByGenre(detailTerms);
     } catch (e) {
       debugPrint('$e');
     }

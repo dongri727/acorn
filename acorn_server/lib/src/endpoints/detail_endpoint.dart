@@ -19,7 +19,7 @@ class DetailEndpoint extends Endpoint {
     );
   }
 
-  ///Fetches selected Detail from DB in selected genre
+  ///Fetches selected Detail from DB with genre
   Future<List<Detail>> getDetailByGenre(Session session,
       {String? genre}) async {
     return await Detail.db.find(
