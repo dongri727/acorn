@@ -84,13 +84,16 @@ class PaysPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          ButtonFormat(
-                              label: 'Add A New Name',
-                              onPressed: () async {
-                                model.addAndFetchRadioButtonBasis(
-                                    model.selectedOption);
-                                controller.clear();
-                              }),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ButtonFormat(
+                                label: 'Add A New Name',
+                                onPressed: () async {
+                                  model.addAndFetchRadioButtonBasis(
+                                      model.selectedOption);
+                                  controller.clear();
+                                }),
+                          ),
                           Padding(
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               child: SingleChildScrollView(

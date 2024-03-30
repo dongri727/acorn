@@ -108,6 +108,7 @@ principal:
   - getPrincipalByCategoryId:
   - getPrincipalByTermId:
   - getPrincipalByUserId:
+  - getPrincipalByDetailIds:
   - getPrincipalsByIds:
 seas:
   - getSeas:

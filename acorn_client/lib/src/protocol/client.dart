@@ -237,7 +237,7 @@ class EndpointDetail extends _i1.EndpointRef {
         {'keyword': keyword},
       );
 
-  ///Fetches selected Detail from DB in selected genre
+  ///Fetches selected Detail from DB with genre
   _i2.Future<List<_i7.Detail>> getDetailByGenre({String? genre}) =>
       caller.callServerEndpoint<List<_i7.Detail>>(
         'detail',
@@ -919,6 +919,15 @@ class EndpointPrincipal extends _i1.EndpointRef {
         'principal',
         'getPrincipalByUserId',
         {'userId': userId},
+      );
+
+  ///get principal by DetailIds
+  _i2.Future<List<_i24.Principal>> getPrincipalByDetailIds(
+          {List<int>? detailIds}) =>
+      caller.callServerEndpoint<List<_i24.Principal>>(
+        'principal',
+        'getPrincipalByDetailIds',
+        {'detailIds': detailIds},
       );
 
   ///二段階検索共通第２Step

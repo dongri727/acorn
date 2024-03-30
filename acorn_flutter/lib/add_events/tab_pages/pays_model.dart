@@ -59,7 +59,8 @@ class PaysModel extends ChangeNotifier {
   final List<int> filtersPATTId = <int>[];
 
   ///観測された星
-  List<Stars> listStars = [];
+  //List<Stars> listStars = [];
+  List<Detail> listDetailStars = [];
   final List<String> filtersStars = <String>[];
   final List<int> filtersStarId = <int>[];
 
@@ -104,8 +105,10 @@ class PaysModel extends ChangeNotifier {
         currentDisplayList = _fetchPattRepository.listPatt;
         break;
       case 'Stars Observed or Aimed at':
-        await _fetchStarsRepository.fetchStars();
-        currentDisplayList = _fetchStarsRepository.listStars;
+        await _fetchStarsRepository.fetchStarsInDetail();
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+/*        await _fetchStarsRepository.fetchStars();
+        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
     }
     notifyListeners();
@@ -135,17 +138,23 @@ class PaysModel extends ChangeNotifier {
       //country must not be added
       case 'Current Name of Place Involved':
         await _fetchPlaceRepository.addVillesAndFetch(newPlace);
+        currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Name of Country Involved at that time':
         await _fetchCattRepository.addCountryATTandFetch(newCATT);
+        currentDisplayList = _fetchCattRepository.listCatt;
         break;
       case 'Name of Place Involved at that time':
         await _fetchPattRepository.addPlaceATTandFetch(newPATT);
+        currentDisplayList = _fetchPattRepository.listPatt;
         break;
       case 'Stars Observed or Aimed at':
-        await _fetchStarsRepository.addStarsAndFetch(newStar);
+        await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+        //await _fetchStarsRepository.addStarsAndFetch(newStar);
         break;
     }
+    notifyListeners();
   }
 
   Widget buildItemWidget(dynamic item) {
@@ -201,7 +210,8 @@ class PaysModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersStars,
           filteredValues: filtersStarId,
-          filterKey: (item as Stars).star,
+          filterKey: (item as Detail).mot,
+          //filterKey: (item as Stars).star,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedStarInv = key;

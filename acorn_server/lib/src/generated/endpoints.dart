@@ -2032,6 +2032,25 @@ class Endpoints extends _i1.EndpointDispatch {
             userId: params['userId'],
           ),
         ),
+        'getPrincipalByDetailIds': _i1.MethodConnector(
+          name: 'getPrincipalByDetailIds',
+          params: {
+            'detailIds': _i1.ParameterDescription(
+              name: 'detailIds',
+              type: _i1.getType<List<int>?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .getPrincipalByDetailIds(
+            session,
+            detailIds: params['detailIds'],
+          ),
+        ),
         'getPrincipalsByIds': _i1.MethodConnector(
           name: 'getPrincipalsByIds',
           params: {

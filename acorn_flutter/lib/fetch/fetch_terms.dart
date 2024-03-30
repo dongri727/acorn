@@ -3,18 +3,18 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/material.dart';
 
 class FetchTermsRepository {
-  List<Terms> listTerms = [];
+  //List<Terms> listTerms = [];
   List<Detail> listDetailTerms = [];
 
-  fetchTerms() async {
+/*  fetchTerms() async {
     try {
       listTerms = await client.terms.getTerms();
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  //todo 複数語を同時に挿入できるようにする
+/*  //todo 複数語を同時に挿入できるようにする
   addTermsAndFetch(String newTerm) async {
     try {
       var terms = Terms(term: newTerm);
@@ -22,7 +22,7 @@ class FetchTermsRepository {
     } catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
   ///get detail with genre
   fetchTermsInDetail() async {

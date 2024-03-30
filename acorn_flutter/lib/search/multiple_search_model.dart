@@ -311,8 +311,10 @@ class MultipleSearchModel extends ChangeNotifier {
           break;
 
           case 'Stars':
-          await _fetchStarsRepository.fetchStars();
-          currentDisplayList = _fetchStarsRepository.listStars;
+          await _fetchStarsRepository.fetchStarsInDetail();
+          currentDisplayList = _fetchStarsRepository.listDetailStars;
+/*          await _fetchStarsRepository.fetchStars();
+          currentDisplayList = _fetchStarsRepository.listStars;*/
           break;
 
         case 'Current Country where it happened':
@@ -355,24 +357,26 @@ class MultipleSearchModel extends ChangeNotifier {
           currentDisplayList = _fetchPattRepository.listPatt;
           break;
         case 'Stars Observed':
-          await _fetchStarsRepository.fetchStars();
-          currentDisplayList = _fetchStarsRepository.listStars;
+          await _fetchStarsRepository.fetchStarsInDetail();
+          currentDisplayList = _fetchStarsRepository.listDetailStars;
+/*          await _fetchStarsRepository.fetchStars();
+          currentDisplayList = _fetchStarsRepository.listStars;*/
           break;
         case 'Organisations':
-          await _fetchOrgsRepository.fetchOrgs();
-          currentDisplayList = _fetchOrgsRepository.listOrgs;
+          await _fetchOrgsRepository.fetchOrgsInDetail();
+          currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
           break;
         case 'People':
-          await _fetchPeopleRepository.fetchPeople();
-          currentDisplayList = _fetchPeopleRepository.listPeople;
+          await _fetchPeopleRepository.fetchPeopleInDetail();
+          currentDisplayList = _fetchPeopleRepository.listDetailPeople;
           break;
         case 'Categories':
-          await _fetchCategoriesRepository.fetchCategories();
-          currentDisplayList = _fetchCategoriesRepository.listCategories;
+          await _fetchCategoriesRepository.fetchCategoriesInDetail();
+          currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
           break;
         case 'Other Terms':
-          await _fetchTermsRepository.fetchTerms();
-          currentDisplayList = _fetchTermsRepository.listTerms;
+          await _fetchTermsRepository.fetchTermsInDetail();
+          currentDisplayList = _fetchTermsRepository.listDetailTerms;
           break;
       }
       notifyListeners();
@@ -517,7 +521,7 @@ class MultipleSearchModel extends ChangeNotifier {
               filtersStarsObserved,
               filteredValues:
               filtersStarsObservedId,
-              filterKey: item.star,
+              filterKey: item.mot,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedStarsObserved =
@@ -530,7 +534,8 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediat(
               filteredKeys: filtersOrgs,
               filteredValues: filtersOrgsId,
-              filterKey: item.organisation,
+              filterKey: item.mot,
+              //filterKey: item.organisation,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedOrg = filterKey;
@@ -541,7 +546,8 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediat(
               filteredKeys: filtersPeople,
               filteredValues: filtersPeopleId,
-              filterKey: item.person,
+              filterKey: item.mot,
+              //filterKey: item.person,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPeople = filterKey;
@@ -553,7 +559,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersCategories,
               filteredValues:
               filtersCategoriesId,
-              filterKey: item.category,
+              filterKey: item.mot,
+              //filterKey: item.category,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCategory = filterKey;
@@ -564,7 +571,8 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediat(
               filteredKeys: filtersTerms,
               filteredValues: filtersTermsId,
-              filterKey: item.term,
+              filterKey: item.mot,
+              //filterKey: item.term,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedTerm = filterKey;
@@ -578,7 +586,8 @@ class MultipleSearchModel extends ChangeNotifier {
     void clearSearch() {
       period.clear();
       universe.clear();
-      _fetchStarsRepository.listStars.clear();
+      _fetchStarsRepository.listDetailStars.clear();
+      //_fetchStarsRepository.listStars.clear();
       filtersStars.clear();
       pays.clear();
       _fetchPlaceRepository.listPlaces.clear();
@@ -594,15 +603,16 @@ class MultipleSearchModel extends ChangeNotifier {
       filtersPaysInvATT.clear();
       _fetchPattRepository.listPatt.clear();
       filtersPlaceInvATT.clear();
-      _fetchStarsRepository.listStars.clear();
+      _fetchStarsRepository.listDetailStars.clear();
+      //_fetchStarsRepository.listStars.clear();
       filtersStarsObserved.clear();
-      _fetchCategoriesRepository.listCategories.clear();
+      _fetchCategoriesRepository.listDetailCategories.clear();
       filtersCategories.clear();
-      _fetchPeopleRepository.listPeople.clear();
+      _fetchPeopleRepository.listDetailPeople.clear();
       filtersPeople.clear();
-      _fetchOrgsRepository.listOrgs.clear();
+      _fetchOrgsRepository.listDetailOrgs.clear();
       filtersOrgs.clear();
-      _fetchTermsRepository.listTerms.clear();
+      _fetchTermsRepository.listDetailTerms.clear();
       filtersTerms.clear();
       //listCatts.clear();
       filtersCatts.clear();
@@ -666,25 +676,35 @@ class MultipleSearchModel extends ChangeNotifier {
           _fetchPrincipalRepository.fetchPrincipalByPattInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
           break;
         case 'Stars Observed':
-          _fetchPrincipalRepository.fetchPrincipalByStarsObservedId(
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersStarsObservedId);
+/*          _fetchPrincipalRepository.fetchPrincipalByStarsObservedId(
               starObservedIds:
-              filtersStarsObservedId);
+              filtersStarsObservedId);*/
           break;
         case 'Organisations':
-          _fetchPrincipalRepository.fetchPrincipalByOrgsId(
-              orgIds: filtersOrgsId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersOrgsId);
+/*          _fetchPrincipalRepository.fetchPrincipalByOrgsId(
+              orgIds: filtersOrgsId);*/
           break;
         case 'People':
-          _fetchPrincipalRepository.fetchPrincipalByPersonId(
-              personIds: filtersPeopleId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersPeopleId);
+/*          _fetchPrincipalRepository.fetchPrincipalByPersonId(
+              personIds: filtersPeopleId);*/
           break;
         case 'Categories':
-          _fetchPrincipalRepository.fetchPrincipalByCategoryId(
-              categoryIds: filtersCategoriesId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersCategoriesId);
+/*          _fetchPrincipalRepository.fetchPrincipalByCategoryId(
+              categoryIds: filtersCategoriesId);*/
           break;
         case 'Other Terms':
-          _fetchPrincipalRepository.fetchPrincipalByTermId(
-              termIds: filtersTermsId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersTermsId);
+/*          _fetchPrincipalRepository.fetchPrincipalByTermId(
+              termIds: filtersTermsId);*/
           break;
       }
       notifyListeners();

@@ -422,6 +422,35 @@ class PrincipalEndpoint extends Endpoint {
     return await getPrincipalsByIds(session, principalIds);
   }
 
+  ///get principal by DetailIds
+  Future<List<Principal>> getPrincipalByDetailIds(Session session,
+      {List<int>? detailIds}) async {
+    print("Getting principal with termIds: $detailIds");
+
+    if (detailIds == null || detailIds.isEmpty) {
+      return Future.value([]); // Return empty list if no detailIds are provided
+    }
+
+    // Step 1: Get principalIds from PrincipalDetail using detailIds
+    dynamic whereClausePrincipalDetail;
+    for (var detailId in detailIds) {
+      if (whereClausePrincipalDetail == null) {
+        whereClausePrincipalDetail = PrincipalDetail.t.detailId.equals(detailId);
+      } else {
+        whereClausePrincipalDetail =
+            whereClausePrincipalDetail | PrincipalTerms.t.termId.equals(detailId);
+      }
+    }
+
+    var principalDetailResults = await PrincipalDetail.db
+        .find(session, where: (_) => whereClausePrincipalDetail);
+    var principalIds =
+        principalDetailResults.map((row) => row.principalId).toList();
+
+    // Step 2: Get Principals using principalIds
+    return await getPrincipalsByIds(session, principalIds);
+  }
+
   ///二段階検索共通第２Step
   Future<List<Principal>> getPrincipalsByIds(Session session, List<int> principalIds) async {
   if (principalIds.isEmpty) {

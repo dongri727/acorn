@@ -104,8 +104,10 @@ class WhereModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Stars':
-        await _fetchStarsRepository.fetchStars();
-        currentDisplayList = _fetchStarsRepository.listStars;
+        await _fetchStarsRepository.fetchStarsInDetail();
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+/*        await _fetchStarsRepository.fetchStars();
+        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
       case 'Current Place-name':
         await _fetchPlaceRepository.fetchPlaces(keyCountry);
@@ -152,8 +154,10 @@ class WhereModel extends ChangeNotifier {
     switch (selectedOption) {
       //country must not be added
       case 'Stars':
-        await _fetchStarsRepository.addStarsAndFetch(newStar);
-        currentDisplayList = _fetchStarsRepository.listStars;
+        await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+/*        await _fetchStarsRepository.addStarsAndFetch(newStar);
+        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
 
         //keyCountryが取得されているので、国名付きで保存される。
@@ -197,7 +201,8 @@ class WhereModel extends ChangeNotifier {
       case 'Stars':
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
-            choiceSIKey: (item as Stars).star,
+            choiceSIKey: (item as Detail).mot,
+            //choiceSIKey: (item as Stars).star,
             onChoiceSISelected: (choiceKey) {
               chosenLocationPrecise = choiceKey;
               updateLocationPrecise(choiceKey);

@@ -30,17 +30,15 @@ class WhoModel extends ChangeNotifier {
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
-  //List<Map<String, String>> displayListPeople = [];
-
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Institutions,Organisations etc':
-        await _fetchOrgsRepository.fetchOrgs();
-        currentDisplayList = _fetchOrgsRepository.listOrgs;
+        await _fetchOrgsRepository.fetchOrgsInDetail();
+        currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
         break;
       case 'People':
-        await _fetchPeopleRepository.fetchPeople();
-        currentDisplayList = _fetchPeopleRepository.listPeople;
+        await _fetchPeopleRepository.fetchPeopleInDetail();
+        currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
     }
     notifyListeners();
@@ -61,12 +59,12 @@ class WhoModel extends ChangeNotifier {
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Institutions,Organisations etc':
-        await _fetchOrgsRepository.addOrgsAndFetch(newOrg);
-        currentDisplayList = _fetchOrgsRepository.listOrgs;
+        await _fetchOrgsRepository.addDetailOrgsAndFetch('organisations', newOrg);
+        currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
         break;
       case 'People':
-        await _fetchPeopleRepository.addPeopleAndFetch(newPerson);
-        currentDisplayList = _fetchPeopleRepository.listPeople;
+        await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
+        currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
     }
     notifyListeners();
@@ -78,7 +76,7 @@ class WhoModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersOrgs,
           filteredValues: filtersOrgsId,
-          filterKey: (item as Organisations).organisation,
+          filterKey: (item as Detail).mot,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedOrgs = key;
@@ -90,7 +88,7 @@ class WhoModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersPeople,
           filteredValues: filtersPeopleId,
-          filterKey: (item as People).person,
+          filterKey: (item as Detail).mot,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedPeople = key;

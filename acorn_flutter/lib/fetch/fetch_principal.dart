@@ -157,4 +157,14 @@ class FetchPrincipalRepository {
         }
     }
 
+    Future<void> fetchPrincipalByDetailId({List<int>? detailIds}) async {
+      try {
+        listPrincipal = await client.principal.getPrincipalByDetailIds(detailIds: detailIds);
+        print("getting principal with detailIds: $detailIds");
+        principalIds = listPrincipal.map((item) => item.id as int).toList();
+      } on Exception catch (e) {
+        debugPrint('$e');
+      }
+    }
+
 }
