@@ -117,12 +117,12 @@ class WhoModel extends ChangeNotifier {
     final confirm = Provider.of<Confirm>(context, listen: false);
 
     // データの一時保存処理
-    confirm.selectedCountries = filtersOrgs;
-    confirm.selectedCountriesId = filtersOrgsId;
+    confirm.selectedOrg = filtersOrgs;
+    confirm.selectedOrgId = filtersOrgsId;
     print("pays:$filtersOrgs");
 
-    confirm.selectedPlaces = filtersPeople;
-    confirm.selectedPlacesId = filtersPeopleId;
+    confirm.selectedWho = filtersPeople;
+    confirm.selectedWhoId = filtersPeopleId;
     print("places:$filtersPeople");
   }
 
