@@ -45,6 +45,7 @@ class PaysModel extends ChangeNotifier {
 
   ///関係都市等の現在名
   List<Places> listPlaces = [];
+  List<Detail> listDetailPlaces = [];
   final List<String> filtersPlaces = <String>[];
   final List<int> filtersPlacesId = <int>[];
 
@@ -93,16 +94,16 @@ class PaysModel extends ChangeNotifier {
         currentDisplayList = listPaysInv;
         break;
       case 'Current Name of Place Involved':
-        await _fetchPlaceRepository.fetchVillesLookedFor();
-        currentDisplayList = _fetchPlaceRepository.listPlaces;
+        await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
+        currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
         break;
       case 'Name of Country Involved at that time':
-        await _fetchCattRepository.fetchCatt();
-        currentDisplayList = _fetchCattRepository.listCatt;
+        await _fetchCattRepository.fetchCattsInDetail();
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Name of Place Involved at that time':
-        await _fetchPattRepository.fetchPatt();
-        currentDisplayList = _fetchPattRepository.listPatt;
+        await _fetchPattRepository.fetchPattsInDetail();
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
       case 'Stars Observed or Aimed at':
         await _fetchStarsRepository.fetchStarsInDetail();
@@ -137,21 +138,20 @@ class PaysModel extends ChangeNotifier {
     switch (selectedOption) {
       //country must not be added
       case 'Current Name of Place Involved':
-        await _fetchPlaceRepository.addVillesAndFetch(newPlace);
+        await _fetchPlaceRepository.addDetailPlacesAndFetch('places_involved', newPlace);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Name of Country Involved at that time':
-        await _fetchCattRepository.addCountryATTandFetch(newCATT);
-        currentDisplayList = _fetchCattRepository.listCatt;
+        await _fetchCattRepository.addDetailCattsAndFetch('countryatts', newCATT);
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Name of Place Involved at that time':
-        await _fetchPattRepository.addPlaceATTandFetch(newPATT);
-        currentDisplayList = _fetchPattRepository.listPatt;
+        await _fetchPattRepository.addDetailPattsAndFetch('placeatts', newPATT);
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
       case 'Stars Observed or Aimed at':
         await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
         currentDisplayList = _fetchStarsRepository.listDetailStars;
-        //await _fetchStarsRepository.addStarsAndFetch(newStar);
         break;
     }
     notifyListeners();
@@ -164,7 +164,8 @@ class PaysModel extends ChangeNotifier {
           filteredKeys: filtersPaysInv,
           filteredValues: filtersPaysInvId,
           filterKey: item['name'],
-          filterValue: item['id'],
+          filterValue: item['detailId'],
+            //filterValue: item['id'],
           onSelected: (key, value) {
             selectedPaysInv = key;
             selectedPaysInvId = value;
@@ -174,7 +175,7 @@ class PaysModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersPlaces,
           filteredValues: filtersPlacesId,
-          filterKey: (item as Places).place,
+          filterKey: (item as Detail).mot,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedPlaceInv = key;
@@ -186,7 +187,8 @@ class PaysModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersCATTs,
           filteredValues: filtersCATTId,
-          filterKey: (item as Countryatts).countryatt,
+          filterKey: (item as Detail).mot,
+          //filterKey: (item as Countryatts).countryatt,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedCattInv = key;
@@ -198,7 +200,8 @@ class PaysModel extends ChangeNotifier {
         return buildFilterFormatImediat(
           filteredKeys: filtersPATTs,
           filteredValues: filtersPATTId,
-          filterKey: (item as Placeatts).placeatt,
+          filterKey: (item as Detail).mot,
+          //filterKey: (item as Placeatts).placeatt,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedPattInv = key;

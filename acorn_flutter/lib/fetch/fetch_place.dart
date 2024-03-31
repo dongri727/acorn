@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class FetchPlaceRepository{
   List<Places> listPlaces = [];
+  List<Detail> listDetailPlaces = [];
 
-  ///DBからPlaceを取得
+  ///Gets places from table Place with key Country
   fetchPlaces(keyCountry) async {
     try {
       listPlaces = await client.places.getPlaces(keyword: keyCountry);
@@ -13,37 +14,39 @@ class FetchPlaceRepository{
       debugPrint('$e');
     }
   }
-
-  //todo 複数語を同時に挿入できるようにする
+  
+  ///Adds a place with keyCountry into table Place 
+  ///and at same time adds a place without keyCountry into table Detail
   addPlacesAndFetch(String newPlace, String keyCountry) async {
     try {
       var places = Places(place: newPlace, country: keyCountry);
       var keyword = keyCountry;
+      var detail = Detail(genre: 'places_involved', mot: newPlace);
       listPlaces =
       await client.places.addAndReturnPlacesWithKeyCountry(places, keyword);
+      await client.detail.addDetail(detail);
     } catch (e) {
       debugPrint('$e');
     }
   }
 
-  ///国で絞らずに全ての地名を取得
-  fetchVillesLookedFor() async {
+  ///Gets places in table Detail with genre
+  fetchPlaceInvolvedInDetail() async {
     try {
-      listPlaces = await client.places.getPlaces();
-      print('getPlaces');
+      listDetailPlaces = await client.detail.getDetailByGenre(genre: 'places_involved');
     } catch (e) {
       debugPrint('$e');
     }
   }
 
-
-  ///国なしで登録・取得
-  addVillesAndFetch(String newPlace) async {
+  ///Adds and gets detail with genre
+  ///and at same time adds a place without keyCountry into table Place
+  addDetailPlacesAndFetch(String placesInv, String newPlace) async {
     try {
-      var places = Places(place: newPlace, country: 'blanc');
-      var keyword = 'blanc';
-      listPlaces =
-      await client.places.addAndReturnPlaces(places);
+      var detailPInv = Detail(genre: placesInv, mot: newPlace);
+      var places = Places(place: newPlace, country: '');
+      listDetailPlaces = await client.detail.addAndReturnDetailByGenre(detailPInv);
+      await client.places.addPlaces(places);
     } catch (e) {
       debugPrint('$e');
     }

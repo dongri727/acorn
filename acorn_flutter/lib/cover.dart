@@ -1,3 +1,4 @@
+import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:acorn_flutter/users/account_page.dart';
 import 'package:flutter/material.dart';
@@ -86,9 +87,10 @@ class CoverPageState extends State<CoverPage> {
                     Navigator.push<String>(
                       context,
                       MaterialPageRoute(
-                    builder: (context) => sessionManager.isSignedIn
+                        builder: (context) => const IndexPage(),
+/*                    builder: (context) => sessionManager.isSignedIn
                         ? const AccountPage()
-                        : const SignInPage(),
+                        : const SignInPage(),*/
                       ),
                     );
                   }),

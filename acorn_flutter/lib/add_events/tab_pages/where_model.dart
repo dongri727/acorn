@@ -118,12 +118,12 @@ class WhereModel extends ChangeNotifier {
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':
-        await _fetchCattRepository.fetchCatt();
-        currentDisplayList = _fetchCattRepository.listCatt;
+        await _fetchCattRepository.fetchCattsInDetail();
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Place-name at that time':
-        await _fetchPattRepository.fetchPatt();
-        currentDisplayList = _fetchPattRepository.listPatt;
+        await _fetchPattRepository.fetchPattsInDetail();
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
     }
     notifyListeners();
@@ -170,12 +170,12 @@ class WhereModel extends ChangeNotifier {
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':
-        await _fetchCattRepository.addCountryATTandFetch(newPaysatt);
-        currentDisplayList = _fetchCattRepository.listCatt;
+        await _fetchCattRepository.addDetailCattsAndFetch('countryatts', newPaysatt);
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Place-name at that time':
-        await _fetchPattRepository.addPlaceATTandFetch(newPlaceatt);
-        currentDisplayList = _fetchPattRepository.listPatt;
+        await _fetchPattRepository.addDetailPattsAndFetch('placeatts', newPlaceatt);
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
     }
     notifyListeners();
@@ -229,7 +229,7 @@ class WhereModel extends ChangeNotifier {
       case 'Country-name at that time':
         return buildChoiceFormat(
             choiceList: _filtersCountryatts,
-            choiceKey: (item as Countryatts).countryatt,
+            choiceKey: (item as Detail).mot,
             choiceId: item.id!,
             onChoiceSelected: (choiceKey, choiceId) {
               chosenCatt = choiceKey;
@@ -240,7 +240,7 @@ class WhereModel extends ChangeNotifier {
       case 'Place-name at that time':
         return buildChoiceFormat(
             choiceList: _filtersPlaceatts,
-            choiceKey: (item as Placeatts).placeatt,
+            choiceKey: (item as Detail).mot,
             choiceId: item.id!,
             onChoiceSelected: (choiceKey, choiceId) {
               chosenPatt = choiceKey;

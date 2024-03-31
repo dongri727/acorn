@@ -3,21 +3,21 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/material.dart';
 
 class FetchPattRepository {
-  List<Placeatts> listPatt= [];
+  List<Detail> listDetailPatts= [];
 
-  fetchPatt() async {
+  fetchPattsInDetail() async {
     try {
-      listPatt = await client.placeatts.getPlaceATTs();
+      listDetailPatts = await client.detail.getDetailByGenre(genre: 'placeatts');
     } catch (e) {
       debugPrint('$e');
     }
   }
 
   ///DBに新規PATTを挿入・再取得･再描画
-  addPlaceATTandFetch(String newPlaceatt) async {
+  addDetailPattsAndFetch(String placeatt, String newPlaceatt) async {
     try {
-      var patts = Placeatts(placeatt: newPlaceatt);
-      listPatt = await client.placeatts.addAndGetPatts(patts);
+      var detailPatts = Detail(genre: placeatt, mot: newPlaceatt);
+      listDetailPatts = await client.detail.addAndReturnDetailByGenre(detailPatts);
     } on Exception catch (e) {
       debugPrint('$e');
     }

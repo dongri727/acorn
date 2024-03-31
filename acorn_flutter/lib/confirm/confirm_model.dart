@@ -1,14 +1,30 @@
 import 'dart:core';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import '../fetch/fetch_catt.dart';
+import '../fetch/fetch_patt.dart';
+import '../fetch/fetch_place.dart';
+import '../fetch/fetch_stars.dart';
 import 'confirm.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
 
 class ConfirmModel extends ChangeNotifier {
-  ConfirmModel();
+
+  late final FetchStarsRepository  _fetchStarsRepository;
+  late final FetchCattRepository _fetchCattRepository;
+  late final FetchPattRepository _fetchPattRepository;
+  late final FetchPlaceRepository _fetchPlaceRepository;
+
+  ConfirmModel() {
+    _fetchStarsRepository = FetchStarsRepository();
+    _fetchCattRepository = FetchCattRepository();
+    _fetchPattRepository = FetchPattRepository();
+    _fetchPlaceRepository = FetchPlaceRepository();
+  }
 
   //insert into DB
   Future<int> save(Confirm confirm) async {
@@ -29,7 +45,7 @@ class ConfirmModel extends ChangeNotifier {
 
         //with map
         var withMap = WithMap(
-            principalId: principalId!,
+            principalId: principalId,
             annee: confirm.annee,
             affair: confirm.name,
             location: confirm.selectedLocation,
@@ -53,86 +69,107 @@ class ConfirmModel extends ChangeNotifier {
           coefficient: confirm.coefficient);
         await client.withGlobe.addWithGlobe(withGlobe);
 
-        //CATT 単
+        //CATT where it happened
         if (confirm.selectedCattId != 0) {
-            var pCatt = PrincipalCatt(
-                principalId: principalId, cattId: confirm.selectedCattId);
-            await client.principalCatt.addPCatt(pCatt);
+            var pCatt = PrincipalDetail(
+                principalId: principalId, detailId: confirm.selectedCattId);
+            await client.principalDetail.addPDetail(pCatt);
         }
 
-        //PATT 単
+/*        //Catt where it happened
+        if (confirm.selectedCattId != 0) {
+          var pCatt = PrincipalCatt(
+              principalId: principalId, cattId: confirm.selectedCattId);
+          await client.principalCatt.addPCatt(pCatt);
+        }*/
+
+        //Patt where it happened
         if (confirm.selectedPattId != 0) {
-            var pPatt = PrincipalPatt(
-              principalId: principalId, pattId: confirm.selectedPattId);
-            await client.principalPatt.addPPatt(pPatt);
+            var pPatt = PrincipalDetail(
+              principalId: principalId, detailId: confirm.selectedPattId);
+            await client.principalDetail.addPDetail(pPatt);
         }
 
-        ///participants A
+/*        //Patt where it happened
+        if (confirm.selectedPattId != 0) {
+          var pPatt = PrincipalPatt(
+              principalId: principalId, pattId: confirm.selectedPattId);
+          await client.principalPatt.addPPatt(pPatt);
+        }*/
+
+        //participants A
         if (confirm.selectedCountriesId.isNotEmpty) {
+          for (var countryId in confirm.selectedCountriesId) {
+            var cInv = PrincipalDetail(
+                principalId: principalId, detailId: countryId);
+            await client.principalDetail
+                .addPDetail(cInv);
+          }
+        }
+
+/*        if (confirm.selectedCountriesId.isNotEmpty) {
           for (var countryId in confirm.selectedCountriesId) {
             var countryInvolved = CountryInvolved(
                 principalId: principalId, paysId: countryId);
             await client.countryInvolved
                 .addCInvolved(countryInvolved);
           }
-        }
-
-/*        if (confirm.selectedPlacesId.isNotEmpty) {
-          for (var placeId in confirm.selectedPlacesId) {
-            var placeInvolved = PrincipalPlace(
-                principalId: principalId, placeId: placeId);
-            var placeInvolvedId = await client.principalPlace
-                .addPPlace(placeInvolved);
-            debugPrint('Added country involved : $placeInvolvedId');
-          }
         }*/
 
         if (confirm.selectedATTId.isNotEmpty) {
+          for (var attId in confirm.selectedATTId) {
+            var cattsInvolved = PrincipalDetail(
+                principalId: principalId, detailId: attId);
+            await client.principalDetail.addPDetail(cattsInvolved);
+          }
+        }
+
+/*        if (confirm.selectedATTId.isNotEmpty) {
           for (var attId in confirm.selectedATTId) {
             var cattsInvolved = CattsInvolved(
                 principalId: principalId, cattId: attId);
             await client.cattsInvolved.addCattsInvolved(cattsInvolved);
           }
-        }
+        }*/
 
         if (confirm.selectedStarId.isNotEmpty) {
           for (var starId in confirm.selectedStarId) {
-            var starsInvolved = StarsInvolved(
-                principalId: principalId, starId: starId);
-            await client.starsInvolved.addStarsInvolved(starsInvolved);
+            var pDetailStar = PrincipalDetail(
+                principalId: principalId, detailId: starId);
+            await client.principalDetail.addPDetail(pDetailStar);
           }
         }
 
         ///participants B
         if (confirm.selectedOrgId.isNotEmpty) {
           for (var orgId in confirm.selectedOrgId) {
-            var pOrgs = PrincipalOrgs(
-                principalId: principalId, orgId: orgId);
-            await client.principalOrgs.addPOrgs(pOrgs);
+            var pDetailOrg = PrincipalDetail(
+                principalId: principalId, detailId: orgId);
+            await client.principalDetail.addPDetail(pDetailOrg);
           }
         }
 
         if (confirm.selectedWhoId.isNotEmpty) {
           for (var whoId in confirm.selectedWhoId) {
-            var principalPeople = PrincipalPeople(
-                principalId: principalId, personId: whoId);
-            await client.principalPeople.addPPeople(principalPeople);
+            var pDetailPerson = PrincipalDetail(
+                principalId: principalId, detailId: whoId);
+            await client.principalDetail.addPDetail(pDetailPerson);
           }
         }
 
         ///terms
         if (confirm.selectedCategoryId.isNotEmpty) {
           for (var categoryId in confirm.selectedCategoryId) {
-            var principalCategories = PrincipalCategories(
-                principalId: principalId, categoryId: categoryId);
-            await client.principalCategories.addPCategories(principalCategories);
+            var pDetailCategory = PrincipalDetail(
+                principalId: principalId, detailId: categoryId);
+            await client.principalDetail.addPDetail(pDetailCategory);
           }
         }
 
         if (confirm.selectedTermId.isNotEmpty) {
           for (var termId in confirm.selectedTermId) {
-            var principalTerms = PrincipalTerms(principalId: principalId, termId: termId);
-            await client.principalTerms.addPrincipalTerms(principalTerms);
+            var pDetailTerms = PrincipalDetail(principalId: principalId, detailId: termId);
+            await client.principalDetail.addPDetail(pDetailTerms);
           }
         }
 

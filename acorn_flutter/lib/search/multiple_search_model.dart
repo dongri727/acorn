@@ -300,21 +300,19 @@ class MultipleSearchModel extends ChangeNotifier {
     switch (selectedOption) {
       case 'Period':
         currentDisplayList = period;
-        updateDisplayList(period);
+        //updateDisplayList(period);
         print(period);
         break;
 
         case 'Universe':
           currentDisplayList = universe;
-          updateDisplayList(universe);
+          //updateDisplayList(universe);
           print(universe);
           break;
 
           case 'Stars':
           await _fetchStarsRepository.fetchStarsInDetail();
           currentDisplayList = _fetchStarsRepository.listDetailStars;
-/*          await _fetchStarsRepository.fetchStars();
-          currentDisplayList = _fetchStarsRepository.listStars;*/
           break;
 
         case 'Current Country where it happened':
@@ -322,8 +320,8 @@ class MultipleSearchModel extends ChangeNotifier {
           //updateDisplayList(pays.map((country) => country['name'] as String).toList());
           break;
         case 'Current Place-name where it happened':
-          await _fetchPlaceRepository.fetchVillesLookedFor();
-          currentDisplayList = _fetchPlaceRepository.listPlaces;
+          await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
+          currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
           break;
         case 'Oceans':
           currentDisplayList = oceans;
@@ -334,33 +332,31 @@ class MultipleSearchModel extends ChangeNotifier {
           currentDisplayList = _fetchSeasRepository.listSeas;
           break;
         case 'Country-name at that time':
-          await _fetchCattRepository.fetchCatt();
-          currentDisplayList = _fetchCattRepository.listCatt;
+          await _fetchCattRepository.fetchCattsInDetail();
+          currentDisplayList = _fetchCattRepository.listDetailCatts;
           break;
         case 'Place-name at that time':
-          await _fetchPattRepository.fetchPatt();
-          currentDisplayList = _fetchPattRepository.listPatt;
+          await _fetchPattRepository.fetchPattsInDetail();
+          currentDisplayList = _fetchPattRepository.listDetailPatts;
           break;
         case 'Countries involved':
           currentDisplayList = listPaysInv;
           break;
         case 'Places involved':
-        //await fetchPlaceInvolvedLookedFor();
-          currentDisplayList = listPlaceInv;
+          await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
+          currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
           break;
         case 'Names of Countries involved at that time':
-          await _fetchCattRepository.fetchCatt();
-          currentDisplayList = _fetchCattRepository.listCatt;
+          await _fetchCattRepository.fetchCattsInDetail();
+          currentDisplayList = _fetchCattRepository.listDetailCatts;
           break;
         case 'Names of Places involved at that time':
-          await _fetchPattRepository.fetchPatt();
-          currentDisplayList = _fetchPattRepository.listPatt;
+          await _fetchPattRepository.fetchPattsInDetail();
+          currentDisplayList = _fetchPattRepository.listDetailPatts;
           break;
         case 'Stars Observed':
           await _fetchStarsRepository.fetchStarsInDetail();
           currentDisplayList = _fetchStarsRepository.listDetailStars;
-/*          await _fetchStarsRepository.fetchStars();
-          currentDisplayList = _fetchStarsRepository.listStars;*/
           break;
         case 'Organisations':
           await _fetchOrgsRepository.fetchOrgsInDetail();
@@ -403,7 +399,8 @@ class MultipleSearchModel extends ChangeNotifier {
         case 'Stars':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersStars,
-              filterKey: item.star,
+              filterKey: item.mot,
+              //filterKey: item.star,
               onSelected: (filterImSiKey) {
                 selectedStar = filterImSiKey;
                 updateSelectedStar(filterImSiKey);
@@ -419,7 +416,7 @@ class MultipleSearchModel extends ChangeNotifier {
         case 'Current Place-name where it happened':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersVilles,
-              filterKey: item.place,
+              filterKey: item.mot,
               onSelected: (filterImSiKey) {
                 selectedPlace = filterImSiKey;
                 updateSelectedPlace(filterImSiKey);
@@ -444,7 +441,8 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediat(
               filteredKeys: filtersCatts,
               filteredValues: filtersCattsId,
-              filterKey: item.countryatt,
+              filterKey: item.mot,
+              //filterKey: item.countryatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCatt = filterKey;
@@ -455,7 +453,8 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediat(
               filteredKeys: filtersPatts,
               filteredValues: filtersPattsId,
-              filterKey: item.placeatt,
+              filterKey: item.mot,
+              //filterKey: item.placeatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPatt = filterKey;
@@ -468,7 +467,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredValues:
               filtersPaysInvId,
               filterKey: item['name'],
-              filterValue: item['id'],
+              filterValue: item['detailId'],
+              //filterValue: item['id'],
               onSelected: (filterKey, filterId) {
                 selectedPays = filterKey;
                 selectedPaysId = filterId;
@@ -479,7 +479,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersPlaceInv,
               filteredValues:
               filtersPlaceInvId,
-              filterKey: item.place,
+              filterKey: item.mot,
+              //filterKey: item.place,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPlace = filterKey;
@@ -491,7 +492,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersPaysInvATT,
               filteredValues:
               filtersPaysInvATTId,
-              filterKey: item.countryatt,
+              filterKey: item.mot,
+              //filterKey: item.countryatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCountryInvolvedATT =
@@ -506,7 +508,8 @@ class MultipleSearchModel extends ChangeNotifier {
               filtersPlaceInvATT,
               filteredValues:
               filtersPlaceInvATTId,
-              filterKey: item.placeatt,
+              filterKey: item.mot,
+              //filterKey: item.placeatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPlaceInvolvedATT =
@@ -599,9 +602,9 @@ class MultipleSearchModel extends ChangeNotifier {
       filtersPaysInv.clear();
       listPlaceInv.clear();
       filtersPlaceInv.clear();
-      _fetchCattRepository.listCatt.clear();
+      _fetchCattRepository.listDetailCatts.clear();
       filtersPaysInvATT.clear();
-      _fetchPattRepository.listPatt.clear();
+      _fetchPattRepository.listDetailPatts.clear();
       filtersPlaceInvATT.clear();
       _fetchStarsRepository.listDetailStars.clear();
       //_fetchStarsRepository.listStars.clear();
@@ -654,8 +657,8 @@ class MultipleSearchModel extends ChangeNotifier {
               precise: filtersSeas);
           break;
         case 'Country-name at that time':
-          _fetchPrincipalRepository.fetchPrincipalByCattId(
-              cattIds: filtersCattsId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersCattsId);
           break;
         case 'Place-name at that time':
           _fetchPrincipalRepository.fetchPrincipalByPattId(
@@ -670,7 +673,7 @@ class MultipleSearchModel extends ChangeNotifier {
             _fetchPrincipalRepository.fetchPrincipalByPInvolvedId(pInvolvedIds: filtersPlaceInvId);
             break;*/
         case 'Names of Countries involved at that time':
-          _fetchPrincipalRepository.fetchPrincipalByCattInvolvedId(cattsInvolvedIds: filtersPaysInvATTId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPaysInvATTId);
           break;
         case 'Names of Places involved at that time':
           _fetchPrincipalRepository.fetchPrincipalByPattInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
