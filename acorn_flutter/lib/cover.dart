@@ -1,9 +1,11 @@
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
-import 'package:acorn_flutter/users/account_page.dart';
+//import 'package:acorn_flutter/users/account_page.dart';
 import 'package:flutter/material.dart';
-import 'users/sign_in_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+//import 'users/sign_in_page.dart';
 import 'utils/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CoverPage extends StatefulWidget {
   const CoverPage({super.key});
@@ -13,6 +15,7 @@ class CoverPage extends StatefulWidget {
 }
 
 class CoverPageState extends State<CoverPage> {
+
   @override
   void initState() {
     super.initState();
@@ -24,6 +27,9 @@ class CoverPageState extends State<CoverPage> {
   }
 
   @override
+
+  final Uri url = Uri.parse('https://www.youtube.com/@laporte_academy');
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -55,7 +61,7 @@ class CoverPageState extends State<CoverPage> {
               child: TextButton(
                 child: Text(
                   'About this Database',
-                  style: AcornTheme.textTheme.bodyLarge,
+                  style: AcornTheme.textTheme.bodyMedium,
                 ),
                   onPressed: (){
                   showDialog(
@@ -79,6 +85,15 @@ class CoverPageState extends State<CoverPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
+                  onPressed: (_launchUrl),
+                  child: Text(
+                    "How-to-Use Video on YouTube",
+                    style: AcornTheme.textTheme.bodyMedium,
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextButton(
                   child: Text(
                     "Enter",
                     style: AcornTheme.textTheme.bodyLarge,
@@ -99,5 +114,10 @@ class CoverPageState extends State<CoverPage> {
         ),
       ),
     );
+  }
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

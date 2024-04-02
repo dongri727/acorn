@@ -1,11 +1,11 @@
 {
-    "name": "acorn_flutter",
-    "short_name": "acorn_flutter",
+    "name": "global_chrono_map",
+    "short_name": "global_chrono_map",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A 3D Journey Through Time and Space",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
