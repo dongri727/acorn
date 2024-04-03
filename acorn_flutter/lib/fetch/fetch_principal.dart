@@ -40,7 +40,7 @@ class FetchPrincipalRepository {
         }
     }
 
-    Future<void> fetchPrincipalByCattId({List<int>? cattIds}) async {
+/*    Future<void> fetchPrincipalByCattId({List<int>? cattIds}) async {
         try {
             listPrincipal =
             await client.principal.getPrincipalByCattId(cattIds: cattIds);
@@ -49,9 +49,9 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByPattId({List<int>? pattIds}) async {
+/*    Future<void> fetchPrincipalByPattId({List<int>? pattIds}) async {
         try {
             listPrincipal =
             await client.principal.getPrincipalByPattId(pattIds: pattIds);
@@ -60,9 +60,9 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByCInvolvedId({List<int>? cInvolvedIds}) async {
+/*    Future<void> fetchPrincipalByCInvolvedId({List<int>? cInvolvedIds}) async {
         try {
             listPrincipal = await client.principal.getPrincipalByCInvolvedId(
                 cInvolvedIds: cInvolvedIds);
@@ -71,9 +71,9 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
+/*  fetchPrincipalByPInvolvedId({List<int>? pInvolvedIds}) async {
     try {
       listPrincipal = await client.principal.getPrincipalByPInvolvedId(pInvolvedIds: pInvolvedIds);
       print("Getting principal with PInvolvedIds: $pInvolvedIds");
@@ -81,9 +81,9 @@ class FetchPrincipalRepository {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  fetchPrincipalByCattInvolvedId({List<int>? cattsInvolvedIds}) async {
+/*  fetchPrincipalByCattInvolvedId({List<int>? cattsInvolvedIds}) async {
     try {
       listPrincipal = await client.principal.getPrincipalByCattInvolvedId(cattInvolvedIds: cattsInvolvedIds);
       print("Getting principal with CattsInvolvedIds: $cattsInvolvedIds");
@@ -91,9 +91,9 @@ class FetchPrincipalRepository {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-  fetchPrincipalByPattInvolvedId({List<int>? pattsInvolvedIds}) async {
+/*  fetchPrincipalByPattInvolvedId({List<int>? pattsInvolvedIds}) async {
     try {
       listPrincipal = await client.principal.getPrincipalByPattInvolvedId(pattInvolvedIds: pattsInvolvedIds);
       print("Getting principal with PattsInvolvedIds: $pattsInvolvedIds");
@@ -101,9 +101,9 @@ class FetchPrincipalRepository {
     } on Exception catch (e) {
       debugPrint('$e');
     }
-  }
+  }*/
 
-    Future<void> fetchPrincipalByStarsObservedId(
+/*    Future<void> fetchPrincipalByStarsObservedId(
         {List<int>? starObservedIds}) async {
         try {
             listPrincipal = await client.principal.getPrincipalByStarsInvolvedId(
@@ -113,18 +113,18 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByOrgsId({List<int>? orgIds}) async {
+/*    Future<void> fetchPrincipalByOrgsId({List<int>? orgIds}) async {
         try {
             listPrincipal = await client.principal.getPrincipalByOrgsId(orgIds: orgIds);
             print("Getting principal with OrgIds: $orgIds");
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByPersonId({List<int>? personIds}) async {
+/*    Future<void> fetchPrincipalByPersonId({List<int>? personIds}) async {
         try {
             listPrincipal =
             await client.principal.getPrincipalByPersonId(personIds: personIds);
@@ -133,9 +133,9 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByCategoryId({List<int>? categoryIds}) async {
+/*    Future<void> fetchPrincipalByCategoryId({List<int>? categoryIds}) async {
         try {
             listPrincipal = await client.principal.getPrincipalByCategoryId(
                 categoryIds: categoryIds);
@@ -144,9 +144,9 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
-    Future<void> fetchPrincipalByTermId({List<int>? termIds}) async {
+/*    Future<void> fetchPrincipalByTermId({List<int>? termIds}) async {
         try {
             listPrincipal =
             await client.principal.getPrincipalByTermId(termIds: termIds);
@@ -155,7 +155,7 @@ class FetchPrincipalRepository {
         } on Exception catch (e) {
             debugPrint('$e');
         }
-    }
+    }*/
 
     Future<void> fetchPrincipalByDetailId({List<int>? detailIds}) async {
       try {

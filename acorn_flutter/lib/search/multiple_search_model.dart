@@ -661,22 +661,22 @@ class MultipleSearchModel extends ChangeNotifier {
               detailIds: filtersCattsId);
           break;
         case 'Place-name at that time':
-          _fetchPrincipalRepository.fetchPrincipalByPattId(
-              pattIds: filtersPattsId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersPattsId);
           break;
         case 'Countries involved':
-          _fetchPrincipalRepository.fetchPrincipalByCInvolvedId(
-              cInvolvedIds: filtersPaysInvId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(
+              detailIds: filtersPaysInvId);
           break;
 
-/*          case 'Places involved':
-            _fetchPrincipalRepository.fetchPrincipalByPInvolvedId(pInvolvedIds: filtersPlaceInvId);
-            break;*/
+          case 'Places involved':
+            _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvId);
+            break;
         case 'Names of Countries involved at that time':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPaysInvATTId);
           break;
         case 'Names of Places involved at that time':
-          _fetchPrincipalRepository.fetchPrincipalByPattInvolvedId(pattsInvolvedIds: filtersPlaceInvATTId);
+          _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvATTId);
           break;
         case 'Stars Observed':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(

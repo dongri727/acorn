@@ -108,8 +108,6 @@ class PaysModel extends ChangeNotifier {
       case 'Stars Observed or Aimed at':
         await _fetchStarsRepository.fetchStarsInDetail();
         currentDisplayList = _fetchStarsRepository.listDetailStars;
-/*        await _fetchStarsRepository.fetchStars();
-        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
     }
     notifyListeners();
