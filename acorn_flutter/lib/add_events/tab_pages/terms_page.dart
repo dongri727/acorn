@@ -39,7 +39,6 @@ class TermsPage extends StatelessWidget {
                                   options: model.options,
                                   onChanged: (String? value) {
                                     model.selectedOption = value!;
-                                    print("selected: $value");
                                   }),
                             ),
                           )),

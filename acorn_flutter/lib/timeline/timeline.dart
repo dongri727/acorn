@@ -198,7 +198,6 @@ class Timeline {
   List<Principal> get listPrincipal => _principal;
 
   Future<List<TimelineEntry>> gatherEntries(principal) async {
-    print("Gather Entries with: $principal");
 
     _principal = principal;
 

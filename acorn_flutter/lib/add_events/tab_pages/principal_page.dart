@@ -168,7 +168,6 @@ class PrincipalPage extends StatelessWidget {
                                     options: model.principalOptions,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
-                                      print("selected: $value");
                                     }),
                               ),
                             ),
@@ -200,7 +199,6 @@ class PrincipalPage extends StatelessWidget {
                                   onChoiceSISelected: (choiceSIKey) {
                                     model.chosenLocation = choiceSIKey;
                                     model.updateLocation(choiceSIKey);
-                                    print(choiceSIKey);
                                   });
                             }).toList(),
                           ),

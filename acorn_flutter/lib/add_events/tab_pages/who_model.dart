@@ -119,11 +119,10 @@ class WhoModel extends ChangeNotifier {
     // データの一時保存処理
     confirm.selectedOrg = filtersOrgs;
     confirm.selectedOrgId = filtersOrgsId;
-    print("pays:$filtersOrgs");
 
     confirm.selectedWho = filtersPeople;
     confirm.selectedWhoId = filtersPeopleId;
-    print("places:$filtersPeople");
+
   }
 
   ///RadioButton

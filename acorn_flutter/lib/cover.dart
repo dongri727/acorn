@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'users/sign_in_page.dart';
 import 'utils/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CoverPage extends StatefulWidget {
   const CoverPage({super.key});
@@ -26,10 +25,9 @@ class CoverPageState extends State<CoverPage> {
     });
   }
 
-  @override
-
   final Uri url = Uri.parse('https://www.youtube.com/@laporte_academy');
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

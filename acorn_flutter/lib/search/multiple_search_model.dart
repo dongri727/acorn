@@ -197,17 +197,6 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> filtersPlaceInv = <String>[];
   final List<int> filtersPlaceInvId = <int>[];
 
-/*   fetchPlaceInvolvedLookedFor() async {
-    try {
-      placeInvIds = await client.principalPlace.getPPlaceNarrowed();  //HERE
-      listPlaceInv = await client.places.getPlacesInv(placeInvIds: placeInvIds);
-      print(listPlaceInv);
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  } */
-
   String selectedPlaceInvolved = '';
   int selectedPlaceInvolvedId = 0;
 
@@ -241,7 +230,6 @@ class MultipleSearchModel extends ChangeNotifier {
   }
 
   //Star Observed or Aimed
-  //List<Stars> listStarsObserved = [];
   final List<String> filtersStarsObserved = <String>[];
   final List<int> filtersStarsObservedId = <int>[];
 
@@ -301,13 +289,11 @@ class MultipleSearchModel extends ChangeNotifier {
       case 'Period':
         currentDisplayList = period;
         //updateDisplayList(period);
-        print(period);
         break;
 
         case 'Universe':
           currentDisplayList = universe;
           //updateDisplayList(universe);
-          print(universe);
           break;
 
           case 'Stars':
@@ -325,7 +311,7 @@ class MultipleSearchModel extends ChangeNotifier {
           break;
         case 'Oceans':
           currentDisplayList = oceans;
-          updateDisplayList(oceans);
+          //updateDisplayList(oceans);
           break;
         case 'Seas':
           await _fetchSeasRepository.fetchSeas();
@@ -400,7 +386,6 @@ class MultipleSearchModel extends ChangeNotifier {
           return buildFilterFormatImediatSI(
               filteredKeys: filtersStars,
               filterKey: item.mot,
-              //filterKey: item.star,
               onSelected: (filterImSiKey) {
                 selectedStar = filterImSiKey;
                 updateSelectedStar(filterImSiKey);
@@ -429,7 +414,7 @@ class MultipleSearchModel extends ChangeNotifier {
                 selectedOcean = filterImSiKey;
                 updateSelectedOcean(filterImSiKey);
               });
-        case 'Seas': //機能している
+        case 'Seas':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersSeas,
               filterKey: item.sea,
@@ -442,7 +427,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersCatts,
               filteredValues: filtersCattsId,
               filterKey: item.mot,
-              //filterKey: item.countryatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCatt = filterKey;
@@ -454,7 +438,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersPatts,
               filteredValues: filtersPattsId,
               filterKey: item.mot,
-              //filterKey: item.placeatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPatt = filterKey;
@@ -468,7 +451,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filtersPaysInvId,
               filterKey: item['name'],
               filterValue: item['detailId'],
-              //filterValue: item['id'],
               onSelected: (filterKey, filterId) {
                 selectedPays = filterKey;
                 selectedPaysId = filterId;
@@ -480,7 +462,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredValues:
               filtersPlaceInvId,
               filterKey: item.mot,
-              //filterKey: item.place,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPlace = filterKey;
@@ -493,7 +474,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredValues:
               filtersPaysInvATTId,
               filterKey: item.mot,
-              //filterKey: item.countryatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCountryInvolvedATT =
@@ -509,7 +489,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredValues:
               filtersPlaceInvATTId,
               filterKey: item.mot,
-              //filterKey: item.placeatt,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPlaceInvolvedATT =
@@ -538,7 +517,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersOrgs,
               filteredValues: filtersOrgsId,
               filterKey: item.mot,
-              //filterKey: item.organisation,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedOrg = filterKey;
@@ -550,7 +528,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersPeople,
               filteredValues: filtersPeopleId,
               filterKey: item.mot,
-              //filterKey: item.person,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedPeople = filterKey;
@@ -563,7 +540,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredValues:
               filtersCategoriesId,
               filterKey: item.mot,
-              //filterKey: item.category,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedCategory = filterKey;
@@ -575,7 +551,6 @@ class MultipleSearchModel extends ChangeNotifier {
               filteredKeys: filtersTerms,
               filteredValues: filtersTermsId,
               filterKey: item.mot,
-              //filterKey: item.term,
               filterValue: item.id,
               onSelected: (filterKey, filterId) {
                 selectedTerm = filterKey;
@@ -590,7 +565,6 @@ class MultipleSearchModel extends ChangeNotifier {
       period.clear();
       universe.clear();
       _fetchStarsRepository.listDetailStars.clear();
-      //_fetchStarsRepository.listStars.clear();
       filtersStars.clear();
       pays.clear();
       _fetchPlaceRepository.listPlaces.clear();
@@ -607,7 +581,6 @@ class MultipleSearchModel extends ChangeNotifier {
       _fetchPattRepository.listDetailPatts.clear();
       filtersPlaceInvATT.clear();
       _fetchStarsRepository.listDetailStars.clear();
-      //_fetchStarsRepository.listStars.clear();
       filtersStarsObserved.clear();
       _fetchCategoriesRepository.listDetailCategories.clear();
       filtersCategories.clear();
@@ -617,15 +590,11 @@ class MultipleSearchModel extends ChangeNotifier {
       filtersOrgs.clear();
       _fetchTermsRepository.listDetailTerms.clear();
       filtersTerms.clear();
-      //listCatts.clear();
       filtersCatts.clear();
-      //listPatts.clear();
       filtersPatts.clear();
 
       notifyListeners(); // 状態が変更されたことを通知
     }
-
-    //List<int> principalIds = [];
 
     void submitSelection() {
       switch (selectedOption) {
@@ -681,33 +650,22 @@ class MultipleSearchModel extends ChangeNotifier {
         case 'Stars Observed':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersStarsObservedId);
-/*          _fetchPrincipalRepository.fetchPrincipalByStarsObservedId(
-              starObservedIds:
-              filtersStarsObservedId);*/
           break;
         case 'Organisations':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersOrgsId);
-/*          _fetchPrincipalRepository.fetchPrincipalByOrgsId(
-              orgIds: filtersOrgsId);*/
           break;
         case 'People':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersPeopleId);
-/*          _fetchPrincipalRepository.fetchPrincipalByPersonId(
-              personIds: filtersPeopleId);*/
           break;
         case 'Categories':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersCategoriesId);
-/*          _fetchPrincipalRepository.fetchPrincipalByCategoryId(
-              categoryIds: filtersCategoriesId);*/
           break;
         case 'Other Terms':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersTermsId);
-/*          _fetchPrincipalRepository.fetchPrincipalByTermId(
-              termIds: filtersTermsId);*/
           break;
       }
       notifyListeners();

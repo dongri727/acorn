@@ -15,7 +15,7 @@ class MenuSection extends StatelessWidget {
 
   const MenuSection(this.title, this.backgroundColor, this.accentColor,
       this.menuOptions, this.navigateTo,
-      {Key? key}) : super(key: key);
+      {super.key});
 
   @override
   Widget build(BuildContext context) {

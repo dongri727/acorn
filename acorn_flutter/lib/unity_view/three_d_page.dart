@@ -29,7 +29,6 @@ class ThreeDViewPageState extends State<ThreeDViewPage> {
   Future<void>fetchWithMap({List<int>? principalIds}) async {
     try {
       withMaps = await client.withMap.getWithMap(keyNumbers: widget.principalIds);
-      print('fetch with $principalIds');
     } catch (e) {
       debugPrint('$e');
     }
@@ -60,9 +59,7 @@ class ThreeDViewPageState extends State<ThreeDViewPage> {
   ///変換したCSVDataをUriにencodeし、さらにurlとしてparseして飛ぶ。
   Future onLaunchUrl() async {
     String csvMap = convertListMapToCsv(withMaps);
-    print(withMaps);
     String encodedCsvMap = Uri.encodeComponent(csvMap);
-    print(encodedCsvMap);
     final Uri url = Uri.parse('https://tempo-spaco.web.app?data=$encodedCsvMap');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);

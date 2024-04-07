@@ -23,7 +23,7 @@ class MRViewPage extends StatelessWidget {
             Navigator.push<String>(
               context,
               CustomPageRoute(
-                MultiSearchPage(),
+                const MultiSearchPage(),
               ),
             );
           },

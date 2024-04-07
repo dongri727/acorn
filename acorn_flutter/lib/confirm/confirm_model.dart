@@ -4,26 +4,24 @@ import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
-import '../fetch/fetch_catt.dart';
+/*import '../fetch/fetch_catt.dart';
 import '../fetch/fetch_patt.dart';
 import '../fetch/fetch_place.dart';
-import '../fetch/fetch_stars.dart';
+import '../fetch/fetch_stars.dart';*/
 import 'confirm.dart';
-import 'package:acorn_flutter/serverpod_client.dart';
 
 class ConfirmModel extends ChangeNotifier {
 
-  late final FetchStarsRepository  _fetchStarsRepository;
+/*  late final FetchStarsRepository  _fetchStarsRepository;
   late final FetchCattRepository _fetchCattRepository;
   late final FetchPattRepository _fetchPattRepository;
-  late final FetchPlaceRepository _fetchPlaceRepository;
+  late final FetchPlaceRepository _fetchPlaceRepository;*/
 
   ConfirmModel() {
-    _fetchStarsRepository = FetchStarsRepository();
+/*    _fetchStarsRepository = FetchStarsRepository();
     _fetchCattRepository = FetchCattRepository();
     _fetchPattRepository = FetchPattRepository();
-    _fetchPlaceRepository = FetchPlaceRepository();
+    _fetchPlaceRepository = FetchPlaceRepository();*/
   }
 
   //insert into DB
@@ -76,26 +74,12 @@ class ConfirmModel extends ChangeNotifier {
             await client.principalDetail.addPDetail(pCatt);
         }
 
-/*        //Catt where it happened
-        if (confirm.selectedCattId != 0) {
-          var pCatt = PrincipalCatt(
-              principalId: principalId, cattId: confirm.selectedCattId);
-          await client.principalCatt.addPCatt(pCatt);
-        }*/
-
         //Patt where it happened
         if (confirm.selectedPattId != 0) {
             var pPatt = PrincipalDetail(
               principalId: principalId, detailId: confirm.selectedPattId);
             await client.principalDetail.addPDetail(pPatt);
         }
-
-/*        //Patt where it happened
-        if (confirm.selectedPattId != 0) {
-          var pPatt = PrincipalPatt(
-              principalId: principalId, pattId: confirm.selectedPattId);
-          await client.principalPatt.addPPatt(pPatt);
-        }*/
 
         //participants A
         if (confirm.selectedCountriesId.isNotEmpty) {
@@ -107,14 +91,14 @@ class ConfirmModel extends ChangeNotifier {
           }
         }
 
-/*        if (confirm.selectedCountriesId.isNotEmpty) {
-          for (var countryId in confirm.selectedCountriesId) {
-            var countryInvolved = CountryInvolved(
-                principalId: principalId, paysId: countryId);
-            await client.countryInvolved
-                .addCInvolved(countryInvolved);
+        if (confirm.selectedPlacesId.isNotEmpty) {
+          for (var placeId in confirm.selectedPlacesId) {
+            var pInv = PrincipalDetail(
+                principalId: principalId, detailId: placeId);
+            await client.principalDetail
+                .addPDetail(pInv);
           }
-        }*/
+        }
 
         if (confirm.selectedATTId.isNotEmpty) {
           for (var attId in confirm.selectedATTId) {
@@ -123,14 +107,6 @@ class ConfirmModel extends ChangeNotifier {
             await client.principalDetail.addPDetail(cattsInvolved);
           }
         }
-
-/*        if (confirm.selectedATTId.isNotEmpty) {
-          for (var attId in confirm.selectedATTId) {
-            var cattsInvolved = CattsInvolved(
-                principalId: principalId, cattId: attId);
-            await client.cattsInvolved.addCattsInvolved(cattsInvolved);
-          }
-        }*/
 
         if (confirm.selectedStarId.isNotEmpty) {
           for (var starId in confirm.selectedStarId) {

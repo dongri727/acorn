@@ -4,8 +4,6 @@ import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../confirm/confirm.dart';
 import '../../utils/tff_format.dart';
 import 'who_model.dart';
 
@@ -41,7 +39,6 @@ class WhoPage extends StatelessWidget {
                                   options: model.options,
                                   onChanged: (String? value) {
                                     model.selectedOption = value!;
-                                    print("selected: $value");
                                   }),
                             ),
                           )),

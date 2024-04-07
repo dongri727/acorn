@@ -1,27 +1,13 @@
-import 'dart:ui';
-import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/dropdown_button.format.dart';
 import 'package:acorn_flutter/utils/navigation_button.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:serverpod_flutter/serverpod_flutter.dart';
-import '../timeline/scalable.dart';
-import '../unity_view/four_d_page.dart';
-import '../unity_view/mr_page.dart';
-import '../unity_view/three_d_page.dart';
 import '../utils/blank_text_format.dart';
 import '../utils/button_format.dart';
-import '../utils/chips_format.dart';
 import '../utils/tff_format.dart';
-import 'result_page.dart';
-import '../lists/countries_list.dart';
-import '../lists/period_list.dart';
-import '../lists/universe_list.dart';
-import '../lists/oceans_list.dart';
 
 class MultiSearchPage extends StatelessWidget {
   const MultiSearchPage({super.key});
@@ -67,7 +53,6 @@ class MultiSearchPage extends StatelessWidget {
                                   options: model.formats,
                                   onChanged: (String? value) {
                                     model.selectedFormat = value!;
-                                    print("selected: $value");
                                   }),
                             ),
                           ),
@@ -96,7 +81,6 @@ class MultiSearchPage extends StatelessWidget {
                                     options: model.options,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
-                                      print("selected: $value");
                                     },
                                   ),
                                 ),

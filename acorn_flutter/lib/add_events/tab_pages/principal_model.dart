@@ -164,17 +164,14 @@ class PrincipalModel extends ChangeNotifier {
         (((newYearI - 1) * 366 + (newMonth - 1) * 30.5 + newDay)
             .toDouble())
             .round();
-    print(newPoint);
 
     ///make data of logarithm
     newLogarithm = double.parse(
         (5885.0 - (1000 * (log10((newPoint - 768600).abs()))))
             .toStringAsFixed(4));
-    print(newLogarithm);
 
     ///make data of reverseLogarithm
     newCoefficient = 6820.0 + newLogarithm;
-    print(newCoefficient);
 
     switch (selectedCalendar) {
       case 'Billion Years':
@@ -209,17 +206,12 @@ class PrincipalModel extends ChangeNotifier {
 
     ///選択されたlocation
     confirm.selectedLocation = location;
-    print(location);
 
     confirm.name = newName;
-    print(newName);
-    print("save name");
 
     ///選択されたlocation
     confirm.selectedLocation = location;
-    print(location);
 
-    print('save principal');
   }
 
 

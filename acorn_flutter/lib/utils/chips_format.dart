@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 typedef OnChoiceSelected = void Function(String choiceKey, int choiceId);
 
+///ひとつ選ぶ
 class ChoiceFormat extends StatefulWidget {
   final List<String> choiceList;
   final String choiceKey;
@@ -85,6 +86,7 @@ class ChoiceSIFormatState extends State<ChoiceSIFormat> {
   }
 }
 
+///複数選ぶ
 class FilterFormat extends StatefulWidget {
   final List<String> filteredKeys;
   final List<dynamic> filteredValues;

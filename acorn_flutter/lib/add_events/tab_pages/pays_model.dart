@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:acorn_flutter/lists/pays_options_list.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/serverpod_client.dart';
 import '../../confirm/confirm.dart';
 import 'package:provider/provider.dart';
 import '../../fetch/fetch_catt.dart';
@@ -44,49 +43,26 @@ class PaysModel extends ChangeNotifier {
   final List<int> filtersPaysInvId = <int>[];
 
   ///関係都市等の現在名
-  List<Places> listPlaces = [];
-  List<Detail> listDetailPlaces = [];
+  //List<Places> listPlaces = [];
+  //List<Detail> listDetailPlaces = [];
   final List<String> filtersPlaces = <String>[];
   final List<int> filtersPlacesId = <int>[];
 
   ///関係国の当時の名称
-  List<Countryatts> listCATTs = [];
+  //List<Countryatts> listCATTs = [];
   final List<String> filtersCATTs = <String>[];
   final List<int> filtersCATTId = <int>[];
 
   ///関係都市等の当時の名称
-  List<Placeatts> listPATTs = [];
+  //List<Placeatts> listPATTs = [];
   final List<String> filtersPATTs = <String>[];
   final List<int> filtersPATTId = <int>[];
 
   ///観測された星
   //List<Stars> listStars = [];
-  List<Detail> listDetailStars = [];
+  //List<Detail> listDetailStars = [];
   final List<String> filtersStars = <String>[];
   final List<int> filtersStarId = <int>[];
-
-/*  // without KeyCountry
-  fetchPlacesInvolved() async {
-    try {
-      listPlaces = await client.places.getPlaces();
-      currentDisplayList = listPlaces;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }*/
-
-/*  //todo 都市名を追加するには国名が必要だが･･･。
-  addPlaceAndFetch(String newPlace) async {
-    try {
-      var place = Places(place: newPlace, country: keyCountry);
-      listPlaces = await client.places.addAndReturnPlaces(place);
-      currentDisplayList = listPlaces;
-      notifyListeners();
-    } catch (e) {
-      debugPrint('$e');
-    }
-  }*/
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
@@ -163,7 +139,6 @@ class PaysModel extends ChangeNotifier {
           filteredValues: filtersPaysInvId,
           filterKey: item['name'],
           filterValue: item['detailId'],
-            //filterValue: item['id'],
           onSelected: (key, value) {
             selectedPaysInv = key;
             selectedPaysInvId = value;
@@ -186,7 +161,6 @@ class PaysModel extends ChangeNotifier {
           filteredKeys: filtersCATTs,
           filteredValues: filtersCATTId,
           filterKey: (item as Detail).mot,
-          //filterKey: (item as Countryatts).countryatt,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedCattInv = key;
@@ -199,7 +173,6 @@ class PaysModel extends ChangeNotifier {
           filteredKeys: filtersPATTs,
           filteredValues: filtersPATTId,
           filterKey: (item as Detail).mot,
-          //filterKey: (item as Placeatts).placeatt,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedPattInv = key;
@@ -212,7 +185,6 @@ class PaysModel extends ChangeNotifier {
           filteredKeys: filtersStars,
           filteredValues: filtersStarId,
           filterKey: (item as Detail).mot,
-          //filterKey: (item as Stars).star,
           filterValue: item.id!,
           onSelected: (key, value) {
             selectedStarInv = key;
@@ -259,23 +231,18 @@ class PaysModel extends ChangeNotifier {
     // データの一時保存処理
     confirm.selectedCountries = filtersPaysInv;
     confirm.selectedCountriesId = filtersPaysInvId;
-    print("pays:$filtersPaysInv");
 
     confirm.selectedPlaces = filtersPlaces;
     confirm.selectedPlacesId = filtersPlacesId;
-    print("places:$filtersPlaces");
 
     confirm.selectedATT = filtersCATTs;
     confirm.selectedATTId = filtersCATTId;
-    print("catt:$filtersCATTs");
 
     confirm.selectedPATT = filtersPATTs;
     confirm.selectedPATTId = filtersPATTId;
-    print("patt:$filtersPATTs");
 
     confirm.selectedStar = filtersStars;
     confirm.selectedStarId = filtersStarId;
-    print("stars:$filtersStars");
   }  
 
   String selectedPaysInv = '';

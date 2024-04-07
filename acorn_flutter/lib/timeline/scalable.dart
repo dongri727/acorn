@@ -3,7 +3,6 @@ import "package:acorn_flutter/search/multiple_search_page.dart";
 import "package:flutter/material.dart";
 import "../utils/tff_format.dart";
 import 'bloc_provider.dart';
-//import "menu_data.dart";
 import 'pont_data.dart';
 import "menu_section.dart";
 import "widget.dart";
@@ -125,7 +124,6 @@ class ScalableState extends State<Scalable> {
                                 ),
                               onPressed: () {
                                   timeline.gatherEntries(widget.principal);
-                                  print('${widget.principal} to timeline');
                                 }
                             ),
                           ),

@@ -12,7 +12,7 @@ class TimelineEntry {
   late String name;//文字表示
   Color accent = Colors.blueGrey; //labelの色
 
-  /// Each entry constitues an element of a tree:
+  /// Each entry constitutes an element of a tree:
   /// Eras are grouped into spanning positions and events are placed into the positions they belong to.
   TimelineEntry? parent;
   List<TimelineEntry> children = [];

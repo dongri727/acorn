@@ -7,13 +7,12 @@ class BlocProvider extends InheritedWidget {
   final Timeline timeline;
 
   const BlocProvider(
-      {Key? key,
+      {super.key,
         required Timeline t,
-        required Widget child,
+        required super.child,
         //TargetPlatform platform = TargetPlatform.iOS,
       })
-      : timeline = t,
-        super(key: key, child: child);
+      : timeline = t;
 
   @override
   updateShouldNotify(InheritedWidget oldWidget) => true;

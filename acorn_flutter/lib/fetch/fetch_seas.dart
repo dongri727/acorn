@@ -14,7 +14,6 @@ class FetchSeasRepository {
   }
 
   ///DBに新規seaを挿入・再取得･再描画
-  //todo 複数語を同時に挿入できるようにする
   addSeasAndFetch(String newSea) async {
     try {
       var seas = Seas(sea: newSea);

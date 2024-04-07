@@ -56,7 +56,7 @@ class IndexPage extends StatelessWidget {
                             Navigator.push<String>(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MultiSearchPage(),
+                                builder: (context) => const MultiSearchPage(),
                               ),
                             );
                           },

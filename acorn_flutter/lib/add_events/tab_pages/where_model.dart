@@ -44,12 +44,10 @@ class WhereModel extends ChangeNotifier {
   ///当時の国名
   List<Map<String, String>> displayListCountryatts = [];
   final List<String> _filtersCountryatts = <String>[];
-  //final List<int> _fltersCountryattsId = <int>[];
 
   ///当時の地名
   List<Map<String, String>> displayListPlaceatts = [];
   final List<String> _filtersPlaceatts = <String>[];
-  //final List<int> _filtersPlaceattsId = <int>[];
 
   List<dynamic> currentDisplayList = [];
 
@@ -106,8 +104,6 @@ class WhereModel extends ChangeNotifier {
       case 'Stars':
         await _fetchStarsRepository.fetchStarsInDetail();
         currentDisplayList = _fetchStarsRepository.listDetailStars;
-/*        await _fetchStarsRepository.fetchStars();
-        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
       case 'Current Place-name':
         await _fetchPlaceRepository.fetchPlaces(keyCountry);
@@ -156,8 +152,6 @@ class WhereModel extends ChangeNotifier {
       case 'Stars':
         await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
         currentDisplayList = _fetchStarsRepository.listDetailStars;
-/*        await _fetchStarsRepository.addStarsAndFetch(newStar);
-        currentDisplayList = _fetchStarsRepository.listStars;*/
         break;
 
         //keyCountryが取得されているので、国名付きで保存される。
@@ -202,11 +196,9 @@ class WhereModel extends ChangeNotifier {
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
             choiceSIKey: (item as Detail).mot,
-            //choiceSIKey: (item as Stars).star,
             onChoiceSISelected: (choiceKey) {
               chosenLocationPrecise = choiceKey;
               updateLocationPrecise(choiceKey);
-              print(choiceKey);
             });
       case 'Current Place-name':
         return buildChoiceSIFormat(
@@ -215,7 +207,6 @@ class WhereModel extends ChangeNotifier {
             onChoiceSISelected: (choiceKey) {
               chosenLocationPrecise = choiceKey;
               updateLocationPrecise(choiceKey);
-              print(choiceKey);
             });
       case 'Sea-name':
         return buildChoiceSIFormat(
@@ -224,7 +215,6 @@ class WhereModel extends ChangeNotifier {
             onChoiceSISelected: (choiceKey) {
               chosenLocationPrecise = choiceKey;
               updateLocationPrecise(choiceKey);
-              print(choiceKey);
             });
       case 'Country-name at that time':
         return buildChoiceFormat(
@@ -235,7 +225,6 @@ class WhereModel extends ChangeNotifier {
               chosenCatt = choiceKey;
               chosenCattId = choiceId;
               updateChosenCatt(choiceKey);
-              print(choiceKey);
             });
       case 'Place-name at that time':
         return buildChoiceFormat(
@@ -246,7 +235,6 @@ class WhereModel extends ChangeNotifier {
               chosenPatt = choiceKey;
               chosenPattId = choiceId;
               updateChosenPatt(choiceKey);
-              print(choiceKey);
             });
       default:
         return const SizedBox.shrink();
@@ -285,6 +273,5 @@ class WhereModel extends ChangeNotifier {
     confirm.x = double.parse((cx).toStringAsFixed(4));
     confirm.y = double.parse((cy).toStringAsFixed(4));
     confirm.z = double.parse((cz).toStringAsFixed(4));
-    print('save where');
   }
 }

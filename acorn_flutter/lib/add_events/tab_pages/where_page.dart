@@ -69,7 +69,6 @@ class WherePage extends StatelessWidget {
                                     options: model.options,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
-                                      print("selected: $value");
                                     }),
                               ),
                             ),
@@ -100,7 +99,6 @@ class WherePage extends StatelessWidget {
                                         options: model.ns,
                                         onChanged: (String? value) {
                                           model.selectedOption = value!;
-                                          print("selected: $value");
                                         }),
                                   ),
                                 ),
@@ -126,7 +124,6 @@ class WherePage extends StatelessWidget {
                                         options: model.ew,
                                         onChanged: (String? value) {
                                           model.selectedOption = value!;
-                                          print("selected: $value");
                                         }),
                                   ),
                                 ),

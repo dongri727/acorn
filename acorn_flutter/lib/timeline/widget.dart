@@ -1,11 +1,8 @@
-import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_page.dart';
 import 'package:acorn_flutter/timeline/pont_data.dart';
-import 'package:acorn_flutter/timeline/scalable.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
-import 'pont_data.dart';
 import 'timeline.dart';
 import 'render_widget.dart';
 import 'timeline_utils.dart';
@@ -21,7 +18,7 @@ class TimelineWidget extends StatefulWidget {
   final MenuItemData focusItem;
   //final List<Principal> _principal;
   final Timeline timeline;
-  const TimelineWidget(this.focusItem, /*this._principal,*/ this.timeline, {Key? key}) : super(key: key);
+  const TimelineWidget(this.focusItem, /*this._principal,*/ this.timeline, {super.key});
 
   @override
   TimelineWidgetState createState() => TimelineWidgetState();
@@ -191,10 +188,10 @@ class TimelineWidgetState extends State<TimelineWidget> {
                 children: <Widget>[
                   Container(
                     height: devicePadding.top,
-                    color: Color(0x99E9E9E9),
+                    color: const Color(0x99E9E9E9),
                   ),
                   Container(
-                      color: Color(0x99E9E9E9),
+                      color: const Color(0x99E9E9E9),
                       height: 56.0,
                       width: double.infinity,
                       child: Row(
@@ -208,7 +205,7 @@ class TimelineWidgetState extends State<TimelineWidget> {
                               onPressed: () {
                                 widget.timeline.isActive = false;
                                 //Navigator.of(context).pop();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MultiSearchPage()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const MultiSearchPage()));
                                 //return true;
                               },
                             ),
