@@ -1,9 +1,9 @@
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
-//import 'package:acorn_flutter/users/account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import 'users/sign_in_page.dart';
+import 'users/account_page.dart';
+import 'users/sign_in_page.dart';
 import 'utils/theme.dart';
 
 class CoverPage extends StatefulWidget {
@@ -100,10 +100,10 @@ class CoverPageState extends State<CoverPage> {
                     Navigator.push<String>(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const IndexPage(),
-/*                    builder: (context) => sessionManager.isSignedIn
+                        //builder: (context) => const IndexPage(),
+                   builder: (context) => sessionManager.isSignedIn
                         ? const AccountPage()
-                        : const SignInPage(),*/
+                        : const SignInPage(),
                       ),
                     );
                   }),

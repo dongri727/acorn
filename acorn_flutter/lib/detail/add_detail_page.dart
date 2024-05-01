@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
+import '../utils/navigation_button.dart';
 import 'detail_page.dart';
 
 class AddDetailPage extends StatelessWidget {
@@ -19,6 +20,14 @@ class AddDetailPage extends StatelessWidget {
       create: (_) => AddDetailModel(principalId: principalId),
       child: Consumer<AddDetailModel>(builder: (_, model, child) {
         return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.grey[200],
+            leading: const PopBackButton(
+              buttonText: 'back to the detail',
+            ),
+            leadingWidth: 150,
+            title: const Text('Add Keywords'),
+          ),
             body: SafeArea(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -108,8 +117,8 @@ class AddDetailPage extends StatelessWidget {
                   ),
                 )),
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                model.savePrincipalDetail();
+              onPressed: () async {
+                await model.savePrincipalDetail();
                 Navigator.of(context).pop();
                 },
               label: const Text('New Keyword Saved'),

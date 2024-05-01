@@ -1,7 +1,7 @@
 import 'package:acorn_flutter/utils/theme.dart';
 import 'package:flutter/material.dart';
 
-///Used for the Add Term Buttons on Input Pages.
+//Used for the Add Term Buttons on Input Pages.
 class ButtonFormat extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
