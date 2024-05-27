@@ -6,6 +6,7 @@ import 'package:acorn_client/acorn_client.dart';
 import '../../lists/where_options_list.dart';
 import 'dart:math' as math;
 import '../../utils/build_chips.dart';
+import '../serverpod_client.dart';
 
 class AddPlaceModel extends ChangeNotifier {
 
@@ -166,8 +167,6 @@ class AddPlaceModel extends ChangeNotifier {
   }
 
   Future<void> savePrecise(int principalId, String newPrecise) async {
-    // Serverpod client instance
-    var client = Client('http://localhost:8080/');
 
     try {
       var result = await client.principal.updatePrincipal(principalId, newPrecise);

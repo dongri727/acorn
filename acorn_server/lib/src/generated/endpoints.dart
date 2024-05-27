@@ -1748,6 +1748,31 @@ class Endpoints extends _i1.EndpointDispatch {
             params['principal'],
           ),
         ),
+        'updatePrincipal': _i1.MethodConnector(
+          name: 'updatePrincipal',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'newPrecise': _i1.ParameterDescription(
+              name: 'newPrecise',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i23.PrincipalEndpoint)
+                  .updatePrincipal(
+            session,
+            params['id'],
+            params['newPrecise'],
+          ),
+        ),
         'getPrincipal': _i1.MethodConnector(
           name: 'getPrincipal',
           params: {

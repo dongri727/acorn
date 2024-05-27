@@ -93,6 +93,7 @@ places:
   - getPlacesByIds:
 principal:
   - addPrincipal:
+  - updatePrincipal:
   - getPrincipal:
   - getPrincipalByPeriod:
   - getPrincipalByPrecise:
