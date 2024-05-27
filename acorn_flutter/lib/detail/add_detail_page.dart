@@ -119,9 +119,10 @@ class AddDetailPage extends StatelessWidget {
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () async {
                 await model.savePrincipalDetail();
+                if (!context.mounted) return;
                 Navigator.of(context).pop();
                 },
-              label: const Text('New Keyword Saved'),
+              label: const Text('Save New Keywords'),
             ));
       }),
     );

@@ -1,11 +1,13 @@
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/utils/navigation_button.dart';
+import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/tff_format.dart';
 import '../../../utils/card_format.dart';
 import 'add_detail_page.dart';
+import 'add_place_page.dart';
 import 'detail_model.dart';
 
 class DetailPage extends StatelessWidget {
@@ -38,6 +40,7 @@ class DetailPage extends StatelessWidget {
                               builder: (context) => AddDetailPage(principalId: principalData.id!),
                             ),
                           );
+                          if (!context.mounted) return;
                           Provider.of<DetailModel>(context, listen: false).fetchDetailBundled(principalData.id!);
                         },
                         label: const Text('add keywords')),
@@ -99,12 +102,43 @@ class DetailPage extends StatelessWidget {
                                         confirmText: principalData.location,
                                         confirmColor: const Color(0xFFF0E68C)),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ConfirmText(
-                                        confirmText: principalData.precise,
-                                        confirmColor: const Color(0xFF8fbc8f)),
-                                  ),
+
+                                  if (principalData.precise == '')
+                                    Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          const ConfirmText(
+                                              confirmText: 'more detailed place?',
+                                              confirmColor: Colors.yellow),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ShadowedContainer(
+                                              child: TextButton(
+                                                  onPressed: () async {
+                                                    await Navigator.push<String>(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => AddPlacePage(location: principalData.location),
+                                                      ),
+                                                    );
+                                                    if (!context.mounted) return;
+                                                    Provider.of<DetailModel>(context, listen: false).fetchDetailBundled(principalData.id!);
+                                                  },
+                                                  child: const Text('Show and Select your options'),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  else
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ConfirmText(
+                                          confirmText: principalData.precise,
+                                          confirmColor: const Color(0xFF8fbc8f)),
+                                    ),
                                 ],
                               ),
                             ),

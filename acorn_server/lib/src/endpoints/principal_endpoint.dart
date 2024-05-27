@@ -12,6 +12,16 @@ class PrincipalEndpoint extends Endpoint {
     return newId!;
   }
 
+    Future<bool> updatePrincipal(Session session, int id, String newPrecise) async {
+    var principal = await Principal.db.findById(session, id);
+    if (principal == null) {
+      return false; // IDに対応するレコードが見つからない場合
+    }
+    principal.precise = newPrecise;
+    var updatedPrincipal = await Principal.db.updateRow(session, principal);
+    return updatedPrincipal != null; // 更新が成功した場合はtrueを返す
+  }
+
   Future<List<Principal>> getPrincipal(Session session,
       {List<String>? keywords}) async {
     print("Getting principal with keywords: $keywords");

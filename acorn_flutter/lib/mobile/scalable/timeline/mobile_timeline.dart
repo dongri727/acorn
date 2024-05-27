@@ -3,13 +3,12 @@ import 'dart:math';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-import 'entry.dart';
-import 'timeline_utils.dart';
+import 'mobile_entry.dart';
+import 'mobile_timeline_utils.dart';
 
 typedef PaintCallback = Function();
 
-class Timeline {
+class TimelineM {
   /// Some aptly named constants for properly aligning the Timeline view.
   static const double lineWidth = 2.0;
   static const double lineSpacing = 10.0;
@@ -82,21 +81,21 @@ class Timeline {
   /// of the Timeline, depending on which elements are currently in focus.
   /// When there's enough space on the top/bottom, the Timeline will render a round button
   /// with an arrow to link to the next/previous element.
-  TimelineEntry? _nextEntry;
-  TimelineEntry? _renderNextEntry;
-  TimelineEntry? _prevEntry;
-  TimelineEntry? _renderPrevEntry;
+  TimelineEntryM? _nextEntry;
+  TimelineEntryM? _renderNextEntry;
+  TimelineEntryM? _prevEntry;
+  TimelineEntryM? _renderPrevEntry;
 
-  late List<TickColors> _tickColors;
+  late List<TickColorsM> _tickColors;
 
   /// All the [TimelineEntry]s that are loaded from disk at boot (in [loadFromBundle()]).
-  List<TimelineEntry> _entries = [];
+  List<TimelineEntryM> _entriesM = [];
 
   /// Callback set by [TimelineRenderWidget] when adding a reference to this object.
   /// It'll trigger [RenderBox.markNeedsPaint()].
   PaintCallback? onNeedPaint;
 
-  Timeline(this._platform) {
+  TimelineM(this._platform) {
     setViewport(start: 1536.0, end: 3072.0);
   }
 
@@ -112,10 +111,10 @@ class Timeline {
   bool get isInteracting => _isInteracting;
   bool get isActive => _isActive;
 
-  TimelineEntry? get nextEntry => _renderNextEntry;
-  TimelineEntry? get prevEntry => _renderPrevEntry;
-  List<TimelineEntry> get entries => _entries;
-  List<TickColors> get tickColors => _tickColors;
+  TimelineEntryM? get nextEntry => _renderNextEntry;
+  TimelineEntryM? get prevEntry => _renderPrevEntry;
+  List<TimelineEntryM> get entries => _entriesM;
+  List<TickColorsM> get tickColors => _tickColors;
 
   /// When a scale operation is detected, this setter is called:
   /// e.g. [_TimelineWidgetState.scaleStart()].
@@ -187,19 +186,16 @@ class Timeline {
     return _height == 0.0 ? 1.0 : _height / (end - start);
   }
 
-
-  /// This function will load from firestore,
   /// and populate all the [TimelineEntry]s.
-  ///
   List<Principal> _principal = [];
 
   List<Principal> get listPrincipal => _principal;
 
-  Future<List<TimelineEntry>> gatherEntries(principal) async {
+  Future<List<TimelineEntryM>> gatherEntries(principal) async {
 
     _principal = principal;
 
-    List<TimelineEntry> allEntries = [];
+    List<TimelineEntryM> allEntriesM = [];
     _tickColors = [];
 
     for (var principal in _principal){
@@ -208,46 +204,40 @@ class Timeline {
       /// Create the current entry and fill in the current date if it's
       /// an `material`, or look for the `start` property if it's a `Position` instead.
       /// Some entries will have a `start` element, but not an `end` specified.
-      TimelineEntry timelineEntry = TimelineEntry();
-        timelineEntry.type = TimelineEntryType.incident;
-        dynamic year = principal.point;
-        timelineEntry.start = year is int ? year.toDouble() : year;
+      TimelineEntryM timelineEntryM = TimelineEntryM();
+      timelineEntryM.type = TimelineEntryMType.incident;
+      dynamic year = principal.point;
+      timelineEntryM.start = year is int ? year.toDouble() : year;
 
-      TickColors tickColors = TickColors()
+      TickColorsM tickColors = TickColorsM()
         ..long = Colors.black
         ..short = Colors.black
         ..text = Colors.grey
-        //..start = timelineEntry.start
+      //..start = timelineEntry.start
         ..screenY = 0.0;
 
       _tickColors.add(tickColors);
 
-      timelineEntry.end = timelineEntry.start; //消したら怒られた
+      timelineEntryM.end = timelineEntryM.start; //消したら怒られた
 
 
       /// The label is a brief description for the current entry.
       /// labelの表示
-      timelineEntry.name = "${principal.annee}-${principal.month}-${principal.day} ${principal.affair}  ${principal.location} ${principal.precise}";
-      //}
+      timelineEntryM.name = "${principal.annee} ${principal.affair} ${principal.precise}";
 
       /// Add this entry to the list.
-      allEntries.add(timelineEntry);
-        }
-
-/*    /// sort the full list so they are in order of oldest to newest
-    allEntries.sort((TimelineEntry a, TimelineEntry b) {
-      return a.start.compareTo(b.start);
-    });*/
+      allEntriesM.add(timelineEntryM);
+    }
 
     _timeMin = double.maxFinite;
     _timeMax = -double.maxFinite;
 
     /// List for "root" entries, i.e. entries with no parents.
-    _entries = [];
+    _entriesM = [];
 
     /// Build up hierarchy (Position are grouped into "Spanning Position" and Events are placed into the Position they belong to).
     /// 消したら表示されない。
-    for (TimelineEntry entry in allEntries) {
+    for (TimelineEntryM entry in allEntriesM) {
       if (entry.start < _timeMin) {
         _timeMin = entry.start;
       }
@@ -255,10 +245,10 @@ class Timeline {
         _timeMax = entry.end;
       }
 
-      TimelineEntry? parent;
+      TimelineEntryM? parent;
       double minTimeline = double.maxFinite;
-      for (TimelineEntry checkEntry in allEntries) {
-        if (checkEntry.type == TimelineEntryType.era) {
+      for (TimelineEntryM checkEntry in allEntriesM) {
+        if (checkEntry.type == TimelineEntryMType.era) {
           double timeline = entry.start - checkEntry.start;
           double timelineEnd = entry.start - checkEntry.end;
           if (timeline > 0 && timelineEnd < 0 && timeline < minTimeline) {
@@ -273,10 +263,10 @@ class Timeline {
         parent.children.add(entry);
       } else {
         /// no parent, so this is a root entry.
-        _entries.add(entry);
+        _entriesM.add(entry);
       }
     }
-    return allEntries;
+    return allEntriesM;
   }
 
   /// Make sure that while scrolling we're within the correct timeline bounds.
@@ -328,7 +318,7 @@ class Timeline {
         bool animate = false}) {
     /// Calculate the current height.
     if (height != double.maxFinite) {
-      if (_height == 0.0 && _entries.isNotEmpty) {
+      if (_height == 0.0 && _entriesM.isNotEmpty) {
         double scale = height / (_end - _start);
         _start = _start - padding.top / scale;
         _end = _end + padding.bottom / scale;
@@ -428,8 +418,8 @@ class Timeline {
     }
   }
 
-  TickColors? findTickColors(double screen) {
-    for (TickColors color in _tickColors.reversed) {
+  TickColorsM? findTickColorsM(double screen) {
+    for (TickColorsM color in _tickColors.reversed) {
       if (screen >= color.screenY) {
         return color;
       }
@@ -506,7 +496,7 @@ class Timeline {
     _prevEntry = null;
     /// Advance the items hierarchy one level at a time.
     if (_advanceItems(
-        _entries, _gutterWidth + lineSpacing, scale, elapsed, animate, 0)) {
+        _entriesM, _gutterWidth + lineSpacing, scale, elapsed, animate, 0)) {
       doneRendering = false;
     }
 
@@ -575,21 +565,21 @@ class Timeline {
   }
 
   ///吹き出しサイズ
-  double bubbleHeight(TimelineEntry entry) {
-    return bubblePadding * 2.0 + bubbleTextHeight;
+  double bubbleHeight(TimelineEntryM entryM) {
+    return bubblePadding * 4.0 + bubbleTextHeight;
   }
 
   /// Advance entry [assets] with the current [elapsed] time.
-  bool _advanceItems(List<TimelineEntry> items, double x, double scale,
+  bool _advanceItems(List<TimelineEntryM> items, double x, double scale,
       double elapsed, bool animate, int depth) {
     bool stillAnimating = false;
     double lastEnd = -double.maxFinite;
     for (int i = 0; i < items.length; i++) {
-      TimelineEntry item = items[i];
+      TimelineEntryM item = items[i];
 
       double start = item.start - _renderStart;
       double end =
-      item.type == TimelineEntryType.era ? item.end - _renderStart : start;
+      item.type == TimelineEntryMType.era ? item.end - _renderStart : start;
 
       /// Vertical position for this element.
       double y = start * scale;
@@ -616,7 +606,7 @@ class Timeline {
 
           /// The best location for our label is occluded, lets see if we can bump it forward...
           &&
-          item.type == TimelineEntryType.era &&
+          item.type == TimelineEntryMType.era &&
           _lastEntryY + fadeAnimationStart < endY) {
         targetLabelY = _lastEntryY + fadeAnimationStart + 0.5;
       }
@@ -701,7 +691,7 @@ class Timeline {
         }
       }
 
-      if (item.type == TimelineEntryType.era &&
+      if (item.type == TimelineEntryMType.era &&
           y < 0 &&
           endY > _height &&
           depth > _offsetDepth) {

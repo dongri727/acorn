@@ -66,7 +66,7 @@ class IndexPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
+/*                      Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OutlinedButton(
                           onPressed: () {
@@ -102,7 +102,7 @@ class IndexPage extends StatelessWidget {
                             style: AcornTheme.textTheme.bodyLarge,
                           ),
                         ),
-                      ),
+                      ),*/
 
                     ],
                   )

@@ -10,8 +10,8 @@ class ButtonFormat extends StatelessWidget {
     required this.label,
     required this.onPressed,
 
-    Key? key,
-  }) :super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +132,37 @@ class _RadioButtonRowFormatState extends State<RadioButtonRowFormat> {
           ),
         );
       }).toList(),
+    );
+  }
+}
+
+//Used for the Add Term Buttons on Input Pages.
+class TextButtonFormat extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+  final Color color;
+
+  const TextButtonFormat ({
+    required this.label,
+    required this.onPressed,
+    required this.color,
+
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(label,
+          style: TextStyle(
+              fontSize: 18,
+            color: color,
+          ),
+        ),
+      ),
     );
   }
 }
