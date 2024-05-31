@@ -1,18 +1,20 @@
-import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/detail/detail_page.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/confirm_dialog.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/tff_format.dart';
+import '../utils/blank_text_format.dart';
+import '../utils/navigation_button.dart';
 import 'add_place_moddel.dart';
 
 
 class AddPlacePage extends StatelessWidget {
+  final int principalId;
   final String location;
 
-  const AddPlacePage({super.key, required this.location});
+  const AddPlacePage({super.key, required this.principalId, required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,14 @@ class AddPlacePage extends StatelessWidget {
       create: (_) => AddPlaceModel(keyCountry: location),
       child: Consumer<AddPlaceModel>(builder: (_, model, child) {
         return Scaffold(
+          appBar: AppBar (
+            backgroundColor: Colors.grey[200],
+            leading: const PopBackButton(
+              buttonText: 'back to the detail',
+            ),
+            leadingWidth: 150,
+            title: const Text('Add place where it happened'),
+          ),
             body: Container(
                 decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -47,6 +57,18 @@ class AddPlacePage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 20, 20, 60),
+                                    child: BlankTextFormat(
+                                        text: model.locationPrecise),
+                                  ),
+                                ],
+                              )),
                           Expanded(
                             flex: 1,
                             child: Column(
@@ -149,9 +171,13 @@ class AddPlacePage extends StatelessWidget {
                 )),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
-
+                model.savePrecise(principalId, model.locationPrecise);
+                if (!context.mounted) return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailPage(principalData: model.newData!)));
               },
-              label: const Text('Temporarily Save'),
+              label: const Text('save detailed location'),
             ));
       }),
     );

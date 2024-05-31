@@ -818,6 +818,19 @@ class EndpointPrincipal extends _i1.EndpointRef {
         },
       );
 
+  _i2.Future<_i24.Principal> updatePrincipalAndReturn(
+    int id,
+    String newPrecise,
+  ) =>
+      caller.callServerEndpoint<_i24.Principal>(
+        'principal',
+        'updatePrincipalAndReturn',
+        {
+          'id': id,
+          'newPrecise': newPrecise,
+        },
+      );
+
   _i2.Future<List<_i24.Principal>> getPrincipal({List<String>? keywords}) =>
       caller.callServerEndpoint<List<_i24.Principal>>(
         'principal',

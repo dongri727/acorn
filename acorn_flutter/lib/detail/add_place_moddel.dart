@@ -4,7 +4,7 @@ import 'package:acorn_flutter/fetch/fetch_stars.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../../lists/where_options_list.dart';
-import 'dart:math' as math;
+//import 'dart:math' as math;
 import '../../utils/build_chips.dart';
 import '../serverpod_client.dart';
 
@@ -21,6 +21,7 @@ class AddPlaceModel extends ChangeNotifier {
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchSeasRepository = FetchSeasRepository();
   }
+
 
   var newStar = '';
   var newPlace = '';
@@ -166,18 +167,16 @@ class AddPlaceModel extends ChangeNotifier {
     }
   }
 
-  Future<void> savePrecise(int principalId, String newPrecise) async {
-
+  Principal? newData;
+  Future<void> savePrecise(int principalId, String locationPrecise) async {
     try {
-      var result = await client.principal.updatePrincipal(principalId, newPrecise);
-      if (result) {
-        print('Update successful');
-      } else {
-        print('Update failed');
-      }
+      var updatedPrincipalData = await client.principal.updatePrincipalAndReturn(principalId, locationPrecise);
+      newData = updatedPrincipalData;
+      print(newData);
+      notifyListeners();
     } catch (e) {
       print('Error updating precise: $e');
     }
   }
-
 }
+

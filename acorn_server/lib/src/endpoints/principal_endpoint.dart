@@ -22,6 +22,28 @@ class PrincipalEndpoint extends Endpoint {
     return updatedPrincipal != null; // 更新が成功した場合はtrueを返す
   }
 
+  Future<Principal> updatePrincipalAndReturn(Session session, int id, String newPrecise) async {
+  var principal = await Principal.db.findById(session, id);
+  if (principal == null) {
+    throw Exception('Principal not found'); // IDに対応するレコードが見つからない場合は例外を投げる
+  }
+  principal.precise = newPrecise;
+  var updatedPrincipal = await Principal.db.updateRow(session, principal);
+  if (updatedPrincipal == null) {
+    throw Exception('Failed to update principal'); // 更新が失敗した場合は例外を投げる
+  }
+
+      // 更新が成功した場合は、更新されたレコードを取得して返す
+    var updatedRecord = await Principal.db.findById(session, id);
+    if (updatedRecord == null) {
+      throw Exception('Failed to fetch updated principal'); // 更新後にレコードが取得できない場合
+    }
+
+    return updatedRecord;
+  }
+
+
+
   Future<List<Principal>> getPrincipal(Session session,
       {List<String>? keywords}) async {
     print("Getting principal with keywords: $keywords");

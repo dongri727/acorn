@@ -13,7 +13,7 @@ import 'detail_model.dart';
 class DetailPage extends StatelessWidget {
   final Principal principalData;
 
-  const DetailPage({super.key, required this.principalData}) ;
+  const DetailPage({super.key, required this.principalData});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class DetailPage extends StatelessWidget {
                                         confirmColor: const Color(0xFFF0E68C)),
                                   ),
 
-                                  if (principalData.precise == '')
+                                  if (principalData.precise.trim().isEmpty)
                                     Padding(
                                         padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -112,20 +112,20 @@ class DetailPage extends StatelessWidget {
                                               confirmText: 'more detailed place?',
                                               confirmColor: Colors.yellow),
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.all(20.0),
                                             child: ShadowedContainer(
                                               child: TextButton(
                                                   onPressed: () async {
-                                                    await Navigator.push<String>(
+                                                    final result = await Navigator.push<String>(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) => AddPlacePage(location: principalData.location),
+                                                        builder: (context) => AddPlacePage(principalId: principalData.id!, location: principalData.location),
                                                       ),
                                                     );
                                                     if (!context.mounted) return;
                                                     Provider.of<DetailModel>(context, listen: false).fetchDetailBundled(principalData.id!);
                                                   },
-                                                  child: const Text('Show and Select your options'),
+                                                  child: const Text('Select Place Option'),
                                               ),
                                             ),
                                           ),
@@ -182,7 +182,6 @@ class DetailPage extends StatelessWidget {
                                         30, 8, 30, 8),
                                     child: ListView.builder(
                                         shrinkWrap: true,
-                                        //physics: const NeverScrollableScrollPhysics(),
                                         itemCount: model.listDetail.length,
                                         itemBuilder: (context, index) {
                                           return TermCard(

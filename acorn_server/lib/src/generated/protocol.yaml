@@ -94,6 +94,7 @@ places:
 principal:
   - addPrincipal:
   - updatePrincipal:
+  - updatePrincipalAndReturn:
   - getPrincipal:
   - getPrincipalByPeriod:
   - getPrincipalByPrecise:
