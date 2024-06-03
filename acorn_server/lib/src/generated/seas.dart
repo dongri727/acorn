@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Seas extends _i1.TableRow {
+abstract class Seas extends _i1.TableRow implements _i1.ProtocolSerialization {
   Seas._({
     int? id,
     required this.sea,
@@ -21,13 +21,10 @@ abstract class Seas extends _i1.TableRow {
     required String sea,
   }) = _SeasImpl;
 
-  factory Seas.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Seas.fromJson(Map<String, dynamic> jsonSerialization) {
     return Seas(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      sea: serializationManager.deserialize<String>(jsonSerialization['sea']),
+      id: jsonSerialization['id'] as int?,
+      sea: jsonSerialization['sea'] as String,
     );
   }
 
@@ -53,155 +50,11 @@ abstract class Seas extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'sea': sea,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'sea': sea,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'sea':
-        sea = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Seas>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<SeasTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Seas>(
-      where: where != null ? where(Seas.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Seas?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<SeasTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Seas>(
-      where: where != null ? where(Seas.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Seas?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Seas>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<SeasTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Seas>(
-      where: where(Seas.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Seas row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Seas row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Seas row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<SeasTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Seas>(
-      where: where != null ? where(Seas.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static SeasInclude include() {
@@ -226,6 +79,11 @@ abstract class Seas extends _i1.TableRow {
       orderByList: orderByList?.call(Seas.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -268,9 +126,6 @@ class SeasTable extends _i1.Table {
         sea,
       ];
 }
-
-@Deprecated('Use SeasTable.t instead.')
-SeasTable tSeas = SeasTable();
 
 class SeasInclude extends _i1.IncludeObject {
   SeasInclude._();
@@ -315,7 +170,7 @@ class SeasRepository {
     _i1.OrderByListBuilder<SeasTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Seas>(
+    return session.db.find<Seas>(
       where: where?.call(Seas.t),
       orderBy: orderBy?.call(Seas.t),
       orderByList: orderByList?.call(Seas.t),
@@ -335,7 +190,7 @@ class SeasRepository {
     _i1.OrderByListBuilder<SeasTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Seas>(
+    return session.db.findFirstRow<Seas>(
       where: where?.call(Seas.t),
       orderBy: orderBy?.call(Seas.t),
       orderByList: orderByList?.call(Seas.t),
@@ -350,7 +205,7 @@ class SeasRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Seas>(
+    return session.db.findById<Seas>(
       id,
       transaction: transaction,
     );
@@ -361,7 +216,7 @@ class SeasRepository {
     List<Seas> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Seas>(
+    return session.db.insert<Seas>(
       rows,
       transaction: transaction,
     );
@@ -372,7 +227,7 @@ class SeasRepository {
     Seas row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Seas>(
+    return session.db.insertRow<Seas>(
       row,
       transaction: transaction,
     );
@@ -384,7 +239,7 @@ class SeasRepository {
     _i1.ColumnSelections<SeasTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Seas>(
+    return session.db.update<Seas>(
       rows,
       columns: columns?.call(Seas.t),
       transaction: transaction,
@@ -397,41 +252,41 @@ class SeasRepository {
     _i1.ColumnSelections<SeasTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Seas>(
+    return session.db.updateRow<Seas>(
       row,
       columns: columns?.call(Seas.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Seas>> delete(
     _i1.Session session,
     List<Seas> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Seas>(
+    return session.db.delete<Seas>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Seas> deleteRow(
     _i1.Session session,
     Seas row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Seas>(
+    return session.db.deleteRow<Seas>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Seas>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<SeasTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Seas>(
+    return session.db.deleteWhere<Seas>(
       where: where(Seas.t),
       transaction: transaction,
     );
@@ -443,7 +298,7 @@ class SeasRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Seas>(
+    return session.db.count<Seas>(
       where: where?.call(Seas.t),
       limit: limit,
       transaction: transaction,

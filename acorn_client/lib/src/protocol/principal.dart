@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Principal extends _i1.SerializableEntity {
+abstract class Principal implements _i1.SerializableModel {
   Principal._({
     this.id,
     required this.period,
@@ -35,25 +35,17 @@ abstract class Principal extends _i1.SerializableEntity {
     required String precise,
   }) = _PrincipalImpl;
 
-  factory Principal.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Principal.fromJson(Map<String, dynamic> jsonSerialization) {
     return Principal(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      period:
-          serializationManager.deserialize<String>(jsonSerialization['period']),
-      annee:
-          serializationManager.deserialize<String>(jsonSerialization['annee']),
-      month: serializationManager.deserialize<int>(jsonSerialization['month']),
-      day: serializationManager.deserialize<int>(jsonSerialization['day']),
-      point: serializationManager.deserialize<int>(jsonSerialization['point']),
-      affair:
-          serializationManager.deserialize<String>(jsonSerialization['affair']),
-      location: serializationManager
-          .deserialize<String>(jsonSerialization['location']),
-      precise: serializationManager
-          .deserialize<String>(jsonSerialization['precise']),
+      id: jsonSerialization['id'] as int?,
+      period: jsonSerialization['period'] as String,
+      annee: jsonSerialization['annee'] as String,
+      month: jsonSerialization['month'] as int,
+      day: jsonSerialization['day'] as int,
+      point: jsonSerialization['point'] as int,
+      affair: jsonSerialization['affair'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
     );
   }
 
@@ -102,6 +94,11 @@ abstract class Principal extends _i1.SerializableEntity {
       'location': location,
       'precise': precise,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

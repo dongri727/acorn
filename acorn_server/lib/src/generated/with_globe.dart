@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class WithGlobe extends _i1.TableRow {
+abstract class WithGlobe extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   WithGlobe._({
     int? id,
     required this.principalId,
@@ -37,30 +38,18 @@ abstract class WithGlobe extends _i1.TableRow {
     required double coefficient,
   }) = _WithGlobeImpl;
 
-  factory WithGlobe.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory WithGlobe.fromJson(Map<String, dynamic> jsonSerialization) {
     return WithGlobe(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      annee:
-          serializationManager.deserialize<String>(jsonSerialization['annee']),
-      affair:
-          serializationManager.deserialize<String>(jsonSerialization['affair']),
-      location: serializationManager
-          .deserialize<String>(jsonSerialization['location']),
-      precise: serializationManager
-          .deserialize<String>(jsonSerialization['precise']),
-      xCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['xCoordinate']),
-      yCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['yCoordinate']),
-      zCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['zCoordinate']),
-      coefficient: serializationManager
-          .deserialize<double>(jsonSerialization['coefficient']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      annee: jsonSerialization['annee'] as String,
+      affair: jsonSerialization['affair'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
+      xCoordinate: (jsonSerialization['xCoordinate'] as num).toDouble(),
+      yCoordinate: (jsonSerialization['yCoordinate'] as num).toDouble(),
+      zCoordinate: (jsonSerialization['zCoordinate'] as num).toDouble(),
+      coefficient: (jsonSerialization['coefficient'] as num).toDouble(),
     );
   }
 
@@ -118,24 +107,7 @@ abstract class WithGlobe extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'annee': annee,
-      'affair': affair,
-      'location': location,
-      'precise': precise,
-      'xCoordinate': xCoordinate,
-      'yCoordinate': yCoordinate,
-      'zCoordinate': zCoordinate,
-      'coefficient': coefficient,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
@@ -148,165 +120,6 @@ abstract class WithGlobe extends _i1.TableRow {
       'zCoordinate': zCoordinate,
       'coefficient': coefficient,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'annee':
-        annee = value;
-        return;
-      case 'affair':
-        affair = value;
-        return;
-      case 'location':
-        location = value;
-        return;
-      case 'precise':
-        precise = value;
-        return;
-      case 'xCoordinate':
-        xCoordinate = value;
-        return;
-      case 'yCoordinate':
-        yCoordinate = value;
-        return;
-      case 'zCoordinate':
-        zCoordinate = value;
-        return;
-      case 'coefficient':
-        coefficient = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<WithGlobe>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithGlobeTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<WithGlobe>(
-      where: where != null ? where(WithGlobe.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<WithGlobe?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithGlobeTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<WithGlobe>(
-      where: where != null ? where(WithGlobe.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<WithGlobe?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<WithGlobe>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<WithGlobeTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<WithGlobe>(
-      where: where(WithGlobe.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    WithGlobe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    WithGlobe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    WithGlobe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithGlobeTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<WithGlobe>(
-      where: where != null ? where(WithGlobe.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static WithGlobeInclude include() {
@@ -331,6 +144,11 @@ abstract class WithGlobe extends _i1.TableRow {
       orderByList: orderByList?.call(WithGlobe.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -462,9 +280,6 @@ class WithGlobeTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use WithGlobeTable.t instead.')
-WithGlobeTable tWithGlobe = WithGlobeTable();
-
 class WithGlobeInclude extends _i1.IncludeObject {
   WithGlobeInclude._();
 
@@ -508,7 +323,7 @@ class WithGlobeRepository {
     _i1.OrderByListBuilder<WithGlobeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<WithGlobe>(
+    return session.db.find<WithGlobe>(
       where: where?.call(WithGlobe.t),
       orderBy: orderBy?.call(WithGlobe.t),
       orderByList: orderByList?.call(WithGlobe.t),
@@ -528,7 +343,7 @@ class WithGlobeRepository {
     _i1.OrderByListBuilder<WithGlobeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<WithGlobe>(
+    return session.db.findFirstRow<WithGlobe>(
       where: where?.call(WithGlobe.t),
       orderBy: orderBy?.call(WithGlobe.t),
       orderByList: orderByList?.call(WithGlobe.t),
@@ -543,7 +358,7 @@ class WithGlobeRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<WithGlobe>(
+    return session.db.findById<WithGlobe>(
       id,
       transaction: transaction,
     );
@@ -554,7 +369,7 @@ class WithGlobeRepository {
     List<WithGlobe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<WithGlobe>(
+    return session.db.insert<WithGlobe>(
       rows,
       transaction: transaction,
     );
@@ -565,7 +380,7 @@ class WithGlobeRepository {
     WithGlobe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<WithGlobe>(
+    return session.db.insertRow<WithGlobe>(
       row,
       transaction: transaction,
     );
@@ -577,7 +392,7 @@ class WithGlobeRepository {
     _i1.ColumnSelections<WithGlobeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<WithGlobe>(
+    return session.db.update<WithGlobe>(
       rows,
       columns: columns?.call(WithGlobe.t),
       transaction: transaction,
@@ -590,41 +405,41 @@ class WithGlobeRepository {
     _i1.ColumnSelections<WithGlobeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<WithGlobe>(
+    return session.db.updateRow<WithGlobe>(
       row,
       columns: columns?.call(WithGlobe.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<WithGlobe>> delete(
     _i1.Session session,
     List<WithGlobe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<WithGlobe>(
+    return session.db.delete<WithGlobe>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<WithGlobe> deleteRow(
     _i1.Session session,
     WithGlobe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<WithGlobe>(
+    return session.db.deleteRow<WithGlobe>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<WithGlobe>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<WithGlobeTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<WithGlobe>(
+    return session.db.deleteWhere<WithGlobe>(
       where: where(WithGlobe.t),
       transaction: transaction,
     );
@@ -636,7 +451,7 @@ class WithGlobeRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<WithGlobe>(
+    return session.db.count<WithGlobe>(
       where: where?.call(WithGlobe.t),
       limit: limit,
       transaction: transaction,

@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class CountryInvolved extends _i1.SerializableEntity {
+abstract class CountryInvolved implements _i1.SerializableModel {
   CountryInvolved._({
     this.id,
     required this.principalId,
@@ -23,16 +23,11 @@ abstract class CountryInvolved extends _i1.SerializableEntity {
     required int paysId,
   }) = _CountryInvolvedImpl;
 
-  factory CountryInvolved.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory CountryInvolved.fromJson(Map<String, dynamic> jsonSerialization) {
     return CountryInvolved(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      paysId:
-          serializationManager.deserialize<int>(jsonSerialization['paysId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      paysId: jsonSerialization['paysId'] as int,
     );
   }
 
@@ -57,6 +52,11 @@ abstract class CountryInvolved extends _i1.SerializableEntity {
       'principalId': principalId,
       'paysId': paysId,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

@@ -67,7 +67,7 @@ import 'package:acorn_server/src/generated/terms.dart' as _i56;
 import 'package:acorn_server/src/generated/universe.dart' as _i57;
 import 'package:acorn_server/src/generated/with_globe.dart' as _i58;
 import 'package:acorn_server/src/generated/with_map.dart' as _i59;
-import 'package:serverpod_auth_server/module.dart' as _i60;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i60;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override

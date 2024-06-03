@@ -39,7 +39,7 @@ import 'package:acorn_client/src/protocol/terms.dart' as _i28;
 import 'package:acorn_client/src/protocol/universe.dart' as _i29;
 import 'package:acorn_client/src/protocol/with_globe.dart' as _i30;
 import 'package:acorn_client/src/protocol/with_map.dart' as _i31;
-import 'package:serverpod_auth_client/module.dart' as _i32;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i32;
 import 'protocol.dart' as _i33;
 
 /// {@category Endpoint}
@@ -1199,6 +1199,12 @@ class Client extends _i1.ServerpodClient {
     _i1.AuthenticationKeyManager? authenticationKeyManager,
     Duration? streamingConnectionTimeout,
     Duration? connectionTimeout,
+    Function(
+      _i1.MethodCallContext,
+      Object,
+      StackTrace,
+    )? onFailedCall,
+    Function(_i1.MethodCallContext)? onSucceededCall,
   }) : super(
           host,
           _i33.Protocol(),
@@ -1206,6 +1212,8 @@ class Client extends _i1.ServerpodClient {
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
+          onFailedCall: onFailedCall,
+          onSucceededCall: onSucceededCall,
         ) {
     countryInvolved = EndpointCountryInvolved(this);
     categories = EndpointCategories(this);

@@ -11,7 +11,7 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'package:serverpod_auth_server/module.dart' as _i3;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'c_involved.dart' as _i4;
 import 'categories.dart' as _i5;
 import 'catts_involved.dart' as _i6;
@@ -107,8 +107,6 @@ class Protocol extends _i1.SerializationManagerServer {
 
   factory Protocol() => _instance;
 
-  static final Map<Type, _i1.constructor> customConstructors = {};
-
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
@@ -120,7 +118,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'categories_id_seq\'::regclass)',
@@ -158,20 +156,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'catts_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'cattId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -202,20 +200,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'country_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'paysId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -246,7 +244,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'countryatts_id_seq\'::regclass)',
@@ -284,7 +282,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'detail_id_seq\'::regclass)',
@@ -328,7 +326,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'oceans_id_seq\'::regclass)',
@@ -366,7 +364,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'organisations_id_seq\'::regclass)',
@@ -404,20 +402,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'patts_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'pattId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -448,7 +446,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'pays_id_seq\'::regclass)',
@@ -486,7 +484,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'people_id_seq\'::regclass)',
@@ -524,20 +522,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'place_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'placeId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -568,7 +566,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'placeatts_id_seq\'::regclass)',
@@ -606,7 +604,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'places_id_seq\'::regclass)',
@@ -650,7 +648,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_id_seq\'::regclass)',
@@ -669,19 +667,19 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'month',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'day',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'point',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -756,20 +754,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_categories_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'categoryId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -800,20 +798,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_catt_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'cattId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -844,20 +842,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_detail_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'detailId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -888,20 +886,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_orgs_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'orgId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -932,20 +930,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_patt_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'pattId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -976,20 +974,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_people_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'personId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1020,20 +1018,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_terms_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'termId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1064,20 +1062,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'principal_user_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'userId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1108,7 +1106,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'seas_id_seq\'::regclass)',
@@ -1146,7 +1144,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'stars_id_seq\'::regclass)',
@@ -1184,20 +1182,20 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'stars_involved_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'starId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1228,7 +1226,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'terms_id_seq\'::regclass)',
@@ -1266,7 +1264,7 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'universe_id_seq\'::regclass)',
@@ -1304,14 +1302,14 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'with_globe_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1390,14 +1388,14 @@ class Protocol extends _i1.SerializationManagerServer {
       columns: [
         _i2.ColumnDefinition(
           name: 'id',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'with_map_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'principalId',
-          columnType: _i2.ColumnType.integer,
+          columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
         ),
@@ -1472,203 +1470,186 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (customConstructors.containsKey(t)) {
-      return customConstructors[t]!(data, this) as T;
-    }
     if (t == _i4.CountryInvolved) {
-      return _i4.CountryInvolved.fromJson(data, this) as T;
+      return _i4.CountryInvolved.fromJson(data) as T;
     }
     if (t == _i5.Categories) {
-      return _i5.Categories.fromJson(data, this) as T;
+      return _i5.Categories.fromJson(data) as T;
     }
     if (t == _i6.CattsInvolved) {
-      return _i6.CattsInvolved.fromJson(data, this) as T;
+      return _i6.CattsInvolved.fromJson(data) as T;
     }
     if (t == _i7.Countryatts) {
-      return _i7.Countryatts.fromJson(data, this) as T;
+      return _i7.Countryatts.fromJson(data) as T;
     }
     if (t == _i8.Detail) {
-      return _i8.Detail.fromJson(data, this) as T;
+      return _i8.Detail.fromJson(data) as T;
     }
     if (t == _i9.MyClass) {
-      return _i9.MyClass.fromJson(data, this) as T;
+      return _i9.MyClass.fromJson(data) as T;
     }
     if (t == _i10.Oceans) {
-      return _i10.Oceans.fromJson(data, this) as T;
+      return _i10.Oceans.fromJson(data) as T;
     }
     if (t == _i11.Organisations) {
-      return _i11.Organisations.fromJson(data, this) as T;
+      return _i11.Organisations.fromJson(data) as T;
     }
     if (t == _i12.PrincipalUser) {
-      return _i12.PrincipalUser.fromJson(data, this) as T;
+      return _i12.PrincipalUser.fromJson(data) as T;
     }
     if (t == _i13.PrincipalCategories) {
-      return _i13.PrincipalCategories.fromJson(data, this) as T;
+      return _i13.PrincipalCategories.fromJson(data) as T;
     }
     if (t == _i14.PrincipalCatt) {
-      return _i14.PrincipalCatt.fromJson(data, this) as T;
+      return _i14.PrincipalCatt.fromJson(data) as T;
     }
     if (t == _i15.PrincipalDetail) {
-      return _i15.PrincipalDetail.fromJson(data, this) as T;
+      return _i15.PrincipalDetail.fromJson(data) as T;
     }
     if (t == _i16.PlaceInvolved) {
-      return _i16.PlaceInvolved.fromJson(data, this) as T;
+      return _i16.PlaceInvolved.fromJson(data) as T;
     }
     if (t == _i17.PrincipalOrgs) {
-      return _i17.PrincipalOrgs.fromJson(data, this) as T;
+      return _i17.PrincipalOrgs.fromJson(data) as T;
     }
     if (t == _i18.PrincipalPatt) {
-      return _i18.PrincipalPatt.fromJson(data, this) as T;
+      return _i18.PrincipalPatt.fromJson(data) as T;
     }
     if (t == _i19.PrincipalPeople) {
-      return _i19.PrincipalPeople.fromJson(data, this) as T;
+      return _i19.PrincipalPeople.fromJson(data) as T;
     }
     if (t == _i20.PrincipalTerms) {
-      return _i20.PrincipalTerms.fromJson(data, this) as T;
+      return _i20.PrincipalTerms.fromJson(data) as T;
     }
     if (t == _i21.PattsInvolved) {
-      return _i21.PattsInvolved.fromJson(data, this) as T;
+      return _i21.PattsInvolved.fromJson(data) as T;
     }
     if (t == _i22.Pays) {
-      return _i22.Pays.fromJson(data, this) as T;
+      return _i22.Pays.fromJson(data) as T;
     }
     if (t == _i23.People) {
-      return _i23.People.fromJson(data, this) as T;
+      return _i23.People.fromJson(data) as T;
     }
     if (t == _i24.Placeatts) {
-      return _i24.Placeatts.fromJson(data, this) as T;
+      return _i24.Placeatts.fromJson(data) as T;
     }
     if (t == _i25.Places) {
-      return _i25.Places.fromJson(data, this) as T;
+      return _i25.Places.fromJson(data) as T;
     }
     if (t == _i26.Principal) {
-      return _i26.Principal.fromJson(data, this) as T;
+      return _i26.Principal.fromJson(data) as T;
     }
     if (t == _i27.Seas) {
-      return _i27.Seas.fromJson(data, this) as T;
+      return _i27.Seas.fromJson(data) as T;
     }
     if (t == _i28.Stars) {
-      return _i28.Stars.fromJson(data, this) as T;
+      return _i28.Stars.fromJson(data) as T;
     }
     if (t == _i29.StarsInvolved) {
-      return _i29.StarsInvolved.fromJson(data, this) as T;
+      return _i29.StarsInvolved.fromJson(data) as T;
     }
     if (t == _i30.Terms) {
-      return _i30.Terms.fromJson(data, this) as T;
+      return _i30.Terms.fromJson(data) as T;
     }
     if (t == _i31.Universe) {
-      return _i31.Universe.fromJson(data, this) as T;
+      return _i31.Universe.fromJson(data) as T;
     }
     if (t == _i32.WithGlobe) {
-      return _i32.WithGlobe.fromJson(data, this) as T;
+      return _i32.WithGlobe.fromJson(data) as T;
     }
     if (t == _i33.WithMap) {
-      return _i33.WithMap.fromJson(data, this) as T;
+      return _i33.WithMap.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.CountryInvolved?>()) {
-      return (data != null ? _i4.CountryInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i4.CountryInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i5.Categories?>()) {
-      return (data != null ? _i5.Categories.fromJson(data, this) : null) as T;
+      return (data != null ? _i5.Categories.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i6.CattsInvolved?>()) {
-      return (data != null ? _i6.CattsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i6.CattsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i7.Countryatts?>()) {
-      return (data != null ? _i7.Countryatts.fromJson(data, this) : null) as T;
+      return (data != null ? _i7.Countryatts.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i8.Detail?>()) {
-      return (data != null ? _i8.Detail.fromJson(data, this) : null) as T;
+      return (data != null ? _i8.Detail.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i9.MyClass?>()) {
-      return (data != null ? _i9.MyClass.fromJson(data, this) : null) as T;
+      return (data != null ? _i9.MyClass.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i10.Oceans?>()) {
-      return (data != null ? _i10.Oceans.fromJson(data, this) : null) as T;
+      return (data != null ? _i10.Oceans.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i11.Organisations?>()) {
-      return (data != null ? _i11.Organisations.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i11.Organisations.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i12.PrincipalUser?>()) {
-      return (data != null ? _i12.PrincipalUser.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i12.PrincipalUser.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i13.PrincipalCategories?>()) {
-      return (data != null
-          ? _i13.PrincipalCategories.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i13.PrincipalCategories.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i14.PrincipalCatt?>()) {
-      return (data != null ? _i14.PrincipalCatt.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i14.PrincipalCatt.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i15.PrincipalDetail?>()) {
-      return (data != null ? _i15.PrincipalDetail.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i15.PrincipalDetail.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i16.PlaceInvolved?>()) {
-      return (data != null ? _i16.PlaceInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i16.PlaceInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i17.PrincipalOrgs?>()) {
-      return (data != null ? _i17.PrincipalOrgs.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i17.PrincipalOrgs.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i18.PrincipalPatt?>()) {
-      return (data != null ? _i18.PrincipalPatt.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i18.PrincipalPatt.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i19.PrincipalPeople?>()) {
-      return (data != null ? _i19.PrincipalPeople.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i19.PrincipalPeople.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i20.PrincipalTerms?>()) {
-      return (data != null ? _i20.PrincipalTerms.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i20.PrincipalTerms.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i21.PattsInvolved?>()) {
-      return (data != null ? _i21.PattsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i21.PattsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i22.Pays?>()) {
-      return (data != null ? _i22.Pays.fromJson(data, this) : null) as T;
+      return (data != null ? _i22.Pays.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i23.People?>()) {
-      return (data != null ? _i23.People.fromJson(data, this) : null) as T;
+      return (data != null ? _i23.People.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i24.Placeatts?>()) {
-      return (data != null ? _i24.Placeatts.fromJson(data, this) : null) as T;
+      return (data != null ? _i24.Placeatts.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i25.Places?>()) {
-      return (data != null ? _i25.Places.fromJson(data, this) : null) as T;
+      return (data != null ? _i25.Places.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i26.Principal?>()) {
-      return (data != null ? _i26.Principal.fromJson(data, this) : null) as T;
+      return (data != null ? _i26.Principal.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i27.Seas?>()) {
-      return (data != null ? _i27.Seas.fromJson(data, this) : null) as T;
+      return (data != null ? _i27.Seas.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i28.Stars?>()) {
-      return (data != null ? _i28.Stars.fromJson(data, this) : null) as T;
+      return (data != null ? _i28.Stars.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i29.StarsInvolved?>()) {
-      return (data != null ? _i29.StarsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i29.StarsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i30.Terms?>()) {
-      return (data != null ? _i30.Terms.fromJson(data, this) : null) as T;
+      return (data != null ? _i30.Terms.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i31.Universe?>()) {
-      return (data != null ? _i31.Universe.fromJson(data, this) : null) as T;
+      return (data != null ? _i31.Universe.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i32.WithGlobe?>()) {
-      return (data != null ? _i32.WithGlobe.fromJson(data, this) : null) as T;
+      return (data != null ? _i32.WithGlobe.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i33.WithMap?>()) {
-      return (data != null ? _i33.WithMap.fromJson(data, this) : null) as T;
+      return (data != null ? _i33.WithMap.fromJson(data) : null) as T;
     }
     if (t == List<_i34.CountryInvolved>) {
       return (data as List)
@@ -1906,10 +1887,10 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
       return _i2.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 

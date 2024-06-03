@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Stars extends _i1.TableRow {
+abstract class Stars extends _i1.TableRow implements _i1.ProtocolSerialization {
   Stars._({
     int? id,
     required this.star,
@@ -21,13 +21,10 @@ abstract class Stars extends _i1.TableRow {
     required String star,
   }) = _StarsImpl;
 
-  factory Stars.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Stars.fromJson(Map<String, dynamic> jsonSerialization) {
     return Stars(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      star: serializationManager.deserialize<String>(jsonSerialization['star']),
+      id: jsonSerialization['id'] as int?,
+      star: jsonSerialization['star'] as String,
     );
   }
 
@@ -53,155 +50,11 @@ abstract class Stars extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'star': star,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'star': star,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'star':
-        star = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Stars>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<StarsTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Stars>(
-      where: where != null ? where(Stars.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Stars?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<StarsTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Stars>(
-      where: where != null ? where(Stars.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Stars?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Stars>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<StarsTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Stars>(
-      where: where(Stars.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Stars row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Stars row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Stars row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<StarsTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Stars>(
-      where: where != null ? where(Stars.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static StarsInclude include() {
@@ -226,6 +79,11 @@ abstract class Stars extends _i1.TableRow {
       orderByList: orderByList?.call(Stars.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -268,9 +126,6 @@ class StarsTable extends _i1.Table {
         star,
       ];
 }
-
-@Deprecated('Use StarsTable.t instead.')
-StarsTable tStars = StarsTable();
 
 class StarsInclude extends _i1.IncludeObject {
   StarsInclude._();
@@ -315,7 +170,7 @@ class StarsRepository {
     _i1.OrderByListBuilder<StarsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Stars>(
+    return session.db.find<Stars>(
       where: where?.call(Stars.t),
       orderBy: orderBy?.call(Stars.t),
       orderByList: orderByList?.call(Stars.t),
@@ -335,7 +190,7 @@ class StarsRepository {
     _i1.OrderByListBuilder<StarsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Stars>(
+    return session.db.findFirstRow<Stars>(
       where: where?.call(Stars.t),
       orderBy: orderBy?.call(Stars.t),
       orderByList: orderByList?.call(Stars.t),
@@ -350,7 +205,7 @@ class StarsRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Stars>(
+    return session.db.findById<Stars>(
       id,
       transaction: transaction,
     );
@@ -361,7 +216,7 @@ class StarsRepository {
     List<Stars> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Stars>(
+    return session.db.insert<Stars>(
       rows,
       transaction: transaction,
     );
@@ -372,7 +227,7 @@ class StarsRepository {
     Stars row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Stars>(
+    return session.db.insertRow<Stars>(
       row,
       transaction: transaction,
     );
@@ -384,7 +239,7 @@ class StarsRepository {
     _i1.ColumnSelections<StarsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Stars>(
+    return session.db.update<Stars>(
       rows,
       columns: columns?.call(Stars.t),
       transaction: transaction,
@@ -397,41 +252,41 @@ class StarsRepository {
     _i1.ColumnSelections<StarsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Stars>(
+    return session.db.updateRow<Stars>(
       row,
       columns: columns?.call(Stars.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Stars>> delete(
     _i1.Session session,
     List<Stars> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Stars>(
+    return session.db.delete<Stars>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Stars> deleteRow(
     _i1.Session session,
     Stars row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Stars>(
+    return session.db.deleteRow<Stars>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Stars>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<StarsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Stars>(
+    return session.db.deleteWhere<Stars>(
       where: where(Stars.t),
       transaction: transaction,
     );
@@ -443,7 +298,7 @@ class StarsRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Stars>(
+    return session.db.count<Stars>(
       where: where?.call(Stars.t),
       limit: limit,
       transaction: transaction,

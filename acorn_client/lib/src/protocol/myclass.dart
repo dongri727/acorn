@@ -9,20 +9,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'package:serverpod_auth_client/module.dart' as _i2;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i2;
 
-abstract class MyClass extends _i1.SerializableEntity {
+abstract class MyClass implements _i1.SerializableModel {
   MyClass._({required this.userInfo});
 
   factory MyClass({required _i2.UserInfo userInfo}) = _MyClassImpl;
 
-  factory MyClass.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory MyClass.fromJson(Map<String, dynamic> jsonSerialization) {
     return MyClass(
-        userInfo: serializationManager
-            .deserialize<_i2.UserInfo>(jsonSerialization['userInfo']));
+        userInfo: _i2.UserInfo.fromJson(
+            (jsonSerialization['userInfo'] as Map<String, dynamic>)));
   }
 
   _i2.UserInfo userInfo;
@@ -31,6 +28,11 @@ abstract class MyClass extends _i1.SerializableEntity {
   @override
   Map<String, dynamic> toJson() {
     return {'userInfo': userInfo.toJson()};
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

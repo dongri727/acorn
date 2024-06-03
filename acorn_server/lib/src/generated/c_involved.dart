@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class CountryInvolved extends _i1.TableRow {
+abstract class CountryInvolved extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   CountryInvolved._({
     int? id,
     required this.principalId,
@@ -23,16 +24,11 @@ abstract class CountryInvolved extends _i1.TableRow {
     required int paysId,
   }) = _CountryInvolvedImpl;
 
-  factory CountryInvolved.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory CountryInvolved.fromJson(Map<String, dynamic> jsonSerialization) {
     return CountryInvolved(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      paysId:
-          serializationManager.deserialize<int>(jsonSerialization['paysId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      paysId: jsonSerialization['paysId'] as int,
     );
   }
 
@@ -62,160 +58,12 @@ abstract class CountryInvolved extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'paysId': paysId,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
       'paysId': paysId,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'paysId':
-        paysId = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<CountryInvolved>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<CountryInvolved>(
-      where: where != null ? where(CountryInvolved.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<CountryInvolved?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<CountryInvolved>(
-      where: where != null ? where(CountryInvolved.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<CountryInvolved?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<CountryInvolved>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<CountryInvolvedTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<CountryInvolved>(
-      where: where(CountryInvolved.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    CountryInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    CountryInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    CountryInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<CountryInvolved>(
-      where: where != null ? where(CountryInvolved.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static CountryInvolvedInclude include() {
@@ -240,6 +88,11 @@ abstract class CountryInvolved extends _i1.TableRow {
       orderByList: orderByList?.call(CountryInvolved.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -295,9 +148,6 @@ class CountryInvolvedTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use CountryInvolvedTable.t instead.')
-CountryInvolvedTable tCountryInvolved = CountryInvolvedTable();
-
 class CountryInvolvedInclude extends _i1.IncludeObject {
   CountryInvolvedInclude._();
 
@@ -341,7 +191,7 @@ class CountryInvolvedRepository {
     _i1.OrderByListBuilder<CountryInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<CountryInvolved>(
+    return session.db.find<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       orderBy: orderBy?.call(CountryInvolved.t),
       orderByList: orderByList?.call(CountryInvolved.t),
@@ -361,7 +211,7 @@ class CountryInvolvedRepository {
     _i1.OrderByListBuilder<CountryInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<CountryInvolved>(
+    return session.db.findFirstRow<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       orderBy: orderBy?.call(CountryInvolved.t),
       orderByList: orderByList?.call(CountryInvolved.t),
@@ -376,7 +226,7 @@ class CountryInvolvedRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<CountryInvolved>(
+    return session.db.findById<CountryInvolved>(
       id,
       transaction: transaction,
     );
@@ -387,7 +237,7 @@ class CountryInvolvedRepository {
     List<CountryInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<CountryInvolved>(
+    return session.db.insert<CountryInvolved>(
       rows,
       transaction: transaction,
     );
@@ -398,7 +248,7 @@ class CountryInvolvedRepository {
     CountryInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<CountryInvolved>(
+    return session.db.insertRow<CountryInvolved>(
       row,
       transaction: transaction,
     );
@@ -410,7 +260,7 @@ class CountryInvolvedRepository {
     _i1.ColumnSelections<CountryInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<CountryInvolved>(
+    return session.db.update<CountryInvolved>(
       rows,
       columns: columns?.call(CountryInvolved.t),
       transaction: transaction,
@@ -423,41 +273,41 @@ class CountryInvolvedRepository {
     _i1.ColumnSelections<CountryInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<CountryInvolved>(
+    return session.db.updateRow<CountryInvolved>(
       row,
       columns: columns?.call(CountryInvolved.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<CountryInvolved>> delete(
     _i1.Session session,
     List<CountryInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<CountryInvolved>(
+    return session.db.delete<CountryInvolved>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<CountryInvolved> deleteRow(
     _i1.Session session,
     CountryInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<CountryInvolved>(
+    return session.db.deleteRow<CountryInvolved>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<CountryInvolved>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<CountryInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<CountryInvolved>(
+    return session.db.deleteWhere<CountryInvolved>(
       where: where(CountryInvolved.t),
       transaction: transaction,
     );
@@ -469,7 +319,7 @@ class CountryInvolvedRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<CountryInvolved>(
+    return session.db.count<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       limit: limit,
       transaction: transaction,

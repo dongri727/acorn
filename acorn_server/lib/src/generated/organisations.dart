@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Organisations extends _i1.TableRow {
+abstract class Organisations extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Organisations._({
     int? id,
     required this.organisation,
@@ -21,14 +22,10 @@ abstract class Organisations extends _i1.TableRow {
     required String organisation,
   }) = _OrganisationsImpl;
 
-  factory Organisations.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Organisations.fromJson(Map<String, dynamic> jsonSerialization) {
     return Organisations(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      organisation: serializationManager
-          .deserialize<String>(jsonSerialization['organisation']),
+      id: jsonSerialization['id'] as int?,
+      organisation: jsonSerialization['organisation'] as String,
     );
   }
 
@@ -54,155 +51,11 @@ abstract class Organisations extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'organisation': organisation,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'organisation': organisation,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'organisation':
-        organisation = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Organisations>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<OrganisationsTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Organisations>(
-      where: where != null ? where(Organisations.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Organisations?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<OrganisationsTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Organisations>(
-      where: where != null ? where(Organisations.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Organisations?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Organisations>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<OrganisationsTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Organisations>(
-      where: where(Organisations.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Organisations row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Organisations row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Organisations row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<OrganisationsTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Organisations>(
-      where: where != null ? where(Organisations.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static OrganisationsInclude include() {
@@ -227,6 +80,11 @@ abstract class Organisations extends _i1.TableRow {
       orderByList: orderByList?.call(Organisations.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -271,9 +129,6 @@ class OrganisationsTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use OrganisationsTable.t instead.')
-OrganisationsTable tOrganisations = OrganisationsTable();
-
 class OrganisationsInclude extends _i1.IncludeObject {
   OrganisationsInclude._();
 
@@ -317,7 +172,7 @@ class OrganisationsRepository {
     _i1.OrderByListBuilder<OrganisationsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Organisations>(
+    return session.db.find<Organisations>(
       where: where?.call(Organisations.t),
       orderBy: orderBy?.call(Organisations.t),
       orderByList: orderByList?.call(Organisations.t),
@@ -337,7 +192,7 @@ class OrganisationsRepository {
     _i1.OrderByListBuilder<OrganisationsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Organisations>(
+    return session.db.findFirstRow<Organisations>(
       where: where?.call(Organisations.t),
       orderBy: orderBy?.call(Organisations.t),
       orderByList: orderByList?.call(Organisations.t),
@@ -352,7 +207,7 @@ class OrganisationsRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Organisations>(
+    return session.db.findById<Organisations>(
       id,
       transaction: transaction,
     );
@@ -363,7 +218,7 @@ class OrganisationsRepository {
     List<Organisations> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Organisations>(
+    return session.db.insert<Organisations>(
       rows,
       transaction: transaction,
     );
@@ -374,7 +229,7 @@ class OrganisationsRepository {
     Organisations row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Organisations>(
+    return session.db.insertRow<Organisations>(
       row,
       transaction: transaction,
     );
@@ -386,7 +241,7 @@ class OrganisationsRepository {
     _i1.ColumnSelections<OrganisationsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Organisations>(
+    return session.db.update<Organisations>(
       rows,
       columns: columns?.call(Organisations.t),
       transaction: transaction,
@@ -399,41 +254,41 @@ class OrganisationsRepository {
     _i1.ColumnSelections<OrganisationsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Organisations>(
+    return session.db.updateRow<Organisations>(
       row,
       columns: columns?.call(Organisations.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Organisations>> delete(
     _i1.Session session,
     List<Organisations> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Organisations>(
+    return session.db.delete<Organisations>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Organisations> deleteRow(
     _i1.Session session,
     Organisations row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Organisations>(
+    return session.db.deleteRow<Organisations>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Organisations>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<OrganisationsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Organisations>(
+    return session.db.deleteWhere<Organisations>(
       where: where(Organisations.t),
       transaction: transaction,
     );
@@ -445,7 +300,7 @@ class OrganisationsRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Organisations>(
+    return session.db.count<Organisations>(
       where: where?.call(Organisations.t),
       limit: limit,
       transaction: transaction,

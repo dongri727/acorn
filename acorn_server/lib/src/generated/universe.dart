@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Universe extends _i1.TableRow {
+abstract class Universe extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Universe._({
     int? id,
     required this.universe,
@@ -21,14 +22,10 @@ abstract class Universe extends _i1.TableRow {
     required String universe,
   }) = _UniverseImpl;
 
-  factory Universe.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Universe.fromJson(Map<String, dynamic> jsonSerialization) {
     return Universe(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      universe: serializationManager
-          .deserialize<String>(jsonSerialization['universe']),
+      id: jsonSerialization['id'] as int?,
+      universe: jsonSerialization['universe'] as String,
     );
   }
 
@@ -54,155 +51,11 @@ abstract class Universe extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'universe': universe,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'universe': universe,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'universe':
-        universe = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Universe>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<UniverseTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Universe>(
-      where: where != null ? where(Universe.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Universe?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<UniverseTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Universe>(
-      where: where != null ? where(Universe.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Universe?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Universe>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<UniverseTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Universe>(
-      where: where(Universe.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Universe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Universe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Universe row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<UniverseTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Universe>(
-      where: where != null ? where(Universe.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static UniverseInclude include() {
@@ -227,6 +80,11 @@ abstract class Universe extends _i1.TableRow {
       orderByList: orderByList?.call(Universe.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -269,9 +127,6 @@ class UniverseTable extends _i1.Table {
         universe,
       ];
 }
-
-@Deprecated('Use UniverseTable.t instead.')
-UniverseTable tUniverse = UniverseTable();
 
 class UniverseInclude extends _i1.IncludeObject {
   UniverseInclude._();
@@ -316,7 +171,7 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Universe>(
+    return session.db.find<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
@@ -336,7 +191,7 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Universe>(
+    return session.db.findFirstRow<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
@@ -351,7 +206,7 @@ class UniverseRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Universe>(
+    return session.db.findById<Universe>(
       id,
       transaction: transaction,
     );
@@ -362,7 +217,7 @@ class UniverseRepository {
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Universe>(
+    return session.db.insert<Universe>(
       rows,
       transaction: transaction,
     );
@@ -373,7 +228,7 @@ class UniverseRepository {
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Universe>(
+    return session.db.insertRow<Universe>(
       row,
       transaction: transaction,
     );
@@ -385,7 +240,7 @@ class UniverseRepository {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Universe>(
+    return session.db.update<Universe>(
       rows,
       columns: columns?.call(Universe.t),
       transaction: transaction,
@@ -398,41 +253,41 @@ class UniverseRepository {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Universe>(
+    return session.db.updateRow<Universe>(
       row,
       columns: columns?.call(Universe.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Universe>> delete(
     _i1.Session session,
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Universe>(
+    return session.db.delete<Universe>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Universe> deleteRow(
     _i1.Session session,
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Universe>(
+    return session.db.deleteRow<Universe>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Universe>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<UniverseTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Universe>(
+    return session.db.deleteWhere<Universe>(
       where: where(Universe.t),
       transaction: transaction,
     );
@@ -444,7 +299,7 @@ class UniverseRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Universe>(
+    return session.db.count<Universe>(
       where: where?.call(Universe.t),
       limit: limit,
       transaction: transaction,

@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Detail extends _i1.TableRow {
+abstract class Detail extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Detail._({
     int? id,
     required this.genre,
@@ -23,15 +24,11 @@ abstract class Detail extends _i1.TableRow {
     required String mot,
   }) = _DetailImpl;
 
-  factory Detail.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Detail.fromJson(Map<String, dynamic> jsonSerialization) {
     return Detail(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      genre:
-          serializationManager.deserialize<String>(jsonSerialization['genre']),
-      mot: serializationManager.deserialize<String>(jsonSerialization['mot']),
+      id: jsonSerialization['id'] as int?,
+      genre: jsonSerialization['genre'] as String,
+      mot: jsonSerialization['mot'] as String,
     );
   }
 
@@ -61,160 +58,12 @@ abstract class Detail extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'genre': genre,
-      'mot': mot,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'genre': genre,
       'mot': mot,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'genre':
-        genre = value;
-        return;
-      case 'mot':
-        mot = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Detail>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<DetailTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Detail>(
-      where: where != null ? where(Detail.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Detail?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<DetailTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Detail>(
-      where: where != null ? where(Detail.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Detail?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Detail>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<DetailTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Detail>(
-      where: where(Detail.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Detail row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Detail row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Detail row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<DetailTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Detail>(
-      where: where != null ? where(Detail.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static DetailInclude include() {
@@ -239,6 +88,11 @@ abstract class Detail extends _i1.TableRow {
       orderByList: orderByList?.call(Detail.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -293,9 +147,6 @@ class DetailTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use DetailTable.t instead.')
-DetailTable tDetail = DetailTable();
-
 class DetailInclude extends _i1.IncludeObject {
   DetailInclude._();
 
@@ -339,7 +190,7 @@ class DetailRepository {
     _i1.OrderByListBuilder<DetailTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Detail>(
+    return session.db.find<Detail>(
       where: where?.call(Detail.t),
       orderBy: orderBy?.call(Detail.t),
       orderByList: orderByList?.call(Detail.t),
@@ -359,7 +210,7 @@ class DetailRepository {
     _i1.OrderByListBuilder<DetailTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Detail>(
+    return session.db.findFirstRow<Detail>(
       where: where?.call(Detail.t),
       orderBy: orderBy?.call(Detail.t),
       orderByList: orderByList?.call(Detail.t),
@@ -374,7 +225,7 @@ class DetailRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Detail>(
+    return session.db.findById<Detail>(
       id,
       transaction: transaction,
     );
@@ -385,7 +236,7 @@ class DetailRepository {
     List<Detail> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Detail>(
+    return session.db.insert<Detail>(
       rows,
       transaction: transaction,
     );
@@ -396,7 +247,7 @@ class DetailRepository {
     Detail row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Detail>(
+    return session.db.insertRow<Detail>(
       row,
       transaction: transaction,
     );
@@ -408,7 +259,7 @@ class DetailRepository {
     _i1.ColumnSelections<DetailTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Detail>(
+    return session.db.update<Detail>(
       rows,
       columns: columns?.call(Detail.t),
       transaction: transaction,
@@ -421,41 +272,41 @@ class DetailRepository {
     _i1.ColumnSelections<DetailTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Detail>(
+    return session.db.updateRow<Detail>(
       row,
       columns: columns?.call(Detail.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Detail>> delete(
     _i1.Session session,
     List<Detail> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Detail>(
+    return session.db.delete<Detail>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Detail> deleteRow(
     _i1.Session session,
     Detail row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Detail>(
+    return session.db.deleteRow<Detail>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Detail>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<DetailTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Detail>(
+    return session.db.deleteWhere<Detail>(
       where: where(Detail.t),
       transaction: transaction,
     );
@@ -467,7 +318,7 @@ class DetailRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Detail>(
+    return session.db.count<Detail>(
       where: where?.call(Detail.t),
       limit: limit,
       transaction: transaction,

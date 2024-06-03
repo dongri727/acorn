@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class WithMap extends _i1.TableRow {
+abstract class WithMap extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   WithMap._({
     int? id,
     required this.principalId,
@@ -35,28 +36,17 @@ abstract class WithMap extends _i1.TableRow {
     required double logarithm,
   }) = _WithMapImpl;
 
-  factory WithMap.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory WithMap.fromJson(Map<String, dynamic> jsonSerialization) {
     return WithMap(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      annee:
-          serializationManager.deserialize<String>(jsonSerialization['annee']),
-      affair:
-          serializationManager.deserialize<String>(jsonSerialization['affair']),
-      location: serializationManager
-          .deserialize<String>(jsonSerialization['location']),
-      precise: serializationManager
-          .deserialize<String>(jsonSerialization['precise']),
-      latitude: serializationManager
-          .deserialize<double>(jsonSerialization['latitude']),
-      longitude: serializationManager
-          .deserialize<double>(jsonSerialization['longitude']),
-      logarithm: serializationManager
-          .deserialize<double>(jsonSerialization['logarithm']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      annee: jsonSerialization['annee'] as String,
+      affair: jsonSerialization['affair'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
+      latitude: (jsonSerialization['latitude'] as num).toDouble(),
+      longitude: (jsonSerialization['longitude'] as num).toDouble(),
+      logarithm: (jsonSerialization['logarithm'] as num).toDouble(),
     );
   }
 
@@ -110,23 +100,7 @@ abstract class WithMap extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'annee': annee,
-      'affair': affair,
-      'location': location,
-      'precise': precise,
-      'latitude': latitude,
-      'longitude': longitude,
-      'logarithm': logarithm,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
@@ -138,162 +112,6 @@ abstract class WithMap extends _i1.TableRow {
       'longitude': longitude,
       'logarithm': logarithm,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'annee':
-        annee = value;
-        return;
-      case 'affair':
-        affair = value;
-        return;
-      case 'location':
-        location = value;
-        return;
-      case 'precise':
-        precise = value;
-        return;
-      case 'latitude':
-        latitude = value;
-        return;
-      case 'longitude':
-        longitude = value;
-        return;
-      case 'logarithm':
-        logarithm = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<WithMap>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithMapTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<WithMap>(
-      where: where != null ? where(WithMap.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<WithMap?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithMapTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<WithMap>(
-      where: where != null ? where(WithMap.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<WithMap?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<WithMap>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<WithMapTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<WithMap>(
-      where: where(WithMap.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    WithMap row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    WithMap row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    WithMap row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<WithMapTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<WithMap>(
-      where: where != null ? where(WithMap.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static WithMapInclude include() {
@@ -318,6 +136,11 @@ abstract class WithMap extends _i1.TableRow {
       orderByList: orderByList?.call(WithMap.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -438,9 +261,6 @@ class WithMapTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use WithMapTable.t instead.')
-WithMapTable tWithMap = WithMapTable();
-
 class WithMapInclude extends _i1.IncludeObject {
   WithMapInclude._();
 
@@ -484,7 +304,7 @@ class WithMapRepository {
     _i1.OrderByListBuilder<WithMapTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<WithMap>(
+    return session.db.find<WithMap>(
       where: where?.call(WithMap.t),
       orderBy: orderBy?.call(WithMap.t),
       orderByList: orderByList?.call(WithMap.t),
@@ -504,7 +324,7 @@ class WithMapRepository {
     _i1.OrderByListBuilder<WithMapTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<WithMap>(
+    return session.db.findFirstRow<WithMap>(
       where: where?.call(WithMap.t),
       orderBy: orderBy?.call(WithMap.t),
       orderByList: orderByList?.call(WithMap.t),
@@ -519,7 +339,7 @@ class WithMapRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<WithMap>(
+    return session.db.findById<WithMap>(
       id,
       transaction: transaction,
     );
@@ -530,7 +350,7 @@ class WithMapRepository {
     List<WithMap> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<WithMap>(
+    return session.db.insert<WithMap>(
       rows,
       transaction: transaction,
     );
@@ -541,7 +361,7 @@ class WithMapRepository {
     WithMap row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<WithMap>(
+    return session.db.insertRow<WithMap>(
       row,
       transaction: transaction,
     );
@@ -553,7 +373,7 @@ class WithMapRepository {
     _i1.ColumnSelections<WithMapTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<WithMap>(
+    return session.db.update<WithMap>(
       rows,
       columns: columns?.call(WithMap.t),
       transaction: transaction,
@@ -566,41 +386,41 @@ class WithMapRepository {
     _i1.ColumnSelections<WithMapTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<WithMap>(
+    return session.db.updateRow<WithMap>(
       row,
       columns: columns?.call(WithMap.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<WithMap>> delete(
     _i1.Session session,
     List<WithMap> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<WithMap>(
+    return session.db.delete<WithMap>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<WithMap> deleteRow(
     _i1.Session session,
     WithMap row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<WithMap>(
+    return session.db.deleteRow<WithMap>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<WithMap>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<WithMapTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<WithMap>(
+    return session.db.deleteWhere<WithMap>(
       where: where(WithMap.t),
       transaction: transaction,
     );
@@ -612,7 +432,7 @@ class WithMapRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<WithMap>(
+    return session.db.count<WithMap>(
       where: where?.call(WithMap.t),
       limit: limit,
       transaction: transaction,

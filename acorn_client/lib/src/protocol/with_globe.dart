@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class WithGlobe extends _i1.SerializableEntity {
+abstract class WithGlobe implements _i1.SerializableModel {
   WithGlobe._({
     this.id,
     required this.principalId,
@@ -37,30 +37,18 @@ abstract class WithGlobe extends _i1.SerializableEntity {
     required double coefficient,
   }) = _WithGlobeImpl;
 
-  factory WithGlobe.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory WithGlobe.fromJson(Map<String, dynamic> jsonSerialization) {
     return WithGlobe(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      annee:
-          serializationManager.deserialize<String>(jsonSerialization['annee']),
-      affair:
-          serializationManager.deserialize<String>(jsonSerialization['affair']),
-      location: serializationManager
-          .deserialize<String>(jsonSerialization['location']),
-      precise: serializationManager
-          .deserialize<String>(jsonSerialization['precise']),
-      xCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['xCoordinate']),
-      yCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['yCoordinate']),
-      zCoordinate: serializationManager
-          .deserialize<double>(jsonSerialization['zCoordinate']),
-      coefficient: serializationManager
-          .deserialize<double>(jsonSerialization['coefficient']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      annee: jsonSerialization['annee'] as String,
+      affair: jsonSerialization['affair'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
+      xCoordinate: (jsonSerialization['xCoordinate'] as num).toDouble(),
+      yCoordinate: (jsonSerialization['yCoordinate'] as num).toDouble(),
+      zCoordinate: (jsonSerialization['zCoordinate'] as num).toDouble(),
+      coefficient: (jsonSerialization['coefficient'] as num).toDouble(),
     );
   }
 
@@ -113,6 +101,11 @@ abstract class WithGlobe extends _i1.SerializableEntity {
       'zCoordinate': zCoordinate,
       'coefficient': coefficient,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

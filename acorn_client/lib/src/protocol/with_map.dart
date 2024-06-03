@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class WithMap extends _i1.SerializableEntity {
+abstract class WithMap implements _i1.SerializableModel {
   WithMap._({
     this.id,
     required this.principalId,
@@ -35,28 +35,17 @@ abstract class WithMap extends _i1.SerializableEntity {
     required double logarithm,
   }) = _WithMapImpl;
 
-  factory WithMap.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory WithMap.fromJson(Map<String, dynamic> jsonSerialization) {
     return WithMap(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      annee:
-          serializationManager.deserialize<String>(jsonSerialization['annee']),
-      affair:
-          serializationManager.deserialize<String>(jsonSerialization['affair']),
-      location: serializationManager
-          .deserialize<String>(jsonSerialization['location']),
-      precise: serializationManager
-          .deserialize<String>(jsonSerialization['precise']),
-      latitude: serializationManager
-          .deserialize<double>(jsonSerialization['latitude']),
-      longitude: serializationManager
-          .deserialize<double>(jsonSerialization['longitude']),
-      logarithm: serializationManager
-          .deserialize<double>(jsonSerialization['logarithm']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      annee: jsonSerialization['annee'] as String,
+      affair: jsonSerialization['affair'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
+      latitude: (jsonSerialization['latitude'] as num).toDouble(),
+      longitude: (jsonSerialization['longitude'] as num).toDouble(),
+      logarithm: (jsonSerialization['logarithm'] as num).toDouble(),
     );
   }
 
@@ -105,6 +94,11 @@ abstract class WithMap extends _i1.SerializableEntity {
       'longitude': longitude,
       'logarithm': logarithm,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

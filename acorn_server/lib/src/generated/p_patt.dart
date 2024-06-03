@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PrincipalPatt extends _i1.TableRow {
+abstract class PrincipalPatt extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   PrincipalPatt._({
     int? id,
     required this.principalId,
@@ -23,16 +24,11 @@ abstract class PrincipalPatt extends _i1.TableRow {
     required int pattId,
   }) = _PrincipalPattImpl;
 
-  factory PrincipalPatt.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory PrincipalPatt.fromJson(Map<String, dynamic> jsonSerialization) {
     return PrincipalPatt(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      pattId:
-          serializationManager.deserialize<int>(jsonSerialization['pattId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      pattId: jsonSerialization['pattId'] as int,
     );
   }
 
@@ -62,160 +58,12 @@ abstract class PrincipalPatt extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'pattId': pattId,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
       'pattId': pattId,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'pattId':
-        pattId = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<PrincipalPatt>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<PrincipalPatt>(
-      where: where != null ? where(PrincipalPatt.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<PrincipalPatt?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<PrincipalPatt>(
-      where: where != null ? where(PrincipalPatt.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<PrincipalPatt?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<PrincipalPatt>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<PrincipalPattTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<PrincipalPatt>(
-      where: where(PrincipalPatt.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    PrincipalPatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    PrincipalPatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    PrincipalPatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<PrincipalPatt>(
-      where: where != null ? where(PrincipalPatt.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static PrincipalPattInclude include() {
@@ -240,6 +88,11 @@ abstract class PrincipalPatt extends _i1.TableRow {
       orderByList: orderByList?.call(PrincipalPatt.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -295,9 +148,6 @@ class PrincipalPattTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use PrincipalPattTable.t instead.')
-PrincipalPattTable tPrincipalPatt = PrincipalPattTable();
-
 class PrincipalPattInclude extends _i1.IncludeObject {
   PrincipalPattInclude._();
 
@@ -341,7 +191,7 @@ class PrincipalPattRepository {
     _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<PrincipalPatt>(
+    return session.db.find<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       orderBy: orderBy?.call(PrincipalPatt.t),
       orderByList: orderByList?.call(PrincipalPatt.t),
@@ -361,7 +211,7 @@ class PrincipalPattRepository {
     _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<PrincipalPatt>(
+    return session.db.findFirstRow<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       orderBy: orderBy?.call(PrincipalPatt.t),
       orderByList: orderByList?.call(PrincipalPatt.t),
@@ -376,7 +226,7 @@ class PrincipalPattRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<PrincipalPatt>(
+    return session.db.findById<PrincipalPatt>(
       id,
       transaction: transaction,
     );
@@ -387,7 +237,7 @@ class PrincipalPattRepository {
     List<PrincipalPatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<PrincipalPatt>(
+    return session.db.insert<PrincipalPatt>(
       rows,
       transaction: transaction,
     );
@@ -398,7 +248,7 @@ class PrincipalPattRepository {
     PrincipalPatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<PrincipalPatt>(
+    return session.db.insertRow<PrincipalPatt>(
       row,
       transaction: transaction,
     );
@@ -410,7 +260,7 @@ class PrincipalPattRepository {
     _i1.ColumnSelections<PrincipalPattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<PrincipalPatt>(
+    return session.db.update<PrincipalPatt>(
       rows,
       columns: columns?.call(PrincipalPatt.t),
       transaction: transaction,
@@ -423,41 +273,41 @@ class PrincipalPattRepository {
     _i1.ColumnSelections<PrincipalPattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<PrincipalPatt>(
+    return session.db.updateRow<PrincipalPatt>(
       row,
       columns: columns?.call(PrincipalPatt.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<PrincipalPatt>> delete(
     _i1.Session session,
     List<PrincipalPatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<PrincipalPatt>(
+    return session.db.delete<PrincipalPatt>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<PrincipalPatt> deleteRow(
     _i1.Session session,
     PrincipalPatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<PrincipalPatt>(
+    return session.db.deleteRow<PrincipalPatt>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<PrincipalPatt>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalPattTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<PrincipalPatt>(
+    return session.db.deleteWhere<PrincipalPatt>(
       where: where(PrincipalPatt.t),
       transaction: transaction,
     );
@@ -469,7 +319,7 @@ class PrincipalPattRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<PrincipalPatt>(
+    return session.db.count<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       limit: limit,
       transaction: transaction,

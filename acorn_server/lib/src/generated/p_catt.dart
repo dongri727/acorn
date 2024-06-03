@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PrincipalCatt extends _i1.TableRow {
+abstract class PrincipalCatt extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   PrincipalCatt._({
     int? id,
     required this.principalId,
@@ -23,16 +24,11 @@ abstract class PrincipalCatt extends _i1.TableRow {
     required int cattId,
   }) = _PrincipalCattImpl;
 
-  factory PrincipalCatt.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory PrincipalCatt.fromJson(Map<String, dynamic> jsonSerialization) {
     return PrincipalCatt(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      cattId:
-          serializationManager.deserialize<int>(jsonSerialization['cattId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      cattId: jsonSerialization['cattId'] as int,
     );
   }
 
@@ -62,160 +58,12 @@ abstract class PrincipalCatt extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'cattId': cattId,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
       'cattId': cattId,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'cattId':
-        cattId = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<PrincipalCatt>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalCattTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<PrincipalCatt>(
-      where: where != null ? where(PrincipalCatt.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<PrincipalCatt?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalCattTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<PrincipalCatt>(
-      where: where != null ? where(PrincipalCatt.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<PrincipalCatt?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<PrincipalCatt>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<PrincipalCattTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<PrincipalCatt>(
-      where: where(PrincipalCatt.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    PrincipalCatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    PrincipalCatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    PrincipalCatt row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalCattTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<PrincipalCatt>(
-      where: where != null ? where(PrincipalCatt.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static PrincipalCattInclude include() {
@@ -240,6 +88,11 @@ abstract class PrincipalCatt extends _i1.TableRow {
       orderByList: orderByList?.call(PrincipalCatt.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -295,9 +148,6 @@ class PrincipalCattTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use PrincipalCattTable.t instead.')
-PrincipalCattTable tPrincipalCatt = PrincipalCattTable();
-
 class PrincipalCattInclude extends _i1.IncludeObject {
   PrincipalCattInclude._();
 
@@ -341,7 +191,7 @@ class PrincipalCattRepository {
     _i1.OrderByListBuilder<PrincipalCattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<PrincipalCatt>(
+    return session.db.find<PrincipalCatt>(
       where: where?.call(PrincipalCatt.t),
       orderBy: orderBy?.call(PrincipalCatt.t),
       orderByList: orderByList?.call(PrincipalCatt.t),
@@ -361,7 +211,7 @@ class PrincipalCattRepository {
     _i1.OrderByListBuilder<PrincipalCattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<PrincipalCatt>(
+    return session.db.findFirstRow<PrincipalCatt>(
       where: where?.call(PrincipalCatt.t),
       orderBy: orderBy?.call(PrincipalCatt.t),
       orderByList: orderByList?.call(PrincipalCatt.t),
@@ -376,7 +226,7 @@ class PrincipalCattRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<PrincipalCatt>(
+    return session.db.findById<PrincipalCatt>(
       id,
       transaction: transaction,
     );
@@ -387,7 +237,7 @@ class PrincipalCattRepository {
     List<PrincipalCatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<PrincipalCatt>(
+    return session.db.insert<PrincipalCatt>(
       rows,
       transaction: transaction,
     );
@@ -398,7 +248,7 @@ class PrincipalCattRepository {
     PrincipalCatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<PrincipalCatt>(
+    return session.db.insertRow<PrincipalCatt>(
       row,
       transaction: transaction,
     );
@@ -410,7 +260,7 @@ class PrincipalCattRepository {
     _i1.ColumnSelections<PrincipalCattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<PrincipalCatt>(
+    return session.db.update<PrincipalCatt>(
       rows,
       columns: columns?.call(PrincipalCatt.t),
       transaction: transaction,
@@ -423,41 +273,41 @@ class PrincipalCattRepository {
     _i1.ColumnSelections<PrincipalCattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<PrincipalCatt>(
+    return session.db.updateRow<PrincipalCatt>(
       row,
       columns: columns?.call(PrincipalCatt.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<PrincipalCatt>> delete(
     _i1.Session session,
     List<PrincipalCatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<PrincipalCatt>(
+    return session.db.delete<PrincipalCatt>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<PrincipalCatt> deleteRow(
     _i1.Session session,
     PrincipalCatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<PrincipalCatt>(
+    return session.db.deleteRow<PrincipalCatt>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<PrincipalCatt>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalCattTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<PrincipalCatt>(
+    return session.db.deleteWhere<PrincipalCatt>(
       where: where(PrincipalCatt.t),
       transaction: transaction,
     );
@@ -469,7 +319,7 @@ class PrincipalCattRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<PrincipalCatt>(
+    return session.db.count<PrincipalCatt>(
       where: where?.call(PrincipalCatt.t),
       limit: limit,
       transaction: transaction,

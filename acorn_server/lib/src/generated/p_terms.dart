@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PrincipalTerms extends _i1.TableRow {
+abstract class PrincipalTerms extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   PrincipalTerms._({
     int? id,
     required this.principalId,
@@ -23,16 +24,11 @@ abstract class PrincipalTerms extends _i1.TableRow {
     required int termId,
   }) = _PrincipalTermsImpl;
 
-  factory PrincipalTerms.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory PrincipalTerms.fromJson(Map<String, dynamic> jsonSerialization) {
     return PrincipalTerms(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      termId:
-          serializationManager.deserialize<int>(jsonSerialization['termId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      termId: jsonSerialization['termId'] as int,
     );
   }
 
@@ -62,160 +58,12 @@ abstract class PrincipalTerms extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'termId': termId,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
       'termId': termId,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'termId':
-        termId = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<PrincipalTerms>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalTermsTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<PrincipalTerms>(
-      where: where != null ? where(PrincipalTerms.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<PrincipalTerms?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalTermsTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<PrincipalTerms>(
-      where: where != null ? where(PrincipalTerms.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<PrincipalTerms?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<PrincipalTerms>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<PrincipalTermsTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<PrincipalTerms>(
-      where: where(PrincipalTerms.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    PrincipalTerms row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    PrincipalTerms row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    PrincipalTerms row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PrincipalTermsTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<PrincipalTerms>(
-      where: where != null ? where(PrincipalTerms.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static PrincipalTermsInclude include() {
@@ -240,6 +88,11 @@ abstract class PrincipalTerms extends _i1.TableRow {
       orderByList: orderByList?.call(PrincipalTerms.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -295,9 +148,6 @@ class PrincipalTermsTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use PrincipalTermsTable.t instead.')
-PrincipalTermsTable tPrincipalTerms = PrincipalTermsTable();
-
 class PrincipalTermsInclude extends _i1.IncludeObject {
   PrincipalTermsInclude._();
 
@@ -341,7 +191,7 @@ class PrincipalTermsRepository {
     _i1.OrderByListBuilder<PrincipalTermsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<PrincipalTerms>(
+    return session.db.find<PrincipalTerms>(
       where: where?.call(PrincipalTerms.t),
       orderBy: orderBy?.call(PrincipalTerms.t),
       orderByList: orderByList?.call(PrincipalTerms.t),
@@ -361,7 +211,7 @@ class PrincipalTermsRepository {
     _i1.OrderByListBuilder<PrincipalTermsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<PrincipalTerms>(
+    return session.db.findFirstRow<PrincipalTerms>(
       where: where?.call(PrincipalTerms.t),
       orderBy: orderBy?.call(PrincipalTerms.t),
       orderByList: orderByList?.call(PrincipalTerms.t),
@@ -376,7 +226,7 @@ class PrincipalTermsRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<PrincipalTerms>(
+    return session.db.findById<PrincipalTerms>(
       id,
       transaction: transaction,
     );
@@ -387,7 +237,7 @@ class PrincipalTermsRepository {
     List<PrincipalTerms> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<PrincipalTerms>(
+    return session.db.insert<PrincipalTerms>(
       rows,
       transaction: transaction,
     );
@@ -398,7 +248,7 @@ class PrincipalTermsRepository {
     PrincipalTerms row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<PrincipalTerms>(
+    return session.db.insertRow<PrincipalTerms>(
       row,
       transaction: transaction,
     );
@@ -410,7 +260,7 @@ class PrincipalTermsRepository {
     _i1.ColumnSelections<PrincipalTermsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<PrincipalTerms>(
+    return session.db.update<PrincipalTerms>(
       rows,
       columns: columns?.call(PrincipalTerms.t),
       transaction: transaction,
@@ -423,41 +273,41 @@ class PrincipalTermsRepository {
     _i1.ColumnSelections<PrincipalTermsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<PrincipalTerms>(
+    return session.db.updateRow<PrincipalTerms>(
       row,
       columns: columns?.call(PrincipalTerms.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<PrincipalTerms>> delete(
     _i1.Session session,
     List<PrincipalTerms> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<PrincipalTerms>(
+    return session.db.delete<PrincipalTerms>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<PrincipalTerms> deleteRow(
     _i1.Session session,
     PrincipalTerms row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<PrincipalTerms>(
+    return session.db.deleteRow<PrincipalTerms>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<PrincipalTerms>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalTermsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<PrincipalTerms>(
+    return session.db.deleteWhere<PrincipalTerms>(
       where: where(PrincipalTerms.t),
       transaction: transaction,
     );
@@ -469,7 +319,7 @@ class PrincipalTermsRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<PrincipalTerms>(
+    return session.db.count<PrincipalTerms>(
       where: where?.call(PrincipalTerms.t),
       limit: limit,
       transaction: transaction,

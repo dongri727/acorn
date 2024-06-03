@@ -69,7 +69,7 @@ import 'package:acorn_client/src/protocol/terms.dart' as _i57;
 import 'package:acorn_client/src/protocol/universe.dart' as _i58;
 import 'package:acorn_client/src/protocol/with_globe.dart' as _i59;
 import 'package:acorn_client/src/protocol/with_map.dart' as _i60;
-import 'package:serverpod_auth_client/module.dart' as _i61;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i61;
 export 'c_involved.dart';
 export 'categories.dart';
 export 'catts_involved.dart';
@@ -107,8 +107,6 @@ class Protocol extends _i1.SerializationManager {
 
   factory Protocol() => _instance;
 
-  static final Map<Type, _i1.constructor> customConstructors = {};
-
   static final Protocol _instance = Protocol._();
 
   @override
@@ -117,203 +115,186 @@ class Protocol extends _i1.SerializationManager {
     Type? t,
   ]) {
     t ??= T;
-    if (customConstructors.containsKey(t)) {
-      return customConstructors[t]!(data, this) as T;
-    }
     if (t == _i2.CountryInvolved) {
-      return _i2.CountryInvolved.fromJson(data, this) as T;
+      return _i2.CountryInvolved.fromJson(data) as T;
     }
     if (t == _i3.Categories) {
-      return _i3.Categories.fromJson(data, this) as T;
+      return _i3.Categories.fromJson(data) as T;
     }
     if (t == _i4.CattsInvolved) {
-      return _i4.CattsInvolved.fromJson(data, this) as T;
+      return _i4.CattsInvolved.fromJson(data) as T;
     }
     if (t == _i5.Countryatts) {
-      return _i5.Countryatts.fromJson(data, this) as T;
+      return _i5.Countryatts.fromJson(data) as T;
     }
     if (t == _i6.Detail) {
-      return _i6.Detail.fromJson(data, this) as T;
+      return _i6.Detail.fromJson(data) as T;
     }
     if (t == _i7.MyClass) {
-      return _i7.MyClass.fromJson(data, this) as T;
+      return _i7.MyClass.fromJson(data) as T;
     }
     if (t == _i8.Oceans) {
-      return _i8.Oceans.fromJson(data, this) as T;
+      return _i8.Oceans.fromJson(data) as T;
     }
     if (t == _i9.Organisations) {
-      return _i9.Organisations.fromJson(data, this) as T;
+      return _i9.Organisations.fromJson(data) as T;
     }
     if (t == _i10.PrincipalUser) {
-      return _i10.PrincipalUser.fromJson(data, this) as T;
+      return _i10.PrincipalUser.fromJson(data) as T;
     }
     if (t == _i11.PrincipalCategories) {
-      return _i11.PrincipalCategories.fromJson(data, this) as T;
+      return _i11.PrincipalCategories.fromJson(data) as T;
     }
     if (t == _i12.PrincipalCatt) {
-      return _i12.PrincipalCatt.fromJson(data, this) as T;
+      return _i12.PrincipalCatt.fromJson(data) as T;
     }
     if (t == _i13.PrincipalDetail) {
-      return _i13.PrincipalDetail.fromJson(data, this) as T;
+      return _i13.PrincipalDetail.fromJson(data) as T;
     }
     if (t == _i14.PlaceInvolved) {
-      return _i14.PlaceInvolved.fromJson(data, this) as T;
+      return _i14.PlaceInvolved.fromJson(data) as T;
     }
     if (t == _i15.PrincipalOrgs) {
-      return _i15.PrincipalOrgs.fromJson(data, this) as T;
+      return _i15.PrincipalOrgs.fromJson(data) as T;
     }
     if (t == _i16.PrincipalPatt) {
-      return _i16.PrincipalPatt.fromJson(data, this) as T;
+      return _i16.PrincipalPatt.fromJson(data) as T;
     }
     if (t == _i17.PrincipalPeople) {
-      return _i17.PrincipalPeople.fromJson(data, this) as T;
+      return _i17.PrincipalPeople.fromJson(data) as T;
     }
     if (t == _i18.PrincipalTerms) {
-      return _i18.PrincipalTerms.fromJson(data, this) as T;
+      return _i18.PrincipalTerms.fromJson(data) as T;
     }
     if (t == _i19.PattsInvolved) {
-      return _i19.PattsInvolved.fromJson(data, this) as T;
+      return _i19.PattsInvolved.fromJson(data) as T;
     }
     if (t == _i20.Pays) {
-      return _i20.Pays.fromJson(data, this) as T;
+      return _i20.Pays.fromJson(data) as T;
     }
     if (t == _i21.People) {
-      return _i21.People.fromJson(data, this) as T;
+      return _i21.People.fromJson(data) as T;
     }
     if (t == _i22.Placeatts) {
-      return _i22.Placeatts.fromJson(data, this) as T;
+      return _i22.Placeatts.fromJson(data) as T;
     }
     if (t == _i23.Places) {
-      return _i23.Places.fromJson(data, this) as T;
+      return _i23.Places.fromJson(data) as T;
     }
     if (t == _i24.Principal) {
-      return _i24.Principal.fromJson(data, this) as T;
+      return _i24.Principal.fromJson(data) as T;
     }
     if (t == _i25.Seas) {
-      return _i25.Seas.fromJson(data, this) as T;
+      return _i25.Seas.fromJson(data) as T;
     }
     if (t == _i26.Stars) {
-      return _i26.Stars.fromJson(data, this) as T;
+      return _i26.Stars.fromJson(data) as T;
     }
     if (t == _i27.StarsInvolved) {
-      return _i27.StarsInvolved.fromJson(data, this) as T;
+      return _i27.StarsInvolved.fromJson(data) as T;
     }
     if (t == _i28.Terms) {
-      return _i28.Terms.fromJson(data, this) as T;
+      return _i28.Terms.fromJson(data) as T;
     }
     if (t == _i29.Universe) {
-      return _i29.Universe.fromJson(data, this) as T;
+      return _i29.Universe.fromJson(data) as T;
     }
     if (t == _i30.WithGlobe) {
-      return _i30.WithGlobe.fromJson(data, this) as T;
+      return _i30.WithGlobe.fromJson(data) as T;
     }
     if (t == _i31.WithMap) {
-      return _i31.WithMap.fromJson(data, this) as T;
+      return _i31.WithMap.fromJson(data) as T;
     }
     if (t == _i1.getType<_i2.CountryInvolved?>()) {
-      return (data != null ? _i2.CountryInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i2.CountryInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i3.Categories?>()) {
-      return (data != null ? _i3.Categories.fromJson(data, this) : null) as T;
+      return (data != null ? _i3.Categories.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i4.CattsInvolved?>()) {
-      return (data != null ? _i4.CattsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i4.CattsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i5.Countryatts?>()) {
-      return (data != null ? _i5.Countryatts.fromJson(data, this) : null) as T;
+      return (data != null ? _i5.Countryatts.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i6.Detail?>()) {
-      return (data != null ? _i6.Detail.fromJson(data, this) : null) as T;
+      return (data != null ? _i6.Detail.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i7.MyClass?>()) {
-      return (data != null ? _i7.MyClass.fromJson(data, this) : null) as T;
+      return (data != null ? _i7.MyClass.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i8.Oceans?>()) {
-      return (data != null ? _i8.Oceans.fromJson(data, this) : null) as T;
+      return (data != null ? _i8.Oceans.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i9.Organisations?>()) {
-      return (data != null ? _i9.Organisations.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i9.Organisations.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i10.PrincipalUser?>()) {
-      return (data != null ? _i10.PrincipalUser.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i10.PrincipalUser.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i11.PrincipalCategories?>()) {
-      return (data != null
-          ? _i11.PrincipalCategories.fromJson(data, this)
-          : null) as T;
+      return (data != null ? _i11.PrincipalCategories.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i12.PrincipalCatt?>()) {
-      return (data != null ? _i12.PrincipalCatt.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i12.PrincipalCatt.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i13.PrincipalDetail?>()) {
-      return (data != null ? _i13.PrincipalDetail.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i13.PrincipalDetail.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i14.PlaceInvolved?>()) {
-      return (data != null ? _i14.PlaceInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i14.PlaceInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i15.PrincipalOrgs?>()) {
-      return (data != null ? _i15.PrincipalOrgs.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i15.PrincipalOrgs.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i16.PrincipalPatt?>()) {
-      return (data != null ? _i16.PrincipalPatt.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i16.PrincipalPatt.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i17.PrincipalPeople?>()) {
-      return (data != null ? _i17.PrincipalPeople.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i17.PrincipalPeople.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i18.PrincipalTerms?>()) {
-      return (data != null ? _i18.PrincipalTerms.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i18.PrincipalTerms.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i19.PattsInvolved?>()) {
-      return (data != null ? _i19.PattsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i19.PattsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i20.Pays?>()) {
-      return (data != null ? _i20.Pays.fromJson(data, this) : null) as T;
+      return (data != null ? _i20.Pays.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i21.People?>()) {
-      return (data != null ? _i21.People.fromJson(data, this) : null) as T;
+      return (data != null ? _i21.People.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i22.Placeatts?>()) {
-      return (data != null ? _i22.Placeatts.fromJson(data, this) : null) as T;
+      return (data != null ? _i22.Placeatts.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i23.Places?>()) {
-      return (data != null ? _i23.Places.fromJson(data, this) : null) as T;
+      return (data != null ? _i23.Places.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i24.Principal?>()) {
-      return (data != null ? _i24.Principal.fromJson(data, this) : null) as T;
+      return (data != null ? _i24.Principal.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i25.Seas?>()) {
-      return (data != null ? _i25.Seas.fromJson(data, this) : null) as T;
+      return (data != null ? _i25.Seas.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i26.Stars?>()) {
-      return (data != null ? _i26.Stars.fromJson(data, this) : null) as T;
+      return (data != null ? _i26.Stars.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i27.StarsInvolved?>()) {
-      return (data != null ? _i27.StarsInvolved.fromJson(data, this) : null)
-          as T;
+      return (data != null ? _i27.StarsInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i28.Terms?>()) {
-      return (data != null ? _i28.Terms.fromJson(data, this) : null) as T;
+      return (data != null ? _i28.Terms.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i29.Universe?>()) {
-      return (data != null ? _i29.Universe.fromJson(data, this) : null) as T;
+      return (data != null ? _i29.Universe.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i30.WithGlobe?>()) {
-      return (data != null ? _i30.WithGlobe.fromJson(data, this) : null) as T;
+      return (data != null ? _i30.WithGlobe.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i31.WithMap?>()) {
-      return (data != null ? _i31.WithMap.fromJson(data, this) : null) as T;
+      return (data != null ? _i31.WithMap.fromJson(data) : null) as T;
     }
     if (t == List<_i32.CountryInvolved>) {
       return (data as List)
@@ -551,7 +532,7 @@ class Protocol extends _i1.SerializationManager {
     }
     try {
       return _i61.Protocol().deserialize<T>(data, t);
-    } catch (_) {}
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 

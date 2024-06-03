@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Universe extends _i1.SerializableEntity {
+abstract class Universe implements _i1.SerializableModel {
   Universe._({
     this.id,
     required this.universe,
@@ -21,14 +21,10 @@ abstract class Universe extends _i1.SerializableEntity {
     required String universe,
   }) = _UniverseImpl;
 
-  factory Universe.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Universe.fromJson(Map<String, dynamic> jsonSerialization) {
     return Universe(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      universe: serializationManager
-          .deserialize<String>(jsonSerialization['universe']),
+      id: jsonSerialization['id'] as int?,
+      universe: jsonSerialization['universe'] as String,
     );
   }
 
@@ -49,6 +45,11 @@ abstract class Universe extends _i1.SerializableEntity {
       if (id != null) 'id': id,
       'universe': universe,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

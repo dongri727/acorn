@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Placeatts extends _i1.TableRow {
+abstract class Placeatts extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   Placeatts._({
     int? id,
     required this.placeatt,
@@ -21,14 +22,10 @@ abstract class Placeatts extends _i1.TableRow {
     required String placeatt,
   }) = _PlaceattsImpl;
 
-  factory Placeatts.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Placeatts.fromJson(Map<String, dynamic> jsonSerialization) {
     return Placeatts(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      placeatt: serializationManager
-          .deserialize<String>(jsonSerialization['placeatt']),
+      id: jsonSerialization['id'] as int?,
+      placeatt: jsonSerialization['placeatt'] as String,
     );
   }
 
@@ -54,155 +51,11 @@ abstract class Placeatts extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'placeatt': placeatt,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'placeatt': placeatt,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'placeatt':
-        placeatt = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Placeatts>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceattsTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<Placeatts>(
-      where: where != null ? where(Placeatts.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Placeatts?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceattsTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<Placeatts>(
-      where: where != null ? where(Placeatts.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Placeatts?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<Placeatts>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<PlaceattsTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<Placeatts>(
-      where: where(Placeatts.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    Placeatts row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    Placeatts row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    Placeatts row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceattsTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<Placeatts>(
-      where: where != null ? where(Placeatts.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static PlaceattsInclude include() {
@@ -227,6 +80,11 @@ abstract class Placeatts extends _i1.TableRow {
       orderByList: orderByList?.call(Placeatts.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -269,9 +127,6 @@ class PlaceattsTable extends _i1.Table {
         placeatt,
       ];
 }
-
-@Deprecated('Use PlaceattsTable.t instead.')
-PlaceattsTable tPlaceatts = PlaceattsTable();
 
 class PlaceattsInclude extends _i1.IncludeObject {
   PlaceattsInclude._();
@@ -316,7 +171,7 @@ class PlaceattsRepository {
     _i1.OrderByListBuilder<PlaceattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Placeatts>(
+    return session.db.find<Placeatts>(
       where: where?.call(Placeatts.t),
       orderBy: orderBy?.call(Placeatts.t),
       orderByList: orderByList?.call(Placeatts.t),
@@ -336,7 +191,7 @@ class PlaceattsRepository {
     _i1.OrderByListBuilder<PlaceattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Placeatts>(
+    return session.db.findFirstRow<Placeatts>(
       where: where?.call(Placeatts.t),
       orderBy: orderBy?.call(Placeatts.t),
       orderByList: orderByList?.call(Placeatts.t),
@@ -351,7 +206,7 @@ class PlaceattsRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Placeatts>(
+    return session.db.findById<Placeatts>(
       id,
       transaction: transaction,
     );
@@ -362,7 +217,7 @@ class PlaceattsRepository {
     List<Placeatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Placeatts>(
+    return session.db.insert<Placeatts>(
       rows,
       transaction: transaction,
     );
@@ -373,7 +228,7 @@ class PlaceattsRepository {
     Placeatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Placeatts>(
+    return session.db.insertRow<Placeatts>(
       row,
       transaction: transaction,
     );
@@ -385,7 +240,7 @@ class PlaceattsRepository {
     _i1.ColumnSelections<PlaceattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Placeatts>(
+    return session.db.update<Placeatts>(
       rows,
       columns: columns?.call(Placeatts.t),
       transaction: transaction,
@@ -398,41 +253,41 @@ class PlaceattsRepository {
     _i1.ColumnSelections<PlaceattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Placeatts>(
+    return session.db.updateRow<Placeatts>(
       row,
       columns: columns?.call(Placeatts.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<Placeatts>> delete(
     _i1.Session session,
     List<Placeatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Placeatts>(
+    return session.db.delete<Placeatts>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<Placeatts> deleteRow(
     _i1.Session session,
     Placeatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Placeatts>(
+    return session.db.deleteRow<Placeatts>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<Placeatts>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PlaceattsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Placeatts>(
+    return session.db.deleteWhere<Placeatts>(
       where: where(Placeatts.t),
       transaction: transaction,
     );
@@ -444,7 +299,7 @@ class PlaceattsRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Placeatts>(
+    return session.db.count<Placeatts>(
       where: where?.call(Placeatts.t),
       limit: limit,
       transaction: transaction,

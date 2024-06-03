@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Detail extends _i1.SerializableEntity {
+abstract class Detail implements _i1.SerializableModel {
   Detail._({
     this.id,
     required this.genre,
@@ -23,15 +23,11 @@ abstract class Detail extends _i1.SerializableEntity {
     required String mot,
   }) = _DetailImpl;
 
-  factory Detail.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory Detail.fromJson(Map<String, dynamic> jsonSerialization) {
     return Detail(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      genre:
-          serializationManager.deserialize<String>(jsonSerialization['genre']),
-      mot: serializationManager.deserialize<String>(jsonSerialization['mot']),
+      id: jsonSerialization['id'] as int?,
+      genre: jsonSerialization['genre'] as String,
+      mot: jsonSerialization['mot'] as String,
     );
   }
 
@@ -56,6 +52,11 @@ abstract class Detail extends _i1.SerializableEntity {
       'genre': genre,
       'mot': mot,
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 

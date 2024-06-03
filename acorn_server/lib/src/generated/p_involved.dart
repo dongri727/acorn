@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PlaceInvolved extends _i1.TableRow {
+abstract class PlaceInvolved extends _i1.TableRow
+    implements _i1.ProtocolSerialization {
   PlaceInvolved._({
     int? id,
     required this.principalId,
@@ -23,16 +24,11 @@ abstract class PlaceInvolved extends _i1.TableRow {
     required int placeId,
   }) = _PlaceInvolvedImpl;
 
-  factory PlaceInvolved.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory PlaceInvolved.fromJson(Map<String, dynamic> jsonSerialization) {
     return PlaceInvolved(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      principalId: serializationManager
-          .deserialize<int>(jsonSerialization['principalId']),
-      placeId:
-          serializationManager.deserialize<int>(jsonSerialization['placeId']),
+      id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
+      placeId: jsonSerialization['placeId'] as int,
     );
   }
 
@@ -62,160 +58,12 @@ abstract class PlaceInvolved extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'principalId': principalId,
-      'placeId': placeId,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'principalId': principalId,
       'placeId': placeId,
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'principalId':
-        principalId = value;
-        return;
-      case 'placeId':
-        placeId = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<PlaceInvolved>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceInvolvedTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<PlaceInvolved>(
-      where: where != null ? where(PlaceInvolved.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<PlaceInvolved?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceInvolvedTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<PlaceInvolved>(
-      where: where != null ? where(PlaceInvolved.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<PlaceInvolved?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<PlaceInvolved>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<PlaceInvolvedTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<PlaceInvolved>(
-      where: where(PlaceInvolved.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    PlaceInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    PlaceInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    PlaceInvolved row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<PlaceInvolvedTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<PlaceInvolved>(
-      where: where != null ? where(PlaceInvolved.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static PlaceInvolvedInclude include() {
@@ -240,6 +88,11 @@ abstract class PlaceInvolved extends _i1.TableRow {
       orderByList: orderByList?.call(PlaceInvolved.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -295,9 +148,6 @@ class PlaceInvolvedTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use PlaceInvolvedTable.t instead.')
-PlaceInvolvedTable tPlaceInvolved = PlaceInvolvedTable();
-
 class PlaceInvolvedInclude extends _i1.IncludeObject {
   PlaceInvolvedInclude._();
 
@@ -341,7 +191,7 @@ class PlaceInvolvedRepository {
     _i1.OrderByListBuilder<PlaceInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<PlaceInvolved>(
+    return session.db.find<PlaceInvolved>(
       where: where?.call(PlaceInvolved.t),
       orderBy: orderBy?.call(PlaceInvolved.t),
       orderByList: orderByList?.call(PlaceInvolved.t),
@@ -361,7 +211,7 @@ class PlaceInvolvedRepository {
     _i1.OrderByListBuilder<PlaceInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<PlaceInvolved>(
+    return session.db.findFirstRow<PlaceInvolved>(
       where: where?.call(PlaceInvolved.t),
       orderBy: orderBy?.call(PlaceInvolved.t),
       orderByList: orderByList?.call(PlaceInvolved.t),
@@ -376,7 +226,7 @@ class PlaceInvolvedRepository {
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<PlaceInvolved>(
+    return session.db.findById<PlaceInvolved>(
       id,
       transaction: transaction,
     );
@@ -387,7 +237,7 @@ class PlaceInvolvedRepository {
     List<PlaceInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<PlaceInvolved>(
+    return session.db.insert<PlaceInvolved>(
       rows,
       transaction: transaction,
     );
@@ -398,7 +248,7 @@ class PlaceInvolvedRepository {
     PlaceInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<PlaceInvolved>(
+    return session.db.insertRow<PlaceInvolved>(
       row,
       transaction: transaction,
     );
@@ -410,7 +260,7 @@ class PlaceInvolvedRepository {
     _i1.ColumnSelections<PlaceInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<PlaceInvolved>(
+    return session.db.update<PlaceInvolved>(
       rows,
       columns: columns?.call(PlaceInvolved.t),
       transaction: transaction,
@@ -423,41 +273,41 @@ class PlaceInvolvedRepository {
     _i1.ColumnSelections<PlaceInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<PlaceInvolved>(
+    return session.db.updateRow<PlaceInvolved>(
       row,
       columns: columns?.call(PlaceInvolved.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  Future<List<PlaceInvolved>> delete(
     _i1.Session session,
     List<PlaceInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<PlaceInvolved>(
+    return session.db.delete<PlaceInvolved>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  Future<PlaceInvolved> deleteRow(
     _i1.Session session,
     PlaceInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<PlaceInvolved>(
+    return session.db.deleteRow<PlaceInvolved>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  Future<List<PlaceInvolved>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PlaceInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<PlaceInvolved>(
+    return session.db.deleteWhere<PlaceInvolved>(
       where: where(PlaceInvolved.t),
       transaction: transaction,
     );
@@ -469,7 +319,7 @@ class PlaceInvolvedRepository {
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<PlaceInvolved>(
+    return session.db.count<PlaceInvolved>(
       where: where?.call(PlaceInvolved.t),
       limit: limit,
       transaction: transaction,
