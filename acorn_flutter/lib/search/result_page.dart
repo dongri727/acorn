@@ -55,6 +55,7 @@ class ResultPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => DetailPage(principalData: detailItem)));
+                            print(detailItem);
                           },
                           child: ListTile(
                             leading: Text('${principal?[index].annee}-${principal?[index].month}-${principal?[index].day}' ,

@@ -170,12 +170,12 @@ class AddPlacePage extends StatelessWidget {
                   ),
                 )),
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                model.savePrecise(principalId, model.locationPrecise);
+              onPressed: () async {
+                await model.savePrecise(principalId, model.locationPrecise);
                 if (!context.mounted) return;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DetailPage(principalData: model.newData!)));
+                  MaterialPageRoute(builder: (context) => DetailPage(principalData: model.principalData!)));
               },
               label: const Text('save detailed location'),
             ));

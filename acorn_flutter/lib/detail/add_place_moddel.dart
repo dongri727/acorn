@@ -167,12 +167,12 @@ class AddPlaceModel extends ChangeNotifier {
     }
   }
 
-  Principal? newData;
+  Principal? principalData;
   Future<void> savePrecise(int principalId, String locationPrecise) async {
     try {
       var updatedPrincipalData = await client.principal.updatePrincipalAndReturn(principalId, locationPrecise);
-      newData = updatedPrincipalData;
-      print(newData);
+      principalData = updatedPrincipalData;
+      print(principalData);
       notifyListeners();
     } catch (e) {
       print('Error updating precise: $e');

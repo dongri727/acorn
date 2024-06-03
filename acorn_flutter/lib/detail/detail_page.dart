@@ -32,18 +32,6 @@ class DetailPage extends StatelessWidget {
                       leadingWidth: 150,
                       title: const Text('DETAIL'),
                     ),
-                    floatingActionButton: FloatingActionButton.extended(
-                        onPressed: () async {
-                          await Navigator.push<String>(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddDetailPage(principalId: principalData.id!),
-                            ),
-                          );
-                          if (!context.mounted) return;
-                          Provider.of<DetailModel>(context, listen: false).fetchDetailBundled(principalData.id!);
-                        },
-                        label: const Text('add keywords')),
                     body: SafeArea(
                       child: Container(
                         decoration: const BoxDecoration(
@@ -189,6 +177,25 @@ class DetailPage extends StatelessWidget {
                                           );
                                         }
                                     )
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: ShadowedContainer(
+                                    child: TextButton(
+                                      onPressed: () async {
+                                        await Navigator.push<String>(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AddDetailPage(principalId: principalData.id!),
+                                          ),
+                                        );
+
+                                        if (!context.mounted) return;
+                                        Provider.of<DetailModel>(context, listen: false).fetchDetailBundled(principalData.id!);
+                                      },
+                                      child: const Text('add keywords'),
+                                    ),
+                                  ),
                                 ),
                               ]
                               ),
