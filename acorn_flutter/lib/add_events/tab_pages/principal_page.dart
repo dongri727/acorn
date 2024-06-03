@@ -9,6 +9,7 @@ import '../../utils/shadowed_container.dart';
 import '../../utils/tff_format.dart';
 
 import 'principal_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrincipalPage extends StatelessWidget {
   const PrincipalPage({super.key});
@@ -49,7 +50,7 @@ class PrincipalPage extends StatelessWidget {
                                   padding: const EdgeInsets.all(20.0),
                                   child: ShadowedContainer(
                                     child: TffFormat(
-                                      hintText: "Event (within 50 letters)",
+                                      hintText: AppLocalizations.of(context)!.principalA,
                                       onChanged: (text) {
                                         model.setNewName(text);
                                       },
@@ -182,7 +183,7 @@ class PrincipalPage extends StatelessWidget {
                         ]),
                         Center(
                           child: ElevatedButton(
-                            child: const Text('Show and Select Options'),
+                            child: Text(AppLocalizations.of(context)!.showSelect,),
                             onPressed: () {
                               model.listRadioButtonBasis(model.selectedOption);
                             },
@@ -208,7 +209,7 @@ class PrincipalPage extends StatelessWidget {
                   ),
                 )),
             floatingActionButton: FloatingActionButton.extended(
-              label: const Text('Temporarily Save'),
+              label: Text(AppLocalizations.of(context)!.saveTempo,),
               onPressed: () {
                 if (model.isAllFieldFilled()) {
                   model.temporarilySaveData((context) {
@@ -220,12 +221,11 @@ class PrincipalPage extends StatelessWidget {
                   },context);
                 } else {
                   showDialog(
-                      context: context, 
+                      context: context,
                       builder: (_) => AlertDialog(
-                        title: const Text('Warning'),
-                        content: const Text(
-                            'There are some fields that have not been filled in \n'
-                                'All required',
+                        title: Text(AppLocalizations.of(context)!.principalD,),
+                        content: Text(
+                            AppLocalizations.of(context)!.principalE,
                         ),
                         actions: <Widget>[
                           TextButton(

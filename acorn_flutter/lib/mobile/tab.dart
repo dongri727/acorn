@@ -1,10 +1,9 @@
 import 'package:acorn_flutter/mobile/register/register_page.dart';
 import 'package:acorn_flutter/mobile/scalable/menu/mobile_scalable.dart';
-import 'package:acorn_flutter/mobile/scalable/timeline/mobile_bloc_provider.dart';
-import 'package:acorn_flutter/mobile/scalable/timeline/mobile_timeline.dart';
 import 'package:acorn_flutter/mode.dart';
 import 'package:flutter/material.dart';
 import 'game_page.dart';
+import 'mobile_index_page.dart';
 import 'mobile_search_page.dart';
 
 
@@ -17,11 +16,12 @@ class TabWidget extends StatefulWidget {
 
 class _TabWidgetState extends State<TabWidget> {
   static const _screens = [
-    ModePage(),
+    MobileIndexPage(),
     RegisterPage(),
     SearchPage(),
     ScalableM(),
     GamePage(),
+    ModePage(),
   ];
 
   int _selectedIndex = 0;
@@ -30,12 +30,6 @@ class _TabWidgetState extends State<TabWidget> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  // splash画面を表示時間を調整するために、下のinstateを追加します。
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -55,6 +49,7 @@ class _TabWidgetState extends State<TabWidget> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.search), label: 'SCALABLE'),
             BottomNavigationBarItem(icon: Icon(Icons.games), label: 'GAME'),
+            BottomNavigationBarItem(icon: Icon(Icons.link), label: 'v.Web'),
           ],
           type: BottomNavigationBarType.fixed,
         ));

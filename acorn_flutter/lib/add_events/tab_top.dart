@@ -4,7 +4,6 @@ import 'package:acorn_flutter/utils/navigation_button.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../confirm/confirm.dart';
 import 'tab_pages/pays_page.dart';
 import 'tab_pages/preview_page.dart';
@@ -12,6 +11,7 @@ import 'tab_pages/principal_page.dart';
 import 'tab_pages/terms_page.dart';
 import 'tab_pages/where_page.dart';
 import 'tab_pages/who_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class TabPage extends StatelessWidget {
@@ -27,22 +27,22 @@ class TabPage extends StatelessWidget {
 
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "Register an Event",
+            title: Text(
+              AppLocalizations.of(context)!.tabTopA,
             ),
             backgroundColor: Colors.grey[200],
             //automaticallyImplyLeading: false,
-            leading: const ShadowedContainer(
+            leading: ShadowedContainer(
               child: NavigationButton(
                 destinationPage: IndexPage(),
-                buttonText: 'index',
+                buttonText: AppLocalizations.of(context)!.tabTopB,
               )
             ),
             leadingWidth: 100,
-            actions: const [
+            actions: [
               NavigationButton(
-                  destinationPage: MultiSearchPage(),
-                  buttonText: 'search')
+                  destinationPage: const MultiSearchPage(),
+                  buttonText: AppLocalizations.of(context)!.tabTopC,)
             ],
           ),
           body: Container(
@@ -52,7 +52,7 @@ class TabPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: const SafeArea(
+            child: SafeArea(
               child: DefaultTabController(
                 length: 6,
                 child: Column(
@@ -62,15 +62,15 @@ class TabPage extends StatelessWidget {
                       indicatorColor: Colors.yellow,
                       unselectedLabelColor: Colors.white,
                       tabs: [
-                        Tab(text: 'PRINCIPAL'),
-                        Tab(text: 'ADDITIONAL "WHERE"'),
-                        Tab(text: 'PARTICIPANTS A'),
-                        Tab(text: 'PARTICIPANTS B'),
-                        Tab(text: 'SEARCH TERMS'),
-                        Tab(text: 'CONFIRM'),
+                        Tab(text: AppLocalizations.of(context)!.tabTopD),
+                        Tab(text: AppLocalizations.of(context)!.tabTopE),
+                        Tab(text: AppLocalizations.of(context)!.tabTopF),
+                        Tab(text: AppLocalizations.of(context)!.tabTopG),
+                        Tab(text: AppLocalizations.of(context)!.tabTopH),
+                        Tab(text: AppLocalizations.of(context)!.tabTopI),
                       ],
                     ),
-                    Expanded(
+                    const Expanded(
                       child: TabBarView(
                         physics: NeverScrollableScrollPhysics(),
                         children: [

@@ -9,6 +9,7 @@ import '../../confirm/confirm.dart';
 import '../../confirm/confirm_model.dart';
 import '../../utils/blank_text_format.dart';
 import '../../utils/tff_format.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WherePageGate extends StatelessWidget {
   const WherePageGate({super.key});
@@ -107,7 +108,7 @@ class WherePage extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(50, 8, 100, 8),
                                   child: ShadowedContainer(
                                     child: TffFormat(
-                                      hintText: "Latitude",
+                                      hintText: AppLocalizations.of(context)!.latitude,
                                       onChanged: (value) {
                                         model.nsSwitch(value);
                                       },
@@ -132,7 +133,7 @@ class WherePage extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(50, 8, 100, 40),
                                   child: ShadowedContainer(
                                     child: TffFormat(
-                                      hintText: "Longitude",
+                                      hintText: AppLocalizations.of(context)!.longitude,
                                       onChanged: (value) {
                                         model.ewSwitch(value);
                                       },
@@ -150,7 +151,7 @@ class WherePage extends StatelessWidget {
                             onPressed: () async {
                               model.fetchRadioButtonBasis(model.selectedOption);
                             },
-                            child: const Text('Show and Select Options'),
+                            child: Text(AppLocalizations.of(context)!.showSelect),
                           ),
                         ),
                         Padding(
@@ -158,7 +159,7 @@ class WherePage extends StatelessWidget {
                           child: ShadowedContainer(
                             child: FormatGrey(
                               controller: controller,
-                              hintText: 'a New Name You Want',
+                              hintText: AppLocalizations.of(context)!.newNameWant,
                               onChanged: (text) {
                                 model.setNewWord(text);
                               },
@@ -171,7 +172,7 @@ class WherePage extends StatelessWidget {
                                 model.selectedOption);
                             controller.clear();
                           },
-                          label: 'Add a New Name',
+                          label: AppLocalizations.of(context)!.addNewName,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20.0),
@@ -197,7 +198,7 @@ class WherePage extends StatelessWidget {
                       });
                 }, context);
               },
-              label: const Text('Temporarily Save'),
+              label: Text(AppLocalizations.of(context)!.saveTempo),
             ));
       }),
     );

@@ -5,6 +5,7 @@ import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
 import 'users/account_page.dart';
 import 'utils/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({super.key});
@@ -44,7 +45,7 @@ class IndexPage extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            "Register Events",
+                            AppLocalizations.of(context)!.webIndexA,
                             style: AcornTheme.textTheme.bodyLarge,
                         ),
                       ),
@@ -61,7 +62,7 @@ class IndexPage extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            "Search & View",
+                            AppLocalizations.of(context)!.webIndexB,
                             style: AcornTheme.textTheme.bodyLarge,
                           ),
                         ),

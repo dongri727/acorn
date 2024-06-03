@@ -1,6 +1,7 @@
+import 'package:acorn_flutter/lists/principal_options_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math';
 
 import '../../confirm/confirm.dart';
@@ -11,6 +12,17 @@ import '../../lists/universe_list.dart';
 import '../../utils/build_chips.dart';
 
 class PrincipalModel extends ChangeNotifier {
+
+/*  Locale _currentLocale;
+
+  PrincipalModel(this._currentLocale);
+
+  void setLocale(Locale locale) {
+    _currentLocale = locale;
+    notifyListeners();
+  }
+
+  Locale get currentLocale => _currentLocale;*/
 
   double log10(num x) => log(x) / ln10;
 
@@ -27,6 +39,19 @@ class PrincipalModel extends ChangeNotifier {
 
   List<String> periods = epoch;
 
+/*  List<String> get periods {
+    switch (_currenLocale.languageCode) {
+      case 'fr':
+        return epochFr;
+      case 'ja':
+        return epochJa;
+      default:
+        return epoch;
+    }
+  }*/
+
+
+
   final List<String> filtersLocation = <String>[];
 
   ///Universe
@@ -41,11 +66,7 @@ class PrincipalModel extends ChangeNotifier {
   List<String> currentDisplayList = [];
   String? selectedOption = '';
 
-  List<String> principalOptions = [
-    'Universe',
-    'Current Country-name',
-    'Ocean-name',
-  ];
+  List<String> principalOptions = principalOptionsEn;
 
   String location = "";
 
@@ -136,6 +157,7 @@ class PrincipalModel extends ChangeNotifier {
     /// convert the years depending on the selected calendar period
     switch (selectedCalendar) {
       case 'Billion Years':
+      case  '〜十億年前':
         newYearI = (newYearD * 1000000000).round();
         newYearI = -newYearI.abs();
         break;
@@ -155,9 +177,11 @@ class PrincipalModel extends ChangeNotifier {
         newYearI = -newYearI.abs();
         break;
       case 'Common-Era':
+      case  '西暦':
         newYearI = (newYearD).round();
         break;
     }
+    print(newYearI);
 
     ///make data of point
     newPoint =
