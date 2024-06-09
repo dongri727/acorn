@@ -1,12 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/add_events/tab_pages/terms_model.dart';
-import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../utils/blank_text_format.dart';
-import '../../utils/confirm_dialog.dart';
-import '../../utils/tff_format.dart';
 
 class TermsPage extends StatelessWidget {
   const TermsPage({super.key});

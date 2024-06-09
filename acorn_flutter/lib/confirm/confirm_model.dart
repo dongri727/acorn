@@ -1,28 +1,12 @@
 import 'dart:core';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-/*import '../fetch/fetch_catt.dart';
-import '../fetch/fetch_patt.dart';
-import '../fetch/fetch_place.dart';
-import '../fetch/fetch_stars.dart';*/
 import 'confirm.dart';
 
 class ConfirmModel extends ChangeNotifier {
-
-/*  late final FetchStarsRepository  _fetchStarsRepository;
-  late final FetchCattRepository _fetchCattRepository;
-  late final FetchPattRepository _fetchPattRepository;
-  late final FetchPlaceRepository _fetchPlaceRepository;*/
-
-  ConfirmModel() {
-/*    _fetchStarsRepository = FetchStarsRepository();
-    _fetchCattRepository = FetchCattRepository();
-    _fetchPattRepository = FetchPattRepository();
-    _fetchPlaceRepository = FetchPlaceRepository();*/
-  }
+  ConfirmModel();
 
   //insert into DB
   Future<int> save(Confirm confirm) async {

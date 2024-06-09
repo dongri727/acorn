@@ -1,13 +1,7 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
-import 'package:acorn_flutter/utils/dropdown_button.format.dart';
-import 'package:acorn_flutter/utils/navigation_button.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../utils/blank_text_format.dart';
-import '../utils/button_format.dart';
-import '../utils/tff_format.dart';
 
 class MultiSearchPage extends StatelessWidget {
   const MultiSearchPage({super.key});
@@ -25,7 +19,7 @@ class MultiSearchPage extends StatelessWidget {
               buttonText: 'index',
             ),
             leadingWidth: 100,
-            title: const Text('Multiple Search Page'),
+            title: Text(AppLocalizations.of(context)!.searchA),
           ),
           body: Container(
             decoration: const BoxDecoration(
@@ -40,10 +34,10 @@ class MultiSearchPage extends StatelessWidget {
                       flex: 1,
                       child: Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(20.0),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
                             child: HintText(
-                              hintText: "Which display format do you prefer?",
+                              hintText: AppLocalizations.of(context)!.searchB,
                             ),
                           ),
                           Flexible(
@@ -62,10 +56,10 @@ class MultiSearchPage extends StatelessWidget {
                       flex: 1,
                       child: Row(
                         children: [
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(20.0),
                             child: HintText(
-                              hintText: "What narrows your search ?",
+                              hintText: AppLocalizations.of(context)!.searchD,
                             ),
                           ),
                           Padding(
@@ -92,9 +86,9 @@ class MultiSearchPage extends StatelessWidget {
                               onPressed: () async {
                                 model.fetchRadioButtonBasis(model.selectedOption);
                               },
-                              child: const Text(
-                                'Show and Select your options',
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.searchE,
+                                style: const TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
                             ),
@@ -147,7 +141,7 @@ class MultiSearchPage extends StatelessWidget {
                                   onPressed: () {
                                     model.submitSelection();
                                   },
-                                  child: const Text("Fix, => Show-button in the lower right corner"),
+                                  child: Text(AppLocalizations.of(context)!.searchF),
                                 ),
                               ),
                             ],

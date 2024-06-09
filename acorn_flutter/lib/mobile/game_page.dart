@@ -1,8 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/mobile/register/register_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../lists/mobile_countries_list.dart';
 import '../serverpod_client.dart';
 

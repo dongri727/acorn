@@ -1,10 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/mobile/register/register_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../utils/dropdown_button.format.dart';
-import '../../utils/tff_format.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});

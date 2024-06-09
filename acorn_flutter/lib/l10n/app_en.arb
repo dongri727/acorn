@@ -65,5 +65,11 @@
   "newNameWant": "a New Name You Want",
   "addNewName": "Add a New Name",
   "latitude": "Latitude(decimal)",
-  "longitude": "Longitude(decimal)"
+  "longitude": "Longitude(decimal)",
+  "searchA": "Multiple Search Page",
+  "searchB": "Which display format do you prefer?",
+  "searchC": "CLASSIC",
+  "searchD": "What narrows your search?",
+  "searchE": "Show and Select your options",
+  "searchF": "Confirm"
 }

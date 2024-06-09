@@ -1,0 +1,5 @@
+class: Japanese
+table: japanese
+fields: 
+  principalId: int
+  japaneseName: String

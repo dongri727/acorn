@@ -1,9 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_flutter/lists/principal_options_list.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math';
-
 import '../../confirm/confirm.dart';
 import '../../lists/countries_list.dart';
 import '../../lists/oceans_list.dart';
@@ -12,17 +9,6 @@ import '../../lists/universe_list.dart';
 import '../../utils/build_chips.dart';
 
 class PrincipalModel extends ChangeNotifier {
-
-/*  Locale _currentLocale;
-
-  PrincipalModel(this._currentLocale);
-
-  void setLocale(Locale locale) {
-    _currentLocale = locale;
-    notifyListeners();
-  }
-
-  Locale get currentLocale => _currentLocale;*/
 
   double log10(num x) => log(x) / ln10;
 
@@ -38,19 +24,6 @@ class PrincipalModel extends ChangeNotifier {
   var calendarNo = 0;
 
   List<String> periods = epoch;
-
-/*  List<String> get periods {
-    switch (_currenLocale.languageCode) {
-      case 'fr':
-        return epochFr;
-      case 'ja':
-        return epochJa;
-      default:
-        return epoch;
-    }
-  }*/
-
-
 
   final List<String> filtersLocation = <String>[];
 

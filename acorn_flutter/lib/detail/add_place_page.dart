@@ -1,12 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/detail/detail_page.dart';
-import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../utils/tff_format.dart';
-import '../utils/blank_text_format.dart';
-import '../utils/navigation_button.dart';
 import 'add_place_moddel.dart';
 
 

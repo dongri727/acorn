@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:provider/provider.dart';
 import '../../confirm/confirm.dart';
 import '../../fetch/fetch_orgs.dart';
 import '../../fetch/fetch_people.dart';

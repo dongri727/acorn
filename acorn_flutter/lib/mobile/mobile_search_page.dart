@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../data_repository.dart';
 import '../lists/mobile_countries_list.dart';
 import '../serverpod_client.dart';
 
@@ -15,8 +14,18 @@ class SearchPage extends StatefulWidget {
 class SearchPageState extends State<SearchPage> {
   List<Principal> listPrincipal = [];
   List<int> principalIds = [];
+
   TextEditingController searchController =
   TextEditingController(); // 検索キーワードを入力するためのController
+
+  @override
+  void initState() {
+    super.initState();
+    getOptions();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchJapaneseNamesIfNeeded();
+    });
+  }
 
   Future<void> fetchPrincipalByLocation(String keywords) async {
     try {
@@ -30,21 +39,25 @@ class SearchPageState extends State<SearchPage> {
     }
   }
 
-  List<String> options = [];
   void getOptions() {
     for (var country in mobileCountries) {
       options.add(country['name']);
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    getOptions();
+  //DB多言語化
+  Future<void> fetchJapaneseNamesIfNeeded() async {
+    final dataRepository = Provider.of<DataRepository>(context, listen: false);
+    if (dataRepository.isJapaneseLanguage(context)) {
+      await dataRepository.fetchAllJapaneseNames();
+    }
   }
+
+  List<String> options = [];
 
   @override
   Widget build(BuildContext context) {
+    final dataRepository = Provider.of<DataRepository>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -95,6 +108,8 @@ class SearchPageState extends State<SearchPage> {
             child: ListView.builder(
               itemCount: listPrincipal.length,
               itemBuilder: (context, index) {
+                final principalId = listPrincipal[index].id;
+                debugPrint('Principal ID: $principalId'); // デバッグ出力
                 return Card(
                   margin:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -110,8 +125,14 @@ class SearchPageState extends State<SearchPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        SelectableText(listPrincipal[index].affair,
-                            style: const TextStyle(fontSize: 16)),
+/*                        SelectableText(listPrincipal[index].affair,
+                            style: const TextStyle(fontSize: 16)),*/
+                        SelectableText(
+                          dataRepository.isJapaneseLanguage(context)
+                              ? dataRepository.getJapaneseName(principalId!)
+                              : listPrincipal[index].affair,
+                          style: const TextStyle(fontSize: 16),
+                        ),
                         const SizedBox(
                           height: 2,
                         ),

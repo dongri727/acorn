@@ -1,9 +1,8 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'dart:core';
 import 'package:acorn_flutter/lists/pays_options_list.dart';
-import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../../confirm/confirm.dart';
-import 'package:provider/provider.dart';
 import '../../fetch/fetch_catt.dart';
 import '../../fetch/fetch_patt.dart';
 import '../../fetch/fetch_place.dart';

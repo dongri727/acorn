@@ -1,8 +1,7 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/navigation_button.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../add_events/tab_top.dart';
 import '../detail/detail_page.dart';
 import 'multiple_search_page.dart';

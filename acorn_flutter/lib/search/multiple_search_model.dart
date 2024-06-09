@@ -57,6 +57,7 @@ class MultipleSearchModel extends ChangeNotifier {
     '3D',
     '4D',
     'MR',
+    'GIS',
   ];
   //radioButton
   String selectedFormat = 'CLASSIC';

@@ -1,12 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/add_events/tab_pages/pays_model.dart';
-import 'package:acorn_flutter/utils/blank_text_format.dart';
-import 'package:acorn_flutter/utils/confirm_dialog.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../utils/button_format.dart';
-import '../../utils/tff_format.dart';
 
 class PaysPage extends StatelessWidget {
   const PaysPage({super.key});

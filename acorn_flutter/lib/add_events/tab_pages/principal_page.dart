@@ -1,15 +1,6 @@
-import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:acorn_flutter/utils/chips_format.dart';
-import 'package:acorn_flutter/utils/confirm_dialog.dart';
-import 'package:acorn_flutter/utils/dropdown_button.format.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../utils/blank_text_format.dart';
-import '../../utils/shadowed_container.dart';
-import '../../utils/tff_format.dart';
-
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'principal_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrincipalPage extends StatelessWidget {
   const PrincipalPage({super.key});

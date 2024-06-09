@@ -8,7 +8,6 @@ import "../timeline/mobile_timeline.dart";
 import "../timeline/mobile_widget.dart";
 import 'menu_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import "mobile_menu_section.dart";
 
 class ScalableM extends StatefulWidget {

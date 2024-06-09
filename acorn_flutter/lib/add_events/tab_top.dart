@@ -1,9 +1,7 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_page.dart';
-import 'package:acorn_flutter/utils/navigation_button.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../confirm/confirm.dart';
 import 'tab_pages/pays_page.dart';
 import 'tab_pages/preview_page.dart';
@@ -11,7 +9,7 @@ import 'tab_pages/principal_page.dart';
 import 'tab_pages/terms_page.dart';
 import 'tab_pages/where_page.dart';
 import 'tab_pages/who_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class TabPage extends StatelessWidget {
@@ -31,10 +29,9 @@ class TabPage extends StatelessWidget {
               AppLocalizations.of(context)!.tabTopA,
             ),
             backgroundColor: Colors.grey[200],
-            //automaticallyImplyLeading: false,
             leading: ShadowedContainer(
               child: NavigationButton(
-                destinationPage: IndexPage(),
+                destinationPage: const IndexPage(),
                 buttonText: AppLocalizations.of(context)!.tabTopB,
               )
             ),

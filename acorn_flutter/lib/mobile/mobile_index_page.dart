@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../utils/discribe_card.dart';
-import '../utils/shadowed_container.dart';
-
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 
 class MobileIndexPage extends StatefulWidget {
   const MobileIndexPage({super.key});

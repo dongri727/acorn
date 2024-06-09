@@ -1,24 +1,19 @@
 import 'package:acorn_flutter/serverpod_client.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'data_repository.dart';
 import 'mobile/scalable/timeline/mobile_bloc_provider.dart';
 import 'mobile/scalable/timeline/mobile_timeline.dart';
 import 'timeline/bloc_provider.dart';
 import 'cover.dart';
 import 'timeline/timeline.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'data_repository.dart';
+import 'package:acorn_flutter/exporter.dart';
 
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-/*  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);*/
-
   await initializeServerpodClient();
-
   Provider.debugCheckInvalidValueType = null;
 
   runApp(const MyApp());
@@ -63,23 +58,28 @@ class _MyAppState extends State<MyApp> {
 
 @override
   Widget build(BuildContext context) {
-  return BlocProviderM(
-      t: TimelineM(Theme.of(context).platform),
-/*    return BlocProvider(
-        t: Timeline(Theme.of(context).platform),*/
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'WhenWhereWhatDatabase',
-          theme: ThemeData(
-            textTheme: GoogleFonts.tsukimiRoundedTextTheme(
-              Theme.of(context).textTheme
+  return MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => DataRepository()),
+    ],
+    child: BlocProviderM(
+        t: TimelineM(Theme.of(context).platform),
+    /*    return BlocProvider(
+          t: Timeline(Theme.of(context).platform),*/
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'WhenWhereWhatDatabase',
+            theme: ThemeData(
+              textTheme: GoogleFonts.tsukimiRoundedTextTheme(
+                Theme.of(context).textTheme
+              ),
+              useMaterial3: true,
             ),
-            useMaterial3: true,
-          ),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: const [Locale('en'), Locale('ja'), Locale('fr')],
-            locale: _locale,
-          home: const CoverPage(),
-        ));
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: const [Locale('en'), Locale('ja'), Locale('fr')],
+              locale: _locale,
+            home: const CoverPage(),
+          )),
+  );
   }
 }

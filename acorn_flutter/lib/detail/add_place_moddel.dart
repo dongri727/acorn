@@ -1,10 +1,9 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_flutter/fetch/fetch_place.dart';
 import 'package:acorn_flutter/fetch/fetch_seas.dart';
 import 'package:acorn_flutter/fetch/fetch_stars.dart';
-import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../../lists/where_options_list.dart';
-//import 'dart:math' as math;
 import '../../utils/build_chips.dart';
 import '../serverpod_client.dart';
 

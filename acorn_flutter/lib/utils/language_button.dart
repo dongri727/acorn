@@ -65,7 +65,7 @@ class LanguageDropdownButtonState extends State<LanguageDropdownButton> {
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value == 'en' ? 'English' : value == 'ja' ? 'Japanese' : 'French'),  // 国旗の表示
+          child: Text(value == 'en' ? 'English' : value == 'ja' ? '日本語' : 'Français'),  // 国旗の表示
         );
       }).toList(),
     );

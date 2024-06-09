@@ -1,11 +1,6 @@
+import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export_utils.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/utils/navigation_button.dart';
-import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../utils/tff_format.dart';
-import '../../../utils/card_format.dart';
 import 'add_detail_page.dart';
 import 'add_place_page.dart';
 import 'detail_model.dart';

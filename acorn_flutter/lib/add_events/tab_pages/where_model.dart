@@ -1,11 +1,10 @@
+import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_flutter/fetch/fetch_catt.dart';
 import 'package:acorn_flutter/fetch/fetch_patt.dart';
 import 'package:acorn_flutter/fetch/fetch_place.dart';
 import 'package:acorn_flutter/fetch/fetch_seas.dart';
 import 'package:acorn_flutter/fetch/fetch_stars.dart';
-import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:provider/provider.dart';
 import '../../confirm/confirm.dart';
 import '../../lists/where_options_list.dart';
 import 'dart:math' as math;

@@ -65,5 +65,11 @@
   "newNameWant": "新規の名称",
   "addNewName": "名称を追加",
   "latitude": "緯度(十進法）",
-  "longitude": "経度（十進法）"
+  "longitude": "経度（十進法）",
+  "searchA": "検索",
+  "searchB": "どの表示形式にしますか",
+  "searchC": "標準",
+  "searchD": "なにで絞り込みますか",
+  "searchE": "選択肢を表示して選ぶ",
+  "searchF": "確定"
 }
