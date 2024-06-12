@@ -42,7 +42,7 @@ class MobileIndexPageState extends State<MobileIndexPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset('images/mobile.png')),
+                                  child: Image.asset('assets/images/mobile.png')),
                             )),
                       ),
                     ],

@@ -1,6 +1,6 @@
 import 'package:acorn_flutter/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
-import 'package:acorn_flutter/mobile/register/register_page.dart';
+import 'package:acorn_flutter/mobile/game_dialog.dart';
 import '../lists/mobile_countries_list.dart';
 import '../serverpod_client.dart';
 
@@ -18,6 +18,7 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
   late Animation<double> _animation;
 
   List<String> values = [];
+
   void getCountries() {
     for (var country in mobileCountries) {
       values.add(country['name']);
@@ -31,9 +32,10 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
   int incorrectAnswer = 0;
   bool answered = false;
   bool selectCountry = false;
+  bool bottomSheet = false;
 
   final List<Color> backgroundColors =
-  List.filled(5, Colors.grey.withOpacity(0.15));
+      List.filled(5, Colors.grey.withOpacity(0.15));
   final Color correctBackgroundColor = Colors.green.withOpacity(0.15);
   final List<Color> stringColors = List.filled(5, Colors.black);
   final Color incorrectStingColor = Colors.red;
@@ -49,34 +51,21 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
 
       if (!mounted) return;
 
+      final dataRepository =
+          Provider.of<DataRepository>(context, listen: false);
+      if (dataRepository.isJapaneseLanguage(context)) {
+        for (var item in listPrincipal) {
+          var japaneseName = dataRepository.getJapaneseName(item.id!);
+          item.affair = japaneseName != 'N/A' ? japaneseName : item.affair;
+        }
+      }
+
       if (listPrincipal.length < 5) {
         // データが5件に満たない場合、アラートを表示
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.gameAlertA),
-              content: Text(AppLocalizations.of(context)!.gameAlertB),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(AppLocalizations.of(context)!.gameAlertC),
-                  onPressed: () {
-                    Navigator.push<String>(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RegisterPage()));
-                  },
-                ),
-                TextButton(
-                  child: Text(AppLocalizations.of(context)!.gameAlertD),
-                  onPressed: () {
-                    Navigator.of(context).pop(); // ダイアログを閉じる
-                    setState(() {
-                      selectCountry = false; // 国を選ぶステップに戻る
-                    });
-                  },
-                ),
-              ],
-            );
+            return const GameUnder5();
           },
         );
       } else {
@@ -116,42 +105,9 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
         _resetGame();
       });
     } else {
-      _showRetryOrNewGameDialog();
+      showGameBottomSheet(context, _retry, _resetGame);
+      bottomSheet = true;
     }
-  }
-
-  void _showRetryOrNewGameDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              AlertDialog(
-                backgroundColor: Colors.white.withOpacity(0.5),
-                title: Text(AppLocalizations.of(context)!.gameDialogA),
-                content: Text(AppLocalizations.of(context)!.gameDialogB),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _retry(); // 同じカードで再挑戦
-                    },
-                    child: Text(AppLocalizations.of(context)!.gameDialogC),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _resetGame(); // 新しいゲームを開始
-                    },
-                    child: Text(AppLocalizations.of(context)!.gameDialogD),
-                  ),
-                ],
-              ),
-            ],
-          );
-        }
-    );
   }
 
   void _resetGame() {
@@ -176,6 +132,7 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
     correctAnswer = 0;
     incorrectAnswer = 0;
     answered = false;
+    bottomSheet = false;
     options.shuffle();
     setState(() {});
   }
@@ -184,13 +141,10 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
   initState() {
     super.initState();
     getCountries();
-    _animationController = AnimationController(
-        duration: const Duration(seconds: 3),
-        vsync: this);
-    _animation = CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeIn
-    );
+    _animationController =
+        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _animationController.reverse();
@@ -212,123 +166,128 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
       ),
       body: !selectCountry
           ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(AppLocalizations.of(context)!.gameA,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: 20.0, horizontal: 80.0),
-            child: Autocomplete<String>(
-              optionsBuilder: (TextEditingValue textEditingValue) {
-                return values.where((String value) {
-                  if (textEditingValue.text.isNotEmpty) {
-                    return value.contains(textEditingValue.text[0]
-                        .toUpperCase() +
-                        textEditingValue.text.substring(1).toLowerCase());
-                  } else {
-                    return value.contains(textEditingValue.text);
-                  }
-                });
-              },
-              onSelected: (String selection) {
-                searchController.text = selection;
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              fetchPrincipalByLocation(searchController.text);
-              selectCountry = true;
-            },
-            child: const Text('Start Game'),
-          )
-        ],
-      )
-          : options.isNotEmpty
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          !answered
-              ? Text(AppLocalizations.of(context)!.gameB,
-            style: const TextStyle(fontSize: 18),
-          )
-              : Column(
-            children: [
-              Text(
-                '👍: $correctAnswer / 👎: $incorrectAnswer',
-                style: const TextStyle(fontSize: 18),
-              ),
-              FadeTransition(
-                opacity: _animation,
-                child: const Center(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    'Perfect!',
-                    style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.green),
+                    AppLocalizations.of(context)!.gameA,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
-              )
-            ],
-          ),
-          const SizedBox(height: 40),
-          Material(
-            child: ReorderableListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              children: <Widget>[
-                for (int index = 0; index < _items.length; index += 1)
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(
-                        color: Colors.blueGrey, // 枠線の色
-                        width: 1.0, // 枠線の幅
-                      ),
-                    ),
-                    key: Key('$index'),
-                    child: ListTile(
-                      tileColor: backgroundColors[index],
-                      title: Text(
-                        options[_items[index]][0],
-                        style: TextStyle(color: stringColors[index]),
-                      ),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 20.0, horizontal: 80.0),
+                  child: Autocomplete<String>(
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      return values.where((String value) {
+                        if (textEditingValue.text.isNotEmpty) {
+                          return value.contains(textEditingValue.text[0]
+                                  .toUpperCase() +
+                              textEditingValue.text.substring(1).toLowerCase());
+                        } else {
+                          return value.contains(textEditingValue.text);
+                        }
+                      });
+                    },
+                    onSelected: (String selection) {
+                      searchController.text = selection;
+                    },
                   ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    fetchPrincipalByLocation(searchController.text);
+                    selectCountry = true;
+                  },
+                  child: const Text('Start Game'),
+                )
               ],
-              onReorder: (int oldIndex, int newIndex) {
-                setState(() {
-                  if (oldIndex < newIndex) {
-                    newIndex -= 1;
-                  }
-                  final int item = _items.removeAt(oldIndex);
-                  _items.insert(newIndex, item);
-                });
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[600],
-                  foregroundColor: Colors.white,
-                  elevation: 2),
-              onPressed: _answer,
-              child: const Text('Answer'))
-        ],
-      )
-          : const Center(
-        child: CircularProgressIndicator(),
-      ),
+            )
+          : options.isNotEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    !answered
+                        ? Text(
+                            AppLocalizations.of(context)!.gameB,
+                            style: const TextStyle(fontSize: 18),
+                          )
+                        : Column(
+                            children: [
+                              Text(
+                                '👍: $correctAnswer / 👎: $incorrectAnswer',
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              FadeTransition(
+                                opacity: _animation,
+                                child: const Center(
+                                  child: Text(
+                                    'Perfect!',
+                                    style: TextStyle(
+                                        fontSize: 48,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                    const SizedBox(height: 40),
+                    Material(
+                      child: ReorderableListView(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        children: <Widget>[
+                          for (int index = 0; index < _items.length; index += 1)
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: Colors.blueGrey, // 枠線の色
+                                  width: 1.0, // 枠線の幅
+                                ),
+                              ),
+                              key: Key('$index'),
+                              child: ListTile(
+                                tileColor: backgroundColors[index],
+                                title: Text(
+                                  options[_items[index]][0],
+                                  style: TextStyle(color: stringColors[index]),
+                                ),
+                              ),
+                            ),
+                        ],
+                        onReorder: (int oldIndex, int newIndex) {
+                          setState(() {
+                            if (oldIndex < newIndex) {
+                              newIndex -= 1;
+                            }
+                            final int item = _items.removeAt(oldIndex);
+                            _items.insert(newIndex, item);
+                          });
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey[600],
+                            foregroundColor: Colors.white,
+                            elevation: 2),
+                        onPressed: _answer,
+                        child: const Text('Answer'))
+                  ],
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
     );
   }
 }
