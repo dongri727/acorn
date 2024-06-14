@@ -1,4 +1,4 @@
-import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 import 'package:acorn_flutter/utils/navigation_button.dart';

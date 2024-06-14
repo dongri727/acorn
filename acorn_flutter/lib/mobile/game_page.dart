@@ -1,4 +1,4 @@
-import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/mobile/game_dialog.dart';
 import '../lists/mobile_countries_list.dart';

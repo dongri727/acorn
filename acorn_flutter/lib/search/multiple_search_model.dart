@@ -1,22 +1,9 @@
 import 'dart:core';
-import 'package:acorn_flutter/fetch/fetch_catt.dart';
-import 'package:acorn_flutter/fetch/fetch_orgs.dart';
-import 'package:acorn_flutter/fetch/fetch_patt.dart';
-import 'package:acorn_flutter/fetch/fetch_people.dart';
-import 'package:acorn_flutter/fetch/fetch_seas.dart';
-import 'package:acorn_flutter/fetch/fetch_stars.dart';
+import 'package:acorn_flutter/export/exporter.dart';
+import 'package:acorn_flutter/export/export_fetch.dart';
+import 'package:acorn_flutter/export/export_list.dart';
 import 'package:acorn_flutter/search/result_page.dart';
-import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
-import '../../lists/search_options_list.dart';
-import '../fetch/fetch_categories.dart';
-import '../fetch/fetch_principal.dart';
-import '../fetch/fetch_terms.dart';
-import '../fetch/fetch_place.dart';
-import '../lists/countries_list.dart';
-import '../lists/oceans_list.dart';
-import '../lists/period_list.dart';
-import '../lists/universe_list.dart';
 import '../timeline/scalable.dart';
 import '../unity_view/four_d_page.dart';
 import '../unity_view/mr_page.dart';
@@ -63,6 +50,9 @@ class MultipleSearchModel extends ChangeNotifier {
   String selectedFormat = 'CLASSIC';
 
   List<String> options = searchOptions;
+  List<String> optionsFr = searchOptionsFr;
+  List<String> optionsJa = searchOptionsJa;
+
   //dropdownButton
   String selectedOption = 'Period';
   List<dynamic> currentDisplayList = [];
@@ -288,76 +278,112 @@ class MultipleSearchModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Period':
+      case 'Période':
+      case '時代':
         currentDisplayList = period;
         //updateDisplayList(period);
         break;
 
         case 'Universe':
+      case 'Univers':
+      case '宇宙':
           currentDisplayList = universe;
           //updateDisplayList(universe);
           break;
 
           case 'Stars':
+      case 'Étoiles':
+      case '恒星・惑星など(起こった場所)':
           await _fetchStarsRepository.fetchStarsInDetail();
           currentDisplayList = _fetchStarsRepository.listDetailStars;
           break;
 
         case 'Current Country where it happened':
+      case 'Pays actuel où cela s\'est passé':
+      case '現在の国名(起こった場所)':
           currentDisplayList = pays.map((country) => country['name'] as String).toList();
           //updateDisplayList(pays.map((country) => country['name'] as String).toList());
           break;
         case 'Current Place-name where it happened':
+      case 'Nom de lieu actuel où cela s\'est passé':
+      case '現在の地名(起こった場所)':
           await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
           currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
           break;
         case 'Oceans':
+      case 'Océans':
+      case '海洋名':
           currentDisplayList = oceans;
           //updateDisplayList(oceans);
           break;
         case 'Seas':
+      case 'Mers':
+      case '海域名':
           await _fetchSeasRepository.fetchSeas();
           currentDisplayList = _fetchSeasRepository.listSeas;
           break;
         case 'Country-name at that time':
+      case 'Nom de pays à cette époque':
+      case '当時の国名(起こった場所)':
           await _fetchCattRepository.fetchCattsInDetail();
           currentDisplayList = _fetchCattRepository.listDetailCatts;
           break;
         case 'Place-name at that time':
+      case 'Nom de lieu à cette époque':
+      case '当時の地名(起こった場所)':
           await _fetchPattRepository.fetchPattsInDetail();
           currentDisplayList = _fetchPattRepository.listDetailPatts;
           break;
         case 'Countries involved':
+      case 'Pays impliqués':
+      case '関係国名':
           currentDisplayList = listPaysInv;
           break;
         case 'Places involved':
+      case 'Lieux impliqués':
+      case '関係都市名':
           await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
           currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
           break;
         case 'Names of Countries involved at that time':
+      case 'Noms des pays impliqués à cette époque':
+      case '関係国の当時の名称':
           await _fetchCattRepository.fetchCattsInDetail();
           currentDisplayList = _fetchCattRepository.listDetailCatts;
           break;
         case 'Names of Places involved at that time':
+      case 'Noms des lieux impliqués à cette époque':
+      case '関係都市の当時の名称':
           await _fetchPattRepository.fetchPattsInDetail();
           currentDisplayList = _fetchPattRepository.listDetailPatts;
           break;
         case 'Stars Observed':
+      case 'Étoiles observées':
+      case '観測された星、目指した星など':
           await _fetchStarsRepository.fetchStarsInDetail();
           currentDisplayList = _fetchStarsRepository.listDetailStars;
           break;
         case 'Organisations':
+      case 'Organisations':
+      case '機関、組織、施設など':
           await _fetchOrgsRepository.fetchOrgsInDetail();
           currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
           break;
         case 'People':
+      case 'Personnes':
+      case '人物':
           await _fetchPeopleRepository.fetchPeopleInDetail();
           currentDisplayList = _fetchPeopleRepository.listDetailPeople;
           break;
         case 'Categories':
+      case 'Catégories':
+      case '分類':
           await _fetchCategoriesRepository.fetchCategoriesInDetail();
           currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
           break;
         case 'Other Terms':
+      case 'Autres termes':
+      case 'その他の用語':
           await _fetchTermsRepository.fetchTermsInDetail();
           currentDisplayList = _fetchTermsRepository.listDetailTerms;
           break;
@@ -368,6 +394,8 @@ class MultipleSearchModel extends ChangeNotifier {
     Widget buildItemWidget(dynamic item) {
       switch (selectedOption) {
         case 'Period':
+        case 'Période':
+        case '時代':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersPeriod,
               filterKey: item,
@@ -376,6 +404,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPeriod(filterImSiKey);
               });
         case 'Universe':
+        case 'Univers':
+        case '宇宙':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersUniverse,
               filterKey: item,
@@ -384,6 +414,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedUniverse(filterImSiKey);
               });
         case 'Stars':
+        case 'Étoiles':
+        case '恒星・惑星など(起こった場所)':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersStars,
               filterKey: item.mot,
@@ -392,6 +424,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedStar(filterImSiKey);
               });
         case 'Current Country where it happened':
+        case 'Pays actuel où cela s\'est passé':
+        case '現在の国名(起こった場所)':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersPays,
               filterKey: item,
@@ -400,6 +434,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPays(filterImSiKey);
               });
         case 'Current Place-name where it happened':
+        case 'Nom de lieu actuel où cela s\'est passé':
+        case '現在の地名(起こった場所)':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersVilles,
               filterKey: item.mot,
@@ -408,6 +444,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPlace(filterImSiKey);
               });
         case 'Oceans':
+        case 'Océans':
+        case '海洋名':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersOceans,
               filterKey: item,
@@ -416,6 +454,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedOcean(filterImSiKey);
               });
         case 'Seas':
+        case 'Mers':
+        case '海域名':
           return buildFilterFormatImediatSI(
               filteredKeys: filtersSeas,
               filterKey: item.sea,
@@ -424,6 +464,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedSea(filterImSiKey);
               });
         case 'Country-name at that time':
+        case 'Nom de pays à cette époque':
+        case '当時の国名(起こった場所)':
           return buildFilterFormatImediat(
               filteredKeys: filtersCatts,
               filteredValues: filtersCattsId,
@@ -435,6 +477,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedCatt(filterKey);
               });
         case 'Place-name at that time':
+        case 'Nom de lieu à cette époque':
+        case '当時の地名(起こった場所)':
           return buildFilterFormatImediat(
               filteredKeys: filtersPatts,
               filteredValues: filtersPattsId,
@@ -446,6 +490,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPatt(filterKey);
               });
         case 'Countries involved':
+        case 'Pays impliqués':
+        case '関係国名':
           return buildFilterFormatImediat(
               filteredKeys: filtersPaysInv,
               filteredValues:
@@ -458,6 +504,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPays(filterKey);
               });
         case 'Places involved':
+        case 'Lieux impliqués':
+        case '関係都市名':
           return buildFilterFormatImediat(
               filteredKeys: filtersPlaceInv,
               filteredValues:
@@ -470,6 +518,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPlace(filterKey);
               });
         case 'Names of Countries involved at that time':
+        case 'Noms des pays impliqués à cette époque':
+        case '関係国の当時の名称':
           return buildFilterFormatImediat(
               filteredKeys: filtersPaysInvATT,
               filteredValues:
@@ -484,6 +534,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedCountryInvolved(filterKey);
               });
         case 'Names of Places involved at that time':
+        case 'Noms des lieux impliqués à cette époque':
+        case '関係都市の当時の名称':
           return buildFilterFormatImediat(
               filteredKeys:
               filtersPlaceInvATT,
@@ -499,6 +551,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPlaceInvolve(filterKey);
               });
         case 'Stars Observed':
+        case 'Étoiles observées':
+        case '観測された星、目指した星など':
           return buildFilterFormatImediat(
               filteredKeys:
               filtersStarsObserved,
@@ -514,6 +568,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedStar(filterKey);
               });
         case 'Organisations':
+        //case 'Organisations':
+        case '機関、組織、施設など':
           return buildFilterFormatImediat(
               filteredKeys: filtersOrgs,
               filteredValues: filtersOrgsId,
@@ -525,6 +581,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedOrg(filterKey);
               });
         case 'People':
+        case 'Personnes':
+        case '人物':
           return buildFilterFormatImediat(
               filteredKeys: filtersPeople,
               filteredValues: filtersPeopleId,
@@ -536,6 +594,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedPeople(filterKey);
               });
         case 'Categories':
+        case 'Catégories':
+        case '分類':
           return buildFilterFormatImediat(
               filteredKeys: filtersCategories,
               filteredValues:
@@ -548,6 +608,8 @@ class MultipleSearchModel extends ChangeNotifier {
                 updateSelectedCategory(filterKey);
               });
         case 'Other Terms':
+        case 'Autres termes':
+        case 'その他の用語':
           return buildFilterFormatImediat(
               filteredKeys: filtersTerms,
               filteredValues: filtersTermsId,
@@ -600,71 +662,107 @@ class MultipleSearchModel extends ChangeNotifier {
     void submitSelection() {
       switch (selectedOption) {
         case 'Period':
+        case 'Période':
+        case '時代':
           _fetchPrincipalRepository.fetchPrincipalByPeriod(
               period: filtersPeriod);
           break;
         case 'Universe':
+        case 'Univers':
+        case '宇宙':
           _fetchPrincipalRepository.fetchPrincipalByLocation(
               location: filtersUniverse);
           break;
         case 'Stars':
+        case 'Étoiles':
+        case '恒星・惑星など(起こった場所)':
           _fetchPrincipalRepository.fetchPrincipalByPrecise(
               precise: filtersStars);
           break;
         case 'Current Country where it happened':
+        case 'Pays actuel où cela s\'est passé':
+        case '現在の国名(起こった場所)':
           _fetchPrincipalRepository.fetchPrincipalByLocation(location: filtersPays);
           break;
         case 'Current Place-name where it happened':
+        case 'Nom de lieu actuel où cela s\'est passé':
+        case '現在の地名(起こった場所)':
           _fetchPrincipalRepository.fetchPrincipalByPrecise(
               precise: filtersVilles);
           break;
         case 'Oceans':
+        case 'Océans':
+        case '海洋名':
           _fetchPrincipalRepository.fetchPrincipalByLocation(
               location: filtersOceans);
           break;
         case 'Seas':
+        case 'Mers':
+        case '海域名':
           _fetchPrincipalRepository.fetchPrincipalByPrecise(
               precise: filtersSeas);
           break;
         case 'Country-name at that time':
+        case 'Nom de pays à cette époque':
+        case '当時の国名(起こった場所)':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersCattsId);
           break;
         case 'Place-name at that time':
+        case 'Nom de lieu à cette époque':
+        case '当時の地名(起こった場所)':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersPattsId);
           break;
         case 'Countries involved':
+        case 'Pays impliqués':
+        case '関係国名':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersPaysInvId);
           break;
 
           case 'Places involved':
+        case 'Lieux impliqués':
+        case '関係都市名':
             _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvId);
             break;
         case 'Names of Countries involved at that time':
+        case 'Noms des pays impliqués à cette époque':
+        case '関係国の当時の名称':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPaysInvATTId);
           break;
         case 'Names of Places involved at that time':
+        case 'Noms des lieux impliqués à cette époque':
+        case '関係都市の当時の名称':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvATTId);
           break;
         case 'Stars Observed':
+        case 'Étoiles observées':
+        case '観測された星、目指した星など':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersStarsObservedId);
           break;
         case 'Organisations':
+        //case 'Organisations':
+        case '機関、組織、施設など':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersOrgsId);
           break;
         case 'People':
+        case 'Personnes':
+        case '人物':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersPeopleId);
           break;
         case 'Categories':
+        case 'Catégories':
+        case '分類':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersCategoriesId);
           break;
         case 'Other Terms':
+        case 'Autres termes':
+        case 'その他の用語':
           _fetchPrincipalRepository.fetchPrincipalByDetailId(
               detailIds: filtersTermsId);
           break;

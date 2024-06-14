@@ -1,5 +1,5 @@
-import 'package:acorn_flutter/exporter.dart';
-import 'package:acorn_flutter/export_utils.dart';
+import 'package:acorn_flutter/export/exporter.dart';
+import 'package:acorn_flutter/export/export_utils.dart';
 import 'dart:core';
 import 'package:acorn_flutter/confirm/confirm.dart';
 import 'package:acorn_flutter/fetch/fetch_categories.dart';

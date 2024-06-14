@@ -1,4 +1,4 @@
-import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../../confirm/confirm.dart';
 import '../../fetch/fetch_orgs.dart';

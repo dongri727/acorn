@@ -8,7 +8,7 @@ import 'cover.dart';
 import 'timeline/timeline.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'data_repository.dart';
-import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 
 
 void main() async {

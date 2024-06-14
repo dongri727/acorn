@@ -1,4 +1,4 @@
-import 'package:acorn_flutter/exporter.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/fetch/fetch_place.dart';
 import 'package:acorn_flutter/fetch/fetch_seas.dart';
 import 'package:acorn_flutter/fetch/fetch_stars.dart';

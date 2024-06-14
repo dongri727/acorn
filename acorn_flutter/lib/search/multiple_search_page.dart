@@ -1,5 +1,5 @@
-import 'package:acorn_flutter/exporter.dart';
-import 'package:acorn_flutter/export_utils.dart';
+import 'package:acorn_flutter/export/exporter.dart';
+import 'package:acorn_flutter/export/export_utils.dart';
 import 'package:acorn_flutter/index.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
 
@@ -11,12 +11,25 @@ class MultiSearchPage extends StatelessWidget {
     return ChangeNotifierProvider<MultipleSearchModel>(
       create: (_) => MultipleSearchModel(),
       child: Consumer<MultipleSearchModel>(builder: (_, model, child) {
+        String locale = Localizations.localeOf(context).languageCode;
+
+        List<String> optionsS;
+        switch (locale) {
+          case 'fr':
+            optionsS = model.optionsFr;
+            break;
+          case 'ja':
+            optionsS = model.optionsJa;
+            break;
+          default:
+            optionsS = model.options;
+        }
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.grey[200],
-            leading: const NavigationButton(
+            leading: NavigationButton(
               destinationPage: IndexPage(),
-              buttonText: 'index',
+              buttonText: AppLocalizations.of(context)!.tabTopB,
             ),
             leadingWidth: 100,
             title: Text(AppLocalizations.of(context)!.searchA),
@@ -72,7 +85,7 @@ class MultiSearchPage extends StatelessWidget {
                                 child: ShadowedContainer(
                                   child: CustomDropdownButton(
                                     selectedValue: model.selectedOption,
-                                    options: model.options,
+                                    options: optionsS,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
                                     },
