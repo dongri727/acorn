@@ -11,6 +11,31 @@ class PrincipalPage extends StatelessWidget {
     return ChangeNotifierProvider<PrincipalModel>(
       create: (_) => PrincipalModel(),
       child: Consumer<PrincipalModel>(builder: (_, model, child) {
+        String locale = Localizations.localeOf(context).languageCode;
+
+        List<String> optionsP;
+        switch (locale) {
+          case 'fr':
+            optionsP = model.periodsFr;
+            break;
+          case 'ja':
+            optionsP = model.periodsJa;
+            break;
+          default:
+            optionsP = model.periods;
+        }
+
+        List<String> optionsL;
+        switch (locale) {
+          case 'fr':
+            optionsL = model.principalOptionFr;
+            break;
+          case 'ja':
+            optionsL = model.principalOptionJa;
+            break;
+          default:
+            optionsL = model.principalOption;
+        }
         return Scaffold(
             body: Container(
                 decoration: const BoxDecoration(
@@ -78,7 +103,7 @@ class PrincipalPage extends StatelessWidget {
                                         child: ShadowedContainer(
                                           child: CustomDropdownButton(
                                             selectedValue: model.selectedCalendar,
-                                            options: model.periods,
+                                            options: optionsP,
                                             onChanged: (value) {
                                               model.setCalendar(value);
                                             },
@@ -154,10 +179,10 @@ class PrincipalPage extends StatelessWidget {
                             flex: 1,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.all(20),
+                              const EdgeInsets.all(20),
                               child: ShadowedContainer(
                                 child: RadioButtonFormat(
-                                    options: model.principalOptions,
+                                    options: optionsL,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
                                     }),

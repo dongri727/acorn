@@ -1,4 +1,4 @@
-List<String> principalOptionsEn = [
+List<String> principalOptions = [
   'Universe',
   'Current Country-name',
   'Ocean-name',
@@ -15,3 +15,4 @@ List<String> principalOptionsJp = [
   '現在の国名',
   '海洋名',
 ];
+

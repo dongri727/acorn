@@ -18,11 +18,6 @@ class ModePageState extends State<ModePage> {
   @override
   void initState() {
     super.initState();
-
-/*    // Make sure that we rebuild the page if signed in status changes.
-    sessionManager.addListener(() {
-      setState(() {});
-    });*/
   }
 
   final Uri youtubeUrl = Uri.parse('https://www.youtube.com/@laporte_academy');

@@ -56,6 +56,10 @@
   "principalModelA": "epochJa",
   "principalModelB": "cosmosJa",
   "principalModelC": "merJa",
+  "principalModelD": "principalOptionsJa",
+  "universe": "宇宙",
+  "currentCountryName": "現在の国名",
+  "oceanName": "海洋名",
   "billion": "〜十億年前",
   "million": "〜百万年前",
   "thousand": "千年単位",
@@ -71,5 +75,6 @@
   "searchC": "標準",
   "searchD": "なにで絞り込みますか",
   "searchE": "選択肢を表示して選ぶ",
-  "searchF": "確定"
+  "searchF": "確定",
+  "saveAll": "これを登録しますか?"
 }

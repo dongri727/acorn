@@ -50,7 +50,7 @@ class TermsPage extends StatelessWidget {
                     ]),
                     Center(
                       child: ElevatedButton(
-                        child: const Text('Show and Select Options'),
+                        child: Text(AppLocalizations.of(context)!.showSelect),
                         onPressed: () async {
                           await model
                               .fetchRadioButtonBasis(model.selectedOption);
@@ -62,7 +62,7 @@ class TermsPage extends StatelessWidget {
                       child: ShadowedContainer(
                         child: FormatGrey(
                           controller: controller,
-                          hintText: 'A New Word You Want',
+                          hintText: AppLocalizations.of(context)!.newNameWant,
                           onChanged: (text) {
                             model.setNewWord(text);
                           },
@@ -70,7 +70,7 @@ class TermsPage extends StatelessWidget {
                       ),
                     ),
                     ButtonFormat(
-                      label: 'Add a New Word',
+                      label: AppLocalizations.of(context)!.addNewName,
                       onPressed: () async {
                         model.addAndFetchRadioButtonBasis(model.selectedOption);
                         controller.clear();
@@ -99,7 +99,7 @@ class TermsPage extends StatelessWidget {
                       });
                 }, context);
               },
-              label: const Text('Temporarily Save'),
+              label: Text(AppLocalizations.of(context)!.saveTempo),
             ));
       }),
     );

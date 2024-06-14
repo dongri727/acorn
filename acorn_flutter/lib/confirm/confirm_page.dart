@@ -101,7 +101,7 @@ class ConfirmPage extends StatelessWidget {
                           break;
                       }
                     },
-                    label: const Text('register them ?')),
+                    label: Text(AppLocalizations.of(context)!.saveAll)),
                 body: SafeArea(
                   child: Container(
                     decoration: const BoxDecoration(

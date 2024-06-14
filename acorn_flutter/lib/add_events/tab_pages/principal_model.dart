@@ -23,7 +23,12 @@ class PrincipalModel extends ChangeNotifier {
   var newName = '';
   var calendarNo = 0;
 
+
+
   List<String> periods = epoch;
+  List<String> periodsFr = epochFr;
+  List<String> periodsJa = epochJa;
+
 
   final List<String> filtersLocation = <String>[];
 
@@ -39,7 +44,9 @@ class PrincipalModel extends ChangeNotifier {
   List<String> currentDisplayList = [];
   String? selectedOption = '';
 
-  List<String> principalOptions = principalOptionsEn;
+  List<String> principalOption = principalOptions;
+  List<String> principalOptionFr = principalOptionsFr;
+  List<String> principalOptionJa = principalOptionsJp;
 
   String location = "";
 
@@ -91,12 +98,18 @@ class PrincipalModel extends ChangeNotifier {
   Future<void> listRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Universe':
+      case 'Univers':
+      case '宇宙':
         currentDisplayList = universe;
         break;
       case 'Current Country-name':
+      case 'Nom de l\'océan':
+      case '現在の国名':
         currentDisplayList = pays.map((country) => country['name'] as String).toList();
         break;
       case 'Ocean-name':
+      case 'Nom de l\'océan':
+      case '海洋名':
         currentDisplayList = oceans;
         break;
     }
@@ -130,27 +143,37 @@ class PrincipalModel extends ChangeNotifier {
     /// convert the years depending on the selected calendar period
     switch (selectedCalendar) {
       case 'Billion Years':
-      case  '〜十億年前':
+      case "Milliards d'années":
+      case '〜十億年前':
         newYearI = (newYearD * 1000000000).round();
         newYearI = -newYearI.abs();
         break;
       case 'Million Years':
+      case "Millions d'années":
+      case '〜百万年前':
         newYearI = (newYearD * 1000000).round();
         newYearI = -newYearI.abs();
         break;
       case 'Thousand Years':
+      case "Milliers d'années":
+      case '千年単位':
         newYearI = (newYearD * 1000).round();
         newYearI = -newYearI.abs();
         break;
       case 'Years by Dating Methods':
+      case "Années par méthodes de datation":
+      case '炭素年代測定':
         newYearI = (2000 - newYearD).round();
         break;
       case 'Before-CommonEra':
+      case "Avant l'ère commune":
+      case '紀元前':
         newYearI = (newYearD).round();
         newYearI = -newYearI.abs();
         break;
       case 'Common-Era':
-      case  '西暦':
+      case "Ère commune":
+      case '西暦':
         newYearI = (newYearD).round();
         break;
     }

@@ -51,7 +51,7 @@ class WhoPage extends StatelessWidget {
                   ),
                   Center(
                     child: ElevatedButton(
-                      child: const Text('Show and Select Options'),
+                      child: Text(AppLocalizations.of(context)!.showSelect),
                       onPressed: () async {
                         model.fetchRadioButtonBasis(model.selectedOption);
                       },
@@ -62,7 +62,7 @@ class WhoPage extends StatelessWidget {
                     child: ShadowedContainer(
                       child: FormatGrey(
                         controller: controller,
-                        hintText: 'a New Name You Want',
+                        hintText: AppLocalizations.of(context)!.newNameWant,
                         onChanged: (text) {
                           model.setNewWord(text);
                         },
@@ -70,7 +70,7 @@ class WhoPage extends StatelessWidget {
                     ),
                   ),
                   ButtonFormat(
-                    label: 'Add a New Name',
+                    label: AppLocalizations.of(context)!.addNewName,
                     onPressed: () async {
                       model.addAndFetchRadioButtonBasis(model.selectedOption);
                       controller.clear();
@@ -98,7 +98,7 @@ class WhoPage extends StatelessWidget {
                     });
               }, context);
             },
-            label: const Text('Temporarily Save'),
+            label: Text(AppLocalizations.of(context)!.saveTempo),
           ),
         );
       }),

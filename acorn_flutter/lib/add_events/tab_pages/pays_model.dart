@@ -31,6 +31,9 @@ class PaysModel extends ChangeNotifier {
   var newStar = '';
 
   List<String> options = paysOptions;
+  List<String> optionsFr = paysOptionsFr;
+  List<String> optionsJa = paysOptionsJa;
+
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -66,21 +69,31 @@ class PaysModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Current Name of Country Involved':
+      case 'Nom actuel du pays impliqué':
+      case '関係国の現在名':
         currentDisplayList = listPaysInv;
         break;
       case 'Current Name of Place Involved':
+      case 'Nom actuel du lieu impliqué':
+      case '関係都市の現在名':
         await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
         currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
         break;
       case 'Name of Country Involved at that time':
+      case 'Nom du pays impliqué à l\'époque':
+      case '当時の関係国名':
         await _fetchCattRepository.fetchCattsInDetail();
         currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Name of Place Involved at that time':
+      case 'Nom du lieu impliqué à l\'époque':
+      case '当時の関係都市名':
         await _fetchPattRepository.fetchPattsInDetail();
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
       case 'Stars Observed or Aimed at':
+      case 'Étoiles observées ou visées':
+      case '観測された星、目指した星など':
         await _fetchStarsRepository.fetchStarsInDetail();
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
@@ -92,15 +105,23 @@ class PaysModel extends ChangeNotifier {
     switch (selectedOption) {
       //country must not be added
       case 'Current Name of Place Involved':
+      case 'Nom actuel du lieu impliqué':
+      case '関係都市の現在名':
         newPlace = text;
         break;
       case 'Name of Country Involved at that time':
+      case 'Nom du pays impliqué à l\'époque':
+      case '当時の関係国名':
         newCATT = text;
         break;
       case 'Name of Place Involved at that time':
+      case 'Nom du lieu impliqué à l\'époque':
+      case '当時の関係都市名':
         newPATT = text;
         break;
       case 'Stars Observed or Aimed at':
+      case 'Étoiles observées ou visées':
+      case '観測された星、目指した星など':
         newStar = text;
         break;
     }
@@ -111,18 +132,26 @@ class PaysModel extends ChangeNotifier {
     switch (selectedOption) {
       //country must not be added
       case 'Current Name of Place Involved':
+      case 'Nom actuel du lieu impliqué':
+      case '関係都市の現在名':
         await _fetchPlaceRepository.addDetailPlacesAndFetch('places_involved', newPlace);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Name of Country Involved at that time':
+      case 'Nom du pays impliqué à l\'époque':
+      case '当時の関係国名':
         await _fetchCattRepository.addDetailCattsAndFetch('countryatts', newCATT);
         currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Name of Place Involved at that time':
+      case 'Nom du lieu impliqué à l\'époque':
+      case '当時の関係都市名':
         await _fetchPattRepository.addDetailPattsAndFetch('placeatts', newPATT);
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
       case 'Stars Observed or Aimed at':
+      case 'Étoiles observées ou visées':
+      case '観測された星、目指した星など':
         await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
@@ -133,6 +162,8 @@ class PaysModel extends ChangeNotifier {
   Widget buildItemWidget(dynamic item) {
     switch (selectedOption) {
       case 'Current Name of Country Involved':
+      case 'Nom actuel du pays impliqué':
+      case '関係国の現在名':
         return buildFilterFormatImediat(
           filteredKeys: filtersPaysInv,
           filteredValues: filtersPaysInvId,
@@ -144,6 +175,8 @@ class PaysModel extends ChangeNotifier {
             updateSelectedPaysInv(key);
           });
       case 'Current Name of Place Involved':
+      case 'Nom actuel du lieu impliqué':
+      case '関係都市の現在名':
         return buildFilterFormatImediat(
           filteredKeys: filtersPlaces,
           filteredValues: filtersPlacesId,
@@ -156,6 +189,8 @@ class PaysModel extends ChangeNotifier {
           },
         );
       case 'Name of Country Involved at that time':
+      case 'Nom du pays impliqué à l\'époque':
+      case '当時の関係国名':
         return buildFilterFormatImediat(
           filteredKeys: filtersCATTs,
           filteredValues: filtersCATTId,
@@ -168,6 +203,8 @@ class PaysModel extends ChangeNotifier {
           },
         ); 
       case 'Name of Place Involved at that time':
+      case 'Nom du lieu impliqué à l\'époque':
+      case '当時の関係都市名':
         return buildFilterFormatImediat(
           filteredKeys: filtersPATTs,
           filteredValues: filtersPATTId,
@@ -180,6 +217,8 @@ class PaysModel extends ChangeNotifier {
           },
         ); 
       case 'Stars Observed or Aimed at':
+      case 'Étoiles observées ou visées':
+      case '観測された星、目指した星など':
         return buildFilterFormatImediat(
           filteredKeys: filtersStars,
           filteredValues: filtersStarId,

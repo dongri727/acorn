@@ -56,6 +56,10 @@
   "principalModelA": "epochFr",
   "principalModelB": "cosmosFr",
   "principalModelC": "merFr",
+  "principalModelD": "principalOptionsFr",
+  "universe": "Univers",
+  "currentCountryName": "Nom actuel du pays",
+  "oceanName": "Nom de l'océan",
   "billion": "Milliards d'années",
   "million": "Millions d'années",
   "thousand": "Milliers d'années",
@@ -71,5 +75,6 @@
   "searchC": "CLASSIQUE",
   "searchD": "Qu'est-ce qui restreint votre recherche ?",
   "searchE": "Montrez et sélectionnez vos options",
-  "searchF": "Confirmer"
+  "searchF": "Confirmer",
+  "saveAll": "les enregistrer ?"
 }

@@ -41,6 +41,20 @@ class WherePage extends StatelessWidget {
     return ChangeNotifierProvider<WhereModel>(
       create: (_) => WhereModel(keyCountry: confirm.selectedLocation),
       child: Consumer<WhereModel>(builder: (_, model, child) {
+
+        String locale = Localizations.localeOf(context).languageCode;
+
+        List<String> optionsW;
+        switch (locale) {
+          case 'fr':
+            optionsW = model.optionsFr;
+            break;
+          case 'ja':
+            optionsW = model.optionsJa;
+            break;
+          default:
+            optionsW = model.options;
+        }
         return Scaffold(
             body: Container(
                 decoration: const BoxDecoration(
@@ -60,7 +74,7 @@ class WherePage extends StatelessWidget {
                                   const EdgeInsets.fromLTRB(100, 20, 20, 20),
                               child: ShadowedContainer(
                                 child: RadioButtonFormat(
-                                    options: model.options,
+                                    options: optionsW,
                                     onChanged: (String? value) {
                                       model.selectedOption = value!;
                                     }),

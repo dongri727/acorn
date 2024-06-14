@@ -53,6 +53,8 @@ class WhereModel extends ChangeNotifier {
   String? selectedOption = '';
 
   List<String> options = whereOptions;
+  List<String> optionsFr = whereOptionsFr;
+  List<String> optionsJa = whereOptionsJa;
 
   List<String> ns = [
     'N',
@@ -101,22 +103,32 @@ class WhereModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Stars':
+      case 'Étoiles':
+      case '恒星名、惑星名など':
         await _fetchStarsRepository.fetchStarsInDetail();
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
       case 'Current Place-name':
+      case 'Nom actuel du lieu':
+      case '現在の地名':
         await _fetchPlaceRepository.fetchPlaces(keyCountry);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
+      case 'Nom de la mer':
+      case '海域名':
         await _fetchSeasRepository.fetchSeas();
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':
+      case 'Nom du pays à l\'époque':
+      case '当時の国名':
         await _fetchCattRepository.fetchCattsInDetail();
         currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Place-name at that time':
+      case 'Nom du lieu à l\'époque':
+      case '当時の地名':
         await _fetchPattRepository.fetchPattsInDetail();
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
@@ -127,18 +139,28 @@ class WhereModel extends ChangeNotifier {
   setNewWord(text) {
     switch (selectedOption) {
       case 'Stars':
+      case 'Étoiles':
+      case '恒星名、惑星名など':
         newStar = text;
         break;
       case 'Current Place-name':
+      case 'Nom actuel du lieu':
+      case '現在の地名':
         newPlace = text;
         break;
       case 'Sea-name':
+      case 'Nom de la mer':
+      case '海域名':
         newSea = text;
         break;
       case 'Country-name at that time':
+      case 'Nom du pays à l\'époque':
+      case '当時の国名':
         newPaysatt = text;
         break;
       case 'Place-name at that time':
+      case 'Nom du lieu à l\'époque':
+      case '当時の地名':
         newPlaceatt = text;
         break;
     }
@@ -149,24 +171,34 @@ class WhereModel extends ChangeNotifier {
     switch (selectedOption) {
       //country must not be added
       case 'Stars':
+      case 'Étoiles':
+      case '恒星名、惑星名など':
         await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
 
         //keyCountryが取得されているので、国名付きで保存される。
       case 'Current Place-name':
+      case 'Nom actuel du lieu':
+      case '現在の地名':
         await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyCountry);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
+      case 'Nom de la mer':
+      case '海域名':
         await _fetchSeasRepository.addSeasAndFetch(newSea);
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':
+      case 'Nom du pays à l\'époque':
+      case '当時の国名':
         await _fetchCattRepository.addDetailCattsAndFetch('countryatts', newPaysatt);
         currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Place-name at that time':
+      case 'Nom du lieu à l\'époque':
+      case '当時の地名':
         await _fetchPattRepository.addDetailPattsAndFetch('placeatts', newPlaceatt);
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
@@ -192,6 +224,8 @@ class WhereModel extends ChangeNotifier {
   Widget buildItemWidget(dynamic item) {
     switch (selectedOption) {
       case 'Stars':
+      case 'Étoiles':
+      case '恒星名、惑星名など':
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
             choiceSIKey: (item as Detail).mot,
@@ -200,6 +234,8 @@ class WhereModel extends ChangeNotifier {
               updateLocationPrecise(choiceKey);
             });
       case 'Current Place-name':
+      case 'Nom actuel du lieu':
+      case '現在の地名':
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
             choiceSIKey: (item as Places).place,
@@ -208,6 +244,8 @@ class WhereModel extends ChangeNotifier {
               updateLocationPrecise(choiceKey);
             });
       case 'Sea-name':
+      case 'Nom de la mer':
+      case '海域名':
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
             choiceSIKey: (item as Seas).sea,
@@ -216,6 +254,8 @@ class WhereModel extends ChangeNotifier {
               updateLocationPrecise(choiceKey);
             });
       case 'Country-name at that time':
+      case 'Nom du pays à l\'époque':
+      case '当時の国名':
         return buildChoiceFormat(
             choiceList: _filtersCountryatts,
             choiceKey: (item as Detail).mot,
@@ -226,6 +266,8 @@ class WhereModel extends ChangeNotifier {
               updateChosenCatt(choiceKey);
             });
       case 'Place-name at that time':
+      case 'Nom du lieu à l\'époque':
+      case '当時の地名':
         return buildChoiceFormat(
             choiceList: _filtersPlaceatts,
             choiceKey: (item as Detail).mot,

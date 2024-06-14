@@ -12,6 +12,20 @@ class PaysPage extends StatelessWidget {
     return ChangeNotifierProvider<PaysModel>(
         create: (_) => PaysModel(),
         child: Consumer<PaysModel>(builder: (_, model, child) {
+
+          String locale = Localizations.localeOf(context).languageCode;
+
+          List<String> options;
+          switch (locale) {
+            case 'fr':
+              options = model.optionsFr;
+              break;
+            case 'ja':
+              options = model.optionsJa;
+              break;
+            default:
+              options = model.options;
+          }
           return Scaffold(
               body: SafeArea(
                   child: Container(
@@ -31,7 +45,7 @@ class PaysPage extends StatelessWidget {
                                       100, 20, 20, 20),
                                   child: ShadowedContainer(
                                     child: RadioButtonFormat(
-                                        options: model.options,
+                                        options: options,
                                         onChanged: (String? value) {
                                           model.selectedOption = value!;
                                         }),
@@ -56,7 +70,7 @@ class PaysPage extends StatelessWidget {
                           ]),
                           Center(
                             child: ElevatedButton(
-                              child: const Text('Show and Select Options'),
+                              child: Text(AppLocalizations.of(context)!.showSelect),
                               onPressed: () async {
                                 await model.fetchRadioButtonBasis(
                                     model.selectedOption);
@@ -70,7 +84,7 @@ class PaysPage extends StatelessWidget {
                                 enabled: model.selectedOption !=
                                     'Current Name of Country Involved',
                                 controller: controller,
-                                hintText: 'A New Name You Want',
+                                hintText: AppLocalizations.of(context)!.newNameWant,
                                 onChanged: (text) {
                                   model.setNewWord(text);
                                 },
@@ -80,7 +94,7 @@ class PaysPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ButtonFormat(
-                                label: 'Add A New Name',
+                                label: AppLocalizations.of(context)!.addNewName,
                                 onPressed: () async {
                                   model.addAndFetchRadioButtonBasis(
                                       model.selectedOption);
@@ -110,7 +124,7 @@ class PaysPage extends StatelessWidget {
                       });
                 }, context);
                 },
-                label: const Text('Temporarily Save'),
+                label: Text(AppLocalizations.of(context)!.saveTempo),
               ));
         }));
   }
