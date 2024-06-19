@@ -6,7 +6,7 @@ class PaysEndpoint extends Endpoint {
   Future<List<Pays>> getPays(Session session, {String? keyword}) async {
     return await Pays.db.find(
       session,
-      orderBy: (pays) => pays.pays,
+      orderBy: (pays) => pays.combien,
     );
   }
 

@@ -14,17 +14,20 @@ abstract class Pays implements _i1.SerializableModel {
   Pays._({
     this.id,
     required this.pays,
+    required this.combien,
   });
 
   factory Pays({
     int? id,
     required String pays,
+    required int combien,
   }) = _PaysImpl;
 
   factory Pays.fromJson(Map<String, dynamic> jsonSerialization) {
     return Pays(
       id: jsonSerialization['id'] as int?,
       pays: jsonSerialization['pays'] as String,
+      combien: jsonSerialization['combien'] as int,
     );
   }
 
@@ -35,15 +38,19 @@ abstract class Pays implements _i1.SerializableModel {
 
   String pays;
 
+  int combien;
+
   Pays copyWith({
     int? id,
     String? pays,
+    int? combien,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'pays': pays,
+      'combien': combien,
     };
   }
 
@@ -59,19 +66,23 @@ class _PaysImpl extends Pays {
   _PaysImpl({
     int? id,
     required String pays,
+    required int combien,
   }) : super._(
           id: id,
           pays: pays,
+          combien: combien,
         );
 
   @override
   Pays copyWith({
     Object? id = _Undefined,
     String? pays,
+    int? combien,
   }) {
     return Pays(
       id: id is int? ? id : this.id,
       pays: pays ?? this.pays,
+      combien: combien ?? this.combien,
     );
   }
 }

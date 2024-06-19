@@ -2,3 +2,4 @@ class: Pays
 table: pays
 fields: 
   pays: String
+  combien: int

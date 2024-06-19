@@ -14,17 +14,20 @@ abstract class Pays extends _i1.TableRow implements _i1.ProtocolSerialization {
   Pays._({
     int? id,
     required this.pays,
+    required this.combien,
   }) : super(id);
 
   factory Pays({
     int? id,
     required String pays,
+    required int combien,
   }) = _PaysImpl;
 
   factory Pays.fromJson(Map<String, dynamic> jsonSerialization) {
     return Pays(
       id: jsonSerialization['id'] as int?,
       pays: jsonSerialization['pays'] as String,
+      combien: jsonSerialization['combien'] as int,
     );
   }
 
@@ -34,18 +37,22 @@ abstract class Pays extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   String pays;
 
+  int combien;
+
   @override
   _i1.Table get table => t;
 
   Pays copyWith({
     int? id,
     String? pays,
+    int? combien,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'pays': pays,
+      'combien': combien,
     };
   }
 
@@ -54,6 +61,7 @@ abstract class Pays extends _i1.TableRow implements _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       'pays': pays,
+      'combien': combien,
     };
   }
 
@@ -93,19 +101,23 @@ class _PaysImpl extends Pays {
   _PaysImpl({
     int? id,
     required String pays,
+    required int combien,
   }) : super._(
           id: id,
           pays: pays,
+          combien: combien,
         );
 
   @override
   Pays copyWith({
     Object? id = _Undefined,
     String? pays,
+    int? combien,
   }) {
     return Pays(
       id: id is int? ? id : this.id,
       pays: pays ?? this.pays,
+      combien: combien ?? this.combien,
     );
   }
 }
@@ -116,14 +128,21 @@ class PaysTable extends _i1.Table {
       'pays',
       this,
     );
+    combien = _i1.ColumnInt(
+      'combien',
+      this,
+    );
   }
 
   late final _i1.ColumnString pays;
+
+  late final _i1.ColumnInt combien;
 
   @override
   List<_i1.Column> get columns => [
         id,
         pays,
+        combien,
       ];
 }
 
