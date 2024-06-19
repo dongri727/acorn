@@ -1,3 +1,4 @@
+import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/lists/data_count_countries.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
@@ -10,10 +11,10 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class AnalysisPageState extends State<AnalysisPage> {
-  List<dynamic> countCountries = [];
+  List<Pays> countCountries = [];
 
   Future<void> fetchCountCountries() async {
-    countCountries = await client.analysis.getCountCountries();
+    countCountries = await client.pays.getPays();
     setState(() {});
   }
 
@@ -40,8 +41,8 @@ class AnalysisPageState extends State<AnalysisPage> {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
-                    title: Text(countCountries[index]['location']),
-                    trailing: Text(countCountries[index]['count'].toString()),
+                    title: Text(countCountries[index].pays),
+                    trailing: Text(countCountries[index].combien.toString()),
                   ),
                 );
               },
