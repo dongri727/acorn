@@ -48,13 +48,11 @@ class ResultPage extends StatelessWidget {
                       color: const Color(0xFFe6e6fa),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => DetailPage(principalData: detailItem)));
-                            print(detailItem);
                           },
                           child: ListTile(
                             leading: Text('${principal?[index].annee}-${principal?[index].month}-${principal?[index].day}' ,
@@ -63,7 +61,7 @@ class ResultPage extends StatelessWidget {
                             title: Text(principal![index].affair,
                               style: const TextStyle(fontSize: 24),
                             ),
-                            trailing: Text('${principal?[index].location}, ${principal?[index].precise}',
+                            trailing: Text('${principal?[index].location}, ${principal?[index].precise} →',
                               style: const TextStyle(fontSize: 20),
                             ),
                           ),

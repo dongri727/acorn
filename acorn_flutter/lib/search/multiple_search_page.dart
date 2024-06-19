@@ -28,7 +28,7 @@ class MultiSearchPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.grey[200],
             leading: NavigationButton(
-              destinationPage: IndexPage(),
+              destinationPage: const IndexPage(),
               buttonText: AppLocalizations.of(context)!.tabTopB,
             ),
             leadingWidth: 100,
@@ -70,7 +70,7 @@ class MultiSearchPage extends StatelessWidget {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(20.0),
                             child: HintText(
                               hintText: AppLocalizations.of(context)!.searchD,
                             ),

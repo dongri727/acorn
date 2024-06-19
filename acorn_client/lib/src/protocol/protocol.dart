@@ -305,6 +305,10 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i32.WithMap?>()) {
       return (data != null ? _i32.WithMap.fromJson(data) : null) as T;
     }
+    if (t == List<dynamic>) {
+      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
+          as dynamic;
+    }
     if (t == List<_i33.CountryInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i33.CountryInvolved>(e))

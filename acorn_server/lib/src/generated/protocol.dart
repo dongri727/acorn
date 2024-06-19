@@ -1704,6 +1704,10 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i34.WithMap?>()) {
       return (data != null ? _i34.WithMap.fromJson(data) : null) as T;
     }
+    if (t == List<dynamic>) {
+      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
+          as dynamic;
+    }
     if (t == List<_i35.CountryInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i35.CountryInvolved>(e))

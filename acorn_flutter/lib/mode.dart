@@ -1,10 +1,10 @@
-import 'package:acorn_flutter/index.dart';
+import 'index.dart';
 import 'package:acorn_flutter/mobile/tab.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'analysis_page.dart';
 import 'utils/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 
 class ModePage extends StatefulWidget {
   const ModePage({super.key});
@@ -72,6 +72,17 @@ class ModePageState extends State<ModePage> {
                           ],
                         );
                       });
+                },
+                color: Colors.white60),
+            TextButtonFormat(
+                label: 'How many data do we have ?',
+                onPressed: () {
+                  Navigator.push<String>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AnalysisPage(),
+                    ),
+                  );
                 },
                 color: Colors.white60),
             TextButtonFormat(

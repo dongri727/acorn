@@ -1,3 +1,5 @@
+analysis:
+  - getCountCountries:
 countryInvolved:
   - getCInvolved:
   - addCInvolved:

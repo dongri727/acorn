@@ -50,7 +50,7 @@ class CoverPageState extends State<CoverPage> {
 
                     TextButton(
                         child: const Text(
-                          "Enter",
+                          "Start",
                           style: TextStyle(
                             fontSize: 24,
                             color: Colors.yellow,

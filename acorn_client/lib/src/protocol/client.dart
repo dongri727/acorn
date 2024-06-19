@@ -44,6 +44,21 @@ import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i33;
 import 'protocol.dart' as _i34;
 
 /// {@category Endpoint}
+class EndpointAnalysis extends _i1.EndpointRef {
+  EndpointAnalysis(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'analysis';
+
+  _i2.Future<List<dynamic>> getCountCountries() =>
+      caller.callServerEndpoint<List<dynamic>>(
+        'analysis',
+        'getCountCountries',
+        {},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointCountryInvolved extends _i1.EndpointRef {
   EndpointCountryInvolved(_i1.EndpointCaller caller) : super(caller);
 
@@ -1233,6 +1248,7 @@ class Client extends _i1.ServerpodClient {
           onFailedCall: onFailedCall,
           onSucceededCall: onSucceededCall,
         ) {
+    analysis = EndpointAnalysis(this);
     countryInvolved = EndpointCountryInvolved(this);
     categories = EndpointCategories(this);
     cattsInvolved = EndpointCattsInvolved(this);
@@ -1265,6 +1281,8 @@ class Client extends _i1.ServerpodClient {
     withMap = EndpointWithMap(this);
     modules = _Modules(this);
   }
+
+  late final EndpointAnalysis analysis;
 
   late final EndpointCountryInvolved countryInvolved;
 
@@ -1330,6 +1348,7 @@ class Client extends _i1.ServerpodClient {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'analysis': analysis,
         'countryInvolved': countryInvolved,
         'categories': categories,
         'cattsInvolved': cattsInvolved,

@@ -1,4 +1,4 @@
-import 'dart:core';
+//import 'dart:core';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
@@ -11,7 +11,6 @@ import '../unity_view/three_d_page.dart';
 import '../utils/build_chips.dart';
 
 class MultipleSearchModel extends ChangeNotifier {
-
   late final FetchSeasRepository _fetchSeasRepository;
   late final FetchPlaceRepository _fetchPlaceRepository;
   late final FetchStarsRepository _fetchStarsRepository;
@@ -24,7 +23,7 @@ class MultipleSearchModel extends ChangeNotifier {
 
   late final FetchPrincipalRepository _fetchPrincipalRepository;
 
-  MultipleSearchModel(){
+  MultipleSearchModel() {
     _fetchSeasRepository = FetchSeasRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchStarsRepository = FetchStarsRepository();
@@ -46,6 +45,7 @@ class MultipleSearchModel extends ChangeNotifier {
     'MR',
     'GIS',
   ];
+
   //radioButton
   String selectedFormat = 'CLASSIC';
 
@@ -284,491 +284,480 @@ class MultipleSearchModel extends ChangeNotifier {
         //updateDisplayList(period);
         break;
 
-        case 'Universe':
+      case 'Universe':
       case 'Univers':
       case '宇宙':
-          currentDisplayList = universe;
-          //updateDisplayList(universe);
-          break;
+        currentDisplayList = universe;
+        //updateDisplayList(universe);
+        break;
 
-          case 'Stars':
+      case 'Stars':
       case 'Étoiles':
       case '恒星・惑星など(起こった場所)':
-          await _fetchStarsRepository.fetchStarsInDetail();
-          currentDisplayList = _fetchStarsRepository.listDetailStars;
-          break;
+        await _fetchStarsRepository.fetchStarsInDetail();
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+        break;
 
-        case 'Current Country where it happened':
+      case 'Current Country where it happened':
       case 'Pays actuel où cela s\'est passé':
       case '現在の国名(起こった場所)':
-          currentDisplayList = pays.map((country) => country['name'] as String).toList();
-          //updateDisplayList(pays.map((country) => country['name'] as String).toList());
-          break;
-        case 'Current Place-name where it happened':
+        currentDisplayList =
+            pays.map((country) => country['name'] as String).toList();
+        //updateDisplayList(pays.map((country) => country['name'] as String).toList());
+        break;
+      case 'Current Place-name where it happened':
       case 'Nom de lieu actuel où cela s\'est passé':
       case '現在の地名(起こった場所)':
-          await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
-          currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
-          break;
-        case 'Oceans':
+        await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
+        currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
+        break;
+      case 'Oceans':
       case 'Océans':
       case '海洋名':
-          currentDisplayList = oceans;
-          //updateDisplayList(oceans);
-          break;
-        case 'Seas':
+        currentDisplayList = oceans;
+        //updateDisplayList(oceans);
+        break;
+      case 'Seas':
       case 'Mers':
       case '海域名':
-          await _fetchSeasRepository.fetchSeas();
-          currentDisplayList = _fetchSeasRepository.listSeas;
-          break;
-        case 'Country-name at that time':
+        await _fetchSeasRepository.fetchSeas();
+        currentDisplayList = _fetchSeasRepository.listSeas;
+        break;
+      case 'Country-name at that time':
       case 'Nom de pays à cette époque':
       case '当時の国名(起こった場所)':
-          await _fetchCattRepository.fetchCattsInDetail();
-          currentDisplayList = _fetchCattRepository.listDetailCatts;
-          break;
-        case 'Place-name at that time':
+        await _fetchCattRepository.fetchCattsInDetail();
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
+        break;
+      case 'Place-name at that time':
       case 'Nom de lieu à cette époque':
       case '当時の地名(起こった場所)':
-          await _fetchPattRepository.fetchPattsInDetail();
-          currentDisplayList = _fetchPattRepository.listDetailPatts;
-          break;
-        case 'Countries involved':
+        await _fetchPattRepository.fetchPattsInDetail();
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
+        break;
+      case 'Countries involved':
       case 'Pays impliqués':
       case '関係国名':
-          currentDisplayList = listPaysInv;
-          break;
-        case 'Places involved':
+        currentDisplayList = listPaysInv;
+        break;
+      case 'Places involved':
       case 'Lieux impliqués':
       case '関係都市名':
-          await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
-          currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
-          break;
-        case 'Names of Countries involved at that time':
+        await _fetchPlaceRepository.fetchPlaceInvolvedInDetail();
+        currentDisplayList = _fetchPlaceRepository.listDetailPlaces;
+        break;
+      case 'Names of Countries involved at that time':
       case 'Noms des pays impliqués à cette époque':
       case '関係国の当時の名称':
-          await _fetchCattRepository.fetchCattsInDetail();
-          currentDisplayList = _fetchCattRepository.listDetailCatts;
-          break;
-        case 'Names of Places involved at that time':
+        await _fetchCattRepository.fetchCattsInDetail();
+        currentDisplayList = _fetchCattRepository.listDetailCatts;
+        break;
+      case 'Names of Places involved at that time':
       case 'Noms des lieux impliqués à cette époque':
       case '関係都市の当時の名称':
-          await _fetchPattRepository.fetchPattsInDetail();
-          currentDisplayList = _fetchPattRepository.listDetailPatts;
-          break;
-        case 'Stars Observed':
+        await _fetchPattRepository.fetchPattsInDetail();
+        currentDisplayList = _fetchPattRepository.listDetailPatts;
+        break;
+      case 'Stars Observed':
       case 'Étoiles observées':
       case '観測された星、目指した星など':
-          await _fetchStarsRepository.fetchStarsInDetail();
-          currentDisplayList = _fetchStarsRepository.listDetailStars;
-          break;
-        case 'Organisations':
+        await _fetchStarsRepository.fetchStarsInDetail();
+        currentDisplayList = _fetchStarsRepository.listDetailStars;
+        break;
+      case 'Organisations':
       case 'Organisations':
       case '機関、組織、施設など':
-          await _fetchOrgsRepository.fetchOrgsInDetail();
-          currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
-          break;
-        case 'People':
+        await _fetchOrgsRepository.fetchOrgsInDetail();
+        currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'People':
       case 'Personnes':
       case '人物':
-          await _fetchPeopleRepository.fetchPeopleInDetail();
-          currentDisplayList = _fetchPeopleRepository.listDetailPeople;
-          break;
-        case 'Categories':
+        await _fetchPeopleRepository.fetchPeopleInDetail();
+        currentDisplayList = _fetchPeopleRepository.listDetailPeople;
+        break;
+      case 'Categories':
       case 'Catégories':
       case '分類':
-          await _fetchCategoriesRepository.fetchCategoriesInDetail();
-          currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
-          break;
-        case 'Other Terms':
+        await _fetchCategoriesRepository.fetchCategoriesInDetail();
+        currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
+        break;
+      case 'Other Terms':
       case 'Autres termes':
       case 'その他の用語':
-          await _fetchTermsRepository.fetchTermsInDetail();
-          currentDisplayList = _fetchTermsRepository.listDetailTerms;
-          break;
-      }
-      notifyListeners();
+        await _fetchTermsRepository.fetchTermsInDetail();
+        currentDisplayList = _fetchTermsRepository.listDetailTerms;
+        break;
     }
+    notifyListeners();
+  }
 
-    Widget buildItemWidget(dynamic item) {
-      switch (selectedOption) {
-        case 'Period':
-        case 'Période':
-        case '時代':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersPeriod,
-              filterKey: item,
-              onSelected: (filterImSiKey) {
-                selectedPeriod = filterImSiKey;
-                updateSelectedPeriod(filterImSiKey);
-              });
-        case 'Universe':
-        case 'Univers':
-        case '宇宙':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersUniverse,
-              filterKey: item,
-              onSelected: (filterImSiKey) {
-                selectedUniverse = filterImSiKey;
-                updateSelectedUniverse(filterImSiKey);
-              });
-        case 'Stars':
-        case 'Étoiles':
-        case '恒星・惑星など(起こった場所)':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersStars,
-              filterKey: item.mot,
-              onSelected: (filterImSiKey) {
-                selectedStar = filterImSiKey;
-                updateSelectedStar(filterImSiKey);
-              });
-        case 'Current Country where it happened':
-        case 'Pays actuel où cela s\'est passé':
-        case '現在の国名(起こった場所)':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersPays,
-              filterKey: item,
-              onSelected: (filterImSiKey) {
-                selectedPays = filterImSiKey;
-                updateSelectedPays(filterImSiKey);
-              });
-        case 'Current Place-name where it happened':
-        case 'Nom de lieu actuel où cela s\'est passé':
-        case '現在の地名(起こった場所)':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersVilles,
-              filterKey: item.mot,
-              onSelected: (filterImSiKey) {
-                selectedPlace = filterImSiKey;
-                updateSelectedPlace(filterImSiKey);
-              });
-        case 'Oceans':
-        case 'Océans':
-        case '海洋名':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersOceans,
-              filterKey: item,
-              onSelected: (filterImSiKey) {
-                selectedOcean = filterImSiKey;
-                updateSelectedOcean(filterImSiKey);
-              });
-        case 'Seas':
-        case 'Mers':
-        case '海域名':
-          return buildFilterFormatImediatSI(
-              filteredKeys: filtersSeas,
-              filterKey: item.sea,
-              onSelected: (filterImSiKey) {
-                selectedSea = filterImSiKey;
-                updateSelectedSea(filterImSiKey);
-              });
-        case 'Country-name at that time':
-        case 'Nom de pays à cette époque':
-        case '当時の国名(起こった場所)':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersCatts,
-              filteredValues: filtersCattsId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedCatt = filterKey;
-                selectedCattId = filterId;
-                updateSelectedCatt(filterKey);
-              });
-        case 'Place-name at that time':
-        case 'Nom de lieu à cette époque':
-        case '当時の地名(起こった場所)':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersPatts,
-              filteredValues: filtersPattsId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedPatt = filterKey;
-                selectedPattId = filterId;
-                updateSelectedPatt(filterKey);
-              });
-        case 'Countries involved':
-        case 'Pays impliqués':
-        case '関係国名':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersPaysInv,
-              filteredValues:
-              filtersPaysInvId,
-              filterKey: item['name'],
-              filterValue: item['detailId'],
-              onSelected: (filterKey, filterId) {
-                selectedPays = filterKey;
-                selectedPaysId = filterId;
-                updateSelectedPays(filterKey);
-              });
-        case 'Places involved':
-        case 'Lieux impliqués':
-        case '関係都市名':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersPlaceInv,
-              filteredValues:
-              filtersPlaceInvId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedPlace = filterKey;
-                selectedPlaceId = filterId;
-                updateSelectedPlace(filterKey);
-              });
-        case 'Names of Countries involved at that time':
-        case 'Noms des pays impliqués à cette époque':
-        case '関係国の当時の名称':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersPaysInvATT,
-              filteredValues:
-              filtersPaysInvATTId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedCountryInvolvedATT =
-                    filterKey;
-                selectedCountryInvolvedATTId =
-                    filterId;
-                updateSelectedCountryInvolved(filterKey);
-              });
-        case 'Names of Places involved at that time':
-        case 'Noms des lieux impliqués à cette époque':
-        case '関係都市の当時の名称':
-          return buildFilterFormatImediat(
-              filteredKeys:
-              filtersPlaceInvATT,
-              filteredValues:
-              filtersPlaceInvATTId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedPlaceInvolvedATT =
-                    filterKey;
-                selectedPlaceInvolvedATTId =
-                    filterId;
-                updateSelectedPlaceInvolve(filterKey);
-              });
-        case 'Stars Observed':
-        case 'Étoiles observées':
-        case '観測された星、目指した星など':
-          return buildFilterFormatImediat(
-              filteredKeys:
-              filtersStarsObserved,
-              filteredValues:
-              filtersStarsObservedId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedStarsObserved =
-                    filterKey;
-                selectedStarsObservedId =
-                    filterId;
-                updateSelectedStar(filterKey);
-              });
-        case 'Organisations':
-        //case 'Organisations':
-        case '機関、組織、施設など':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersOrgs,
-              filteredValues: filtersOrgsId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedOrg = filterKey;
-                selectedOrgId = filterId;
-                updateSelectedOrg(filterKey);
-              });
-        case 'People':
-        case 'Personnes':
-        case '人物':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersPeople,
-              filteredValues: filtersPeopleId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedPeople = filterKey;
-                selectedPeopleId = filterId;
-                updateSelectedPeople(filterKey);
-              });
-        case 'Categories':
-        case 'Catégories':
-        case '分類':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersCategories,
-              filteredValues:
-              filtersCategoriesId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedCategory = filterKey;
-                selectedCategoryId = filterId;
-                updateSelectedCategory(filterKey);
-              });
-        case 'Other Terms':
-        case 'Autres termes':
-        case 'その他の用語':
-          return buildFilterFormatImediat(
-              filteredKeys: filtersTerms,
-              filteredValues: filtersTermsId,
-              filterKey: item.mot,
-              filterValue: item.id,
-              onSelected: (filterKey, filterId) {
-                selectedTerm = filterKey;
-                selectedTermId = filterId;
-                updateSelectedTerm(filterKey);
-              });
-      }
-      return const SizedBox.shrink();
+  Widget buildItemWidget(dynamic item) {
+    switch (selectedOption) {
+      case 'Period':
+      case 'Période':
+      case '時代':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersPeriod,
+            filterKey: item,
+            onSelected: (filterImSiKey) {
+              selectedPeriod = filterImSiKey;
+              updateSelectedPeriod(filterImSiKey);
+            });
+      case 'Universe':
+      case 'Univers':
+      case '宇宙':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersUniverse,
+            filterKey: item,
+            onSelected: (filterImSiKey) {
+              selectedUniverse = filterImSiKey;
+              updateSelectedUniverse(filterImSiKey);
+            });
+      case 'Stars':
+      case 'Étoiles':
+      case '恒星・惑星など(起こった場所)':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersStars,
+            filterKey: item.mot,
+            onSelected: (filterImSiKey) {
+              selectedStar = filterImSiKey;
+              updateSelectedStar(filterImSiKey);
+            });
+      case 'Current Country where it happened':
+      case 'Pays actuel où cela s\'est passé':
+      case '現在の国名(起こった場所)':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersPays,
+            filterKey: item,
+            onSelected: (filterImSiKey) {
+              selectedPays = filterImSiKey;
+              updateSelectedPays(filterImSiKey);
+            });
+      case 'Current Place-name where it happened':
+      case 'Nom de lieu actuel où cela s\'est passé':
+      case '現在の地名(起こった場所)':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersVilles,
+            filterKey: item.mot,
+            onSelected: (filterImSiKey) {
+              selectedPlace = filterImSiKey;
+              updateSelectedPlace(filterImSiKey);
+            });
+      case 'Oceans':
+      case 'Océans':
+      case '海洋名':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersOceans,
+            filterKey: item,
+            onSelected: (filterImSiKey) {
+              selectedOcean = filterImSiKey;
+              updateSelectedOcean(filterImSiKey);
+            });
+      case 'Seas':
+      case 'Mers':
+      case '海域名':
+        return buildFilterFormatImediatSI(
+            filteredKeys: filtersSeas,
+            filterKey: item.sea,
+            onSelected: (filterImSiKey) {
+              selectedSea = filterImSiKey;
+              updateSelectedSea(filterImSiKey);
+            });
+      case 'Country-name at that time':
+      case 'Nom de pays à cette époque':
+      case '当時の国名(起こった場所)':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersCatts,
+            filteredValues: filtersCattsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedCatt = filterKey;
+              selectedCattId = filterId;
+              updateSelectedCatt(filterKey);
+            });
+      case 'Place-name at that time':
+      case 'Nom de lieu à cette époque':
+      case '当時の地名(起こった場所)':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPatts,
+            filteredValues: filtersPattsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedPatt = filterKey;
+              selectedPattId = filterId;
+              updateSelectedPatt(filterKey);
+            });
+      case 'Countries involved':
+      case 'Pays impliqués':
+      case '関係国名':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPaysInv,
+            filteredValues: filtersPaysInvId,
+            filterKey: item['name'],
+            filterValue: item['detailId'],
+            onSelected: (filterKey, filterId) {
+              selectedPays = filterKey;
+              selectedPaysId = filterId;
+              updateSelectedPays(filterKey);
+            });
+      case 'Places involved':
+      case 'Lieux impliqués':
+      case '関係都市名':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPlaceInv,
+            filteredValues: filtersPlaceInvId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedPlace = filterKey;
+              selectedPlaceId = filterId;
+              updateSelectedPlace(filterKey);
+            });
+      case 'Names of Countries involved at that time':
+      case 'Noms des pays impliqués à cette époque':
+      case '関係国の当時の名称':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPaysInvATT,
+            filteredValues: filtersPaysInvATTId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedCountryInvolvedATT = filterKey;
+              selectedCountryInvolvedATTId = filterId;
+              updateSelectedCountryInvolved(filterKey);
+            });
+      case 'Names of Places involved at that time':
+      case 'Noms des lieux impliqués à cette époque':
+      case '関係都市の当時の名称':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPlaceInvATT,
+            filteredValues: filtersPlaceInvATTId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedPlaceInvolvedATT = filterKey;
+              selectedPlaceInvolvedATTId = filterId;
+              updateSelectedPlaceInvolve(filterKey);
+            });
+      case 'Stars Observed':
+      case 'Étoiles observées':
+      case '観測された星、目指した星など':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersStarsObserved,
+            filteredValues: filtersStarsObservedId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedStarsObserved = filterKey;
+              selectedStarsObservedId = filterId;
+              updateSelectedStar(filterKey);
+            });
+      case 'Organisations':
+      //case 'Organisations':
+      case '機関、組織、施設など':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersOrgs,
+            filteredValues: filtersOrgsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedOrg = filterKey;
+              selectedOrgId = filterId;
+              updateSelectedOrg(filterKey);
+            });
+      case 'People':
+      case 'Personnes':
+      case '人物':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPeople,
+            filteredValues: filtersPeopleId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedPeople = filterKey;
+              selectedPeopleId = filterId;
+              updateSelectedPeople(filterKey);
+            });
+      case 'Categories':
+      case 'Catégories':
+      case '分類':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersCategories,
+            filteredValues: filtersCategoriesId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedCategory = filterKey;
+              selectedCategoryId = filterId;
+              updateSelectedCategory(filterKey);
+            });
+      case 'Other Terms':
+      case 'Autres termes':
+      case 'その他の用語':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersTerms,
+            filteredValues: filtersTermsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedTerm = filterKey;
+              selectedTermId = filterId;
+              updateSelectedTerm(filterKey);
+            });
     }
+    return const SizedBox.shrink();
+  }
 
-    void clearSearch() {
-      period.clear();
-      universe.clear();
-      _fetchStarsRepository.listDetailStars.clear();
-      filtersStars.clear();
-      pays.clear();
-      _fetchPlaceRepository.listPlaces.clear();
-      filtersVilles.clear();
-      oceans.clear();
-      _fetchSeasRepository.listSeas.clear();
-      filtersSeas.clear();
-      listPaysInv.clear();
-      filtersPaysInv.clear();
-      listPlaceInv.clear();
-      filtersPlaceInv.clear();
-      _fetchCattRepository.listDetailCatts.clear();
-      filtersPaysInvATT.clear();
-      _fetchPattRepository.listDetailPatts.clear();
-      filtersPlaceInvATT.clear();
-      _fetchStarsRepository.listDetailStars.clear();
-      filtersStarsObserved.clear();
-      _fetchCategoriesRepository.listDetailCategories.clear();
-      filtersCategories.clear();
-      _fetchPeopleRepository.listDetailPeople.clear();
-      filtersPeople.clear();
-      _fetchOrgsRepository.listDetailOrgs.clear();
-      filtersOrgs.clear();
-      _fetchTermsRepository.listDetailTerms.clear();
-      filtersTerms.clear();
-      filtersCatts.clear();
-      filtersPatts.clear();
+  void clearSearch() {
+    period.clear();
+    universe.clear();
+    _fetchStarsRepository.listDetailStars.clear();
+    filtersStars.clear();
+    pays.clear();
+    _fetchPlaceRepository.listPlaces.clear();
+    filtersVilles.clear();
+    oceans.clear();
+    _fetchSeasRepository.listSeas.clear();
+    filtersSeas.clear();
+    listPaysInv.clear();
+    filtersPaysInv.clear();
+    listPlaceInv.clear();
+    filtersPlaceInv.clear();
+    _fetchCattRepository.listDetailCatts.clear();
+    filtersPaysInvATT.clear();
+    _fetchPattRepository.listDetailPatts.clear();
+    filtersPlaceInvATT.clear();
+    _fetchStarsRepository.listDetailStars.clear();
+    filtersStarsObserved.clear();
+    _fetchCategoriesRepository.listDetailCategories.clear();
+    filtersCategories.clear();
+    _fetchPeopleRepository.listDetailPeople.clear();
+    filtersPeople.clear();
+    _fetchOrgsRepository.listDetailOrgs.clear();
+    filtersOrgs.clear();
+    _fetchTermsRepository.listDetailTerms.clear();
+    filtersTerms.clear();
+    filtersCatts.clear();
+    filtersPatts.clear();
 
-      notifyListeners(); // 状態が変更されたことを通知
+    notifyListeners(); // 状態が変更されたことを通知
+  }
+
+  void submitSelection() {
+    switch (selectedOption) {
+      case 'Period':
+      case 'Période':
+      case '時代':
+        _fetchPrincipalRepository.fetchPrincipalByPeriod(period: filtersPeriod);
+        break;
+      case 'Universe':
+      case 'Univers':
+      case '宇宙':
+        _fetchPrincipalRepository.fetchPrincipalByLocation(
+            location: filtersUniverse);
+        break;
+      case 'Stars':
+      case 'Étoiles':
+      case '恒星・惑星など(起こった場所)':
+        _fetchPrincipalRepository.fetchPrincipalByPrecise(
+            precise: filtersStars);
+        break;
+      case 'Current Country where it happened':
+      case 'Pays actuel où cela s\'est passé':
+      case '現在の国名(起こった場所)':
+        _fetchPrincipalRepository.fetchPrincipalByLocation(
+            location: filtersPays);
+        break;
+      case 'Current Place-name where it happened':
+      case 'Nom de lieu actuel où cela s\'est passé':
+      case '現在の地名(起こった場所)':
+        _fetchPrincipalRepository.fetchPrincipalByPrecise(
+            precise: filtersVilles);
+        break;
+      case 'Oceans':
+      case 'Océans':
+      case '海洋名':
+        _fetchPrincipalRepository.fetchPrincipalByLocation(
+            location: filtersOceans);
+        break;
+      case 'Seas':
+      case 'Mers':
+      case '海域名':
+        _fetchPrincipalRepository.fetchPrincipalByPrecise(precise: filtersSeas);
+        break;
+      case 'Country-name at that time':
+      case 'Nom de pays à cette époque':
+      case '当時の国名(起こった場所)':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersCattsId);
+        break;
+      case 'Place-name at that time':
+      case 'Nom de lieu à cette époque':
+      case '当時の地名(起こった場所)':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPattsId);
+        break;
+      case 'Countries involved':
+      case 'Pays impliqués':
+      case '関係国名':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPaysInvId);
+        break;
+
+      case 'Places involved':
+      case 'Lieux impliqués':
+      case '関係都市名':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPlaceInvId);
+        break;
+      case 'Names of Countries involved at that time':
+      case 'Noms des pays impliqués à cette époque':
+      case '関係国の当時の名称':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPaysInvATTId);
+        break;
+      case 'Names of Places involved at that time':
+      case 'Noms des lieux impliqués à cette époque':
+      case '関係都市の当時の名称':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPlaceInvATTId);
+        break;
+      case 'Stars Observed':
+      case 'Étoiles observées':
+      case '観測された星、目指した星など':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersStarsObservedId);
+        break;
+      case 'Organisations':
+      //case 'Organisations':
+      case '機関、組織、施設など':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersOrgsId);
+        break;
+      case 'People':
+      case 'Personnes':
+      case '人物':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersPeopleId);
+        break;
+      case 'Categories':
+      case 'Catégories':
+      case '分類':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersCategoriesId);
+        break;
+      case 'Other Terms':
+      case 'Autres termes':
+      case 'その他の用語':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersTermsId);
+        break;
     }
-
-    void submitSelection() {
-      switch (selectedOption) {
-        case 'Period':
-        case 'Période':
-        case '時代':
-          _fetchPrincipalRepository.fetchPrincipalByPeriod(
-              period: filtersPeriod);
-          break;
-        case 'Universe':
-        case 'Univers':
-        case '宇宙':
-          _fetchPrincipalRepository.fetchPrincipalByLocation(
-              location: filtersUniverse);
-          break;
-        case 'Stars':
-        case 'Étoiles':
-        case '恒星・惑星など(起こった場所)':
-          _fetchPrincipalRepository.fetchPrincipalByPrecise(
-              precise: filtersStars);
-          break;
-        case 'Current Country where it happened':
-        case 'Pays actuel où cela s\'est passé':
-        case '現在の国名(起こった場所)':
-          _fetchPrincipalRepository.fetchPrincipalByLocation(location: filtersPays);
-          break;
-        case 'Current Place-name where it happened':
-        case 'Nom de lieu actuel où cela s\'est passé':
-        case '現在の地名(起こった場所)':
-          _fetchPrincipalRepository.fetchPrincipalByPrecise(
-              precise: filtersVilles);
-          break;
-        case 'Oceans':
-        case 'Océans':
-        case '海洋名':
-          _fetchPrincipalRepository.fetchPrincipalByLocation(
-              location: filtersOceans);
-          break;
-        case 'Seas':
-        case 'Mers':
-        case '海域名':
-          _fetchPrincipalRepository.fetchPrincipalByPrecise(
-              precise: filtersSeas);
-          break;
-        case 'Country-name at that time':
-        case 'Nom de pays à cette époque':
-        case '当時の国名(起こった場所)':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersCattsId);
-          break;
-        case 'Place-name at that time':
-        case 'Nom de lieu à cette époque':
-        case '当時の地名(起こった場所)':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersPattsId);
-          break;
-        case 'Countries involved':
-        case 'Pays impliqués':
-        case '関係国名':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersPaysInvId);
-          break;
-
-          case 'Places involved':
-        case 'Lieux impliqués':
-        case '関係都市名':
-            _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvId);
-            break;
-        case 'Names of Countries involved at that time':
-        case 'Noms des pays impliqués à cette époque':
-        case '関係国の当時の名称':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPaysInvATTId);
-          break;
-        case 'Names of Places involved at that time':
-        case 'Noms des lieux impliqués à cette époque':
-        case '関係都市の当時の名称':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(detailIds: filtersPlaceInvATTId);
-          break;
-        case 'Stars Observed':
-        case 'Étoiles observées':
-        case '観測された星、目指した星など':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersStarsObservedId);
-          break;
-        case 'Organisations':
-        //case 'Organisations':
-        case '機関、組織、施設など':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersOrgsId);
-          break;
-        case 'People':
-        case 'Personnes':
-        case '人物':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersPeopleId);
-          break;
-        case 'Categories':
-        case 'Catégories':
-        case '分類':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersCategoriesId);
-          break;
-        case 'Other Terms':
-        case 'Autres termes':
-        case 'その他の用語':
-          _fetchPrincipalRepository.fetchPrincipalByDetailId(
-              detailIds: filtersTermsId);
-          break;
-      }
-      notifyListeners();
-    }
+    notifyListeners();
+  }
 
   void navigateBasedOnSelection(BuildContext context, String isSelectedFormat) {
     // ダイアログを表示する関数
@@ -801,7 +790,8 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ResultPage(principal: _fetchPrincipalRepository.listPrincipal),
+              builder: (context) => ResultPage(
+                  principal: _fetchPrincipalRepository.listPrincipal),
             ),
           );
         }
@@ -813,7 +803,8 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Scalable(principal: _fetchPrincipalRepository.listPrincipal),
+              builder: (context) =>
+                  Scalable(principal: _fetchPrincipalRepository.listPrincipal),
             ),
           );
         }
@@ -825,7 +816,8 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ThreeDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
+              builder: (context) => ThreeDViewPage(
+                  principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
         }
@@ -837,7 +829,8 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FourDViewPage(principalIds: _fetchPrincipalRepository.principalIds),
+              builder: (context) => FourDViewPage(
+                  principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
         }
@@ -849,17 +842,15 @@ class MultipleSearchModel extends ChangeNotifier {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MRViewPage(principalIds: _fetchPrincipalRepository.principalIds),
+              builder: (context) => MRViewPage(
+                  principalIds: _fetchPrincipalRepository.principalIds),
             ),
           );
         }
         break;
       default:
-      // 未知の選択肢に対する処理（必要に応じてここにコードを追加）
+        // 未知の選択肢に対する処理（必要に応じてここにコードを追加）
         break;
     }
   }
-
-
-
 }

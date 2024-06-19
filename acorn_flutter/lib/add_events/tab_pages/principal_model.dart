@@ -21,7 +21,7 @@ class PrincipalModel extends ChangeNotifier {
   late double newLogarithm;
   late double newCoefficient;
   var newName = '';
-  var calendarNo = 0;
+  //var calendarNo = 0;
 
 
 
@@ -60,7 +60,40 @@ class PrincipalModel extends ChangeNotifier {
 
   void setCalendar(String? value) {
     if (value != null) {
-      selectedCalendar = value;
+      //selectedCalendar = value;
+      switch (value) {
+        case 'Billion Years':
+        case "Milliards d'années":
+        case '〜十億年前':
+          selectedCalendar = 'Billion Years';
+          break;
+        case 'Million Years':
+        case "Millions d'années":
+        case '〜百万年前':
+          selectedCalendar = 'Million Years';
+          break;
+        case 'Thousand Years':
+        case "Milliers d'années":
+        case '千年単位':
+          selectedCalendar = 'Thousand Years';
+          break;
+        case 'Years by Dating Methods':
+        case "Années par méthodes de datation":
+        case '炭素年代測定':
+          selectedCalendar = 'Years by Dating Methods';
+          break;
+        case 'Before-CommonEra':
+        case "Avant l'ère commune":
+        case '紀元前':
+          selectedCalendar = 'Before-CommonEra';
+          break;
+        case 'Common-Era':
+        case "Ère commune":
+        case '西暦':
+          selectedCalendar = 'Common-Era';
+          break;
+      }
+      print(selectedCalendar);
     }
     notifyListeners();
   }
@@ -103,7 +136,7 @@ class PrincipalModel extends ChangeNotifier {
         currentDisplayList = universe;
         break;
       case 'Current Country-name':
-      case 'Nom de l\'océan':
+      case 'Nom actuel du pays':
       case '現在の国名':
         currentDisplayList = pays.map((country) => country['name'] as String).toList();
         break;
@@ -195,21 +228,33 @@ class PrincipalModel extends ChangeNotifier {
 
     switch (selectedCalendar) {
       case 'Billion Years':
+      case "Milliards d'années":
+      case '〜十億年前':
         newAnnee = '${newYearD}B years ago';
         break;
       case 'Million Years':
+      case "Millions d'années":
+      case '〜百万年前':
         newAnnee = '${newYearD}M years ago';
         break;
       case 'Thousand Years':
+      case "Milliers d'années":
+      case '千年単位':
         newAnnee = '${newYearD}K years ago';
         break;
       case 'Years by Dating Methods':
+      case "Années par méthodes de datation":
+      case '炭素年代測定':
         newAnnee = 'about $newYearD years ago';
         break;
       case 'Before-CommonEra':
+      case "Avant l'ère commune":
+      case '紀元前':
         newAnnee = 'BCE ${(newYearD).round()}';
         break;
       case 'Common-Era':
+      case "Ère commune":
+      case '西暦':
         newAnnee = 'CE ${(newYearD).round()}';
         break;
     }
