@@ -13,6 +13,7 @@ class AnalysisPage extends StatefulWidget {
 class AnalysisPageState extends State<AnalysisPage> {
   List<Pays> countCountries = [];
   //List<dynamic> countCountries = [];
+  List<Categories> countCategories = [];
 
   Future<void> fetchCountCountries() async {
     countCountries = await client.pays.getPays();
@@ -24,11 +25,17 @@ class AnalysisPageState extends State<AnalysisPage> {
     setState(() {});
   }*/
 
+  Future<void> fetchCountCategories() async {
+    countCategories = await client.categories.countCategories();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       fetchCountCountries();
+      fetchCountCategories();
     });
   }
 
@@ -63,6 +70,20 @@ class AnalysisPageState extends State<AnalysisPage> {
                   child: ListTile(
                     title: Text(periodData[index]['name']),
                     trailing: Text(periodData[index]['count'].toString()),
+                  ),
+                );
+              },
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+              itemCount: countCategories.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    title: Text(countCategories[index].category),
+                    trailing: Text(countCategories[index].combien.toString()),
                   ),
                 );
               },
