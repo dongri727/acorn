@@ -11,18 +11,18 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class AnalysisPageState extends State<AnalysisPage> {
-  //List<Pays> countCountries = [];
-  List<dynamic> countCountries = [];
-
-/*  Future<void> fetchCountCountries() async {
-    countCountries = await client.pays.getPays();
-    setState(() {});
-  }*/
+  List<Pays> countCountries = [];
+  //List<dynamic> countCountries = [];
 
   Future<void> fetchCountCountries() async {
-    countCountries = await client.analysis.getCountCountries();
+    countCountries = await client.pays.getPays();
     setState(() {});
   }
+
+/*  Future<void> fetchCountCountries() async {
+    countCountries = await client.analysis.getCountCountries();
+    setState(() {});
+  }*/
 
   @override
   void initState() {

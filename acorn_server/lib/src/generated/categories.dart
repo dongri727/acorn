@@ -15,17 +15,23 @@ abstract class Categories extends _i1.TableRow
   Categories._({
     int? id,
     required this.category,
+    required this.detailId,
+    required this.combien,
   }) : super(id);
 
   factory Categories({
     int? id,
     required String category,
+    required int detailId,
+    required int combien,
   }) = _CategoriesImpl;
 
   factory Categories.fromJson(Map<String, dynamic> jsonSerialization) {
     return Categories(
       id: jsonSerialization['id'] as int?,
       category: jsonSerialization['category'] as String,
+      detailId: jsonSerialization['detailId'] as int,
+      combien: jsonSerialization['combien'] as int,
     );
   }
 
@@ -35,18 +41,26 @@ abstract class Categories extends _i1.TableRow
 
   String category;
 
+  int detailId;
+
+  int combien;
+
   @override
   _i1.Table get table => t;
 
   Categories copyWith({
     int? id,
     String? category,
+    int? detailId,
+    int? combien,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'category': category,
+      'detailId': detailId,
+      'combien': combien,
     };
   }
 
@@ -55,6 +69,8 @@ abstract class Categories extends _i1.TableRow
     return {
       if (id != null) 'id': id,
       'category': category,
+      'detailId': detailId,
+      'combien': combien,
     };
   }
 
@@ -94,19 +110,27 @@ class _CategoriesImpl extends Categories {
   _CategoriesImpl({
     int? id,
     required String category,
+    required int detailId,
+    required int combien,
   }) : super._(
           id: id,
           category: category,
+          detailId: detailId,
+          combien: combien,
         );
 
   @override
   Categories copyWith({
     Object? id = _Undefined,
     String? category,
+    int? detailId,
+    int? combien,
   }) {
     return Categories(
       id: id is int? ? id : this.id,
       category: category ?? this.category,
+      detailId: detailId ?? this.detailId,
+      combien: combien ?? this.combien,
     );
   }
 }
@@ -117,14 +141,28 @@ class CategoriesTable extends _i1.Table {
       'category',
       this,
     );
+    detailId = _i1.ColumnInt(
+      'detailId',
+      this,
+    );
+    combien = _i1.ColumnInt(
+      'combien',
+      this,
+    );
   }
 
   late final _i1.ColumnString category;
+
+  late final _i1.ColumnInt detailId;
+
+  late final _i1.ColumnInt combien;
 
   @override
   List<_i1.Column> get columns => [
         id,
         category,
+        detailId,
+        combien,
       ];
 }
 

@@ -6,6 +6,7 @@ countryInvolved:
   - getPrincipalIdsByCInvolvedIds:
 categories:
   - getCategories:
+  - countCategories:
   - addCategories:
   - addAndReturnCategories:
   - getCategoriesByPrincipalId:

@@ -2,3 +2,5 @@ class: Categories
 table: categories
 fields: 
   category: String
+  detailId: int
+  combien: int

@@ -363,6 +363,16 @@ class Endpoints extends _i1.EndpointDispatch {
             keyword: params['keyword'],
           ),
         ),
+        'countCategories': _i1.MethodConnector(
+          name: 'countCategories',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['categories'] as _i4.CategoriesEndpoint)
+                  .countCategories(session),
+        ),
         'addCategories': _i1.MethodConnector(
           name: 'addCategories',
           params: {

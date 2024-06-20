@@ -106,6 +106,14 @@ class EndpointCategories extends _i1.EndpointRef {
         {'keyword': keyword},
       );
 
+  ///Fetches all categories from DB
+  _i2.Future<List<_i4.Categories>> countCategories() =>
+      caller.callServerEndpoint<List<_i4.Categories>>(
+        'categories',
+        'countCategories',
+        {},
+      );
+
   ///Adds a category in DB
   _i2.Future<int> addCategories(_i4.Categories categories) =>
       caller.callServerEndpoint<int>(

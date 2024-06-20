@@ -11,6 +11,15 @@ class CategoriesEndpoint extends Endpoint {
     );
   }
 
+    ///Fetches all categories from DB
+  Future<List<Categories>> countCategories(Session session) async {
+    return await Categories.db.find(
+      session,
+      orderBy: (categories) => categories.combien,
+      orderDescending: true,
+    );
+  }
+
   ///Adds a category in DB
   Future<int> addCategories(Session session, Categories categories) async {
     var newCategory = await Categories.db.insertRow(session, categories);
