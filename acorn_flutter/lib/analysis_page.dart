@@ -27,6 +27,7 @@ class AnalysisPageState extends State<AnalysisPage> {
 
   Future<void> fetchCountCategories() async {
     countCategories = await client.categories.countCategories();
+    print(countCategories);
     setState(() {});
   }
 
