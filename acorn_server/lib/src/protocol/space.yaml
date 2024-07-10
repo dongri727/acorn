@@ -1,0 +1,9 @@
+class: Space
+table: space
+fields:
+  annee: String
+  month: int
+  day: int
+  point: int
+  affair: String
+  distance: String

@@ -19,7 +19,7 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          // 各タブページで参照するjournal を生成(プレビュー用に各タブ入力を保持する必要があるため)
+          // 各タブページで参照するconfirmを生成(プレビュー用に各タブ入力を保持する必要があるため)
           Provider(create: (context) => Confirm()),
         ],
 

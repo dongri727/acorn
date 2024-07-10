@@ -104,9 +104,31 @@ class ScalableMState extends State<ScalableM> {
             child: Padding(
               padding: const EdgeInsets.only(left: 30.0,right: 20.0),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context)!.scalableA),
+                    IconButton(
+                        icon: const Icon(
+                          Icons.question_mark,
+                          color: Colors.green,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Search Hint'),
+                                  content: Text(AppLocalizations.of(context)!.scalableA),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('close'))
+                                  ],
+                                );
+                              });
+                        }
+                    ),
                     Row(
                       children: [
                         Expanded(

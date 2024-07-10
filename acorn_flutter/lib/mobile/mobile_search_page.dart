@@ -70,7 +70,29 @@ class SearchPageState extends State<SearchPage> {
               padding: const EdgeInsets.only(left: 30.0,right: 20.0),
               child: Column(
                 children: [
-                  Text(AppLocalizations.of(context)!.search),
+                  IconButton(
+                      icon: const Icon(
+                        Icons.question_mark,
+                        color: Colors.green,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Search Hint'),
+                                content: Text(AppLocalizations.of(context)!.search),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('close'))
+                                ],
+                              );
+                            });
+                      }
+                  ),
                   Row(
                     children: [
                       Expanded(

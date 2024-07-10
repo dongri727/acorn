@@ -97,7 +97,6 @@ places:
   - getPlacesByPrincipalId:
   - getPlacesByIds:
 principal:
-  - addPrincipal:
   - updatePrincipal:
   - updatePrincipalAndReturn:
   - getPrincipal:
@@ -121,6 +120,9 @@ seas:
   - getSeas:
   - addSeas:
   - addAndReturnSeas:
+space:
+  - addSpace:
+  - getAllSpace:
 stars:
   - getStars:
   - addStars:

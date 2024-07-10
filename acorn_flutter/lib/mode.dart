@@ -21,8 +21,8 @@ class ModePageState extends State<ModePage> {
   }
 
   final Uri youtubeUrl = Uri.parse('https://www.youtube.com/@laporte_academy');
-  final Uri appStoreUrl = Uri.parse('https://apps.apple.com/us/app/apple-store/id375380948'); // Replace with your App Store URL
-  final Uri playStoreUrl = Uri.parse('https://play.google.com/store/apps/details?id=com.example.app'); // Replace with your Play Store URL
+  final Uri appStoreUrl = Uri.parse('https://apps.apple.com/jp/app/%E5%9B%9B%E6%AC%A1%E5%85%83%E5%B9%B4%E8%A1%A8for-mobile/id6502634868'); // Replace with your App Store URL
+  final Uri playStoreUrl = Uri.parse('https://play.google.com/store/apps/details?id=academy.laporte.chronomapMobile.chronomap_mobile&hl=ja'); // Replace with your Play Store URL
 
 
   @override

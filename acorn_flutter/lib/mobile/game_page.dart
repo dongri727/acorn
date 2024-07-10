@@ -168,13 +168,30 @@ class GamePageState extends State<GamePage> with TickerProviderStateMixin {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.gameA,
-                    style: const TextStyle(fontSize: 16),
-                  ),
+                IconButton(
+                    icon: const Icon(
+                      Icons.question_mark,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Game Hint'),
+                              content: Text(AppLocalizations.of(context)!.gameA),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('close'))
+                              ],
+                            );
+                          });
+                    }
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 20.0, horizontal: 80.0),
