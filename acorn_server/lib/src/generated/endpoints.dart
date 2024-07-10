@@ -62,15 +62,16 @@ import 'package:acorn_server/src/generated/pays.dart' as _i51;
 import 'package:acorn_server/src/generated/people.dart' as _i52;
 import 'package:acorn_server/src/generated/placeatts.dart' as _i53;
 import 'package:acorn_server/src/generated/places.dart' as _i54;
-import 'package:acorn_server/src/generated/seas.dart' as _i55;
-import 'package:acorn_server/src/generated/space.dart' as _i56;
-import 'package:acorn_server/src/generated/stars.dart' as _i57;
-import 'package:acorn_server/src/generated/stars_involved.dart' as _i58;
-import 'package:acorn_server/src/generated/terms.dart' as _i59;
-import 'package:acorn_server/src/generated/universe.dart' as _i60;
-import 'package:acorn_server/src/generated/with_globe.dart' as _i61;
-import 'package:acorn_server/src/generated/with_map.dart' as _i62;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i63;
+import 'package:acorn_server/src/generated/principal.dart' as _i55;
+import 'package:acorn_server/src/generated/seas.dart' as _i56;
+import 'package:acorn_server/src/generated/space.dart' as _i57;
+import 'package:acorn_server/src/generated/stars.dart' as _i58;
+import 'package:acorn_server/src/generated/stars_involved.dart' as _i59;
+import 'package:acorn_server/src/generated/terms.dart' as _i60;
+import 'package:acorn_server/src/generated/universe.dart' as _i61;
+import 'package:acorn_server/src/generated/with_globe.dart' as _i62;
+import 'package:acorn_server/src/generated/with_map.dart' as _i63;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i64;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -1793,6 +1794,24 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'principal',
       endpoint: endpoints['principal']!,
       methodConnectors: {
+        'addPrincipal': _i1.MethodConnector(
+          name: 'addPrincipal',
+          params: {
+            'principal': _i1.ParameterDescription(
+              name: 'principal',
+              type: _i1.getType<_i55.Principal>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i25.PrincipalEndpoint).addPrincipal(
+            session,
+            params['principal'],
+          ),
+        ),
         'updatePrincipal': _i1.MethodConnector(
           name: 'updatePrincipal',
           params: {
@@ -2194,7 +2213,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'seas': _i1.ParameterDescription(
               name: 'seas',
-              type: _i1.getType<_i55.Seas>(),
+              type: _i1.getType<_i56.Seas>(),
               nullable: false,
             )
           },
@@ -2212,7 +2231,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'seas': _i1.ParameterDescription(
               name: 'seas',
-              type: _i1.getType<_i55.Seas>(),
+              type: _i1.getType<_i56.Seas>(),
               nullable: false,
             )
           },
@@ -2236,7 +2255,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'space': _i1.ParameterDescription(
               name: 'space',
-              type: _i1.getType<_i56.Space>(),
+              type: _i1.getType<_i57.Space>(),
               nullable: false,
             )
           },
@@ -2287,7 +2306,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'stars': _i1.ParameterDescription(
               name: 'stars',
-              type: _i1.getType<_i57.Stars>(),
+              type: _i1.getType<_i58.Stars>(),
               nullable: false,
             )
           },
@@ -2305,7 +2324,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'stars': _i1.ParameterDescription(
               name: 'stars',
-              type: _i1.getType<_i57.Stars>(),
+              type: _i1.getType<_i58.Stars>(),
               nullable: false,
             )
           },
@@ -2384,7 +2403,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'starsInvolved': _i1.ParameterDescription(
               name: 'starsInvolved',
-              type: _i1.getType<_i58.StarsInvolved>(),
+              type: _i1.getType<_i59.StarsInvolved>(),
               nullable: false,
             )
           },
@@ -2427,7 +2446,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'terms': _i1.ParameterDescription(
               name: 'terms',
-              type: _i1.getType<_i59.Terms>(),
+              type: _i1.getType<_i60.Terms>(),
               nullable: false,
             )
           },
@@ -2445,7 +2464,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'terms': _i1.ParameterDescription(
               name: 'terms',
-              type: _i1.getType<_i59.Terms>(),
+              type: _i1.getType<_i60.Terms>(),
               nullable: false,
             )
           },
@@ -2523,7 +2542,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'universe': _i1.ParameterDescription(
               name: 'universe',
-              type: _i1.getType<_i60.Universe>(),
+              type: _i1.getType<_i61.Universe>(),
               nullable: false,
             )
           },
@@ -2565,7 +2584,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'withGlobe': _i1.ParameterDescription(
               name: 'withGlobe',
-              type: _i1.getType<_i61.WithGlobe>(),
+              type: _i1.getType<_i62.WithGlobe>(),
               nullable: false,
             )
           },
@@ -2607,7 +2626,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'withMap': _i1.ParameterDescription(
               name: 'withMap',
-              type: _i1.getType<_i62.WithMap>(),
+              type: _i1.getType<_i63.WithMap>(),
               nullable: false,
             )
           },
@@ -2622,6 +2641,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    modules['serverpod_auth'] = _i63.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i64.Endpoints()..initializeEndpoints(server);
   }
 }

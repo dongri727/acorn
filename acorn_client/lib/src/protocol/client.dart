@@ -840,6 +840,13 @@ class EndpointPrincipal extends _i1.EndpointRef {
   @override
   String get name => 'principal';
 
+  _i2.Future<int> addPrincipal(_i25.Principal principal) =>
+      caller.callServerEndpoint<int>(
+        'principal',
+        'addPrincipal',
+        {'principal': principal},
+      );
+
   _i2.Future<bool> updatePrincipal(
     int id,
     String newPrecise,

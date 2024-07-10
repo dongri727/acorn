@@ -97,6 +97,7 @@ places:
   - getPlacesByPrincipalId:
   - getPlacesByIds:
 principal:
+  - addPrincipal:
   - updatePrincipal:
   - updatePrincipalAndReturn:
   - getPrincipal:

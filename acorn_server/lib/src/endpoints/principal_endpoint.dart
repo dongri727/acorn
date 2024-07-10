@@ -5,7 +5,14 @@ import '../generated/protocol.dart';
 class PrincipalEndpoint extends Endpoint {
   //Principal
 
-    Future<bool> updatePrincipal(Session session, int id, String newPrecise) async {
+  Future<int> addPrincipal(
+    Session session, Principal principal) async {
+    var newPrincipal = await Principal.db.insertRow(session, principal);
+    var newId = newPrincipal.id;
+    return newId!;
+  }
+
+  Future<bool> updatePrincipal(Session session, int id, String newPrecise) async {
     var principal = await Principal.db.findById(session, id);
     if (principal == null) {
       return false; // IDに対応するレコードが見つからない場合
