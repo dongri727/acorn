@@ -130,6 +130,7 @@ stars:
   - addAndReturnStars:
   - getStarsByPrincipalId:
   - getStarsByIds:
+  - addAndReturnStarsWithKeyArea:
 starsInvolved:
   - getStarsInvolved:
   - addStarsInvolved:

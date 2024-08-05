@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'index.dart';
 import 'package:acorn_flutter/mobile/tab.dart';
 import 'package:acorn_flutter/utils/button_format.dart';
@@ -89,6 +91,20 @@ class ModePageState extends State<ModePage> {
                 label: AppLocalizations.of(context)!.modeC,
                 onPressed: (_launchYouTube),
                 color: Colors.white60),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 8.0),
+                  child: Icon(Icons.desktop_mac_outlined, color: Colors.white),
+                ),
+                Icon(Icons.laptop, color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Icon(Icons.tablet, color: Colors.white),
+                ),
+              ],
+            ),
             TextButtonFormat(
                 label: AppLocalizations.of(context)!.modeD,
                 onPressed: () {
@@ -100,6 +116,8 @@ class ModePageState extends State<ModePage> {
                   );
                 },
                 color: Colors.white),
+            const Icon(Icons.phone_android, color: Colors.white ),
+
             TextButtonFormat(
                 label: AppLocalizations.of(context)!.modeE,
                 onPressed: () {

@@ -1104,6 +1104,19 @@ class EndpointStars extends _i1.EndpointRef {
         'getStarsByIds',
         {'starIds': starIds},
       );
+
+  _i2.Future<List<_i28.Stars>> addAndReturnStarsWithKeyArea(
+    _i28.Stars stars,
+    String keyword,
+  ) =>
+      caller.callServerEndpoint<List<_i28.Stars>>(
+        'stars',
+        'addAndReturnStarsWithKeyArea',
+        {
+          'stars': stars,
+          'keyword': keyword,
+        },
+      );
 }
 
 /// {@category Endpoint}

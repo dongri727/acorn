@@ -2,3 +2,4 @@ class: Stars
 table: stars
 fields: 
   star: String
+  area: String

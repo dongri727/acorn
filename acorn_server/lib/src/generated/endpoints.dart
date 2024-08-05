@@ -2373,6 +2373,31 @@ class Endpoints extends _i1.EndpointDispatch {
             params['starIds'],
           ),
         ),
+        'addAndReturnStarsWithKeyArea': _i1.MethodConnector(
+          name: 'addAndReturnStarsWithKeyArea',
+          params: {
+            'stars': _i1.ParameterDescription(
+              name: 'stars',
+              type: _i1.getType<_i58.Stars>(),
+              nullable: false,
+            ),
+            'keyword': _i1.ParameterDescription(
+              name: 'keyword',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['stars'] as _i28.StarsEndpoint)
+                  .addAndReturnStarsWithKeyArea(
+            session,
+            params['stars'],
+            params['keyword'],
+          ),
+        ),
       },
     );
     connectors['starsInvolved'] = _i1.EndpointConnector(

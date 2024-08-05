@@ -6,6 +6,8 @@ class StarsEndpoint extends Endpoint {
   Future<List<Stars>> getStars(Session session, {String? keyword}) async {
     return await Stars.db.find(
       session,
+      where: (t) =>
+          keyword != null ? t.area.equals(keyword) : Constant.bool(true),
       orderBy: (stars) => stars.id,
     );
   }
@@ -16,8 +18,7 @@ class StarsEndpoint extends Endpoint {
   }
 
   ///Adds a new Star and returns all Stars
-  Future<List<Stars>> addAndReturnStars(
-      Session session, Stars stars) async {
+  Future<List<Stars>> addAndReturnStars(Session session, Stars stars) async {
     await Stars.db.insertRow(session, stars);
     var allStars = await Stars.db.find(
       session,
@@ -39,8 +40,7 @@ class StarsEndpoint extends Endpoint {
 
     var starsInvolvedResults = await StarsInvolved.db
         .find(session, where: (_) => whereClauseStarsInvolved);
-    var starIds =
-        starsInvolvedResults.map((row) => row.starId).toList();
+    var starIds = starsInvolvedResults.map((row) => row.starId).toList();
 
     if (starIds.isEmpty) {
       return Future.value([]);
@@ -50,8 +50,7 @@ class StarsEndpoint extends Endpoint {
     return await getStarsByIds(session, starIds);
   }
 
-  Future<List<Stars>> getStarsByIds(
-      Session session, List<int> starIds) async {
+  Future<List<Stars>> getStarsByIds(Session session, List<int> starIds) async {
     if (starIds.isEmpty) {
       return Future.value([]);
     }
@@ -61,8 +60,7 @@ class StarsEndpoint extends Endpoint {
       if (whereClauseStars == null) {
         whereClauseStars = Stars.t.id.equals(starId);
       } else {
-        whereClauseStars =
-            whereClauseStars | Stars.t.id.equals(starId);
+        whereClauseStars = whereClauseStars | Stars.t.id.equals(starId);
       }
     }
     return await Stars.db.find(
@@ -70,5 +68,16 @@ class StarsEndpoint extends Endpoint {
       where: (_) => whereClauseStars,
       orderBy: (stars) => stars.star,
     );
+  }
+
+  Future<List<Stars>> addAndReturnStarsWithKeyArea(
+      Session session, Stars stars, String keyword) async {
+    await Stars.db.insertRow(session, stars);
+    var allStarsWithKeyArea = await Stars.db.find(
+      session,
+      where: (t) => t.area.equals(keyword),
+      orderBy: (stars) => stars.id,
+    );
+    return allStarsWithKeyArea;
   }
 }

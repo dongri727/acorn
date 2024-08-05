@@ -199,4 +199,5 @@ List<Map<String, dynamic>> countries = [
   {'id': 197, 'name': 'Yemen', 'detailId': 293},
   {'id': 198, 'name': 'Zambia', 'detailId': 294},
   {'id': 199, 'name': 'Zimbabwe', 'detailId': 295},
+  {'id': 200, 'name': 'World Wide', 'detailId': 687}
 ];

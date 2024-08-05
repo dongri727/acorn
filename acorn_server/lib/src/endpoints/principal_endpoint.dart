@@ -457,7 +457,7 @@ class PrincipalEndpoint extends Endpoint {
   ///get principal by DetailIds
   Future<List<Principal>> getPrincipalByDetailIds(Session session,
       {List<int>? detailIds}) async {
-    print("Getting principal with termIds: $detailIds");
+    print("Getting principal with detailIds: $detailIds");
 
     if (detailIds == null || detailIds.isEmpty) {
       return Future.value([]); // Return empty list if no detailIds are provided

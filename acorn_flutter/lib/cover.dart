@@ -53,7 +53,7 @@ class CoverPageState extends State<CoverPage> {
                           "Start",
                           style: TextStyle(
                             fontSize: 24,
-                            color: Colors.yellow,
+                            color: Colors.blueAccent,
                           ),
                         ),
                         onPressed: () {

@@ -14,17 +14,20 @@ abstract class Stars implements _i1.SerializableModel {
   Stars._({
     this.id,
     required this.star,
+    required this.area,
   });
 
   factory Stars({
     int? id,
     required String star,
+    required String area,
   }) = _StarsImpl;
 
   factory Stars.fromJson(Map<String, dynamic> jsonSerialization) {
     return Stars(
       id: jsonSerialization['id'] as int?,
       star: jsonSerialization['star'] as String,
+      area: jsonSerialization['area'] as String,
     );
   }
 
@@ -35,15 +38,19 @@ abstract class Stars implements _i1.SerializableModel {
 
   String star;
 
+  String area;
+
   Stars copyWith({
     int? id,
     String? star,
+    String? area,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'star': star,
+      'area': area,
     };
   }
 
@@ -59,19 +66,23 @@ class _StarsImpl extends Stars {
   _StarsImpl({
     int? id,
     required String star,
+    required String area,
   }) : super._(
           id: id,
           star: star,
+          area: area,
         );
 
   @override
   Stars copyWith({
     Object? id = _Undefined,
     String? star,
+    String? area,
   }) {
     return Stars(
       id: id is int? ? id : this.id,
       star: star ?? this.star,
+      area: area ?? this.area,
     );
   }
 }

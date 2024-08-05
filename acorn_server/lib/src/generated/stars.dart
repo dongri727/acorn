@@ -14,17 +14,20 @@ abstract class Stars extends _i1.TableRow implements _i1.ProtocolSerialization {
   Stars._({
     int? id,
     required this.star,
+    required this.area,
   }) : super(id);
 
   factory Stars({
     int? id,
     required String star,
+    required String area,
   }) = _StarsImpl;
 
   factory Stars.fromJson(Map<String, dynamic> jsonSerialization) {
     return Stars(
       id: jsonSerialization['id'] as int?,
       star: jsonSerialization['star'] as String,
+      area: jsonSerialization['area'] as String,
     );
   }
 
@@ -34,18 +37,22 @@ abstract class Stars extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   String star;
 
+  String area;
+
   @override
   _i1.Table get table => t;
 
   Stars copyWith({
     int? id,
     String? star,
+    String? area,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'star': star,
+      'area': area,
     };
   }
 
@@ -54,6 +61,7 @@ abstract class Stars extends _i1.TableRow implements _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       'star': star,
+      'area': area,
     };
   }
 
@@ -93,19 +101,23 @@ class _StarsImpl extends Stars {
   _StarsImpl({
     int? id,
     required String star,
+    required String area,
   }) : super._(
           id: id,
           star: star,
+          area: area,
         );
 
   @override
   Stars copyWith({
     Object? id = _Undefined,
     String? star,
+    String? area,
   }) {
     return Stars(
       id: id is int? ? id : this.id,
       star: star ?? this.star,
+      area: area ?? this.area,
     );
   }
 }
@@ -116,14 +128,21 @@ class StarsTable extends _i1.Table {
       'star',
       this,
     );
+    area = _i1.ColumnString(
+      'area',
+      this,
+    );
   }
 
   late final _i1.ColumnString star;
+
+  late final _i1.ColumnString area;
 
   @override
   List<_i1.Column> get columns => [
         id,
         star,
+        area,
       ];
 }
 
