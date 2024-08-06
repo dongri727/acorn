@@ -8,7 +8,7 @@ class StarsEndpoint extends Endpoint {
       session,
       where: (t) =>
           keyword != null ? t.area.equals(keyword) : Constant.bool(true),
-      orderBy: (stars) => stars.id,
+      orderBy: (stars) => stars.star,
     );
   }
 
@@ -22,7 +22,7 @@ class StarsEndpoint extends Endpoint {
     await Stars.db.insertRow(session, stars);
     var allStars = await Stars.db.find(
       session,
-      orderBy: (stars) => stars.id,
+      orderBy: (stars) => stars.star,
       //To maintain the order of the solar system, the entire List is managed by Id
     );
     return allStars;
@@ -76,7 +76,7 @@ class StarsEndpoint extends Endpoint {
     var allStarsWithKeyArea = await Stars.db.find(
       session,
       where: (t) => t.area.equals(keyword),
-      orderBy: (stars) => stars.id,
+      orderBy: (stars) => stars.star,
     );
     return allStarsWithKeyArea;
   }
