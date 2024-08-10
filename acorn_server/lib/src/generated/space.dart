@@ -13,39 +13,68 @@ import 'package:serverpod/serverpod.dart' as _i1;
 abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
   Space._({
     int? id,
+    required this.principalId,
     required this.annee,
     required this.month,
     required this.day,
     required this.point,
     required this.affair,
-    required this.distance,
+    required this.location,
+    required this.precise,
+    required this.hecX,
+    required this.hecY,
+    required this.hecZ,
+    required this.julianD,
+    required this.gLat,
+    required this.gLon,
+    required this.lightYear,
   }) : super(id);
 
   factory Space({
     int? id,
+    required int principalId,
     required String annee,
     required int month,
     required int day,
     required int point,
     required String affair,
-    required String distance,
+    required String location,
+    required String precise,
+    required double hecX,
+    required double hecY,
+    required double hecZ,
+    required int julianD,
+    required double gLat,
+    required double gLon,
+    required double lightYear,
   }) = _SpaceImpl;
 
   factory Space.fromJson(Map<String, dynamic> jsonSerialization) {
     return Space(
       id: jsonSerialization['id'] as int?,
+      principalId: jsonSerialization['principalId'] as int,
       annee: jsonSerialization['annee'] as String,
       month: jsonSerialization['month'] as int,
       day: jsonSerialization['day'] as int,
       point: jsonSerialization['point'] as int,
       affair: jsonSerialization['affair'] as String,
-      distance: jsonSerialization['distance'] as String,
+      location: jsonSerialization['location'] as String,
+      precise: jsonSerialization['precise'] as String,
+      hecX: (jsonSerialization['hecX'] as num).toDouble(),
+      hecY: (jsonSerialization['hecY'] as num).toDouble(),
+      hecZ: (jsonSerialization['hecZ'] as num).toDouble(),
+      julianD: jsonSerialization['julianD'] as int,
+      gLat: (jsonSerialization['gLat'] as num).toDouble(),
+      gLon: (jsonSerialization['gLon'] as num).toDouble(),
+      lightYear: (jsonSerialization['lightYear'] as num).toDouble(),
     );
   }
 
   static final t = SpaceTable();
 
   static const db = SpaceRepository._();
+
+  int principalId;
 
   String annee;
 
@@ -57,30 +86,64 @@ abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
 
   String affair;
 
-  String distance;
+  String location;
+
+  String precise;
+
+  double hecX;
+
+  double hecY;
+
+  double hecZ;
+
+  int julianD;
+
+  double gLat;
+
+  double gLon;
+
+  double lightYear;
 
   @override
   _i1.Table get table => t;
 
   Space copyWith({
     int? id,
+    int? principalId,
     String? annee,
     int? month,
     int? day,
     int? point,
     String? affair,
-    String? distance,
+    String? location,
+    String? precise,
+    double? hecX,
+    double? hecY,
+    double? hecZ,
+    int? julianD,
+    double? gLat,
+    double? gLon,
+    double? lightYear,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'principalId': principalId,
       'annee': annee,
       'month': month,
       'day': day,
       'point': point,
       'affair': affair,
-      'distance': distance,
+      'location': location,
+      'precise': precise,
+      'hecX': hecX,
+      'hecY': hecY,
+      'hecZ': hecZ,
+      'julianD': julianD,
+      'gLat': gLat,
+      'gLon': gLon,
+      'lightYear': lightYear,
     };
   }
 
@@ -88,12 +151,21 @@ abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
   Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
+      'principalId': principalId,
       'annee': annee,
       'month': month,
       'day': day,
       'point': point,
       'affair': affair,
-      'distance': distance,
+      'location': location,
+      'precise': precise,
+      'hecX': hecX,
+      'hecY': hecY,
+      'hecZ': hecZ,
+      'julianD': julianD,
+      'gLat': gLat,
+      'gLon': gLon,
+      'lightYear': lightYear,
     };
   }
 
@@ -132,46 +204,86 @@ class _Undefined {}
 class _SpaceImpl extends Space {
   _SpaceImpl({
     int? id,
+    required int principalId,
     required String annee,
     required int month,
     required int day,
     required int point,
     required String affair,
-    required String distance,
+    required String location,
+    required String precise,
+    required double hecX,
+    required double hecY,
+    required double hecZ,
+    required int julianD,
+    required double gLat,
+    required double gLon,
+    required double lightYear,
   }) : super._(
           id: id,
+          principalId: principalId,
           annee: annee,
           month: month,
           day: day,
           point: point,
           affair: affair,
-          distance: distance,
+          location: location,
+          precise: precise,
+          hecX: hecX,
+          hecY: hecY,
+          hecZ: hecZ,
+          julianD: julianD,
+          gLat: gLat,
+          gLon: gLon,
+          lightYear: lightYear,
         );
 
   @override
   Space copyWith({
     Object? id = _Undefined,
+    int? principalId,
     String? annee,
     int? month,
     int? day,
     int? point,
     String? affair,
-    String? distance,
+    String? location,
+    String? precise,
+    double? hecX,
+    double? hecY,
+    double? hecZ,
+    int? julianD,
+    double? gLat,
+    double? gLon,
+    double? lightYear,
   }) {
     return Space(
       id: id is int? ? id : this.id,
+      principalId: principalId ?? this.principalId,
       annee: annee ?? this.annee,
       month: month ?? this.month,
       day: day ?? this.day,
       point: point ?? this.point,
       affair: affair ?? this.affair,
-      distance: distance ?? this.distance,
+      location: location ?? this.location,
+      precise: precise ?? this.precise,
+      hecX: hecX ?? this.hecX,
+      hecY: hecY ?? this.hecY,
+      hecZ: hecZ ?? this.hecZ,
+      julianD: julianD ?? this.julianD,
+      gLat: gLat ?? this.gLat,
+      gLon: gLon ?? this.gLon,
+      lightYear: lightYear ?? this.lightYear,
     );
   }
 }
 
 class SpaceTable extends _i1.Table {
   SpaceTable({super.tableRelation}) : super(tableName: 'space') {
+    principalId = _i1.ColumnInt(
+      'principalId',
+      this,
+    );
     annee = _i1.ColumnString(
       'annee',
       this,
@@ -192,11 +304,45 @@ class SpaceTable extends _i1.Table {
       'affair',
       this,
     );
-    distance = _i1.ColumnString(
-      'distance',
+    location = _i1.ColumnString(
+      'location',
+      this,
+    );
+    precise = _i1.ColumnString(
+      'precise',
+      this,
+    );
+    hecX = _i1.ColumnDouble(
+      'hecX',
+      this,
+    );
+    hecY = _i1.ColumnDouble(
+      'hecY',
+      this,
+    );
+    hecZ = _i1.ColumnDouble(
+      'hecZ',
+      this,
+    );
+    julianD = _i1.ColumnInt(
+      'julianD',
+      this,
+    );
+    gLat = _i1.ColumnDouble(
+      'gLat',
+      this,
+    );
+    gLon = _i1.ColumnDouble(
+      'gLon',
+      this,
+    );
+    lightYear = _i1.ColumnDouble(
+      'lightYear',
       this,
     );
   }
+
+  late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnString annee;
 
@@ -208,17 +354,42 @@ class SpaceTable extends _i1.Table {
 
   late final _i1.ColumnString affair;
 
-  late final _i1.ColumnString distance;
+  late final _i1.ColumnString location;
+
+  late final _i1.ColumnString precise;
+
+  late final _i1.ColumnDouble hecX;
+
+  late final _i1.ColumnDouble hecY;
+
+  late final _i1.ColumnDouble hecZ;
+
+  late final _i1.ColumnInt julianD;
+
+  late final _i1.ColumnDouble gLat;
+
+  late final _i1.ColumnDouble gLon;
+
+  late final _i1.ColumnDouble lightYear;
 
   @override
   List<_i1.Column> get columns => [
         id,
+        principalId,
         annee,
         month,
         day,
         point,
         affair,
-        distance,
+        location,
+        precise,
+        hecX,
+        hecY,
+        hecZ,
+        julianD,
+        gLat,
+        gLon,
+        lightYear,
       ];
 }
 

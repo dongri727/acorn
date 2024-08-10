@@ -1,9 +1,18 @@
 class: Space
 table: space
 fields:
+  principalId: int
   annee: String
   month: int
   day: int
   point: int
   affair: String
-  distance: String
+  location: String
+  precise: String
+  hecX: double
+  hecY: double
+  hecZ: double
+  julianD: int
+  gLat: double
+  gLon: double
+  lightYear: double
