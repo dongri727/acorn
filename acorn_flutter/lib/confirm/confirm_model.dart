@@ -50,15 +50,17 @@ class ConfirmModel extends ChangeNotifier {
             zCoordinate: confirm.z,
           coefficient: confirm.coefficient);
         await client.withGlobe.addWithGlobe(withGlobe);
+        debugPrint('add WithGlobe');
 
         //with qgis
         var withQgis = WithQgis(
             principalId: principalId,
             year: confirm.annee,
             name: confirm.name,
-            geo: confirm.geo,
+            geo: confirm.geo as String,
             );
         await client.withQgis.addWithQgis(withQgis);
+        debugPrint('add WithQgis');
 
         //in space
         if(confirm.selectedLocation == 'universe' ||
@@ -82,7 +84,8 @@ class ConfirmModel extends ChangeNotifier {
             gLat: 0.0,
             gLon: 0.0,
             lightYear: 0.0);
-          await client.space.addSpace(space);  
+          await client.space.addSpace(space);
+          debugPrint('add in space');
         }
 
         //CATT where it happened
