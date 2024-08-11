@@ -53,9 +53,9 @@ class ConfirmModel extends ChangeNotifier {
 
         //with qgis
         var withQgis = WithQgis(
-            //principalId: principalId,
-            annee: confirm.annee,
-            affair: confirm.name,
+            principalId: principalId,
+            year: confirm.annee,
+            name: confirm.name,
             geo: confirm.geo,
             );
         await client.withQgis.addWithQgis(withQgis);
