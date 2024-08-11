@@ -39,6 +39,7 @@ class Confirm {
   double x = 0.0;
   double y = 0.0;
   double z = 0.0;
+  String geo = '';
 
   //pays involved
   List<String> selectedCountries = [];

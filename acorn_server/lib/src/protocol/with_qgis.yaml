@@ -1,0 +1,7 @@
+class: WithQgis
+table: with_qgis
+fields: 
+  principalId: int
+  name: String
+  geo: String
+  year: String

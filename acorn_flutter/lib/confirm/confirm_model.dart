@@ -51,6 +51,40 @@ class ConfirmModel extends ChangeNotifier {
           coefficient: confirm.coefficient);
         await client.withGlobe.addWithGlobe(withGlobe);
 
+        //with qgis
+        var withQgis = WithQgis(
+            //principalId: principalId,
+            annee: confirm.annee,
+            affair: confirm.name,
+            geo: confirm.geo,
+            );
+        await client.withQgis.addWithQgis(withQgis);
+
+        //in space
+        if(confirm.selectedLocation == 'universe' ||
+            confirm.selectedLocation == 'Solar System' ||
+            confirm.selectedLocation == 'Milky Way'||
+            confirm.selectedLocation == 'Other Galaxy' 
+        ) {
+          var space = Space(
+            principalId: principalId,
+            annee: confirm.annee,
+            month: confirm.month,
+            day: confirm.day,
+            point: confirm.point,
+            affair: confirm.name,
+            location: confirm.selectedLocation,
+            precise: confirm.selectedPrecise,
+            hecX: 0.0,
+            hecY: 0.0,
+            hecZ: 0.0,
+            julianD: confirm.point + 1719906,
+            gLat: 0.0,
+            gLon: 0.0,
+            lightYear: 0.0);
+          await client.space.addSpace(space);  
+        }
+
         //CATT where it happened
         if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalDetail(

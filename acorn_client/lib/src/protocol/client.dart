@@ -41,8 +41,9 @@ import 'package:acorn_client/src/protocol/terms.dart' as _i30;
 import 'package:acorn_client/src/protocol/universe.dart' as _i31;
 import 'package:acorn_client/src/protocol/with_globe.dart' as _i32;
 import 'package:acorn_client/src/protocol/with_map.dart' as _i33;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i34;
-import 'protocol.dart' as _i35;
+import 'package:acorn_client/src/protocol/with_qgis.dart' as _i34;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i35;
+import 'protocol.dart' as _i36;
 
 /// {@category Endpoint}
 class EndpointAnalysis extends _i1.EndpointRef {
@@ -1261,12 +1262,36 @@ class EndpointWithMap extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointWithQgis extends _i1.EndpointRef {
+  EndpointWithQgis(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'withQgis';
+
+  /// Fetches WithQgis from DB
+  _i2.Future<List<_i34.WithQgis>> getWithQgis({List<int>? keyNumbers}) =>
+      caller.callServerEndpoint<List<_i34.WithQgis>>(
+        'withQgis',
+        'getWithQgis',
+        {'keyNumbers': keyNumbers},
+      );
+
+  ///Adds a WithQgis in DB
+  _i2.Future<void> addWithQgis(_i34.WithQgis withQgis) =>
+      caller.callServerEndpoint<void>(
+        'withQgis',
+        'addWithQgis',
+        {'withQgis': withQgis},
+      );
+}
+
 class _Modules {
   _Modules(Client client) {
-    auth = _i34.Caller(client);
+    auth = _i35.Caller(client);
   }
 
-  late final _i34.Caller auth;
+  late final _i35.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -1284,7 +1309,7 @@ class Client extends _i1.ServerpodClient {
     Function(_i1.MethodCallContext)? onSucceededCall,
   }) : super(
           host,
-          _i35.Protocol(),
+          _i36.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -1324,6 +1349,7 @@ class Client extends _i1.ServerpodClient {
     universe = EndpointUniverse(this);
     withGlobe = EndpointWithGlobe(this);
     withMap = EndpointWithMap(this);
+    withQgis = EndpointWithQgis(this);
     modules = _Modules(this);
   }
 
@@ -1391,6 +1417,8 @@ class Client extends _i1.ServerpodClient {
 
   late final EndpointWithMap withMap;
 
+  late final EndpointWithQgis withQgis;
+
   late final _Modules modules;
 
   @override
@@ -1427,6 +1455,7 @@ class Client extends _i1.ServerpodClient {
         'universe': universe,
         'withGlobe': withGlobe,
         'withMap': withMap,
+        'withQgis': withQgis,
       };
 
   @override

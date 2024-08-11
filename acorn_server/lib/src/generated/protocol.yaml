@@ -149,3 +149,6 @@ withGlobe:
 withMap:
   - getWithMap:
   - addWithMap:
+withQgis:
+  - getWithQgis:
+  - addWithQgis:

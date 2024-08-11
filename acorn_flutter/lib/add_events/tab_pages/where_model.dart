@@ -11,7 +11,6 @@ import 'dart:math' as math;
 import '../../utils/build_chips.dart';
 
 class WhereModel extends ChangeNotifier {
-
   late final FetchStarsRepository _fetchStarsRepository;
   late final FetchPlaceRepository _fetchPlaceRepository;
   late final FetchSeasRepository _fetchSeasRepository;
@@ -20,14 +19,14 @@ class WhereModel extends ChangeNotifier {
 
   final String keyCountry;
 
-  WhereModel({required this.keyCountry}){
+  WhereModel({required this.keyCountry}) {
     _fetchStarsRepository = FetchStarsRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchSeasRepository = FetchSeasRepository();
     _fetchCattRepository = FetchCattRepository();
     _fetchPattRepository = FetchPattRepository();
   }
-  
+
   var newStar = '';
   var newPlace = '';
   var newSea = '';
@@ -173,11 +172,12 @@ class WhereModel extends ChangeNotifier {
       case 'Stars':
       case 'Étoiles':
       case '恒星名、惑星名など':
-        await _fetchStarsRepository.addDetailStarsAndFetch('stars_involved', newStar);
+        await _fetchStarsRepository.addDetailStarsAndFetch(
+            'stars_involved', newStar);
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
 
-        //keyCountryが取得されているので、国名付きで保存される。
+      //keyCountryが取得されているので、国名付きで保存される。
       case 'Current Place-name':
       case 'Nom actuel du lieu':
       case '現在の地名':
@@ -193,13 +193,15 @@ class WhereModel extends ChangeNotifier {
       case 'Country-name at that time':
       case 'Nom du pays à l\'époque':
       case '当時の国名':
-        await _fetchCattRepository.addDetailCattsAndFetch('countryatts', newPaysatt);
+        await _fetchCattRepository.addDetailCattsAndFetch(
+            'countryatts', newPaysatt);
         currentDisplayList = _fetchCattRepository.listDetailCatts;
         break;
       case 'Place-name at that time':
       case 'Nom du lieu à l\'époque':
       case '当時の地名':
-        await _fetchPattRepository.addDetailPattsAndFetch('placeatts', newPlaceatt);
+        await _fetchPattRepository.addDetailPattsAndFetch(
+            'placeatts', newPlaceatt);
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
     }
@@ -314,5 +316,7 @@ class WhereModel extends ChangeNotifier {
     confirm.x = double.parse((cx).toStringAsFixed(4));
     confirm.y = double.parse((cy).toStringAsFixed(4));
     confirm.z = double.parse((cz).toStringAsFixed(4));
+
+    confirm.geo = 'SRID=4326;POINT($newLongitude $newLatitude)';
   }
 }
