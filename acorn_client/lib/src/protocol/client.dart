@@ -1059,6 +1059,14 @@ class EndpointSpace extends _i1.EndpointRef {
         'getAllSpace',
         {},
       );
+
+  /// Fetches all Space from DB
+  _i2.Future<List<_i27.Space>> getSelectedSpace({String? keyword}) =>
+      caller.callServerEndpoint<List<_i27.Space>>(
+        'space',
+        'getSelectedSpace',
+        {'keyword': keyword},
+      );
 }
 
 /// {@category Endpoint}

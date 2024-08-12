@@ -2285,6 +2285,24 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['space'] as _i27.SpaceEndpoint).getAllSpace(session),
         ),
+        'getSelectedSpace': _i1.MethodConnector(
+          name: 'getSelectedSpace',
+          params: {
+            'keyword': _i1.ParameterDescription(
+              name: 'keyword',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['space'] as _i27.SpaceEndpoint).getSelectedSpace(
+            session,
+            keyword: params['keyword'],
+          ),
+        ),
       },
     );
     connectors['stars'] = _i1.EndpointConnector(

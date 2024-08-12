@@ -124,6 +124,7 @@ seas:
 space:
   - addSpace:
   - getAllSpace:
+  - getSelectedSpace:
 stars:
   - getStars:
   - addStars:
