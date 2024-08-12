@@ -45581,239 +45581,239 @@ $S:86}
 A.nF.prototype={}
 A.jg.prototype={
 f1(a,b){return this.ZL(0,b)},
-ZL(c4,c5){var s=0,r=A.B(t.S),q,p=2,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2,c3
-var $async$f1=A.C(function(c6,c7){if(c6===1){o=c7
-s=p}while(true)switch(s){case 0:s=c5.c!==0&&c5.x!==""&&c5.y!==""?3:5
+ZL(c3,c4){var s=0,r=A.B(t.S),q,p=2,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2
+var $async$f1=A.C(function(c5,c6){if(c5===1){o=c6
+s=p}while(true)switch(s){case 0:s=c4.c!==0&&c4.x!==""&&c4.y!==""?3:5
 break
 case 3:p=7
-b2=c5.a
-b3=c5.b
-b4=c5.d
-b5=c5.e
-b6=c5.f
-n=A.aJz(c5.x,b3,b5,null,c5.y,b4,b2,b6,c5.z)
+b2=c4.a
+b3=c4.b
+b4=c4.d
+b5=c4.e
+b6=c4.f
+n=A.aJz(c4.x,b3,b5,null,c4.y,b4,b2,b6,c4.z)
 b6=$.aD.aO().F
 b6===$&&A.b()
 s=10
 return A.n(b6.Uc(n),$async$f1)
-case 10:m=c7
+case 10:m=c6
 A.cd().$1("Add principal : "+A.l(m))
-b6=c5.b
-b2=c5.x
-b4=c5.y
-b5=c5.z
-b3=c5.Q
-b7=c5.as
-l=A.aJP(b2,b6,null,b3,b4,c5.r,b7,b5,m)
+b6=c4.b
+b2=c4.x
+b4=c4.y
+b5=c4.z
+b3=c4.Q
+b7=c4.as
+l=A.aJP(b2,b6,null,b3,b4,c4.r,b7,b5,m)
 b5=$.aD.aO().co
 b5===$&&A.b()
 s=11
 return A.n(b5.Ue(l),$async$f1)
 case 11:A.cd().$1("add WithMap")
-b5=c5.b
-b7=c5.x
-b4=c5.y
-b3=c5.z
-b6=c5.dx
-b2=c5.dy
-b8=c5.fr
-k=A.aJO(b7,b5,c5.w,null,b4,b3,m,b6,b2,b8)
+b5=c4.b
+b7=c4.x
+b4=c4.y
+b3=c4.z
+b6=c4.dx
+b2=c4.dy
+b8=c4.fr
+k=A.aJO(b7,b5,c4.w,null,b4,b3,m,b6,b2,b8)
 b8=$.aD.aO().cf
 b8===$&&A.b()
 s=12
 return A.n(b8.Ud(k),$async$f1)
 case 12:A.cd().$1("add WithGlobe")
-b8=c5.b
-j=new A.Ji(null,m,c5.x,c5.fx,b8)
-b8=$.aD.aO().cm
-b8===$&&A.b()
-b2=t.N
-b6=t.z
-b3=t.H
-s=13
-return A.n(b8.a.c2("withQgis","addWithQgis",A.h(["withQgis",j],b2,b6),b3),$async$f1)
-case 13:A.cd().$1("add WithQgis")
-b4=c5.y
-s=b4==="universe"||b4==="Solar System"||b4==="Milky Way"||b4==="Other Galaxy"?14:15
+b2=c4.y
+s=b2==="universe"||b2==="Solar System"||b2==="Milky Way"||b2==="Other Galaxy"?13:14
 break
-case 14:b5=c5.b
-b7=c5.d
-b8=c5.e
-b9=c5.f
-i=A.aR4(c5.x,b5,b8,0,0,0,0,0,null,b9+1719906,0,b4,b7,b9,c5.z,m)
-b9=$.aD.aO().S
-b9===$&&A.b()
-s=16
-return A.n(b9.a.c2("space","addSpace",A.h(["space",i],b2,b6),t.S),$async$f1)
-case 16:A.cd().$1("add in space")
-case 15:b4=c5.cx
-s=b4!==0?17:18
+case 13:b3=c4.b
+b4=c4.d
+b5=c4.e
+b6=c4.f
+j=A.aR4(c4.x,b3,b5,0,0,0,0,0,null,b6+1719906,0,b2,b4,b6,c4.z,m)
+b6=$.aD.aO().S
+b6===$&&A.b()
+s=15
+return A.n(b6.a.c2("space","addSpace",A.h(["space",j],t.N,t.z),t.S),$async$f1)
+case 15:A.cd().$1("add in space")
+case 14:b2=c4.cx
+s=b2!==0?16:17
 break
-case 17:h=new A.dH(null,m,b4)
-b4=$.aD.aO().y1
-b4===$&&A.b()
-s=19
-return A.n(b4.U9(h),$async$f1)
-case 19:case 18:b4=c5.db
-s=b4!==0?20:21
+case 16:i=new A.dH(null,m,b2)
+b2=$.aD.aO().y1
+b2===$&&A.b()
+s=18
+return A.n(b2.U9(i),$async$f1)
+case 18:case 17:b2=c4.db
+s=b2!==0?19:20
 break
-case 20:g=new A.dH(null,m,b4)
-b4=$.aD.aO().y1
-b4===$&&A.b()
-s=22
-return A.n(b4.U9(g),$async$f1)
-case 22:case 21:b4=c5.go
-b5=b4.length
-s=b5!==0?23:24
+case 19:h=new A.dH(null,m,b2)
+b2=$.aD.aO().y1
+b2===$&&A.b()
+s=21
+return A.n(b2.U9(h),$async$f1)
+case 21:case 20:b2=c4.go
+b3=b2.length
+s=b3!==0?22:23
 break
-case 23:b7=$.aD.a,c0=0
-case 25:if(!(c0<b4.length)){s=27
-break}f=b4[c0]
-e=new A.dH(null,m,f)
+case 22:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 24:if(!(b9<b2.length)){s=26
+break}g=b2[b9]
+f=new A.dH(null,m,g)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=28
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",e],b2,b6),b3),$async$f1)
-case 28:case 26:b4.length===b5||(0,A.T)(b4),++c0
-s=25
+s=27
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",f],b4,b5),b6),$async$f1)
+case 27:case 25:b2.length===b3||(0,A.T)(b2),++b9
+s=24
 break
-case 27:case 24:b4=c5.k1
-b5=b4.length
-s=b5!==0?29:30
+case 26:case 23:b2=c4.k1
+b3=b2.length
+s=b3!==0?28:29
 break
-case 29:b7=$.aD.a,c0=0
-case 31:if(!(c0<b4.length)){s=33
-break}d=b4[c0]
-c=new A.dH(null,m,d)
+case 28:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 30:if(!(b9<b2.length)){s=32
+break}e=b2[b9]
+d=new A.dH(null,m,e)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=34
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",c],b2,b6),b3),$async$f1)
-case 34:case 32:b4.length===b5||(0,A.T)(b4),++c0
-s=31
+s=33
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",d],b4,b5),b6),$async$f1)
+case 33:case 31:b2.length===b3||(0,A.T)(b2),++b9
+s=30
 break
-case 33:case 30:b4=c5.k3
-b5=b4.length
-s=b5!==0?35:36
+case 32:case 29:b2=c4.k3
+b3=b2.length
+s=b3!==0?34:35
 break
-case 35:b7=$.aD.a,c0=0
-case 37:if(!(c0<b4.length)){s=39
-break}b=b4[c0]
-a=new A.dH(null,m,b)
+case 34:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 36:if(!(b9<b2.length)){s=38
+break}c=b2[b9]
+b=new A.dH(null,m,c)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=40
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a],b2,b6),b3),$async$f1)
-case 40:case 38:b4.length===b5||(0,A.T)(b4),++c0
-s=37
+s=39
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",b],b4,b5),b6),$async$f1)
+case 39:case 37:b2.length===b3||(0,A.T)(b2),++b9
+s=36
 break
-case 39:case 36:b4=c5.p2
-b5=b4.length
-s=b5!==0?41:42
+case 38:case 35:b2=c4.p2
+b3=b2.length
+s=b3!==0?40:41
 break
-case 41:b7=$.aD.a,c0=0
-case 43:if(!(c0<b4.length)){s=45
-break}a0=b4[c0]
-a1=new A.dH(null,m,a0)
+case 40:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 42:if(!(b9<b2.length)){s=44
+break}a=b2[b9]
+a0=new A.dH(null,m,a)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=46
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a1],b2,b6),b3),$async$f1)
-case 46:case 44:b4.length===b5||(0,A.T)(b4),++c0
-s=43
+s=45
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a0],b4,b5),b6),$async$f1)
+case 45:case 43:b2.length===b3||(0,A.T)(b2),++b9
+s=42
 break
-case 45:case 42:b4=c5.p4
-b5=b4.length
-s=b5!==0?47:48
+case 44:case 41:b2=c4.p4
+b3=b2.length
+s=b3!==0?46:47
 break
-case 47:b7=$.aD.a,c0=0
-case 49:if(!(c0<b4.length)){s=51
-break}a2=b4[c0]
-a3=new A.dH(null,m,a2)
+case 46:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 48:if(!(b9<b2.length)){s=50
+break}a1=b2[b9]
+a2=new A.dH(null,m,a1)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=52
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a3],b2,b6),b3),$async$f1)
-case 52:case 50:b4.length===b5||(0,A.T)(b4),++c0
-s=49
+s=51
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a2],b4,b5),b6),$async$f1)
+case 51:case 49:b2.length===b3||(0,A.T)(b2),++b9
+s=48
 break
-case 51:case 48:b4=c5.RG
-b5=b4.length
-s=b5!==0?53:54
+case 50:case 47:b2=c4.RG
+b3=b2.length
+s=b3!==0?52:53
 break
-case 53:b7=$.aD.a,c0=0
-case 55:if(!(c0<b4.length)){s=57
-break}a4=b4[c0]
-a5=new A.dH(null,m,a4)
+case 52:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 54:if(!(b9<b2.length)){s=56
+break}a3=b2[b9]
+a4=new A.dH(null,m,a3)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=58
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a5],b2,b6),b3),$async$f1)
-case 58:case 56:b4.length===b5||(0,A.T)(b4),++c0
-s=55
+s=57
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a4],b4,b5),b6),$async$f1)
+case 57:case 55:b2.length===b3||(0,A.T)(b2),++b9
+s=54
 break
-case 57:case 54:b4=c5.ry
-b5=b4.length
-s=b5!==0?59:60
+case 56:case 53:b2=c4.ry
+b3=b2.length
+s=b3!==0?58:59
 break
-case 59:b7=$.aD.a,c0=0
-case 61:if(!(c0<b4.length)){s=63
-break}a6=b4[c0]
-a7=new A.dH(null,m,a6)
+case 58:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 60:if(!(b9<b2.length)){s=62
+break}a5=b2[b9]
+a6=new A.dH(null,m,a5)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
-s=64
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a7],b2,b6),b3),$async$f1)
-case 64:case 62:b4.length===b5||(0,A.T)(b4),++c0
-s=61
+s=63
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a6],b4,b5),b6),$async$f1)
+case 63:case 61:b2.length===b3||(0,A.T)(b2),++b9
+s=60
 break
-case 63:case 60:b4=c5.x1
-b5=b4.length
-s=b5!==0?65:66
+case 62:case 59:b2=c4.x1
+b3=b2.length
+s=b3!==0?64:65
 break
-case 65:b7=$.aD.a,c0=0
-case 67:if(!(c0<b4.length)){s=69
-break}a8=b4[c0]
-a9=new A.dH(null,m,a8)
+case 64:b4=t.N,b5=t.z,b6=t.H,b7=$.aD.a,b9=0
+case 66:if(!(b9<b2.length)){s=68
+break}a7=b2[b9]
+a8=new A.dH(null,m,a7)
 b8=$.aD.b
 if(b8===$.aD)A.a1(A.eC(b7))
 b8=b8.y1
 b8===$&&A.b()
+s=69
+return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a8],b4,b5),b6),$async$f1)
+case 69:case 67:b2.length===b3||(0,A.T)(b2),++b9
+s=66
+break
+case 68:case 65:b2=$.aFf.aO().d
+c0=b2==null?null:b2.a
+a9=c0==null?0:c0
+b0=new A.Hk(null,m,a9)
+b2=$.aD.aO().bm
+b2===$&&A.b()
+b3=t.N
+b4=t.z
+b5=t.H
 s=70
-return A.n(b8.a.c2("principalDetail","addPDetail",A.h(["pDetail",a9],b2,b6),b3),$async$f1)
-case 70:case 68:b4.length===b5||(0,A.T)(b4),++c0
-s=67
-break
-case 69:case 66:b4=$.aFf.aO().d
-c1=b4==null?null:b4.a
-b0=c1==null?0:c1
-b1=new A.Hk(null,m,b0)
-b4=$.aD.aO().bm
-b4===$&&A.b()
+return A.n(b2.a.c2("principalUser","addPrincipalUser",A.h(["pUser",b0],b3,b4),b5),$async$f1)
+case 70:b2=c4.b
+b1=new A.Ji(null,m,c4.x,c4.fx,b2)
+b2=$.aD.aO().cm
+b2===$&&A.b()
 s=71
-return A.n(b4.a.c2("principalUser","addPrincipalUser",A.h(["pUser",b1],b2,b6),b3),$async$f1)
-case 71:q=0
+return A.n(b2.a.c2("withQgis","addWithQgis",A.h(["withQgis",b1],b3,b4),b5),$async$f1)
+case 71:A.cd().$1("add WithQgis")
+q=0
 s=1
 break
 p=2
 s=9
 break
 case 7:p=6
-c3=o
+c2=o
 q=1
 s=1
 break

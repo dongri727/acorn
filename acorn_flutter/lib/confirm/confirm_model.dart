@@ -52,16 +52,6 @@ class ConfirmModel extends ChangeNotifier {
         await client.withGlobe.addWithGlobe(withGlobe);
         debugPrint('add WithGlobe');
 
-        //with qgis
-        var withQgis = WithQgis(
-            principalId: principalId,
-            year: confirm.annee,
-            name: confirm.name,
-            geo: confirm.geo as String,
-            );
-        await client.withQgis.addWithQgis(withQgis);
-        debugPrint('add WithQgis');
-
         //in space
         if(confirm.selectedLocation == 'universe' ||
             confirm.selectedLocation == 'Solar System' ||
@@ -173,6 +163,16 @@ class ConfirmModel extends ChangeNotifier {
         var userId = sessionManager.signedInUser?.id ?? 0;
         var principalUser = PrincipalUser(principalId: principalId, userId: userId);
         await client.principalUser.addPrincipalUser(principalUser);
+
+        //with qgis
+        var withQgis = WithQgis(
+            principalId: principalId,
+            year: confirm.annee,
+            name: confirm.name,
+            geo: confirm.geo,
+            );
+        await client.withQgis.addWithQgis(withQgis);
+        debugPrint('add WithQgis');
 
         return 0;
 
