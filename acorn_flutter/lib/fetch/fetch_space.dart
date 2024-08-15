@@ -7,7 +7,7 @@ class FetchSpaceRepository {
 
   fetchSpace() async {
     try {
-      listSpace = await client.space.getAllSpace();
+      listSpace = await client.space.getSpace();
     } catch (e) {
       debugPrint('$e');
     }

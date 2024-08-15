@@ -1,0 +1,8 @@
+class: LaunchSites
+table: launch_sites
+fields: 
+  location: String
+  precise: String
+  site: String
+  lat: double
+  lon: double

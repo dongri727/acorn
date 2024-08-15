@@ -31,6 +31,10 @@ detail:
   - getDetailByIds:
 japanese:
   - getAllJapaneseNames:
+launchSites:
+  - addLaunchSites:
+  - getLaunchSite:
+  - addAndReturnLaunchSites:
 oceans:
   - getOceans:
   - addOceans:
@@ -61,6 +65,9 @@ principalPatt:
 principalPeople:
   - getPPeople:
   - addPPeople:
+principalSites:
+  - addPSites:
+  - getPSites:
 principalTerms:
   - getPTerms:
   - addPrincipalTerms:
@@ -123,8 +130,7 @@ seas:
   - addAndReturnSeas:
 space:
   - addSpace:
-  - getAllSpace:
-  - getSelectedSpace:
+  - getSpace:
 stars:
   - getStars:
   - addStars:

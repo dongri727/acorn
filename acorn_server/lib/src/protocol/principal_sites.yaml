@@ -1,0 +1,5 @@
+class: PrincipalSites
+table: principal_sites
+fields: 
+  principalId: int
+  siteId: int
