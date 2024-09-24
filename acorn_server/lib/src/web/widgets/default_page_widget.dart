@@ -4,7 +4,7 @@ class DefaultPageWidget extends Widget {
   DefaultPageWidget() : super(name: 'index') {
     values = {
       'served': DateTime.now(),
-      'runmode': Serverpod.instance!.runMode,
+      'runmode': Serverpod.instance.runMode,
     };
   }
 }
