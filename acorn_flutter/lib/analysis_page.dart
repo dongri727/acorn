@@ -11,19 +11,19 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class AnalysisPageState extends State<AnalysisPage> {
-  List<Pays> countCountries = [];
-  //List<dynamic> countCountries = [];
+  //List<Pays> countCountries = [];
+  List<dynamic> countCountries = [];
   List<Categories> countCategories = [];
 
-  Future<void> fetchCountCountries() async {
+/*  Future<void> fetchCountCountries() async {
     countCountries = await client.pays.getPays();
     setState(() {});
-  }
+  }*/
 
-/*  Future<void> fetchCountCountries() async {
+  Future<void> fetchCountCountries() async {
     countCountries = await client.analysis.getCountCountries();
     setState(() {});
-  }*/
+  }
 
   Future<void> fetchCountCategories() async {
     countCategories = await client.categories.countCategories();
@@ -44,7 +44,7 @@ class AnalysisPageState extends State<AnalysisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Our Data (as of June17)'),
+        title: const Text('Our Data'),
       ),
       body: Row(
         children: [
