@@ -11,13 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PrincipalCategories extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class PrincipalCategories
+    implements _i1.TableRow, _i1.ProtocolSerialization {
   PrincipalCategories._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.categoryId,
-  }) : super(id);
+  });
 
   factory PrincipalCategories({
     int? id,
@@ -36,6 +36,9 @@ abstract class PrincipalCategories extends _i1.TableRow
   static final t = PrincipalCategoriesTable();
 
   static const db = PrincipalCategoriesRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -183,7 +186,7 @@ class PrincipalCategoriesRepository {
   const PrincipalCategoriesRepository._();
 
   Future<List<PrincipalCategories>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? limit,
     int? offset,
@@ -192,19 +195,19 @@ class PrincipalCategoriesRepository {
     _i1.OrderByListBuilder<PrincipalCategoriesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<PrincipalCategories>(
+    return databaseAccessor.db.find<PrincipalCategories>(
       where: where?.call(PrincipalCategories.t),
       orderBy: orderBy?.call(PrincipalCategories.t),
       orderByList: orderByList?.call(PrincipalCategories.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalCategories?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? offset,
     _i1.OrderByBuilder<PrincipalCategoriesTable>? orderBy,
@@ -212,118 +215,118 @@ class PrincipalCategoriesRepository {
     _i1.OrderByListBuilder<PrincipalCategoriesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<PrincipalCategories>(
+    return databaseAccessor.db.findFirstRow<PrincipalCategories>(
       where: where?.call(PrincipalCategories.t),
       orderBy: orderBy?.call(PrincipalCategories.t),
       orderByList: orderByList?.call(PrincipalCategories.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalCategories?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<PrincipalCategories>(
+    return databaseAccessor.db.findById<PrincipalCategories>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalCategories>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalCategories> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<PrincipalCategories>(
+    return databaseAccessor.db.insert<PrincipalCategories>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalCategories> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalCategories row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<PrincipalCategories>(
+    return databaseAccessor.db.insertRow<PrincipalCategories>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalCategories>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalCategories> rows, {
     _i1.ColumnSelections<PrincipalCategoriesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<PrincipalCategories>(
+    return databaseAccessor.db.update<PrincipalCategories>(
       rows,
       columns: columns?.call(PrincipalCategories.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalCategories> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalCategories row, {
     _i1.ColumnSelections<PrincipalCategoriesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<PrincipalCategories>(
+    return databaseAccessor.db.updateRow<PrincipalCategories>(
       row,
       columns: columns?.call(PrincipalCategories.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalCategories>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalCategories> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<PrincipalCategories>(
+    return databaseAccessor.db.delete<PrincipalCategories>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalCategories> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalCategories row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<PrincipalCategories>(
+    return databaseAccessor.db.deleteRow<PrincipalCategories>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalCategories>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<PrincipalCategoriesTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<PrincipalCategories>(
+    return databaseAccessor.db.deleteWhere<PrincipalCategories>(
       where: where(PrincipalCategories.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalCategoriesTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<PrincipalCategories>(
+    return databaseAccessor.db.count<PrincipalCategories>(
       where: where?.call(PrincipalCategories.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

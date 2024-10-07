@@ -11,13 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Japanese extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Japanese implements _i1.TableRow, _i1.ProtocolSerialization {
   Japanese._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.japaneseName,
-  }) : super(id);
+  });
 
   factory Japanese({
     int? id,
@@ -36,6 +35,9 @@ abstract class Japanese extends _i1.TableRow
   static final t = JapaneseTable();
 
   static const db = JapaneseRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -182,7 +184,7 @@ class JapaneseRepository {
   const JapaneseRepository._();
 
   Future<List<Japanese>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<JapaneseTable>? where,
     int? limit,
     int? offset,
@@ -191,19 +193,19 @@ class JapaneseRepository {
     _i1.OrderByListBuilder<JapaneseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Japanese>(
+    return databaseAccessor.db.find<Japanese>(
       where: where?.call(Japanese.t),
       orderBy: orderBy?.call(Japanese.t),
       orderByList: orderByList?.call(Japanese.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Japanese?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<JapaneseTable>? where,
     int? offset,
     _i1.OrderByBuilder<JapaneseTable>? orderBy,
@@ -211,118 +213,118 @@ class JapaneseRepository {
     _i1.OrderByListBuilder<JapaneseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Japanese>(
+    return databaseAccessor.db.findFirstRow<Japanese>(
       where: where?.call(Japanese.t),
       orderBy: orderBy?.call(Japanese.t),
       orderByList: orderByList?.call(Japanese.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Japanese?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Japanese>(
+    return databaseAccessor.db.findById<Japanese>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Japanese>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Japanese> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Japanese>(
+    return databaseAccessor.db.insert<Japanese>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Japanese> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Japanese row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Japanese>(
+    return databaseAccessor.db.insertRow<Japanese>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Japanese>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Japanese> rows, {
     _i1.ColumnSelections<JapaneseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Japanese>(
+    return databaseAccessor.db.update<Japanese>(
       rows,
       columns: columns?.call(Japanese.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Japanese> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Japanese row, {
     _i1.ColumnSelections<JapaneseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Japanese>(
+    return databaseAccessor.db.updateRow<Japanese>(
       row,
       columns: columns?.call(Japanese.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Japanese>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Japanese> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Japanese>(
+    return databaseAccessor.db.delete<Japanese>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Japanese> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Japanese row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Japanese>(
+    return databaseAccessor.db.deleteRow<Japanese>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Japanese>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<JapaneseTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Japanese>(
+    return databaseAccessor.db.deleteWhere<Japanese>(
       where: where(Japanese.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<JapaneseTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Japanese>(
+    return databaseAccessor.db.count<Japanese>(
       where: where?.call(Japanese.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

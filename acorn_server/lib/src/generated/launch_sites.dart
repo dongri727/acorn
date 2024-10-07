@@ -11,16 +11,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class LaunchSites extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class LaunchSites implements _i1.TableRow, _i1.ProtocolSerialization {
   LaunchSites._({
-    int? id,
+    this.id,
     required this.location,
     required this.precise,
     required this.site,
     required this.lat,
     required this.lon,
-  }) : super(id);
+  });
 
   factory LaunchSites({
     int? id,
@@ -45,6 +44,9 @@ abstract class LaunchSites extends _i1.TableRow
   static final t = LaunchSitesTable();
 
   static const db = LaunchSitesRepository._();
+
+  @override
+  int? id;
 
   String location;
 
@@ -239,7 +241,7 @@ class LaunchSitesRepository {
   const LaunchSitesRepository._();
 
   Future<List<LaunchSites>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<LaunchSitesTable>? where,
     int? limit,
     int? offset,
@@ -248,19 +250,19 @@ class LaunchSitesRepository {
     _i1.OrderByListBuilder<LaunchSitesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<LaunchSites>(
+    return databaseAccessor.db.find<LaunchSites>(
       where: where?.call(LaunchSites.t),
       orderBy: orderBy?.call(LaunchSites.t),
       orderByList: orderByList?.call(LaunchSites.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<LaunchSites?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<LaunchSitesTable>? where,
     int? offset,
     _i1.OrderByBuilder<LaunchSitesTable>? orderBy,
@@ -268,118 +270,118 @@ class LaunchSitesRepository {
     _i1.OrderByListBuilder<LaunchSitesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<LaunchSites>(
+    return databaseAccessor.db.findFirstRow<LaunchSites>(
       where: where?.call(LaunchSites.t),
       orderBy: orderBy?.call(LaunchSites.t),
       orderByList: orderByList?.call(LaunchSites.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<LaunchSites?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<LaunchSites>(
+    return databaseAccessor.db.findById<LaunchSites>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<LaunchSites>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<LaunchSites> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<LaunchSites>(
+    return databaseAccessor.db.insert<LaunchSites>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<LaunchSites> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     LaunchSites row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<LaunchSites>(
+    return databaseAccessor.db.insertRow<LaunchSites>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<LaunchSites>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<LaunchSites> rows, {
     _i1.ColumnSelections<LaunchSitesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<LaunchSites>(
+    return databaseAccessor.db.update<LaunchSites>(
       rows,
       columns: columns?.call(LaunchSites.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<LaunchSites> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     LaunchSites row, {
     _i1.ColumnSelections<LaunchSitesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<LaunchSites>(
+    return databaseAccessor.db.updateRow<LaunchSites>(
       row,
       columns: columns?.call(LaunchSites.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<LaunchSites>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<LaunchSites> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<LaunchSites>(
+    return databaseAccessor.db.delete<LaunchSites>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<LaunchSites> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     LaunchSites row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<LaunchSites>(
+    return databaseAccessor.db.deleteRow<LaunchSites>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<LaunchSites>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<LaunchSitesTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<LaunchSites>(
+    return databaseAccessor.db.deleteWhere<LaunchSites>(
       where: where(LaunchSites.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<LaunchSitesTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<LaunchSites>(
+    return databaseAccessor.db.count<LaunchSites>(
       where: where?.call(LaunchSites.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

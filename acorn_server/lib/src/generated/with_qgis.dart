@@ -11,15 +11,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class WithQgis extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class WithQgis implements _i1.TableRow, _i1.ProtocolSerialization {
   WithQgis._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.name,
     required this.geo,
     required this.year,
-  }) : super(id);
+  });
 
   factory WithQgis({
     int? id,
@@ -42,6 +41,9 @@ abstract class WithQgis extends _i1.TableRow
   static final t = WithQgisTable();
 
   static const db = WithQgisRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -220,7 +222,7 @@ class WithQgisRepository {
   const WithQgisRepository._();
 
   Future<List<WithQgis>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithQgisTable>? where,
     int? limit,
     int? offset,
@@ -229,19 +231,19 @@ class WithQgisRepository {
     _i1.OrderByListBuilder<WithQgisTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<WithQgis>(
+    return databaseAccessor.db.find<WithQgis>(
       where: where?.call(WithQgis.t),
       orderBy: orderBy?.call(WithQgis.t),
       orderByList: orderByList?.call(WithQgis.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithQgis?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithQgisTable>? where,
     int? offset,
     _i1.OrderByBuilder<WithQgisTable>? orderBy,
@@ -249,118 +251,118 @@ class WithQgisRepository {
     _i1.OrderByListBuilder<WithQgisTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<WithQgis>(
+    return databaseAccessor.db.findFirstRow<WithQgis>(
       where: where?.call(WithQgis.t),
       orderBy: orderBy?.call(WithQgis.t),
       orderByList: orderByList?.call(WithQgis.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithQgis?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<WithQgis>(
+    return databaseAccessor.db.findById<WithQgis>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithQgis>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithQgis> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<WithQgis>(
+    return databaseAccessor.db.insert<WithQgis>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithQgis> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithQgis row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<WithQgis>(
+    return databaseAccessor.db.insertRow<WithQgis>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithQgis>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithQgis> rows, {
     _i1.ColumnSelections<WithQgisTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<WithQgis>(
+    return databaseAccessor.db.update<WithQgis>(
       rows,
       columns: columns?.call(WithQgis.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithQgis> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithQgis row, {
     _i1.ColumnSelections<WithQgisTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<WithQgis>(
+    return databaseAccessor.db.updateRow<WithQgis>(
       row,
       columns: columns?.call(WithQgis.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithQgis>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithQgis> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<WithQgis>(
+    return databaseAccessor.db.delete<WithQgis>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithQgis> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithQgis row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<WithQgis>(
+    return databaseAccessor.db.deleteRow<WithQgis>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithQgis>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<WithQgisTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<WithQgis>(
+    return databaseAccessor.db.deleteWhere<WithQgis>(
       where: where(WithQgis.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithQgisTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<WithQgis>(
+    return databaseAccessor.db.count<WithQgis>(
       where: where?.call(WithQgis.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

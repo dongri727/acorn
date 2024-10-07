@@ -17,9 +17,9 @@ class WhereModel extends ChangeNotifier {
   late final FetchCattRepository _fetchCattRepository;
   late final FetchPattRepository _fetchPattRepository;
 
-  final String keyCountry;
+  final String keyArea;
 
-  WhereModel({required this.keyCountry}) {
+  WhereModel({required this.keyArea}) {
     _fetchStarsRepository = FetchStarsRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchSeasRepository = FetchSeasRepository();
@@ -110,7 +110,7 @@ class WhereModel extends ChangeNotifier {
       case 'Current Place-name':
       case 'Nom actuel du lieu':
       case '現在の地名':
-        await _fetchPlaceRepository.fetchPlaces(keyCountry);
+        await _fetchPlaceRepository.fetchPlaces(keyArea);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
@@ -181,13 +181,13 @@ class WhereModel extends ChangeNotifier {
       case 'Current Place-name':
       case 'Nom actuel du lieu':
       case '現在の地名':
-        await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyCountry);
+        await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyArea);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
       case 'Nom de la mer':
       case '海域名':
-        await _fetchSeasRepository.addSeasAndFetch(newSea);
+        await _fetchSeasRepository.addSeasAndFetch(newSea, keyArea);
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':

@@ -15,7 +15,7 @@ class AddPlacePage extends StatelessWidget {
     final TextEditingController controller = TextEditingController();
 
     return ChangeNotifierProvider<AddPlaceModel>(
-      create: (_) => AddPlaceModel(keyCountry: location),
+      create: (_) => AddPlaceModel(keyArea: location),
       child: Consumer<AddPlaceModel>(builder: (_, model, child) {
         return Scaffold(
           appBar: AppBar (

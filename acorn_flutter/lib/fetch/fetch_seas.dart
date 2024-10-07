@@ -14,9 +14,9 @@ class FetchSeasRepository {
   }
 
   ///DBに新規seaを挿入・再取得･再描画
-  addSeasAndFetch(String newSea) async {
+  addSeasAndFetch(String newSea, String keyArea) async {
     try {
-      var seas = Seas(sea: newSea);
+      var seas = Seas(sea: newSea, area: keyArea);
       listSeas = await client.seas.addAndReturnSeas(seas);
     } catch (e) {
       debugPrint('$e');

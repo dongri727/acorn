@@ -11,13 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class CountryInvolved extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class CountryInvolved
+    implements _i1.TableRow, _i1.ProtocolSerialization {
   CountryInvolved._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.paysId,
-  }) : super(id);
+  });
 
   factory CountryInvolved({
     int? id,
@@ -36,6 +36,9 @@ abstract class CountryInvolved extends _i1.TableRow
   static final t = CountryInvolvedTable();
 
   static const db = CountryInvolvedRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -183,7 +186,7 @@ class CountryInvolvedRepository {
   const CountryInvolvedRepository._();
 
   Future<List<CountryInvolved>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
     int? limit,
     int? offset,
@@ -192,19 +195,19 @@ class CountryInvolvedRepository {
     _i1.OrderByListBuilder<CountryInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<CountryInvolved>(
+    return databaseAccessor.db.find<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       orderBy: orderBy?.call(CountryInvolved.t),
       orderByList: orderByList?.call(CountryInvolved.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<CountryInvolved?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
     int? offset,
     _i1.OrderByBuilder<CountryInvolvedTable>? orderBy,
@@ -212,118 +215,118 @@ class CountryInvolvedRepository {
     _i1.OrderByListBuilder<CountryInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<CountryInvolved>(
+    return databaseAccessor.db.findFirstRow<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       orderBy: orderBy?.call(CountryInvolved.t),
       orderByList: orderByList?.call(CountryInvolved.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<CountryInvolved?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<CountryInvolved>(
+    return databaseAccessor.db.findById<CountryInvolved>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<CountryInvolved>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<CountryInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<CountryInvolved>(
+    return databaseAccessor.db.insert<CountryInvolved>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<CountryInvolved> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     CountryInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<CountryInvolved>(
+    return databaseAccessor.db.insertRow<CountryInvolved>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<CountryInvolved>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<CountryInvolved> rows, {
     _i1.ColumnSelections<CountryInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<CountryInvolved>(
+    return databaseAccessor.db.update<CountryInvolved>(
       rows,
       columns: columns?.call(CountryInvolved.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<CountryInvolved> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     CountryInvolved row, {
     _i1.ColumnSelections<CountryInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<CountryInvolved>(
+    return databaseAccessor.db.updateRow<CountryInvolved>(
       row,
       columns: columns?.call(CountryInvolved.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<CountryInvolved>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<CountryInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<CountryInvolved>(
+    return databaseAccessor.db.delete<CountryInvolved>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<CountryInvolved> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     CountryInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<CountryInvolved>(
+    return databaseAccessor.db.deleteRow<CountryInvolved>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<CountryInvolved>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<CountryInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<CountryInvolved>(
+    return databaseAccessor.db.deleteWhere<CountryInvolved>(
       where: where(CountryInvolved.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<CountryInvolvedTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<CountryInvolved>(
+    return databaseAccessor.db.count<CountryInvolved>(
       where: where?.call(CountryInvolved.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

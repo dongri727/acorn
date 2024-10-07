@@ -11,13 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Detail extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Detail implements _i1.TableRow, _i1.ProtocolSerialization {
   Detail._({
-    int? id,
+    this.id,
     required this.genre,
     required this.mot,
-  }) : super(id);
+  });
 
   factory Detail({
     int? id,
@@ -36,6 +35,9 @@ abstract class Detail extends _i1.TableRow
   static final t = DetailTable();
 
   static const db = DetailRepository._();
+
+  @override
+  int? id;
 
   String genre;
 
@@ -182,7 +184,7 @@ class DetailRepository {
   const DetailRepository._();
 
   Future<List<Detail>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DetailTable>? where,
     int? limit,
     int? offset,
@@ -191,19 +193,19 @@ class DetailRepository {
     _i1.OrderByListBuilder<DetailTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Detail>(
+    return databaseAccessor.db.find<Detail>(
       where: where?.call(Detail.t),
       orderBy: orderBy?.call(Detail.t),
       orderByList: orderByList?.call(Detail.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Detail?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DetailTable>? where,
     int? offset,
     _i1.OrderByBuilder<DetailTable>? orderBy,
@@ -211,118 +213,118 @@ class DetailRepository {
     _i1.OrderByListBuilder<DetailTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Detail>(
+    return databaseAccessor.db.findFirstRow<Detail>(
       where: where?.call(Detail.t),
       orderBy: orderBy?.call(Detail.t),
       orderByList: orderByList?.call(Detail.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Detail?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Detail>(
+    return databaseAccessor.db.findById<Detail>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Detail>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Detail> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Detail>(
+    return databaseAccessor.db.insert<Detail>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Detail> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Detail row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Detail>(
+    return databaseAccessor.db.insertRow<Detail>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Detail>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Detail> rows, {
     _i1.ColumnSelections<DetailTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Detail>(
+    return databaseAccessor.db.update<Detail>(
       rows,
       columns: columns?.call(Detail.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Detail> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Detail row, {
     _i1.ColumnSelections<DetailTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Detail>(
+    return databaseAccessor.db.updateRow<Detail>(
       row,
       columns: columns?.call(Detail.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Detail>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Detail> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Detail>(
+    return databaseAccessor.db.delete<Detail>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Detail> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Detail row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Detail>(
+    return databaseAccessor.db.deleteRow<Detail>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Detail>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<DetailTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Detail>(
+    return databaseAccessor.db.deleteWhere<Detail>(
       where: where(Detail.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DetailTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Detail>(
+    return databaseAccessor.db.count<Detail>(
       where: where?.call(Detail.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

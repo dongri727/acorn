@@ -11,12 +11,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Universe extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Universe implements _i1.TableRow, _i1.ProtocolSerialization {
   Universe._({
-    int? id,
+    this.id,
     required this.universe,
-  }) : super(id);
+  });
 
   factory Universe({
     int? id,
@@ -33,6 +32,9 @@ abstract class Universe extends _i1.TableRow
   static final t = UniverseTable();
 
   static const db = UniverseRepository._();
+
+  @override
+  int? id;
 
   String universe;
 
@@ -163,7 +165,7 @@ class UniverseRepository {
   const UniverseRepository._();
 
   Future<List<Universe>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? limit,
     int? offset,
@@ -172,19 +174,19 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Universe>(
+    return databaseAccessor.db.find<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Universe?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? offset,
     _i1.OrderByBuilder<UniverseTable>? orderBy,
@@ -192,118 +194,118 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Universe>(
+    return databaseAccessor.db.findFirstRow<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Universe?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Universe>(
+    return databaseAccessor.db.findById<Universe>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Universe>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Universe>(
+    return databaseAccessor.db.insert<Universe>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Universe> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Universe>(
+    return databaseAccessor.db.insertRow<Universe>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Universe>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Universe> rows, {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Universe>(
+    return databaseAccessor.db.update<Universe>(
       rows,
       columns: columns?.call(Universe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Universe> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Universe row, {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Universe>(
+    return databaseAccessor.db.updateRow<Universe>(
       row,
       columns: columns?.call(Universe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Universe>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Universe>(
+    return databaseAccessor.db.delete<Universe>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Universe> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Universe>(
+    return databaseAccessor.db.deleteRow<Universe>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Universe>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<UniverseTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Universe>(
+    return databaseAccessor.db.deleteWhere<Universe>(
       where: where(Universe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Universe>(
+    return databaseAccessor.db.count<Universe>(
       where: where?.call(Universe.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

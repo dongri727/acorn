@@ -11,9 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
+abstract class Space implements _i1.TableRow, _i1.ProtocolSerialization {
   Space._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.annee,
     required this.month,
@@ -29,7 +29,7 @@ abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
     required this.gLat,
     required this.gLon,
     required this.lightYear,
-  }) : super(id);
+  });
 
   factory Space({
     int? id,
@@ -74,6 +74,9 @@ abstract class Space extends _i1.TableRow implements _i1.ProtocolSerialization {
   static final t = SpaceTable();
 
   static const db = SpaceRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -428,7 +431,7 @@ class SpaceRepository {
   const SpaceRepository._();
 
   Future<List<Space>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
     int? limit,
     int? offset,
@@ -437,19 +440,19 @@ class SpaceRepository {
     _i1.OrderByListBuilder<SpaceTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Space>(
+    return databaseAccessor.db.find<Space>(
       where: where?.call(Space.t),
       orderBy: orderBy?.call(Space.t),
       orderByList: orderByList?.call(Space.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Space?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
     int? offset,
     _i1.OrderByBuilder<SpaceTable>? orderBy,
@@ -457,118 +460,118 @@ class SpaceRepository {
     _i1.OrderByListBuilder<SpaceTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Space>(
+    return databaseAccessor.db.findFirstRow<Space>(
       where: where?.call(Space.t),
       orderBy: orderBy?.call(Space.t),
       orderByList: orderByList?.call(Space.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Space?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Space>(
+    return databaseAccessor.db.findById<Space>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Space>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Space> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Space>(
+    return databaseAccessor.db.insert<Space>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Space> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Space row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Space>(
+    return databaseAccessor.db.insertRow<Space>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Space>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Space> rows, {
     _i1.ColumnSelections<SpaceTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Space>(
+    return databaseAccessor.db.update<Space>(
       rows,
       columns: columns?.call(Space.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Space> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Space row, {
     _i1.ColumnSelections<SpaceTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Space>(
+    return databaseAccessor.db.updateRow<Space>(
       row,
       columns: columns?.call(Space.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Space>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Space> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Space>(
+    return databaseAccessor.db.delete<Space>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Space> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Space row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Space>(
+    return databaseAccessor.db.deleteRow<Space>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Space>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<SpaceTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Space>(
+    return databaseAccessor.db.deleteWhere<Space>(
       where: where(Space.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Space>(
+    return databaseAccessor.db.count<Space>(
       where: where?.call(Space.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

@@ -11,10 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class WithMap extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class WithMap implements _i1.TableRow, _i1.ProtocolSerialization {
   WithMap._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.annee,
     required this.affair,
@@ -23,7 +22,7 @@ abstract class WithMap extends _i1.TableRow
     required this.latitude,
     required this.longitude,
     required this.logarithm,
-  }) : super(id);
+  });
 
   factory WithMap({
     int? id,
@@ -54,6 +53,9 @@ abstract class WithMap extends _i1.TableRow
   static final t = WithMapTable();
 
   static const db = WithMapRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -296,7 +298,7 @@ class WithMapRepository {
   const WithMapRepository._();
 
   Future<List<WithMap>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithMapTable>? where,
     int? limit,
     int? offset,
@@ -305,19 +307,19 @@ class WithMapRepository {
     _i1.OrderByListBuilder<WithMapTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<WithMap>(
+    return databaseAccessor.db.find<WithMap>(
       where: where?.call(WithMap.t),
       orderBy: orderBy?.call(WithMap.t),
       orderByList: orderByList?.call(WithMap.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithMap?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithMapTable>? where,
     int? offset,
     _i1.OrderByBuilder<WithMapTable>? orderBy,
@@ -325,118 +327,118 @@ class WithMapRepository {
     _i1.OrderByListBuilder<WithMapTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<WithMap>(
+    return databaseAccessor.db.findFirstRow<WithMap>(
       where: where?.call(WithMap.t),
       orderBy: orderBy?.call(WithMap.t),
       orderByList: orderByList?.call(WithMap.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithMap?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<WithMap>(
+    return databaseAccessor.db.findById<WithMap>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithMap>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithMap> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<WithMap>(
+    return databaseAccessor.db.insert<WithMap>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithMap> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithMap row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<WithMap>(
+    return databaseAccessor.db.insertRow<WithMap>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithMap>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithMap> rows, {
     _i1.ColumnSelections<WithMapTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<WithMap>(
+    return databaseAccessor.db.update<WithMap>(
       rows,
       columns: columns?.call(WithMap.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithMap> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithMap row, {
     _i1.ColumnSelections<WithMapTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<WithMap>(
+    return databaseAccessor.db.updateRow<WithMap>(
       row,
       columns: columns?.call(WithMap.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithMap>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithMap> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<WithMap>(
+    return databaseAccessor.db.delete<WithMap>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithMap> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithMap row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<WithMap>(
+    return databaseAccessor.db.deleteRow<WithMap>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithMap>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<WithMapTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<WithMap>(
+    return databaseAccessor.db.deleteWhere<WithMap>(
       where: where(WithMap.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithMapTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<WithMap>(
+    return databaseAccessor.db.count<WithMap>(
       where: where?.call(WithMap.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

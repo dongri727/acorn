@@ -39,7 +39,7 @@ class WherePage extends StatelessWidget {
     final confirm = Provider.of<Confirm>(context); //for getting keyCountry
 
     return ChangeNotifierProvider<WhereModel>(
-      create: (_) => WhereModel(keyCountry: confirm.selectedLocation),
+      create: (_) => WhereModel(keyArea: confirm.selectedLocation),
       child: Consumer<WhereModel>(builder: (_, model, child) {
 
         String locale = Localizations.localeOf(context).languageCode;

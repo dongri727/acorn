@@ -15,17 +15,20 @@ abstract class Seas implements _i1.SerializableModel {
   Seas._({
     this.id,
     required this.sea,
+    required this.area,
   });
 
   factory Seas({
     int? id,
     required String sea,
+    required String area,
   }) = _SeasImpl;
 
   factory Seas.fromJson(Map<String, dynamic> jsonSerialization) {
     return Seas(
       id: jsonSerialization['id'] as int?,
       sea: jsonSerialization['sea'] as String,
+      area: jsonSerialization['area'] as String,
     );
   }
 
@@ -36,15 +39,19 @@ abstract class Seas implements _i1.SerializableModel {
 
   String sea;
 
+  String area;
+
   Seas copyWith({
     int? id,
     String? sea,
+    String? area,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
       'sea': sea,
+      'area': area,
     };
   }
 
@@ -60,19 +67,23 @@ class _SeasImpl extends Seas {
   _SeasImpl({
     int? id,
     required String sea,
+    required String area,
   }) : super._(
           id: id,
           sea: sea,
+          area: area,
         );
 
   @override
   Seas copyWith({
     Object? id = _Undefined,
     String? sea,
+    String? area,
   }) {
     return Seas(
       id: id is int? ? id : this.id,
       sea: sea ?? this.sea,
+      area: area ?? this.area,
     );
   }
 }

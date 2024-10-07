@@ -11,13 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class PrincipalPatt extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class PrincipalPatt
+    implements _i1.TableRow, _i1.ProtocolSerialization {
   PrincipalPatt._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.pattId,
-  }) : super(id);
+  });
 
   factory PrincipalPatt({
     int? id,
@@ -36,6 +36,9 @@ abstract class PrincipalPatt extends _i1.TableRow
   static final t = PrincipalPattTable();
 
   static const db = PrincipalPattRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -183,7 +186,7 @@ class PrincipalPattRepository {
   const PrincipalPattRepository._();
 
   Future<List<PrincipalPatt>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? limit,
     int? offset,
@@ -192,19 +195,19 @@ class PrincipalPattRepository {
     _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<PrincipalPatt>(
+    return databaseAccessor.db.find<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       orderBy: orderBy?.call(PrincipalPatt.t),
       orderByList: orderByList?.call(PrincipalPatt.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalPatt?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? offset,
     _i1.OrderByBuilder<PrincipalPattTable>? orderBy,
@@ -212,118 +215,118 @@ class PrincipalPattRepository {
     _i1.OrderByListBuilder<PrincipalPattTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<PrincipalPatt>(
+    return databaseAccessor.db.findFirstRow<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       orderBy: orderBy?.call(PrincipalPatt.t),
       orderByList: orderByList?.call(PrincipalPatt.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalPatt?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<PrincipalPatt>(
+    return databaseAccessor.db.findById<PrincipalPatt>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalPatt>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalPatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<PrincipalPatt>(
+    return databaseAccessor.db.insert<PrincipalPatt>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalPatt> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalPatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<PrincipalPatt>(
+    return databaseAccessor.db.insertRow<PrincipalPatt>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalPatt>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalPatt> rows, {
     _i1.ColumnSelections<PrincipalPattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<PrincipalPatt>(
+    return databaseAccessor.db.update<PrincipalPatt>(
       rows,
       columns: columns?.call(PrincipalPatt.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalPatt> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalPatt row, {
     _i1.ColumnSelections<PrincipalPattTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<PrincipalPatt>(
+    return databaseAccessor.db.updateRow<PrincipalPatt>(
       row,
       columns: columns?.call(PrincipalPatt.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalPatt>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<PrincipalPatt> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<PrincipalPatt>(
+    return databaseAccessor.db.delete<PrincipalPatt>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<PrincipalPatt> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     PrincipalPatt row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<PrincipalPatt>(
+    return databaseAccessor.db.deleteRow<PrincipalPatt>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<PrincipalPatt>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<PrincipalPattTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<PrincipalPatt>(
+    return databaseAccessor.db.deleteWhere<PrincipalPatt>(
       where: where(PrincipalPatt.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PrincipalPattTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<PrincipalPatt>(
+    return databaseAccessor.db.count<PrincipalPatt>(
       where: where?.call(PrincipalPatt.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

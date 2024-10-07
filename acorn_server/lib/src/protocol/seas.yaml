@@ -2,3 +2,4 @@ class: Seas
 table: seas
 fields: 
   sea: String
+  area: String

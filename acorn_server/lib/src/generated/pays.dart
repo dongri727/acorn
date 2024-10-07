@@ -11,12 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Pays extends _i1.TableRow implements _i1.ProtocolSerialization {
+abstract class Pays implements _i1.TableRow, _i1.ProtocolSerialization {
   Pays._({
-    int? id,
+    this.id,
     required this.pays,
     required this.combien,
-  }) : super(id);
+  });
 
   factory Pays({
     int? id,
@@ -35,6 +35,9 @@ abstract class Pays extends _i1.TableRow implements _i1.ProtocolSerialization {
   static final t = PaysTable();
 
   static const db = PaysRepository._();
+
+  @override
+  int? id;
 
   String pays;
 
@@ -181,7 +184,7 @@ class PaysRepository {
   const PaysRepository._();
 
   Future<List<Pays>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PaysTable>? where,
     int? limit,
     int? offset,
@@ -190,19 +193,19 @@ class PaysRepository {
     _i1.OrderByListBuilder<PaysTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Pays>(
+    return databaseAccessor.db.find<Pays>(
       where: where?.call(Pays.t),
       orderBy: orderBy?.call(Pays.t),
       orderByList: orderByList?.call(Pays.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Pays?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PaysTable>? where,
     int? offset,
     _i1.OrderByBuilder<PaysTable>? orderBy,
@@ -210,118 +213,118 @@ class PaysRepository {
     _i1.OrderByListBuilder<PaysTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Pays>(
+    return databaseAccessor.db.findFirstRow<Pays>(
       where: where?.call(Pays.t),
       orderBy: orderBy?.call(Pays.t),
       orderByList: orderByList?.call(Pays.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Pays?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Pays>(
+    return databaseAccessor.db.findById<Pays>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Pays>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Pays> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Pays>(
+    return databaseAccessor.db.insert<Pays>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Pays> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Pays row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Pays>(
+    return databaseAccessor.db.insertRow<Pays>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Pays>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Pays> rows, {
     _i1.ColumnSelections<PaysTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Pays>(
+    return databaseAccessor.db.update<Pays>(
       rows,
       columns: columns?.call(Pays.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Pays> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Pays row, {
     _i1.ColumnSelections<PaysTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Pays>(
+    return databaseAccessor.db.updateRow<Pays>(
       row,
       columns: columns?.call(Pays.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Pays>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Pays> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Pays>(
+    return databaseAccessor.db.delete<Pays>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Pays> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Pays row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Pays>(
+    return databaseAccessor.db.deleteRow<Pays>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Pays>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<PaysTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Pays>(
+    return databaseAccessor.db.deleteWhere<Pays>(
       where: where(Pays.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<PaysTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Pays>(
+    return databaseAccessor.db.count<Pays>(
       where: where?.call(Pays.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

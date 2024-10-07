@@ -160,14 +160,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
-  email_validator:
-    dependency: transitive
-    description:
-      name: email_validator
-      sha256: e9a90f27ab2b915a27d7f9c2a7ddda5dd752d6942616ee83529b686fc086221b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.17"
   fake_async:
     dependency: transitive
     description:
@@ -316,54 +308,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.1"
-  google_identity_services_web:
-    dependency: transitive
-    description:
-      name: google_identity_services_web
-      sha256: "5be191523702ba8d7a01ca97c17fca096822ccf246b0a9f11923a6ded06199b6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1+4"
-  google_sign_in:
-    dependency: transitive
-    description:
-      name: google_sign_in
-      sha256: "0b8787cb9c1a68ad398e8010e8c8766bfa33556d2ab97c439fb4137756d7308f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.1"
-  google_sign_in_android:
-    dependency: transitive
-    description:
-      name: google_sign_in_android
-      sha256: "5a47ebec9af97daf0822e800e4f101c3340b5ebc3f6898cf860c1a71b53cf077"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.28"
-  google_sign_in_ios:
-    dependency: transitive
-    description:
-      name: google_sign_in_ios
-      sha256: a058c9880be456f21e2e8571c1126eaacd570bdc5b6c6d9d15aea4bdf22ca9fe
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.7.6"
-  google_sign_in_platform_interface:
-    dependency: transitive
-    description:
-      name: google_sign_in_platform_interface
-      sha256: "1f6e5787d7a120cc0359ddf315c92309069171306242e181c09472d1b00a2971"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.5"
-  google_sign_in_web:
-    dependency: transitive
-    description:
-      name: google_sign_in_web
-      sha256: "042805a21127a85b0dc46bba98a37926f17d2439720e8a459d27045d8ef68055"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.12.4+2"
   http:
     dependency: transitive
     description:
@@ -392,26 +336,26 @@ packages:
     dependency: transitive
     description:
       name: image_cropper
-      sha256: f4bad5ed2dfff5a7ce0dfbad545b46a945c702bb6182a921488ef01ba7693111
+      sha256: fe37d9a129411486e0d93089b61bd326d05b89e78ad4981de54b560725bf5bd5
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.1"
+    version: "8.0.2"
   image_cropper_for_web:
     dependency: transitive
     description:
       name: image_cropper_for_web
-      sha256: "865d798b5c9d826f1185b32e5d0018c4183ddb77b7b82a931e1a06aa3b74974e"
+      sha256: "34256c8fb7fcb233251787c876bb37271744459b593a948a2db73caa323034d0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "6.0.2"
   image_cropper_platform_interface:
     dependency: transitive
     description:
       name: image_cropper_platform_interface
-      sha256: ee160d686422272aa306125f3b6fb1c1894d9b87a5e20ed33fa008e7285da11e
+      sha256: e8e9d2ca36360387aee39295ce49029362ae4df3071f23e8e71f2b81e40b7531
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "7.0.0"
   image_picker:
     dependency: transitive
     description:
@@ -484,14 +428,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
-  js:
-    dependency: transitive
-    description:
-      name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.7"
   json_annotation:
     dependency: transitive
     description:
@@ -564,14 +500,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
-  material_design_icons_flutter:
-    dependency: transitive
-    description:
-      name: material_design_icons_flutter
-      sha256: "4c81ebf55b9661d1eb94652884a7b098af63153ea75b9070caedaddfae308e02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.7296"
   meta:
     dependency: transitive
     description:
@@ -708,70 +636,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
-  serverpod_auth_apple_flutter:
-    dependency: "direct main"
-    description:
-      name: serverpod_auth_apple_flutter
-      sha256: "06e5067d3590e36c081d2f6376908677c280fc0469da759e991fc8c41930ade7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   serverpod_auth_client:
     dependency: transitive
     description:
       name: serverpod_auth_client
-      sha256: "805d84dab365b517bda96e1e3841ad9c53978b5dd7725428b121d1899e59c52f"
+      sha256: e5709d8ab670b1fc35d4085c265ba6994a59e80d508f531fc70ecc51eae54b12
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
-  serverpod_auth_email_flutter:
-    dependency: "direct main"
-    description:
-      name: serverpod_auth_email_flutter
-      sha256: "1e863a5c8224de7230e8678a9eed43aa610b736897ab20e6f937c4b387d53afb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
-  serverpod_auth_google_flutter:
-    dependency: "direct main"
-    description:
-      name: serverpod_auth_google_flutter
-      sha256: "55311c512715c48b05af23e51bec11299763072ed0cfc2a27780bc52d607d78f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
+    version: "2.1.3"
   serverpod_auth_shared_flutter:
     dependency: "direct main"
     description:
       name: serverpod_auth_shared_flutter
-      sha256: "73ac7e4f320e88db35e85d74d90b6362ae99e1063d0bee6f9af913953d6b0ac8"
+      sha256: "4e2f2d3346ab7a6ba32963efa5aa809ff7e820601838994dba8d423a855b22fc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.3"
   serverpod_client:
     dependency: transitive
     description:
       name: serverpod_client
-      sha256: "8aefc285ede74291375d0f4fe125bc8886ffc475769b6c60c8d10e83bbadd359"
+      sha256: "3b4053558cda2072d95e614d8be65263daceadc81ca7b3e179669ec4008c44e2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.3"
   serverpod_flutter:
     dependency: "direct main"
     description:
       name: serverpod_flutter
-      sha256: "33bc76f9adb06067ea17a538fd16c20e8d7e6db3d6b07abf3c30cdb2c65088f3"
+      sha256: "83bfb9222546203a539f1f1f60c317d6c91841c31451317babfa011be8af02c8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.3"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: e700eb909a03de7220540f92372b515c84b960eeefd954fd81851f57f03d5970
+      sha256: f65ef4dd1105da71e61ff3e13289a531c5ed26f7ab5c8a4342ce5724dfa1b88c
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.3"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -828,30 +732,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
-  sign_in_with_apple:
-    dependency: transitive
-    description:
-      name: sign_in_with_apple
-      sha256: "5c34c601d6910d7db0077063001ccd9d9329ee58b9038ee07153ffcdd76e91bd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.1"
-  sign_in_with_apple_platform_interface:
-    dependency: transitive
-    description:
-      name: sign_in_with_apple_platform_interface
-      sha256: c2ef2ce6273fce0c61acd7e9ff5be7181e33d7aa2b66508b39418b786cca2119
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
-  sign_in_with_apple_web:
-    dependency: transitive
-    description:
-      name: sign_in_with_apple_web
-      sha256: c009e9beeb6c376e86aaa154fcc8b4e075d4bad90c56286b9668a51cdb6129ea
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   sky_engine:
     dependency: transitive
     description: flutter

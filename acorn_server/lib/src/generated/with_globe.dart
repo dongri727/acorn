@@ -11,10 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class WithGlobe extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class WithGlobe implements _i1.TableRow, _i1.ProtocolSerialization {
   WithGlobe._({
-    int? id,
+    this.id,
     required this.principalId,
     required this.annee,
     required this.affair,
@@ -24,7 +23,7 @@ abstract class WithGlobe extends _i1.TableRow
     required this.yCoordinate,
     required this.zCoordinate,
     required this.coefficient,
-  }) : super(id);
+  });
 
   factory WithGlobe({
     int? id,
@@ -57,6 +56,9 @@ abstract class WithGlobe extends _i1.TableRow
   static final t = WithGlobeTable();
 
   static const db = WithGlobeRepository._();
+
+  @override
+  int? id;
 
   int principalId;
 
@@ -315,7 +317,7 @@ class WithGlobeRepository {
   const WithGlobeRepository._();
 
   Future<List<WithGlobe>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithGlobeTable>? where,
     int? limit,
     int? offset,
@@ -324,19 +326,19 @@ class WithGlobeRepository {
     _i1.OrderByListBuilder<WithGlobeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<WithGlobe>(
+    return databaseAccessor.db.find<WithGlobe>(
       where: where?.call(WithGlobe.t),
       orderBy: orderBy?.call(WithGlobe.t),
       orderByList: orderByList?.call(WithGlobe.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithGlobe?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithGlobeTable>? where,
     int? offset,
     _i1.OrderByBuilder<WithGlobeTable>? orderBy,
@@ -344,118 +346,118 @@ class WithGlobeRepository {
     _i1.OrderByListBuilder<WithGlobeTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<WithGlobe>(
+    return databaseAccessor.db.findFirstRow<WithGlobe>(
       where: where?.call(WithGlobe.t),
       orderBy: orderBy?.call(WithGlobe.t),
       orderByList: orderByList?.call(WithGlobe.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithGlobe?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<WithGlobe>(
+    return databaseAccessor.db.findById<WithGlobe>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithGlobe>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithGlobe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<WithGlobe>(
+    return databaseAccessor.db.insert<WithGlobe>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithGlobe> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithGlobe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<WithGlobe>(
+    return databaseAccessor.db.insertRow<WithGlobe>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithGlobe>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithGlobe> rows, {
     _i1.ColumnSelections<WithGlobeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<WithGlobe>(
+    return databaseAccessor.db.update<WithGlobe>(
       rows,
       columns: columns?.call(WithGlobe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithGlobe> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithGlobe row, {
     _i1.ColumnSelections<WithGlobeTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<WithGlobe>(
+    return databaseAccessor.db.updateRow<WithGlobe>(
       row,
       columns: columns?.call(WithGlobe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithGlobe>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<WithGlobe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<WithGlobe>(
+    return databaseAccessor.db.delete<WithGlobe>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<WithGlobe> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     WithGlobe row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<WithGlobe>(
+    return databaseAccessor.db.deleteRow<WithGlobe>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<WithGlobe>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<WithGlobeTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<WithGlobe>(
+    return databaseAccessor.db.deleteWhere<WithGlobe>(
       where: where(WithGlobe.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<WithGlobeTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<WithGlobe>(
+    return databaseAccessor.db.count<WithGlobe>(
       where: where?.call(WithGlobe.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

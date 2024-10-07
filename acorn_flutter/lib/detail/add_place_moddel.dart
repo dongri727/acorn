@@ -13,9 +13,9 @@ class AddPlaceModel extends ChangeNotifier {
   late final FetchPlaceRepository _fetchPlaceRepository;
   late final FetchSeasRepository _fetchSeasRepository;
 
-  final String keyCountry;
+  final String keyArea;
 
-  AddPlaceModel({required this.keyCountry}){
+  AddPlaceModel({required this.keyArea}){
     _fetchStarsRepository = FetchStarsRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchSeasRepository = FetchSeasRepository();
@@ -83,7 +83,7 @@ class AddPlaceModel extends ChangeNotifier {
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
       case 'Current Place-name':
-        await _fetchPlaceRepository.fetchPlaces(keyCountry);
+        await _fetchPlaceRepository.fetchPlaces(keyArea);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
@@ -117,13 +117,13 @@ class AddPlaceModel extends ChangeNotifier {
         currentDisplayList = _fetchStarsRepository.listDetailStars;
         break;
 
-    //keyCountryが取得されているので、国名付きで保存される。
+    //keyAreaが取得されているので、国名付き地名・大洋名付き海域名が保存される。
       case 'Current Place-name':
-        await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyCountry);
+        await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyArea);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
         break;
       case 'Sea-name':
-        await _fetchSeasRepository.addSeasAndFetch(newSea);
+        await _fetchSeasRepository.addSeasAndFetch(newSea, keyArea);
         currentDisplayList = _fetchSeasRepository.listSeas;
         break;
     }
