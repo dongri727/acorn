@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -165,7 +167,7 @@ class UniverseRepository {
   const UniverseRepository._();
 
   Future<List<Universe>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? limit,
     int? offset,
@@ -174,19 +176,19 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<Universe>(
+    return session.db.find<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Universe?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? offset,
     _i1.OrderByBuilder<UniverseTable>? orderBy,
@@ -194,118 +196,118 @@ class UniverseRepository {
     _i1.OrderByListBuilder<UniverseTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<Universe>(
+    return session.db.findFirstRow<Universe>(
       where: where?.call(Universe.t),
       orderBy: orderBy?.call(Universe.t),
       orderByList: orderByList?.call(Universe.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Universe?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<Universe>(
+    return session.db.findById<Universe>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Universe>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<Universe>(
+    return session.db.insert<Universe>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Universe> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<Universe>(
+    return session.db.insertRow<Universe>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Universe>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Universe> rows, {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<Universe>(
+    return session.db.update<Universe>(
       rows,
       columns: columns?.call(Universe.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Universe> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Universe row, {
     _i1.ColumnSelections<UniverseTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<Universe>(
+    return session.db.updateRow<Universe>(
       row,
       columns: columns?.call(Universe.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Universe>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Universe> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<Universe>(
+    return session.db.delete<Universe>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Universe> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Universe row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<Universe>(
+    return session.db.deleteRow<Universe>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Universe>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<UniverseTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<Universe>(
+    return session.db.deleteWhere<Universe>(
       where: where(Universe.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<Universe>(
+    return session.db.count<Universe>(
       where: where?.call(Universe.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

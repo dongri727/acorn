@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -186,7 +188,7 @@ class PrincipalUserRepository {
   const PrincipalUserRepository._();
 
   Future<List<PrincipalUser>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalUserTable>? where,
     int? limit,
     int? offset,
@@ -195,19 +197,19 @@ class PrincipalUserRepository {
     _i1.OrderByListBuilder<PrincipalUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<PrincipalUser>(
+    return session.db.find<PrincipalUser>(
       where: where?.call(PrincipalUser.t),
       orderBy: orderBy?.call(PrincipalUser.t),
       orderByList: orderByList?.call(PrincipalUser.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<PrincipalUser?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalUserTable>? where,
     int? offset,
     _i1.OrderByBuilder<PrincipalUserTable>? orderBy,
@@ -215,118 +217,118 @@ class PrincipalUserRepository {
     _i1.OrderByListBuilder<PrincipalUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<PrincipalUser>(
+    return session.db.findFirstRow<PrincipalUser>(
       where: where?.call(PrincipalUser.t),
       orderBy: orderBy?.call(PrincipalUser.t),
       orderByList: orderByList?.call(PrincipalUser.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<PrincipalUser?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<PrincipalUser>(
+    return session.db.findById<PrincipalUser>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<PrincipalUser>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<PrincipalUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<PrincipalUser>(
+    return session.db.insert<PrincipalUser>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<PrincipalUser> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     PrincipalUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<PrincipalUser>(
+    return session.db.insertRow<PrincipalUser>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<PrincipalUser>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<PrincipalUser> rows, {
     _i1.ColumnSelections<PrincipalUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<PrincipalUser>(
+    return session.db.update<PrincipalUser>(
       rows,
       columns: columns?.call(PrincipalUser.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<PrincipalUser> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     PrincipalUser row, {
     _i1.ColumnSelections<PrincipalUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<PrincipalUser>(
+    return session.db.updateRow<PrincipalUser>(
       row,
       columns: columns?.call(PrincipalUser.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<PrincipalUser>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<PrincipalUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<PrincipalUser>(
+    return session.db.delete<PrincipalUser>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<PrincipalUser> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     PrincipalUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<PrincipalUser>(
+    return session.db.deleteRow<PrincipalUser>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<PrincipalUser>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalUserTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<PrincipalUser>(
+    return session.db.deleteWhere<PrincipalUser>(
       where: where(PrincipalUser.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalUserTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<PrincipalUser>(
+    return session.db.count<PrincipalUser>(
       where: where?.call(PrincipalUser.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

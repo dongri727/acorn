@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -165,7 +167,7 @@ class OceansRepository {
   const OceansRepository._();
 
   Future<List<Oceans>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<OceansTable>? where,
     int? limit,
     int? offset,
@@ -174,19 +176,19 @@ class OceansRepository {
     _i1.OrderByListBuilder<OceansTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<Oceans>(
+    return session.db.find<Oceans>(
       where: where?.call(Oceans.t),
       orderBy: orderBy?.call(Oceans.t),
       orderByList: orderByList?.call(Oceans.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Oceans?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<OceansTable>? where,
     int? offset,
     _i1.OrderByBuilder<OceansTable>? orderBy,
@@ -194,118 +196,118 @@ class OceansRepository {
     _i1.OrderByListBuilder<OceansTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<Oceans>(
+    return session.db.findFirstRow<Oceans>(
       where: where?.call(Oceans.t),
       orderBy: orderBy?.call(Oceans.t),
       orderByList: orderByList?.call(Oceans.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Oceans?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<Oceans>(
+    return session.db.findById<Oceans>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Oceans>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Oceans> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<Oceans>(
+    return session.db.insert<Oceans>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Oceans> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Oceans row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<Oceans>(
+    return session.db.insertRow<Oceans>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Oceans>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Oceans> rows, {
     _i1.ColumnSelections<OceansTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<Oceans>(
+    return session.db.update<Oceans>(
       rows,
       columns: columns?.call(Oceans.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Oceans> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Oceans row, {
     _i1.ColumnSelections<OceansTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<Oceans>(
+    return session.db.updateRow<Oceans>(
       row,
       columns: columns?.call(Oceans.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Oceans>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Oceans> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<Oceans>(
+    return session.db.delete<Oceans>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Oceans> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Oceans row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<Oceans>(
+    return session.db.deleteRow<Oceans>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Oceans>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<OceansTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<Oceans>(
+    return session.db.deleteWhere<Oceans>(
       where: where(Oceans.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<OceansTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<Oceans>(
+    return session.db.count<Oceans>(
       where: where?.call(Oceans.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

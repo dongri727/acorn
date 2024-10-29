@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -186,7 +188,7 @@ class StarsInvolvedRepository {
   const StarsInvolvedRepository._();
 
   Future<List<StarsInvolved>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? limit,
     int? offset,
@@ -195,19 +197,19 @@ class StarsInvolvedRepository {
     _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<StarsInvolved>(
+    return session.db.find<StarsInvolved>(
       where: where?.call(StarsInvolved.t),
       orderBy: orderBy?.call(StarsInvolved.t),
       orderByList: orderByList?.call(StarsInvolved.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<StarsInvolved?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? offset,
     _i1.OrderByBuilder<StarsInvolvedTable>? orderBy,
@@ -215,118 +217,118 @@ class StarsInvolvedRepository {
     _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<StarsInvolved>(
+    return session.db.findFirstRow<StarsInvolved>(
       where: where?.call(StarsInvolved.t),
       orderBy: orderBy?.call(StarsInvolved.t),
       orderByList: orderByList?.call(StarsInvolved.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<StarsInvolved?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<StarsInvolved>(
+    return session.db.findById<StarsInvolved>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<StarsInvolved>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<StarsInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<StarsInvolved>(
+    return session.db.insert<StarsInvolved>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<StarsInvolved> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     StarsInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<StarsInvolved>(
+    return session.db.insertRow<StarsInvolved>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<StarsInvolved>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<StarsInvolved> rows, {
     _i1.ColumnSelections<StarsInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<StarsInvolved>(
+    return session.db.update<StarsInvolved>(
       rows,
       columns: columns?.call(StarsInvolved.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<StarsInvolved> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     StarsInvolved row, {
     _i1.ColumnSelections<StarsInvolvedTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<StarsInvolved>(
+    return session.db.updateRow<StarsInvolved>(
       row,
       columns: columns?.call(StarsInvolved.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<StarsInvolved>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<StarsInvolved> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<StarsInvolved>(
+    return session.db.delete<StarsInvolved>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<StarsInvolved> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     StarsInvolved row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<StarsInvolved>(
+    return session.db.deleteRow<StarsInvolved>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<StarsInvolved>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<StarsInvolvedTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<StarsInvolved>(
+    return session.db.deleteWhere<StarsInvolved>(
       where: where(StarsInvolved.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<StarsInvolvedTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<StarsInvolved>(
+    return session.db.count<StarsInvolved>(
       where: where?.call(StarsInvolved.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

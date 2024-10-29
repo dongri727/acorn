@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -165,7 +167,7 @@ class CountryattsRepository {
   const CountryattsRepository._();
 
   Future<List<Countryatts>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CountryattsTable>? where,
     int? limit,
     int? offset,
@@ -174,19 +176,19 @@ class CountryattsRepository {
     _i1.OrderByListBuilder<CountryattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<Countryatts>(
+    return session.db.find<Countryatts>(
       where: where?.call(Countryatts.t),
       orderBy: orderBy?.call(Countryatts.t),
       orderByList: orderByList?.call(Countryatts.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Countryatts?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CountryattsTable>? where,
     int? offset,
     _i1.OrderByBuilder<CountryattsTable>? orderBy,
@@ -194,118 +196,118 @@ class CountryattsRepository {
     _i1.OrderByListBuilder<CountryattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<Countryatts>(
+    return session.db.findFirstRow<Countryatts>(
       where: where?.call(Countryatts.t),
       orderBy: orderBy?.call(Countryatts.t),
       orderByList: orderByList?.call(Countryatts.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Countryatts?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<Countryatts>(
+    return session.db.findById<Countryatts>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Countryatts>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Countryatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<Countryatts>(
+    return session.db.insert<Countryatts>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Countryatts> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Countryatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<Countryatts>(
+    return session.db.insertRow<Countryatts>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Countryatts>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Countryatts> rows, {
     _i1.ColumnSelections<CountryattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<Countryatts>(
+    return session.db.update<Countryatts>(
       rows,
       columns: columns?.call(Countryatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Countryatts> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Countryatts row, {
     _i1.ColumnSelections<CountryattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<Countryatts>(
+    return session.db.updateRow<Countryatts>(
       row,
       columns: columns?.call(Countryatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Countryatts>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Countryatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<Countryatts>(
+    return session.db.delete<Countryatts>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Countryatts> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Countryatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<Countryatts>(
+    return session.db.deleteRow<Countryatts>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Countryatts>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<CountryattsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<Countryatts>(
+    return session.db.deleteWhere<Countryatts>(
       where: where(Countryatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CountryattsTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<Countryatts>(
+    return session.db.count<Countryatts>(
       where: where?.call(Countryatts.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

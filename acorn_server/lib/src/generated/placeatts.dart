@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -165,7 +167,7 @@ class PlaceattsRepository {
   const PlaceattsRepository._();
 
   Future<List<Placeatts>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
     int? limit,
     int? offset,
@@ -174,19 +176,19 @@ class PlaceattsRepository {
     _i1.OrderByListBuilder<PlaceattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<Placeatts>(
+    return session.db.find<Placeatts>(
       where: where?.call(Placeatts.t),
       orderBy: orderBy?.call(Placeatts.t),
       orderByList: orderByList?.call(Placeatts.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Placeatts?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
     int? offset,
     _i1.OrderByBuilder<PlaceattsTable>? orderBy,
@@ -194,118 +196,118 @@ class PlaceattsRepository {
     _i1.OrderByListBuilder<PlaceattsTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<Placeatts>(
+    return session.db.findFirstRow<Placeatts>(
       where: where?.call(Placeatts.t),
       orderBy: orderBy?.call(Placeatts.t),
       orderByList: orderByList?.call(Placeatts.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Placeatts?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<Placeatts>(
+    return session.db.findById<Placeatts>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Placeatts>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Placeatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<Placeatts>(
+    return session.db.insert<Placeatts>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Placeatts> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Placeatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<Placeatts>(
+    return session.db.insertRow<Placeatts>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Placeatts>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Placeatts> rows, {
     _i1.ColumnSelections<PlaceattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<Placeatts>(
+    return session.db.update<Placeatts>(
       rows,
       columns: columns?.call(Placeatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Placeatts> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Placeatts row, {
     _i1.ColumnSelections<PlaceattsTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<Placeatts>(
+    return session.db.updateRow<Placeatts>(
       row,
       columns: columns?.call(Placeatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Placeatts>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Placeatts> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<Placeatts>(
+    return session.db.delete<Placeatts>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Placeatts> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Placeatts row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<Placeatts>(
+    return session.db.deleteRow<Placeatts>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Placeatts>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<PlaceattsTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<Placeatts>(
+    return session.db.deleteWhere<Placeatts>(
       where: where(Placeatts.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<Placeatts>(
+    return session.db.count<Placeatts>(
       where: where?.call(Placeatts.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

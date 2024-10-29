@@ -8,6 +8,8 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
@@ -203,7 +205,7 @@ class CategoriesRepository {
   const CategoriesRepository._();
 
   Future<List<Categories>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
     int? limit,
     int? offset,
@@ -212,19 +214,19 @@ class CategoriesRepository {
     _i1.OrderByListBuilder<CategoriesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.find<Categories>(
+    return session.db.find<Categories>(
       where: where?.call(Categories.t),
       orderBy: orderBy?.call(Categories.t),
       orderByList: orderByList?.call(Categories.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Categories?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
     int? offset,
     _i1.OrderByBuilder<CategoriesTable>? orderBy,
@@ -232,118 +234,118 @@ class CategoriesRepository {
     _i1.OrderByListBuilder<CategoriesTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findFirstRow<Categories>(
+    return session.db.findFirstRow<Categories>(
       where: where?.call(Categories.t),
       orderBy: orderBy?.call(Categories.t),
       orderByList: orderByList?.call(Categories.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Categories?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.findById<Categories>(
+    return session.db.findById<Categories>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Categories>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Categories> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<Categories>(
+    return session.db.insert<Categories>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Categories> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Categories row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<Categories>(
+    return session.db.insertRow<Categories>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Categories>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Categories> rows, {
     _i1.ColumnSelections<CategoriesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<Categories>(
+    return session.db.update<Categories>(
       rows,
       columns: columns?.call(Categories.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Categories> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Categories row, {
     _i1.ColumnSelections<CategoriesTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<Categories>(
+    return session.db.updateRow<Categories>(
       row,
       columns: columns?.call(Categories.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Categories>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<Categories> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<Categories>(
+    return session.db.delete<Categories>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<Categories> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     Categories row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<Categories>(
+    return session.db.deleteRow<Categories>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<List<Categories>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<CategoriesTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<Categories>(
+    return session.db.deleteWhere<Categories>(
       where: where(Categories.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<Categories>(
+    return session.db.count<Categories>(
       where: where?.call(Categories.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction ?? session.transaction,
     );
   }
 }

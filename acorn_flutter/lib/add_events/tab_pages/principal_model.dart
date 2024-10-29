@@ -23,8 +23,6 @@ class PrincipalModel extends ChangeNotifier {
   var newName = '';
   //var calendarNo = 0;
 
-
-
   List<String> periods = epoch;
   List<String> periodsFr = epochFr;
   List<String> periodsJa = epochJa;
@@ -41,6 +39,7 @@ class PrincipalModel extends ChangeNotifier {
   ///Oceans
   List<String> oceans = mer;
 
+  //Chipに表示されるListとそこで選ばれたもの
   List<String> currentDisplayList = [];
   String? selectedOption = '';
 

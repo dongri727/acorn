@@ -1,0 +1,5 @@
+class: Target
+table: target
+fields: 
+  specialite: String
+  detailId: int

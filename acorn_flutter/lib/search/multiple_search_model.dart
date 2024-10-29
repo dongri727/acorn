@@ -275,6 +275,7 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //todo fetchDropdoenButtonBasisに直すべき
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Period':
