@@ -78,11 +78,12 @@ import 'package:acorn_server/src/generated/seas.dart' as _i65;
 import 'package:acorn_server/src/generated/space.dart' as _i66;
 import 'package:acorn_server/src/generated/stars.dart' as _i67;
 import 'package:acorn_server/src/generated/stars_involved.dart' as _i68;
-import 'package:acorn_server/src/generated/terms.dart' as _i69;
-import 'package:acorn_server/src/generated/universe.dart' as _i70;
-import 'package:acorn_server/src/generated/with_globe.dart' as _i71;
-import 'package:acorn_server/src/generated/with_map.dart' as _i72;
-import 'package:acorn_server/src/generated/with_qgis.dart' as _i73;
+import 'package:acorn_server/src/generated/target.dart' as _i69;
+import 'package:acorn_server/src/generated/terms.dart' as _i70;
+import 'package:acorn_server/src/generated/universe.dart' as _i71;
+import 'package:acorn_server/src/generated/with_globe.dart' as _i72;
+import 'package:acorn_server/src/generated/with_map.dart' as _i73;
+import 'package:acorn_server/src/generated/with_qgis.dart' as _i74;
 export 'c_involved.dart';
 export 'categories.dart';
 export 'catts_involved.dart';
@@ -2337,25 +2338,20 @@ class Protocol extends _i1.SerializationManagerServer {
           .map((e) => deserialize<_i68.StarsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i69.Terms>) {
-      return (data as List).map((e) => deserialize<_i69.Terms>(e)).toList()
+    if (t == List<_i69.Target>) {
+      return (data as List).map((e) => deserialize<_i69.Target>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i70.Universe>) {
-      return (data as List).map((e) => deserialize<_i70.Universe>(e)).toList()
+    if (t == List<_i70.Terms>) {
+      return (data as List).map((e) => deserialize<_i70.Terms>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i71.WithGlobe>) {
-      return (data as List).map((e) => deserialize<_i71.WithGlobe>(e)).toList()
+    if (t == List<_i71.Universe>) {
+      return (data as List).map((e) => deserialize<_i71.Universe>(e)).toList()
           as dynamic;
     }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == List<_i72.WithMap>) {
-      return (data as List).map((e) => deserialize<_i72.WithMap>(e)).toList()
+    if (t == List<_i72.WithGlobe>) {
+      return (data as List).map((e) => deserialize<_i72.WithGlobe>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {
@@ -2363,8 +2359,17 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i73.WithQgis>) {
-      return (data as List).map((e) => deserialize<_i73.WithQgis>(e)).toList()
+    if (t == List<_i73.WithMap>) {
+      return (data as List).map((e) => deserialize<_i73.WithMap>(e)).toList()
+          as dynamic;
+    }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i74.WithQgis>) {
+      return (data as List).map((e) => deserialize<_i74.WithQgis>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {

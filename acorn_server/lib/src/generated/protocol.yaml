@@ -141,6 +141,10 @@ stars:
 starsInvolved:
   - getStarsInvolved:
   - addStarsInvolved:
+target:
+  - addTarget:
+  - getTarget:
+  - addAndReturnTarget:
 terms:
   - getTerms:
   - addTerms:

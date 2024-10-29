@@ -40,13 +40,14 @@ import 'package:acorn_client/src/protocol/seas.dart' as _i28;
 import 'package:acorn_client/src/protocol/space.dart' as _i29;
 import 'package:acorn_client/src/protocol/stars.dart' as _i30;
 import 'package:acorn_client/src/protocol/stars_involved.dart' as _i31;
-import 'package:acorn_client/src/protocol/terms.dart' as _i32;
-import 'package:acorn_client/src/protocol/universe.dart' as _i33;
-import 'package:acorn_client/src/protocol/with_globe.dart' as _i34;
-import 'package:acorn_client/src/protocol/with_map.dart' as _i35;
-import 'package:acorn_client/src/protocol/with_qgis.dart' as _i36;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i37;
-import 'protocol.dart' as _i38;
+import 'package:acorn_client/src/protocol/target.dart' as _i32;
+import 'package:acorn_client/src/protocol/terms.dart' as _i33;
+import 'package:acorn_client/src/protocol/universe.dart' as _i34;
+import 'package:acorn_client/src/protocol/with_globe.dart' as _i35;
+import 'package:acorn_client/src/protocol/with_map.dart' as _i36;
+import 'package:acorn_client/src/protocol/with_qgis.dart' as _i37;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i38;
+import 'protocol.dart' as _i39;
 
 /// {@category Endpoint}
 class EndpointAnalysis extends _i1.EndpointRef {
@@ -1206,6 +1207,38 @@ class EndpointStarsInvolved extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointTarget extends _i1.EndpointRef {
+  EndpointTarget(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'target';
+
+  ///Adds target in DB
+  _i2.Future<int> addTarget(_i32.Target target) =>
+      caller.callServerEndpoint<int>(
+        'target',
+        'addTarget',
+        {'target': target},
+      );
+
+  ///Fetches all target from DB
+  _i2.Future<List<_i32.Target>> getTarget({String? keyword}) =>
+      caller.callServerEndpoint<List<_i32.Target>>(
+        'target',
+        'getTarget',
+        {'keyword': keyword},
+      );
+
+  ///Adds a new Target and returns all Target
+  _i2.Future<List<_i32.Target>> addAndReturnTarget(_i32.Target target) =>
+      caller.callServerEndpoint<List<_i32.Target>>(
+        'target',
+        'addAndReturnTarget',
+        {'target': target},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointTerms extends _i1.EndpointRef {
   EndpointTerms(_i1.EndpointCaller caller) : super(caller);
 
@@ -1213,38 +1246,38 @@ class EndpointTerms extends _i1.EndpointRef {
   String get name => 'terms';
 
   ///Fetches all terms from DB
-  _i2.Future<List<_i32.Terms>> getTerms({String? keyword}) =>
-      caller.callServerEndpoint<List<_i32.Terms>>(
+  _i2.Future<List<_i33.Terms>> getTerms({String? keyword}) =>
+      caller.callServerEndpoint<List<_i33.Terms>>(
         'terms',
         'getTerms',
         {'keyword': keyword},
       );
 
   ///Adds a term in DB
-  _i2.Future<int> addTerms(_i32.Terms terms) => caller.callServerEndpoint<int>(
+  _i2.Future<int> addTerms(_i33.Terms terms) => caller.callServerEndpoint<int>(
         'terms',
         'addTerms',
         {'terms': terms},
       );
 
   ///Adds a new Term and returns all Terms
-  _i2.Future<List<_i32.Terms>> addAndReturnTerms(_i32.Terms terms) =>
-      caller.callServerEndpoint<List<_i32.Terms>>(
+  _i2.Future<List<_i33.Terms>> addAndReturnTerms(_i33.Terms terms) =>
+      caller.callServerEndpoint<List<_i33.Terms>>(
         'terms',
         'addAndReturnTerms',
         {'terms': terms},
       );
 
   ///Fetches selected terms with principalId
-  _i2.Future<List<_i32.Terms>> getTermsByPrincipalId({int? principalId}) =>
-      caller.callServerEndpoint<List<_i32.Terms>>(
+  _i2.Future<List<_i33.Terms>> getTermsByPrincipalId({int? principalId}) =>
+      caller.callServerEndpoint<List<_i33.Terms>>(
         'terms',
         'getTermsByPrincipalId',
         {'principalId': principalId},
       );
 
-  _i2.Future<List<_i32.Terms>> getTermsByIds(List<int> termIds) =>
-      caller.callServerEndpoint<List<_i32.Terms>>(
+  _i2.Future<List<_i33.Terms>> getTermsByIds(List<int> termIds) =>
+      caller.callServerEndpoint<List<_i33.Terms>>(
         'terms',
         'getTermsByIds',
         {'termIds': termIds},
@@ -1259,15 +1292,15 @@ class EndpointUniverse extends _i1.EndpointRef {
   String get name => 'universe';
 
   ///Fetches all universe from DB
-  _i2.Future<List<_i33.Universe>> getUniverse({String? keyword}) =>
-      caller.callServerEndpoint<List<_i33.Universe>>(
+  _i2.Future<List<_i34.Universe>> getUniverse({String? keyword}) =>
+      caller.callServerEndpoint<List<_i34.Universe>>(
         'universe',
         'getUniverse',
         {'keyword': keyword},
       );
 
   ///Adds universe in DB
-  _i2.Future<void> addUniverse(_i33.Universe universe) =>
+  _i2.Future<void> addUniverse(_i34.Universe universe) =>
       caller.callServerEndpoint<void>(
         'universe',
         'addUniverse',
@@ -1283,15 +1316,15 @@ class EndpointWithGlobe extends _i1.EndpointRef {
   String get name => 'withGlobe';
 
   /// Fetches WithGlobe from DB
-  _i2.Future<List<_i34.WithGlobe>> getWithGlobe({List<int>? keyNumbers}) =>
-      caller.callServerEndpoint<List<_i34.WithGlobe>>(
+  _i2.Future<List<_i35.WithGlobe>> getWithGlobe({List<int>? keyNumbers}) =>
+      caller.callServerEndpoint<List<_i35.WithGlobe>>(
         'withGlobe',
         'getWithGlobe',
         {'keyNumbers': keyNumbers},
       );
 
   ///Adds a WithGlobe in DB
-  _i2.Future<void> addWithGlobe(_i34.WithGlobe withGlobe) =>
+  _i2.Future<void> addWithGlobe(_i35.WithGlobe withGlobe) =>
       caller.callServerEndpoint<void>(
         'withGlobe',
         'addWithGlobe',
@@ -1307,15 +1340,15 @@ class EndpointWithMap extends _i1.EndpointRef {
   String get name => 'withMap';
 
   /// Fetches WithMap from DB
-  _i2.Future<List<_i35.WithMap>> getWithMap({List<int>? keyNumbers}) =>
-      caller.callServerEndpoint<List<_i35.WithMap>>(
+  _i2.Future<List<_i36.WithMap>> getWithMap({List<int>? keyNumbers}) =>
+      caller.callServerEndpoint<List<_i36.WithMap>>(
         'withMap',
         'getWithMap',
         {'keyNumbers': keyNumbers},
       );
 
   ///Adds a WithMap in DB
-  _i2.Future<void> addWithMap(_i35.WithMap withMap) =>
+  _i2.Future<void> addWithMap(_i36.WithMap withMap) =>
       caller.callServerEndpoint<void>(
         'withMap',
         'addWithMap',
@@ -1331,15 +1364,15 @@ class EndpointWithQgis extends _i1.EndpointRef {
   String get name => 'withQgis';
 
   /// Fetches WithQgis from DB
-  _i2.Future<List<_i36.WithQgis>> getWithQgis({List<int>? keyNumbers}) =>
-      caller.callServerEndpoint<List<_i36.WithQgis>>(
+  _i2.Future<List<_i37.WithQgis>> getWithQgis({List<int>? keyNumbers}) =>
+      caller.callServerEndpoint<List<_i37.WithQgis>>(
         'withQgis',
         'getWithQgis',
         {'keyNumbers': keyNumbers},
       );
 
   ///Adds a WithQgis in DB
-  _i2.Future<void> addWithQgis(_i36.WithQgis withQgis) =>
+  _i2.Future<void> addWithQgis(_i37.WithQgis withQgis) =>
       caller.callServerEndpoint<void>(
         'withQgis',
         'addWithQgis',
@@ -1349,10 +1382,10 @@ class EndpointWithQgis extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i37.Caller(client);
+    auth = _i38.Caller(client);
   }
 
-  late final _i37.Caller auth;
+  late final _i38.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -1371,7 +1404,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i38.Protocol(),
+          _i39.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -1411,6 +1444,7 @@ class Client extends _i1.ServerpodClientShared {
     space = EndpointSpace(this);
     stars = EndpointStars(this);
     starsInvolved = EndpointStarsInvolved(this);
+    target = EndpointTarget(this);
     terms = EndpointTerms(this);
     universe = EndpointUniverse(this);
     withGlobe = EndpointWithGlobe(this);
@@ -1479,6 +1513,8 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointStarsInvolved starsInvolved;
 
+  late final EndpointTarget target;
+
   late final EndpointTerms terms;
 
   late final EndpointUniverse universe;
@@ -1523,6 +1559,7 @@ class Client extends _i1.ServerpodClientShared {
         'space': space,
         'stars': stars,
         'starsInvolved': starsInvolved,
+        'target': target,
         'terms': terms,
         'universe': universe,
         'withGlobe': withGlobe,

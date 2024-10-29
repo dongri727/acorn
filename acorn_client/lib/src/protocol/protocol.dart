@@ -76,12 +76,13 @@ import 'package:acorn_client/src/protocol/seas.dart' as _i63;
 import 'package:acorn_client/src/protocol/space.dart' as _i64;
 import 'package:acorn_client/src/protocol/stars.dart' as _i65;
 import 'package:acorn_client/src/protocol/stars_involved.dart' as _i66;
-import 'package:acorn_client/src/protocol/terms.dart' as _i67;
-import 'package:acorn_client/src/protocol/universe.dart' as _i68;
-import 'package:acorn_client/src/protocol/with_globe.dart' as _i69;
-import 'package:acorn_client/src/protocol/with_map.dart' as _i70;
-import 'package:acorn_client/src/protocol/with_qgis.dart' as _i71;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i72;
+import 'package:acorn_client/src/protocol/target.dart' as _i67;
+import 'package:acorn_client/src/protocol/terms.dart' as _i68;
+import 'package:acorn_client/src/protocol/universe.dart' as _i69;
+import 'package:acorn_client/src/protocol/with_globe.dart' as _i70;
+import 'package:acorn_client/src/protocol/with_map.dart' as _i71;
+import 'package:acorn_client/src/protocol/with_qgis.dart' as _i72;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i73;
 export 'c_involved.dart';
 export 'categories.dart';
 export 'catts_involved.dart';
@@ -580,25 +581,20 @@ class Protocol extends _i1.SerializationManager {
           .map((e) => deserialize<_i66.StarsInvolved>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i67.Terms>) {
-      return (data as List).map((e) => deserialize<_i67.Terms>(e)).toList()
+    if (t == List<_i67.Target>) {
+      return (data as List).map((e) => deserialize<_i67.Target>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i68.Universe>) {
-      return (data as List).map((e) => deserialize<_i68.Universe>(e)).toList()
+    if (t == List<_i68.Terms>) {
+      return (data as List).map((e) => deserialize<_i68.Terms>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i69.WithGlobe>) {
-      return (data as List).map((e) => deserialize<_i69.WithGlobe>(e)).toList()
+    if (t == List<_i69.Universe>) {
+      return (data as List).map((e) => deserialize<_i69.Universe>(e)).toList()
           as dynamic;
     }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == List<_i70.WithMap>) {
-      return (data as List).map((e) => deserialize<_i70.WithMap>(e)).toList()
+    if (t == List<_i70.WithGlobe>) {
+      return (data as List).map((e) => deserialize<_i70.WithGlobe>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {
@@ -606,8 +602,17 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<int>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i71.WithQgis>) {
-      return (data as List).map((e) => deserialize<_i71.WithQgis>(e)).toList()
+    if (t == List<_i71.WithMap>) {
+      return (data as List).map((e) => deserialize<_i71.WithMap>(e)).toList()
+          as dynamic;
+    }
+    if (t == _i1.getType<List<int>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<int>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i72.WithQgis>) {
+      return (data as List).map((e) => deserialize<_i72.WithQgis>(e)).toList()
           as dynamic;
     }
     if (t == _i1.getType<List<int>?>()) {
@@ -616,7 +621,7 @@ class Protocol extends _i1.SerializationManager {
           : null) as dynamic;
     }
     try {
-      return _i72.Protocol().deserialize<T>(data, t);
+      return _i73.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -733,7 +738,7 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i37.WithQgis) {
       return 'WithQgis';
     }
-    className = _i72.Protocol().getClassNameForObject(data);
+    className = _i73.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -852,7 +857,7 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i72.Protocol().deserializeByClassName(data);
+      return _i73.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
