@@ -144,6 +144,14 @@ class ConfirmModel extends ChangeNotifier {
           }
         }
 
+        if (confirm.selectedShipsId.isNotEmpty) {
+          for (var shipId in confirm.selectedShipsId) {
+            var pDetailShip = PrincipalDetail(
+                principalId: principalId, detailId: shipId);
+            await client.principalDetail.addPDetail(pDetailShip);
+          }
+        }
+
         ///terms
         if (confirm.selectedCategoryId.isNotEmpty) {
           for (var categoryId in confirm.selectedCategoryId) {
@@ -164,7 +172,7 @@ class ConfirmModel extends ChangeNotifier {
         var principalUser = PrincipalUser(principalId: principalId, userId: userId);
         await client.principalUser.addPrincipalUser(principalUser);
 
-        //with qgis
+/*        //with qgis
         var withQgis = WithQgis(
             principalId: principalId,
             year: confirm.annee,
@@ -172,7 +180,7 @@ class ConfirmModel extends ChangeNotifier {
             geo: confirm.geo,
             );
         await client.withQgis.addWithQgis(withQgis);
-        debugPrint('add WithQgis');
+        debugPrint('add WithQgis');*/
 
         return 0;
 

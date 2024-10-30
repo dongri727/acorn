@@ -14,6 +14,7 @@ class TargetEndpoint extends Endpoint {
   }
 
   ///Adds a new Target and returns all Target
+  ///detailに追加して新しいidを取得してからしかaddできない。
   Future<List<Target>> addAndReturnTarget(
       Session session, Target target) async {
     await Target.db.insertRow(session, target);

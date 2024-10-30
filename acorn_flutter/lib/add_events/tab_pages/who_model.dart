@@ -3,6 +3,7 @@ import 'package:acorn_client/acorn_client.dart';
 import '../../confirm/confirm.dart';
 import '../../fetch/fetch_orgs.dart';
 import '../../fetch/fetch_people.dart';
+import '../../fetch/fetch_ships.dart';
 import '../../utils/build_chips.dart';
 
 
@@ -10,10 +11,12 @@ class WhoModel extends ChangeNotifier {
 
   late final FetchOrgsRepository _fetchOrgsRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
+  late final FetchShipsRepository _fetchShipsRepository;
 
   WhoModel(){
     _fetchOrgsRepository = FetchOrgsRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
+    _fetchShipsRepository = FetchShipsRepository();
   }
 
   final List<String> filtersOrgs = <String>[];
@@ -22,10 +25,14 @@ class WhoModel extends ChangeNotifier {
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
 
+  final List<String> filtersShips = <String>[];
+  final List<int> filtersShipsId = <int>[];
+
   var newOrg = '';
   var newPerson = '';
+  var newShip = '';
 
-  List<String> options = ['Institutions,Organisations etc', 'People'];
+  List<String> options = ['Institutions,Organisations etc', 'People', 'Ships'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -39,6 +46,10 @@ class WhoModel extends ChangeNotifier {
         await _fetchPeopleRepository.fetchPeopleInDetail();
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
+      case 'Ships':
+        await _fetchShipsRepository.fetchShipsInDetail();
+        currentDisplayList = _fetchShipsRepository.listDetailShips;
+        break;
     }
     notifyListeners();
   }
@@ -50,6 +61,9 @@ class WhoModel extends ChangeNotifier {
         break;
       case 'People':
         newPerson = text;
+        break;
+      case 'Ships':
+        newShip = text;
         break;
     }
     notifyListeners();
@@ -64,6 +78,10 @@ class WhoModel extends ChangeNotifier {
       case 'People':
         await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
+        break;
+      case 'Ships':
+        await _fetchShipsRepository.addDetailShipsAndFetch('ships', newShip);
+        currentDisplayList = _fetchShipsRepository.listDetailShips;
         break;
     }
     notifyListeners();
@@ -95,6 +113,18 @@ class WhoModel extends ChangeNotifier {
             updateSelectedPeople(key);
           },
         );
+      case 'Ships':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersShips,
+          filteredValues: filtersShipsId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedShips = key;
+            selectedShipsId = value;
+            updateSelectedPeople(key);
+          },
+        );
       default:
         return const SizedBox.shrink();
     }
@@ -110,6 +140,11 @@ class WhoModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedShips(String newSelectedShips) {
+    selectedShips = newSelectedShips;
+    notifyListeners();
+  }
+
   void temporarilySaveData(Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
     showDialogCallback(context);
@@ -121,6 +156,9 @@ class WhoModel extends ChangeNotifier {
 
     confirm.selectedWho = filtersPeople;
     confirm.selectedWhoId = filtersPeopleId;
+
+    confirm.selectedShips = filtersShips;
+    confirm.selectedShipsId = filtersShipsId;
 
   }
 
@@ -134,5 +172,9 @@ class WhoModel extends ChangeNotifier {
   ///仮表示
   String selectedPeople = '';
   int selectedPeopleId = 0;
+
+  ///仮表示
+  String selectedShips = '';
+  int selectedShipsId = 0;
 
 }
