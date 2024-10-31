@@ -1230,6 +1230,7 @@ class EndpointTarget extends _i1.EndpointRef {
       );
 
   ///Adds a new Target and returns all Target
+  ///detailに追加して新しいidを取得してからしかaddできない。
   _i2.Future<List<_i32.Target>> addAndReturnTarget(_i32.Target target) =>
       caller.callServerEndpoint<List<_i32.Target>>(
         'target',

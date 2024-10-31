@@ -23,9 +23,9 @@ class ModePageState extends State<ModePage> {
   }
 
   final Uri youtubeUrl = Uri.parse('https://www.youtube.com/@laporte_academy');
-  final Uri appStoreUrl = Uri.parse('https://apps.apple.com/jp/app/%E5%9B%9B%E6%AC%A1%E5%85%83%E5%B9%B4%E8%A1%A8for-mobile/id6502634868'); // Replace with your App Store URL
+  final Uri appStoreMobileUrl = Uri.parse('https://apps.apple.com/jp/app/%E5%9B%9B%E6%AC%A1%E5%85%83%E5%B9%B4%E8%A1%A8for-mobile/id6502634868'); // Replace with your App Store URL
   final Uri playStoreUrl = Uri.parse('https://play.google.com/store/apps/details?id=academy.laporte.chronomapMobile.chronomap_mobile&hl=ja'); // Replace with your Play Store URL
-
+  final Uri appStoreCosmosUrl = Uri.parse("https://apps.apple.com/jp/app/chronomap-in-cosmos/id6642644551");
 
   @override
   Widget build(BuildContext context) {
@@ -129,13 +129,20 @@ class ModePageState extends State<ModePage> {
                   );
                 },
                 color: Colors.white),
+            const Icon(Icons.phone_android, color: Colors.white ),
             TextButtonFormat(
-                label: AppLocalizations.of(context)!.modeF,
-                onPressed: (_launchAppStore),
+                label: "Chronomap for Mobile (iOS)",
+                onPressed: (_launchAppStoreMobile),
                 color: Colors.white),
+            const Icon(Icons.phone_android, color: Colors.white ),
             TextButtonFormat(
-                label: AppLocalizations.of(context)!.modeG,
+                label: "Chronomap for Mobile (android)",
                 onPressed: (_launchPlayStore),
+                color: Colors.white),
+            const Icon(Icons.phone_android, color: Colors.white ),
+            TextButtonFormat(
+                label: "Chronomap in Cosmos (iOS)",
+                onPressed: (_launchAppStoreCosmos),
                 color: Colors.white),
           ],
         ),
@@ -149,9 +156,15 @@ class ModePageState extends State<ModePage> {
     }
   }
 
-  Future<void> _launchAppStore() async {
-    if (!await launchUrl(appStoreUrl)) {
-      throw Exception('Could not launch $appStoreUrl');
+  Future<void> _launchAppStoreMobile() async {
+    if (!await launchUrl(appStoreMobileUrl)) {
+      throw Exception('Could not launch $appStoreMobileUrl');
+    }
+  }
+
+  Future<void> _launchAppStoreCosmos() async {
+    if (!await launchUrl(appStoreCosmosUrl)) {
+      throw Exception('Could not launch $appStoreCosmosUrl');
     }
   }
 
