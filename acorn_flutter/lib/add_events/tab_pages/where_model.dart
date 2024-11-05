@@ -13,7 +13,7 @@ import '../../utils/build_chips.dart';
 class WhereModel extends ChangeNotifier {
   late final FetchStarsRepository _fetchStarsRepository;
   late final FetchPlaceRepository _fetchPlaceRepository;
-  late final FetchSeasRepository _fetchSeasRepository;
+  //late final FetchSeasRepository _fetchSeasRepository;
   late final FetchCattRepository _fetchCattRepository;
   late final FetchPattRepository _fetchPattRepository;
 
@@ -22,14 +22,14 @@ class WhereModel extends ChangeNotifier {
   WhereModel({required this.keyArea}) {
     _fetchStarsRepository = FetchStarsRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
-    _fetchSeasRepository = FetchSeasRepository();
+    //_fetchSeasRepository = FetchSeasRepository();
     _fetchCattRepository = FetchCattRepository();
     _fetchPattRepository = FetchPattRepository();
   }
 
   var newStar = '';
   var newPlace = '';
-  var newSea = '';
+  //var newSea = '';
   var newPaysatt = '';
   var newPlaceatt = '';
 
@@ -116,8 +116,10 @@ class WhereModel extends ChangeNotifier {
       case 'Sea-name':
       case 'Nom de la mer':
       case '海域名':
-        await _fetchSeasRepository.fetchSeas();
-        currentDisplayList = _fetchSeasRepository.listSeas;
+        await _fetchPlaceRepository.fetchPlaces(keyArea);
+        currentDisplayList = _fetchPlaceRepository.listPlaces;
+/*        await _fetchSeasRepository.fetchSeas();
+        currentDisplayList = _fetchSeasRepository.listSeas;*/
         break;
       case 'Country-name at that time':
       case 'Nom du pays à l\'époque':
@@ -150,7 +152,8 @@ class WhereModel extends ChangeNotifier {
       case 'Sea-name':
       case 'Nom de la mer':
       case '海域名':
-        newSea = text;
+        newPlace = text;
+        //newSea = text;
         break;
       case 'Country-name at that time':
       case 'Nom du pays à l\'époque':
@@ -187,8 +190,10 @@ class WhereModel extends ChangeNotifier {
       case 'Sea-name':
       case 'Nom de la mer':
       case '海域名':
-        await _fetchSeasRepository.addSeasAndFetch(newSea, keyArea);
-        currentDisplayList = _fetchSeasRepository.listSeas;
+        await _fetchPlaceRepository.addPlacesAndFetch(newPlace, keyArea);
+        currentDisplayList = _fetchPlaceRepository.listPlaces;
+        //await _fetchSeasRepository.addSeasAndFetch(newSea, keyArea);
+        //currentDisplayList = _fetchSeasRepository.listSeas;
         break;
       case 'Country-name at that time':
       case 'Nom du pays à l\'époque':
@@ -250,7 +255,8 @@ class WhereModel extends ChangeNotifier {
       case '海域名':
         return buildChoiceSIFormat(
             choiceSIList: _filtersLocationPrecise,
-            choiceSIKey: (item as Seas).sea,
+            choiceSIKey: (item as Places).place,
+            //choiceSIKey: (item as Seas).sea,
             onChoiceSISelected: (choiceKey) {
               chosenLocationPrecise = choiceKey;
               updateLocationPrecise(choiceKey);

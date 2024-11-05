@@ -62,6 +62,7 @@ class AddDetailPage extends StatelessWidget {
                                       text: model.filtersStars.join(', ')),
                                   BlankTextFormat(text: model.filtersOrgs.join(', ')),
                                   BlankTextFormat(text: model.filtersPeople.join(', ')),
+                                  BlankTextFormat(text: model.filtersShips.join(', ')),
                                   BlankTextFormat(
                                       text: model.filtersCategories.join(', ')),
                                   BlankTextFormat(

@@ -2,6 +2,7 @@
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
+import 'package:acorn_flutter/fetch/fetch_ships.dart';
 import 'package:acorn_flutter/search/result_page.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../timeline/scalable.dart';
@@ -18,6 +19,7 @@ class MultipleSearchModel extends ChangeNotifier {
   late final FetchPattRepository _fetchPattRepository;
   late final FetchOrgsRepository _fetchOrgsRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
+  late final FetchShipsRepository _fetchShipsRepository;
   late final FetchCategoriesRepository _fetchCategoriesRepository;
   late final FetchTermsRepository _fetchTermsRepository;
 
@@ -31,6 +33,7 @@ class MultipleSearchModel extends ChangeNotifier {
     _fetchPattRepository = FetchPattRepository();
     _fetchOrgsRepository = FetchOrgsRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
+    _fetchShipsRepository = FetchShipsRepository();
     _fetchCategoriesRepository = FetchCategoriesRepository();
     _fetchTermsRepository = FetchTermsRepository();
 
@@ -251,6 +254,18 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Ships
+  final List<String> filtersShips = <String>[];
+  final List<int> filtersShipsId = <int>[];
+
+  String selectedShips = '';
+  int selectedShopsId = 0;
+
+  void updateSelectedShips(String newSelectedShips) {
+    selectedPeople = newSelectedShips;
+    notifyListeners();
+  }
+
   //Categories
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
@@ -275,8 +290,7 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  //todo fetchDropdoenButtonBasisに直すべき
-  Future<void> fetchRadioButtonBasis(selectedOption) async {
+  Future<void> fetchDropdownButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Period':
       case 'Période':
@@ -376,6 +390,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '人物':
         await _fetchPeopleRepository.fetchPeopleInDetail();
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
+        break;
+      case 'Ships':
+      case 'Nom du navire':
+      case '船名':
+        await _fetchShipsRepository.fetchShipsInDetail();
+        currentDisplayList = _fetchShipsRepository.listDetailShips;
         break;
       case 'Categories':
       case 'Catégories':
@@ -582,6 +602,19 @@ class MultipleSearchModel extends ChangeNotifier {
               selectedPeopleId = filterId;
               updateSelectedPeople(filterKey);
             });
+      case 'Ships':
+      case 'Nom du Navire':
+      case '船名':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersShips,
+            filteredValues: filtersShipsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedShips = filterKey;
+              selectedShopsId = filterId;
+              updateSelectedPeople(filterKey);
+            });
       case 'Categories':
       case 'Catégories':
       case '分類':
@@ -743,6 +776,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '人物':
         _fetchPrincipalRepository.fetchPrincipalByDetailId(
             detailIds: filtersPeopleId);
+        break;
+      case 'Ships':
+      case 'Nom du Navire':
+      case '船名':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersShipsId);
         break;
       case 'Categories':
       case 'Catégories':

@@ -12,6 +12,7 @@ import '../fetch/fetch_orgs.dart';
 import '../fetch/fetch_patt.dart';
 import '../fetch/fetch_people.dart';
 import '../fetch/fetch_place.dart';
+import '../fetch/fetch_ships.dart';
 import '../fetch/fetch_stars.dart';
 import '../lists/countries_list.dart';
 import '../serverpod_client.dart';
@@ -26,6 +27,7 @@ class AddDetailModel extends ChangeNotifier {
   late final FetchPlaceRepository _fetchPlaceRepository;
   late final FetchOrgsRepository _fetchOrgsRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
+  late final FetchShipsRepository _fetchShipsRepository;
   late final FetchCategoriesRepository _fetchCategoriesRepository;
   late final FetchTermsRepository _fetchTermsRepository;
 
@@ -37,6 +39,7 @@ class AddDetailModel extends ChangeNotifier {
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchOrgsRepository = FetchOrgsRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
+    _fetchShipsRepository = FetchShipsRepository();
     _fetchCategoriesRepository = FetchCategoriesRepository();
     _fetchTermsRepository = FetchTermsRepository();
   }
@@ -53,6 +56,7 @@ class AddDetailModel extends ChangeNotifier {
   var newStar = '';
   var newOrg = '';
   var newPerson = '';
+  var newShip = '';
   var newCategory = '';
   var newTerm = '';
 
@@ -91,6 +95,10 @@ class AddDetailModel extends ChangeNotifier {
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
 
+  //船舶
+  final List<String> filtersShips = <String>[];
+  final List<int> filtersShipsId = <int>[];
+
   //category
   final List<String> filtersCategories = <String>[];
   final List<int> filtersCategoriesId = <int>[];
@@ -119,6 +127,9 @@ class AddDetailModel extends ChangeNotifier {
 
   String selectedPeople = '';
   int selectedPeopleId = 0;
+
+  String selectedShips = '';
+  int selectedShipsId = 0;
 
   String selectedCategory = '';
   int selectedCategoryId = 0;
@@ -155,6 +166,10 @@ class AddDetailModel extends ChangeNotifier {
         await _fetchPeopleRepository.fetchPeopleInDetail();
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
+      case 'Ships':
+        await _fetchShipsRepository.fetchShipsInDetail();
+        currentDisplayList = _fetchShipsRepository.listDetailShips;
+        break;
       case 'Categories':
         await _fetchCategoriesRepository.fetchCategoriesInDetail();
         currentDisplayList = _fetchCategoriesRepository.listDetailCategories;
@@ -187,6 +202,9 @@ class AddDetailModel extends ChangeNotifier {
         break;
       case 'People':
         newPerson = text;
+        break;
+      case 'Ships':
+        newShip = text;
         break;
       case 'Categories':
         newCategory = text;
@@ -224,6 +242,10 @@ class AddDetailModel extends ChangeNotifier {
       case 'People':
         await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
+        break;
+      case 'Ships':
+        await _fetchShipsRepository.addDetailShipsAndFetch('ships', newShip);
+        currentDisplayList = _fetchShipsRepository.listDetailShips;
         break;
       case 'Categories':
         await _fetchCategoriesRepository.addDetailCategoriesAndFetch('categories', newCategory);
@@ -323,6 +345,18 @@ class AddDetailModel extends ChangeNotifier {
             updateSelectedPeople(key);
           },
         );
+      case 'Ships':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersShips,
+          filteredValues: filtersShipsId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedShips = key;
+            selectedShipsId = value;
+            updateSelectedPeople(key);
+          },
+        );
       case 'Categories':
         return buildFilterFormatImediat(
           filteredKeys: filtersCategories,
@@ -387,6 +421,11 @@ class AddDetailModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedShips(String newSelectedShips) {
+    selectedShips = newSelectedShips;
+    notifyListeners();
+  }
+
   void updateSelectedCategory(String newSelectedCategory) {
     selectedCategory = newSelectedCategory;
     notifyListeners();
@@ -442,6 +481,13 @@ class AddDetailModel extends ChangeNotifier {
     if (filtersPeopleId.isNotEmpty) {
       for (var personId in filtersPeopleId) {
         var principalDetail = PrincipalDetail(principalId: principalId, detailId: personId);
+        await client.principalDetail.addPDetail(principalDetail);
+      }
+    }
+
+    if (filtersShipsId.isNotEmpty) {
+      for (var shipId in filtersShipsId) {
+        var principalDetail = PrincipalDetail(principalId: principalId, detailId: shipId);
         await client.principalDetail.addPDetail(principalDetail);
       }
     }

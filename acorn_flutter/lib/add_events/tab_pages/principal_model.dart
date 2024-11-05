@@ -275,7 +275,6 @@ class PrincipalModel extends ChangeNotifier {
 
     ///選択されたlocation
     confirm.selectedLocation = location;
-
   }
 
 

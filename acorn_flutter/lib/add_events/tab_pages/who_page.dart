@@ -43,6 +43,7 @@ class WhoPage extends StatelessWidget {
                           children: [
                             BlankTextFormat(text: model.filtersOrgs.join(', ')),
                             BlankTextFormat(text: model.filtersPeople.join(', ')),
+                            BlankTextFormat(text: model.filtersShips.join(', ')),
                           ],
                         ),
                       ),

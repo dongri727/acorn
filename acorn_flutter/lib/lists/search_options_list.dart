@@ -15,6 +15,7 @@ final List<String> searchOptions = [
   'Stars Observed',
   'Organisations',
   'People',
+  'Ships',
   'Categories',
   'Other Terms'
 ];
@@ -36,6 +37,7 @@ final List<String> searchOptionsFr = [
   'Étoiles observées',
   'Organisations',
   'Personnes',
+  'Nom du navire',
   'Catégories',
   'Autres termes'
 ];
@@ -57,6 +59,7 @@ final List<String> searchOptionsJa = [
   '観測された星、目指した星など',
   '機関、組織、施設など',
   '人物',
+  '船名',
   '分類',
   'その他の用語'
 ];

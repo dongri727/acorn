@@ -9,6 +9,8 @@ List<String> mer = <String>[
   'Southern Ocean',
 ];
 
+
+//locationとしてkeyWordになるので、多言語化しない。
 //principalに保存されるので現時点では多言語化しない。
 /*
 List<String> merFr = <String>[

@@ -97,7 +97,7 @@ class MultiSearchPage extends StatelessWidget {
                             padding: const EdgeInsets.all(20.0),
                             child: OutlinedButton(
                               onPressed: () async {
-                                model.fetchRadioButtonBasis(model.selectedOption);
+                                model.fetchDropdownButtonBasis(model.selectedOption);
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.searchE,
@@ -135,6 +135,7 @@ class MultiSearchPage extends StatelessWidget {
                                   ...model.filtersStarsObserved,
                                   ...model.filtersOrgs,
                                   ...model.filtersPeople,
+                                      ...model.filtersShips,
                                   ...model.filtersCategories,
                                   ...model.filtersTerms,
                                 ].join(', ')),
