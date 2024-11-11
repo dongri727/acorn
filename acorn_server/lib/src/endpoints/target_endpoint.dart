@@ -10,7 +10,9 @@ class TargetEndpoint extends Endpoint {
 
   ///Fetches all target from DB
   Future<List<Target>> getTarget(Session session, {String? keyword}) async {
-    return await Target.db.find(session);
+    return await Target.db.find(
+      session,
+      orderBy: (target) => target.specialite,);
   }
 
   ///Adds a new Target and returns all Target
