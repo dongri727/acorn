@@ -91,12 +91,23 @@ class AddDetailPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ButtonFormat(
-                          label: 'Add a New Word',
-                          onPressed: () async {
-                            model.addAndFetchRadioButtonBasis(model.selectedOption);
-                            controller.clear();
-                          },
+                        Visibility(
+                          visible: model.newPlace.trim().isNotEmpty
+                              || model.newCATT.trim().isNotEmpty
+                              || model.newPATT.trim().isNotEmpty
+                              || model.newStar.trim().isNotEmpty
+                              || model.newOrg.trim().isNotEmpty
+                              || model.newPerson.trim().isNotEmpty
+                              || model.newShip.trim().isNotEmpty
+                              || model.newCategory.trim().isNotEmpty
+                              || model.newTerm.trim().isNotEmpty,
+                          child: ButtonFormat(
+                            label: 'Add a New Word',
+                            onPressed: () async {
+                              model.addAndFetchRadioButtonBasis(model.selectedOption);
+                              controller.clear();
+                            },
+                          ),
                         ),
                         Padding(
                             padding: const EdgeInsets.all(20.0),

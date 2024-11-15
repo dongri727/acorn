@@ -153,7 +153,6 @@ class WhereModel extends ChangeNotifier {
       case 'Nom de la mer':
       case '海域名':
         newPlace = text;
-        //newSea = text;
         break;
       case 'Country-name at that time':
       case 'Nom du pays à l\'époque':

@@ -69,12 +69,16 @@ class TermsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ButtonFormat(
-                      label: AppLocalizations.of(context)!.addNewName,
-                      onPressed: () async {
-                        model.addAndFetchRadioButtonBasis(model.selectedOption);
-                        controller.clear();
-                      },
+                    Visibility(
+                      visible: model.newCategory.trim().isNotEmpty
+                          || model.newTerm.trim().isNotEmpty,
+                      child: ButtonFormat(
+                        label: AppLocalizations.of(context)!.addNewName,
+                        onPressed: () async {
+                          model.addAndFetchRadioButtonBasis(model.selectedOption);
+                          controller.clear();
+                        },
+                      ),
                     ),
                     Padding(
                         padding: const EdgeInsets.all(20.0),

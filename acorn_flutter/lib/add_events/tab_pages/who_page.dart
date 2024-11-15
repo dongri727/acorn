@@ -70,12 +70,17 @@ class WhoPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ButtonFormat(
-                    label: AppLocalizations.of(context)!.addNewName,
-                    onPressed: () async {
-                      model.addAndFetchRadioButtonBasis(model.selectedOption);
-                      controller.clear();
-                    },
+                  Visibility(
+                    visible: model.newOrg.trim().isNotEmpty
+                        || model.newPerson.trim().isNotEmpty
+                        || model.newShip.trim().isNotEmpty,
+                    child: ButtonFormat(
+                      label: AppLocalizations.of(context)!.addNewName,
+                      onPressed: () async {
+                        model.addAndFetchRadioButtonBasis(model.selectedOption);
+                        controller.clear();
+                      },
+                    ),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(20.0),

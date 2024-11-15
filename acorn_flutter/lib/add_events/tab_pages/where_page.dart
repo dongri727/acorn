@@ -114,7 +114,7 @@ class WherePage extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(50, 8, 100, 8),
                                   child: ShadowedContainer(
-                                    child: TffFormat(
+                                    child: NumFormat(
                                       hintText: AppLocalizations.of(context)!.latitude,
                                       onChanged: (value) {
                                         model.nsSwitch(value);
@@ -139,7 +139,7 @@ class WherePage extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(50, 8, 100, 40),
                                   child: ShadowedContainer(
-                                    child: TffFormat(
+                                    child: NumFormat(
                                       hintText: AppLocalizations.of(context)!.longitude,
                                       onChanged: (value) {
                                         model.ewSwitch(value);
@@ -173,13 +173,19 @@ class WherePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ButtonFormat(
-                          onPressed: () async {
-                            model.addAndFetchRadioButtonBasis(
-                                model.selectedOption);
-                            controller.clear();
-                          },
-                          label: AppLocalizations.of(context)!.addNewName,
+                        Visibility(
+                          visible: model.newStar.trim().isNotEmpty
+                            || model.newPlace.trim().isNotEmpty
+                            || model.newPaysatt.trim().isNotEmpty
+                            || model.newPlaceatt.trim().isNotEmpty,
+                          child: ButtonFormat(
+                            onPressed: () async {
+                              model.addAndFetchRadioButtonBasis(
+                                  model.selectedOption);
+                              controller.clear();
+                            },
+                            label: AppLocalizations.of(context)!.addNewName,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20.0),

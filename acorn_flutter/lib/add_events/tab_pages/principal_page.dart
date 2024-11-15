@@ -116,7 +116,7 @@ class PrincipalPage extends StatelessWidget {
                                         child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: ShadowedContainer(
-                                              child: TffFormat(
+                                              child: NumFormat(
                                                 hintText: "year",
                                                 onChanged: (value) {
                                                   model.setNewYearD(value);
@@ -130,7 +130,7 @@ class PrincipalPage extends StatelessWidget {
                                       child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: ShadowedContainer(
-                                            child: TffFormat(
+                                            child: NumFormat(
                                               hintText: "Month 1-12 or 0",
                                               onChanged: (value) {
                                                 model.setNewMonth(value);
@@ -146,7 +146,7 @@ class PrincipalPage extends StatelessWidget {
                                           padding:
                                           const EdgeInsets.fromLTRB(8, 8, 20, 8),
                                           child: ShadowedContainer(
-                                            child: TffFormat(
+                                            child: NumFormat(
                                               hintText: "Date 1-31 or 0",
                                               onChanged: (value) {
                                                 model.setNewDay(value);

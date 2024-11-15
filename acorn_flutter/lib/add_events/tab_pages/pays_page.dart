@@ -93,13 +93,19 @@ class PaysPage extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ButtonFormat(
-                                label: AppLocalizations.of(context)!.addNewName,
-                                onPressed: () async {
-                                  model.addAndFetchRadioButtonBasis(
-                                      model.selectedOption);
-                                  controller.clear();
-                                }),
+                            child: Visibility(
+                              visible: model.newPlace.trim().isNotEmpty
+                                  || model.newCATT.trim().isNotEmpty
+                                  || model.newPATT.trim().isNotEmpty
+                                  || model.newStar.trim().isNotEmpty,
+                              child: ButtonFormat(
+                                  label: AppLocalizations.of(context)!.addNewName,
+                                  onPressed: () async {
+                                    model.addAndFetchRadioButtonBasis(
+                                        model.selectedOption);
+                                    controller.clear();
+                                  }),
+                            ),
                           ),
                           Padding(
                               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
