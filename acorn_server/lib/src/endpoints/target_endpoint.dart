@@ -12,7 +12,7 @@ class TargetEndpoint extends Endpoint {
   Future<List<Target>> getTarget(Session session, {String? keyword}) async {
     return await Target.db.find(
       session,
-      orderBy: (target) => target.specialite,);
+      orderBy: (target) => target.specialite);
   }
 
   ///Adds a new Target and returns all Target
@@ -20,7 +20,9 @@ class TargetEndpoint extends Endpoint {
   Future<List<Target>> addAndReturnTarget(
       Session session, Target target) async {
     await Target.db.insertRow(session, target);
-    var allTarget = await Target.db.find(session);
+    var allTarget = await Target.db.find(
+      session,
+      orderBy: (target) => target.specialite);
     return allTarget;
   }
 }
