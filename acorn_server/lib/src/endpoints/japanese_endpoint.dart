@@ -13,4 +13,10 @@ class JapaneseEndpoint extends Endpoint {
       throw Exception('Failed to fetch Japanese names');
     }
   }
+
+  ///Adds a japanese in DB
+  Future<int> addJapanese(Session session, Japanese japanese) async {
+    await Japanese.db.insertRow(session, japanese);
+    return japanese.id!;
+  }
 }

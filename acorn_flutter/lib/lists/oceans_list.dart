@@ -7,6 +7,7 @@ List<String> mer = <String>[
   'North Pacific Ocean',
   'South Pacific Ocean',
   'Southern Ocean',
+  'Non-Oceanic Areas'
 ];
 
 
@@ -21,6 +22,7 @@ List<String> merFr = <String>[
   'Océan Pacifique Nord',
   'Océan Pacifique Sud',
   'Océan Austral',
+  'Zones Non-Océaniques'
 ];
 
 List<String> merJp = <String>[
@@ -31,4 +33,5 @@ List<String> merJp = <String>[
   '北太平洋',
   '南太平洋',
   '南極海',
+  '大洋外海域'
 ];*/

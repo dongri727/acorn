@@ -313,6 +313,14 @@ class EndpointJapanese extends _i1.EndpointRef {
         'getAllJapaneseNames',
         {},
       );
+
+  ///Adds a japanese in DB
+  _i2.Future<int> addJapanese(_i8.Japanese japanese) =>
+      caller.callServerEndpoint<int>(
+        'japanese',
+        'addJapanese',
+        {'japanese': japanese},
+      );
 }
 
 /// {@category Endpoint}
