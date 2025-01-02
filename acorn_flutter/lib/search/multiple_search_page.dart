@@ -134,6 +134,7 @@ class MultiSearchPage extends StatelessWidget {
                                   ...model.filtersPlaceInvATT,
                                   ...model.filtersStarsObserved,
                                   ...model.filtersOrgs,
+                                  ...model.filtersUnivs,
                                   ...model.filtersPeople,
                                       ...model.filtersShips,
                                   ...model.filtersCategories,

@@ -4,23 +4,29 @@ import '../../confirm/confirm.dart';
 import '../../fetch/fetch_orgs.dart';
 import '../../fetch/fetch_people.dart';
 import '../../fetch/fetch_ships.dart';
+import '../../fetch/fetch_univs.dart';
 import '../../utils/build_chips.dart';
 
 
 class WhoModel extends ChangeNotifier {
 
   late final FetchOrgsRepository _fetchOrgsRepository;
+  late final FetchUnivsRepository _fetchUnivsRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
   late final FetchShipsRepository _fetchShipsRepository;
 
   WhoModel(){
     _fetchOrgsRepository = FetchOrgsRepository();
+    _fetchUnivsRepository = FetchUnivsRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
     _fetchShipsRepository = FetchShipsRepository();
   }
 
   final List<String> filtersOrgs = <String>[];
   final List<int> filtersOrgsId = <int>[];
+
+  final List<String> filtersUnivs = <String>[];
+  final List<int> filtersUnivsId = <int>[];
 
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
@@ -29,10 +35,11 @@ class WhoModel extends ChangeNotifier {
   final List<int> filtersShipsId = <int>[];
 
   var newOrg = '';
+  var newUniv = '';
   var newPerson = '';
   var newShip = '';
 
-  List<String> options = ['Institutions,Organisations etc', 'People', 'Ships'];
+  List<String> options = ['Institutions,Organisations etc', 'Universities', 'People', 'Ships'];
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
@@ -41,6 +48,10 @@ class WhoModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         await _fetchOrgsRepository.fetchOrgsInDetail();
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'Universities':
+        await _fetchUnivsRepository.fetchUnivsInDetail();
+        currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
         break;
       case 'People':
         await _fetchPeopleRepository.fetchPeopleInDetail();
@@ -59,6 +70,9 @@ class WhoModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         newOrg = text;
         break;
+      case 'Universities':
+        newUniv = text;
+        break;
       case 'People':
         newPerson = text;
         break;
@@ -74,6 +88,10 @@ class WhoModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         await _fetchOrgsRepository.addDetailOrgsAndFetch('organisations', newOrg);
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'Universities':
+        await _fetchUnivsRepository.addDetailUnivsAndFetch('universities', newUniv);
+        currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
         break;
       case 'People':
         await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
@@ -99,6 +117,18 @@ class WhoModel extends ChangeNotifier {
             selectedOrgs = key;
             selectedOrgsId = value;
             updateSelectedOrgs(key);
+          },
+        );
+      case 'Universities':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersUnivs,
+          filteredValues: filtersUnivsId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedUnivs = key;
+            selectedUnivsId = value;
+            updateSelectedUnivs(key);
           },
         );
       case 'People':
@@ -135,6 +165,11 @@ class WhoModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedUnivs(String newSelectedUnivs) {
+    selectedOrgs = newSelectedUnivs;
+    notifyListeners();
+  }
+
   void updateSelectedPeople(String newSelectedPeople) {
     selectedPeople = newSelectedPeople;
     notifyListeners();
@@ -154,6 +189,9 @@ class WhoModel extends ChangeNotifier {
     confirm.selectedOrg = filtersOrgs;
     confirm.selectedOrgId = filtersOrgsId;
 
+    confirm.selectedUniv = filtersUnivs;
+    confirm.selectedUnivId = filtersUnivsId;
+
     confirm.selectedWho = filtersPeople;
     confirm.selectedWhoId = filtersPeopleId;
 
@@ -168,6 +206,10 @@ class WhoModel extends ChangeNotifier {
   ///仮表示
   String selectedOrgs = '';
   int selectedOrgsId = 0;
+
+  ///仮表示
+  String selectedUnivs = '';
+  int selectedUnivsId = 0;
 
   ///仮表示
   String selectedPeople = '';

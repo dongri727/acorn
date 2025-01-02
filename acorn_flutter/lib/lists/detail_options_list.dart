@@ -5,6 +5,7 @@ List<String> detailOptions = [
   'Name of Place Involved at that time',
   'Stars Observed or Aimed at',
   'Institutions,Organisations etc',
+  'Universities',
   'People',
   'Ships',
   'Categories',
@@ -18,6 +19,7 @@ List<String> detailOptionsFr = [
   'Nom du lieu impliqué à l\'époque',
   'Étoiles observées ou visées',
   'Institutions, organisations, etc.',
+  'Universités',
   'Personnes',
   'Nom du navire',
   'Catégories',
@@ -31,6 +33,7 @@ List<String> detailOptionsJa = [
   '当時の関係都市名',
   '観測された星、目指した星など',
   '機関、組織、施設など',
+  '大学',
   '人物',
   '船名'
   '分類',

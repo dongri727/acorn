@@ -14,6 +14,7 @@ final List<String> searchOptions = [
   'Names of Places involved at that time',
   'Stars Observed',
   'Organisations',
+  'Universities'
   'People',
   'Ships',
   'Categories',
@@ -36,6 +37,7 @@ final List<String> searchOptionsFr = [
   'Noms des lieux impliqués à cette époque',
   'Étoiles observées',
   'Organisations',
+  'Universités',
   'Personnes',
   'Nom du navire',
   'Catégories',
@@ -58,6 +60,7 @@ final List<String> searchOptionsJa = [
   '関係都市の当時の名称',
   '観測された星、目指した星など',
   '機関、組織、施設など',
+  '大学',
   '人物',
   '船名',
   '分類',

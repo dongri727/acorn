@@ -5,6 +5,7 @@ import 'package:acorn_flutter/export/export_list.dart';
 import 'package:acorn_flutter/fetch/fetch_ships.dart';
 import 'package:acorn_flutter/search/result_page.dart';
 import 'package:acorn_client/acorn_client.dart';
+import '../fetch/fetch_univs.dart';
 import '../timeline/scalable.dart';
 import '../unity_view/four_d_page.dart';
 import '../unity_view/mr_page.dart';
@@ -18,6 +19,7 @@ class MultipleSearchModel extends ChangeNotifier {
   late final FetchCattRepository _fetchCattRepository;
   late final FetchPattRepository _fetchPattRepository;
   late final FetchOrgsRepository _fetchOrgsRepository;
+  late final FetchUnivsRepository _fetchUnivsRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
   late final FetchShipsRepository _fetchShipsRepository;
   late final FetchCategoriesRepository _fetchCategoriesRepository;
@@ -32,6 +34,7 @@ class MultipleSearchModel extends ChangeNotifier {
     _fetchCattRepository = FetchCattRepository();
     _fetchPattRepository = FetchPattRepository();
     _fetchOrgsRepository = FetchOrgsRepository();
+    _fetchUnivsRepository = FetchUnivsRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
     _fetchShipsRepository = FetchShipsRepository();
     _fetchCategoriesRepository = FetchCategoriesRepository();
@@ -43,10 +46,12 @@ class MultipleSearchModel extends ChangeNotifier {
   final List<String> formats = [
     'CLASSIC',
     //'SCALABLE',
-    '3D',
-    '4D',
-    'MR',
-    'GIS',
+    'Map',
+    //'Globe',
+    //'3D',
+    //'4D',
+    //'MR',
+    //'GIS',
   ];
 
   //radioButton
@@ -242,6 +247,18 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Universities
+  final List<String> filtersUnivs = <String>[];
+  final List<int> filtersUnivsId = <int>[];
+
+  String selectedUniv = '';
+  int selectedUnivId = 0;
+
+  void updateSelectedUniv(String newSelectedUniv) {
+    selectedUniv = newSelectedUniv;
+    notifyListeners();
+  }
+
   //People
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
@@ -384,6 +401,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '機関、組織、施設など':
         await _fetchOrgsRepository.fetchOrgsInDetail();
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'Universities':
+      case 'Universités':
+      case '大学':
+        await _fetchUnivsRepository.fetchUnivsInDetail();
+        currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
         break;
       case 'People':
       case 'Personnes':
@@ -589,6 +612,19 @@ class MultipleSearchModel extends ChangeNotifier {
               selectedOrgId = filterId;
               updateSelectedOrg(filterKey);
             });
+      case 'Universities':
+      case 'Universités':
+      case '大学':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersUnivs,
+            filteredValues: filtersUnivsId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedUniv = filterKey;
+              selectedUnivId = filterId;
+              updateSelectedOrg(filterKey);
+            });
       case 'People':
       case 'Personnes':
       case '人物':
@@ -672,6 +708,8 @@ class MultipleSearchModel extends ChangeNotifier {
     filtersPeople.clear();
     _fetchOrgsRepository.listDetailOrgs.clear();
     filtersOrgs.clear();
+    _fetchUnivsRepository.listDetailUnivs.clear();
+    filtersUnivs.clear();
     _fetchTermsRepository.listDetailTerms.clear();
     filtersTerms.clear();
     filtersCatts.clear();
@@ -770,6 +808,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '機関、組織、施設など':
         _fetchPrincipalRepository.fetchPrincipalByDetailId(
             detailIds: filtersOrgsId);
+        break;
+      case 'Universities':
+      case 'Universités':
+      case '大学':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersUnivsId);
         break;
       case 'People':
       case 'Personnes':

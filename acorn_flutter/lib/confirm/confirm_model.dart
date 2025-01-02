@@ -136,6 +136,14 @@ class ConfirmModel extends ChangeNotifier {
           }
         }
 
+        if (confirm.selectedUnivId.isNotEmpty) {
+          for (var univId in confirm.selectedUnivId) {
+            var pDetailUniv = PrincipalDetail(
+                principalId: principalId, detailId: univId);
+            await client.principalDetail.addPDetail(pDetailUniv);
+          }
+        }
+
         if (confirm.selectedWhoId.isNotEmpty) {
           for (var whoId in confirm.selectedWhoId) {
             var pDetailPerson = PrincipalDetail(

@@ -42,6 +42,7 @@ class WhoPage extends StatelessWidget {
                         child: Column(
                           children: [
                             BlankTextFormat(text: model.filtersOrgs.join(', ')),
+                            BlankTextFormat(text: model.filtersUnivs.join(', ')),
                             BlankTextFormat(text: model.filtersPeople.join(', ')),
                             BlankTextFormat(text: model.filtersShips.join(', ')),
                           ],
@@ -72,6 +73,7 @@ class WhoPage extends StatelessWidget {
                   ),
                   Visibility(
                     visible: model.newOrg.trim().isNotEmpty
+                        || model.newUniv.trim().isNotEmpty
                         || model.newPerson.trim().isNotEmpty
                         || model.newShip.trim().isNotEmpty,
                     child: ButtonFormat(
