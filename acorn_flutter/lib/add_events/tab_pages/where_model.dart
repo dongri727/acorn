@@ -2,7 +2,7 @@ import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/fetch/fetch_catt.dart';
 import 'package:acorn_flutter/fetch/fetch_patt.dart';
 import 'package:acorn_flutter/fetch/fetch_place.dart';
-import 'package:acorn_flutter/fetch/fetch_seas.dart';
+//import 'package:acorn_flutter/fetch/fetch_seas.dart';
 import 'package:acorn_flutter/fetch/fetch_stars.dart';
 import 'package:acorn_client/acorn_client.dart';
 import '../../confirm/confirm.dart';

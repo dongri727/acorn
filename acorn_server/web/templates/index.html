@@ -35,7 +35,25 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = "490586572";
+    var serviceWorkerVersion = "2582815526";
+  </script>
+  <!-- Include ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <!-- Include ECharts-GL for 3D support -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  <!-- Your custom JavaScript for initializing the chart -->
+  <script>
+    // Function to initialize the ECharts instance
+    function initChart(chartId, optionsJson) {
+      const chartDom = document.getElementById(chartId);
+      if (chartDom) {
+        const myChart = echarts.init(chartDom, 'dark');
+        const options = JSON.parse(optionsJson);
+        myChart.setOption(options);
+      } else {
+        console.error('Div element not found:', chartId);
+      }
+    }
   </script>
 </head>
 <body>
