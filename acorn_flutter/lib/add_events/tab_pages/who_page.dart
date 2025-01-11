@@ -12,6 +12,20 @@ class WhoPage extends StatelessWidget {
     return ChangeNotifierProvider<WhoModel>(
       create: (_) => WhoModel(),
       child: Consumer<WhoModel>(builder: (_, model, child) {
+
+        String locale = Localizations.localeOf(context).languageCode;
+
+        List<String> optionsWho;
+        switch (locale) {
+          case 'fr':
+            optionsWho = model.optionsFr;
+            break;
+          case 'ja':
+            optionsWho = model.optionsJa;
+            break;
+          default:
+            optionsWho = model.options;
+        }
         return Scaffold(
           body: SafeArea(
               child: Container(
@@ -31,7 +45,7 @@ class WhoPage extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(100, 20, 20, 20),
                             child: ShadowedContainer(
                               child: RadioButtonFormat(
-                                  options: model.options,
+                                  options: optionsWho,
                                   onChanged: (String? value) {
                                     model.selectedOption = value!;
                                   }),

@@ -31,7 +31,7 @@ class MapPageState extends State<MapPage> {
       final html.DivElement div = html.DivElement()
         ..id = 'echarts_div'
         ..style.width = '100%'
-        ..style.height = '600px';
+        ..style.height = '800px';
 
       // Initialize
       Future.microtask(() async {
@@ -195,8 +195,8 @@ class MapPageState extends State<MapPage> {
                 child: const Text('Show on Map'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 50),
               child: Text(
                   'You can zoom in, zoom out, and rotate the view. \nHowever, we currently do not support adjustments when the view is cut off due to zooming in.\n In such cases, please either zoom out or use the Pacific-centered map or the globe view.',
                 style: TextStyle(color: Colors.white),

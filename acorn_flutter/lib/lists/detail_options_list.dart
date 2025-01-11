@@ -6,6 +6,7 @@ List<String> detailOptions = [
   'Stars Observed or Aimed at',
   'Institutions,Organisations etc',
   'Universities',
+  'Publishers,Websites',
   'People',
   'Ships',
   'Categories',
@@ -20,6 +21,7 @@ List<String> detailOptionsFr = [
   'Étoiles observées ou visées',
   'Institutions, organisations, etc.',
   'Universités',
+  'Éditeurs, Sites Web',
   'Personnes',
   'Nom du navire',
   'Catégories',
@@ -34,6 +36,7 @@ List<String> detailOptionsJa = [
   '観測された星、目指した星など',
   '機関、組織、施設など',
   '大学',
+  '出版社、ウェブサイト',
   '人物',
   '船名'
   '分類',

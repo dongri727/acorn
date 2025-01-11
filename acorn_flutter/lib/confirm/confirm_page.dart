@@ -322,7 +322,7 @@ class ConfirmPage extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('Organizations Involved',
+                                child: Text('Institutions, Organizations',
                                     style: AcornTheme.textTheme.headlineSmall,
                                 ),
                               ),
@@ -342,7 +342,7 @@ class ConfirmPage extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('Universities Involved',
+                                child: Text('Universities',
                                   style: AcornTheme.textTheme.headlineSmall,
                                 ),
                               ),
@@ -352,7 +352,7 @@ class ConfirmPage extends StatelessWidget {
                                   child: ListView.builder(
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
-                                      itemCount: _confirm.selectedOrg.length,
+                                      itemCount: _confirm.selectedUniv.length,
                                       itemBuilder: (context, index) {
                                         return TermCard(
                                           _confirm.selectedUniv[index],
@@ -362,7 +362,27 @@ class ConfirmPage extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('People Involved',
+                                child: Text('Publishers, Websites',
+                                  style: AcornTheme.textTheme.headlineSmall,
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      30, 8, 30, 8),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: _confirm.selectedPublisher.length,
+                                      itemBuilder: (context, index) {
+                                        return TermCard(
+                                          _confirm.selectedPublisher[index],
+                                        );
+                                      }
+                                  )
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                child: Text('People',
                                     style: AcornTheme.textTheme.headlineSmall,
                                 ),
                               ),
@@ -382,7 +402,7 @@ class ConfirmPage extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
-                                child: Text('Ships Involved',
+                                child: Text('Ships',
                                   style: AcornTheme.textTheme.headlineSmall,
                                 ),
                               ),

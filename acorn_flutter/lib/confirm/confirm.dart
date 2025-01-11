@@ -69,6 +69,10 @@ class Confirm {
   List<String> selectedUniv = [];
   List<int> selectedUnivId = [];
 
+  //Publisher involved
+  List<String> selectedPublisher = [];
+  List<int> selectedPublisherId = [];
+
   //who
   List<String> selectedWho = [];
   List<int> selectedWhoId = [];

@@ -1,10 +1,12 @@
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
+import 'package:acorn_flutter/fetch/fetch_publisher.dart';
 import '../../confirm/confirm.dart';
 import '../../fetch/fetch_orgs.dart';
 import '../../fetch/fetch_people.dart';
 import '../../fetch/fetch_ships.dart';
 import '../../fetch/fetch_univs.dart';
+import '../../lists/who_options_list.dart';
 import '../../utils/build_chips.dart';
 
 
@@ -12,12 +14,14 @@ class WhoModel extends ChangeNotifier {
 
   late final FetchOrgsRepository _fetchOrgsRepository;
   late final FetchUnivsRepository _fetchUnivsRepository;
+  late final FetchPublisherRepository _fetchPublisherRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
   late final FetchShipsRepository _fetchShipsRepository;
 
   WhoModel(){
     _fetchOrgsRepository = FetchOrgsRepository();
     _fetchUnivsRepository = FetchUnivsRepository();
+    _fetchPublisherRepository = FetchPublisherRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
     _fetchShipsRepository = FetchShipsRepository();
   }
@@ -28,6 +32,9 @@ class WhoModel extends ChangeNotifier {
   final List<String> filtersUnivs = <String>[];
   final List<int> filtersUnivsId = <int>[];
 
+  final List<String> filtersPublisher = <String>[];
+  final List<int> filtersPublisherId = <int>[];
+
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
 
@@ -36,28 +43,46 @@ class WhoModel extends ChangeNotifier {
 
   var newOrg = '';
   var newUniv = '';
+  var newPublisher = '';
   var newPerson = '';
   var newShip = '';
 
-  List<String> options = ['Institutions,Organisations etc', 'Universities', 'People', 'Ships'];
+  List<String> options = whoOptions;
+  List<String> optionsFr = whoOptionsFr;
+  List<String> optionsJa = whoOptionsJa;
+
   String isSelectedOption = '';
   List<dynamic> currentDisplayList = [];
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
-      case 'Institutions,Organisations etc':
+      case 'Institutions, Organisations etc.':
+      //case 'Institutions, Organisations etc.':
+      case '機関、組織、施設など':
         await _fetchOrgsRepository.fetchOrgsInDetail();
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
         break;
       case 'Universities':
+      case 'Universités':
+      case '大学':
         await _fetchUnivsRepository.fetchUnivsInDetail();
         currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
         break;
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        await _fetchPublisherRepository.fetchPublisherInDetail();
+        currentDisplayList = _fetchPublisherRepository.listDetailPublisher;
+        break;
       case 'People':
+      case 'Personnes':
+      case '人物':
         await _fetchPeopleRepository.fetchPeopleInDetail();
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
       case 'Ships':
+      case 'Nom du navire':
+      case '船名':
         await _fetchShipsRepository.fetchShipsInDetail();
         currentDisplayList = _fetchShipsRepository.listDetailShips;
         break;
@@ -68,15 +93,28 @@ class WhoModel extends ChangeNotifier {
   setNewWord(text) {
     switch (selectedOption) {
       case 'Institutions,Organisations etc':
+      //case 'Institutions, Organisations etc.':
+      case '機関、組織、施設など':
         newOrg = text;
         break;
       case 'Universities':
+      case 'Universités':
+      case '大学':
         newUniv = text;
         break;
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        newPublisher = text;
+        break;
       case 'People':
+      case 'Personnes':
+      case '人物':
         newPerson = text;
         break;
       case 'Ships':
+      case 'Nom du navire':
+      case '船名':
         newShip = text;
         break;
     }
@@ -86,18 +124,32 @@ class WhoModel extends ChangeNotifier {
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Institutions,Organisations etc':
+      //case 'Institutions, Organisations etc.':
+      case '機関、組織、施設など':
         await _fetchOrgsRepository.addDetailOrgsAndFetch('organisations', newOrg);
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
         break;
       case 'Universities':
+      case 'Universités':
+      case '大学':
         await _fetchUnivsRepository.addDetailUnivsAndFetch('universities', newUniv);
         currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
         break;
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        await _fetchPublisherRepository.addDetailPublisherAndFetch('publisher', newPublisher);
+        currentDisplayList = _fetchPublisherRepository.listDetailPublisher;
+        break;
       case 'People':
+      case 'Personnes':
+      case '人物':
         await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
         currentDisplayList = _fetchPeopleRepository.listDetailPeople;
         break;
       case 'Ships':
+      case 'Nom du navire':
+      case '船名':
         await _fetchShipsRepository.addDetailShipsAndFetch('ships', newShip);
         currentDisplayList = _fetchShipsRepository.listDetailShips;
         break;
@@ -120,6 +172,8 @@ class WhoModel extends ChangeNotifier {
           },
         );
       case 'Universities':
+      case 'Universités':
+      case '大学':
         return buildFilterFormatImediat(
           filteredKeys: filtersUnivs,
           filteredValues: filtersUnivsId,
@@ -131,7 +185,23 @@ class WhoModel extends ChangeNotifier {
             updateSelectedUnivs(key);
           },
         );
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersPublisher,
+          filteredValues: filtersPublisherId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedPublisher = key;
+            selectedPublisherId = value;
+            updateSelectedPublisher(key);
+          },
+        );
       case 'People':
+      case 'Personnes':
+      case '人物':
         return buildFilterFormatImediat(
           filteredKeys: filtersPeople,
           filteredValues: filtersPeopleId,
@@ -144,6 +214,8 @@ class WhoModel extends ChangeNotifier {
           },
         );
       case 'Ships':
+      case 'Nom du navire':
+      case '船名':
         return buildFilterFormatImediat(
           filteredKeys: filtersShips,
           filteredValues: filtersShipsId,
@@ -166,7 +238,12 @@ class WhoModel extends ChangeNotifier {
   }
 
   void updateSelectedUnivs(String newSelectedUnivs) {
-    selectedOrgs = newSelectedUnivs;
+    selectedUnivs = newSelectedUnivs;
+    notifyListeners();
+  }
+
+  void updateSelectedPublisher(String newSelectedPublisher) {
+    selectedPublisher = newSelectedPublisher;
     notifyListeners();
   }
 
@@ -192,6 +269,9 @@ class WhoModel extends ChangeNotifier {
     confirm.selectedUniv = filtersUnivs;
     confirm.selectedUnivId = filtersUnivsId;
 
+    confirm.selectedPublisher = filtersPublisher;
+    confirm.selectedPublisherId = filtersPublisherId;
+
     confirm.selectedWho = filtersPeople;
     confirm.selectedWhoId = filtersPeopleId;
 
@@ -210,6 +290,10 @@ class WhoModel extends ChangeNotifier {
   ///仮表示
   String selectedUnivs = '';
   int selectedUnivsId = 0;
+
+  ///仮表示
+  String selectedPublisher = '';
+  int selectedPublisherId = 0;
 
   ///仮表示
   String selectedPeople = '';

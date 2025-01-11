@@ -12,8 +12,10 @@ import '../fetch/fetch_orgs.dart';
 import '../fetch/fetch_patt.dart';
 import '../fetch/fetch_people.dart';
 import '../fetch/fetch_place.dart';
+import '../fetch/fetch_publisher.dart';
 import '../fetch/fetch_ships.dart';
 import '../fetch/fetch_stars.dart';
+import '../fetch/fetch_univs.dart';
 import '../lists/countries_list.dart';
 import '../serverpod_client.dart';
 
@@ -26,6 +28,8 @@ class AddDetailModel extends ChangeNotifier {
   late final FetchPattRepository _fetchPattRepository;
   late final FetchPlaceRepository _fetchPlaceRepository;
   late final FetchOrgsRepository _fetchOrgsRepository;
+  late final FetchUnivsRepository _fetchUnivsRepository;
+  late final FetchPublisherRepository _fetchPublisherRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
   late final FetchShipsRepository _fetchShipsRepository;
   late final FetchCategoriesRepository _fetchCategoriesRepository;
@@ -38,6 +42,8 @@ class AddDetailModel extends ChangeNotifier {
     _fetchPattRepository = FetchPattRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
     _fetchOrgsRepository = FetchOrgsRepository();
+    _fetchUnivsRepository = FetchUnivsRepository();
+    _fetchPublisherRepository = FetchPublisherRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
     _fetchShipsRepository = FetchShipsRepository();
     _fetchCategoriesRepository = FetchCategoriesRepository();
@@ -55,6 +61,8 @@ class AddDetailModel extends ChangeNotifier {
   var newPATT = '';
   var newStar = '';
   var newOrg = '';
+  var newUniv = '';
+  var newPublisher = '';
   var newPerson = '';
   var newShip = '';
   var newCategory = '';
@@ -91,6 +99,14 @@ class AddDetailModel extends ChangeNotifier {
   final List<String> filtersOrgs = <String>[];
   final List<int> filtersOrgsId = <int>[];
 
+  //大学
+  final List<String> filtersUnivs = <String>[];
+  final List<int> filtersUnivsId = <int>[];
+
+  //出版社、ウェブサイト
+  final List<String> filtersPublisher = <String>[];
+  final List<int> filtersPublisherId = <int>[];
+
   //関係者
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
@@ -124,6 +140,12 @@ class AddDetailModel extends ChangeNotifier {
 
   String selectedOrgs = '';
   int selectedOrgsId = 0;
+
+  String selectedUnivs = '';
+  int selectedUnivsId = 0;
+
+  String selectedPublisher = '';
+  int selectedPublisherId = 0;
 
   String selectedPeople = '';
   int selectedPeopleId = 0;
@@ -161,6 +183,14 @@ class AddDetailModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         await _fetchOrgsRepository.fetchOrgsInDetail();
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'Universities':
+        await _fetchUnivsRepository.fetchUnivsInDetail();
+        currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
+        break;
+      case 'Publishers,Websites':
+        await _fetchPublisherRepository.fetchPublisherInDetail();
+        currentDisplayList = _fetchPublisherRepository.listDetailPublisher;
         break;
       case 'People':
         await _fetchPeopleRepository.fetchPeopleInDetail();
@@ -200,6 +230,12 @@ class AddDetailModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         newOrg = text;
         break;
+      case 'Universities':
+        newUniv = text;
+        break;
+      case 'Publishers,Websites':
+        newPublisher = text;
+        break;
       case 'People':
         newPerson = text;
         break;
@@ -238,6 +274,14 @@ class AddDetailModel extends ChangeNotifier {
       case 'Institutions,Organisations etc':
         await _fetchOrgsRepository.addDetailOrgsAndFetch('organisations', newOrg);
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
+        break;
+      case 'Universities':
+        await _fetchUnivsRepository.addDetailUnivsAndFetch('universities', newUniv);
+        currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
+        break;
+      case 'Publishers,Websites':
+        await _fetchPublisherRepository.addDetailPublisherAndFetch('publisher', newPublisher);
+        currentDisplayList = _fetchPublisherRepository.listDetailPublisher;
         break;
       case 'People':
         await _fetchPeopleRepository.addDetailPeopleAndFetch('people', newPerson);
@@ -333,6 +377,30 @@ class AddDetailModel extends ChangeNotifier {
             updateSelectedOrgs(key);
           },
         );
+      case 'Universities':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersUnivs,
+          filteredValues: filtersUnivsId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedUnivs = key;
+            selectedUnivsId = value;
+            updateSelectedUnivs(key);
+          },
+        );
+      case 'Publishers,Websites':
+        return buildFilterFormatImediat(
+          filteredKeys: filtersPublisher,
+          filteredValues: filtersPublisherId,
+          filterKey: (item as Detail).mot,
+          filterValue: item.id!,
+          onSelected: (key, value) {
+            selectedPublisher = key;
+            selectedPublisherId = value;
+            updateSelectedPublisher(key);
+          },
+        );
       case 'People':
         return buildFilterFormatImediat(
           filteredKeys: filtersPeople,
@@ -416,6 +484,16 @@ class AddDetailModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedUnivs(String newSelectedUnivs) {
+    selectedUnivs = newSelectedUnivs;
+    notifyListeners();
+  }
+
+  void updateSelectedPublisher(String newSelectedPublisher) {
+    selectedPublisher = newSelectedPublisher;
+    notifyListeners();
+  }
+
   void updateSelectedPeople(String newSelectedPeople) {
     selectedPeople = newSelectedPeople;
     notifyListeners();
@@ -474,6 +552,20 @@ class AddDetailModel extends ChangeNotifier {
     if (filtersOrgsId.isNotEmpty) {
       for (var orgId in filtersOrgsId) {
         var principalDetail = PrincipalDetail(principalId: principalId, detailId: orgId);
+        await client.principalDetail.addPDetail(principalDetail);
+      }
+    }
+
+    if (filtersUnivsId.isNotEmpty) {
+      for (var univId in filtersUnivsId) {
+        var principalDetail = PrincipalDetail(principalId: principalId, detailId: univId);
+        await client.principalDetail.addPDetail(principalDetail);
+      }
+    }
+
+    if (filtersPublisherId.isNotEmpty) {
+      for (var publisherId in filtersPublisherId) {
+        var principalDetail = PrincipalDetail(principalId: principalId, detailId: publisherId);
         await client.principalDetail.addPDetail(principalDetail);
       }
     }

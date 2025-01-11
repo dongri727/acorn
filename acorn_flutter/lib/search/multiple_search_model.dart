@@ -5,6 +5,7 @@ import 'package:acorn_flutter/export/export_list.dart';
 import 'package:acorn_flutter/fetch/fetch_ships.dart';
 import 'package:acorn_flutter/search/result_page.dart';
 import 'package:acorn_client/acorn_client.dart';
+import '../fetch/fetch_publisher.dart';
 import '../fetch/fetch_univs.dart';
 import '../scatter_view/map_page.dart';
 import '../timeline/scalable.dart';
@@ -21,6 +22,7 @@ class MultipleSearchModel extends ChangeNotifier {
   late final FetchPattRepository _fetchPattRepository;
   late final FetchOrgsRepository _fetchOrgsRepository;
   late final FetchUnivsRepository _fetchUnivsRepository;
+  late final FetchPublisherRepository _fetchPublisherRepository;
   late final FetchPeopleRepository _fetchPeopleRepository;
   late final FetchShipsRepository _fetchShipsRepository;
   late final FetchCategoriesRepository _fetchCategoriesRepository;
@@ -36,6 +38,7 @@ class MultipleSearchModel extends ChangeNotifier {
     _fetchPattRepository = FetchPattRepository();
     _fetchOrgsRepository = FetchOrgsRepository();
     _fetchUnivsRepository = FetchUnivsRepository();
+    _fetchPublisherRepository = FetchPublisherRepository();
     _fetchPeopleRepository = FetchPeopleRepository();
     _fetchShipsRepository = FetchShipsRepository();
     _fetchCategoriesRepository = FetchCategoriesRepository();
@@ -260,6 +263,18 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Publisher
+  final List<String> filtersPublisher = <String>[];
+  final List<int> filtersPublisherId = <int>[];
+
+  String selectedPublisher = '';
+  int selectedPublisherId = 0;
+
+  void updateSelectedPublisher(String newSelectedPublisher) {
+    selectedPublisher = newSelectedPublisher;
+    notifyListeners();
+  }
+
   //People
   final List<String> filtersPeople = <String>[];
   final List<int> filtersPeopleId = <int>[];
@@ -408,6 +423,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '大学':
         await _fetchUnivsRepository.fetchUnivsInDetail();
         currentDisplayList = _fetchUnivsRepository.listDetailUnivs;
+        break;
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        await _fetchPublisherRepository.fetchPublisherInDetail();
+        currentDisplayList = _fetchPublisherRepository.listDetailPublisher;
         break;
       case 'People':
       case 'Personnes':
@@ -626,6 +647,19 @@ class MultipleSearchModel extends ChangeNotifier {
               selectedUnivId = filterId;
               updateSelectedOrg(filterKey);
             });
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersPublisher,
+            filteredValues: filtersPublisherId,
+            filterKey: item.mot,
+            filterValue: item.id,
+            onSelected: (filterKey, filterId) {
+              selectedPublisher = filterKey;
+              selectedPublisherId = filterId;
+              updateSelectedOrg(filterKey);
+            });
       case 'People':
       case 'Personnes':
       case '人物':
@@ -815,6 +849,12 @@ class MultipleSearchModel extends ChangeNotifier {
       case '大学':
         _fetchPrincipalRepository.fetchPrincipalByDetailId(
             detailIds: filtersUnivsId);
+        break;
+      case 'Publishers, Websites':
+      case 'Éditeurs, Sites Web':
+      case '出版社、ウェブサイト':
+      _fetchPrincipalRepository.fetchPrincipalByDetailId(
+          detailIds: filtersPublisherId);
         break;
       case 'People':
       case 'Personnes':
