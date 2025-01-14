@@ -56,7 +56,7 @@ class MultiSearchPage extends StatelessWidget {
                           Flexible(
                             child: ShadowedContainer(
                               child: RadioButtonRowFormat(
-                                initialOption: 'CLASSIC',
+                                  initialOption: 'CLASSIC',
                                   options: model.formats,
                                   onChanged: (String? value) {
                                     model.selectedFormat = value!;
@@ -82,22 +82,23 @@ class MultiSearchPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: const Color(0x99e6e6fa),
                               ),
-                                child: ShadowedContainer(
-                                  child: CustomDropdownButton(
-                                    selectedValue: model.selectedOption,
-                                    options: optionsS,
-                                    onChanged: (String? value) {
-                                      model.selectedOption = value!;
-                                    },
-                                  ),
+                              child: ShadowedContainer(
+                                child: CustomDropdownButton(
+                                  selectedValue: model.selectedOption,
+                                  options: optionsS,
+                                  onChanged: (String? value) {
+                                    model.selectedOption = value!;
+                                  },
                                 ),
+                              ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: OutlinedButton(
                               onPressed: () async {
-                                model.fetchDropdownButtonBasis(model.selectedOption);
+                                model.fetchDropdownButtonBasis(
+                                    model.selectedOption);
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.searchE,
@@ -116,7 +117,8 @@ class MultiSearchPage extends StatelessWidget {
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(400, 8, 8, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(400, 8, 8, 8),
                                 child: BlankTextFormat(
                                     text: [
                                   ...model.filtersPeriod,
@@ -135,15 +137,16 @@ class MultiSearchPage extends StatelessWidget {
                                   ...model.filtersStarsObserved,
                                   ...model.filtersOrgs,
                                   ...model.filtersUnivs,
-                                      ...model.filtersPublisher,
+                                  ...model.filtersPublisher,
                                   ...model.filtersPeople,
-                                      ...model.filtersShips,
+                                  ...model.filtersShips,
                                   ...model.filtersCategories,
                                   ...model.filtersTerms,
                                 ].join(', ')),
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 8, 20, 8),
                                 child: ElevatedButton(
                                   onPressed: () {
                                     model.clearSearch();
@@ -152,12 +155,14 @@ class MultiSearchPage extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 8, 20, 8),
                                 child: ElevatedButton(
                                   onPressed: () {
                                     model.submitSelection();
                                   },
-                                  child: Text(AppLocalizations.of(context)!.searchF),
+                                  child: Text(
+                                      AppLocalizations.of(context)!.searchF),
                                 ),
                               ),
                             ],
@@ -166,7 +171,8 @@ class MultiSearchPage extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
                               spacing: 5.0, // Gap between FilterChips
-                              children: model.currentDisplayList.map<Widget>((item) {
+                              children:
+                                  model.currentDisplayList.map<Widget>((item) {
                                 return model.buildItemWidget(item);
                               }).toList(),
                             ),

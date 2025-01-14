@@ -2,11 +2,9 @@
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
-import 'package:acorn_flutter/fetch/fetch_ships.dart';
 import 'package:acorn_flutter/search/result_page.dart';
 import 'package:acorn_client/acorn_client.dart';
-import '../fetch/fetch_publisher.dart';
-import '../fetch/fetch_univs.dart';
+import '../scatter_view/globe_page.dart';
 import '../scatter_view/map_page.dart';
 import '../timeline/scalable.dart';
 import '../unity_view/four_d_page.dart';
@@ -51,7 +49,7 @@ class MultipleSearchModel extends ChangeNotifier {
     'CLASSIC',
     //'SCALABLE',
     'Map',
-    //'Globe',
+    'Globe',
     //'3D',
     //'4D',
     //'MR',
@@ -973,7 +971,7 @@ class MultipleSearchModel extends ChangeNotifier {
           );
         }
         break;
-            case 'Map':
+        case 'Map':
         if (_fetchPrincipalRepository.principalIds.isEmpty) {
           showNoItemDialog();
         } else {
@@ -985,7 +983,20 @@ class MultipleSearchModel extends ChangeNotifier {
             ),
           );
         }
-        break;  
+        break;
+      case 'Globe':
+        if (_fetchPrincipalRepository.principalIds.isEmpty) {
+          showNoItemDialog();
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GlobePage(
+                  principalIds: _fetchPrincipalRepository.principalIds),
+            ),
+          );
+        }
+        break;
       default:
         // 未知の選択肢に対する処理（必要に応じてここにコードを追加）
         break;

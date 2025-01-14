@@ -1,5 +1,5 @@
 List<String> whoOptions = [
-  'Institutions,Organisations etc.',
+  'Institutions, Organisations etc.',
   'Universities',
   'Publishers, Websites',
   'People',

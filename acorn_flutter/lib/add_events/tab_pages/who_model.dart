@@ -57,7 +57,6 @@ class WhoModel extends ChangeNotifier {
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       case 'Institutions, Organisations etc.':
-      //case 'Institutions, Organisations etc.':
       case '機関、組織、施設など':
         await _fetchOrgsRepository.fetchOrgsInDetail();
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
@@ -92,8 +91,7 @@ class WhoModel extends ChangeNotifier {
 
   setNewWord(text) {
     switch (selectedOption) {
-      case 'Institutions,Organisations etc':
-      //case 'Institutions, Organisations etc.':
+      case 'Institutions, Organisations etc.':
       case '機関、組織、施設など':
         newOrg = text;
         break;
@@ -123,8 +121,7 @@ class WhoModel extends ChangeNotifier {
 
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
-      case 'Institutions,Organisations etc':
-      //case 'Institutions, Organisations etc.':
+      case 'Institutions, Organisations etc.':
       case '機関、組織、施設など':
         await _fetchOrgsRepository.addDetailOrgsAndFetch('organisations', newOrg);
         currentDisplayList = _fetchOrgsRepository.listDetailOrgs;
@@ -159,7 +156,8 @@ class WhoModel extends ChangeNotifier {
 
   Widget buildItemWidget(dynamic item) {
     switch (selectedOption) {
-      case 'Institutions,Organisations etc':
+      case 'Institutions, Organisations etc.':
+      case '機関、組織、施設など':
         return buildFilterFormatImediat(
           filteredKeys: filtersOrgs,
           filteredValues: filtersOrgsId,

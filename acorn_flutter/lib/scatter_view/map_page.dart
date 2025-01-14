@@ -5,7 +5,7 @@ import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../fetch/fetch_with_map.dart';
-import 'map_model.dart';
+import 'echarts_js.dart';
 
 class MapPage extends StatefulWidget {
   final List<int>? principalIds;
@@ -101,7 +101,9 @@ class MapPageState extends State<MapPage> {
 
   Map<String, dynamic> _buildChartOptions(List<List<double>> coast, List<List<double>> ridge, List<List<double>> trench) {
     return {
-      'tooltip': {},
+      'tooltip': {
+        'trigger': 'item'
+      },
       'xAxis3D': {
         'type': 'value',
         'name': 'Longitude',
@@ -144,22 +146,28 @@ class MapPageState extends State<MapPage> {
       },
       'series': [
         {
+          'name': 'Coast',
           'type': 'scatter3D',
           'data': coast,
           'symbolSize': 3,
-          'itemStyle': {'color': 'white'}
+          'itemStyle': {'color': 'white'},
+          'tooltip': {'show': false}
         },
         {
+          'name': 'Ridge',
           'type': 'scatter3D',
           'data': ridge,
           'symbolSize': 3,
-          'itemStyle': {'color': '#bc8f8f'}
+          'itemStyle': {'color': '#bc8f8f'},
+          'tooltip': {'show': false}
         },
         {
+          'name': 'Trench',
           'type': 'scatter3D',
           'data': trench,
           'symbolSize': 3,
-          'itemStyle': {'color': '#cd5c5c'}
+          'itemStyle': {'color': '#cd5c5c'},
+          'tooltip': {'show': false}
         },
         if (_dataList.isNotEmpty)
           {
@@ -168,7 +176,10 @@ class MapPageState extends State<MapPage> {
             'symbolSize': 8,
             'dimensions': ['Longitude', 'Latitude', 'Logarithm', 'Year', 'Location', 'Precise'],
             'itemStyle': {'color': 'yellow'},
-          }
+            'tooltip': {
+              'show': true,
+            },
+          },
       ],
     };
   }
@@ -198,7 +209,7 @@ class MapPageState extends State<MapPage> {
             const Padding(
               padding: EdgeInsets.only(bottom: 50),
               child: Text(
-                  'You can zoom in, zoom out, and rotate the view. \nHowever, we currently do not support adjustments when the view is cut off due to zooming in.\n In such cases, please either zoom out or use the Pacific-centered map or the globe view.',
+                'You can zoom in, zoom out, and rotate the view. \nHowever, we currently do not support adjustments when the view is cut off due to zooming in.\n In such cases, please either zoom out or use the Pacific-centered map or the globe view.',
                 style: TextStyle(color: Colors.white),
               ),
             ),
