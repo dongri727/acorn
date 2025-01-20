@@ -2,10 +2,10 @@ import 'package:acorn_flutter/mobile/register/register_page.dart';
 import 'package:acorn_flutter/mobile/scalable/menu/mobile_scalable.dart';
 import 'package:acorn_flutter/mode.dart';
 import 'package:flutter/material.dart';
+import '../timeline/scalable.dart';
 import 'game_page.dart';
 import 'mobile_index_page.dart';
 import 'mobile_search_page.dart';
-
 
 class TabWidget extends StatefulWidget {
   const TabWidget({super.key});
@@ -19,7 +19,7 @@ class _TabWidgetState extends State<TabWidget> {
     MobileIndexPage(),
     RegisterPage(),
     SearchPage(),
-    ScalableM(),
+    //ScalableM(),
     GamePage(),
     ModePage(),
   ];
@@ -46,8 +46,8 @@ class _TabWidgetState extends State<TabWidget> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
             BottomNavigationBarItem(icon: Icon(Icons.add), label: 'REGISTER'),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'CLASSIC'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: 'SCALABLE'),
+/*            BottomNavigationBarItem(
+                icon: Icon(Icons.search), label: 'SCALABLE'),*/
             BottomNavigationBarItem(icon: Icon(Icons.games), label: 'GAME'),
             BottomNavigationBarItem(icon: Icon(Icons.link), label: 'v.Web'),
           ],

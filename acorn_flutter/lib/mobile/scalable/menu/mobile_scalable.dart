@@ -104,7 +104,7 @@ class ScalableMState extends State<ScalableM> {
             child: Padding(
               padding: const EdgeInsets.only(left: 30.0,right: 20.0),
               child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
                         icon: const Icon(

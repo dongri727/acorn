@@ -109,7 +109,7 @@ class GlobePageState extends State<GlobePage> {
     return data.map((item) {
       final double lon = (item[0] is num) ? item[0].toDouble() : double.tryParse(item[0].toString()) ?? 0.0;
       final double lat = (item[1] is num) ? item[1].toDouble() : double.tryParse(item[1].toString()) ?? 0.0;
-      return [lon, lat, 0.0];
+      return [lon, lat, -5000.0];
     }).toList();
   }
 

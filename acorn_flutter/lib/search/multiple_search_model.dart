@@ -47,7 +47,7 @@ class MultipleSearchModel extends ChangeNotifier {
 
   final List<String> formats = [
     'CLASSIC',
-    //'SCALABLE',
+    'SCALABLE',
     'Map',
     'Globe',
     //'3D',
