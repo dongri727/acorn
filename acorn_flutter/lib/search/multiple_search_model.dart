@@ -1,15 +1,12 @@
 //import 'dart:core';
+import 'dart:convert';
+
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
-import 'package:acorn_flutter/search/result_page.dart';
+import 'package:acorn_flutter/search/tab_top.dart';
 import 'package:acorn_client/acorn_client.dart';
-import '../scatter_view/globe_page.dart';
-import '../scatter_view/map_page.dart';
-import '../timeline/scalable.dart';
-import '../unity_view/four_d_page.dart';
-import '../unity_view/mr_page.dart';
-import '../unity_view/three_d_page.dart';
+import 'package:flutter/services.dart';
 import '../utils/build_chips.dart';
 
 class MultipleSearchModel extends ChangeNotifier {
@@ -28,6 +25,8 @@ class MultipleSearchModel extends ChangeNotifier {
 
   late final FetchPrincipalRepository _fetchPrincipalRepository;
 
+  late final FetchWithMapRepository _fetchWithMapRepository;
+
   MultipleSearchModel() {
     _fetchSeasRepository = FetchSeasRepository();
     _fetchPlaceRepository = FetchPlaceRepository();
@@ -43,21 +42,9 @@ class MultipleSearchModel extends ChangeNotifier {
     _fetchTermsRepository = FetchTermsRepository();
 
     _fetchPrincipalRepository = FetchPrincipalRepository();
+
+    _fetchWithMapRepository = FetchWithMapRepository();
   }
-
-  final List<String> formats = [
-    'CLASSIC',
-    'SCALABLE',
-    'Map',
-    'Globe',
-    //'3D',
-    //'4D',
-    //'MR',
-    //'GIS',
-  ];
-
-  //radioButton
-  String selectedFormat = 'CLASSIC';
 
   List<String> options = searchOptions;
   List<String> optionsFr = searchOptionsFr;
@@ -775,6 +762,7 @@ class MultipleSearchModel extends ChangeNotifier {
       case '現在の国名(起こった場所)':
         _fetchPrincipalRepository.fetchPrincipalByLocation(
             location: filtersPays);
+        print(filtersPays);
         break;
       case 'Current Place-name where it happened':
       case 'Nom de lieu actuel où cela s\'est passé':
@@ -882,7 +870,118 @@ class MultipleSearchModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void navigateBasedOnSelection(BuildContext context, String isSelectedFormat) {
+  //List<Principal> listPrincipal = [];
+  //List<int> principalIds = [];
+  List<WithMap> listWithMap = [];
+  List<Map<String, dynamic>>? scatterData;
+  List<Map<String, dynamic>>? pacificData;
+  List<dynamic>? coastLine;
+  List<dynamic>? pacificLine;
+  List<dynamic>? globeLine;
+  List<dynamic>? ridgeLine;
+  List<dynamic>? pacificRidge;
+  List<dynamic>? globeRidge;
+  List<dynamic>? trenchLine;
+  List<dynamic>? pacificTrench;
+  List<dynamic>? globeTrench;
+  List<Japanese>? japaneseList;
+
+  Future<void> fetchMapData(List<int>? principalIds, BuildContext context) async {
+
+    // JapaneseList を取得するリポジトリを Provider 経由でアクセス
+    final dataRepository = Provider.of<DataRepository>(context, listen: false);
+
+    // 必要ならば日本語リストを取得
+    if (dataRepository.isJapaneseLanguage(context) && dataRepository.japaneseList.isEmpty) {
+      await dataRepository.fetchAllJapaneseNames();
+    }
+
+    await _fetchWithMapRepository.fetchWithMap(keyNumbers: _fetchPrincipalRepository.principalIds);
+
+    //print(_fetchWithMapRepository.listWithMap);
+
+    scatterData = _fetchWithMapRepository.listWithMap.map((withMap) {
+
+      String japaneseName = dataRepository.getJapaneseName(withMap.principalId);
+      //print(japaneseName);
+
+      return {
+        "value": [withMap.longitude, withMap.latitude, withMap.logarithm, withMap.annee, withMap.location, withMap.precise],
+        "name": dataRepository.isJapaneseLanguage(context)
+            ? japaneseName
+            : withMap.affair,
+      };
+    }).toList();
+
+    pacificData = _fetchWithMapRepository.listWithMap.map((withMap) {
+
+      String japaneseName = dataRepository.getJapaneseName(withMap.principalId);
+
+      return {
+        "value": [shiftLongitude(withMap.longitude), withMap.latitude, withMap.logarithm, withMap.annee, withMap.location, withMap.precise],
+        "name": dataRepository.isJapaneseLanguage(context)
+            ? japaneseName
+            : withMap.affair,
+      };
+    }).toList();
+
+    notifyListeners();
+  }
+
+  double shiftLongitude(double longitude) {
+    // Shift the longitude by 205 degrees, and wrap it around using modulo 360
+    double shifted = longitude + 205.0;
+    if (shifted > 180.0) shifted -= 360.0;
+    return shifted;
+  }
+
+  Future<void> fetchCoastLine() async {
+    final String jsonString = await rootBundle.loadString('assets/json/coastline.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+    coastLine = jsonData.map((coordinate) => [...coordinate, 0]).toList();
+    globeLine = jsonData.map((dataItem) => [dataItem[0], dataItem[1], 7]).toList();
+    pacificLine = jsonData.map((coordinate) {
+      // Ensure that all values are converted to double
+      double longitude = shiftLongitude((coordinate[0] as num).toDouble());
+      double latitude = (coordinate[1] as num).toDouble();
+      return [longitude, latitude, 0.0]; // Add a z-value of 0.0 for 3D compatibility
+    }).toList();
+
+    notifyListeners();
+  }
+
+  Future<void> fetchRidgeLine() async {
+    final String jsonString = await rootBundle.loadString('assets/json/ridge.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+    ridgeLine = jsonData.map((coordinate) => [...coordinate, 0]).toList();
+    globeRidge = jsonData.map((dataItem) => [dataItem[0], dataItem[1], 7]).toList();
+    pacificRidge = jsonData.map((coordinate) {
+      // Ensure that all values are converted to double
+      double longitude = shiftLongitude((coordinate[0] as num).toDouble());
+      double latitude = (coordinate[1] as num).toDouble();
+      return [longitude, latitude, 0.0]; // Add a z-value of 0.0 for 3D compatibility
+    }).toList();
+
+    notifyListeners();
+  }
+
+  Future<void> fetchTrenchLine() async {
+    final String jsonString = await rootBundle.loadString('assets/json/trench.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+    trenchLine = jsonData.map((coordinate) => [...coordinate, 0]).toList();
+    globeTrench = jsonData.map((dataItem) => [dataItem[0], dataItem[1], 7]).toList();
+    pacificTrench = jsonData.map((coordinate) {
+      // Ensure that all values are converted to double
+      double longitude = shiftLongitude((coordinate[0] as num).toDouble());
+      double latitude = (coordinate[1] as num).toDouble();
+      return [longitude, latitude, 0.0]; // Add a z-value of 0.0 for 3D compatibility
+    }).toList();
+
+    notifyListeners();
+  }
+
+  Future<void> showResult(BuildContext context) async {
+
     // ダイアログを表示する関数
     void showNoItemDialog() {
       showDialog(
@@ -904,102 +1003,37 @@ class MultipleSearchModel extends ChangeNotifier {
       );
     }
 
-    // 選択に基づいて処理を分岐
-    switch (isSelectedFormat) {
-      case 'CLASSIC':
-        if (_fetchPrincipalRepository.listPrincipal.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResultPage(
-                  principal: _fetchPrincipalRepository.listPrincipal),
-            ),
-          );
-        }
-        break;
-      case 'SCALABLE':
-        if (_fetchPrincipalRepository.listPrincipal.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
+    if (!context.mounted) return;
+
+    await fetchMapData(_fetchPrincipalRepository.principalIds, context); //principalに相当するMapを取り、対応する日本語を取り込む。
+    await fetchCoastLine(); //海岸線を取る。
+    await fetchRidgeLine(); //ridgeを取る
+    await fetchTrenchLine(); //trenchを取る
+
+    if (!context.mounted) return;
+
+    if (_fetchPrincipalRepository.listPrincipal.isEmpty) {
+      showNoItemDialog();
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
               builder: (context) =>
-                  Scalable(principal: _fetchPrincipalRepository.listPrincipal),
-            ),
-          );
-        }
-        break;
-      case '3D':
-        if (_fetchPrincipalRepository.principalIds.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ThreeDViewPage(
-                  principalIds: _fetchPrincipalRepository.principalIds),
-            ),
-          );
-        }
-        break;
-      case '4D':
-        if (_fetchPrincipalRepository.principalIds.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FourDViewPage(
-                  principalIds: _fetchPrincipalRepository.principalIds),
-            ),
-          );
-        }
-        break;
-      case 'MR':
-        if (_fetchPrincipalRepository.principalIds.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MRViewPage(
-                  principalIds: _fetchPrincipalRepository.principalIds),
-            ),
-          );
-        }
-        break;
-        case 'Map':
-        if (_fetchPrincipalRepository.principalIds.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MapPage(
-                  principalIds: _fetchPrincipalRepository.principalIds),
-            ),
-          );
-        }
-        break;
-      case 'Globe':
-        if (_fetchPrincipalRepository.principalIds.isEmpty) {
-          showNoItemDialog();
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GlobePage(
-                  principalIds: _fetchPrincipalRepository.principalIds),
-            ),
-          );
-        }
-        break;
-      default:
-        // 未知の選択肢に対する処理（必要に応じてここにコードを追加）
-        break;
+                  ResultTabTop(
+                      principal: _fetchPrincipalRepository.listPrincipal,
+                      principalIds: _fetchPrincipalRepository.principalIds,
+                      scatterData: scatterData!,
+                      pacificData: pacificData!,
+                      coastLine: coastLine!,
+                      pacificLine: pacificLine!,
+                      globeLine: globeLine!,
+                      ridgeLine: ridgeLine!,
+                      pacificRidge: pacificRidge!,
+                      globeRidge: globeRidge!,
+                      trenchLine: trenchLine!,
+                      pacificTrench: pacificTrench!,
+                      globeTrench: globeTrench!)
+          ));
     }
   }
 }

@@ -1,21 +1,18 @@
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/search/multiple_search_model.dart';
-import 'package:acorn_flutter/utils/navigation_button.dart';
-import '../add_events/tab_top.dart';
 import '../detail/detail_page.dart';
-import 'multiple_search_page.dart';
 
-class ResultPage extends StatelessWidget {
+class ClassicViewPage extends StatelessWidget {
   final List<Principal>? principal;
-  const ResultPage({ super.key , this.principal});
+  const ClassicViewPage({ super.key , this.principal});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (_) => MultipleSearchModel(),
       child: Scaffold(
-        appBar: AppBar(
+/*        appBar: AppBar(
           backgroundColor: Colors.grey[200],
           leading: const NavigationButton(
             destinationPage: MultiSearchPage(),
@@ -28,7 +25,7 @@ class ResultPage extends StatelessWidget {
                 destinationPage: TabPage(),
                 buttonText: 'add a new event')
         ],
-        ),
+        ),*/
         body: Consumer<MultipleSearchModel>(
           builder: (context, model, child) {
             return Container(

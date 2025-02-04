@@ -1,5 +1,6 @@
 import 'package:acorn_flutter/search/multiple_search_page.dart';
 import 'package:acorn_flutter/timeline/pont_data.dart';
+import 'package:acorn_flutter/timeline/scalable.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
@@ -204,9 +205,7 @@ class TimelineWidgetState extends State<TimelineWidget> {
                               icon: const Icon(Icons.arrow_back),
                               onPressed: () {
                                 widget.timeline.isActive = false;
-                                //Navigator.of(context).pop();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const MultiSearchPage()));
-                                //return true;
+                                Navigator.of(context).pop();
                               },
                             ),
                             const Text(

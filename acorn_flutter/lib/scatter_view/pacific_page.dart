@@ -4,27 +4,27 @@ import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'echarts_js.dart';
 
-class MapPage extends StatefulWidget {
+class PacificPage extends StatefulWidget {
   // 前ページから受け取るパラメータ
-  final List<Map<String, dynamic>> scatterData;
-  final List<dynamic> coastLine;
-  final List<dynamic> ridgeLine;
-  final List<dynamic> trenchLine;
+  final List<Map<String, dynamic>> pacificData;
+  final List<dynamic> pacificLine;
+  final List<dynamic> pacificRidge;
+  final List<dynamic> pacificTrench;
 
-  const MapPage({
+  const PacificPage({
     super.key,
-    required this.scatterData,
-    required this.coastLine,
-    required this.ridgeLine,
-    required this.trenchLine,
+    required this.pacificData,
+    required this.pacificLine,
+    required this.pacificRidge,
+    required this.pacificTrench,
   });
 
   @override
-  MapPageState createState() => MapPageState();
+  PacificPageState createState() => PacificPageState();
 }
 
-class MapPageState extends State<MapPage> {
-  final String _viewType = 'echarts-div-a';
+class PacificPageState extends State<PacificPage> {
+  final String _viewType = 'echarts-div_p';
   bool _isLoading = true; // ローディング状態のフラグ
 
   @override
@@ -34,7 +34,7 @@ class MapPageState extends State<MapPage> {
     // HTML 要素（チャート用の DIV）の登録
     ui_web.platformViewRegistry.registerViewFactory(_viewType, (int viewId) {
       final html.DivElement div = html.DivElement()
-        ..id = 'echarts_div_a'
+        ..id = 'echarts_div_p'
         ..style.width = '100%'
         ..style.height = '800px';
       return div;
@@ -51,12 +51,12 @@ class MapPageState extends State<MapPage> {
     const maxAttempts = 50;
     int attempts = 0;
     // document.getElementById を使って、対象の DOM 要素が存在するか確認
-    while (html.document.getElementById('echarts_div_a') == null && attempts < maxAttempts) {
+    while (html.document.getElementById('echarts_div_p') == null && attempts < maxAttempts) {
       await Future.delayed(const Duration(milliseconds: 100));
       attempts++;
     }
 
-    if (html.document.getElementById('echarts_div_a') != null) {
+    if (html.document.getElementById('echarts_div_p') != null) {
       await _initializeChart();
     } else {
       print('Error: echarts_div not found after waiting.');
@@ -73,21 +73,21 @@ class MapPageState extends State<MapPage> {
   Future<void> _initializeChart() async {
     try {
       // 各ラインデータを変換
-      final List<List<double>> transformedCoast = _transformData(widget.coastLine);
-      final List<List<double>> transformedRidge = _transformData(widget.ridgeLine);
-      final List<List<double>> transformedTrench = _transformData(widget.trenchLine);
+      final List<List<double>> transformedCoast = _transformData(widget.pacificLine);
+      final List<List<double>> transformedRidge = _transformData(widget.pacificRidge);
+      final List<List<double>> transformedTrench = _transformData(widget.pacificTrench);
 
       // チャートオプションの作成
       final Map<String, dynamic> option = _buildChartOptions(
         transformedCoast,
         transformedRidge,
         transformedTrench,
-        widget.scatterData,
+        widget.pacificData,
       );
 
       final String optionJson = json.encode(option);
       // 対象の DIV が存在することが確認できたのでチャートを初期化
-      initChart('echarts_div_a', optionJson);
+      initChart('echarts_div_p', optionJson);
     } catch (e) {
       print('Error initializing chart: $e');
     }
@@ -203,7 +203,7 @@ class MapPageState extends State<MapPage> {
             Container(
               color: Colors.black.withOpacity(0.5),
               child: const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.blue),
               ),
             ),
         ],
@@ -211,4 +211,3 @@ class MapPageState extends State<MapPage> {
     );
   }
 }
-

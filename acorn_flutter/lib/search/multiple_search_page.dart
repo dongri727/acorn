@@ -50,28 +50,6 @@ class MultiSearchPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: HintText(
-                              hintText: AppLocalizations.of(context)!.searchB,
-                            ),
-                          ),
-                          Flexible(
-                            child: ShadowedContainer(
-                              child: RadioButtonRowFormat(
-                                  initialOption: 'CLASSIC',
-                                  options: model.formats,
-                                  onChanged: (String? value) {
-                                    model.selectedFormat = value!;
-                                  }),
-                            ),
-                          ),
-                        ],
-                      )),
-                  Expanded(
-                      flex: 1,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: HintText(
                               hintText: AppLocalizations.of(context)!.searchD,
                             ),
                           ),
@@ -156,12 +134,13 @@ class MultiSearchPage extends StatelessWidget {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                                const EdgeInsets.fromLTRB(20, 8, 20, 8),
                                 child: ElevatedButton(
                                   onPressed: () {
                                     model.submitSelection();
                                   },
                                   child: Text(
+                                    style: const TextStyle(color: Colors.red),
                                       AppLocalizations.of(context)!.searchF),
                                 ),
                               ),
@@ -189,9 +168,9 @@ class MultiSearchPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                model.navigateBasedOnSelection(context, model.selectedFormat);
+                model.showResult(context);
               },
-              label: const Text('SHOW'),
+              label: const Text('確定しましたか？\nSHOW'),
             ),
           ),
         );

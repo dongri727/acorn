@@ -3,26 +3,32 @@ import 'dart:html' as html;
 import 'dart:ui_web' as ui_web;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../fetch/fetch_with_map.dart';
 import 'echarts_js.dart';
+import 'globe_hint_page.dart';
 
 class GlobePage extends StatefulWidget {
-  final List<int>? principalIds;
-  const GlobePage({super.key, this.principalIds});
+  // 前ページから受け取るパラメータ
+  final List<Map<String, dynamic>> scatterData;
+  final List<dynamic> globeLine;
+  final List<dynamic> globeRidge;
+  final List<dynamic> globeTrench;
+
+  const GlobePage({
+    super.key,
+    required this.scatterData,
+    required this.globeLine,
+    required this.globeRidge,
+    required this.globeTrench,
+  });
 
   @override
   GlobePageState createState() => GlobePageState();
 }
 
 class GlobePageState extends State<GlobePage> {
-  final FetchWithMapRepository _repository = FetchWithMapRepository();
   // ECharts を表示するための viewType 名
   final String _viewType = 'echarts-div-globe';
-
-  // 実際にプロットするデータを保持
-  // (repository.fetchWithMap で取得したデータを _onFetchWithMapButtonPressed でセットする想定)
-  List<Map<String, dynamic>> _dataList = [];
+  bool _isLoading = true; // ローディング状態のフラグ
 
   @override
   void initState() {
@@ -35,67 +41,54 @@ class GlobePageState extends State<GlobePage> {
         ..style.width = '100%'
         ..style.height = '800px';
 
-      // 画面描画直後に ECharts 初期化を実行
-      Future.microtask(() async {
-        await _initializeChart();
-      });
-
       return div;
+    });
+
+    // ウィジェットツリーのレンダリング完了後に DOM の生成を確認してからチャート初期化する
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _waitForDomAndInitialize();
     });
   }
 
-  /// ボタン押下時にバックエンドからデータを取得し、_dataList をセット
-  Future<void> _onFetchWithMapButtonPressed() async {
-    try {
-      // widget.principalIds から ID リストを取得
-      final keyNumbers = widget.principalIds ?? [];
-      if (keyNumbers.isEmpty) {
-        debugPrint('No principal IDs provided');
-        return;
-      }
-      // データ取得
-      final listWithMap = await _repository.fetchWithMap(keyNumbers: keyNumbers);
+  /// DOM に対象の DIV が現れるまで待ってからチャートを初期化する
+  Future<void> _waitForDomAndInitialize() async {
+    const maxAttempts = 50;
+    int attempts = 0;
+    // document.getElementById を使って、対象の DOM 要素が存在するか確認
+    while (html.document.getElementById('echarts_div_globe') == null && attempts < maxAttempts) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      attempts++;
+    }
 
-      setState(() {
-        // ECharts が期待する [longitude, latitude, 他] 形式へ格納
-        _dataList = listWithMap
-            .map((d) => {
-          'name': d.affair, // ツールチップなどで表示したい名称
-          'value': [
-            d.longitude,
-            d.latitude,
-            d.logarithm, // 時系列や他の数値表現に使う想定(例)
-            d.annee,
-            d.location,
-            d.precise
-          ],
-        })
-            .toList();
-      });
-
-      // データを更新したので再度チャートを初期化(再描画)
+    if (html.document.getElementById('echarts_div_globe') != null) {
       await _initializeChart();
-    } catch (e) {
-      debugPrint('Error fetching data: $e');
+    } else {
+      print('Error: echarts_div not found after waiting.');
+    }
+
+    // チャートの初期化が完了したら、ローディングを解除する
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   /// ECharts のオプション生成と initChart 呼び出し
   Future<void> _initializeChart() async {
     try {
-      final String coastLineString = await rootBundle.loadString('assets/json/coastline.json');
-      final List<dynamic> coastLineData = json.decode(coastLineString);
-      final String ridgeLineString = await rootBundle.loadString('assets/json/ridge.json');
-      final List<dynamic> ridgeLineData = json.decode(ridgeLineString);
-      final String trenchLineString = await rootBundle.loadString('assets/json/trench.json');
-      final List<dynamic> trenchLineData = json.decode(trenchLineString);
 
-      final transformedCoast = _transformData(coastLineData);
-      final transformedRidge = _transformData(ridgeLineData);
-      final transformedTrench = _transformData(trenchLineData);
+      final transformedCoast = _transformData(widget.globeLine);
+      final transformedRidge = _transformData(widget.globeRidge);
+      final transformedTrench = _transformData(widget.globeTrench);
 
       // ECharts 用のオプションを作成
-      final Map<String, dynamic> option = _buildChartOptions(transformedCoast, transformedRidge, transformedTrench);
+      final Map<String, dynamic> option = _buildChartOptions(
+          transformedCoast,
+          transformedRidge,
+          transformedTrench,
+          widget.scatterData,
+      );
 
       // Dart のマップを JSON に変換して、JS 側に渡す
       final String optionJson = json.encode(option);
@@ -114,7 +107,7 @@ class GlobePageState extends State<GlobePage> {
   }
 
   /// Globe で表示する際の ECharts オプションを定義
-  Map<String, dynamic> _buildChartOptions(List<List<double>> coast, List<List<double>> ridge, List<List<double>> trench) {
+  Map<String, dynamic> _buildChartOptions(List<List<double>> coast, List<List<double>> ridge, List<List<double>> trench, List<Map<String, dynamic>> scatterData) {
     return {
       'tooltip': {
         'trigger': 'item'
@@ -153,7 +146,7 @@ class GlobePageState extends State<GlobePage> {
           'blendMode': "lighter",
           'symbolSize': 5,
           'itemStyle': {
-            'color': "#adff2f",
+            'color': "#b22222",
             'opacity': 1
           },
           'data': ridge,
@@ -175,7 +168,7 @@ class GlobePageState extends State<GlobePage> {
           'type': 'scatter3D',
           'coordinateSystem': 'globe',
           // 取得したデータをそのまま描画
-          'data': _dataList,
+          'data': scatterData,
           'symbolSize': 8,
           // value の各要素名を指定しておくとデバッグ・ツールで見やすい
           'dimensions': [
@@ -200,32 +193,35 @@ class GlobePageState extends State<GlobePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+/*      appBar: AppBar(
         title: const Text('Results on Globe'),
-      ),
+      ),*/
       body: Container(
         color: Colors.black,
-        child: Column(
+        child: Stack(
           children: [
-            // Globe を表示する領域
-            Expanded(
-              child: HtmlElementView(viewType: _viewType),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _onFetchWithMapButtonPressed,
-              child: const Text('Show on Globe'),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'You can rotate or zoom in/out the globe.\nTap "Show on Globe" to fetch and display the data by principal IDs.',
-                style: TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
+            // 常に HtmlElementView を表示しておき、上からローディングをオーバーレイする
+            Positioned.fill(child: HtmlElementView(viewType: _viewType)),
+            if (_isLoading)
+              Container(
+                color: Colors.black.withOpacity(0.5),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
-            ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // HintPage へ遷移する処理
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const GlobeHintPage()),
+          );
+        },
+        tooltip: 'Show Hint',
+        child: const Icon(Icons.question_mark),
       ),
     );
   }

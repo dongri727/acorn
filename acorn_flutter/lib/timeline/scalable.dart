@@ -72,7 +72,7 @@ class ScalableState extends State<Scalable> {
     }
 
     return Scaffold(
-      appBar: AppBar(
+/*      appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -82,10 +82,8 @@ class ScalableState extends State<Scalable> {
             );
           },
         ),
-
         title: const Text("SCALABLE"),
-
-      ),
+      ),*/
       body: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
