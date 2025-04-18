@@ -15,8 +15,7 @@ class JapaneseEndpoint extends Endpoint {
   }
 
   ///Adds a japanese in DB
-  Future<int> addJapanese(Session session, Japanese japanese) async {
+  Future<void> addJapanese(Session session, Japanese japanese) async {
     await Japanese.db.insertRow(session, japanese);
-    return japanese.id!;
   }
 }

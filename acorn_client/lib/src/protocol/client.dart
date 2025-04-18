@@ -315,8 +315,8 @@ class EndpointJapanese extends _i1.EndpointRef {
       );
 
   ///Adds a japanese in DB
-  _i2.Future<int> addJapanese(_i8.Japanese japanese) =>
-      caller.callServerEndpoint<int>(
+  _i2.Future<void> addJapanese(_i8.Japanese japanese) =>
+      caller.callServerEndpoint<void>(
         'japanese',
         'addJapanese',
         {'japanese': japanese},

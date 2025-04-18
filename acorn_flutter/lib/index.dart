@@ -1,3 +1,5 @@
+import 'package:acorn_flutter/analysis_page.dart';
+import 'package:acorn_flutter/csv_page.dart';
 import 'package:flutter/material.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
@@ -30,6 +32,21 @@ class IndexPage extends StatelessWidget {
                   flex: 4,
                   child: Column(
                     children: [
+/*                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.push<String>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AnalysisPage(),
+                              ),
+                            );
+                          },
+                          child: const Text( 'Analysis'
+                          ),
+                        ),
+                      ),*/
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OutlinedButton(
@@ -46,6 +63,23 @@ class IndexPage extends StatelessWidget {
                             style: AcornTheme.textTheme.bodyLarge,
                         ),
                       ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.push<String>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CSVPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.webIndexC,
+                            style: AcornTheme.textTheme.bodyLarge,
+                          ),
+                        ),
                       ),
                        Padding(
                         padding: const EdgeInsets.all(20.0),

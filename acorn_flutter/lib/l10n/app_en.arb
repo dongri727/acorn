@@ -39,6 +39,7 @@
   "modeG": "Android App",
   "webIndexA": "Register Event",
   "webIndexB": "Search & View" ,
+  "webIndexC": "Bulk Import",
   "tabTopA": "Register an Event",
   "tabTopB": "index",
   "tabTopC": "search",

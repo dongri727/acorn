@@ -39,6 +39,7 @@
   "modeG": "Application Android",
   "webIndexA" : "Enregistrer des événements",
   "webIndexB" : "Chercher et Voir",
+  "webIndexC" : "Importation en lot",
   "tabTopA": "Enregistrer un événement",
   "tabTopB": "index",
   "tabTopC": "recherche",
