@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html' as html;
+import 'dart:math';
 import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'echarts_js.dart';
@@ -73,9 +74,44 @@ class PacificPageState extends State<PacificPage> {
   Future<void> _initializeChart() async {
     try {
       // 各ラインデータを変換
-      final List<List<double>> transformedCoast = _transformData(widget.pacificLine);
-      final List<List<double>> transformedRidge = _transformData(widget.pacificRidge);
-      final List<List<double>> transformedTrench = _transformData(widget.pacificTrench);
+      // Compute midZ from pacificData
+      List<double> zValues = widget.pacificData
+          .map((item) => (item['value'][2] as num).toDouble())
+          .toList();
+      double minZ = zValues.reduce(min).floorToDouble();
+      double maxZ = zValues.reduce(max).ceilToDouble();
+      double midZ = (minZ + maxZ) / 2;
+
+      // Set all line z-values to midZ
+      final List<List<double>> transformedCoast = widget.pacificLine.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
+
+      final List<List<double>> transformedRidge = widget.pacificRidge.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
+
+      final List<List<double>> transformedTrench = widget.pacificTrench.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
 
       // チャートオプションの作成
       final Map<String, dynamic> option = _buildChartOptions(
@@ -132,8 +168,8 @@ class PacificPageState extends State<PacificPage> {
       'zAxis3D': {
         'type': 'value',
         'name': 'Timeline',
-        'min': -5000,
-        'max': 2000,
+        'min': 'minZ',
+        'max': 'maxZ',
         'splitNumber': 2,
       },
       'grid3D': {
@@ -192,9 +228,6 @@ class PacificPageState extends State<PacificPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-/*      appBar: AppBar(
-        title: const Text('Results on Map (Atlantic centered)'),
-      ),*/
       body: Stack(
         children: [
           // 常に HtmlElementView を表示しておき、上からローディングをオーバーレイする

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html' as html;
+import 'dart:math';
 import 'dart:ui_web' as ui_web;
 import 'package:flutter/material.dart';
 import 'echarts_js.dart';
@@ -73,9 +74,50 @@ class MapPageState extends State<MapPage> {
   Future<void> _initializeChart() async {
     try {
       // 各ラインデータを変換
-      final List<List<double>> transformedCoast = _transformData(widget.coastLine);
-      final List<List<double>> transformedRidge = _transformData(widget.ridgeLine);
-      final List<List<double>> transformedTrench = _transformData(widget.trenchLine);
+
+      // Compute midZ from pacificData
+      List<double> zValues = widget.scatterData
+          .map((item) => (item['value'][2] as num).toDouble())
+          .toList();
+      double minZ = zValues.reduce(min).floorToDouble();
+      double maxZ = zValues.reduce(max).ceilToDouble();
+      double midZ = (minZ + maxZ) / 2;
+
+      // Set all line z-values to midZ
+      final List<List<double>> transformedCoast = widget.coastLine.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
+
+      final List<List<double>> transformedRidge = widget.ridgeLine.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
+
+      final List<List<double>> transformedTrench = widget.trenchLine.map((coordinate) {
+        final double lon = (coordinate[0] is num)
+            ? (coordinate[0] as num).toDouble()
+            : double.tryParse(coordinate[0].toString()) ?? 0.0;
+        final double lat = (coordinate[1] is num)
+            ? (coordinate[1] as num).toDouble()
+            : double.tryParse(coordinate[1].toString()) ?? 0.0;
+        return [lon, lat, midZ];
+      }).toList();
+
+
+      //final List<List<double>> transformedCoast = _transformData(widget.coastLine);
+      //final List<List<double>> transformedRidge = _transformData(widget.ridgeLine);
+      //final List<List<double>> transformedTrench = _transformData(widget.trenchLine);
 
       // チャートオプションの作成
       final Map<String, dynamic> option = _buildChartOptions(
@@ -132,8 +174,8 @@ class MapPageState extends State<MapPage> {
       'zAxis3D': {
         'type': 'value',
         'name': 'Timeline',
-        'min': -5000,
-        'max': 2000,
+        'min': 'minZ',
+        'max': 'maxZ',
         'splitNumber': 2,
       },
       'grid3D': {
