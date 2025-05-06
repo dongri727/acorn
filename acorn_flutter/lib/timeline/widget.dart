@@ -1,6 +1,7 @@
 import 'package:acorn_flutter/search/multiple_search_page.dart';
 import 'package:acorn_flutter/timeline/pont_data.dart';
 import 'package:acorn_flutter/timeline/scalable.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'entry.dart';
@@ -168,56 +169,75 @@ class TimelineWidgetState extends State<TimelineWidget> {
     EdgeInsets devicePadding = MediaQuery.of(context).padding;
 
     return Scaffold(
-      body: GestureDetector(
-          onLongPress: _longPress,
-          onTapDown: _tapDown,
-          onScaleStart: _scaleStart,
-          onScaleUpdate: _scaleUpdate,
-          onScaleEnd: _scaleEnd,
-          onTapUp: _tapUp,
-          child: Stack(children: <Widget>[
-            TimelineRenderWidget(
-                timeline: timeline,
-                topOverlap: topOverlap + devicePadding.top,
-                focusItem: widget.focusItem,
-                touchBubble: onTouchBubble,
-                touchEntry: onTouchEntry
-            ),
-
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: devicePadding.top,
-                    color: const Color(0x99E9E9E9),
-                  ),
-                  Container(
+      body: Listener(
+        onPointerSignal: (pointerSignal) {
+          if (pointerSignal is PointerScrollEvent) {
+            final scaleChange = pointerSignal.scrollDelta.dy > 0 ? 1.1 : 0.9;
+            _handleMouseZoom(pointerSignal.localPosition, scaleChange);
+          }
+        },
+        child: GestureDetector(
+            onLongPress: _longPress,
+            onTapDown: _tapDown,
+            onScaleStart: _scaleStart,
+            onScaleUpdate: _scaleUpdate,
+            onScaleEnd: _scaleEnd,
+            onTapUp: _tapUp,
+            child: Stack(children: <Widget>[
+              TimelineRenderWidget(
+                  timeline: timeline,
+                  topOverlap: topOverlap + devicePadding.top,
+                  focusItem: widget.focusItem,
+                  touchBubble: onTouchBubble,
+                  touchEntry: onTouchEntry
+              ),
+        
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: devicePadding.top,
                       color: const Color(0x99E9E9E9),
-                      height: 56.0,
-                      width: double.infinity,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                              //color: _headerTextColor ?? Colors.black.withOpacity(0.5),
-                              alignment: Alignment.centerLeft,
-                              icon: const Icon(Icons.arrow_back),
-                              onPressed: () {
-                                widget.timeline.isActive = false;
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            const Text(
-                              "SCALABLE VIEW",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 20.0,
+                    ),
+                    Container(
+                        color: const Color(0x99E9E9E9),
+                        height: 56.0,
+                        width: double.infinity,
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              IconButton(
+                                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                //color: _headerTextColor ?? Colors.black.withOpacity(0.5),
+                                alignment: Alignment.centerLeft,
+                                icon: const Icon(Icons.arrow_back),
+                                onPressed: () {
+                                  widget.timeline.isActive = false;
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                            ),
-                          ]))
-                ])
-          ])),
+                              const Text(
+                                "SCALABLE VIEW",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ]))
+                  ])
+            ])),
+      ),
+    );
+  }
+  void _handleMouseZoom(Offset focalPoint, double scaleChange) {
+    double scale = (timeline.end - timeline.start) / context.size!.height;
+    double focus = timeline.start + focalPoint.dy * scale;
+
+    timeline.setViewport(
+      start: focus + (timeline.start - focus) * scaleChange,
+      end: focus + (timeline.end - focus) * scaleChange,
+      height: context.size!.height,
+      animate: true,
     );
   }
 }
