@@ -150,7 +150,10 @@ class PacificPageState extends State<PacificPage> {
       List<Map<String, dynamic>> scatterData,
       ) {
     return {
-      'tooltip': {'trigger': 'item'},
+      'tooltip': {
+        'trigger': 'item',
+        'triggerOn': 'click',
+      },
       'xAxis3D': {
         'type': 'value',
         'name': 'Longitude',

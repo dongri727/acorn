@@ -114,11 +114,6 @@ class MapPageState extends State<MapPage> {
         return [lon, lat, midZ];
       }).toList();
 
-
-      //final List<List<double>> transformedCoast = _transformData(widget.coastLine);
-      //final List<List<double>> transformedRidge = _transformData(widget.ridgeLine);
-      //final List<List<double>> transformedTrench = _transformData(widget.trenchLine);
-
       // チャートオプションの作成
       final Map<String, dynamic> option = _buildChartOptions(
         transformedCoast,
@@ -156,7 +151,10 @@ class MapPageState extends State<MapPage> {
       List<Map<String, dynamic>> scatterData,
       ) {
     return {
-      'tooltip': {'trigger': 'item'},
+      'tooltip': {
+        'trigger': 'item',
+        'triggerOn': 'click',
+      },
       'xAxis3D': {
         'type': 'value',
         'name': 'Longitude',
