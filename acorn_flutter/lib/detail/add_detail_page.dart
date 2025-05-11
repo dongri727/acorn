@@ -61,6 +61,8 @@ class AddDetailPage extends StatelessWidget {
                                   BlankTextFormat(
                                       text: model.filtersStars.join(', ')),
                                   BlankTextFormat(text: model.filtersOrgs.join(', ')),
+                                  BlankTextFormat(text: model.filtersUnivs.join(', ')),
+                                  BlankTextFormat(text: model.filtersPublisher.join(', ')),
                                   BlankTextFormat(text: model.filtersPeople.join(', ')),
                                   BlankTextFormat(text: model.filtersShips.join(', ')),
                                   BlankTextFormat(
@@ -97,6 +99,8 @@ class AddDetailPage extends StatelessWidget {
                               || model.newPATT.trim().isNotEmpty
                               || model.newStar.trim().isNotEmpty
                               || model.newOrg.trim().isNotEmpty
+                              || model.newUniv.trim().isNotEmpty
+                              || model.newPublisher.trim().isNotEmpty
                               || model.newPerson.trim().isNotEmpty
                               || model.newShip.trim().isNotEmpty
                               || model.newCategory.trim().isNotEmpty
