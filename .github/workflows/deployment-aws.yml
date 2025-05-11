@@ -49,6 +49,13 @@ jobs:
         working-directory: acorn_server
         run: dart pub get
 
+      - name: Activate Serverpod CLI
+        run: dart pub global activate serverpod_cli 2.6.0
+
+      - name: Generate Serverpod code
+        working-directory: acorn_server
+        run: serverpod generate
+
       - name: Compile server
         working-directory: acorn_server
         run: dart compile kernel bin/main.dart
