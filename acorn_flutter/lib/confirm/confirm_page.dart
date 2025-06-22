@@ -214,6 +214,25 @@ class ConfirmPage extends StatelessWidget {
                                       confirmText: _confirm.name,
                                       confirmColor: const Color(0xFFF0E68C)),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),
+                                  child: Text('Geologic Time Scale',
+                                    style: AcornTheme.textTheme.headlineSmall,
+                                  ),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 8),
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: _confirm.selectedGeoTime.length,
+                                        itemBuilder: (context, index) {
+                                          return TermCard(
+                                            _confirm.selectedGeoTime[index],
+                                          );
+                                        })
+                                ),
+
 
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(30, 50, 30, 8),

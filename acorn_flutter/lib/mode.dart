@@ -76,7 +76,7 @@ class ModePageState extends State<ModePage> {
                       });
                 },
                 color: Colors.white60),
-            TextButtonFormat(
+/*            TextButtonFormat(
                 label: 'How many data do we have ?',
                 onPressed: () {
                   Navigator.push<String>(
@@ -86,7 +86,7 @@ class ModePageState extends State<ModePage> {
                     ),
                   );
                 },
-                color: Colors.white60),
+                color: Colors.white60),*/
             TextButtonFormat(
                 label: AppLocalizations.of(context)!.modeC,
                 onPressed: (_launchYouTube),

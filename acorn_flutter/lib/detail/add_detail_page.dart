@@ -51,6 +51,8 @@ class AddDetailPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   BlankTextFormat(
+                                      text: model.filtersGeoTime.join(', ')),
+                                  BlankTextFormat(
                                       text: model.filtersPaysInv.join(', ')),
                                   BlankTextFormat(
                                       text: model.filtersPlaces.join(', ')),

@@ -1,4 +1,7 @@
 List<String> detailOptions = [
+  'Geologic Time Scale',
+  'Archaeological Periodization',
+  'Climate Chronology',
   'Current Name of Country Involved',
   'Current Name of Place Involved',
   'Name of Country Involved at that time',
@@ -14,6 +17,9 @@ List<String> detailOptions = [
 ];
 
 List<String> detailOptionsFr = [
+  'Geologic Time Scale',
+  'Archaeological Periodization',
+  'Climate Chronology',
   'Nom actuel du pays impliqué',
   'Nom actuel du lieu impliqué',
   'Nom du pays impliqué à l\'époque',
@@ -29,6 +35,9 @@ List<String> detailOptionsFr = [
 ];
 
 List<String> detailOptionsJa = [
+  '地質時代区分',
+  '考古学的時代区分',
+  '気候編年',
   '関係国の現在名',
   '関係都市の現在名',
   '当時の関係国名',

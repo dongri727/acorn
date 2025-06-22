@@ -41,6 +41,10 @@ class Confirm {
   double z = 0.0;
   String geo = '';
 
+  //additional when
+  List<String> selectedGeoTime = [];
+  List<int> selectedGeoTimeId = [];
+
   //pays involved
   List<String> selectedCountries = [];
   List<int> selectedCountriesId = [];

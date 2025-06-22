@@ -1,3 +1,4 @@
+import 'package:acorn_flutter/add_events/tab_pages/when_page.dart';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_utils.dart';
 import 'package:acorn_flutter/index.dart';
@@ -51,7 +52,7 @@ class TabPage extends StatelessWidget {
             ),
             child: SafeArea(
               child: DefaultTabController(
-                length: 6,
+                length: 7,
                 child: Column(
                   children: [
                     TabBar(
@@ -61,6 +62,7 @@ class TabPage extends StatelessWidget {
                       tabs: [
                         Tab(text: AppLocalizations.of(context)!.tabTopD),
                         Tab(text: AppLocalizations.of(context)!.tabTopE),
+                        Tab(text: "Additional When"),
                         Tab(text: AppLocalizations.of(context)!.tabTopF),
                         Tab(text: AppLocalizations.of(context)!.tabTopG),
                         Tab(text: AppLocalizations.of(context)!.tabTopH),
@@ -72,7 +74,8 @@ class TabPage extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           PrincipalPage(), // 必須
-                          WherePageGate(), // 地名･座標
+                          WherePageGate(),
+                          WhenPage(),// 地名･座標
                           PaysPage(),//関係国・都市
                           WhoPage(), // 関係団体･関係者
                           TermsPage(), // 検索語

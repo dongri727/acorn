@@ -5,7 +5,6 @@ class AnalysisEndpoint extends Endpoint {
      var countCountries = await session.db.unsafeQuery(
       r'SELECT principal.location, COUNT(*)FROM principalGROUP BY principal.locationON CONFLICT (pays) DO UPDATESET combien = EXCLUDED.combien;',
     );
-
     return countCountries;
   }
 }

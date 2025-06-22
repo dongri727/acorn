@@ -1,4 +1,4 @@
-import 'package:acorn_client/acorn_client.dart';
+/* import 'package:acorn_client/acorn_client.dart';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/lists/data_count_countries.dart';
 import 'package:acorn_flutter/serverpod_client.dart';
@@ -14,14 +14,15 @@ class AnalysisPageState extends State<AnalysisPage> {
   //List<Pays> countCountries = [];
   List<dynamic> countCountries = [];
   List<Categories> countCategories = [];
+  List<dynamic>
 
-/*  Future<void> fetchCountCountries() async {
+ Future<void> fetchCountCountries() async {
     countCountries = await client.pays.getPays();
     setState(() {});
-  }*/
+  }
 
-  Future<void> fetchCountCountries() async {
-    countCountries = await client.analysis.getCountCountries();
+  Future<void> fetchCountLocations() async {
+    countLocations = await client.principal.getLocationsCount();
     setState(() {});
   }
 
@@ -94,4 +95,4 @@ class AnalysisPageState extends State<AnalysisPage> {
       ),
     );
   }
-}
+} */

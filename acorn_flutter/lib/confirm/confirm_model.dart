@@ -78,6 +78,15 @@ class ConfirmModel extends ChangeNotifier {
           debugPrint('add in space');
         }
 
+        ///Additional When
+        if (confirm.selectedGeoTimeId.isNotEmpty) {
+          for (var geoTimeId in confirm.selectedGeoTimeId) {
+            var pDetailGeoTime = PrincipalDetail(
+                principalId: principalId, detailId: geoTimeId);
+            await client.principalDetail.addPDetail(pDetailGeoTime);
+          }
+        }
+
         //CATT where it happened
         if (confirm.selectedCattId != 0) {
             var pCatt = PrincipalDetail(

@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:acorn_flutter/fetch/fetch_categories.dart';
 import 'package:acorn_flutter/fetch/fetch_terms.dart';
 import 'package:acorn_flutter/lists/detail_options_list.dart';
+import 'package:acorn_flutter/lists/geologic_time_scale.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:acorn_client/acorn_client.dart';
@@ -57,6 +58,7 @@ class AddDetailModel extends ChangeNotifier {
   List<dynamic> currentDisplayList = [];
 
   var newPlace = '';
+  var newGeoTime = '';
   var newCATT = '';
   var newPATT = '';
   var newStar = '';
@@ -67,6 +69,11 @@ class AddDetailModel extends ChangeNotifier {
   var newShip = '';
   var newCategory = '';
   var newTerm = '';
+
+  //Additional When
+  List<Map<String, dynamic>> geoTime = geologicTimeScale;
+  final List<String> filtersGeoTime = <String>[];
+  final List<int> filtersGeoTimeID = <int>[];
 
   //関係国の現在名
   List<Map<String, dynamic>> listPaysInv = countries;
@@ -123,6 +130,9 @@ class AddDetailModel extends ChangeNotifier {
   final List<String> filtersTerms = <String>[];
   final List<int> filtersTermsId = <int>[];
 
+  String selectedGeoTime = '';
+  int selectedGeoTimeId = 0;
+
   String selectedPaysInv = '';
   int selectedPaysInvId = 0;
 
@@ -161,6 +171,9 @@ class AddDetailModel extends ChangeNotifier {
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
+      case 'Geologic Time Scale':
+        currentDisplayList = geoTime;
+        break;
       case 'Current Name of Country Involved':
         currentDisplayList = listPaysInv;
         break;
@@ -215,6 +228,7 @@ class AddDetailModel extends ChangeNotifier {
   setNewWord(text) {
     switch (selectedOption) {
       //country must not be added
+      //geoTime must not be added
       case 'Current Name of Place Involved':
         newPlace = text;
         break;
@@ -255,6 +269,7 @@ class AddDetailModel extends ChangeNotifier {
   Future<void> addAndFetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
       //country must not be added
+      //GeoTime must not be added
       case 'Current Name of Place Involved':
         await _fetchPlaceRepository.addDetailPlacesAndFetch('places_involved', newPlace);
         currentDisplayList = _fetchPlaceRepository.listPlaces;
@@ -304,6 +319,17 @@ class AddDetailModel extends ChangeNotifier {
   }
   Widget buildItemWidget(dynamic item) {
     switch (selectedOption) {
+      case 'Geologic Time Scale':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersGeoTime,
+            filteredValues: filtersGeoTimeID,
+            filterKey: item['name'],
+            filterValue: item['detailId'],
+            onSelected: (key, value) {
+              selectedPaysInv = key;
+              selectedPaysInvId = value;
+              updateSelectedGeoTime(key);
+            });
       case 'Current Name of Country Involved':
         return buildFilterFormatImediat(
             filteredKeys: filtersPaysInv,
@@ -454,6 +480,11 @@ class AddDetailModel extends ChangeNotifier {
     }
   }
 
+  void updateSelectedGeoTime(String newSelectedGeoTime) {
+    selectedGeoTime = newSelectedGeoTime;
+    notifyListeners();
+  }
+
   void updateSelectedPaysInv(String newSelectedPaysInv) {
     selectedPaysInv = newSelectedPaysInv;
     notifyListeners();
@@ -515,6 +546,12 @@ class AddDetailModel extends ChangeNotifier {
   }
 
   Future<void> savePrincipalDetail() async {
+    if (filtersGeoTimeID.isNotEmpty) {
+      for (var geoTimeId in filtersGeoTimeID) {
+        var principalDetail = PrincipalDetail(principalId: principalId, detailId: geoTimeId);
+        await client.principalDetail.addPDetail(principalDetail);
+      }
+    }
     if (filtersPaysInvId.isNotEmpty) {
       for (var paysInvId in filtersPaysInvId) {
         var principalDetail = PrincipalDetail(principalId: principalId, detailId: paysInvId);
