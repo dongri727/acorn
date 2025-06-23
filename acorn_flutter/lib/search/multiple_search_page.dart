@@ -98,7 +98,7 @@ class MultiSearchPage extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.fromLTRB(400, 8, 8, 8),
                                 child: BlankTextFormat(
-                                    text: [
+                                    text: <String>[
                                   ...model.filtersPeriod,
                                   ...model.filtersUniverse,
                                   ...model.filtersStars,
@@ -108,6 +108,7 @@ class MultiSearchPage extends StatelessWidget {
                                   ...model.filtersSeas,
                                   ...model.filtersCatts,
                                   ...model.filtersPatts,
+                                      ...model.filtersGeoTime,
                                   ...model.filtersPaysInv,
                                   ...model.filtersPlaceInv,
                                   ...model.filtersPaysInvATT,

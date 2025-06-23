@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
+import 'package:acorn_flutter/fetch/fetch_geotime.dart';
+import 'package:acorn_flutter/lists/geologic_time_scale.dart';
 import 'package:acorn_flutter/search/tab_top.dart';
 import 'package:acorn_client/acorn_client.dart';
 import 'package:flutter/services.dart';
@@ -165,6 +167,20 @@ class MultipleSearchModel extends ChangeNotifier {
     selectedPatt = newSelectedPatt;
     notifyListeners();
   }
+
+  //additional when
+  final List<Map<String, dynamic>> geoTime = geologicTimeScale;
+  final List<String> filtersGeoTime = <String>[];
+  final List<int> filtersGeoTimeId = <int>[];
+
+  String selectedGeoTime = '';
+  int selectedGeoTimeId = 0;
+
+  void updateSelectedGeoTime(String newSelectedGeoTime) {
+    selectedGeoTime = newSelectedGeoTime;
+    notifyListeners();
+  }
+
 
   //Countries involved
   List<Map<String, dynamic>> listPaysInv = countries;
@@ -338,6 +354,7 @@ class MultipleSearchModel extends ChangeNotifier {
             pays.map((country) => country['name'] as String).toList();
         //updateDisplayList(pays.map((country) => country['name'] as String).toList());
         break;
+
       case 'Current Place-name where it happened':
       case 'Nom de lieu actuel où cela s\'est passé':
       case '現在の地名(起こった場所)':
@@ -368,6 +385,13 @@ class MultipleSearchModel extends ChangeNotifier {
         await _fetchPattRepository.fetchPattsInDetail();
         currentDisplayList = _fetchPattRepository.listDetailPatts;
         break;
+
+      case 'Geologic Time Scale':
+      case '地質時代区分':
+        currentDisplayList = geoTime;
+        //updateDisplayList(geoTIme.map((geoTime) => geoTime['name'] as String).toList());
+        break;
+
       case 'Countries involved':
       case 'Pays impliqués':
       case '関係国名':
@@ -541,6 +565,20 @@ class MultipleSearchModel extends ChangeNotifier {
               selectedPattId = filterId;
               updateSelectedPatt(filterKey);
             });
+
+      case 'Geologic Time Scale':
+      case '地質時代区分':
+      return buildFilterFormatImediat(
+          filteredKeys: filtersGeoTime,
+          filteredValues: filtersGeoTimeId,
+          filterKey: item['name'],
+          filterValue: item['detailId'],
+          onSelected: (filterKey, filterId) {
+            selectedPays = filterKey;
+            selectedPaysId = filterId;
+            updateSelectedPays(filterKey);
+          });
+
       case 'Countries involved':
       case 'Pays impliqués':
       case '関係国名':
@@ -712,6 +750,7 @@ class MultipleSearchModel extends ChangeNotifier {
     oceans.clear();
     _fetchSeasRepository.listSeas.clear();
     filtersSeas.clear();
+    filtersGeoTime.clear();
     listPaysInv.clear();
     filtersPaysInv.clear();
     listPlaceInv.clear();
@@ -793,6 +832,13 @@ class MultipleSearchModel extends ChangeNotifier {
         _fetchPrincipalRepository.fetchPrincipalByDetailId(
             detailIds: filtersPattsId);
         break;
+
+      case 'Geologic Time Scale':
+      case '地質時代区分':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+            detailIds: filtersGeoTimeId);
+        break;
+
       case 'Countries involved':
       case 'Pays impliqués':
       case '関係国名':
