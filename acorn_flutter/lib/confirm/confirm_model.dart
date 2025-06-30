@@ -86,6 +86,13 @@ class ConfirmModel extends ChangeNotifier {
             await client.principalDetail.addPDetail(pDetailGeoTime);
           }
         }
+        if (confirm.selectedArchaeTimeId.isNotEmpty) {
+          for (var archaeTimeId in confirm.selectedArchaeTimeId) {
+            var pDetailArchaeTime = PrincipalDetail(
+                principalId: principalId, detailId: archaeTimeId);
+            await client.principalDetail.addPDetail(pDetailArchaeTime);
+          }
+        }
 
         //CATT where it happened
         if (confirm.selectedCattId != 0) {

@@ -53,6 +53,8 @@ class AddDetailPage extends StatelessWidget {
                                   BlankTextFormat(
                                       text: model.filtersGeoTime.join(', ')),
                                   BlankTextFormat(
+                                      text: model.filtersArchaeTime.join(', ')),
+                                  BlankTextFormat(
                                       text: model.filtersPaysInv.join(', ')),
                                   BlankTextFormat(
                                       text: model.filtersPlaces.join(', ')),

@@ -57,10 +57,8 @@ class WhenPage extends StatelessWidget {
                             child: Column(
                               children: [
                                 BlankTextFormat(text: model.filtersGeoTime.join(', ')),
-/*                                BlankTextFormat(text: model.filtersUnivs.join(', ')),
-                                BlankTextFormat(text: model.filtersPublisher.join(', ')),
-                                BlankTextFormat(text: model.filtersPeople.join(', ')),
-                                BlankTextFormat(text: model.filtersShips.join(', ')),*/
+                                BlankTextFormat(text: model.filtersArchaeTime.join(', ')),
+
                               ],
                             ),
                           ),

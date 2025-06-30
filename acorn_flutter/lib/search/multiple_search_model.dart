@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:acorn_flutter/export/exporter.dart';
 import 'package:acorn_flutter/export/export_fetch.dart';
 import 'package:acorn_flutter/export/export_list.dart';
-import 'package:acorn_flutter/fetch/fetch_geotime.dart';
+import 'package:acorn_flutter/lists/archaeology_list.dart';
 import 'package:acorn_flutter/lists/geologic_time_scale.dart';
 import 'package:acorn_flutter/search/tab_top.dart';
 import 'package:acorn_client/acorn_client.dart';
@@ -180,7 +180,17 @@ class MultipleSearchModel extends ChangeNotifier {
     selectedGeoTime = newSelectedGeoTime;
     notifyListeners();
   }
+  final List<Map<String, dynamic>> archaeTime = archaeology;
+  final List<String> filtersArchaeTime = <String>[];
+  final List<int> filtersArchaeTimeId = <int>[];
 
+  String selectedArchaeTime = '';
+  int selectedArchaeTimeId = 0;
+
+  void updateSelectedArchaeTime(String newSelectedArchaeTime) {
+    selectedArchaeTime = newSelectedArchaeTime;
+    notifyListeners();
+  }
 
   //Countries involved
   List<Map<String, dynamic>> listPaysInv = countries;
@@ -391,6 +401,11 @@ class MultipleSearchModel extends ChangeNotifier {
         currentDisplayList = geoTime;
         //updateDisplayList(geoTIme.map((geoTime) => geoTime['name'] as String).toList());
         break;
+      case 'Archaeological Periodization':
+      case '考古学的時代区分':
+        currentDisplayList = archaeTime;
+        //updateDisplayList(archaeTIme.map((archaeTime) => archaeTime['name'] as String).toList());
+        break;
 
       case 'Countries involved':
       case 'Pays impliqués':
@@ -578,6 +593,18 @@ class MultipleSearchModel extends ChangeNotifier {
             selectedPaysId = filterId;
             updateSelectedPays(filterKey);
           });
+      case 'Archaeological Periodization':
+      case '考古学的時代区分':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersArchaeTime,
+            filteredValues: filtersArchaeTimeId,
+            filterKey: item['name'],
+            filterValue: item['detailId'],
+            onSelected: (filterKey, filterId) {
+              selectedPays = filterKey;
+              selectedPaysId = filterId;
+              updateSelectedPays(filterKey);
+            });
 
       case 'Countries involved':
       case 'Pays impliqués':
@@ -837,6 +864,11 @@ class MultipleSearchModel extends ChangeNotifier {
       case '地質時代区分':
         _fetchPrincipalRepository.fetchPrincipalByDetailId(
             detailIds: filtersGeoTimeId);
+        break;
+      case 'Archaeological Periodization':
+      case '考古学的時代区分':
+        _fetchPrincipalRepository.fetchPrincipalByDetailId(
+          detailIds: filtersArchaeTimeId);
         break;
 
       case 'Countries involved':

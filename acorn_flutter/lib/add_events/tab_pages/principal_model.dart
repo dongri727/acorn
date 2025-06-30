@@ -229,22 +229,22 @@ class PrincipalModel extends ChangeNotifier {
       case 'Billion Years':
       case "Milliards d'années":
       case '〜十億年前':
-        newAnnee = '${newYearD}B years ago';
+        newAnnee = '${newYearD}Bya';
         break;
       case 'Million Years':
       case "Millions d'années":
       case '〜百万年前':
-        newAnnee = '${newYearD}M years ago';
+        newAnnee = '${newYearD}Mya';
         break;
       case 'Thousand Years':
       case "Milliers d'années":
       case '千年単位':
-        newAnnee = '${newYearD}K years ago';
+        newAnnee = '${newYearD}kya';
         break;
       case 'Years by Dating Methods':
       case "Années par méthodes de datation":
       case '炭素年代測定':
-        newAnnee = 'about $newYearD years ago';
+        newAnnee = 'about $newYearD ya';
         break;
       case 'Before-CommonEra':
       case "Avant l'ère commune":

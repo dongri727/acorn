@@ -1,0 +1,17 @@
+List<Map<String, dynamic>> archaeology = [
+  {'id': 10, 'name':'Paleolithic　旧石器時代', 'detailId': 1227},
+  {'id': 11, 'name':'Aceramic Culture　無土器文化', 'detailId': 1289},
+  {'id': 20, 'name':'Mesolithic　中石器時代', 'detailId': 1290},
+  {'id': 30, 'name':'Neolithic　新石器時代', 'detailId': 504},
+  {'id': 31, 'name':'Aceramic Neolithic　無土器新石器時代', 'detailId': 1291},
+  {'id': 32, 'name':'Ceramic Culture　有土器文化', 'detailId': 1292},
+  {'id': 40, 'name':'Chalcolithic　銅器時代', 'detailId': 1293},
+  {'id': 50, 'name':'Bronze Age　青銅器時代', 'detailId': 529},
+  {'id': 60, 'name':'Iron Age　鉄器時代', 'detailId': 511},
+  {'id': 70, 'name':'Hunter-Gathering　狩猟採集', 'detailId': 1216},
+  {'id': 71, 'name':'Sedentism　定住', 'detailId': 1294},
+  {'id': 72, 'name':'agriculture　農業', 'detailId': 738},
+  {'id': 73, 'name':'irrigation　灌漑', 'detailId': 1295},
+  {'id': 81, 'name':'settlement　集落', 'detailId': 1296},
+  {'id': 82, 'name':'urbanism　都市化', 'detailId': 1297},
+];

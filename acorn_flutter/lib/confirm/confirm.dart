@@ -44,6 +44,8 @@ class Confirm {
   //additional when
   List<String> selectedGeoTime = [];
   List<int> selectedGeoTimeId = [];
+  List<String> selectedArchaeTime = [];
+  List<int> selectedArchaeTimeId = [];
 
   //pays involved
   List<String> selectedCountries = [];

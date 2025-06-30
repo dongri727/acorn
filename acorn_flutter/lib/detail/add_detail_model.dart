@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:acorn_flutter/fetch/fetch_categories.dart';
 import 'package:acorn_flutter/fetch/fetch_terms.dart';
+import 'package:acorn_flutter/lists/archaeology_list.dart';
 import 'package:acorn_flutter/lists/detail_options_list.dart';
 import 'package:acorn_flutter/lists/geologic_time_scale.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,6 +76,10 @@ class AddDetailModel extends ChangeNotifier {
   final List<String> filtersGeoTime = <String>[];
   final List<int> filtersGeoTimeID = <int>[];
 
+  List<Map<String, dynamic>> archaeTime = archaeology;
+  final List<String> filtersArchaeTime = <String>[];
+  final List<int> filtersArcheTimeID = <int>[];
+
   //関係国の現在名
   List<Map<String, dynamic>> listPaysInv = countries;
   final List<String> filtersPaysInv = <String>[];
@@ -133,6 +138,9 @@ class AddDetailModel extends ChangeNotifier {
   String selectedGeoTime = '';
   int selectedGeoTimeId = 0;
 
+  String selectedArchaeTime = '';
+  int selectedArchaeTimeId = 0;
+
   String selectedPaysInv = '';
   int selectedPaysInvId = 0;
 
@@ -173,6 +181,9 @@ class AddDetailModel extends ChangeNotifier {
     switch (selectedOption) {
       case 'Geologic Time Scale':
         currentDisplayList = geoTime;
+        break;
+      case 'Archaeological Periodization':
+        currentDisplayList = archaeTime;
         break;
       case 'Current Name of Country Involved':
         currentDisplayList = listPaysInv;
@@ -323,6 +334,17 @@ class AddDetailModel extends ChangeNotifier {
         return buildFilterFormatImediat(
             filteredKeys: filtersGeoTime,
             filteredValues: filtersGeoTimeID,
+            filterKey: item['name'],
+            filterValue: item['detailId'],
+            onSelected: (key, value) {
+              selectedPaysInv = key;
+              selectedPaysInvId = value;
+              updateSelectedGeoTime(key);
+            });
+      case 'Archaeological Periodization':
+        return buildFilterFormatImediat(
+            filteredKeys: filtersArchaeTime,
+            filteredValues: filtersArcheTimeID,
             filterKey: item['name'],
             filterValue: item['detailId'],
             onSelected: (key, value) {
@@ -485,6 +507,11 @@ class AddDetailModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedArchaeTime(String newSelectedArchaeTime) {
+    selectedArchaeTime = newSelectedArchaeTime;
+    notifyListeners();
+  }
+
   void updateSelectedPaysInv(String newSelectedPaysInv) {
     selectedPaysInv = newSelectedPaysInv;
     notifyListeners();
@@ -549,6 +576,12 @@ class AddDetailModel extends ChangeNotifier {
     if (filtersGeoTimeID.isNotEmpty) {
       for (var geoTimeId in filtersGeoTimeID) {
         var principalDetail = PrincipalDetail(principalId: principalId, detailId: geoTimeId);
+        await client.principalDetail.addPDetail(principalDetail);
+      }
+    }
+    if (filtersArcheTimeID.isNotEmpty) {
+      for (var archaeTimeId in filtersArcheTimeID) {
+        var principalDetail = PrincipalDetail(principalId: principalId, detailId: archaeTimeId);
         await client.principalDetail.addPDetail(principalDetail);
       }
     }
