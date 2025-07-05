@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
 import 'utils/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:acorn_flutter/export/exporter.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({super.key});

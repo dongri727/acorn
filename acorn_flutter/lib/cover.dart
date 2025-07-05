@@ -4,7 +4,8 @@ import 'package:acorn_flutter/utils/shadowed_container.dart';
 import 'package:flutter/material.dart';
 import 'info_page.dart';
 import 'mode.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:acorn_flutter/export/exporter.dart';
+
 
 
 class CoverPage extends StatefulWidget {

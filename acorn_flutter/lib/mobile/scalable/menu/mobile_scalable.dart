@@ -1,5 +1,6 @@
 import "package:acorn_client/acorn_client.dart";
 import "package:flutter/material.dart";
+import "../../../l10n/app_localizations.dart";
 import "../../../lists/countries_list.dart";
 import "../../../serverpod_client.dart";
 import "../../../timeline/widget.dart";
@@ -7,7 +8,7 @@ import "../timeline/mobile_bloc_provider.dart";
 import "../timeline/mobile_timeline.dart";
 import "../timeline/mobile_widget.dart";
 import 'menu_data.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import "mobile_menu_section.dart";
 
 class ScalableM extends StatefulWidget {
