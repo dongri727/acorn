@@ -8,12 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Placeatts implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class Placeatts
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Placeatts._({
     this.id,
     required this.placeatt,
@@ -41,8 +40,11 @@ abstract class Placeatts implements _i1.TableRow, _i1.ProtocolSerialization {
   String placeatt;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [Placeatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Placeatts copyWith({
     int? id,
     String? placeatt,
@@ -104,6 +106,9 @@ class _PlaceattsImpl extends Placeatts {
           placeatt: placeatt,
         );
 
+  /// Returns a shallow copy of this [Placeatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Placeatts copyWith({
     Object? id = _Undefined,
@@ -116,7 +121,7 @@ class _PlaceattsImpl extends Placeatts {
   }
 }
 
-class PlaceattsTable extends _i1.Table {
+class PlaceattsTable extends _i1.Table<int?> {
   PlaceattsTable({super.tableRelation}) : super(tableName: 'placeatts') {
     placeatt = _i1.ColumnString(
       'placeatt',
@@ -140,7 +145,7 @@ class PlaceattsInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Placeatts.t;
+  _i1.Table<int?> get table => Placeatts.t;
 }
 
 class PlaceattsIncludeList extends _i1.IncludeList {
@@ -160,12 +165,34 @@ class PlaceattsIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Placeatts.t;
+  _i1.Table<int?> get table => Placeatts.t;
 }
 
 class PlaceattsRepository {
   const PlaceattsRepository._();
 
+  /// Returns a list of [Placeatts]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<Placeatts>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
@@ -183,10 +210,27 @@ class PlaceattsRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [Placeatts] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<Placeatts?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
@@ -202,10 +246,11 @@ class PlaceattsRepository {
       orderByList: orderByList?.call(Placeatts.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [Placeatts] by its [id] or null if no such row exists.
   Future<Placeatts?> findById(
     _i1.Session session,
     int id, {
@@ -213,10 +258,16 @@ class PlaceattsRepository {
   }) async {
     return session.db.findById<Placeatts>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [Placeatts]s in the list and returns the inserted rows.
+  ///
+  /// The returned [Placeatts]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<Placeatts>> insert(
     _i1.Session session,
     List<Placeatts> rows, {
@@ -224,10 +275,13 @@ class PlaceattsRepository {
   }) async {
     return session.db.insert<Placeatts>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [Placeatts] and returns the inserted row.
+  ///
+  /// The returned [Placeatts] will have its `id` field set.
   Future<Placeatts> insertRow(
     _i1.Session session,
     Placeatts row, {
@@ -235,10 +289,15 @@ class PlaceattsRepository {
   }) async {
     return session.db.insertRow<Placeatts>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [Placeatts]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<Placeatts>> update(
     _i1.Session session,
     List<Placeatts> rows, {
@@ -248,10 +307,13 @@ class PlaceattsRepository {
     return session.db.update<Placeatts>(
       rows,
       columns: columns?.call(Placeatts.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [Placeatts]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<Placeatts> updateRow(
     _i1.Session session,
     Placeatts row, {
@@ -261,10 +323,13 @@ class PlaceattsRepository {
     return session.db.updateRow<Placeatts>(
       row,
       columns: columns?.call(Placeatts.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [Placeatts]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<Placeatts>> delete(
     _i1.Session session,
     List<Placeatts> rows, {
@@ -272,10 +337,11 @@ class PlaceattsRepository {
   }) async {
     return session.db.delete<Placeatts>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [Placeatts].
   Future<Placeatts> deleteRow(
     _i1.Session session,
     Placeatts row, {
@@ -283,10 +349,11 @@ class PlaceattsRepository {
   }) async {
     return session.db.deleteRow<Placeatts>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<Placeatts>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PlaceattsTable> where,
@@ -294,10 +361,12 @@ class PlaceattsRepository {
   }) async {
     return session.db.deleteWhere<Placeatts>(
       where: where(Placeatts.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PlaceattsTable>? where,
@@ -307,7 +376,7 @@ class PlaceattsRepository {
     return session.db.count<Placeatts>(
       where: where?.call(Placeatts.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

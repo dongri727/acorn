@@ -41,6 +41,9 @@ abstract class StarsInvolved implements _i1.SerializableModel {
 
   int starId;
 
+  /// Returns a shallow copy of this [StarsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   StarsInvolved copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _StarsInvolvedImpl extends StarsInvolved {
           starId: starId,
         );
 
+  /// Returns a shallow copy of this [StarsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   StarsInvolved copyWith({
     Object? id = _Undefined,

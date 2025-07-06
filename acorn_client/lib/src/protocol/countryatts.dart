@@ -36,6 +36,9 @@ abstract class Countryatts implements _i1.SerializableModel {
 
   String countryatt;
 
+  /// Returns a shallow copy of this [Countryatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Countryatts copyWith({
     int? id,
     String? countryatt,
@@ -65,6 +68,9 @@ class _CountryattsImpl extends Countryatts {
           countryatt: countryatt,
         );
 
+  /// Returns a shallow copy of this [Countryatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Countryatts copyWith({
     Object? id = _Undefined,

@@ -76,6 +76,9 @@ abstract class WithGlobe implements _i1.SerializableModel {
 
   double coefficient;
 
+  /// Returns a shallow copy of this [WithGlobe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   WithGlobe copyWith({
     int? id,
     int? principalId,
@@ -137,6 +140,9 @@ class _WithGlobeImpl extends WithGlobe {
           coefficient: coefficient,
         );
 
+  /// Returns a shallow copy of this [WithGlobe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   WithGlobe copyWith({
     Object? id = _Undefined,

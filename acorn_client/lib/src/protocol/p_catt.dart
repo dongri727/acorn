@@ -41,6 +41,9 @@ abstract class PrincipalCatt implements _i1.SerializableModel {
 
   int cattId;
 
+  /// Returns a shallow copy of this [PrincipalCatt]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalCatt copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalCattImpl extends PrincipalCatt {
           cattId: cattId,
         );
 
+  /// Returns a shallow copy of this [PrincipalCatt]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalCatt copyWith({
     Object? id = _Undefined,

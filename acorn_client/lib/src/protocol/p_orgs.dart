@@ -41,6 +41,9 @@ abstract class PrincipalOrgs implements _i1.SerializableModel {
 
   int orgId;
 
+  /// Returns a shallow copy of this [PrincipalOrgs]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalOrgs copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalOrgsImpl extends PrincipalOrgs {
           orgId: orgId,
         );
 
+  /// Returns a shallow copy of this [PrincipalOrgs]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalOrgs copyWith({
     Object? id = _Undefined,

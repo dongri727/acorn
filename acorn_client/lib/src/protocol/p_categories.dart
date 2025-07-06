@@ -41,6 +41,9 @@ abstract class PrincipalCategories implements _i1.SerializableModel {
 
   int categoryId;
 
+  /// Returns a shallow copy of this [PrincipalCategories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalCategories copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalCategoriesImpl extends PrincipalCategories {
           categoryId: categoryId,
         );
 
+  /// Returns a shallow copy of this [PrincipalCategories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalCategories copyWith({
     Object? id = _Undefined,

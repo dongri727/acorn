@@ -41,6 +41,9 @@ abstract class PrincipalPeople implements _i1.SerializableModel {
 
   int personId;
 
+  /// Returns a shallow copy of this [PrincipalPeople]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalPeople copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalPeopleImpl extends PrincipalPeople {
           personId: personId,
         );
 
+  /// Returns a shallow copy of this [PrincipalPeople]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalPeople copyWith({
     Object? id = _Undefined,

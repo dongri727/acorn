@@ -41,6 +41,9 @@ abstract class PrincipalDetail implements _i1.SerializableModel {
 
   int detailId;
 
+  /// Returns a shallow copy of this [PrincipalDetail]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalDetail copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalDetailImpl extends PrincipalDetail {
           detailId: detailId,
         );
 
+  /// Returns a shallow copy of this [PrincipalDetail]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalDetail copyWith({
     Object? id = _Undefined,

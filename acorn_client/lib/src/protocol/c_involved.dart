@@ -41,6 +41,9 @@ abstract class CountryInvolved implements _i1.SerializableModel {
 
   int paysId;
 
+  /// Returns a shallow copy of this [CountryInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   CountryInvolved copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _CountryInvolvedImpl extends CountryInvolved {
           paysId: paysId,
         );
 
+  /// Returns a shallow copy of this [CountryInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   CountryInvolved copyWith({
     Object? id = _Undefined,

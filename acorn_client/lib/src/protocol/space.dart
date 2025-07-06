@@ -106,6 +106,9 @@ abstract class Space implements _i1.SerializableModel {
 
   double lightYear;
 
+  /// Returns a shallow copy of this [Space]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Space copyWith({
     int? id,
     int? principalId,
@@ -191,6 +194,9 @@ class _SpaceImpl extends Space {
           lightYear: lightYear,
         );
 
+  /// Returns a shallow copy of this [Space]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Space copyWith({
     Object? id = _Undefined,

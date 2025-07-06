@@ -41,6 +41,9 @@ abstract class Places implements _i1.SerializableModel {
 
   String country;
 
+  /// Returns a shallow copy of this [Places]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Places copyWith({
     int? id,
     String? place,
@@ -74,6 +77,9 @@ class _PlacesImpl extends Places {
           country: country,
         );
 
+  /// Returns a shallow copy of this [Places]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Places copyWith({
     Object? id = _Undefined,

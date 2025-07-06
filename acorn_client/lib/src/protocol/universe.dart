@@ -36,6 +36,9 @@ abstract class Universe implements _i1.SerializableModel {
 
   String universe;
 
+  /// Returns a shallow copy of this [Universe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Universe copyWith({
     int? id,
     String? universe,
@@ -65,6 +68,9 @@ class _UniverseImpl extends Universe {
           universe: universe,
         );
 
+  /// Returns a shallow copy of this [Universe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Universe copyWith({
     Object? id = _Undefined,

@@ -71,6 +71,9 @@ abstract class Principal implements _i1.SerializableModel {
 
   String precise;
 
+  /// Returns a shallow copy of this [Principal]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Principal copyWith({
     int? id,
     String? period,
@@ -128,6 +131,9 @@ class _PrincipalImpl extends Principal {
           precise: precise,
         );
 
+  /// Returns a shallow copy of this [Principal]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Principal copyWith({
     Object? id = _Undefined,

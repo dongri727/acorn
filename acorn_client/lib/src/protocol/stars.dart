@@ -41,6 +41,9 @@ abstract class Stars implements _i1.SerializableModel {
 
   String area;
 
+  /// Returns a shallow copy of this [Stars]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Stars copyWith({
     int? id,
     String? star,
@@ -74,6 +77,9 @@ class _StarsImpl extends Stars {
           area: area,
         );
 
+  /// Returns a shallow copy of this [Stars]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Stars copyWith({
     Object? id = _Undefined,

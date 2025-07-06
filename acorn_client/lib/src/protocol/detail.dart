@@ -41,6 +41,9 @@ abstract class Detail implements _i1.SerializableModel {
 
   String mot;
 
+  /// Returns a shallow copy of this [Detail]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Detail copyWith({
     int? id,
     String? genre,
@@ -74,6 +77,9 @@ class _DetailImpl extends Detail {
           mot: mot,
         );
 
+  /// Returns a shallow copy of this [Detail]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Detail copyWith({
     Object? id = _Undefined,

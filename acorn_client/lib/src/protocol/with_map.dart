@@ -71,6 +71,9 @@ abstract class WithMap implements _i1.SerializableModel {
 
   double logarithm;
 
+  /// Returns a shallow copy of this [WithMap]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   WithMap copyWith({
     int? id,
     int? principalId,
@@ -128,6 +131,9 @@ class _WithMapImpl extends WithMap {
           logarithm: logarithm,
         );
 
+  /// Returns a shallow copy of this [WithMap]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   WithMap copyWith({
     Object? id = _Undefined,

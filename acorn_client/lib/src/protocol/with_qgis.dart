@@ -51,6 +51,9 @@ abstract class WithQgis implements _i1.SerializableModel {
 
   String year;
 
+  /// Returns a shallow copy of this [WithQgis]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   WithQgis copyWith({
     int? id,
     int? principalId,
@@ -92,6 +95,9 @@ class _WithQgisImpl extends WithQgis {
           year: year,
         );
 
+  /// Returns a shallow copy of this [WithQgis]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   WithQgis copyWith({
     Object? id = _Undefined,

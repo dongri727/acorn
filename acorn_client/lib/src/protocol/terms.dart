@@ -36,6 +36,9 @@ abstract class Terms implements _i1.SerializableModel {
 
   String term;
 
+  /// Returns a shallow copy of this [Terms]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Terms copyWith({
     int? id,
     String? term,
@@ -65,6 +68,9 @@ class _TermsImpl extends Terms {
           term: term,
         );
 
+  /// Returns a shallow copy of this [Terms]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Terms copyWith({
     Object? id = _Undefined,

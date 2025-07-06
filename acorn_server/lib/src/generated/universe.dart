@@ -8,12 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Universe implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class Universe
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Universe._({
     this.id,
     required this.universe,
@@ -41,8 +40,11 @@ abstract class Universe implements _i1.TableRow, _i1.ProtocolSerialization {
   String universe;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [Universe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Universe copyWith({
     int? id,
     String? universe,
@@ -104,6 +106,9 @@ class _UniverseImpl extends Universe {
           universe: universe,
         );
 
+  /// Returns a shallow copy of this [Universe]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Universe copyWith({
     Object? id = _Undefined,
@@ -116,7 +121,7 @@ class _UniverseImpl extends Universe {
   }
 }
 
-class UniverseTable extends _i1.Table {
+class UniverseTable extends _i1.Table<int?> {
   UniverseTable({super.tableRelation}) : super(tableName: 'universe') {
     universe = _i1.ColumnString(
       'universe',
@@ -140,7 +145,7 @@ class UniverseInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Universe.t;
+  _i1.Table<int?> get table => Universe.t;
 }
 
 class UniverseIncludeList extends _i1.IncludeList {
@@ -160,12 +165,34 @@ class UniverseIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Universe.t;
+  _i1.Table<int?> get table => Universe.t;
 }
 
 class UniverseRepository {
   const UniverseRepository._();
 
+  /// Returns a list of [Universe]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<Universe>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
@@ -183,10 +210,27 @@ class UniverseRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [Universe] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<Universe?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
@@ -202,10 +246,11 @@ class UniverseRepository {
       orderByList: orderByList?.call(Universe.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [Universe] by its [id] or null if no such row exists.
   Future<Universe?> findById(
     _i1.Session session,
     int id, {
@@ -213,10 +258,16 @@ class UniverseRepository {
   }) async {
     return session.db.findById<Universe>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [Universe]s in the list and returns the inserted rows.
+  ///
+  /// The returned [Universe]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<Universe>> insert(
     _i1.Session session,
     List<Universe> rows, {
@@ -224,10 +275,13 @@ class UniverseRepository {
   }) async {
     return session.db.insert<Universe>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [Universe] and returns the inserted row.
+  ///
+  /// The returned [Universe] will have its `id` field set.
   Future<Universe> insertRow(
     _i1.Session session,
     Universe row, {
@@ -235,10 +289,15 @@ class UniverseRepository {
   }) async {
     return session.db.insertRow<Universe>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [Universe]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<Universe>> update(
     _i1.Session session,
     List<Universe> rows, {
@@ -248,10 +307,13 @@ class UniverseRepository {
     return session.db.update<Universe>(
       rows,
       columns: columns?.call(Universe.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [Universe]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<Universe> updateRow(
     _i1.Session session,
     Universe row, {
@@ -261,10 +323,13 @@ class UniverseRepository {
     return session.db.updateRow<Universe>(
       row,
       columns: columns?.call(Universe.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [Universe]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<Universe>> delete(
     _i1.Session session,
     List<Universe> rows, {
@@ -272,10 +337,11 @@ class UniverseRepository {
   }) async {
     return session.db.delete<Universe>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [Universe].
   Future<Universe> deleteRow(
     _i1.Session session,
     Universe row, {
@@ -283,10 +349,11 @@ class UniverseRepository {
   }) async {
     return session.db.deleteRow<Universe>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<Universe>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<UniverseTable> where,
@@ -294,10 +361,12 @@ class UniverseRepository {
   }) async {
     return session.db.deleteWhere<Universe>(
       where: where(Universe.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<UniverseTable>? where,
@@ -307,7 +376,7 @@ class UniverseRepository {
     return session.db.count<Universe>(
       where: where?.call(Universe.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

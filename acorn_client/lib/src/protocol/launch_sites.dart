@@ -56,6 +56,9 @@ abstract class LaunchSites implements _i1.SerializableModel {
 
   double lon;
 
+  /// Returns a shallow copy of this [LaunchSites]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   LaunchSites copyWith({
     int? id,
     String? location,
@@ -101,6 +104,9 @@ class _LaunchSitesImpl extends LaunchSites {
           lon: lon,
         );
 
+  /// Returns a shallow copy of this [LaunchSites]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   LaunchSites copyWith({
     Object? id = _Undefined,

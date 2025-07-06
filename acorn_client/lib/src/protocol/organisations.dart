@@ -36,6 +36,9 @@ abstract class Organisations implements _i1.SerializableModel {
 
   String organisation;
 
+  /// Returns a shallow copy of this [Organisations]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Organisations copyWith({
     int? id,
     String? organisation,
@@ -65,6 +68,9 @@ class _OrganisationsImpl extends Organisations {
           organisation: organisation,
         );
 
+  /// Returns a shallow copy of this [Organisations]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Organisations copyWith({
     Object? id = _Undefined,

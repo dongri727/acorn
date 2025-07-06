@@ -41,6 +41,9 @@ abstract class PlaceInvolved implements _i1.SerializableModel {
 
   int placeId;
 
+  /// Returns a shallow copy of this [PlaceInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PlaceInvolved copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PlaceInvolvedImpl extends PlaceInvolved {
           placeId: placeId,
         );
 
+  /// Returns a shallow copy of this [PlaceInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PlaceInvolved copyWith({
     Object? id = _Undefined,

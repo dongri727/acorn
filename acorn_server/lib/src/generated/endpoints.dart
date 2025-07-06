@@ -2343,6 +2343,16 @@ class Endpoints extends _i1.EndpointDispatch {
             params['principalIds'],
           ),
         ),
+        'getLocationCounts': _i1.MethodConnector(
+          name: 'getLocationCounts',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['principal'] as _i27.PrincipalEndpoint)
+                  .getLocationCounts(session),
+        ),
       },
     );
     connectors['seas'] = _i1.EndpointConnector(

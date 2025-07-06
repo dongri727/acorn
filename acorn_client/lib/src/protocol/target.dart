@@ -41,6 +41,9 @@ abstract class Target implements _i1.SerializableModel {
 
   int detailId;
 
+  /// Returns a shallow copy of this [Target]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Target copyWith({
     int? id,
     String? specialite,
@@ -74,6 +77,9 @@ class _TargetImpl extends Target {
           detailId: detailId,
         );
 
+  /// Returns a shallow copy of this [Target]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Target copyWith({
     Object? id = _Undefined,

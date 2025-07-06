@@ -46,6 +46,9 @@ abstract class Categories implements _i1.SerializableModel {
 
   int combien;
 
+  /// Returns a shallow copy of this [Categories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Categories copyWith({
     int? id,
     String? category,
@@ -83,6 +86,9 @@ class _CategoriesImpl extends Categories {
           combien: combien,
         );
 
+  /// Returns a shallow copy of this [Categories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Categories copyWith({
     Object? id = _Undefined,

@@ -41,6 +41,9 @@ abstract class Seas implements _i1.SerializableModel {
 
   String area;
 
+  /// Returns a shallow copy of this [Seas]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Seas copyWith({
     int? id,
     String? sea,
@@ -74,6 +77,9 @@ class _SeasImpl extends Seas {
           area: area,
         );
 
+  /// Returns a shallow copy of this [Seas]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Seas copyWith({
     Object? id = _Undefined,

@@ -41,6 +41,9 @@ abstract class PrincipalUser implements _i1.SerializableModel {
 
   int userId;
 
+  /// Returns a shallow copy of this [PrincipalUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalUser copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalUserImpl extends PrincipalUser {
           userId: userId,
         );
 
+  /// Returns a shallow copy of this [PrincipalUser]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalUser copyWith({
     Object? id = _Undefined,

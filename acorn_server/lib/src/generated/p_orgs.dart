@@ -8,13 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class PrincipalOrgs
-    implements _i1.TableRow, _i1.ProtocolSerialization {
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   PrincipalOrgs._({
     this.id,
     required this.principalId,
@@ -47,8 +45,11 @@ abstract class PrincipalOrgs
   int orgId;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [PrincipalOrgs]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalOrgs copyWith({
     int? id,
     int? principalId,
@@ -115,6 +116,9 @@ class _PrincipalOrgsImpl extends PrincipalOrgs {
           orgId: orgId,
         );
 
+  /// Returns a shallow copy of this [PrincipalOrgs]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalOrgs copyWith({
     Object? id = _Undefined,
@@ -129,7 +133,7 @@ class _PrincipalOrgsImpl extends PrincipalOrgs {
   }
 }
 
-class PrincipalOrgsTable extends _i1.Table {
+class PrincipalOrgsTable extends _i1.Table<int?> {
   PrincipalOrgsTable({super.tableRelation})
       : super(tableName: 'principal_orgs') {
     principalId = _i1.ColumnInt(
@@ -161,7 +165,7 @@ class PrincipalOrgsInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => PrincipalOrgs.t;
+  _i1.Table<int?> get table => PrincipalOrgs.t;
 }
 
 class PrincipalOrgsIncludeList extends _i1.IncludeList {
@@ -181,12 +185,34 @@ class PrincipalOrgsIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => PrincipalOrgs.t;
+  _i1.Table<int?> get table => PrincipalOrgs.t;
 }
 
 class PrincipalOrgsRepository {
   const PrincipalOrgsRepository._();
 
+  /// Returns a list of [PrincipalOrgs]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<PrincipalOrgs>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalOrgsTable>? where,
@@ -204,10 +230,27 @@ class PrincipalOrgsRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [PrincipalOrgs] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<PrincipalOrgs?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalOrgsTable>? where,
@@ -223,10 +266,11 @@ class PrincipalOrgsRepository {
       orderByList: orderByList?.call(PrincipalOrgs.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [PrincipalOrgs] by its [id] or null if no such row exists.
   Future<PrincipalOrgs?> findById(
     _i1.Session session,
     int id, {
@@ -234,10 +278,16 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.findById<PrincipalOrgs>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [PrincipalOrgs]s in the list and returns the inserted rows.
+  ///
+  /// The returned [PrincipalOrgs]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<PrincipalOrgs>> insert(
     _i1.Session session,
     List<PrincipalOrgs> rows, {
@@ -245,10 +295,13 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.insert<PrincipalOrgs>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [PrincipalOrgs] and returns the inserted row.
+  ///
+  /// The returned [PrincipalOrgs] will have its `id` field set.
   Future<PrincipalOrgs> insertRow(
     _i1.Session session,
     PrincipalOrgs row, {
@@ -256,10 +309,15 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.insertRow<PrincipalOrgs>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [PrincipalOrgs]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<PrincipalOrgs>> update(
     _i1.Session session,
     List<PrincipalOrgs> rows, {
@@ -269,10 +327,13 @@ class PrincipalOrgsRepository {
     return session.db.update<PrincipalOrgs>(
       rows,
       columns: columns?.call(PrincipalOrgs.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [PrincipalOrgs]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<PrincipalOrgs> updateRow(
     _i1.Session session,
     PrincipalOrgs row, {
@@ -282,10 +343,13 @@ class PrincipalOrgsRepository {
     return session.db.updateRow<PrincipalOrgs>(
       row,
       columns: columns?.call(PrincipalOrgs.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [PrincipalOrgs]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<PrincipalOrgs>> delete(
     _i1.Session session,
     List<PrincipalOrgs> rows, {
@@ -293,10 +357,11 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.delete<PrincipalOrgs>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [PrincipalOrgs].
   Future<PrincipalOrgs> deleteRow(
     _i1.Session session,
     PrincipalOrgs row, {
@@ -304,10 +369,11 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.deleteRow<PrincipalOrgs>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<PrincipalOrgs>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalOrgsTable> where,
@@ -315,10 +381,12 @@ class PrincipalOrgsRepository {
   }) async {
     return session.db.deleteWhere<PrincipalOrgs>(
       where: where(PrincipalOrgs.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalOrgsTable>? where,
@@ -328,7 +396,7 @@ class PrincipalOrgsRepository {
     return session.db.count<PrincipalOrgs>(
       where: where?.call(PrincipalOrgs.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

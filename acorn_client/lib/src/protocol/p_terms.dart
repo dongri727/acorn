@@ -41,6 +41,9 @@ abstract class PrincipalTerms implements _i1.SerializableModel {
 
   int termId;
 
+  /// Returns a shallow copy of this [PrincipalTerms]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalTerms copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalTermsImpl extends PrincipalTerms {
           termId: termId,
         );
 
+  /// Returns a shallow copy of this [PrincipalTerms]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalTerms copyWith({
     Object? id = _Undefined,

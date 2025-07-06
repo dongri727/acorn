@@ -36,6 +36,9 @@ abstract class Placeatts implements _i1.SerializableModel {
 
   String placeatt;
 
+  /// Returns a shallow copy of this [Placeatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Placeatts copyWith({
     int? id,
     String? placeatt,
@@ -65,6 +68,9 @@ class _PlaceattsImpl extends Placeatts {
           placeatt: placeatt,
         );
 
+  /// Returns a shallow copy of this [Placeatts]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Placeatts copyWith({
     Object? id = _Undefined,

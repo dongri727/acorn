@@ -41,6 +41,9 @@ abstract class Japanese implements _i1.SerializableModel {
 
   String japaneseName;
 
+  /// Returns a shallow copy of this [Japanese]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Japanese copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _JapaneseImpl extends Japanese {
           japaneseName: japaneseName,
         );
 
+  /// Returns a shallow copy of this [Japanese]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Japanese copyWith({
     Object? id = _Undefined,

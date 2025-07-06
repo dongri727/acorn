@@ -41,6 +41,9 @@ abstract class Pays implements _i1.SerializableModel {
 
   int combien;
 
+  /// Returns a shallow copy of this [Pays]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Pays copyWith({
     int? id,
     String? pays,
@@ -74,6 +77,9 @@ class _PaysImpl extends Pays {
           combien: combien,
         );
 
+  /// Returns a shallow copy of this [Pays]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Pays copyWith({
     Object? id = _Undefined,

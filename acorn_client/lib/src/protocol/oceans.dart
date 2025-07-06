@@ -36,6 +36,9 @@ abstract class Oceans implements _i1.SerializableModel {
 
   String ocean;
 
+  /// Returns a shallow copy of this [Oceans]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Oceans copyWith({
     int? id,
     String? ocean,
@@ -65,6 +68,9 @@ class _OceansImpl extends Oceans {
           ocean: ocean,
         );
 
+  /// Returns a shallow copy of this [Oceans]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Oceans copyWith({
     Object? id = _Undefined,

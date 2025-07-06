@@ -8,8 +8,7 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'c_involved.dart' as _i2;
 import 'categories.dart' as _i3;
@@ -352,273 +351,189 @@ class Protocol extends _i1.SerializationManager {
       return (data != null ? _i37.WithQgis.fromJson(data) : null) as T;
     }
     if (t == List<dynamic>) {
-      return (data as List).map((e) => deserialize<dynamic>(e)).toList()
-          as dynamic;
+      return (data as List).map((e) => deserialize<dynamic>(e)).toList() as T;
     }
     if (t == List<_i38.CountryInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i38.CountryInvolved>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<int>) {
-      return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
+      return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
     if (t == _i1.getType<List<int>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
+          : null) as T;
     }
     if (t == List<_i39.Categories>) {
       return (data as List).map((e) => deserialize<_i39.Categories>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i40.CattsInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i40.CattsInvolved>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i41.Countryatts>) {
       return (data as List)
           .map((e) => deserialize<_i41.Countryatts>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<String>(e)).toList()
-          : null) as dynamic;
+          : null) as T;
     }
     if (t == List<_i42.Detail>) {
       return (data as List).map((e) => deserialize<_i42.Detail>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i43.Japanese>) {
       return (data as List).map((e) => deserialize<_i43.Japanese>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i44.LaunchSites>) {
       return (data as List)
           .map((e) => deserialize<_i44.LaunchSites>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i45.Oceans>) {
       return (data as List).map((e) => deserialize<_i45.Oceans>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i46.Organisations>) {
       return (data as List)
           .map((e) => deserialize<_i46.Organisations>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i47.PrincipalCategories>) {
       return (data as List)
           .map((e) => deserialize<_i47.PrincipalCategories>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i48.PrincipalCatt>) {
       return (data as List)
           .map((e) => deserialize<_i48.PrincipalCatt>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i49.PrincipalDetail>) {
       return (data as List)
           .map((e) => deserialize<_i49.PrincipalDetail>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i50.PlaceInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i50.PlaceInvolved>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i51.PrincipalOrgs>) {
       return (data as List)
           .map((e) => deserialize<_i51.PrincipalOrgs>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i52.PrincipalPatt>) {
       return (data as List)
           .map((e) => deserialize<_i52.PrincipalPatt>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i53.PrincipalPeople>) {
       return (data as List)
           .map((e) => deserialize<_i53.PrincipalPeople>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i54.PrincipalSites>) {
       return (data as List)
           .map((e) => deserialize<_i54.PrincipalSites>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i55.PrincipalTerms>) {
       return (data as List)
           .map((e) => deserialize<_i55.PrincipalTerms>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i56.PrincipalUser>) {
       return (data as List)
           .map((e) => deserialize<_i56.PrincipalUser>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i57.PattsInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i57.PattsInvolved>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i58.Pays>) {
-      return (data as List).map((e) => deserialize<_i58.Pays>(e)).toList()
-          as dynamic;
+      return (data as List).map((e) => deserialize<_i58.Pays>(e)).toList() as T;
     }
     if (t == List<_i59.People>) {
       return (data as List).map((e) => deserialize<_i59.People>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i60.Placeatts>) {
       return (data as List).map((e) => deserialize<_i60.Placeatts>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i61.Places>) {
       return (data as List).map((e) => deserialize<_i61.Places>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == _i1.getType<List<dynamic>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<dynamic>(e)).toList()
-          : null) as dynamic;
+          : null) as T;
     }
     if (t == List<_i62.Principal>) {
       return (data as List).map((e) => deserialize<_i62.Principal>(e)).toList()
-          as dynamic;
+          as T;
     }
-    if (t == _i1.getType<List<String>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<String>(e)).toList()
-          : null) as dynamic;
+    if (t == List<Map<String, dynamic>>) {
+      return (data as List)
+          .map((e) => deserialize<Map<String, dynamic>>(e))
+          .toList() as T;
     }
-    if (t == _i1.getType<List<String>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<String>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<String>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<String>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
+    if (t == Map<String, dynamic>) {
+      return (data as Map).map((k, v) =>
+          MapEntry(deserialize<String>(k), deserialize<dynamic>(v))) as T;
     }
     if (t == List<_i63.Seas>) {
-      return (data as List).map((e) => deserialize<_i63.Seas>(e)).toList()
-          as dynamic;
+      return (data as List).map((e) => deserialize<_i63.Seas>(e)).toList() as T;
     }
     if (t == List<_i64.Space>) {
       return (data as List).map((e) => deserialize<_i64.Space>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i65.Stars>) {
       return (data as List).map((e) => deserialize<_i65.Stars>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i66.StarsInvolved>) {
       return (data as List)
           .map((e) => deserialize<_i66.StarsInvolved>(e))
-          .toList() as dynamic;
+          .toList() as T;
     }
     if (t == List<_i67.Target>) {
       return (data as List).map((e) => deserialize<_i67.Target>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i68.Terms>) {
       return (data as List).map((e) => deserialize<_i68.Terms>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i69.Universe>) {
       return (data as List).map((e) => deserialize<_i69.Universe>(e)).toList()
-          as dynamic;
+          as T;
     }
     if (t == List<_i70.WithGlobe>) {
       return (data as List).map((e) => deserialize<_i70.WithGlobe>(e)).toList()
-          as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
+          as T;
     }
     if (t == List<_i71.WithMap>) {
       return (data as List).map((e) => deserialize<_i71.WithMap>(e)).toList()
-          as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
+          as T;
     }
     if (t == List<_i72.WithQgis>) {
       return (data as List).map((e) => deserialize<_i72.WithQgis>(e)).toList()
-          as dynamic;
-    }
-    if (t == _i1.getType<List<int>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as dynamic;
+          as T;
     }
     try {
       return _i73.Protocol().deserialize<T>(data, t);
@@ -747,116 +662,120 @@ class Protocol extends _i1.SerializationManager {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'CountryInvolved') {
+    var dataClassName = data['className'];
+    if (dataClassName is! String) {
+      return super.deserializeByClassName(data);
+    }
+    if (dataClassName == 'CountryInvolved') {
       return deserialize<_i2.CountryInvolved>(data['data']);
     }
-    if (data['className'] == 'Categories') {
+    if (dataClassName == 'Categories') {
       return deserialize<_i3.Categories>(data['data']);
     }
-    if (data['className'] == 'CattsInvolved') {
+    if (dataClassName == 'CattsInvolved') {
       return deserialize<_i4.CattsInvolved>(data['data']);
     }
-    if (data['className'] == 'Countryatts') {
+    if (dataClassName == 'Countryatts') {
       return deserialize<_i5.Countryatts>(data['data']);
     }
-    if (data['className'] == 'Detail') {
+    if (dataClassName == 'Detail') {
       return deserialize<_i6.Detail>(data['data']);
     }
-    if (data['className'] == 'Japanese') {
+    if (dataClassName == 'Japanese') {
       return deserialize<_i7.Japanese>(data['data']);
     }
-    if (data['className'] == 'LaunchSites') {
+    if (dataClassName == 'LaunchSites') {
       return deserialize<_i8.LaunchSites>(data['data']);
     }
-    if (data['className'] == 'MyClass') {
+    if (dataClassName == 'MyClass') {
       return deserialize<_i9.MyClass>(data['data']);
     }
-    if (data['className'] == 'Oceans') {
+    if (dataClassName == 'Oceans') {
       return deserialize<_i10.Oceans>(data['data']);
     }
-    if (data['className'] == 'Organisations') {
+    if (dataClassName == 'Organisations') {
       return deserialize<_i11.Organisations>(data['data']);
     }
-    if (data['className'] == 'PrincipalUser') {
+    if (dataClassName == 'PrincipalUser') {
       return deserialize<_i12.PrincipalUser>(data['data']);
     }
-    if (data['className'] == 'PrincipalCategories') {
+    if (dataClassName == 'PrincipalCategories') {
       return deserialize<_i13.PrincipalCategories>(data['data']);
     }
-    if (data['className'] == 'PrincipalCatt') {
+    if (dataClassName == 'PrincipalCatt') {
       return deserialize<_i14.PrincipalCatt>(data['data']);
     }
-    if (data['className'] == 'PrincipalDetail') {
+    if (dataClassName == 'PrincipalDetail') {
       return deserialize<_i15.PrincipalDetail>(data['data']);
     }
-    if (data['className'] == 'PlaceInvolved') {
+    if (dataClassName == 'PlaceInvolved') {
       return deserialize<_i16.PlaceInvolved>(data['data']);
     }
-    if (data['className'] == 'PrincipalOrgs') {
+    if (dataClassName == 'PrincipalOrgs') {
       return deserialize<_i17.PrincipalOrgs>(data['data']);
     }
-    if (data['className'] == 'PrincipalPatt') {
+    if (dataClassName == 'PrincipalPatt') {
       return deserialize<_i18.PrincipalPatt>(data['data']);
     }
-    if (data['className'] == 'PrincipalPeople') {
+    if (dataClassName == 'PrincipalPeople') {
       return deserialize<_i19.PrincipalPeople>(data['data']);
     }
-    if (data['className'] == 'PrincipalTerms') {
+    if (dataClassName == 'PrincipalTerms') {
       return deserialize<_i20.PrincipalTerms>(data['data']);
     }
-    if (data['className'] == 'PattsInvolved') {
+    if (dataClassName == 'PattsInvolved') {
       return deserialize<_i21.PattsInvolved>(data['data']);
     }
-    if (data['className'] == 'Pays') {
+    if (dataClassName == 'Pays') {
       return deserialize<_i22.Pays>(data['data']);
     }
-    if (data['className'] == 'People') {
+    if (dataClassName == 'People') {
       return deserialize<_i23.People>(data['data']);
     }
-    if (data['className'] == 'Placeatts') {
+    if (dataClassName == 'Placeatts') {
       return deserialize<_i24.Placeatts>(data['data']);
     }
-    if (data['className'] == 'Places') {
+    if (dataClassName == 'Places') {
       return deserialize<_i25.Places>(data['data']);
     }
-    if (data['className'] == 'Principal') {
+    if (dataClassName == 'Principal') {
       return deserialize<_i26.Principal>(data['data']);
     }
-    if (data['className'] == 'PrincipalSites') {
+    if (dataClassName == 'PrincipalSites') {
       return deserialize<_i27.PrincipalSites>(data['data']);
     }
-    if (data['className'] == 'Seas') {
+    if (dataClassName == 'Seas') {
       return deserialize<_i28.Seas>(data['data']);
     }
-    if (data['className'] == 'Space') {
+    if (dataClassName == 'Space') {
       return deserialize<_i29.Space>(data['data']);
     }
-    if (data['className'] == 'Stars') {
+    if (dataClassName == 'Stars') {
       return deserialize<_i30.Stars>(data['data']);
     }
-    if (data['className'] == 'StarsInvolved') {
+    if (dataClassName == 'StarsInvolved') {
       return deserialize<_i31.StarsInvolved>(data['data']);
     }
-    if (data['className'] == 'Target') {
+    if (dataClassName == 'Target') {
       return deserialize<_i32.Target>(data['data']);
     }
-    if (data['className'] == 'Terms') {
+    if (dataClassName == 'Terms') {
       return deserialize<_i33.Terms>(data['data']);
     }
-    if (data['className'] == 'Universe') {
+    if (dataClassName == 'Universe') {
       return deserialize<_i34.Universe>(data['data']);
     }
-    if (data['className'] == 'WithGlobe') {
+    if (dataClassName == 'WithGlobe') {
       return deserialize<_i35.WithGlobe>(data['data']);
     }
-    if (data['className'] == 'WithMap') {
+    if (dataClassName == 'WithMap') {
       return deserialize<_i36.WithMap>(data['data']);
     }
-    if (data['className'] == 'WithQgis') {
+    if (dataClassName == 'WithQgis') {
       return deserialize<_i37.WithQgis>(data['data']);
     }
-    if (data['className'].startsWith('serverpod_auth.')) {
-      data['className'] = data['className'].substring(15);
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
       return _i73.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);

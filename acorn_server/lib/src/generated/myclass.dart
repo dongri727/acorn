@@ -26,6 +26,9 @@ abstract class MyClass
 
   _i2.UserInfo userInfo;
 
+  /// Returns a shallow copy of this [MyClass]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   MyClass copyWith({_i2.UserInfo? userInfo});
   @override
   Map<String, dynamic> toJson() {
@@ -46,6 +49,9 @@ abstract class MyClass
 class _MyClassImpl extends MyClass {
   _MyClassImpl({required _i2.UserInfo userInfo}) : super._(userInfo: userInfo);
 
+  /// Returns a shallow copy of this [MyClass]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   MyClass copyWith({_i2.UserInfo? userInfo}) {
     return MyClass(userInfo: userInfo ?? this.userInfo.copyWith());

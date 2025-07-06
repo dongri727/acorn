@@ -8,12 +8,10 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class People implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class People implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   People._({
     this.id,
     required this.person,
@@ -41,8 +39,11 @@ abstract class People implements _i1.TableRow, _i1.ProtocolSerialization {
   String person;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [People]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   People copyWith({
     int? id,
     String? person,
@@ -104,6 +105,9 @@ class _PeopleImpl extends People {
           person: person,
         );
 
+  /// Returns a shallow copy of this [People]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   People copyWith({
     Object? id = _Undefined,
@@ -116,7 +120,7 @@ class _PeopleImpl extends People {
   }
 }
 
-class PeopleTable extends _i1.Table {
+class PeopleTable extends _i1.Table<int?> {
   PeopleTable({super.tableRelation}) : super(tableName: 'people') {
     person = _i1.ColumnString(
       'person',
@@ -140,7 +144,7 @@ class PeopleInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => People.t;
+  _i1.Table<int?> get table => People.t;
 }
 
 class PeopleIncludeList extends _i1.IncludeList {
@@ -160,12 +164,34 @@ class PeopleIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => People.t;
+  _i1.Table<int?> get table => People.t;
 }
 
 class PeopleRepository {
   const PeopleRepository._();
 
+  /// Returns a list of [People]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<People>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PeopleTable>? where,
@@ -183,10 +209,27 @@ class PeopleRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [People] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<People?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PeopleTable>? where,
@@ -202,10 +245,11 @@ class PeopleRepository {
       orderByList: orderByList?.call(People.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [People] by its [id] or null if no such row exists.
   Future<People?> findById(
     _i1.Session session,
     int id, {
@@ -213,10 +257,16 @@ class PeopleRepository {
   }) async {
     return session.db.findById<People>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [People]s in the list and returns the inserted rows.
+  ///
+  /// The returned [People]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<People>> insert(
     _i1.Session session,
     List<People> rows, {
@@ -224,10 +274,13 @@ class PeopleRepository {
   }) async {
     return session.db.insert<People>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [People] and returns the inserted row.
+  ///
+  /// The returned [People] will have its `id` field set.
   Future<People> insertRow(
     _i1.Session session,
     People row, {
@@ -235,10 +288,15 @@ class PeopleRepository {
   }) async {
     return session.db.insertRow<People>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [People]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<People>> update(
     _i1.Session session,
     List<People> rows, {
@@ -248,10 +306,13 @@ class PeopleRepository {
     return session.db.update<People>(
       rows,
       columns: columns?.call(People.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [People]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<People> updateRow(
     _i1.Session session,
     People row, {
@@ -261,10 +322,13 @@ class PeopleRepository {
     return session.db.updateRow<People>(
       row,
       columns: columns?.call(People.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [People]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<People>> delete(
     _i1.Session session,
     List<People> rows, {
@@ -272,10 +336,11 @@ class PeopleRepository {
   }) async {
     return session.db.delete<People>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [People].
   Future<People> deleteRow(
     _i1.Session session,
     People row, {
@@ -283,10 +348,11 @@ class PeopleRepository {
   }) async {
     return session.db.deleteRow<People>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<People>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PeopleTable> where,
@@ -294,10 +360,12 @@ class PeopleRepository {
   }) async {
     return session.db.deleteWhere<People>(
       where: where(People.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PeopleTable>? where,
@@ -307,7 +375,7 @@ class PeopleRepository {
     return session.db.count<People>(
       where: where?.call(People.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

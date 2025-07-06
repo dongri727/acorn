@@ -125,6 +125,7 @@ principal:
   - getPrincipalByUserId:
   - getPrincipalByDetailIds:
   - getPrincipalsByIds:
+  - getLocationCounts:
 seas:
   - getSeas:
   - addSeas:

@@ -41,6 +41,9 @@ abstract class PrincipalSites implements _i1.SerializableModel {
 
   int siteId;
 
+  /// Returns a shallow copy of this [PrincipalSites]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalSites copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalSitesImpl extends PrincipalSites {
           siteId: siteId,
         );
 
+  /// Returns a shallow copy of this [PrincipalSites]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalSites copyWith({
     Object? id = _Undefined,

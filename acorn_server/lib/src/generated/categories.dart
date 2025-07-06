@@ -8,12 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Categories implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class Categories
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Categories._({
     this.id,
     required this.category,
@@ -51,8 +50,11 @@ abstract class Categories implements _i1.TableRow, _i1.ProtocolSerialization {
   int combien;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [Categories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Categories copyWith({
     int? id,
     String? category,
@@ -124,6 +126,9 @@ class _CategoriesImpl extends Categories {
           combien: combien,
         );
 
+  /// Returns a shallow copy of this [Categories]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Categories copyWith({
     Object? id = _Undefined,
@@ -140,7 +145,7 @@ class _CategoriesImpl extends Categories {
   }
 }
 
-class CategoriesTable extends _i1.Table {
+class CategoriesTable extends _i1.Table<int?> {
   CategoriesTable({super.tableRelation}) : super(tableName: 'categories') {
     category = _i1.ColumnString(
       'category',
@@ -178,7 +183,7 @@ class CategoriesInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Categories.t;
+  _i1.Table<int?> get table => Categories.t;
 }
 
 class CategoriesIncludeList extends _i1.IncludeList {
@@ -198,12 +203,34 @@ class CategoriesIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Categories.t;
+  _i1.Table<int?> get table => Categories.t;
 }
 
 class CategoriesRepository {
   const CategoriesRepository._();
 
+  /// Returns a list of [Categories]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<Categories>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
@@ -221,10 +248,27 @@ class CategoriesRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [Categories] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<Categories?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
@@ -240,10 +284,11 @@ class CategoriesRepository {
       orderByList: orderByList?.call(Categories.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [Categories] by its [id] or null if no such row exists.
   Future<Categories?> findById(
     _i1.Session session,
     int id, {
@@ -251,10 +296,16 @@ class CategoriesRepository {
   }) async {
     return session.db.findById<Categories>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [Categories]s in the list and returns the inserted rows.
+  ///
+  /// The returned [Categories]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<Categories>> insert(
     _i1.Session session,
     List<Categories> rows, {
@@ -262,10 +313,13 @@ class CategoriesRepository {
   }) async {
     return session.db.insert<Categories>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [Categories] and returns the inserted row.
+  ///
+  /// The returned [Categories] will have its `id` field set.
   Future<Categories> insertRow(
     _i1.Session session,
     Categories row, {
@@ -273,10 +327,15 @@ class CategoriesRepository {
   }) async {
     return session.db.insertRow<Categories>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [Categories]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<Categories>> update(
     _i1.Session session,
     List<Categories> rows, {
@@ -286,10 +345,13 @@ class CategoriesRepository {
     return session.db.update<Categories>(
       rows,
       columns: columns?.call(Categories.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [Categories]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<Categories> updateRow(
     _i1.Session session,
     Categories row, {
@@ -299,10 +361,13 @@ class CategoriesRepository {
     return session.db.updateRow<Categories>(
       row,
       columns: columns?.call(Categories.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [Categories]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<Categories>> delete(
     _i1.Session session,
     List<Categories> rows, {
@@ -310,10 +375,11 @@ class CategoriesRepository {
   }) async {
     return session.db.delete<Categories>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [Categories].
   Future<Categories> deleteRow(
     _i1.Session session,
     Categories row, {
@@ -321,10 +387,11 @@ class CategoriesRepository {
   }) async {
     return session.db.deleteRow<Categories>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<Categories>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<CategoriesTable> where,
@@ -332,10 +399,12 @@ class CategoriesRepository {
   }) async {
     return session.db.deleteWhere<Categories>(
       where: where(Categories.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<CategoriesTable>? where,
@@ -345,7 +414,7 @@ class CategoriesRepository {
     return session.db.count<Categories>(
       where: where?.call(Categories.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

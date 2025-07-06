@@ -1075,6 +1075,14 @@ class EndpointPrincipal extends _i1.EndpointRef {
         'getPrincipalsByIds',
         {'principalIds': principalIds},
       );
+
+  /// Returns counts of Principals grouped by location.
+  _i2.Future<List<Map<String, dynamic>>> getLocationCounts() =>
+      caller.callServerEndpoint<List<Map<String, dynamic>>>(
+        'principal',
+        'getLocationCounts',
+        {},
+      );
 }
 
 /// {@category Endpoint}
@@ -1389,8 +1397,8 @@ class EndpointWithQgis extends _i1.EndpointRef {
       );
 }
 
-class _Modules {
-  _Modules(Client client) {
+class Modules {
+  Modules(Client client) {
     auth = _i38.Caller(client);
   }
 
@@ -1459,7 +1467,7 @@ class Client extends _i1.ServerpodClientShared {
     withGlobe = EndpointWithGlobe(this);
     withMap = EndpointWithMap(this);
     withQgis = EndpointWithQgis(this);
-    modules = _Modules(this);
+    modules = Modules(this);
   }
 
   late final EndpointAnalysis analysis;
@@ -1534,7 +1542,7 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointWithQgis withQgis;
 
-  late final _Modules modules;
+  late final Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {

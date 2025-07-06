@@ -8,12 +8,10 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Space implements _i1.TableRow, _i1.ProtocolSerialization {
+abstract class Space implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Space._({
     this.id,
     required this.principalId,
@@ -111,8 +109,11 @@ abstract class Space implements _i1.TableRow, _i1.ProtocolSerialization {
   double lightYear;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [Space]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Space copyWith({
     int? id,
     int? principalId,
@@ -244,6 +245,9 @@ class _SpaceImpl extends Space {
           lightYear: lightYear,
         );
 
+  /// Returns a shallow copy of this [Space]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Space copyWith({
     Object? id = _Undefined,
@@ -284,7 +288,7 @@ class _SpaceImpl extends Space {
   }
 }
 
-class SpaceTable extends _i1.Table {
+class SpaceTable extends _i1.Table<int?> {
   SpaceTable({super.tableRelation}) : super(tableName: 'space') {
     principalId = _i1.ColumnInt(
       'principalId',
@@ -406,7 +410,7 @@ class SpaceInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Space.t;
+  _i1.Table<int?> get table => Space.t;
 }
 
 class SpaceIncludeList extends _i1.IncludeList {
@@ -426,12 +430,34 @@ class SpaceIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Space.t;
+  _i1.Table<int?> get table => Space.t;
 }
 
 class SpaceRepository {
   const SpaceRepository._();
 
+  /// Returns a list of [Space]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<Space>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
@@ -449,10 +475,27 @@ class SpaceRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [Space] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<Space?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
@@ -468,10 +511,11 @@ class SpaceRepository {
       orderByList: orderByList?.call(Space.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [Space] by its [id] or null if no such row exists.
   Future<Space?> findById(
     _i1.Session session,
     int id, {
@@ -479,10 +523,16 @@ class SpaceRepository {
   }) async {
     return session.db.findById<Space>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [Space]s in the list and returns the inserted rows.
+  ///
+  /// The returned [Space]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<Space>> insert(
     _i1.Session session,
     List<Space> rows, {
@@ -490,10 +540,13 @@ class SpaceRepository {
   }) async {
     return session.db.insert<Space>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [Space] and returns the inserted row.
+  ///
+  /// The returned [Space] will have its `id` field set.
   Future<Space> insertRow(
     _i1.Session session,
     Space row, {
@@ -501,10 +554,15 @@ class SpaceRepository {
   }) async {
     return session.db.insertRow<Space>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [Space]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<Space>> update(
     _i1.Session session,
     List<Space> rows, {
@@ -514,10 +572,13 @@ class SpaceRepository {
     return session.db.update<Space>(
       rows,
       columns: columns?.call(Space.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [Space]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<Space> updateRow(
     _i1.Session session,
     Space row, {
@@ -527,10 +588,13 @@ class SpaceRepository {
     return session.db.updateRow<Space>(
       row,
       columns: columns?.call(Space.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [Space]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<Space>> delete(
     _i1.Session session,
     List<Space> rows, {
@@ -538,10 +602,11 @@ class SpaceRepository {
   }) async {
     return session.db.delete<Space>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [Space].
   Future<Space> deleteRow(
     _i1.Session session,
     Space row, {
@@ -549,10 +614,11 @@ class SpaceRepository {
   }) async {
     return session.db.deleteRow<Space>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<Space>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<SpaceTable> where,
@@ -560,10 +626,12 @@ class SpaceRepository {
   }) async {
     return session.db.deleteWhere<Space>(
       where: where(Space.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<SpaceTable>? where,
@@ -573,7 +641,7 @@ class SpaceRepository {
     return session.db.count<Space>(
       where: where?.call(Space.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

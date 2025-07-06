@@ -41,6 +41,9 @@ abstract class PrincipalPatt implements _i1.SerializableModel {
 
   int pattId;
 
+  /// Returns a shallow copy of this [PrincipalPatt]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalPatt copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PrincipalPattImpl extends PrincipalPatt {
           pattId: pattId,
         );
 
+  /// Returns a shallow copy of this [PrincipalPatt]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalPatt copyWith({
     Object? id = _Undefined,

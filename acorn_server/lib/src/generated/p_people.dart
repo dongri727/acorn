@@ -8,13 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-// ignore_for_file: invalid_use_of_visible_for_testing_member
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class PrincipalPeople
-    implements _i1.TableRow, _i1.ProtocolSerialization {
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   PrincipalPeople._({
     this.id,
     required this.principalId,
@@ -47,8 +45,11 @@ abstract class PrincipalPeople
   int personId;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [PrincipalPeople]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PrincipalPeople copyWith({
     int? id,
     int? principalId,
@@ -115,6 +116,9 @@ class _PrincipalPeopleImpl extends PrincipalPeople {
           personId: personId,
         );
 
+  /// Returns a shallow copy of this [PrincipalPeople]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PrincipalPeople copyWith({
     Object? id = _Undefined,
@@ -129,7 +133,7 @@ class _PrincipalPeopleImpl extends PrincipalPeople {
   }
 }
 
-class PrincipalPeopleTable extends _i1.Table {
+class PrincipalPeopleTable extends _i1.Table<int?> {
   PrincipalPeopleTable({super.tableRelation})
       : super(tableName: 'principal_people') {
     principalId = _i1.ColumnInt(
@@ -161,7 +165,7 @@ class PrincipalPeopleInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => PrincipalPeople.t;
+  _i1.Table<int?> get table => PrincipalPeople.t;
 }
 
 class PrincipalPeopleIncludeList extends _i1.IncludeList {
@@ -181,12 +185,34 @@ class PrincipalPeopleIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => PrincipalPeople.t;
+  _i1.Table<int?> get table => PrincipalPeople.t;
 }
 
 class PrincipalPeopleRepository {
   const PrincipalPeopleRepository._();
 
+  /// Returns a list of [PrincipalPeople]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<PrincipalPeople>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalPeopleTable>? where,
@@ -204,10 +230,27 @@ class PrincipalPeopleRepository {
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Returns the first matching [PrincipalPeople] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<PrincipalPeople?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalPeopleTable>? where,
@@ -223,10 +266,11 @@ class PrincipalPeopleRepository {
       orderByList: orderByList?.call(PrincipalPeople.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Finds a single [PrincipalPeople] by its [id] or null if no such row exists.
   Future<PrincipalPeople?> findById(
     _i1.Session session,
     int id, {
@@ -234,10 +278,16 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.findById<PrincipalPeople>(
       id,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts all [PrincipalPeople]s in the list and returns the inserted rows.
+  ///
+  /// The returned [PrincipalPeople]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<PrincipalPeople>> insert(
     _i1.Session session,
     List<PrincipalPeople> rows, {
@@ -245,10 +295,13 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.insert<PrincipalPeople>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [PrincipalPeople] and returns the inserted row.
+  ///
+  /// The returned [PrincipalPeople] will have its `id` field set.
   Future<PrincipalPeople> insertRow(
     _i1.Session session,
     PrincipalPeople row, {
@@ -256,10 +309,15 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.insertRow<PrincipalPeople>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [PrincipalPeople]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<PrincipalPeople>> update(
     _i1.Session session,
     List<PrincipalPeople> rows, {
@@ -269,10 +327,13 @@ class PrincipalPeopleRepository {
     return session.db.update<PrincipalPeople>(
       rows,
       columns: columns?.call(PrincipalPeople.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [PrincipalPeople]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<PrincipalPeople> updateRow(
     _i1.Session session,
     PrincipalPeople row, {
@@ -282,10 +343,13 @@ class PrincipalPeopleRepository {
     return session.db.updateRow<PrincipalPeople>(
       row,
       columns: columns?.call(PrincipalPeople.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all [PrincipalPeople]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<PrincipalPeople>> delete(
     _i1.Session session,
     List<PrincipalPeople> rows, {
@@ -293,10 +357,11 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.delete<PrincipalPeople>(
       rows,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [PrincipalPeople].
   Future<PrincipalPeople> deleteRow(
     _i1.Session session,
     PrincipalPeople row, {
@@ -304,10 +369,11 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.deleteRow<PrincipalPeople>(
       row,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<PrincipalPeople>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<PrincipalPeopleTable> where,
@@ -315,10 +381,12 @@ class PrincipalPeopleRepository {
   }) async {
     return session.db.deleteWhere<PrincipalPeople>(
       where: where(PrincipalPeople.t),
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<PrincipalPeopleTable>? where,
@@ -328,7 +396,7 @@ class PrincipalPeopleRepository {
     return session.db.count<PrincipalPeople>(
       where: where?.call(PrincipalPeople.t),
       limit: limit,
-      transaction: transaction ?? session.transaction,
+      transaction: transaction,
     );
   }
 }

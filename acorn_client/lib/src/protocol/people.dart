@@ -36,6 +36,9 @@ abstract class People implements _i1.SerializableModel {
 
   String person;
 
+  /// Returns a shallow copy of this [People]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   People copyWith({
     int? id,
     String? person,
@@ -65,6 +68,9 @@ class _PeopleImpl extends People {
           person: person,
         );
 
+  /// Returns a shallow copy of this [People]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   People copyWith({
     Object? id = _Undefined,

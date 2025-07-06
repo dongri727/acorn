@@ -41,6 +41,9 @@ abstract class PattsInvolved implements _i1.SerializableModel {
 
   int pattId;
 
+  /// Returns a shallow copy of this [PattsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   PattsInvolved copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _PattsInvolvedImpl extends PattsInvolved {
           pattId: pattId,
         );
 
+  /// Returns a shallow copy of this [PattsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   PattsInvolved copyWith({
     Object? id = _Undefined,

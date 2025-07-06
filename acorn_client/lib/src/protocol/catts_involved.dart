@@ -41,6 +41,9 @@ abstract class CattsInvolved implements _i1.SerializableModel {
 
   int cattId;
 
+  /// Returns a shallow copy of this [CattsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   CattsInvolved copyWith({
     int? id,
     int? principalId,
@@ -74,6 +77,9 @@ class _CattsInvolvedImpl extends CattsInvolved {
           cattId: cattId,
         );
 
+  /// Returns a shallow copy of this [CattsInvolved]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   CattsInvolved copyWith({
     Object? id = _Undefined,
