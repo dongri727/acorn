@@ -55,7 +55,7 @@ jobs:
         run: dart pub get
 
       - name: Activate Serverpod CLI
-        run: dart pub global activate serverpod_cli 2.6.0
+        run: dart pub global activate serverpod_cli 2.9.0
 
       - name: Generate Serverpod code
         working-directory: acorn_server
