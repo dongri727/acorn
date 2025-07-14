@@ -1,6 +1,6 @@
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web/web.dart';
+//import 'package:web/web.dart';
 import 'timeline/bloc_provider.dart';
 import 'cover.dart';
 import 'timeline/timeline.dart';
@@ -12,8 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeServerpodClient();
   Provider.debugCheckInvalidValueType = null;
-  final div = document.querySelector('div')!;
-  div.text = 'Text set at ${DateTime.now()}';
+/*  final div = document.querySelector('div')!;
+  div.text = 'Text set at ${DateTime.now()}';*/
 
   runApp(const MyApp());
 }
