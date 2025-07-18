@@ -391,6 +391,12 @@ abstract class AppLocalizations {
   /// **'CONFIRM'**
   String get tabTopI;
 
+  /// No description provided for @tabTopJ.
+  ///
+  /// In en, this message translates to:
+  /// **'ADDITIONAL \'WHEN\''**
+  String get tabTopJ;
+
   /// No description provided for @principalA.
   ///
   /// In en, this message translates to:

@@ -156,6 +156,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tabTopI => '入力確認';
 
   @override
+  String get tabTopJ => '時代情報';
+
+  @override
   String get principalA => '事象名(50文字以内)';
 
   @override

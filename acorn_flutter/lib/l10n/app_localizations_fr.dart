@@ -156,6 +156,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tabTopI => 'CONFIRMER';
 
   @override
+  String get tabTopJ => 'EPOQUE PRECISE';
+
+  @override
   String get principalA => 'Evénement(dans les 50 lettres)';
 
   @override

@@ -156,6 +156,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabTopI => 'CONFIRM';
 
   @override
+  String get tabTopJ => 'ADDITIONAL \'WHEN\'';
+
+  @override
   String get principalA => 'Event(within 50 letters)';
 
   @override

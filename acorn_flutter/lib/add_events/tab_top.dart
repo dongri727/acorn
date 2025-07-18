@@ -62,7 +62,7 @@ class TabPage extends StatelessWidget {
                       tabs: [
                         Tab(text: AppLocalizations.of(context)!.tabTopD),
                         Tab(text: AppLocalizations.of(context)!.tabTopE),
-                        Tab(text: "Additional When"),
+                        Tab(text: AppLocalizations.of(context)!.tabTopJ),
                         Tab(text: AppLocalizations.of(context)!.tabTopF),
                         Tab(text: AppLocalizations.of(context)!.tabTopG),
                         Tab(text: AppLocalizations.of(context)!.tabTopH),
