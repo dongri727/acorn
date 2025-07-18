@@ -8,10 +8,6 @@ import '../../utils/build_chips.dart';
 
 class WhenModel extends ChangeNotifier {
 
-/*  List<String> era = epoch;
-  List<String> periodsFr = epochFr;
-  List<String> periodsJa = epochJa;*/
-
   ///GeoTime
   List<Map<String, dynamic>> geoTime = geologicTimeScale;
 
@@ -102,6 +98,7 @@ class WhenModel extends ChangeNotifier {
       ///選択されたgeoTime
       confirm.selectedGeoTime = filtersGeoTime;
       confirm.selectedGeoTimeId = filtersGeoTimeId;
+      debugPrint('save geoTime');
 
       ///選択されたArchaeTime
       confirm.selectedArchaeTime = filtersArchaeTime;
@@ -119,8 +116,4 @@ class WhenModel extends ChangeNotifier {
     notifyListeners();
   }
 
-/*  void updateDisplayList(List<String> newList) {
-    currentDisplayList = newList.cast<Map<String, dynamic>>();
-    notifyListeners();
-  }*/
   }

@@ -25,6 +25,10 @@ class ConfirmModel extends ChangeNotifier {
         var principalId = await client.principal.addPrincipal(principal);
         debugPrint('Add principal : $principalId');
 
+        var japanese = Japanese(principalId: principalId, japaneseName: confirm.name);
+        await client.japanese.addJapanese(japanese);
+        debugPrint('add Japanese');
+
         //with map
         var withMap = WithMap(
             principalId: principalId,
@@ -52,7 +56,7 @@ class ConfirmModel extends ChangeNotifier {
         await client.withGlobe.addWithGlobe(withGlobe);
         debugPrint('add WithGlobe');
 
-        //in space
+/*        //in space
         if(confirm.selectedLocation == 'universe' ||
             confirm.selectedLocation == 'Solar System' ||
             confirm.selectedLocation == 'Milky Way'||
@@ -76,7 +80,7 @@ class ConfirmModel extends ChangeNotifier {
             lightYear: 0.0);
           await client.space.addSpace(space);
           debugPrint('add in space');
-        }
+        }*/
 
         ///Additional When
         if (confirm.selectedGeoTimeId.isNotEmpty) {
@@ -84,6 +88,7 @@ class ConfirmModel extends ChangeNotifier {
             var pDetailGeoTime = PrincipalDetail(
                 principalId: principalId, detailId: geoTimeId);
             await client.principalDetail.addPDetail(pDetailGeoTime);
+            debugPrint('add GeoTime');
           }
         }
         if (confirm.selectedArchaeTimeId.isNotEmpty) {
@@ -191,10 +196,6 @@ class ConfirmModel extends ChangeNotifier {
             await client.principalDetail.addPDetail(pDetailTerms);
           }
         }
-
-        var japanese = Japanese(principalId: principalId, japaneseName: confirm.name);
-        await client.japanese.addJapanese(japanese);
-        debugPrint('add Japanese');
 
         var userId = sessionManager.signedInUser?.id ?? 0;
         var principalUser = PrincipalUser(principalId: principalId, userId: userId);
