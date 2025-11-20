@@ -1,0 +1,135 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "principal"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "principal",
+        "dartName": "Principal",
+        "module": "acorn",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('principal_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "period",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "annee",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "month",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "day",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "point",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "affair",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "location",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "precise",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "principal_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          },
+          {
+            "indexName": "location_idx",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "location"
+              }
+            ],
+            "type": "btree",
+            "isUnique": false,
+            "isPrimary": false
+          },
+          {
+            "indexName": "precise_idx",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "precise"
+              }
+            ],
+            "type": "btree",
+            "isUnique": false,
+            "isPrimary": false
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column point of table principal is modified in a way that it must be deleted and recreated.",
+      "table": "principal",
+      "columns": [
+        "point"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"principal\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "principal",
+      "columns": [
+        "point"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

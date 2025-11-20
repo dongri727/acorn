@@ -12,7 +12,7 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'c_involved.dart' as _i4;
+import 'p_categories.dart' as _i4;
 import 'categories.dart' as _i5;
 import 'catts_involved.dart' as _i6;
 import 'countryatts.dart' as _i7;
@@ -23,7 +23,7 @@ import 'myclass.dart' as _i11;
 import 'oceans.dart' as _i12;
 import 'organisations.dart' as _i13;
 import 'p-user.dart' as _i14;
-import 'p_categories.dart' as _i15;
+import 'c_involved.dart' as _i15;
 import 'p_catt.dart' as _i16;
 import 'p_detail.dart' as _i17;
 import 'p_involved.dart' as _i18;
@@ -35,7 +35,7 @@ import 'patts_involved.dart' as _i23;
 import 'pays.dart' as _i24;
 import 'people.dart' as _i25;
 import 'placeatts.dart' as _i26;
-import 'places.dart' as _i27;
+import 'with_qgis.dart' as _i27;
 import 'principal.dart' as _i28;
 import 'principal_sites.dart' as _i29;
 import 'seas.dart' as _i30;
@@ -47,7 +47,7 @@ import 'terms.dart' as _i35;
 import 'universe.dart' as _i36;
 import 'with_globe.dart' as _i37;
 import 'with_map.dart' as _i38;
-import 'with_qgis.dart' as _i39;
+import 'places.dart' as _i39;
 import 'package:acorn_server/src/generated/c_involved.dart' as _i40;
 import 'package:acorn_server/src/generated/categories.dart' as _i41;
 import 'package:acorn_server/src/generated/catts_involved.dart' as _i42;
@@ -1890,8 +1890,8 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i4.CountryInvolved) {
-      return _i4.CountryInvolved.fromJson(data) as T;
+    if (t == _i4.PrincipalCategories) {
+      return _i4.PrincipalCategories.fromJson(data) as T;
     }
     if (t == _i5.Categories) {
       return _i5.Categories.fromJson(data) as T;
@@ -1923,8 +1923,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i14.PrincipalUser) {
       return _i14.PrincipalUser.fromJson(data) as T;
     }
-    if (t == _i15.PrincipalCategories) {
-      return _i15.PrincipalCategories.fromJson(data) as T;
+    if (t == _i15.CountryInvolved) {
+      return _i15.CountryInvolved.fromJson(data) as T;
     }
     if (t == _i16.PrincipalCatt) {
       return _i16.PrincipalCatt.fromJson(data) as T;
@@ -1959,8 +1959,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i26.Placeatts) {
       return _i26.Placeatts.fromJson(data) as T;
     }
-    if (t == _i27.Places) {
-      return _i27.Places.fromJson(data) as T;
+    if (t == _i27.WithQgis) {
+      return _i27.WithQgis.fromJson(data) as T;
     }
     if (t == _i28.Principal) {
       return _i28.Principal.fromJson(data) as T;
@@ -1995,11 +1995,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i38.WithMap) {
       return _i38.WithMap.fromJson(data) as T;
     }
-    if (t == _i39.WithQgis) {
-      return _i39.WithQgis.fromJson(data) as T;
+    if (t == _i39.Places) {
+      return _i39.Places.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.CountryInvolved?>()) {
-      return (data != null ? _i4.CountryInvolved.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.PrincipalCategories?>()) {
+      return (data != null ? _i4.PrincipalCategories.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i5.Categories?>()) {
       return (data != null ? _i5.Categories.fromJson(data) : null) as T;
@@ -2031,9 +2032,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i14.PrincipalUser?>()) {
       return (data != null ? _i14.PrincipalUser.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i15.PrincipalCategories?>()) {
-      return (data != null ? _i15.PrincipalCategories.fromJson(data) : null)
-          as T;
+    if (t == _i1.getType<_i15.CountryInvolved?>()) {
+      return (data != null ? _i15.CountryInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i16.PrincipalCatt?>()) {
       return (data != null ? _i16.PrincipalCatt.fromJson(data) : null) as T;
@@ -2068,8 +2068,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i26.Placeatts?>()) {
       return (data != null ? _i26.Placeatts.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i27.Places?>()) {
-      return (data != null ? _i27.Places.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i27.WithQgis?>()) {
+      return (data != null ? _i27.WithQgis.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i28.Principal?>()) {
       return (data != null ? _i28.Principal.fromJson(data) : null) as T;
@@ -2104,8 +2104,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i38.WithMap?>()) {
       return (data != null ? _i38.WithMap.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i39.WithQgis?>()) {
-      return (data != null ? _i39.WithQgis.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i39.Places?>()) {
+      return (data != null ? _i39.Places.fromJson(data) : null) as T;
     }
     if (t == List<dynamic>) {
       return (data as List).map((e) => deserialize<dynamic>(e)).toList() as T;
@@ -2305,8 +2305,8 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i4.CountryInvolved) {
-      return 'CountryInvolved';
+    if (data is _i4.PrincipalCategories) {
+      return 'PrincipalCategories';
     }
     if (data is _i5.Categories) {
       return 'Categories';
@@ -2338,8 +2338,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i14.PrincipalUser) {
       return 'PrincipalUser';
     }
-    if (data is _i15.PrincipalCategories) {
-      return 'PrincipalCategories';
+    if (data is _i15.CountryInvolved) {
+      return 'CountryInvolved';
     }
     if (data is _i16.PrincipalCatt) {
       return 'PrincipalCatt';
@@ -2374,8 +2374,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i26.Placeatts) {
       return 'Placeatts';
     }
-    if (data is _i27.Places) {
-      return 'Places';
+    if (data is _i27.WithQgis) {
+      return 'WithQgis';
     }
     if (data is _i28.Principal) {
       return 'Principal';
@@ -2410,8 +2410,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i38.WithMap) {
       return 'WithMap';
     }
-    if (data is _i39.WithQgis) {
-      return 'WithQgis';
+    if (data is _i39.Places) {
+      return 'Places';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -2430,8 +2430,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'CountryInvolved') {
-      return deserialize<_i4.CountryInvolved>(data['data']);
+    if (dataClassName == 'PrincipalCategories') {
+      return deserialize<_i4.PrincipalCategories>(data['data']);
     }
     if (dataClassName == 'Categories') {
       return deserialize<_i5.Categories>(data['data']);
@@ -2463,8 +2463,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'PrincipalUser') {
       return deserialize<_i14.PrincipalUser>(data['data']);
     }
-    if (dataClassName == 'PrincipalCategories') {
-      return deserialize<_i15.PrincipalCategories>(data['data']);
+    if (dataClassName == 'CountryInvolved') {
+      return deserialize<_i15.CountryInvolved>(data['data']);
     }
     if (dataClassName == 'PrincipalCatt') {
       return deserialize<_i16.PrincipalCatt>(data['data']);
@@ -2499,8 +2499,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Placeatts') {
       return deserialize<_i26.Placeatts>(data['data']);
     }
-    if (dataClassName == 'Places') {
-      return deserialize<_i27.Places>(data['data']);
+    if (dataClassName == 'WithQgis') {
+      return deserialize<_i27.WithQgis>(data['data']);
     }
     if (dataClassName == 'Principal') {
       return deserialize<_i28.Principal>(data['data']);
@@ -2535,8 +2535,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'WithMap') {
       return deserialize<_i38.WithMap>(data['data']);
     }
-    if (dataClassName == 'WithQgis') {
-      return deserialize<_i39.WithQgis>(data['data']);
+    if (dataClassName == 'Places') {
+      return deserialize<_i39.Places>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -2564,8 +2564,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.CountryInvolved:
-        return _i4.CountryInvolved.t;
+      case _i15.CountryInvolved:
+        return _i15.CountryInvolved.t;
       case _i5.Categories:
         return _i5.Categories.t;
       case _i6.CattsInvolved:
@@ -2584,8 +2584,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i13.Organisations.t;
       case _i14.PrincipalUser:
         return _i14.PrincipalUser.t;
-      case _i15.PrincipalCategories:
-        return _i15.PrincipalCategories.t;
+      case _i4.PrincipalCategories:
+        return _i4.PrincipalCategories.t;
       case _i16.PrincipalCatt:
         return _i16.PrincipalCatt.t;
       case _i17.PrincipalDetail:
@@ -2608,8 +2608,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i25.People.t;
       case _i26.Placeatts:
         return _i26.Placeatts.t;
-      case _i27.Places:
-        return _i27.Places.t;
+      case _i39.Places:
+        return _i39.Places.t;
       case _i28.Principal:
         return _i28.Principal.t;
       case _i29.PrincipalSites:
@@ -2632,8 +2632,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i37.WithGlobe.t;
       case _i38.WithMap:
         return _i38.WithMap.t;
-      case _i39.WithQgis:
-        return _i39.WithQgis.t;
+      case _i27.WithQgis:
+        return _i27.WithQgis.t;
     }
     return null;
   }

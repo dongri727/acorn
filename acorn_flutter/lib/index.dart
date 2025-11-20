@@ -1,6 +1,5 @@
 import 'package:acorn_flutter/analysis_page.dart';
-import 'package:acorn_flutter/csv_page.dart';
-import 'package:flutter/material.dart';
+//import 'package:acorn_flutter/csv_page.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
 import 'utils/theme.dart';
@@ -64,7 +63,7 @@ class IndexPage extends StatelessWidget {
                         ),
                       ),
                       ),
-                      Padding(
+/*                      Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OutlinedButton(
                           onPressed: () {
@@ -80,7 +79,7 @@ class IndexPage extends StatelessWidget {
                             style: AcornTheme.textTheme.bodyLarge,
                           ),
                         ),
-                      ),
+                      ),*/
                        Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: OutlinedButton(

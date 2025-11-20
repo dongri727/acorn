@@ -7,10 +7,10 @@ environment:
   sdk: '>=2.19.0 <4.0.0'
 
 dependencies:
-  serverpod: ^2.9.0
-  serverpod_auth_server: ^2.9.0
+  serverpod: 2.9.2
+  serverpod_auth_server: 2.9.2
   mailer: ^6.1.0
 
 dev_dependencies:
   lints: ^2.0.1
-  serverpod_cli: ^2.9.0
+  serverpod_cli: 2.9.2

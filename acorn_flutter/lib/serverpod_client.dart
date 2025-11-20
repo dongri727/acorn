@@ -20,7 +20,8 @@ Future<void> initializeServerpodClient() async {
   client = Client(
     //switch server
     //'http://$ipAddress:8080/',
-    'https://api.laporte.academy/',
+    //'https://api.laporte.academy/',
+    'https://chronomap.api.serverpod.space/',
     authenticationKeyManager: FlutterAuthenticationKeyManager(),
   )..connectivityMonitor = FlutterConnectivityMonitor();
 
