@@ -177,6 +177,16 @@ class RegisterModel extends ChangeNotifier {
         );
         var principalId = await client.principal.addPrincipal(principal);
 
+        //japanese
+        try {
+          var japanese = Japanese(
+              principalId: principalId,
+              japaneseName: newName);
+          await client.japanese.addJapanese(japanese);
+        } catch (e) {
+          print('Error adding Japanese: $e');
+        }
+
         //with Map
         var withMap = WithMap(
             principalId: principalId,
