@@ -1,4 +1,4 @@
-import 'package:js/js.dart';
+import 'dart:js_interop';
 
 /// Annotate the Dart function to bind it to the JavaScript `initChart` function.
 /// This allows Dart to call the JavaScript function directly.

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/describe_card.dart';
 
 class GlobeHintPage extends StatelessWidget {

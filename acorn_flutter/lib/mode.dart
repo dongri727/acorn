@@ -22,11 +22,6 @@ class ModePageState extends State<ModePage> {
     super.initState();
   }
 
-  final Uri youtubeUrl = Uri.parse('https://www.youtube.com/@laporte_academy');
-  final Uri appStoreMobileUrl = Uri.parse('https://apps.apple.com/jp/app/%E5%9B%9B%E6%AC%A1%E5%85%83%E5%B9%B4%E8%A1%A8for-mobile/id6502634868'); // Replace with your App Store URL
-  final Uri playStoreUrl = Uri.parse('https://play.google.com/store/apps/details?id=academy.laporte.chronomapMobile.chronomap_mobile&hl=ja'); // Replace with your Play Store URL
-  final Uri appStoreCosmosUrl = Uri.parse("https://apps.apple.com/jp/app/chronomap-in-cosmos/id6642644551");
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,55 +50,59 @@ class ModePageState extends State<ModePage> {
                 style: AcornTheme.textTheme.bodyLarge,
               ),
             ),
-            TextButtonFormat(
-                label: AppLocalizations.of(context)!.modeB,
-                onPressed: (){
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('This is YOUR Database'),
-                          content: const Text('Create a uniquely global platform\n'
-                              'where YOU contribute to expanding the wealth of data'),
-                          actions: <Widget>[
-                            TextButton(
-                                child: const Text('close'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                })
-                          ],
-                        );
-                      });
-                },
-                color: Colors.white60),
-/*            TextButtonFormat(
-                label: 'How many data do we have ?',
-                onPressed: () {
-                  Navigator.push<String>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AnalysisPage(),
-                    ),
-                  );
-                },
-                color: Colors.white60),*/
-            TextButtonFormat(
-                label: AppLocalizations.of(context)!.modeC,
-                onPressed: (_launchYouTube),
-                color: Colors.white60),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(Icons.desktop_mac_outlined, color: Colors.white),
+                TextButtonFormat(
+                    label: AppLocalizations.of(context)!.modeB,
+                    onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('This is YOUR Database'),
+                              content: const Text('Create a uniquely global platform\n'
+                                  'where YOU contribute to expanding the wealth of data'),
+                              actions: <Widget>[
+                                TextButton(
+                                    child: const Text('close'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    })
+                              ],
+                            );
+                          });
+                    },
+                    color: Colors.white),
+
+                /*            TextButtonFormat(
+            label: 'How many data do we have ?',
+            onPressed: () {
+              Navigator.push<String>(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AnalysisPage(),
                 ),
-                Icon(Icons.laptop, color: Colors.white),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.tablet, color: Colors.white),
-                ),
+              );
+            },
+            color: Colors.blueGrey),*/
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: Icon(Icons.desktop_mac_outlined, color: Colors.white),
+                  ),
+                  Icon(Icons.laptop, color: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Icon(Icons.tablet, color: Colors.white),
+                  ),
+                ],
+              ),
             ),
             TextButtonFormat(
                 label: AppLocalizations.of(context)!.modeD,
@@ -116,7 +115,11 @@ class ModePageState extends State<ModePage> {
                   );
                 },
                 color: Colors.white),
-            const Icon(Icons.phone_android, color: Colors.white ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: const Icon(Icons.phone_android, color: Colors.white ),
+            ),
 
             TextButtonFormat(
                 label: AppLocalizations.of(context)!.modeE,
@@ -129,34 +132,13 @@ class ModePageState extends State<ModePage> {
                   );
                 },
                 color: Colors.white),
-            const Icon(Icons.phone_android, color: Colors.white ),
-            TextButtonFormat(
-                label: "Chronomap for Mobile (iOS)",
-                onPressed: (_launchAppStoreMobile),
-                color: Colors.white),
-            const Icon(Icons.phone_android, color: Colors.white ),
-            TextButtonFormat(
-                label: "Chronomap for Mobile (android)",
-                onPressed: (_launchPlayStore),
-                color: Colors.white),
-            const Icon(Icons.phone_android, color: Colors.white ),
-            TextButtonFormat(
-                label: "Chronomap in Cosmos (iOS)",
-                onPressed: (_launchAppStoreCosmos),
-                color: Colors.white),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _launchYouTube() async {
-    if (!await launchUrl(youtubeUrl)) {
-      throw Exception('Could not launch $youtubeUrl');
-    }
-  }
-
-  Future<void> _launchAppStoreMobile() async {
+/*  Future<void> _launchAppStoreMobile() async {
     if (!await launchUrl(appStoreMobileUrl)) {
       throw Exception('Could not launch $appStoreMobileUrl');
     }
@@ -172,5 +154,5 @@ class ModePageState extends State<ModePage> {
     if (!await launchUrl(playStoreUrl)) {
       throw Exception('Could not launch $playStoreUrl');
     }
-  }
+  }*/
 }

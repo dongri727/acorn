@@ -1,4 +1,6 @@
 import 'package:acorn_flutter/analysis_page.dart';
+import 'package:acorn_flutter/mode.dart';
+import 'package:acorn_flutter/show_case/cassini_huygens.dart';
 //import 'package:acorn_flutter/csv_page.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
@@ -10,8 +12,8 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
+    return Scaffold(
+      body: Container(
           constraints: const BoxConstraints.expand( ),
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -94,6 +96,36 @@ class IndexPage extends StatelessWidget {
                           child: Text(
                             AppLocalizations.of(context)!.webIndexB,
                             style: AcornTheme.textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.all(20.0),
+                        child: Text(
+                            "Showcase",
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.push<String>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CassiniHuygens(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Cassini_Huygens',
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),

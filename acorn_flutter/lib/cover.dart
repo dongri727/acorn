@@ -1,12 +1,11 @@
 import 'package:acorn_flutter/serverpod_client.dart';
 import 'package:acorn_flutter/utils/language_button.dart';
 import 'package:acorn_flutter/utils/shadowed_container.dart';
-import 'package:flutter/material.dart';
+import 'index.dart';
 import 'info_page.dart';
+import 'laporte.dart';
 import 'mode.dart';
 import 'package:acorn_flutter/export/exporter.dart';
-
-
 
 class CoverPage extends StatefulWidget {
   const CoverPage({super.key});
@@ -32,6 +31,17 @@ class CoverPageState extends State<CoverPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push<String>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Laporte(),
+              ),
+            );
+          },
+          label: Text("about LaPorte"),
+          ),
       body: Container(
         constraints: const BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -61,7 +71,7 @@ class CoverPageState extends State<CoverPage> {
                           Navigator.push<String>(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const ModePage(),
+                              builder: (context) => const IndexPage(),
                               /*                   builder: (context) => sessionManager.isSignedIn
                               ? const AccountPage()
                               : const SignInPage(),*/

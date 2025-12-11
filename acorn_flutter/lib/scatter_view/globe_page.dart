@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:html' as html;
+import 'package:web/web.dart' as web;
 import 'dart:ui_web' as ui_web;
-
 import 'package:flutter/material.dart';
 import 'echarts_js.dart';
 import 'globe_hint_page.dart';
@@ -36,7 +35,7 @@ class GlobePageState extends State<GlobePage> {
 
     // Globe 用の ECharts コンテナを登録
     ui_web.platformViewRegistry.registerViewFactory(_viewType, (int viewId) {
-      final html.DivElement div = html.DivElement()
+      final web.HTMLDivElement div = web.HTMLDivElement()
         ..id = 'echarts_div_globe'
         ..style.width = '100%'
         ..style.height = '800px';
@@ -55,12 +54,12 @@ class GlobePageState extends State<GlobePage> {
     const maxAttempts = 50;
     int attempts = 0;
     // document.getElementById を使って、対象の DOM 要素が存在するか確認
-    while (html.document.getElementById('echarts_div_globe') == null && attempts < maxAttempts) {
+    while (web.document.getElementById('echarts_div_globe') == null && attempts < maxAttempts) {
       await Future.delayed(const Duration(milliseconds: 100));
       attempts++;
     }
 
-    if (html.document.getElementById('echarts_div_globe') != null) {
+    if (web.document.getElementById('echarts_div_globe') != null) {
       await _initializeChart();
     } else {
       print('Error: echarts_div not found after waiting.');
