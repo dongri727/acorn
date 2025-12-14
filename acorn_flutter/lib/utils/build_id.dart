@@ -1,3 +1,3 @@
 class BuildId {
-  static const String value = '20251214';
+  static const String value = '20251215';
 }
