@@ -11,27 +11,29 @@ class WherePageGate extends StatelessWidget {
   Widget build(BuildContext context) {
     final confirm = Provider.of<Confirm>(context);
     return ChangeNotifierProvider<ConfirmModel>(
-        create: (_) => ConfirmModel(),
-        child: Consumer<ConfirmModel>(
-          builder: (_, model, __) {
-            return Scaffold(
-              body: SafeArea(
-                  child: Center(
-                child: Column(children: [
-                  Expanded(
-                      child: WherePage(
-                    confirm: confirm,
-                  )),
-                ]),
-              )),
-            );
-          },
-        ));
+      create: (_) => ConfirmModel(),
+      child: Consumer<ConfirmModel>(
+        builder: (_, model, __) {
+          return Scaffold(
+            body: SafeArea(
+              child: Center(
+                child: Column(
+                  children: [Expanded(child: WherePage(confirm: confirm))],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
 class WherePage extends StatelessWidget {
-  const WherePage({super.key, required Confirm confirm}) /* : _confirm = confirm */;
+  const WherePage({
+    super.key,
+    required Confirm confirm,
+  }) /* : _confirm = confirm */;
 
   @override
   Widget build(BuildContext context) {
@@ -40,180 +42,350 @@ class WherePage extends StatelessWidget {
 
     return ChangeNotifierProvider<WhereModel>(
       create: (_) => WhereModel(keyArea: confirm.selectedLocation),
-      child: Consumer<WhereModel>(builder: (_, model, child) {
+      child: Consumer<WhereModel>(
+        builder: (_, model, child) {
+          String locale = Localizations.localeOf(context).languageCode;
 
-        String locale = Localizations.localeOf(context).languageCode;
-
-        List<String> optionsW;
-        switch (locale) {
-          case 'fr':
-            optionsW = model.optionsFr;
-            break;
-          case 'ja':
-            optionsW = model.optionsJa;
-            break;
-          default:
-            optionsW = model.options;
-        }
-        return Scaffold(
+          List<String> optionsW;
+          switch (locale) {
+            case 'fr':
+              optionsW = model.optionsFr;
+              break;
+            case 'ja':
+              optionsW = model.optionsJa;
+              break;
+            default:
+              optionsW = model.options;
+          }
+          return Scaffold(
             body: Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
                   image: AssetImage('assets/images/both.png'),
                   fit: BoxFit.cover,
-                )),
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(children: [
+                ),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
                           Expanded(
                             flex: 1,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(100, 20, 20, 20),
+                              padding: const EdgeInsets.fromLTRB(
+                                100,
+                                20,
+                                20,
+                                20,
+                              ),
                               child: ShadowedContainer(
                                 child: RadioButtonFormat(
-                                    options: optionsW,
-                                    onChanged: (String? value) {
-                                      model.selectedOption = value!;
-                                    }),
+                                  options: optionsW,
+                                  onChanged: (String? value) {
+                                    model.selectedOption = value!;
+                                  },
+                                ),
                               ),
                             ),
                           ),
-                          Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 20, 20, 60),
-                                    child: BlankTextFormat(
-                                        text: model.locationPrecise),
-                                  ),
-                                  BlankTextFormat(text: model.chosenCatt),
-                                  BlankTextFormat(text: model.chosenPatt),
-                                ],
-                              )),
                           Expanded(
                             flex: 1,
                             child: Column(
                               children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
-                                  child: ShadowedContainer(
-                                    child: RadioButtonRowFormat(
-                                        options: model.ns,
-                                        onChanged: (String? value) {
-                                          model.selectedOption = value!;
-                                        }),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    20,
+                                    20,
+                                    20,
+                                    60,
+                                  ),
+                                  child: BlankTextFormat(
+                                    text: model.locationPrecise,
                                   ),
                                 ),
+                                BlankTextFormat(text: model.chosenCatt),
+                                BlankTextFormat(text: model.chosenPatt),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    8,
+                                    100,
+                                    8,
+                                  ),
                                   child: ShadowedContainer(
-                                    child: NumFormat(
-                                      hintText: AppLocalizations.of(context)!.latitude,
-                                      onChanged: (value) {
-                                        model.nsSwitch(value);
+                                    child: RadioButtonRowFormat(
+                                      options: model.ns,
+                                      onChanged: (String? value) {
+                                        model.selectedNs = value ?? 'N';
                                       },
-                                      tffColor1: Colors.black54,
-                                      tffColor2: const Color(0x99e6e6fa),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 100, 8),
-                                  child: ShadowedContainer(
-                                    child: RadioButtonRowFormat(
-                                        options: model.ew,
-                                        onChanged: (String? value) {
-                                          model.selectedOption = value!;
-                                        }),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    8,
+                                    100,
+                                    8,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: AppLocalizations.of(
+                                              context,
+                                            )!.latitude,
+                                            onChanged: (value) {
+                                              model.ewSwitch(value);
+                                            },
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 20.0),
+                                          child: Text(
+                                            "or",
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(50, 8, 100, 40),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    0,
+                                    100,
+                                    8,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "12°",
+                                            onChanged: model.setLatDeg,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "34'",
+                                            onChanged: model.setLatMin,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "56\"",
+                                            onChanged: model.setLatSec,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    8,
+                                    100,
+                                    8,
+                                  ),
                                   child: ShadowedContainer(
-                                    child: NumFormat(
-                                      hintText: AppLocalizations.of(context)!.longitude,
-                                      onChanged: (value) {
-                                        model.ewSwitch(value);
+                                    child: RadioButtonRowFormat(
+                                      options: model.ew,
+                                      onChanged: (String? value) {
+                                        model.selectedEw = value ?? 'E';
                                       },
-                                      tffColor1: Colors.black54,
-                                      tffColor2: const Color(0x99e6e6fa),
                                     ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    8,
+                                    100,
+                                    8,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: AppLocalizations.of(
+                                              context,
+                                            )!.longitude,
+                                            onChanged: (value) {
+                                              model.ewSwitch(value);
+                                            },
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 20.0),
+                                          child: Text(
+                                            "or",
+                                            style: TextStyle(
+                                            color: Colors.white
+                                            ),
+                                                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    50,
+                                    0,
+                                    100,
+                                    40,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "123°",
+                                            onChanged: model.setLonDeg,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "45'",
+                                            onChanged: model.setLonMin,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: ShadowedContainer(
+                                          child: NumFormat(
+                                            hintText: "67\"",
+                                            onChanged: model.setLonSec,
+                                            tffColor1: Colors.black54,
+                                            tffColor2: const Color(0x99e6e6fa),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                          )
-                        ]),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              model.fetchRadioButtonBasis(model.selectedOption);
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            model.fetchRadioButtonBasis(model.selectedOption);
+                          },
+                          child: Text(AppLocalizations.of(context)!.showSelect),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: ShadowedContainer(
+                          child: FormatGrey(
+                            controller: controller,
+                            hintText: AppLocalizations.of(context)!.newNameWant,
+                            onChanged: (text) {
+                              model.setNewWord(text);
                             },
-                            child: Text(AppLocalizations.of(context)!.showSelect),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: ShadowedContainer(
-                            child: FormatGrey(
-                              controller: controller,
-                              hintText: AppLocalizations.of(context)!.newNameWant,
-                              onChanged: (text) {
-                                model.setNewWord(text);
-                              },
-                            ),
-                          ),
+                      ),
+                      Visibility(
+                        visible:
+                            model.newStar.trim().isNotEmpty ||
+                            model.newPlace.trim().isNotEmpty ||
+                            model.newPaysatt.trim().isNotEmpty ||
+                            model.newPlaceatt.trim().isNotEmpty,
+                        child: ButtonFormat(
+                          onPressed: () async {
+                            model.addAndFetchRadioButtonBasis(
+                              model.selectedOption,
+                            );
+                            controller.clear();
+                          },
+                          label: AppLocalizations.of(context)!.addNewName,
                         ),
-                        Visibility(
-                          visible: model.newStar.trim().isNotEmpty
-                            || model.newPlace.trim().isNotEmpty
-                            || model.newPaysatt.trim().isNotEmpty
-                            || model.newPlaceatt.trim().isNotEmpty,
-                          child: ButtonFormat(
-                            onPressed: () async {
-                              model.addAndFetchRadioButtonBasis(
-                                  model.selectedOption);
-                              controller.clear();
-                            },
-                            label: AppLocalizations.of(context)!.addNewName,
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Wrap(
+                          spacing: 5.0,
+                          children: model.currentDisplayList.map<Widget>((
+                            item,
+                          ) {
+                            return model.buildItemWidget(item);
+                          }).toList(),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Wrap(
-                            spacing: 5.0,
-                            children:
-                                model.currentDisplayList.map<Widget>((item) {
-                              return model.buildItemWidget(item);
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
                 model.temporarilySaveData((context) {
                   showDialog<void>(
-                      context: context,
-                      builder: (_) {
-                        return const ConfirmDialog();
-                      });
+                    context: context,
+                    builder: (_) {
+                      return const ConfirmDialog();
+                    },
+                  );
                 }, context);
               },
               label: Text(AppLocalizations.of(context)!.saveTempo),
-            ));
-      }),
+            ),
+          );
+        },
+      ),
     );
   }
 }

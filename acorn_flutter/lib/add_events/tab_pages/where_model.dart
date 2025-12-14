@@ -51,6 +51,20 @@ class WhereModel extends ChangeNotifier {
 
   String? selectedOption = '';
 
+  String selectedNs = 'N';
+  String selectedEw = 'E';
+
+  String _latDecimalRaw = '';
+  String _lonDecimalRaw = '';
+
+  String _latDegRaw = '';
+  String _latMinRaw = '';
+  String _latSecRaw = '';
+
+  String _lonDegRaw = '';
+  String _lonMinRaw = '';
+  String _lonSecRaw = '';
+
   List<String> options = whereOptions;
   List<String> optionsFr = whereOptionsFr;
   List<String> optionsJa = whereOptionsJa;
@@ -61,12 +75,17 @@ class WhereModel extends ChangeNotifier {
   ];
 
   nsSwitch(value) async {
-    switch (selectedOption) {
-      case 'N':
-        newLatitude = double.tryParse(value)!;
-        break;
+    _latDecimalRaw = (value ?? '').toString();
+    final parsed = double.tryParse(_latDecimalRaw.trim());
+    if (parsed == null) return;
+
+    switch (selectedNs) {
       case 'S':
-        newLatitude = -double.tryParse(value)!;
+        newLatitude = -parsed;
+        break;
+      case 'N':
+      default:
+        newLatitude = parsed;
         break;
     }
   }
@@ -77,16 +96,22 @@ class WhereModel extends ChangeNotifier {
   ];
 
   ewSwitch(value) async {
-    switch (selectedOption) {
-      case 'E':
-        newLongitude = double.tryParse(value)!;
-        break;
+    _lonDecimalRaw = (value ?? '').toString();
+    final parsed = double.tryParse(_lonDecimalRaw.trim());
+    if (parsed == null) return;
+
+    switch (selectedEw) {
       case 'W':
-        newLongitude = -double.tryParse(value)!;
+        newLongitude = -parsed;
+        break;
+      case 'E':
+      default:
+        newLongitude = parsed;
         break;
     }
   }
 
+  // ---- selection state for chips / labels (restored) ----
   final List<String> _filtersLocationPrecise = <String>[];
 
   String locationPrecise = '';
@@ -98,6 +123,40 @@ class WhereModel extends ChangeNotifier {
   int chosenPattId = 0;
 
   String chosenLocationPrecise = '';
+
+  void setLatDeg(String v) {
+    _latDegRaw = v;
+  }
+
+  void setLatMin(String v) {
+    _latMinRaw = v;
+  }
+
+  void setLatSec(String v) {
+    _latSecRaw = v;
+  }
+
+  void setLonDeg(String v) {
+    _lonDegRaw = v;
+  }
+
+  void setLonMin(String v) {
+    _lonMinRaw = v;
+  }
+
+  void setLonSec(String v) {
+    _lonSecRaw = v;
+  }
+
+  double? _dmsToDecimal({required String degRaw, required String minRaw, required String secRaw}) {
+    final deg = double.tryParse(degRaw.trim());
+    if (deg == null) return null;
+
+    final min = double.tryParse(minRaw.trim()) ?? 0.0;
+    final sec = double.tryParse(secRaw.trim()) ?? 0.0;
+
+    return deg + (min / 60.0) + (sec / 3600.0);
+  }
 
   Future<void> fetchRadioButtonBasis(selectedOption) async {
     switch (selectedOption) {
@@ -289,11 +348,39 @@ class WhereModel extends ChangeNotifier {
     }
   }
 
+  void _applyDmsIfNeeded() {
+    // Latitude: if decimal not provided, but DMS provided, convert.
+    if (_latDecimalRaw.trim().isEmpty) {
+      final hasLatDms = _latDegRaw.trim().isNotEmpty || _latMinRaw.trim().isNotEmpty || _latSecRaw.trim().isNotEmpty;
+      if (hasLatDms) {
+        final dec = _dmsToDecimal(degRaw: _latDegRaw, minRaw: _latMinRaw, secRaw: _latSecRaw);
+        if (dec != null) {
+          final signedN = (selectedNs == 'S') ? -dec : dec;
+          newLatitude = double.parse(signedN.toStringAsFixed(4));
+        }
+      }
+    }
+
+    // Longitude: if decimal not provided, but DMS provided, convert.
+    if (_lonDecimalRaw.trim().isEmpty) {
+      final hasLonDms = _lonDegRaw.trim().isNotEmpty || _lonMinRaw.trim().isNotEmpty || _lonSecRaw.trim().isNotEmpty;
+      if (hasLonDms) {
+        final dec = _dmsToDecimal(degRaw: _lonDegRaw, minRaw: _lonMinRaw, secRaw: _lonSecRaw);
+        if (dec != null) {
+          final signedE = (selectedEw == 'W') ? -dec : dec;
+          newLongitude = double.parse(signedE.toStringAsFixed(4));
+        }
+      }
+    }
+  }
+
   void temporarilySaveData(
       Function(BuildContext) showDialogCallback, BuildContext context) {
     // ダイアログ表示
     showDialogCallback(context);
     final confirm = Provider.of<Confirm>(context, listen: false);
+
+    _applyDmsIfNeeded();
 
     double ns = (math.pi * newLatitude) / 180;
     double ew = (math.pi * newLongitude) / 180;
@@ -321,7 +408,5 @@ class WhereModel extends ChangeNotifier {
     confirm.x = double.parse((cx).toStringAsFixed(4));
     confirm.y = double.parse((cy).toStringAsFixed(4));
     confirm.z = double.parse((cz).toStringAsFixed(4));
-
-    confirm.geo = 'SRID=4326;POINT($newLongitude $newLatitude)';
   }
 }

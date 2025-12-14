@@ -1,11 +1,24 @@
 #!/bin/sh
 
+# タイムスタンプを生成
+BUILD_ID=$(date +"%Y%m%d")
+
+# Dart を上書き
+cat <<EOF > ../acorn_flutter/lib/utils/build_id.dart
+class BuildId {
+  static const String value = '$BUILD_ID';
+}
+EOF
+
+echo "Build ID generated: $BUILD_ID"
+
 # Makes sure we break the script on any error.
 set -e
 
 # Build the web app
 cd ../acorn_flutter
 flutter build web --release --no-tree-shake-icons
+cp web/flutter_service_worker.js build/web/flutter_service_worker.js
 cd ..
 
 # Copy the build files into the web/app diretory.

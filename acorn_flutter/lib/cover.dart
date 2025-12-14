@@ -6,6 +6,7 @@ import 'info_page.dart';
 import 'laporte.dart';
 import 'mode.dart';
 import 'package:acorn_flutter/export/exporter.dart';
+import 'package:acorn_flutter/utils/build_id.dart';
 
 class CoverPage extends StatefulWidget {
   const CoverPage({super.key});
@@ -32,6 +33,7 @@ class CoverPageState extends State<CoverPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.grey,
           onPressed: () {
             Navigator.push<String>(
               context,
@@ -91,8 +93,11 @@ class CoverPageState extends State<CoverPage> {
                               MaterialPageRoute(
                                   builder: (context) => const InfoPage()));
                         },
-                        icon: const Icon(Icons.info_outline))
-
+                        icon: const Icon(Icons.info_outline)),
+                    Text(
+                       BuildId.value,
+                      style: TextStyle(fontSize: 10, color: Colors.grey),
+                    ),
                   ],
                 ),
               ),

@@ -30,6 +30,13 @@ class Laporte extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.grey,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        label: Text("back"),
+          ),
     );
   }
 
