@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class PlaceInvolved
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PlaceInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'placeId': placeId,
@@ -67,6 +69,7 @@ abstract class PlaceInvolved
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'PlaceInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'placeId': placeId,
@@ -111,10 +114,10 @@ class _PlaceInvolvedImpl extends PlaceInvolved {
     required int principalId,
     required int placeId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          placeId: placeId,
-        );
+         id: id,
+         principalId: principalId,
+         placeId: placeId,
+       );
 
   /// Returns a shallow copy of this [PlaceInvolved]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _PlaceInvolvedImpl extends PlaceInvolved {
   }
 }
 
+class PlaceInvolvedUpdateTable extends _i1.UpdateTable<PlaceInvolvedTable> {
+  PlaceInvolvedUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> placeId(int value) => _i1.ColumnValue(
+    table.placeId,
+    value,
+  );
+}
+
 class PlaceInvolvedTable extends _i1.Table<int?> {
   PlaceInvolvedTable({super.tableRelation})
-      : super(tableName: 'place_involved') {
+    : super(tableName: 'place_involved') {
+    updateTable = PlaceInvolvedUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class PlaceInvolvedTable extends _i1.Table<int?> {
     );
   }
 
+  late final PlaceInvolvedUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt placeId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        placeId,
-      ];
+    id,
+    principalId,
+    placeId,
+  ];
 }
 
 class PlaceInvolvedInclude extends _i1.IncludeObject {
@@ -343,6 +363,46 @@ class PlaceInvolvedRepository {
     return session.db.updateRow<PlaceInvolved>(
       row,
       columns: columns?.call(PlaceInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [PlaceInvolved] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<PlaceInvolved?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PlaceInvolvedUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<PlaceInvolved>(
+      id,
+      columnValues: columnValues(PlaceInvolved.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [PlaceInvolved]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<PlaceInvolved>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PlaceInvolvedUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PlaceInvolvedTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PlaceInvolvedTable>? orderBy,
+    _i1.OrderByListBuilder<PlaceInvolvedTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<PlaceInvolved>(
+      columnValues: columnValues(PlaceInvolved.t.updateTable),
+      where: where(PlaceInvolved.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PlaceInvolved.t),
+      orderByList: orderByList?.call(PlaceInvolved.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

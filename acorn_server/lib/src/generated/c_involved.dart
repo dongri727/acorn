@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class CountryInvolved
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'CountryInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'paysId': paysId,
@@ -67,6 +69,7 @@ abstract class CountryInvolved
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'CountryInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'paysId': paysId,
@@ -111,10 +114,10 @@ class _CountryInvolvedImpl extends CountryInvolved {
     required int principalId,
     required int paysId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          paysId: paysId,
-        );
+         id: id,
+         principalId: principalId,
+         paysId: paysId,
+       );
 
   /// Returns a shallow copy of this [CountryInvolved]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _CountryInvolvedImpl extends CountryInvolved {
   }
 }
 
+class CountryInvolvedUpdateTable extends _i1.UpdateTable<CountryInvolvedTable> {
+  CountryInvolvedUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> paysId(int value) => _i1.ColumnValue(
+    table.paysId,
+    value,
+  );
+}
+
 class CountryInvolvedTable extends _i1.Table<int?> {
   CountryInvolvedTable({super.tableRelation})
-      : super(tableName: 'country_involved') {
+    : super(tableName: 'country_involved') {
+    updateTable = CountryInvolvedUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class CountryInvolvedTable extends _i1.Table<int?> {
     );
   }
 
+  late final CountryInvolvedUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt paysId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        paysId,
-      ];
+    id,
+    principalId,
+    paysId,
+  ];
 }
 
 class CountryInvolvedInclude extends _i1.IncludeObject {
@@ -343,6 +363,48 @@ class CountryInvolvedRepository {
     return session.db.updateRow<CountryInvolved>(
       row,
       columns: columns?.call(CountryInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [CountryInvolved] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<CountryInvolved?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<CountryInvolvedUpdateTable>
+    columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<CountryInvolved>(
+      id,
+      columnValues: columnValues(CountryInvolved.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [CountryInvolved]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<CountryInvolved>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<CountryInvolvedUpdateTable>
+    columnValues,
+    required _i1.WhereExpressionBuilder<CountryInvolvedTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<CountryInvolvedTable>? orderBy,
+    _i1.OrderByListBuilder<CountryInvolvedTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<CountryInvolved>(
+      columnValues: columnValues(CountryInvolved.t.updateTable),
+      where: where(CountryInvolved.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(CountryInvolved.t),
+      orderByList: orderByList?.call(CountryInvolved.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

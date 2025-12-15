@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class StarsInvolved
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'StarsInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'starId': starId,
@@ -67,6 +69,7 @@ abstract class StarsInvolved
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'StarsInvolved',
       if (id != null) 'id': id,
       'principalId': principalId,
       'starId': starId,
@@ -111,10 +114,10 @@ class _StarsInvolvedImpl extends StarsInvolved {
     required int principalId,
     required int starId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          starId: starId,
-        );
+         id: id,
+         principalId: principalId,
+         starId: starId,
+       );
 
   /// Returns a shallow copy of this [StarsInvolved]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _StarsInvolvedImpl extends StarsInvolved {
   }
 }
 
+class StarsInvolvedUpdateTable extends _i1.UpdateTable<StarsInvolvedTable> {
+  StarsInvolvedUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> starId(int value) => _i1.ColumnValue(
+    table.starId,
+    value,
+  );
+}
+
 class StarsInvolvedTable extends _i1.Table<int?> {
   StarsInvolvedTable({super.tableRelation})
-      : super(tableName: 'stars_involved') {
+    : super(tableName: 'stars_involved') {
+    updateTable = StarsInvolvedUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class StarsInvolvedTable extends _i1.Table<int?> {
     );
   }
 
+  late final StarsInvolvedUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt starId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        starId,
-      ];
+    id,
+    principalId,
+    starId,
+  ];
 }
 
 class StarsInvolvedInclude extends _i1.IncludeObject {
@@ -343,6 +363,46 @@ class StarsInvolvedRepository {
     return session.db.updateRow<StarsInvolved>(
       row,
       columns: columns?.call(StarsInvolved.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [StarsInvolved] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<StarsInvolved?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<StarsInvolvedUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<StarsInvolved>(
+      id,
+      columnValues: columnValues(StarsInvolved.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [StarsInvolved]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<StarsInvolved>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<StarsInvolvedUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<StarsInvolvedTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StarsInvolvedTable>? orderBy,
+    _i1.OrderByListBuilder<StarsInvolvedTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<StarsInvolved>(
+      columnValues: columnValues(StarsInvolved.t.updateTable),
+      where: where(StarsInvolved.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(StarsInvolved.t),
+      orderByList: orderByList?.call(StarsInvolved.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

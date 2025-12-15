@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Target implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Target',
       if (id != null) 'id': id,
       'specialite': specialite,
       'detailId': detailId,
@@ -66,6 +68,7 @@ abstract class Target implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Target',
       if (id != null) 'id': id,
       'specialite': specialite,
       'detailId': detailId,
@@ -110,10 +113,10 @@ class _TargetImpl extends Target {
     required String specialite,
     required int detailId,
   }) : super._(
-          id: id,
-          specialite: specialite,
-          detailId: detailId,
-        );
+         id: id,
+         specialite: specialite,
+         detailId: detailId,
+       );
 
   /// Returns a shallow copy of this [Target]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _TargetImpl extends Target {
   }
 }
 
+class TargetUpdateTable extends _i1.UpdateTable<TargetTable> {
+  TargetUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> specialite(String value) => _i1.ColumnValue(
+    table.specialite,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> detailId(int value) => _i1.ColumnValue(
+    table.detailId,
+    value,
+  );
+}
+
 class TargetTable extends _i1.Table<int?> {
   TargetTable({super.tableRelation}) : super(tableName: 'target') {
+    updateTable = TargetUpdateTable(this);
     specialite = _i1.ColumnString(
       'specialite',
       this,
@@ -144,16 +162,18 @@ class TargetTable extends _i1.Table<int?> {
     );
   }
 
+  late final TargetUpdateTable updateTable;
+
   late final _i1.ColumnString specialite;
 
   late final _i1.ColumnInt detailId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        specialite,
-        detailId,
-      ];
+    id,
+    specialite,
+    detailId,
+  ];
 }
 
 class TargetInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class TargetRepository {
     return session.db.updateRow<Target>(
       row,
       columns: columns?.call(Target.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Target] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Target?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<TargetUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Target>(
+      id,
+      columnValues: columnValues(Target.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Target]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Target>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<TargetUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<TargetTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<TargetTable>? orderBy,
+    _i1.OrderByListBuilder<TargetTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Target>(
+      columnValues: columnValues(Target.t.updateTable),
+      where: where(Target.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Target.t),
+      orderByList: orderByList?.call(Target.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

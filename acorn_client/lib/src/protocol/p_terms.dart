@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -52,6 +53,7 @@ abstract class PrincipalTerms implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PrincipalTerms',
       if (id != null) 'id': id,
       'principalId': principalId,
       'termId': termId,
@@ -72,10 +74,10 @@ class _PrincipalTermsImpl extends PrincipalTerms {
     required int principalId,
     required int termId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          termId: termId,
-        );
+         id: id,
+         principalId: principalId,
+         termId: termId,
+       );
 
   /// Returns a shallow copy of this [PrincipalTerms]
   /// with some or all fields replaced by the given arguments.

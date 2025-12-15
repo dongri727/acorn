@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class PrincipalSites
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PrincipalSites',
       if (id != null) 'id': id,
       'principalId': principalId,
       'siteId': siteId,
@@ -67,6 +69,7 @@ abstract class PrincipalSites
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'PrincipalSites',
       if (id != null) 'id': id,
       'principalId': principalId,
       'siteId': siteId,
@@ -111,10 +114,10 @@ class _PrincipalSitesImpl extends PrincipalSites {
     required int principalId,
     required int siteId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          siteId: siteId,
-        );
+         id: id,
+         principalId: principalId,
+         siteId: siteId,
+       );
 
   /// Returns a shallow copy of this [PrincipalSites]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _PrincipalSitesImpl extends PrincipalSites {
   }
 }
 
+class PrincipalSitesUpdateTable extends _i1.UpdateTable<PrincipalSitesTable> {
+  PrincipalSitesUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> siteId(int value) => _i1.ColumnValue(
+    table.siteId,
+    value,
+  );
+}
+
 class PrincipalSitesTable extends _i1.Table<int?> {
   PrincipalSitesTable({super.tableRelation})
-      : super(tableName: 'principal_sites') {
+    : super(tableName: 'principal_sites') {
+    updateTable = PrincipalSitesUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class PrincipalSitesTable extends _i1.Table<int?> {
     );
   }
 
+  late final PrincipalSitesUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt siteId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        siteId,
-      ];
+    id,
+    principalId,
+    siteId,
+  ];
 }
 
 class PrincipalSitesInclude extends _i1.IncludeObject {
@@ -343,6 +363,46 @@ class PrincipalSitesRepository {
     return session.db.updateRow<PrincipalSites>(
       row,
       columns: columns?.call(PrincipalSites.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [PrincipalSites] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<PrincipalSites?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PrincipalSitesUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<PrincipalSites>(
+      id,
+      columnValues: columnValues(PrincipalSites.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [PrincipalSites]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<PrincipalSites>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PrincipalSitesUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PrincipalSitesTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalSitesTable>? orderBy,
+    _i1.OrderByListBuilder<PrincipalSitesTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<PrincipalSites>(
+      columnValues: columnValues(PrincipalSites.t.updateTable),
+      where: where(PrincipalSites.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalSites.t),
+      orderByList: orderByList?.call(PrincipalSites.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

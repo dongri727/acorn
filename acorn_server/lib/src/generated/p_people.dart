@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class PrincipalPeople
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PrincipalPeople',
       if (id != null) 'id': id,
       'principalId': principalId,
       'personId': personId,
@@ -67,6 +69,7 @@ abstract class PrincipalPeople
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'PrincipalPeople',
       if (id != null) 'id': id,
       'principalId': principalId,
       'personId': personId,
@@ -111,10 +114,10 @@ class _PrincipalPeopleImpl extends PrincipalPeople {
     required int principalId,
     required int personId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          personId: personId,
-        );
+         id: id,
+         principalId: principalId,
+         personId: personId,
+       );
 
   /// Returns a shallow copy of this [PrincipalPeople]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _PrincipalPeopleImpl extends PrincipalPeople {
   }
 }
 
+class PrincipalPeopleUpdateTable extends _i1.UpdateTable<PrincipalPeopleTable> {
+  PrincipalPeopleUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> personId(int value) => _i1.ColumnValue(
+    table.personId,
+    value,
+  );
+}
+
 class PrincipalPeopleTable extends _i1.Table<int?> {
   PrincipalPeopleTable({super.tableRelation})
-      : super(tableName: 'principal_people') {
+    : super(tableName: 'principal_people') {
+    updateTable = PrincipalPeopleUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class PrincipalPeopleTable extends _i1.Table<int?> {
     );
   }
 
+  late final PrincipalPeopleUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt personId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        personId,
-      ];
+    id,
+    principalId,
+    personId,
+  ];
 }
 
 class PrincipalPeopleInclude extends _i1.IncludeObject {
@@ -343,6 +363,48 @@ class PrincipalPeopleRepository {
     return session.db.updateRow<PrincipalPeople>(
       row,
       columns: columns?.call(PrincipalPeople.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [PrincipalPeople] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<PrincipalPeople?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PrincipalPeopleUpdateTable>
+    columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<PrincipalPeople>(
+      id,
+      columnValues: columnValues(PrincipalPeople.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [PrincipalPeople]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<PrincipalPeople>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PrincipalPeopleUpdateTable>
+    columnValues,
+    required _i1.WhereExpressionBuilder<PrincipalPeopleTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalPeopleTable>? orderBy,
+    _i1.OrderByListBuilder<PrincipalPeopleTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<PrincipalPeople>(
+      columnValues: columnValues(PrincipalPeople.t.updateTable),
+      where: where(PrincipalPeople.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalPeople.t),
+      orderByList: orderByList?.call(PrincipalPeople.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

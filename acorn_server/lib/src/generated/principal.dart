@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -94,6 +95,7 @@ abstract class Principal
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Principal',
       if (id != null) 'id': id,
       'period': period,
       'annee': annee,
@@ -109,6 +111,7 @@ abstract class Principal
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Principal',
       if (id != null) 'id': id,
       'period': period,
       'annee': annee,
@@ -165,16 +168,16 @@ class _PrincipalImpl extends Principal {
     required String location,
     required String precise,
   }) : super._(
-          id: id,
-          period: period,
-          annee: annee,
-          month: month,
-          day: day,
-          point: point,
-          affair: affair,
-          location: location,
-          precise: precise,
-        );
+         id: id,
+         period: period,
+         annee: annee,
+         month: month,
+         day: day,
+         point: point,
+         affair: affair,
+         location: location,
+         precise: precise,
+       );
 
   /// Returns a shallow copy of this [Principal]
   /// with some or all fields replaced by the given arguments.
@@ -205,8 +208,53 @@ class _PrincipalImpl extends Principal {
   }
 }
 
+class PrincipalUpdateTable extends _i1.UpdateTable<PrincipalTable> {
+  PrincipalUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> period(String value) => _i1.ColumnValue(
+    table.period,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> annee(String value) => _i1.ColumnValue(
+    table.annee,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> month(int value) => _i1.ColumnValue(
+    table.month,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> day(int value) => _i1.ColumnValue(
+    table.day,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> point(int value) => _i1.ColumnValue(
+    table.point,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> affair(String value) => _i1.ColumnValue(
+    table.affair,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> location(String value) => _i1.ColumnValue(
+    table.location,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> precise(String value) => _i1.ColumnValue(
+    table.precise,
+    value,
+  );
+}
+
 class PrincipalTable extends _i1.Table<int?> {
   PrincipalTable({super.tableRelation}) : super(tableName: 'principal') {
+    updateTable = PrincipalUpdateTable(this);
     period = _i1.ColumnString(
       'period',
       this,
@@ -241,6 +289,8 @@ class PrincipalTable extends _i1.Table<int?> {
     );
   }
 
+  late final PrincipalUpdateTable updateTable;
+
   late final _i1.ColumnString period;
 
   late final _i1.ColumnString annee;
@@ -259,16 +309,16 @@ class PrincipalTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        period,
-        annee,
-        month,
-        day,
-        point,
-        affair,
-        location,
-        precise,
-      ];
+    id,
+    period,
+    annee,
+    month,
+    day,
+    point,
+    affair,
+    location,
+    precise,
+  ];
 }
 
 class PrincipalInclude extends _i1.IncludeObject {
@@ -456,6 +506,46 @@ class PrincipalRepository {
     return session.db.updateRow<Principal>(
       row,
       columns: columns?.call(Principal.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Principal] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Principal?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PrincipalUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Principal>(
+      id,
+      columnValues: columnValues(Principal.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Principal]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Principal>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PrincipalUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PrincipalTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalTable>? orderBy,
+    _i1.OrderByListBuilder<PrincipalTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Principal>(
+      columnValues: columnValues(Principal.t.updateTable),
+      where: where(Principal.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Principal.t),
+      orderByList: orderByList?.call(Principal.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

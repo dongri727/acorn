@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -94,6 +95,7 @@ abstract class WithGlobe implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'WithGlobe',
       if (id != null) 'id': id,
       'principalId': principalId,
       'annee': annee,
@@ -128,17 +130,17 @@ class _WithGlobeImpl extends WithGlobe {
     required double zCoordinate,
     required double coefficient,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          annee: annee,
-          affair: affair,
-          location: location,
-          precise: precise,
-          xCoordinate: xCoordinate,
-          yCoordinate: yCoordinate,
-          zCoordinate: zCoordinate,
-          coefficient: coefficient,
-        );
+         id: id,
+         principalId: principalId,
+         annee: annee,
+         affair: affair,
+         location: location,
+         precise: precise,
+         xCoordinate: xCoordinate,
+         yCoordinate: yCoordinate,
+         zCoordinate: zCoordinate,
+         coefficient: coefficient,
+       );
 
   /// Returns a shallow copy of this [WithGlobe]
   /// with some or all fields replaced by the given arguments.

@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -58,6 +59,7 @@ abstract class PrincipalUser
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PrincipalUser',
       if (id != null) 'id': id,
       'principalId': principalId,
       'userId': userId,
@@ -67,6 +69,7 @@ abstract class PrincipalUser
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'PrincipalUser',
       if (id != null) 'id': id,
       'principalId': principalId,
       'userId': userId,
@@ -111,10 +114,10 @@ class _PrincipalUserImpl extends PrincipalUser {
     required int principalId,
     required int userId,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          userId: userId,
-        );
+         id: id,
+         principalId: principalId,
+         userId: userId,
+       );
 
   /// Returns a shallow copy of this [PrincipalUser]
   /// with some or all fields replaced by the given arguments.
@@ -133,9 +136,24 @@ class _PrincipalUserImpl extends PrincipalUser {
   }
 }
 
+class PrincipalUserUpdateTable extends _i1.UpdateTable<PrincipalUserTable> {
+  PrincipalUserUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+}
+
 class PrincipalUserTable extends _i1.Table<int?> {
   PrincipalUserTable({super.tableRelation})
-      : super(tableName: 'principal_user') {
+    : super(tableName: 'principal_user') {
+    updateTable = PrincipalUserUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -146,16 +164,18 @@ class PrincipalUserTable extends _i1.Table<int?> {
     );
   }
 
+  late final PrincipalUserUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnInt userId;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        userId,
-      ];
+    id,
+    principalId,
+    userId,
+  ];
 }
 
 class PrincipalUserInclude extends _i1.IncludeObject {
@@ -343,6 +363,46 @@ class PrincipalUserRepository {
     return session.db.updateRow<PrincipalUser>(
       row,
       columns: columns?.call(PrincipalUser.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [PrincipalUser] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<PrincipalUser?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PrincipalUserUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<PrincipalUser>(
+      id,
+      columnValues: columnValues(PrincipalUser.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [PrincipalUser]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<PrincipalUser>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PrincipalUserUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PrincipalUserTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PrincipalUserTable>? orderBy,
+    _i1.OrderByListBuilder<PrincipalUserTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<PrincipalUser>(
+      columnValues: columnValues(PrincipalUser.t.updateTable),
+      where: where(PrincipalUser.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PrincipalUser.t),
+      orderByList: orderByList?.call(PrincipalUser.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

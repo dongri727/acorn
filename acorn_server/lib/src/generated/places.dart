@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Places implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Places',
       if (id != null) 'id': id,
       'place': place,
       'country': country,
@@ -66,6 +68,7 @@ abstract class Places implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Places',
       if (id != null) 'id': id,
       'place': place,
       'country': country,
@@ -110,10 +113,10 @@ class _PlacesImpl extends Places {
     required String place,
     required String country,
   }) : super._(
-          id: id,
-          place: place,
-          country: country,
-        );
+         id: id,
+         place: place,
+         country: country,
+       );
 
   /// Returns a shallow copy of this [Places]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _PlacesImpl extends Places {
   }
 }
 
+class PlacesUpdateTable extends _i1.UpdateTable<PlacesTable> {
+  PlacesUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> place(String value) => _i1.ColumnValue(
+    table.place,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> country(String value) => _i1.ColumnValue(
+    table.country,
+    value,
+  );
+}
+
 class PlacesTable extends _i1.Table<int?> {
   PlacesTable({super.tableRelation}) : super(tableName: 'places') {
+    updateTable = PlacesUpdateTable(this);
     place = _i1.ColumnString(
       'place',
       this,
@@ -144,16 +162,18 @@ class PlacesTable extends _i1.Table<int?> {
     );
   }
 
+  late final PlacesUpdateTable updateTable;
+
   late final _i1.ColumnString place;
 
   late final _i1.ColumnString country;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        place,
-        country,
-      ];
+    id,
+    place,
+    country,
+  ];
 }
 
 class PlacesInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class PlacesRepository {
     return session.db.updateRow<Places>(
       row,
       columns: columns?.call(Places.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Places] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Places?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PlacesUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Places>(
+      id,
+      columnValues: columnValues(Places.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Places]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Places>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PlacesUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PlacesTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PlacesTable>? orderBy,
+    _i1.OrderByListBuilder<PlacesTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Places>(
+      columnValues: columnValues(Places.t.updateTable),
+      where: where(Places.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Places.t),
+      orderByList: orderByList?.call(Places.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

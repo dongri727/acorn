@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -52,6 +53,7 @@ abstract class Detail implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Detail',
       if (id != null) 'id': id,
       'genre': genre,
       'mot': mot,
@@ -72,10 +74,10 @@ class _DetailImpl extends Detail {
     required String genre,
     required String mot,
   }) : super._(
-          id: id,
-          genre: genre,
-          mot: mot,
-        );
+         id: id,
+         genre: genre,
+         mot: mot,
+       );
 
   /// Returns a shallow copy of this [Detail]
   /// with some or all fields replaced by the given arguments.

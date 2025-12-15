@@ -7,12 +7,13 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'p_categories.dart' as _i4;
+import 'c_involved.dart' as _i4;
 import 'categories.dart' as _i5;
 import 'catts_involved.dart' as _i6;
 import 'countryatts.dart' as _i7;
@@ -23,7 +24,7 @@ import 'myclass.dart' as _i11;
 import 'oceans.dart' as _i12;
 import 'organisations.dart' as _i13;
 import 'p-user.dart' as _i14;
-import 'c_involved.dart' as _i15;
+import 'p_categories.dart' as _i15;
 import 'p_catt.dart' as _i16;
 import 'p_detail.dart' as _i17;
 import 'p_involved.dart' as _i18;
@@ -35,7 +36,7 @@ import 'patts_involved.dart' as _i23;
 import 'pays.dart' as _i24;
 import 'people.dart' as _i25;
 import 'placeatts.dart' as _i26;
-import 'with_qgis.dart' as _i27;
+import 'places.dart' as _i27;
 import 'principal.dart' as _i28;
 import 'principal_sites.dart' as _i29;
 import 'seas.dart' as _i30;
@@ -47,7 +48,7 @@ import 'terms.dart' as _i35;
 import 'universe.dart' as _i36;
 import 'with_globe.dart' as _i37;
 import 'with_map.dart' as _i38;
-import 'places.dart' as _i39;
+import 'with_qgis.dart' as _i39;
 import 'package:acorn_server/src/generated/c_involved.dart' as _i40;
 import 'package:acorn_server/src/generated/categories.dart' as _i41;
 import 'package:acorn_server/src/generated/catts_involved.dart' as _i42;
@@ -169,12 +170,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -213,12 +214,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -257,12 +258,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -295,12 +296,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -339,12 +340,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -383,12 +384,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -445,12 +446,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -483,12 +484,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -521,12 +522,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -565,12 +566,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -609,12 +610,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -647,12 +648,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -691,12 +692,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -729,12 +730,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -773,12 +774,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -853,7 +854,7 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
@@ -866,7 +867,7 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'location',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: false,
@@ -879,7 +880,7 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'precise',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: false,
@@ -923,12 +924,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -967,12 +968,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1011,12 +1012,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1055,12 +1056,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1099,12 +1100,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1143,12 +1144,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1187,12 +1188,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1231,12 +1232,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1275,12 +1276,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1319,12 +1320,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1441,12 +1442,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1485,12 +1486,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1529,12 +1530,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1573,12 +1574,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1611,12 +1612,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1649,12 +1650,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1735,12 +1736,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1815,12 +1816,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1871,12 +1872,12 @@ class Protocol extends _i1.SerializationManagerServer {
             _i2.IndexElementDefinition(
               type: _i2.IndexElementDefinitionType.column,
               definition: 'id',
-            )
+            ),
           ],
           type: 'btree',
           isUnique: true,
           isPrimary: true,
-        )
+        ),
       ],
       managed: true,
     ),
@@ -1884,14 +1885,35 @@ class Protocol extends _i1.SerializationManagerServer {
     ..._i2.Protocol.targetTableDefinitions,
   ];
 
+  static String? getClassNameFromObjectJson(dynamic data) {
+    if (data is! Map) return null;
+    final className = data['__className__'] as String?;
+    return className;
+  }
+
   @override
   T deserialize<T>(
     dynamic data, [
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i4.PrincipalCategories) {
-      return _i4.PrincipalCategories.fromJson(data) as T;
+
+    final dataClassName = getClassNameFromObjectJson(data);
+    if (dataClassName != null && dataClassName != getClassNameForType(t)) {
+      try {
+        return deserializeByClassName({
+          'className': dataClassName,
+          'data': data,
+        });
+      } on FormatException catch (_) {
+        // If the className is not recognized (e.g., older client receiving
+        // data with a new subtype), fall back to deserializing without the
+        // className, using the expected type T.
+      }
+    }
+
+    if (t == _i4.CountryInvolved) {
+      return _i4.CountryInvolved.fromJson(data) as T;
     }
     if (t == _i5.Categories) {
       return _i5.Categories.fromJson(data) as T;
@@ -1923,8 +1945,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i14.PrincipalUser) {
       return _i14.PrincipalUser.fromJson(data) as T;
     }
-    if (t == _i15.CountryInvolved) {
-      return _i15.CountryInvolved.fromJson(data) as T;
+    if (t == _i15.PrincipalCategories) {
+      return _i15.PrincipalCategories.fromJson(data) as T;
     }
     if (t == _i16.PrincipalCatt) {
       return _i16.PrincipalCatt.fromJson(data) as T;
@@ -1959,8 +1981,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i26.Placeatts) {
       return _i26.Placeatts.fromJson(data) as T;
     }
-    if (t == _i27.WithQgis) {
-      return _i27.WithQgis.fromJson(data) as T;
+    if (t == _i27.Places) {
+      return _i27.Places.fromJson(data) as T;
     }
     if (t == _i28.Principal) {
       return _i28.Principal.fromJson(data) as T;
@@ -1995,12 +2017,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i38.WithMap) {
       return _i38.WithMap.fromJson(data) as T;
     }
-    if (t == _i39.Places) {
-      return _i39.Places.fromJson(data) as T;
+    if (t == _i39.WithQgis) {
+      return _i39.WithQgis.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.PrincipalCategories?>()) {
-      return (data != null ? _i4.PrincipalCategories.fromJson(data) : null)
-          as T;
+    if (t == _i1.getType<_i4.CountryInvolved?>()) {
+      return (data != null ? _i4.CountryInvolved.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i5.Categories?>()) {
       return (data != null ? _i5.Categories.fromJson(data) : null) as T;
@@ -2032,8 +2053,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i14.PrincipalUser?>()) {
       return (data != null ? _i14.PrincipalUser.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i15.CountryInvolved?>()) {
-      return (data != null ? _i15.CountryInvolved.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i15.PrincipalCategories?>()) {
+      return (data != null ? _i15.PrincipalCategories.fromJson(data) : null)
+          as T;
     }
     if (t == _i1.getType<_i16.PrincipalCatt?>()) {
       return (data != null ? _i16.PrincipalCatt.fromJson(data) : null) as T;
@@ -2068,8 +2090,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i26.Placeatts?>()) {
       return (data != null ? _i26.Placeatts.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i27.WithQgis?>()) {
-      return (data != null ? _i27.WithQgis.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i27.Places?>()) {
+      return (data != null ? _i27.Places.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i28.Principal?>()) {
       return (data != null ? _i28.Principal.fromJson(data) : null) as T;
@@ -2104,24 +2126,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i38.WithMap?>()) {
       return (data != null ? _i38.WithMap.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i39.Places?>()) {
-      return (data != null ? _i39.Places.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i39.WithQgis?>()) {
+      return (data != null ? _i39.WithQgis.fromJson(data) : null) as T;
     }
     if (t == List<dynamic>) {
       return (data as List).map((e) => deserialize<dynamic>(e)).toList() as T;
     }
     if (t == List<_i40.CountryInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i40.CountryInvolved>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i40.CountryInvolved>(e))
+              .toList()
+          as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
     if (t == _i1.getType<List<int>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<int>(e)).toList()
-          : null) as T;
+              ? (data as List).map((e) => deserialize<int>(e)).toList()
+              : null)
+          as T;
     }
     if (t == List<_i41.Categories>) {
       return (data as List).map((e) => deserialize<_i41.Categories>(e)).toList()
@@ -2129,18 +2153,24 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i42.CattsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i42.CattsInvolved>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i42.CattsInvolved>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i43.Countryatts>) {
       return (data as List)
-          .map((e) => deserialize<_i43.Countryatts>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i43.Countryatts>(e))
+              .toList()
+          as T;
+    }
+    if (t == List<String>) {
+      return (data as List).map((e) => deserialize<String>(e)).toList() as T;
     }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<String>(e)).toList()
-          : null) as T;
+              ? (data as List).map((e) => deserialize<String>(e)).toList()
+              : null)
+          as T;
     }
     if (t == List<_i44.Detail>) {
       return (data as List).map((e) => deserialize<_i44.Detail>(e)).toList()
@@ -2152,8 +2182,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i46.LaunchSites>) {
       return (data as List)
-          .map((e) => deserialize<_i46.LaunchSites>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i46.LaunchSites>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i47.Oceans>) {
       return (data as List).map((e) => deserialize<_i47.Oceans>(e)).toList()
@@ -2161,63 +2192,75 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i48.Organisations>) {
       return (data as List)
-          .map((e) => deserialize<_i48.Organisations>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i48.Organisations>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i49.PrincipalCategories>) {
       return (data as List)
-          .map((e) => deserialize<_i49.PrincipalCategories>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i49.PrincipalCategories>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i50.PrincipalCatt>) {
       return (data as List)
-          .map((e) => deserialize<_i50.PrincipalCatt>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i50.PrincipalCatt>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i51.PrincipalDetail>) {
       return (data as List)
-          .map((e) => deserialize<_i51.PrincipalDetail>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i51.PrincipalDetail>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i52.PlaceInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i52.PlaceInvolved>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i52.PlaceInvolved>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i53.PrincipalOrgs>) {
       return (data as List)
-          .map((e) => deserialize<_i53.PrincipalOrgs>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i53.PrincipalOrgs>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i54.PrincipalPatt>) {
       return (data as List)
-          .map((e) => deserialize<_i54.PrincipalPatt>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i54.PrincipalPatt>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i55.PrincipalPeople>) {
       return (data as List)
-          .map((e) => deserialize<_i55.PrincipalPeople>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i55.PrincipalPeople>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i56.PrincipalSites>) {
       return (data as List)
-          .map((e) => deserialize<_i56.PrincipalSites>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i56.PrincipalSites>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i57.PrincipalTerms>) {
       return (data as List)
-          .map((e) => deserialize<_i57.PrincipalTerms>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i57.PrincipalTerms>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i58.PrincipalUser>) {
       return (data as List)
-          .map((e) => deserialize<_i58.PrincipalUser>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i58.PrincipalUser>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i59.PattsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i59.PattsInvolved>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i59.PattsInvolved>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i60.Pays>) {
       return (data as List).map((e) => deserialize<_i60.Pays>(e)).toList() as T;
@@ -2236,8 +2279,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<List<dynamic>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<dynamic>(e)).toList()
-          : null) as T;
+              ? (data as List).map((e) => deserialize<dynamic>(e)).toList()
+              : null)
+          as T;
     }
     if (t == List<_i64.Principal>) {
       return (data as List).map((e) => deserialize<_i64.Principal>(e)).toList()
@@ -2245,12 +2289,15 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<Map<String, dynamic>>) {
       return (data as List)
-          .map((e) => deserialize<Map<String, dynamic>>(e))
-          .toList() as T;
+              .map((e) => deserialize<Map<String, dynamic>>(e))
+              .toList()
+          as T;
     }
     if (t == Map<String, dynamic>) {
-      return (data as Map).map((k, v) =>
-          MapEntry(deserialize<String>(k), deserialize<dynamic>(v))) as T;
+      return (data as Map).map(
+            (k, v) => MapEntry(deserialize<String>(k), deserialize<dynamic>(v)),
+          )
+          as T;
     }
     if (t == List<_i65.Seas>) {
       return (data as List).map((e) => deserialize<_i65.Seas>(e)).toList() as T;
@@ -2265,8 +2312,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i68.StarsInvolved>) {
       return (data as List)
-          .map((e) => deserialize<_i68.StarsInvolved>(e))
-          .toList() as T;
+              .map((e) => deserialize<_i68.StarsInvolved>(e))
+              .toList()
+          as T;
     }
     if (t == List<_i69.Target>) {
       return (data as List).map((e) => deserialize<_i69.Target>(e)).toList()
@@ -2301,117 +2349,130 @@ class Protocol extends _i1.SerializationManagerServer {
     return super.deserialize<T>(data, t);
   }
 
+  static String? getClassNameForType(Type type) {
+    return switch (type) {
+      _i4.CountryInvolved => 'CountryInvolved',
+      _i5.Categories => 'Categories',
+      _i6.CattsInvolved => 'CattsInvolved',
+      _i7.Countryatts => 'Countryatts',
+      _i8.Detail => 'Detail',
+      _i9.Japanese => 'Japanese',
+      _i10.LaunchSites => 'LaunchSites',
+      _i11.MyClass => 'MyClass',
+      _i12.Oceans => 'Oceans',
+      _i13.Organisations => 'Organisations',
+      _i14.PrincipalUser => 'PrincipalUser',
+      _i15.PrincipalCategories => 'PrincipalCategories',
+      _i16.PrincipalCatt => 'PrincipalCatt',
+      _i17.PrincipalDetail => 'PrincipalDetail',
+      _i18.PlaceInvolved => 'PlaceInvolved',
+      _i19.PrincipalOrgs => 'PrincipalOrgs',
+      _i20.PrincipalPatt => 'PrincipalPatt',
+      _i21.PrincipalPeople => 'PrincipalPeople',
+      _i22.PrincipalTerms => 'PrincipalTerms',
+      _i23.PattsInvolved => 'PattsInvolved',
+      _i24.Pays => 'Pays',
+      _i25.People => 'People',
+      _i26.Placeatts => 'Placeatts',
+      _i27.Places => 'Places',
+      _i28.Principal => 'Principal',
+      _i29.PrincipalSites => 'PrincipalSites',
+      _i30.Seas => 'Seas',
+      _i31.Space => 'Space',
+      _i32.Stars => 'Stars',
+      _i33.StarsInvolved => 'StarsInvolved',
+      _i34.Target => 'Target',
+      _i35.Terms => 'Terms',
+      _i36.Universe => 'Universe',
+      _i37.WithGlobe => 'WithGlobe',
+      _i38.WithMap => 'WithMap',
+      _i39.WithQgis => 'WithQgis',
+      _ => null,
+    };
+  }
+
   @override
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i4.PrincipalCategories) {
-      return 'PrincipalCategories';
+
+    if (data is Map<String, dynamic> && data['__className__'] is String) {
+      return (data['__className__'] as String).replaceFirst('acorn.', '');
     }
-    if (data is _i5.Categories) {
-      return 'Categories';
-    }
-    if (data is _i6.CattsInvolved) {
-      return 'CattsInvolved';
-    }
-    if (data is _i7.Countryatts) {
-      return 'Countryatts';
-    }
-    if (data is _i8.Detail) {
-      return 'Detail';
-    }
-    if (data is _i9.Japanese) {
-      return 'Japanese';
-    }
-    if (data is _i10.LaunchSites) {
-      return 'LaunchSites';
-    }
-    if (data is _i11.MyClass) {
-      return 'MyClass';
-    }
-    if (data is _i12.Oceans) {
-      return 'Oceans';
-    }
-    if (data is _i13.Organisations) {
-      return 'Organisations';
-    }
-    if (data is _i14.PrincipalUser) {
-      return 'PrincipalUser';
-    }
-    if (data is _i15.CountryInvolved) {
-      return 'CountryInvolved';
-    }
-    if (data is _i16.PrincipalCatt) {
-      return 'PrincipalCatt';
-    }
-    if (data is _i17.PrincipalDetail) {
-      return 'PrincipalDetail';
-    }
-    if (data is _i18.PlaceInvolved) {
-      return 'PlaceInvolved';
-    }
-    if (data is _i19.PrincipalOrgs) {
-      return 'PrincipalOrgs';
-    }
-    if (data is _i20.PrincipalPatt) {
-      return 'PrincipalPatt';
-    }
-    if (data is _i21.PrincipalPeople) {
-      return 'PrincipalPeople';
-    }
-    if (data is _i22.PrincipalTerms) {
-      return 'PrincipalTerms';
-    }
-    if (data is _i23.PattsInvolved) {
-      return 'PattsInvolved';
-    }
-    if (data is _i24.Pays) {
-      return 'Pays';
-    }
-    if (data is _i25.People) {
-      return 'People';
-    }
-    if (data is _i26.Placeatts) {
-      return 'Placeatts';
-    }
-    if (data is _i27.WithQgis) {
-      return 'WithQgis';
-    }
-    if (data is _i28.Principal) {
-      return 'Principal';
-    }
-    if (data is _i29.PrincipalSites) {
-      return 'PrincipalSites';
-    }
-    if (data is _i30.Seas) {
-      return 'Seas';
-    }
-    if (data is _i31.Space) {
-      return 'Space';
-    }
-    if (data is _i32.Stars) {
-      return 'Stars';
-    }
-    if (data is _i33.StarsInvolved) {
-      return 'StarsInvolved';
-    }
-    if (data is _i34.Target) {
-      return 'Target';
-    }
-    if (data is _i35.Terms) {
-      return 'Terms';
-    }
-    if (data is _i36.Universe) {
-      return 'Universe';
-    }
-    if (data is _i37.WithGlobe) {
-      return 'WithGlobe';
-    }
-    if (data is _i38.WithMap) {
-      return 'WithMap';
-    }
-    if (data is _i39.Places) {
-      return 'Places';
+
+    switch (data) {
+      case _i4.CountryInvolved():
+        return 'CountryInvolved';
+      case _i5.Categories():
+        return 'Categories';
+      case _i6.CattsInvolved():
+        return 'CattsInvolved';
+      case _i7.Countryatts():
+        return 'Countryatts';
+      case _i8.Detail():
+        return 'Detail';
+      case _i9.Japanese():
+        return 'Japanese';
+      case _i10.LaunchSites():
+        return 'LaunchSites';
+      case _i11.MyClass():
+        return 'MyClass';
+      case _i12.Oceans():
+        return 'Oceans';
+      case _i13.Organisations():
+        return 'Organisations';
+      case _i14.PrincipalUser():
+        return 'PrincipalUser';
+      case _i15.PrincipalCategories():
+        return 'PrincipalCategories';
+      case _i16.PrincipalCatt():
+        return 'PrincipalCatt';
+      case _i17.PrincipalDetail():
+        return 'PrincipalDetail';
+      case _i18.PlaceInvolved():
+        return 'PlaceInvolved';
+      case _i19.PrincipalOrgs():
+        return 'PrincipalOrgs';
+      case _i20.PrincipalPatt():
+        return 'PrincipalPatt';
+      case _i21.PrincipalPeople():
+        return 'PrincipalPeople';
+      case _i22.PrincipalTerms():
+        return 'PrincipalTerms';
+      case _i23.PattsInvolved():
+        return 'PattsInvolved';
+      case _i24.Pays():
+        return 'Pays';
+      case _i25.People():
+        return 'People';
+      case _i26.Placeatts():
+        return 'Placeatts';
+      case _i27.Places():
+        return 'Places';
+      case _i28.Principal():
+        return 'Principal';
+      case _i29.PrincipalSites():
+        return 'PrincipalSites';
+      case _i30.Seas():
+        return 'Seas';
+      case _i31.Space():
+        return 'Space';
+      case _i32.Stars():
+        return 'Stars';
+      case _i33.StarsInvolved():
+        return 'StarsInvolved';
+      case _i34.Target():
+        return 'Target';
+      case _i35.Terms():
+        return 'Terms';
+      case _i36.Universe():
+        return 'Universe';
+      case _i37.WithGlobe():
+        return 'WithGlobe';
+      case _i38.WithMap():
+        return 'WithMap';
+      case _i39.WithQgis():
+        return 'WithQgis';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -2430,8 +2491,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'PrincipalCategories') {
-      return deserialize<_i4.PrincipalCategories>(data['data']);
+    if (dataClassName == 'CountryInvolved') {
+      return deserialize<_i4.CountryInvolved>(data['data']);
     }
     if (dataClassName == 'Categories') {
       return deserialize<_i5.Categories>(data['data']);
@@ -2463,8 +2524,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'PrincipalUser') {
       return deserialize<_i14.PrincipalUser>(data['data']);
     }
-    if (dataClassName == 'CountryInvolved') {
-      return deserialize<_i15.CountryInvolved>(data['data']);
+    if (dataClassName == 'PrincipalCategories') {
+      return deserialize<_i15.PrincipalCategories>(data['data']);
     }
     if (dataClassName == 'PrincipalCatt') {
       return deserialize<_i16.PrincipalCatt>(data['data']);
@@ -2499,8 +2560,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Placeatts') {
       return deserialize<_i26.Placeatts>(data['data']);
     }
-    if (dataClassName == 'WithQgis') {
-      return deserialize<_i27.WithQgis>(data['data']);
+    if (dataClassName == 'Places') {
+      return deserialize<_i27.Places>(data['data']);
     }
     if (dataClassName == 'Principal') {
       return deserialize<_i28.Principal>(data['data']);
@@ -2535,8 +2596,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'WithMap') {
       return deserialize<_i38.WithMap>(data['data']);
     }
-    if (dataClassName == 'Places') {
-      return deserialize<_i39.Places>(data['data']);
+    if (dataClassName == 'WithQgis') {
+      return deserialize<_i39.WithQgis>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -2564,8 +2625,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i15.CountryInvolved:
-        return _i15.CountryInvolved.t;
+      case _i4.CountryInvolved:
+        return _i4.CountryInvolved.t;
       case _i5.Categories:
         return _i5.Categories.t;
       case _i6.CattsInvolved:
@@ -2584,8 +2645,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i13.Organisations.t;
       case _i14.PrincipalUser:
         return _i14.PrincipalUser.t;
-      case _i4.PrincipalCategories:
-        return _i4.PrincipalCategories.t;
+      case _i15.PrincipalCategories:
+        return _i15.PrincipalCategories.t;
       case _i16.PrincipalCatt:
         return _i16.PrincipalCatt.t;
       case _i17.PrincipalDetail:
@@ -2608,8 +2669,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i25.People.t;
       case _i26.Placeatts:
         return _i26.Placeatts.t;
-      case _i39.Places:
-        return _i39.Places.t;
+      case _i27.Places:
+        return _i27.Places.t;
       case _i28.Principal:
         return _i28.Principal.t;
       case _i29.PrincipalSites:
@@ -2632,8 +2693,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i37.WithGlobe.t;
       case _i38.WithMap:
         return _i38.WithMap.t;
-      case _i27.WithQgis:
-        return _i27.WithQgis.t;
+      case _i39.WithQgis:
+        return _i39.WithQgis.t;
     }
     return null;
   }

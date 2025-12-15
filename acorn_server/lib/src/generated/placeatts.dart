@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -52,6 +53,7 @@ abstract class Placeatts
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Placeatts',
       if (id != null) 'id': id,
       'placeatt': placeatt,
     };
@@ -60,6 +62,7 @@ abstract class Placeatts
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Placeatts',
       if (id != null) 'id': id,
       'placeatt': placeatt,
     };
@@ -102,9 +105,9 @@ class _PlaceattsImpl extends Placeatts {
     int? id,
     required String placeatt,
   }) : super._(
-          id: id,
-          placeatt: placeatt,
-        );
+         id: id,
+         placeatt: placeatt,
+       );
 
   /// Returns a shallow copy of this [Placeatts]
   /// with some or all fields replaced by the given arguments.
@@ -121,21 +124,33 @@ class _PlaceattsImpl extends Placeatts {
   }
 }
 
+class PlaceattsUpdateTable extends _i1.UpdateTable<PlaceattsTable> {
+  PlaceattsUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> placeatt(String value) => _i1.ColumnValue(
+    table.placeatt,
+    value,
+  );
+}
+
 class PlaceattsTable extends _i1.Table<int?> {
   PlaceattsTable({super.tableRelation}) : super(tableName: 'placeatts') {
+    updateTable = PlaceattsUpdateTable(this);
     placeatt = _i1.ColumnString(
       'placeatt',
       this,
     );
   }
 
+  late final PlaceattsUpdateTable updateTable;
+
   late final _i1.ColumnString placeatt;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        placeatt,
-      ];
+    id,
+    placeatt,
+  ];
 }
 
 class PlaceattsInclude extends _i1.IncludeObject {
@@ -323,6 +338,46 @@ class PlaceattsRepository {
     return session.db.updateRow<Placeatts>(
       row,
       columns: columns?.call(Placeatts.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Placeatts] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Placeatts?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PlaceattsUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Placeatts>(
+      id,
+      columnValues: columnValues(Placeatts.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Placeatts]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Placeatts>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PlaceattsUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PlaceattsTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PlaceattsTable>? orderBy,
+    _i1.OrderByListBuilder<PlaceattsTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Placeatts>(
+      columnValues: columnValues(Placeatts.t.updateTable),
+      where: where(Placeatts.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Placeatts.t),
+      orderByList: orderByList?.call(Placeatts.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

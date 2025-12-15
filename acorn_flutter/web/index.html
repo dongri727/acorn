@@ -34,10 +34,6 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = {{ flutter_service_worker_version }};
-  </script>
   <!-- Include ECharts -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <!-- Include ECharts-GL for 3D support -->
@@ -66,8 +62,8 @@
 <body>
   <script>
     window.addEventListener('load', function (ev) {
-      { { flutter_js } }
-      { { flutter_build_config } }
+      {{flutter_js}}
+      {{flutter_build_config}}
       _flutter.loader.load({
         onEntrypointLoaded: function (engineInitializer) {
           engineInitializer.initializeEngine().then(function (appRunner) {
@@ -77,7 +73,6 @@
       });
     });
   </script>
-  <script src="main.dart.js?v=20251215" type="application/javascript"></script>
 </body>
 
 </html>

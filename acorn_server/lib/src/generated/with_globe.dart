@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -100,6 +101,7 @@ abstract class WithGlobe
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'WithGlobe',
       if (id != null) 'id': id,
       'principalId': principalId,
       'annee': annee,
@@ -116,6 +118,7 @@ abstract class WithGlobe
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'WithGlobe',
       if (id != null) 'id': id,
       'principalId': principalId,
       'annee': annee,
@@ -174,17 +177,17 @@ class _WithGlobeImpl extends WithGlobe {
     required double zCoordinate,
     required double coefficient,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          annee: annee,
-          affair: affair,
-          location: location,
-          precise: precise,
-          xCoordinate: xCoordinate,
-          yCoordinate: yCoordinate,
-          zCoordinate: zCoordinate,
-          coefficient: coefficient,
-        );
+         id: id,
+         principalId: principalId,
+         annee: annee,
+         affair: affair,
+         location: location,
+         precise: precise,
+         xCoordinate: xCoordinate,
+         yCoordinate: yCoordinate,
+         zCoordinate: zCoordinate,
+         coefficient: coefficient,
+       );
 
   /// Returns a shallow copy of this [WithGlobe]
   /// with some or all fields replaced by the given arguments.
@@ -217,8 +220,58 @@ class _WithGlobeImpl extends WithGlobe {
   }
 }
 
+class WithGlobeUpdateTable extends _i1.UpdateTable<WithGlobeTable> {
+  WithGlobeUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> annee(String value) => _i1.ColumnValue(
+    table.annee,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> affair(String value) => _i1.ColumnValue(
+    table.affair,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> location(String value) => _i1.ColumnValue(
+    table.location,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> precise(String value) => _i1.ColumnValue(
+    table.precise,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> xCoordinate(double value) => _i1.ColumnValue(
+    table.xCoordinate,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> yCoordinate(double value) => _i1.ColumnValue(
+    table.yCoordinate,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> zCoordinate(double value) => _i1.ColumnValue(
+    table.zCoordinate,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> coefficient(double value) => _i1.ColumnValue(
+    table.coefficient,
+    value,
+  );
+}
+
 class WithGlobeTable extends _i1.Table<int?> {
   WithGlobeTable({super.tableRelation}) : super(tableName: 'with_globe') {
+    updateTable = WithGlobeUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -257,6 +310,8 @@ class WithGlobeTable extends _i1.Table<int?> {
     );
   }
 
+  late final WithGlobeUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnString annee;
@@ -277,17 +332,17 @@ class WithGlobeTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        annee,
-        affair,
-        location,
-        precise,
-        xCoordinate,
-        yCoordinate,
-        zCoordinate,
-        coefficient,
-      ];
+    id,
+    principalId,
+    annee,
+    affair,
+    location,
+    precise,
+    xCoordinate,
+    yCoordinate,
+    zCoordinate,
+    coefficient,
+  ];
 }
 
 class WithGlobeInclude extends _i1.IncludeObject {
@@ -475,6 +530,46 @@ class WithGlobeRepository {
     return session.db.updateRow<WithGlobe>(
       row,
       columns: columns?.call(WithGlobe.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [WithGlobe] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<WithGlobe?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<WithGlobeUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<WithGlobe>(
+      id,
+      columnValues: columnValues(WithGlobe.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [WithGlobe]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<WithGlobe>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<WithGlobeUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<WithGlobeTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<WithGlobeTable>? orderBy,
+    _i1.OrderByListBuilder<WithGlobeTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<WithGlobe>(
+      columnValues: columnValues(WithGlobe.t.updateTable),
+      where: where(WithGlobe.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(WithGlobe.t),
+      orderByList: orderByList?.call(WithGlobe.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

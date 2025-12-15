@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Seas implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Seas',
       if (id != null) 'id': id,
       'sea': sea,
       'area': area,
@@ -66,6 +68,7 @@ abstract class Seas implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Seas',
       if (id != null) 'id': id,
       'sea': sea,
       'area': area,
@@ -110,10 +113,10 @@ class _SeasImpl extends Seas {
     required String sea,
     required String area,
   }) : super._(
-          id: id,
-          sea: sea,
-          area: area,
-        );
+         id: id,
+         sea: sea,
+         area: area,
+       );
 
   /// Returns a shallow copy of this [Seas]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _SeasImpl extends Seas {
   }
 }
 
+class SeasUpdateTable extends _i1.UpdateTable<SeasTable> {
+  SeasUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> sea(String value) => _i1.ColumnValue(
+    table.sea,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> area(String value) => _i1.ColumnValue(
+    table.area,
+    value,
+  );
+}
+
 class SeasTable extends _i1.Table<int?> {
   SeasTable({super.tableRelation}) : super(tableName: 'seas') {
+    updateTable = SeasUpdateTable(this);
     sea = _i1.ColumnString(
       'sea',
       this,
@@ -144,16 +162,18 @@ class SeasTable extends _i1.Table<int?> {
     );
   }
 
+  late final SeasUpdateTable updateTable;
+
   late final _i1.ColumnString sea;
 
   late final _i1.ColumnString area;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        sea,
-        area,
-      ];
+    id,
+    sea,
+    area,
+  ];
 }
 
 class SeasInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class SeasRepository {
     return session.db.updateRow<Seas>(
       row,
       columns: columns?.call(Seas.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Seas] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Seas?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<SeasUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Seas>(
+      id,
+      columnValues: columnValues(Seas.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Seas]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Seas>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<SeasUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<SeasTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<SeasTable>? orderBy,
+    _i1.OrderByListBuilder<SeasTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Seas>(
+      columnValues: columnValues(Seas.t.updateTable),
+      where: where(Seas.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Seas.t),
+      orderByList: orderByList?.call(Seas.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Detail implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Detail',
       if (id != null) 'id': id,
       'genre': genre,
       'mot': mot,
@@ -66,6 +68,7 @@ abstract class Detail implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Detail',
       if (id != null) 'id': id,
       'genre': genre,
       'mot': mot,
@@ -110,10 +113,10 @@ class _DetailImpl extends Detail {
     required String genre,
     required String mot,
   }) : super._(
-          id: id,
-          genre: genre,
-          mot: mot,
-        );
+         id: id,
+         genre: genre,
+         mot: mot,
+       );
 
   /// Returns a shallow copy of this [Detail]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _DetailImpl extends Detail {
   }
 }
 
+class DetailUpdateTable extends _i1.UpdateTable<DetailTable> {
+  DetailUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> genre(String value) => _i1.ColumnValue(
+    table.genre,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> mot(String value) => _i1.ColumnValue(
+    table.mot,
+    value,
+  );
+}
+
 class DetailTable extends _i1.Table<int?> {
   DetailTable({super.tableRelation}) : super(tableName: 'detail') {
+    updateTable = DetailUpdateTable(this);
     genre = _i1.ColumnString(
       'genre',
       this,
@@ -144,16 +162,18 @@ class DetailTable extends _i1.Table<int?> {
     );
   }
 
+  late final DetailUpdateTable updateTable;
+
   late final _i1.ColumnString genre;
 
   late final _i1.ColumnString mot;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        genre,
-        mot,
-      ];
+    id,
+    genre,
+    mot,
+  ];
 }
 
 class DetailInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class DetailRepository {
     return session.db.updateRow<Detail>(
       row,
       columns: columns?.call(Detail.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Detail] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Detail?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<DetailUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Detail>(
+      id,
+      columnValues: columnValues(Detail.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Detail]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Detail>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<DetailUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<DetailTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<DetailTable>? orderBy,
+    _i1.OrderByListBuilder<DetailTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Detail>(
+      columnValues: columnValues(Detail.t.updateTable),
+      where: where(Detail.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Detail.t),
+      orderByList: orderByList?.call(Detail.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

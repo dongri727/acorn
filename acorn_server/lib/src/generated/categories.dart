@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -64,6 +65,7 @@ abstract class Categories
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Categories',
       if (id != null) 'id': id,
       'category': category,
       'detailId': detailId,
@@ -74,6 +76,7 @@ abstract class Categories
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Categories',
       if (id != null) 'id': id,
       'category': category,
       'detailId': detailId,
@@ -120,11 +123,11 @@ class _CategoriesImpl extends Categories {
     required int detailId,
     required int combien,
   }) : super._(
-          id: id,
-          category: category,
-          detailId: detailId,
-          combien: combien,
-        );
+         id: id,
+         category: category,
+         detailId: detailId,
+         combien: combien,
+       );
 
   /// Returns a shallow copy of this [Categories]
   /// with some or all fields replaced by the given arguments.
@@ -145,8 +148,28 @@ class _CategoriesImpl extends Categories {
   }
 }
 
+class CategoriesUpdateTable extends _i1.UpdateTable<CategoriesTable> {
+  CategoriesUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> category(String value) => _i1.ColumnValue(
+    table.category,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> detailId(int value) => _i1.ColumnValue(
+    table.detailId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> combien(int value) => _i1.ColumnValue(
+    table.combien,
+    value,
+  );
+}
+
 class CategoriesTable extends _i1.Table<int?> {
   CategoriesTable({super.tableRelation}) : super(tableName: 'categories') {
+    updateTable = CategoriesUpdateTable(this);
     category = _i1.ColumnString(
       'category',
       this,
@@ -161,6 +184,8 @@ class CategoriesTable extends _i1.Table<int?> {
     );
   }
 
+  late final CategoriesUpdateTable updateTable;
+
   late final _i1.ColumnString category;
 
   late final _i1.ColumnInt detailId;
@@ -169,11 +194,11 @@ class CategoriesTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        category,
-        detailId,
-        combien,
-      ];
+    id,
+    category,
+    detailId,
+    combien,
+  ];
 }
 
 class CategoriesInclude extends _i1.IncludeObject {
@@ -361,6 +386,46 @@ class CategoriesRepository {
     return session.db.updateRow<Categories>(
       row,
       columns: columns?.call(Categories.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Categories] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Categories?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<CategoriesUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Categories>(
+      id,
+      columnValues: columnValues(Categories.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Categories]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Categories>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<CategoriesUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<CategoriesTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<CategoriesTable>? orderBy,
+    _i1.OrderByListBuilder<CategoriesTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Categories>(
+      columnValues: columnValues(Categories.t.updateTable),
+      where: where(Categories.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Categories.t),
+      orderByList: orderByList?.call(Categories.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

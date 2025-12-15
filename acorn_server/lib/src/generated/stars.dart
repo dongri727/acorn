@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Stars implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Stars',
       if (id != null) 'id': id,
       'star': star,
       'area': area,
@@ -66,6 +68,7 @@ abstract class Stars implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Stars',
       if (id != null) 'id': id,
       'star': star,
       'area': area,
@@ -110,10 +113,10 @@ class _StarsImpl extends Stars {
     required String star,
     required String area,
   }) : super._(
-          id: id,
-          star: star,
-          area: area,
-        );
+         id: id,
+         star: star,
+         area: area,
+       );
 
   /// Returns a shallow copy of this [Stars]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _StarsImpl extends Stars {
   }
 }
 
+class StarsUpdateTable extends _i1.UpdateTable<StarsTable> {
+  StarsUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> star(String value) => _i1.ColumnValue(
+    table.star,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> area(String value) => _i1.ColumnValue(
+    table.area,
+    value,
+  );
+}
+
 class StarsTable extends _i1.Table<int?> {
   StarsTable({super.tableRelation}) : super(tableName: 'stars') {
+    updateTable = StarsUpdateTable(this);
     star = _i1.ColumnString(
       'star',
       this,
@@ -144,16 +162,18 @@ class StarsTable extends _i1.Table<int?> {
     );
   }
 
+  late final StarsUpdateTable updateTable;
+
   late final _i1.ColumnString star;
 
   late final _i1.ColumnString area;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        star,
-        area,
-      ];
+    id,
+    star,
+    area,
+  ];
 }
 
 class StarsInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class StarsRepository {
     return session.db.updateRow<Stars>(
       row,
       columns: columns?.call(Stars.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Stars] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Stars?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<StarsUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Stars>(
+      id,
+      columnValues: columnValues(Stars.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Stars]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Stars>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<StarsUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<StarsTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StarsTable>? orderBy,
+    _i1.OrderByListBuilder<StarsTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Stars>(
+      columnValues: columnValues(Stars.t.updateTable),
+      where: where(Stars.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Stars.t),
+      orderByList: orderByList?.call(Stars.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

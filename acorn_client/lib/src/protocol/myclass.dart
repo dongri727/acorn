@@ -7,10 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i2;
+import 'package:acorn_client/src/protocol/protocol.dart' as _i3;
 
 abstract class MyClass implements _i1.SerializableModel {
   MyClass._({required this.userInfo});
@@ -19,8 +21,10 @@ abstract class MyClass implements _i1.SerializableModel {
 
   factory MyClass.fromJson(Map<String, dynamic> jsonSerialization) {
     return MyClass(
-        userInfo: _i2.UserInfo.fromJson(
-            (jsonSerialization['userInfo'] as Map<String, dynamic>)));
+      userInfo: _i3.Protocol().deserialize<_i2.UserInfo>(
+        jsonSerialization['userInfo'],
+      ),
+    );
   }
 
   _i2.UserInfo userInfo;
@@ -31,7 +35,10 @@ abstract class MyClass implements _i1.SerializableModel {
   MyClass copyWith({_i2.UserInfo? userInfo});
   @override
   Map<String, dynamic> toJson() {
-    return {'userInfo': userInfo.toJson()};
+    return {
+      '__className__': 'MyClass',
+      'userInfo': userInfo.toJson(),
+    };
   }
 
   @override

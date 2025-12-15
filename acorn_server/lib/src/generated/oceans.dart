@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -51,6 +52,7 @@ abstract class Oceans implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Oceans',
       if (id != null) 'id': id,
       'ocean': ocean,
     };
@@ -59,6 +61,7 @@ abstract class Oceans implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Oceans',
       if (id != null) 'id': id,
       'ocean': ocean,
     };
@@ -101,9 +104,9 @@ class _OceansImpl extends Oceans {
     int? id,
     required String ocean,
   }) : super._(
-          id: id,
-          ocean: ocean,
-        );
+         id: id,
+         ocean: ocean,
+       );
 
   /// Returns a shallow copy of this [Oceans]
   /// with some or all fields replaced by the given arguments.
@@ -120,21 +123,33 @@ class _OceansImpl extends Oceans {
   }
 }
 
+class OceansUpdateTable extends _i1.UpdateTable<OceansTable> {
+  OceansUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> ocean(String value) => _i1.ColumnValue(
+    table.ocean,
+    value,
+  );
+}
+
 class OceansTable extends _i1.Table<int?> {
   OceansTable({super.tableRelation}) : super(tableName: 'oceans') {
+    updateTable = OceansUpdateTable(this);
     ocean = _i1.ColumnString(
       'ocean',
       this,
     );
   }
 
+  late final OceansUpdateTable updateTable;
+
   late final _i1.ColumnString ocean;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        ocean,
-      ];
+    id,
+    ocean,
+  ];
 }
 
 class OceansInclude extends _i1.IncludeObject {
@@ -322,6 +337,46 @@ class OceansRepository {
     return session.db.updateRow<Oceans>(
       row,
       columns: columns?.call(Oceans.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Oceans] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Oceans?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<OceansUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Oceans>(
+      id,
+      columnValues: columnValues(Oceans.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Oceans]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Oceans>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<OceansUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<OceansTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<OceansTable>? orderBy,
+    _i1.OrderByListBuilder<OceansTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Oceans>(
+      columnValues: columnValues(Oceans.t.updateTable),
+      where: where(Oceans.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Oceans.t),
+      orderByList: orderByList?.call(Oceans.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

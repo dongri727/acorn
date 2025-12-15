@@ -13,18 +13,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "0b2f2bd91ba804e53a61d757b986f89f1f9eaed5b11e4b2f5a2468d86d6c9fc7"
+      sha256: "5b7468c326d2f8a4f630056404ca0d291ade42918f4a3c6233618e724f39da8e"
       url: "https://pub.dev"
     source: hosted
-    version: "67.0.0"
+    version: "92.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "37577842a27e4338429a1cbc32679d508836510b056f1eedf0c8d20e39c1383d"
+      sha256: "70e4b1ef8003c64793a9e268a551a82869a8a96f39deb73dea28084b0e8bf75e"
       url: "https://pub.dev"
     source: hosted
-    version: "6.4.1"
+    version: "9.0.0"
   archive:
     dependency: transitive
     description:
@@ -117,10 +117,10 @@ packages:
     dependency: transitive
     description:
       name: cli_tools
-      sha256: c6a837ef35b37d8193c65ae7eceda77aa78b611096abe60d10725a7d241a923f
+      sha256: "571aa0dbae03159d34a11791a877577e528fe929f42a8d0b1ebfe54cda5e50a7"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.1"
   clock:
     dependency: transitive
     description:
@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
+  config:
+    dependency: transitive
+    description:
+      name: config
+      sha256: "7b419d7d908303459f5de4c739743a6c838c1791b5ff499619a2f16838409158"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2"
   convert:
     dependency: transitive
     description:
@@ -181,10 +189,10 @@ packages:
     dependency: transitive
     description:
       name: dart_style
-      sha256: "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9"
+      sha256: a9c30492da18ff84efe2422ba2d319a89942d93e58eb0b73d32abe822ef54b7b
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.6"
+    version: "3.1.3"
   email_validator:
     dependency: transitive
     description:
@@ -309,10 +317,10 @@ packages:
     dependency: transitive
     description:
       name: json_rpc_2
-      sha256: "246b321532f0e8e2ba474b4d757eaa558ae4fdd0688fdbc1e1ca9705f9b8ca0e"
+      sha256: "3c46c2633aec07810c3d6a2eb08d575b5b4072980db08f1344e66aeb53d6e4a7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.3"
+    version: "4.0.0"
   lints:
     dependency: "direct dev"
     description:
@@ -333,10 +341,10 @@ packages:
     dependency: transitive
     description:
       name: lsp_server
-      sha256: ac509ee9d4cfd010def28fc4278041f47eb458549caf52785e5903e1a29d8539
+      sha256: "81fc68ade179fa6a23b46354fe019e8d492a724548ec909657020db750e31376"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.2"
+    version: "0.4.0"
   mailer:
     dependency: "direct main"
     description:
@@ -497,6 +505,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  relic:
+    dependency: transitive
+    description:
+      name: relic
+      sha256: "7c4d4243bfb8fc5d2ab094aa0f056222ed5ccb532f2fc55231efa3b65f105a2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.1"
   retry:
     dependency: transitive
     description:
@@ -517,58 +533,58 @@ packages:
     dependency: "direct main"
     description:
       name: serverpod
-      sha256: e9d57fa4185c2d5ed093745fbc4ca4e8b8dc351d00c2fc7a76bd1aabd509ee6e
+      sha256: "9ee50893859fa40ea3eff9d6281ce4dc1b39edac5b5a58623b80628332246c98"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_auth_server:
     dependency: "direct main"
     description:
       name: serverpod_auth_server
-      sha256: "10f3c97d9598a840cc0d5fa770b3a69044fa4b843e3de3cbd3c43ba59499aa4b"
+      sha256: a61cf1bf0d566199eeaa34299b395c29d2e5d764e547485ae163662122f7f9a0
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_cli:
     dependency: "direct dev"
     description:
       name: serverpod_cli
-      sha256: "9f7ee139d5469253c7451583f640d10b2ec6d8c0c0e4e7527675454c0fed8cee"
+      sha256: "64085cc19cab11aad56a1c022301bb1f006c7a10b74ab4096dee09a65d7000a6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_client:
     dependency: transitive
     description:
       name: serverpod_client
-      sha256: f1f9695e06b12c4ed6bfafba9e54c64b8154c6aa2cb0526ac4f8c9e7c0a6aed1
+      sha256: "95006502299ee4f81bfdaf15c52c21a3f7b1cc96febff0d42fe426208ca0fafc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: e68bee9f9e5d609ae6249365826748c43742fd05080bae8549eabf939294271c
+      sha256: "86d2447b8614614c370bc3e718b5c463841f45c4a3eef2df11a7509dc1722e4f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_service_client:
     dependency: transitive
     description:
       name: serverpod_service_client
-      sha256: "1e93b1b08117d1d715db76f6a4b262a4c7efcdaa00e7d8a3b1fb4bbd0c45f5d8"
+      sha256: a8e8c7c2c29d6ce611108ef6ede69487f8e26db4acf8ce53c6bd2bf242a61c04
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   serverpod_shared:
     dependency: transitive
     description:
       name: serverpod_shared
-      sha256: "5a35101167050fdb2213407248bc0063c0eea523606da35b9f29cf567ee13a48"
+      sha256: "64b2d325f603b51afae7225d9eac063ca90197f8a567671b31f7c498ff561cda"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.2"
+    version: "3.0.1"
   source_span:
     dependency: transitive
     description:
@@ -729,5 +745,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.3"
+  yaml_edit:
+    dependency: transitive
+    description:
+      name: yaml_edit
+      sha256: ec709065bb2c911b336853b67f3732dd13e0336bd065cc2f1061d7610ddf45e3
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
 sdks:
   dart: ">=3.9.0 <4.0.0"

@@ -18,7 +18,6 @@ set -e
 # Build the web app
 cd ../acorn_flutter
 flutter build web --release --no-tree-shake-icons
-cp web/flutter_service_worker.js build/web/flutter_service_worker.js
 cd ..
 
 # Copy the build files into the web/app diretory.

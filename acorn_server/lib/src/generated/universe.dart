@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -52,6 +53,7 @@ abstract class Universe
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Universe',
       if (id != null) 'id': id,
       'universe': universe,
     };
@@ -60,6 +62,7 @@ abstract class Universe
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Universe',
       if (id != null) 'id': id,
       'universe': universe,
     };
@@ -102,9 +105,9 @@ class _UniverseImpl extends Universe {
     int? id,
     required String universe,
   }) : super._(
-          id: id,
-          universe: universe,
-        );
+         id: id,
+         universe: universe,
+       );
 
   /// Returns a shallow copy of this [Universe]
   /// with some or all fields replaced by the given arguments.
@@ -121,21 +124,33 @@ class _UniverseImpl extends Universe {
   }
 }
 
+class UniverseUpdateTable extends _i1.UpdateTable<UniverseTable> {
+  UniverseUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> universe(String value) => _i1.ColumnValue(
+    table.universe,
+    value,
+  );
+}
+
 class UniverseTable extends _i1.Table<int?> {
   UniverseTable({super.tableRelation}) : super(tableName: 'universe') {
+    updateTable = UniverseUpdateTable(this);
     universe = _i1.ColumnString(
       'universe',
       this,
     );
   }
 
+  late final UniverseUpdateTable updateTable;
+
   late final _i1.ColumnString universe;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        universe,
-      ];
+    id,
+    universe,
+  ];
 }
 
 class UniverseInclude extends _i1.IncludeObject {
@@ -323,6 +338,46 @@ class UniverseRepository {
     return session.db.updateRow<Universe>(
       row,
       columns: columns?.call(Universe.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Universe] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Universe?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<UniverseUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Universe>(
+      id,
+      columnValues: columnValues(Universe.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Universe]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Universe>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<UniverseUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<UniverseTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<UniverseTable>? orderBy,
+    _i1.OrderByListBuilder<UniverseTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Universe>(
+      columnValues: columnValues(Universe.t.updateTable),
+      where: where(Universe.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Universe.t),
+      orderByList: orderByList?.call(Universe.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -57,6 +58,7 @@ abstract class Pays implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Pays',
       if (id != null) 'id': id,
       'pays': pays,
       'combien': combien,
@@ -66,6 +68,7 @@ abstract class Pays implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Pays',
       if (id != null) 'id': id,
       'pays': pays,
       'combien': combien,
@@ -110,10 +113,10 @@ class _PaysImpl extends Pays {
     required String pays,
     required int combien,
   }) : super._(
-          id: id,
-          pays: pays,
-          combien: combien,
-        );
+         id: id,
+         pays: pays,
+         combien: combien,
+       );
 
   /// Returns a shallow copy of this [Pays]
   /// with some or all fields replaced by the given arguments.
@@ -132,8 +135,23 @@ class _PaysImpl extends Pays {
   }
 }
 
+class PaysUpdateTable extends _i1.UpdateTable<PaysTable> {
+  PaysUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> pays(String value) => _i1.ColumnValue(
+    table.pays,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> combien(int value) => _i1.ColumnValue(
+    table.combien,
+    value,
+  );
+}
+
 class PaysTable extends _i1.Table<int?> {
   PaysTable({super.tableRelation}) : super(tableName: 'pays') {
+    updateTable = PaysUpdateTable(this);
     pays = _i1.ColumnString(
       'pays',
       this,
@@ -144,16 +162,18 @@ class PaysTable extends _i1.Table<int?> {
     );
   }
 
+  late final PaysUpdateTable updateTable;
+
   late final _i1.ColumnString pays;
 
   late final _i1.ColumnInt combien;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        pays,
-        combien,
-      ];
+    id,
+    pays,
+    combien,
+  ];
 }
 
 class PaysInclude extends _i1.IncludeObject {
@@ -341,6 +361,46 @@ class PaysRepository {
     return session.db.updateRow<Pays>(
       row,
       columns: columns?.call(Pays.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Pays] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Pays?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PaysUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Pays>(
+      id,
+      columnValues: columnValues(Pays.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Pays]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Pays>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<PaysUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<PaysTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PaysTable>? orderBy,
+    _i1.OrderByListBuilder<PaysTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Pays>(
+      columnValues: columnValues(Pays.t.updateTable),
+      where: where(Pays.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Pays.t),
+      orderByList: orderByList?.call(Pays.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

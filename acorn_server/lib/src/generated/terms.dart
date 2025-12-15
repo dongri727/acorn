@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -51,6 +52,7 @@ abstract class Terms implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Terms',
       if (id != null) 'id': id,
       'term': term,
     };
@@ -59,6 +61,7 @@ abstract class Terms implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Terms',
       if (id != null) 'id': id,
       'term': term,
     };
@@ -101,9 +104,9 @@ class _TermsImpl extends Terms {
     int? id,
     required String term,
   }) : super._(
-          id: id,
-          term: term,
-        );
+         id: id,
+         term: term,
+       );
 
   /// Returns a shallow copy of this [Terms]
   /// with some or all fields replaced by the given arguments.
@@ -120,21 +123,33 @@ class _TermsImpl extends Terms {
   }
 }
 
+class TermsUpdateTable extends _i1.UpdateTable<TermsTable> {
+  TermsUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> term(String value) => _i1.ColumnValue(
+    table.term,
+    value,
+  );
+}
+
 class TermsTable extends _i1.Table<int?> {
   TermsTable({super.tableRelation}) : super(tableName: 'terms') {
+    updateTable = TermsUpdateTable(this);
     term = _i1.ColumnString(
       'term',
       this,
     );
   }
 
+  late final TermsUpdateTable updateTable;
+
   late final _i1.ColumnString term;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        term,
-      ];
+    id,
+    term,
+  ];
 }
 
 class TermsInclude extends _i1.IncludeObject {
@@ -322,6 +337,46 @@ class TermsRepository {
     return session.db.updateRow<Terms>(
       row,
       columns: columns?.call(Terms.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Terms] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Terms?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<TermsUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Terms>(
+      id,
+      columnValues: columnValues(Terms.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Terms]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Terms>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<TermsUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<TermsTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<TermsTable>? orderBy,
+    _i1.OrderByListBuilder<TermsTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Terms>(
+      columnValues: columnValues(Terms.t.updateTable),
+      where: where(Terms.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Terms.t),
+      orderByList: orderByList?.call(Terms.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

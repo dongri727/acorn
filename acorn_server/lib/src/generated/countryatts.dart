@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -52,6 +53,7 @@ abstract class Countryatts
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Countryatts',
       if (id != null) 'id': id,
       'countryatt': countryatt,
     };
@@ -60,6 +62,7 @@ abstract class Countryatts
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Countryatts',
       if (id != null) 'id': id,
       'countryatt': countryatt,
     };
@@ -102,9 +105,9 @@ class _CountryattsImpl extends Countryatts {
     int? id,
     required String countryatt,
   }) : super._(
-          id: id,
-          countryatt: countryatt,
-        );
+         id: id,
+         countryatt: countryatt,
+       );
 
   /// Returns a shallow copy of this [Countryatts]
   /// with some or all fields replaced by the given arguments.
@@ -121,21 +124,33 @@ class _CountryattsImpl extends Countryatts {
   }
 }
 
+class CountryattsUpdateTable extends _i1.UpdateTable<CountryattsTable> {
+  CountryattsUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> countryatt(String value) => _i1.ColumnValue(
+    table.countryatt,
+    value,
+  );
+}
+
 class CountryattsTable extends _i1.Table<int?> {
   CountryattsTable({super.tableRelation}) : super(tableName: 'countryatts') {
+    updateTable = CountryattsUpdateTable(this);
     countryatt = _i1.ColumnString(
       'countryatt',
       this,
     );
   }
 
+  late final CountryattsUpdateTable updateTable;
+
   late final _i1.ColumnString countryatt;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        countryatt,
-      ];
+    id,
+    countryatt,
+  ];
 }
 
 class CountryattsInclude extends _i1.IncludeObject {
@@ -323,6 +338,46 @@ class CountryattsRepository {
     return session.db.updateRow<Countryatts>(
       row,
       columns: columns?.call(Countryatts.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Countryatts] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Countryatts?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<CountryattsUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Countryatts>(
+      id,
+      columnValues: columnValues(Countryatts.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Countryatts]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Countryatts>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<CountryattsUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<CountryattsTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<CountryattsTable>? orderBy,
+    _i1.OrderByListBuilder<CountryattsTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Countryatts>(
+      columnValues: columnValues(Countryatts.t.updateTable),
+      where: where(Countryatts.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Countryatts.t),
+      orderByList: orderByList?.call(Countryatts.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

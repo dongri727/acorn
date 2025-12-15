@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -135,6 +136,7 @@ abstract class Space implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Space',
       if (id != null) 'id': id,
       'principalId': principalId,
       'annee': annee,
@@ -157,6 +159,7 @@ abstract class Space implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Space',
       if (id != null) 'id': id,
       'principalId': principalId,
       'annee': annee,
@@ -227,23 +230,23 @@ class _SpaceImpl extends Space {
     required double gLon,
     required double lightYear,
   }) : super._(
-          id: id,
-          principalId: principalId,
-          annee: annee,
-          month: month,
-          day: day,
-          point: point,
-          affair: affair,
-          location: location,
-          precise: precise,
-          hecX: hecX,
-          hecY: hecY,
-          hecZ: hecZ,
-          julianD: julianD,
-          gLat: gLat,
-          gLon: gLon,
-          lightYear: lightYear,
-        );
+         id: id,
+         principalId: principalId,
+         annee: annee,
+         month: month,
+         day: day,
+         point: point,
+         affair: affair,
+         location: location,
+         precise: precise,
+         hecX: hecX,
+         hecY: hecY,
+         hecZ: hecZ,
+         julianD: julianD,
+         gLat: gLat,
+         gLon: gLon,
+         lightYear: lightYear,
+       );
 
   /// Returns a shallow copy of this [Space]
   /// with some or all fields replaced by the given arguments.
@@ -288,8 +291,88 @@ class _SpaceImpl extends Space {
   }
 }
 
+class SpaceUpdateTable extends _i1.UpdateTable<SpaceTable> {
+  SpaceUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> principalId(int value) => _i1.ColumnValue(
+    table.principalId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> annee(String value) => _i1.ColumnValue(
+    table.annee,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> month(int value) => _i1.ColumnValue(
+    table.month,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> day(int value) => _i1.ColumnValue(
+    table.day,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> point(int value) => _i1.ColumnValue(
+    table.point,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> affair(String value) => _i1.ColumnValue(
+    table.affair,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> location(String value) => _i1.ColumnValue(
+    table.location,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> precise(String value) => _i1.ColumnValue(
+    table.precise,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> hecX(double value) => _i1.ColumnValue(
+    table.hecX,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> hecY(double value) => _i1.ColumnValue(
+    table.hecY,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> hecZ(double value) => _i1.ColumnValue(
+    table.hecZ,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> julianD(int value) => _i1.ColumnValue(
+    table.julianD,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> gLat(double value) => _i1.ColumnValue(
+    table.gLat,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> gLon(double value) => _i1.ColumnValue(
+    table.gLon,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> lightYear(double value) => _i1.ColumnValue(
+    table.lightYear,
+    value,
+  );
+}
+
 class SpaceTable extends _i1.Table<int?> {
   SpaceTable({super.tableRelation}) : super(tableName: 'space') {
+    updateTable = SpaceUpdateTable(this);
     principalId = _i1.ColumnInt(
       'principalId',
       this,
@@ -352,6 +435,8 @@ class SpaceTable extends _i1.Table<int?> {
     );
   }
 
+  late final SpaceUpdateTable updateTable;
+
   late final _i1.ColumnInt principalId;
 
   late final _i1.ColumnString annee;
@@ -384,23 +469,23 @@ class SpaceTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        principalId,
-        annee,
-        month,
-        day,
-        point,
-        affair,
-        location,
-        precise,
-        hecX,
-        hecY,
-        hecZ,
-        julianD,
-        gLat,
-        gLon,
-        lightYear,
-      ];
+    id,
+    principalId,
+    annee,
+    month,
+    day,
+    point,
+    affair,
+    location,
+    precise,
+    hecX,
+    hecY,
+    hecZ,
+    julianD,
+    gLat,
+    gLon,
+    lightYear,
+  ];
 }
 
 class SpaceInclude extends _i1.IncludeObject {
@@ -588,6 +673,46 @@ class SpaceRepository {
     return session.db.updateRow<Space>(
       row,
       columns: columns?.call(Space.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [Space] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Space?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<SpaceUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Space>(
+      id,
+      columnValues: columnValues(Space.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Space]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Space>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<SpaceUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<SpaceTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<SpaceTable>? orderBy,
+    _i1.OrderByListBuilder<SpaceTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Space>(
+      columnValues: columnValues(Space.t.updateTable),
+      where: where(Space.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Space.t),
+      orderByList: orderByList?.call(Space.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }

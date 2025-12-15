@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -76,6 +77,7 @@ abstract class LaunchSites
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'LaunchSites',
       if (id != null) 'id': id,
       'location': location,
       'precise': precise,
@@ -88,6 +90,7 @@ abstract class LaunchSites
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'LaunchSites',
       if (id != null) 'id': id,
       'location': location,
       'precise': precise,
@@ -138,13 +141,13 @@ class _LaunchSitesImpl extends LaunchSites {
     required double lat,
     required double lon,
   }) : super._(
-          id: id,
-          location: location,
-          precise: precise,
-          site: site,
-          lat: lat,
-          lon: lon,
-        );
+         id: id,
+         location: location,
+         precise: precise,
+         site: site,
+         lat: lat,
+         lon: lon,
+       );
 
   /// Returns a shallow copy of this [LaunchSites]
   /// with some or all fields replaced by the given arguments.
@@ -169,8 +172,38 @@ class _LaunchSitesImpl extends LaunchSites {
   }
 }
 
+class LaunchSitesUpdateTable extends _i1.UpdateTable<LaunchSitesTable> {
+  LaunchSitesUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> location(String value) => _i1.ColumnValue(
+    table.location,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> precise(String value) => _i1.ColumnValue(
+    table.precise,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> site(String value) => _i1.ColumnValue(
+    table.site,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> lat(double value) => _i1.ColumnValue(
+    table.lat,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> lon(double value) => _i1.ColumnValue(
+    table.lon,
+    value,
+  );
+}
+
 class LaunchSitesTable extends _i1.Table<int?> {
   LaunchSitesTable({super.tableRelation}) : super(tableName: 'launch_sites') {
+    updateTable = LaunchSitesUpdateTable(this);
     location = _i1.ColumnString(
       'location',
       this,
@@ -193,6 +226,8 @@ class LaunchSitesTable extends _i1.Table<int?> {
     );
   }
 
+  late final LaunchSitesUpdateTable updateTable;
+
   late final _i1.ColumnString location;
 
   late final _i1.ColumnString precise;
@@ -205,13 +240,13 @@ class LaunchSitesTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        location,
-        precise,
-        site,
-        lat,
-        lon,
-      ];
+    id,
+    location,
+    precise,
+    site,
+    lat,
+    lon,
+  ];
 }
 
 class LaunchSitesInclude extends _i1.IncludeObject {
@@ -399,6 +434,46 @@ class LaunchSitesRepository {
     return session.db.updateRow<LaunchSites>(
       row,
       columns: columns?.call(LaunchSites.t),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates a single [LaunchSites] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<LaunchSites?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<LaunchSitesUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<LaunchSites>(
+      id,
+      columnValues: columnValues(LaunchSites.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [LaunchSites]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<LaunchSites>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<LaunchSitesUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<LaunchSitesTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<LaunchSitesTable>? orderBy,
+    _i1.OrderByListBuilder<LaunchSitesTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<LaunchSites>(
+      columnValues: columnValues(LaunchSites.t.updateTable),
+      where: where(LaunchSites.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(LaunchSites.t),
+      orderByList: orderByList?.call(LaunchSites.t),
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }
