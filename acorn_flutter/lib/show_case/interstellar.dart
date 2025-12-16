@@ -9,7 +9,7 @@ import '../l10n/app_localizations.dart';
 import '../scatter_view/echarts_js.dart';
 import '../utils/navigation_button.dart';
 import '../utils/shadowed_container.dart';
-//import 'pioneer_voyager_info.dart';
+import 'interstellar_info.dart';
 import 'cassini_info.dart';
 
 
@@ -28,6 +28,7 @@ class PioneerVoyagerState extends State<PioneerVoyager> {
   List<dynamic>? voyager2;
   List<dynamic>? pioneer10;
   List<dynamic>? pioneer11;
+  List<dynamic>? newHorizons;
   List<dynamic>? interstellar;
 
   @override
@@ -90,12 +91,15 @@ class PioneerVoyagerState extends State<PioneerVoyager> {
         'assets/json/showcase/pioneer10.json');
     final pioneer11Data = await rootBundle.loadString(
         'assets/json/showcase/pioneer11.json');
+    final newHorizonsData = await rootBundle.loadString(
+        'assets/json/showcase/new_horizons.json');
 
     final List<dynamic> combineData = [];
     combineData.addAll(json.decode(voyager1Data));
     combineData.addAll(json.decode(voyager2Data));
     combineData.addAll(json.decode(pioneer10Data));
     combineData.addAll(json.decode(pioneer11Data));
+    combineData.addAll(json.decode(newHorizonsData));
 
     setState(() {
       interstellar = combineData;

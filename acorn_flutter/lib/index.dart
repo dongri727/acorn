@@ -1,7 +1,7 @@
 import 'package:acorn_flutter/analysis_page.dart';
 import 'package:acorn_flutter/mode.dart';
 import 'package:acorn_flutter/show_case/cassini_huygens.dart';
-import 'package:acorn_flutter/show_case/pioneer_voyager.dart';
+import 'package:acorn_flutter/show_case/interstellar.dart';
 //import 'package:acorn_flutter/csv_page.dart';
 import 'add_events/tab_top.dart';
 import 'search/multiple_search_page.dart';
