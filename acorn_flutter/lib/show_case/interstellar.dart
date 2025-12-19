@@ -160,14 +160,14 @@ class PioneerVoyagerState extends State<PioneerVoyager> {
         maxZ = maxTmp;
       }
     }
-    const double midZ = (2450000 + 2455000) / 2;
+    //const double midZ = (2450000 + 2455000) / 2;
 
-    final mercuryOrbit = _generateOrbitData(5.82, 0.05, minZ);
-    final venusOrbit = _generateOrbitData(10.75, 0.05, minZ);
-    final earthOrbit = _generateOrbitData(14.93, 0.05, minZ);
-    final marsOrbit = _generateOrbitData(22.68, 0.05, minZ);
-    final beltOrbit = _generateOrbitData(40.31, 0.05, minZ);
-    final jupiterOrbit = _generateOrbitData(77.85, 0.05, minZ);
+    final mercuryOrbit = _generateOrbitData(5.82, 0.05, 0);
+    final venusOrbit = _generateOrbitData(10.75, 0.05, 0);
+    final earthOrbit = _generateOrbitData(14.93, 0.05, 0);
+    final marsOrbit = _generateOrbitData(22.68, 0.05, 0);
+    final beltOrbit = _generateOrbitData(40.31, 0.05, 0);
+    final jupiterOrbit = _generateOrbitData(77.85, 0.05, 0);
 
     return {
       'backgroundColor': 'transparent',
@@ -195,7 +195,7 @@ class PioneerVoyagerState extends State<PioneerVoyager> {
       },
       'zAxis3D': {
         'type': 'value',
-        'name': 'Timeline',
+        'name': 'North Ecliptic Pole',
         'min': -600,
         'max': 600,
         'splitLine': {'show': false},
@@ -337,7 +337,7 @@ class PioneerVoyagerState extends State<PioneerVoyager> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CassiniInfo()));
+                        builder: (context) => InterstellarInfo()));
               },
               icon: const Icon(Icons.question_mark, color: Colors.blue,))
         ],

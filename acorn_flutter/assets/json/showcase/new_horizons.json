@@ -5,7 +5,7 @@
       12.8,
       -0.0
     ],
-    "name": "01-20",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -16,7 +16,7 @@
       11.4,
       0.0
     ],
-    "name": "01-27",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -27,7 +27,7 @@
       11.0,
       0.0
     ],
-    "name": "01-29",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -38,7 +38,7 @@
       10.6,
       0.1
     ],
-    "name": "01-31",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -49,7 +49,7 @@
       6.9,
       0.1
     ],
-    "name": "02-15",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -60,7 +60,7 @@
       3.2,
       0.2
     ],
-    "name": "03-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -71,7 +71,7 @@
       0.5,
       0.3
     ],
-    "name": "03-11",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -82,7 +82,7 @@
       -5.2,
       0.3
     ],
-    "name": "04-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -93,7 +93,7 @@
       -7.1,
       0.4
     ],
-    "name": "04-08",
+    "name": "pass Mars orbit",
     "itemStyle": {
       "color": "red"
     }
@@ -104,7 +104,7 @@
       -9.0,
       0.4
     ],
-    "name": "04-15",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -115,7 +115,7 @@
       -13.1,
       0.4
     ],
-    "name": "05-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -126,7 +126,7 @@
       -16.6,
       0.5
     ],
-    "name": "05-15",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -137,7 +137,7 @@
       -20.8,
       0.5
     ],
-    "name": "06-01",
+    "name": "Asteroid Belt",
     "itemStyle": {
       "color": "red"
     }
@@ -148,7 +148,7 @@
       -23.8,
       0.6
     ],
-    "name": "06-14",
+    "name": "(132524)APL",
     "itemStyle": {
       "color": "red"
     }
@@ -159,7 +159,7 @@
       -27.7,
       0.6
     ],
-    "name": "",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -170,7 +170,7 @@
       -34.4,
       0.7
     ],
-    "name": "08-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -181,7 +181,7 @@
       -40.8,
       0.7
     ],
-    "name": "09-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -192,7 +192,7 @@
       -46.8,
       0.8
     ],
-    "name": "10-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -203,7 +203,7 @@
       -52.6,
       0.8
     ],
-    "name": "11-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -214,7 +214,7 @@
       -58.1,
       0.9
     ],
-    "name": "12-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -236,7 +236,7 @@
       -68.9,
       0.9
     ],
-    "name": "02-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -247,7 +247,7 @@
       -73.7,
       1.0
     ],
-    "name": "03-01",
+    "name": "Jupiter",
     "itemStyle": {
       "color": "red"
     }
@@ -258,7 +258,7 @@
       -79.5,
       1.2
     ],
-    "name": "04-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -269,7 +269,7 @@
       -84.9,
       1.4
     ],
-    "name": "05-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -280,7 +280,7 @@
       -90.4,
       1.6
     ],
-    "name": "06-01",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -291,7 +291,7 @@
       -95.6,
       1.7
     ],
-    "name": "",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -313,7 +313,7 @@
       -150.1,
       3.7
     ],
-    "name": "06-08",
+    "name": "pass Saturn orbit",
     "itemStyle": {
       "color": "red"
     }
@@ -324,7 +324,7 @@
       -153.5,
       3.8
     ],
-    "name": "",
+    "name": "_",
     "itemStyle": {
       "color": "red"
     }
@@ -357,7 +357,7 @@
       -239.0,
       7.1
     ],
-    "name": "03-09",
+    "name": "(83982)Crantor",
     "itemStyle": {
       "color": "red"
     }
@@ -379,7 +379,7 @@
       -287.4,
       9.0
     ],
-    "name": "03-19",
+    "name": "pass Uranus orbit",
     "itemStyle": {
       "color": "red"
     }
@@ -423,7 +423,7 @@
       -439.5,
       14.9
     ],
-    "name": "08-25",
+    "name": "pass Neptune orbit",
     "itemStyle": {
       "color": "red"
     }
@@ -434,7 +434,7 @@
       -451.6,
       15.4
     ],
-    "name": "12-06",
+    "name": "wake up",
     "itemStyle": {
       "color": "red"
     }
@@ -456,7 +456,7 @@
       -457.4,
       15.6
     ],
-    "name": "01-25",
+    "name": "take photos of Uranus and Charon",
     "itemStyle": {
       "color": "red"
     }
@@ -467,7 +467,7 @@
       -459.9,
       15.7
     ],
-    "name": "02-15",
+    "name": "Uranus",
     "itemStyle": {
       "color": "red"
     }
@@ -478,7 +478,7 @@
       -477.3,
       16.4
     ],
-    "name": "07-15",
+    "name": "Uranus",
     "itemStyle": {
       "color": "red"
     }
@@ -500,7 +500,7 @@
       -531.1,
       18.5
     ],
-    "name": "10-25",
+    "name": "all data of Uranus sent",
     "itemStyle": {
       "color": "red"
     }
@@ -533,7 +533,7 @@
       -621.3,
       22.1
     ],
-    "name": "19",
+    "name": "19 Arrokoth",
     "itemStyle": {
       "color": "red"
     }
@@ -599,7 +599,7 @@
       -862.7,
       31.6
     ],
-    "name": "25",
+    "name": "25 New Horizons",
     "itemStyle": {
       "color": "red"
     }
