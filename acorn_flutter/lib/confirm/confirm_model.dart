@@ -10,57 +10,66 @@ class ConfirmModel extends ChangeNotifier {
 
   //insert into DB
   Future<int> save(Confirm confirm) async {
-    if (confirm.year != 0 && confirm.name != "" && confirm.selectedLocation != "") {
+    if (confirm.year != 0 &&
+        confirm.name != "" &&
+        confirm.selectedLocation != "") {
       try {
         var principal = Principal(
-            period: confirm.isSelectedCalendar,
-            annee: confirm.annee,
-            month: confirm.month,
-            day: confirm.day,
-            point: confirm.point,
-            affair: confirm.name,
-            location: confirm.selectedLocation,
-            precise: confirm.selectedPrecise,
+          period: confirm.isSelectedCalendar,
+          annee: confirm.annee,
+          month: confirm.month,
+          day: confirm.day,
+          point: confirm.point,
+          affair: confirm.name,
+          location: confirm.selectedLocation,
+          precise: confirm.selectedPrecise,
         );
         var principalId = await client.principal.addPrincipal(principal);
         debugPrint('Add principal : $principalId');
 
-        var japanese = Japanese(principalId: principalId, japaneseName: confirm.name);
+        var japanese = Japanese(
+          principalId: principalId,
+          japaneseName: confirm.name,
+        );
         await client.japanese.addJapanese(japanese);
         debugPrint('add Japanese');
 
         //with map
         var withMap = WithMap(
-            principalId: principalId,
-            annee: confirm.annee,
-            affair: confirm.name,
-            location: confirm.selectedLocation,
-            precise: confirm.selectedPrecise,
-            latitude: confirm.latitude,
-            longitude: confirm.longitude,
-            logarithm: confirm.logarithm);
+          principalId: principalId,
+          annee: confirm.annee,
+          affair: confirm.name,
+          location: confirm.selectedLocation,
+          precise: confirm.selectedPrecise,
+          latitude: confirm.latitude,
+          longitude: confirm.longitude,
+          logarithm: confirm.logarithm,
+          updatedAt: DateTime.now().toUtc(),
+          deletedAt: null,
+        );
         await client.withMap.addWithMap(withMap);
         debugPrint('add WithMap');
 
         //with globe
         var withGlobe = WithGlobe(
-            principalId: principalId,
-            annee: confirm.annee,
-            affair: confirm.name,
-            location: confirm.selectedLocation,
-            precise: confirm.selectedPrecise,
-            xCoordinate: confirm.x,
-            yCoordinate: confirm.y,
-            zCoordinate: confirm.z,
-          coefficient: confirm.coefficient);
+          principalId: principalId,
+          annee: confirm.annee,
+          affair: confirm.name,
+          location: confirm.selectedLocation,
+          precise: confirm.selectedPrecise,
+          xCoordinate: confirm.x,
+          yCoordinate: confirm.y,
+          zCoordinate: confirm.z,
+          coefficient: confirm.coefficient,
+        );
         await client.withGlobe.addWithGlobe(withGlobe);
         debugPrint('add WithGlobe');
 
-/*        //in space
+        /*        //in space
         if(confirm.selectedLocation == 'universe' ||
             confirm.selectedLocation == 'Solar System' ||
             confirm.selectedLocation == 'Milky Way'||
-            confirm.selectedLocation == 'Other Galaxy' 
+            confirm.selectedLocation == 'Other Galaxy'
         ) {
           var space = Space(
             principalId: principalId,
@@ -86,7 +95,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedGeoTimeId.isNotEmpty) {
           for (var geoTimeId in confirm.selectedGeoTimeId) {
             var pDetailGeoTime = PrincipalDetail(
-                principalId: principalId, detailId: geoTimeId);
+              principalId: principalId,
+              detailId: geoTimeId,
+            );
             await client.principalDetail.addPDetail(pDetailGeoTime);
             debugPrint('add GeoTime');
           }
@@ -94,48 +105,58 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedArchaeTimeId.isNotEmpty) {
           for (var archaeTimeId in confirm.selectedArchaeTimeId) {
             var pDetailArchaeTime = PrincipalDetail(
-                principalId: principalId, detailId: archaeTimeId);
+              principalId: principalId,
+              detailId: archaeTimeId,
+            );
             await client.principalDetail.addPDetail(pDetailArchaeTime);
           }
         }
 
         //CATT where it happened
         if (confirm.selectedCattId != 0) {
-            var pCatt = PrincipalDetail(
-                principalId: principalId, detailId: confirm.selectedCattId);
-            await client.principalDetail.addPDetail(pCatt);
+          var pCatt = PrincipalDetail(
+            principalId: principalId,
+            detailId: confirm.selectedCattId,
+          );
+          await client.principalDetail.addPDetail(pCatt);
         }
 
         //Patt where it happened
         if (confirm.selectedPattId != 0) {
-            var pPatt = PrincipalDetail(
-              principalId: principalId, detailId: confirm.selectedPattId);
-            await client.principalDetail.addPDetail(pPatt);
+          var pPatt = PrincipalDetail(
+            principalId: principalId,
+            detailId: confirm.selectedPattId,
+          );
+          await client.principalDetail.addPDetail(pPatt);
         }
 
         //participants A
         if (confirm.selectedCountriesId.isNotEmpty) {
           for (var countryId in confirm.selectedCountriesId) {
             var cInv = PrincipalDetail(
-                principalId: principalId, detailId: countryId);
-            await client.principalDetail
-                .addPDetail(cInv);
+              principalId: principalId,
+              detailId: countryId,
+            );
+            await client.principalDetail.addPDetail(cInv);
           }
         }
 
         if (confirm.selectedPlacesId.isNotEmpty) {
           for (var placeId in confirm.selectedPlacesId) {
             var pInv = PrincipalDetail(
-                principalId: principalId, detailId: placeId);
-            await client.principalDetail
-                .addPDetail(pInv);
+              principalId: principalId,
+              detailId: placeId,
+            );
+            await client.principalDetail.addPDetail(pInv);
           }
         }
 
         if (confirm.selectedATTId.isNotEmpty) {
           for (var attId in confirm.selectedATTId) {
             var cattsInvolved = PrincipalDetail(
-                principalId: principalId, detailId: attId);
+              principalId: principalId,
+              detailId: attId,
+            );
             await client.principalDetail.addPDetail(cattsInvolved);
           }
         }
@@ -143,7 +164,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedStarId.isNotEmpty) {
           for (var starId in confirm.selectedStarId) {
             var pDetailStar = PrincipalDetail(
-                principalId: principalId, detailId: starId);
+              principalId: principalId,
+              detailId: starId,
+            );
             await client.principalDetail.addPDetail(pDetailStar);
           }
         }
@@ -152,7 +175,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedOrgId.isNotEmpty) {
           for (var orgId in confirm.selectedOrgId) {
             var pDetailOrg = PrincipalDetail(
-                principalId: principalId, detailId: orgId);
+              principalId: principalId,
+              detailId: orgId,
+            );
             await client.principalDetail.addPDetail(pDetailOrg);
           }
         }
@@ -160,7 +185,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedUnivId.isNotEmpty) {
           for (var univId in confirm.selectedUnivId) {
             var pDetailUniv = PrincipalDetail(
-                principalId: principalId, detailId: univId);
+              principalId: principalId,
+              detailId: univId,
+            );
             await client.principalDetail.addPDetail(pDetailUniv);
           }
         }
@@ -168,7 +195,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedWhoId.isNotEmpty) {
           for (var whoId in confirm.selectedWhoId) {
             var pDetailPerson = PrincipalDetail(
-                principalId: principalId, detailId: whoId);
+              principalId: principalId,
+              detailId: whoId,
+            );
             await client.principalDetail.addPDetail(pDetailPerson);
           }
         }
@@ -176,7 +205,9 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedShipsId.isNotEmpty) {
           for (var shipId in confirm.selectedShipsId) {
             var pDetailShip = PrincipalDetail(
-                principalId: principalId, detailId: shipId);
+              principalId: principalId,
+              detailId: shipId,
+            );
             await client.principalDetail.addPDetail(pDetailShip);
           }
         }
@@ -185,24 +216,31 @@ class ConfirmModel extends ChangeNotifier {
         if (confirm.selectedCategoryId.isNotEmpty) {
           for (var categoryId in confirm.selectedCategoryId) {
             var pDetailCategory = PrincipalDetail(
-                principalId: principalId, detailId: categoryId);
+              principalId: principalId,
+              detailId: categoryId,
+            );
             await client.principalDetail.addPDetail(pDetailCategory);
           }
         }
 
         if (confirm.selectedTermId.isNotEmpty) {
           for (var termId in confirm.selectedTermId) {
-            var pDetailTerms = PrincipalDetail(principalId: principalId, detailId: termId);
+            var pDetailTerms = PrincipalDetail(
+              principalId: principalId,
+              detailId: termId,
+            );
             await client.principalDetail.addPDetail(pDetailTerms);
           }
         }
 
         var userId = sessionManager.signedInUser?.id ?? 0;
-        var principalUser = PrincipalUser(principalId: principalId, userId: userId);
+        var principalUser = PrincipalUser(
+          principalId: principalId,
+          userId: userId,
+        );
         await client.principalUser.addPrincipalUser(principalUser);
 
         return 0;
-
       } catch (e) {
         return 1;
       }

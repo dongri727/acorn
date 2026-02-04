@@ -25,3 +25,42 @@ cd ..
 rm -rf acorn_server/web
 mkdir -p acorn_server/web
 cp -R acorn_flutter/build/web/. acorn_server/web/
+#!/bin/sh
+
+# Stop on any error.
+set -e
+
+# Always run from the repo root (so relative paths are stable).
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+REPO_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+cd "$REPO_ROOT"
+
+# Generate build id (UTC date) used by the Flutter web app.
+BUILD_ID=$(TZ=UTC date +"%Y-%m-%d")
+
+cat <<EOF > acorn_flutter/lib/utils/build_id.dart
+class BuildId {
+  static const String value = '$BUILD_ID';
+}
+EOF
+
+echo "Build ID generated: $BUILD_ID"
+
+# Build the Flutter web app.
+cd acorn_flutter
+flutter build web --release --no-tree-shake-icons
+cd "$REPO_ROOT"
+
+# Copy the build output into the server's static web directory.
+# NOTE:
+# - If you are serving the website from Serverpod Cloud (FlutterRoute/StaticRoute), keep this enabled.
+# - If you are serving the website from Firebase Hosting, you can skip this step by running:
+#     COPY_TO_SERVER=0 ./scripts/build_web
+if [ "${COPY_TO_SERVER:-1}" = "1" ]; then
+  mkdir -p acorn_server/web
+  # Sync build/web -> acorn_server/web (delete removed files, keep directory clean)
+  rsync -a --delete acorn_flutter/build/web/ acorn_server/web/
+  echo "Copied Flutter web build to acorn_server/web"
+else
+  echo "Skipped copying to acorn_server/web (COPY_TO_SERVER=0)"
+fi
