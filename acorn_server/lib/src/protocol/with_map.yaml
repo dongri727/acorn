@@ -9,3 +9,5 @@ fields:
   latitude: double
   longitude: double
   logarithm: double
+  updatedAt: DateTime?
+  deletedAt: DateTime?
