@@ -20,10 +20,8 @@ cd ../acorn_flutter
 flutter build web --release --no-tree-shake-icons
 cd ..
 
-# Copy the build files into the web/app diretory.
-rm -rf acorn_server/web/app
-cp -r acorn_flutter/build/web acorn_server/web/app
-
-# Move the index.html file into the templates directory.
-mkdir -p acorn_server/web/templates
-mv acorn_server/web/app/index.html acorn_server/web/templates/index.html
+# Copy the build files into the server's static web directory.
+# We serve files directly from acorn_server/web (index.html, main.dart.js, assets, etc.).
+rm -rf acorn_server/web
+mkdir -p acorn_server/web
+cp -R acorn_flutter/build/web/. acorn_server/web/

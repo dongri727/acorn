@@ -20,6 +20,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A 3D Journey Through Time and Space">
+  <meta name="theme-color" content="#000000">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -64,7 +65,16 @@
     window.addEventListener('load', function (ev) {
       {{flutter_js}}
       {{flutter_build_config}}
+
+      // Keep the template placeholder in a valid JS string so editors don't flag a syntax error.
+      // This is replaced by `flutter build web`.
+      const serviceWorkerVersion = '{{flutter_service_worker_version}}';
+
+      // Standard Flutter web loader wiring (keeps PWA/service worker behavior standard)
       _flutter.loader.load({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
         onEntrypointLoaded: function (engineInitializer) {
           engineInitializer.initializeEngine().then(function (appRunner) {
             appRunner.runApp();

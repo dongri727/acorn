@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 

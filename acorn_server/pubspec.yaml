@@ -10,7 +10,8 @@ dependencies:
   serverpod: 3.1.1
   serverpod_auth_server: 3.1.1
   mailer: ^6.1.0
+  path: ^1.9.0
 
 dev_dependencies:
-  lints: ^2.0.1
+  lints: ^6.0.0
   serverpod_cli: 3.1.1
