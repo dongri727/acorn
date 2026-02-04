@@ -24,6 +24,8 @@ abstract class WithMap
     required this.latitude,
     required this.longitude,
     required this.logarithm,
+    this.updatedAt,
+    this.deletedAt,
   });
 
   factory WithMap({
@@ -36,6 +38,8 @@ abstract class WithMap
     required double latitude,
     required double longitude,
     required double logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   }) = _WithMapImpl;
 
   factory WithMap.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -49,6 +53,12 @@ abstract class WithMap
       latitude: (jsonSerialization['latitude'] as num).toDouble(),
       longitude: (jsonSerialization['longitude'] as num).toDouble(),
       logarithm: (jsonSerialization['logarithm'] as num).toDouble(),
+      updatedAt: jsonSerialization['updatedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      deletedAt: jsonSerialization['deletedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['deletedAt']),
     );
   }
 
@@ -75,6 +85,10 @@ abstract class WithMap
 
   double logarithm;
 
+  DateTime? updatedAt;
+
+  DateTime? deletedAt;
+
   @override
   _i1.Table<int?> get table => t;
 
@@ -91,6 +105,8 @@ abstract class WithMap
     double? latitude,
     double? longitude,
     double? logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -105,6 +121,8 @@ abstract class WithMap
       'latitude': latitude,
       'longitude': longitude,
       'logarithm': logarithm,
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
+      if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
     };
   }
 
@@ -121,6 +139,8 @@ abstract class WithMap
       'latitude': latitude,
       'longitude': longitude,
       'logarithm': logarithm,
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
+      if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
     };
   }
 
@@ -167,6 +187,8 @@ class _WithMapImpl extends WithMap {
     required double latitude,
     required double longitude,
     required double logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   }) : super._(
          id: id,
          principalId: principalId,
@@ -177,6 +199,8 @@ class _WithMapImpl extends WithMap {
          latitude: latitude,
          longitude: longitude,
          logarithm: logarithm,
+         updatedAt: updatedAt,
+         deletedAt: deletedAt,
        );
 
   /// Returns a shallow copy of this [WithMap]
@@ -193,6 +217,8 @@ class _WithMapImpl extends WithMap {
     double? latitude,
     double? longitude,
     double? logarithm,
+    Object? updatedAt = _Undefined,
+    Object? deletedAt = _Undefined,
   }) {
     return WithMap(
       id: id is int? ? id : this.id,
@@ -204,6 +230,8 @@ class _WithMapImpl extends WithMap {
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
       logarithm: logarithm ?? this.logarithm,
+      updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
+      deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
     );
   }
 }
@@ -250,6 +278,18 @@ class WithMapUpdateTable extends _i1.UpdateTable<WithMapTable> {
     table.logarithm,
     value,
   );
+
+  _i1.ColumnValue<DateTime, DateTime> updatedAt(DateTime? value) =>
+      _i1.ColumnValue(
+        table.updatedAt,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> deletedAt(DateTime? value) =>
+      _i1.ColumnValue(
+        table.deletedAt,
+        value,
+      );
 }
 
 class WithMapTable extends _i1.Table<int?> {
@@ -287,6 +327,14 @@ class WithMapTable extends _i1.Table<int?> {
       'logarithm',
       this,
     );
+    updatedAt = _i1.ColumnDateTime(
+      'updatedAt',
+      this,
+    );
+    deletedAt = _i1.ColumnDateTime(
+      'deletedAt',
+      this,
+    );
   }
 
   late final WithMapUpdateTable updateTable;
@@ -307,6 +355,10 @@ class WithMapTable extends _i1.Table<int?> {
 
   late final _i1.ColumnDouble logarithm;
 
+  late final _i1.ColumnDateTime updatedAt;
+
+  late final _i1.ColumnDateTime deletedAt;
+
   @override
   List<_i1.Column> get columns => [
     id,
@@ -318,6 +370,8 @@ class WithMapTable extends _i1.Table<int?> {
     latitude,
     longitude,
     logarithm,
+    updatedAt,
+    deletedAt,
   ];
 }
 

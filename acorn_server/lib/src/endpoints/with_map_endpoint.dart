@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:serverpod/serverpod.dart';
 import 'package:acorn_server/src/generated/protocol.dart';
 
@@ -19,7 +17,8 @@ class WithMapEndpoint extends Endpoint {
         }
       }
     } else {
-      whereClauseWithMap = Constant.bool(true);
+      // By default, hide soft-deleted rows.
+      whereClauseWithMap = WithMap.t.deletedAt.equals(null);
     }
 
     return await WithMap.db.find(
@@ -31,6 +30,8 @@ class WithMapEndpoint extends Endpoint {
 
   ///Adds a WithMap in DB
   Future<void> addWithMap(Session session, WithMap withMap) async {
+    withMap.updatedAt ??= DateTime.now().toUtc();
+    withMap.deletedAt = null;
     await WithMap.db.insertRow(session, withMap);
   }
 }

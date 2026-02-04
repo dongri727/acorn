@@ -23,6 +23,8 @@ abstract class WithMap implements _i1.SerializableModel {
     required this.latitude,
     required this.longitude,
     required this.logarithm,
+    this.updatedAt,
+    this.deletedAt,
   });
 
   factory WithMap({
@@ -35,6 +37,8 @@ abstract class WithMap implements _i1.SerializableModel {
     required double latitude,
     required double longitude,
     required double logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   }) = _WithMapImpl;
 
   factory WithMap.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -48,6 +52,12 @@ abstract class WithMap implements _i1.SerializableModel {
       latitude: (jsonSerialization['latitude'] as num).toDouble(),
       longitude: (jsonSerialization['longitude'] as num).toDouble(),
       logarithm: (jsonSerialization['logarithm'] as num).toDouble(),
+      updatedAt: jsonSerialization['updatedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      deletedAt: jsonSerialization['deletedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['deletedAt']),
     );
   }
 
@@ -72,6 +82,10 @@ abstract class WithMap implements _i1.SerializableModel {
 
   double logarithm;
 
+  DateTime? updatedAt;
+
+  DateTime? deletedAt;
+
   /// Returns a shallow copy of this [WithMap]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
@@ -85,6 +99,8 @@ abstract class WithMap implements _i1.SerializableModel {
     double? latitude,
     double? longitude,
     double? logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -99,6 +115,8 @@ abstract class WithMap implements _i1.SerializableModel {
       'latitude': latitude,
       'longitude': longitude,
       'logarithm': logarithm,
+      if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
+      if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
     };
   }
 
@@ -121,6 +139,8 @@ class _WithMapImpl extends WithMap {
     required double latitude,
     required double longitude,
     required double logarithm,
+    DateTime? updatedAt,
+    DateTime? deletedAt,
   }) : super._(
          id: id,
          principalId: principalId,
@@ -131,6 +151,8 @@ class _WithMapImpl extends WithMap {
          latitude: latitude,
          longitude: longitude,
          logarithm: logarithm,
+         updatedAt: updatedAt,
+         deletedAt: deletedAt,
        );
 
   /// Returns a shallow copy of this [WithMap]
@@ -147,6 +169,8 @@ class _WithMapImpl extends WithMap {
     double? latitude,
     double? longitude,
     double? logarithm,
+    Object? updatedAt = _Undefined,
+    Object? deletedAt = _Undefined,
   }) {
     return WithMap(
       id: id is int? ? id : this.id,
@@ -158,6 +182,8 @@ class _WithMapImpl extends WithMap {
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
       logarithm: logarithm ?? this.logarithm,
+      updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
+      deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,
     );
   }
 }
