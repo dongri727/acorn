@@ -10,3 +10,11 @@ doc/api/
 
 # Passwords file
 config/passwords.yaml
+
+.DS_Store
+.idea/
+*.iml
+
+# Python virtualenv
+venv/
+**/venv/
