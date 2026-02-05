@@ -2937,6 +2937,16 @@ class Endpoints extends _i1.EndpointDispatch {
               type: _i1.getType<List<int>?>(),
               nullable: true,
             ),
+            'updatedAfter': _i1.ParameterDescription(
+              name: 'updatedAfter',
+              type: _i1.getType<DateTime?>(),
+              nullable: true,
+            ),
+            'limit': _i1.ParameterDescription(
+              name: 'limit',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
           },
           call:
               (
@@ -2946,6 +2956,8 @@ class Endpoints extends _i1.EndpointDispatch {
                   (endpoints['withMap'] as _i36.WithMapEndpoint).getWithMap(
                     session,
                     keyNumbers: params['keyNumbers'],
+                    updatedAfter: params['updatedAfter'],
+                    limit: params['limit'],
                   ),
         ),
         'addWithMap': _i1.MethodConnector(

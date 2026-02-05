@@ -1354,12 +1354,24 @@ class EndpointWithMap extends _i1.EndpointRef {
   String get name => 'withMap';
 
   /// Fetches WithMap from DB
-  _i2.Future<List<_i36.WithMap>> getWithMap({List<int>? keyNumbers}) =>
-      caller.callServerEndpoint<List<_i36.WithMap>>(
-        'withMap',
-        'getWithMap',
-        {'keyNumbers': keyNumbers},
-      );
+  ///
+  /// - By default, returns only non-soft-deleted rows (`deletedAt == null`).
+  /// - If [updatedAfter] is provided, returns rows updated after that timestamp (UTC recommended).
+  /// - If [keyNumbers] is provided, filters by `principalId` in that set (still excluding soft-deleted rows).
+  /// - [limit] caps the number of returned rows to keep Unity transfers sane.
+  _i2.Future<List<_i36.WithMap>> getWithMap({
+    List<int>? keyNumbers,
+    DateTime? updatedAfter,
+    required int limit,
+  }) => caller.callServerEndpoint<List<_i36.WithMap>>(
+    'withMap',
+    'getWithMap',
+    {
+      'keyNumbers': keyNumbers,
+      'updatedAfter': updatedAfter,
+      'limit': limit,
+    },
+  );
 
   ///Adds a WithMap in DB
   _i2.Future<void> addWithMap(_i36.WithMap withMap) =>
