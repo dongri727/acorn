@@ -1,0 +1,12 @@
+class: AppConfigResponse
+
+fields:
+  minBuild: int
+  latestBuild: int
+  message: String
+
+  storeUrlIos: String?
+  storeUrlAndroid: String?
+  webUrl: String?
+
+  maintenance: bool

@@ -1,0 +1,20 @@
+class: Announcement
+table: announcement
+
+fields:
+  title: String
+  body: String
+
+  # 公開日時
+  publishedAt: DateTime
+
+  # 対象プラットフォーム（例: "ios,android,web"）
+  targetPlatforms: String
+
+  # このお知らせが適用される最小ビルド（任意）
+  minBuild: int?
+
+  # 管理用フラグ
+  isPublished: bool?
+
+  createdAt: DateTime?

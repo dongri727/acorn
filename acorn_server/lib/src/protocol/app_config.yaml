@@ -1,0 +1,28 @@
+class: AppConfig
+table: app_config
+
+fields:
+  # ===== 必須/最新ビルド番号 =====
+  minBuildIos: int?
+  latestBuildIos: int?
+
+  minBuildAndroid: int?
+  latestBuildAndroid: int?
+
+  minBuildWeb: int?
+  latestBuildWeb: int?
+
+  # ===== 表示メッセージ（言語別） =====
+  messageJa: String?
+  messageEn: String?
+
+  # ===== ストアURL =====
+  storeUrlIos: String?
+  storeUrlAndroid: String?
+  webUrl: String?
+
+  # ===== メンテナンスフラグ =====
+  maintenance: bool?
+
+  # ===== 管理用 =====
+  updatedAt: DateTime?

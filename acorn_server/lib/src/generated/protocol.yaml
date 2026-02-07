@@ -1,5 +1,9 @@
 analysis:
   - getCountCountries:
+announcement:
+  - listLatest:
+appConfig:
+  - get:
 countryInvolved:
   - getCInvolved:
   - addCInvolved:
